@@ -1,0 +1,1441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="{{ Blog.Lang | default('en') }}">
+    <head>
+        <!-- shortcut:[Meta] -->
+        <!-- title, description, keyword, robots -->
+        {% if isSingle%}
+            {% list Posts %}
+            <title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
+            <meta name="description" content="{{ Post.Snippet }}" />
+            <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
+                <meta name="robots" content="index,follow" />
+            {% endlist %}
+        {% elseif isTag and Tag is not empty %}
+            <title>{{ Tag.Title|title }} - {{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="keywords" content="{{ Tag.Title|title }}" />
+            <meta name="robots" content="index,follow" />
+        {% elseif isSearch and Search is not empty %}
+            <title>{{ Search|title }} - {{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="keywords" content="{{ Search|title }}" />
+            <meta name="robots" content="noindex" />
+        {% else %}
+            <title>{{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="robots" content="index,follow" />
+        {% endif %}
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        <!-- Social setting : Facebook, G+ .. -->
+        <meta property="og:site_name" content="{{ Blog.Title }}" />
+        <meta property="og:type" content="blog" />
+        <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
+        <meta itemprop="name" content="{{ Blog.Title }}" />
+        
+        {% if isSingle %}
+            {% list Posts %}
+                <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
+                <meta property="og:description" content="{{ Post.Snippet }}" />
+                <meta itemprop="description" content="{{ Post.Snippet }}" />
+                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+                {% if Post.Cover %}
+                    <meta property="og:image" content="{{ Post.Cover }}"/>
+                    <meta itemprop="image" content="{{ Post.Cover }}" />
+                {% endif %}
+            {% endlist %}
+            <meta property="og:type" content="overblogkiwi:see" />
+        {% else %}
+            <meta property="og:title" content="{{ Blog.Title }}"/>
+            <meta property="og:description" content="{{ Blog.Description }}" />
+            <meta itemprop="description" content="{{ Blog.Description }}" />
+            {% if Blog.Avatar %}
+                <meta property="og:image" content="{{ Blog.Avatar }}"/>
+                <meta itemprop="image" content="{{ Blog.Avatar }}" />
+            {% else %}
+                {% list Posts %}
+                    {% if loop.index == 1 and Post.Cover %}
+                        <meta property="og:image" content="{{ Post.Cover }}"/>
+                        <meta itemprop="image" content="{{ Post.Cover }}" />
+                    {% endif %}
+                {% endlist %}
+            {% endif %}
+            {% if isSearch %}
+                <meta property="og:type" content="overblogkiwi:search" />
+            {% else %}
+                <meta property="og:type" content="overblogkiwi:visit" />
+            {% endif %}
+        {% endif %}
+
+        <!-- shortcut:[Includes] -->
+        <!-- favicon -->
+        {% if Blog.FaviconUrl is not empty %}
+            <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
+        {% else %}
+            <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
+            <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
+            <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
+        {% endif %} 
+        
+        <!-- SEO -->
+        {% if Custom('google_webmaster_id') is not empty %}
+            <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
+        {% endif %}
+        {% if Custom('msn_webmaster_id') is not empty %}
+            <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
+        {% endif %}
+
+        <!-- includes -->
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
+        {% if Blog.CssUrl is not empty %}
+            <link rel="stylesheet" href="{{ Blog.CssUrl }}" type="text/css" />
+        {% endif %}
+
+        <!-- Style -->
+        <style type="text/css">
+            /*----- Reset -----*/
+            body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,textarea,blockquote,th,td{ margin:0; padding:0;}
+            table{ border-collapse:collapse; border-spacing:0;}
+            fieldset,img{ border:0;}
+            address,caption,cite,code,dfn,var{ font-style:normal; font-weight:normal;}
+            ol,ul{ list-style:none;}
+            caption,th{ text-align:left;}
+            h1,h2,h3,h4,h5,h6{ font-size:100%; font-weight:normal;}
+            q:before,q:after{ content:'';}
+            abbr,acronym{ border:0;}
+        </style>
+        
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        
+        <!-- NivoSlider -->
+        <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/themes/default/default.css" type="text/css" />
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+        
+        <!-- Fancybox -->
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+        
+        <!-- Template resources -->
+        {% if Custom("custom_titles_font") is not empty %}
+            <link href="http://fonts.googleapis.com/css?family={{ Custom("custom_titles_font") }}" rel="stylesheet" type="text/css" />
+        {% endif %}
+        <style type="text/css">
+            /*  
+            Theme Name: African Daisy
+            Theme URI: http://www.freewpthemes.net/preview/africandaisy
+            Description: Widget ready and tested on WP 2.3.1.
+            Version: 2.0
+            Author: Free WordPress Themes
+            Author URI: http://www.freewpthemes.net/
+            */
+            body {
+                margin: 0;
+                padding: 0;
+                background: #3D0217 url(http://assets.over-blog-kiwi.com/themes/30/images/img01.gif) repeat;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                color: #FFCFE2;
+            }
+
+            h1, h2, h3 {
+                margin: 0;
+                padding: 0;
+                font-weight: normal;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 2.8em;
+            }
+
+            h3 {
+                font-size: 1.6em;
+            }
+
+            p, ul, ol {
+                margin-top: 0;
+                line-height: 150%;
+            }
+
+            ul, ol {
+            }
+
+            a {
+                text-decoration: none;
+                color: #FF0462;
+            }
+
+            a:hover {
+            }
+
+            #wrapper {
+                background: url(http://assets.over-blog-kiwi.com/themes/30/images/img02.gif) no-repeat left top;
+            }
+
+            .container {
+                width: 1000px;
+                margin: 0px auto;
+            }
+
+            /* Header */
+
+            #header {
+                width: 900px;
+                height: 115px;
+                margin: 0 auto;
+                padding: 0px 50px;
+            }
+
+            /* Logo */
+
+            #logo {
+                float: left;
+                width: 350px;
+                margin: 0;
+                padding: 0;
+                color: #FFFFFF;
+            }
+
+            #logo h1, #logo p {
+            }
+
+            #logo h1 {
+                padding: 30px 0px 0px 0px;
+                letter-spacing: -3px;
+                text-transform: lowercase;
+                font-size: 4.8em;
+            }
+
+            #logo h1 a {
+                text-shadow: 1px 1px 1px #C76200;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-style: italic;
+                color: #FFFFFF;
+            }
+
+            #logo p {
+                margin: 0;
+                padding: 0px 0 0 0px;
+                letter-spacing: 1px;
+                text-shadow: 1px 1px 1px #C76200;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 12px;
+                color: #FFFFFF;
+            }
+
+            #logo p a {
+                color: #FFFFFF;
+            }
+
+            #logo a {
+                border: none;
+                background: none;
+                text-decoration: none;
+                color: #000000;
+            }
+
+            /* Splash */
+
+            #splash {
+                width: 960px;
+                height: 300px;
+                margin: 0px auto;
+            }
+
+            /* Search */
+
+            #search {
+                float: right;
+                width: 280px;
+                height: 60px;
+                padding: 20px 0px 0px 0px;
+            }
+
+            #search form {
+                height: 41px;
+                margin: 0;
+                padding: 10px 0 0 20px;
+            }
+
+            #search fieldset {
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+
+            #search-text {
+                width: 170px;
+                padding: 6px 5px 2px 5px;
+                border: 1px solid #560620;
+                background: #FFFFFF;
+                text-transform: lowercase;
+                font: normal 11px Arial, Helvetica, sans-serif;
+                color: #5D781D;
+            }
+
+            #search-submit {
+                width: 50px;
+                height: 22px;
+                border: none;
+                background: #B9B9B9;
+                color: #000000;
+            }
+
+            /* Menu */
+
+            #menu {
+                float: right;
+                width: 500px;
+                height: 90px;
+                margin: 0 auto;
+                padding: 0;
+            }
+
+            #menu ul {
+                float: right;
+                margin: 0;
+                padding: 70px 0px 0px 0px;
+                list-style: none;
+                line-height: normal;
+            }
+
+            #menu li {
+                float: left;
+            }
+
+            #menu a {
+                display: block;
+                height: 20px;
+                margin-right: 1px;
+                padding: 0px 20px 15px 20px;
+                letter-spacing: 1px;
+                text-decoration: none;
+                text-align: center;
+                text-shadow: 1px 1px 1px #C76200;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 13px;
+                font-weight: normal;
+                color: #FFFFFF;
+                border: none;
+            }
+
+            #menu a:hover, #menu .current_page_item a {
+                text-decoration: none;
+                color: #FFFFFF;
+            }
+
+            #menu .current_page_item a {
+            }
+
+            /* Page */
+
+            #page {
+                width: 900px;
+                margin: 0 auto;
+                padding: 30px 30px;
+            }
+
+            /* Content */
+
+            #content {
+                float: right;
+                width: 590px;
+                padding: 50px 0px 0px 0px;
+            }
+
+            .post {
+                overflow: hidden;
+                margin-bottom: 20px;
+                border-bottom: 1px solid #560620;
+            }
+
+            .post .title {
+                margin: 0px;
+                padding: 7px 0px 0px 0px;
+                letter-spacing: -1px;
+            }
+
+            .post .title a,
+            .special h3 {
+                border: none;
+                letter-spacing: 1px;
+                text-align: left;
+                text-shadow: 1px 2px 1px #2B0010;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 26px;
+                font-weight: normal;
+                color: #FFFFFF;
+            }
+
+            .post .meta {
+                margin-bottom: 30px;
+                padding: 0px;
+                letter-spacing: 1px;
+                text-align: left;
+                text-shadow: 1px 2px 1px #2B0010;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 11px;
+                font-weight: normal;
+            }
+
+            .post .meta .date {
+                float: left;
+            }
+
+            .post .meta .posted {
+                float: right;
+            }
+
+            .post .meta a {
+            }
+
+            .post .entry {
+                padding: 0px 0px 30px 0px;
+                padding-bottom: 20px;
+                text-align: justify;
+            }
+
+            .links {
+                float: right;
+                margin: 20px 0px 30px 0px;
+                text-align: right;
+                text-shadow: 1px 2px 1px #2B0010;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+            .more {
+                display: block;
+                float: left;
+                padding: 0px 0px 0px 0px;
+                margin-right: 30px;
+            }
+
+            .comments {
+                display: block;
+                float: left;
+                padding: 0px 0px 0px 0px;
+            }
+
+            .ob-form + a {
+                display: block;
+                margin-top: 80px;
+                text-align: center;
+                line-height: 35px;
+                text-shadow: 1px 2px 1px #2B0010;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+            /* Sidebar */
+
+            #sidebar {
+                float: left;
+                width: 280px;
+                margin: 0px;
+                padding: 30px 0px 0px 0px;
+            }
+
+            #sidebar ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            #sidebar li {
+                margin: 0;
+                padding: 0;
+            }
+
+            #sidebar li ul {
+                margin: 0px 0px;
+                padding-bottom: 50px;
+            }
+
+            #sidebar li li {
+                line-height: 35px;
+                border-bottom: 1px dashed #560620;
+                margin: 0px 30px;
+                text-shadow: 1px 2px 1px #2B0010;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+            #sidebar li li span {
+                display: block;
+                margin-top: -20px;
+                padding: 0;
+                font-size: 11px;
+                font-style: italic;
+            }
+
+            #sidebar li li a {
+                padding: 0px 0px 0px 0px;
+            }
+
+            #sidebar h3 {
+                margin: 0px;
+                padding: 0px 0px 30px 0px;
+                padding-left: 30px;
+                letter-spacing: 1px;
+                text-align: left;
+                text-shadow: 1px 2px 1px #2B0010;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 20px;
+                font-weight: normal;
+                color: #FFFFFF;
+            }
+
+            #sidebar p {
+                margin: 0 0px;
+                padding: 0px 30px 20px 30px;
+                text-align: justify;
+            }
+
+            #sidebar a {
+                border: none;
+            }
+
+            #sidebar a:hover {
+                text-decoration: underline;
+            }
+
+            /* Calendar */
+
+            #calendar {
+            }
+
+            #calendar_wrap {
+                padding: 20px;
+            }
+
+            #calendar table {
+                width: 100%;
+            }
+
+            #calendar tbody td {
+                text-align: center;
+            }
+
+            #calendar #next {
+                text-align: right;
+            }
+
+            /* Three Column Footer Content */
+
+            #footer-content {
+                border-top: 10px #FF4E00 solid;
+                color: #FF4E00;
+            }
+
+            #footer-content a {
+                color: #FFFFFF;
+            }
+
+            #footer-bg {
+                overflow: hidden;
+                width: 890px;
+                padding: 40px 55px 30px 55px;
+            }
+
+            #footer-content h3 {
+                margin: 0px;
+                padding: 0px 0px 20px 0px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-family: Georgia, "Times New Roman", Times, serif;
+                font-size: 16px;
+                font-weight: normal;
+                color: #F1AF83;
+            }
+
+            #footer-content ul {
+                margin: 0px;
+                padding: 0px;
+                list-style: none;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-size: 11px;
+                font-weight: normal;
+                color: #FFFFFF;
+            }
+
+            #footer-content li {
+                padding: 7px 0px 8px 0px;
+            }
+
+            #footer-content p {
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-size: 11px;
+                font-weight: normal;
+                color: #FFFFFF;
+            }
+
+            #column1 {
+                float: left;
+                width: 290px;
+                margin-right: 30px;
+            }
+
+            #column2 {
+                float: left;
+                width: 280px;
+            }
+
+            #column3 {
+                float: right;
+                width: 260px;
+            }
+
+            /* Footer */
+
+            #footer {
+                height: 50px;
+                margin: 0 auto;
+                padding: 0px 0 15px 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            #footer p {
+                margin: 0;
+                padding-top: 30px;
+                line-height: normal;
+                letter-spacing: 1px;
+                text-align: center;
+                text-decoration: none;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 12px;
+                font-weight: normal;
+                color: #FFFFFF;
+            }
+
+            #footer a {
+                color: #FFFFFF;
+            }
+
+            #marketing {
+                overflow: hidden;
+                margin-bottom: 30px;
+                padding: 20px 0px 10px 0px;
+                border-top: 1px solid #560620;
+                border-bottom: 1px solid #560620;
+            }
+
+            #marketing .text1 {
+                float: left;
+                margin: 0px;
+                padding: 0px;
+                letter-spacing: -2px;
+                text-transform: lowercase;
+                font-size: 34px;
+                color: #345E9B;
+            }
+
+            #marketing .text2 {
+                float: right;
+            }
+
+            #marketing .text2 a {
+                display: block;
+                width: 252px;
+                height: 38px;
+                padding: 15px 0px 0px 0px;
+                background: url(http://assets.over-blog-kiwi.com/themes/30/images/img07.jpg) no-repeat left top;
+                letter-spacing: -2px;
+                text-align: center;
+                text-transform: lowercase;
+                font-size: 30px;
+                color: #FFFFFF;
+            }
+        </style>
+        <style type="text/css">
+            {% if Custom("custom_titles_font") is not empty %}
+                .ob-text h2,
+                .ob-text h3,
+                .ob-text h4,
+                #logo h1 a,
+                .post .title a,
+                #sidebar h2,
+                #footer-content h2{
+                    font-family: '{{ Custom("custom_titles_font") }}', Georgia, "Times New Roman", Times, serif;
+                }
+                {% if Custom("custom_titles_font") == "Nosifer" %}
+                    #logo h1{
+                        font-size: 3.8em;
+                        line-height: 1.36em;
+                    }
+                {% endif %}
+            {% endif %}
+            .clear{
+                clear: both;
+            }
+            .ob-text ol,
+            .ob-text ul{
+                margin: 0 0 0 25px;
+            }
+            .ob-text ol li,
+            .ob-text ul li{
+                list-style: disc;
+                margin: 3px 0;
+            }
+            .ob-text ol li{
+                list-style: decimal;
+            }
+            #content{
+                width: 600px;
+            }
+            form.search{
+                margin-left: 30px;
+            }
+            #search-text{
+                background: #FFF;;
+                background: rgba(255, 255, 255, 0.7);
+                color: #333;
+                width: 125px;
+            }
+            #sidebar h2 a{
+                color: #FFF;
+            }
+            .entry-content,
+            .ob-section-images,
+            .ob-section-video,
+            .ob-section-map,
+            .ob-section-images .ob-slideshow{
+                width: 100%;
+            }
+            {% if Custom("custom_page_background_color") is not empty and Custom("custom_page_background_color") != "#510C21"%}
+                body{
+                    background: {{ Custom("custom_page_background_color") }};
+                }
+                #wrapper{
+                    background: none;
+                }
+            {% endif %}
+            {% if Custom("custom_footer_border_color") is not empty %}
+                #footer-content{
+                    border-top: 10px solid {{ Custom("custom_footer_border_color") }};
+                    color: {{ Custom("custom_footer_border_color") }};
+                }
+            {% endif %}
+            {% if Custom("custom_links_color") is not empty %}
+                a{
+                    color: {{ Custom("custom_links_color") }};
+                }
+            {% endif %}
+            {% if Custom("custom_sidebar_position") == "right" %}
+                #content{
+                    float: left;
+                }
+                #sidebar{
+                    float: right;
+                }
+            {% else %}
+                #content{
+                    float: right;
+                }
+                #sidebar{
+                    float: left;
+                }
+            {% endif %}
+            
+            .search .ob-input-submit{
+                margin: 0;
+            }
+            .ob-input-submit{
+                background: #B9B9B9;
+                border: 0;
+                -moz-border-radius: 2px;
+                -o-border-radius: 2px;
+                -ms-border-radius: 2x;
+                -webkit-border-radius: 2px;
+                border-radius: 2px;
+                color: #000;
+                cursor: pointer;
+                padding: 2px 12px;
+            }
+            .ob-input-submit:hover{
+                background: #DDD;
+            }
+            .ob-form-field{
+                margin: 8px 0;
+            }
+            .m-networks a{
+                margin-right: 4px;
+            }
+            .m-networks a:last-child{
+                margin-right: 0;
+            }
+            #footer{
+                height: auto;
+                padding: 30px 20px;
+            }
+            #footer p{
+                padding: 0;
+            }
+            .obsoundplayer .obsoundplayername{
+                width: 235px !important;
+            }
+            .entry{
+                word-wrap: break-word;
+            }
+            .ob-section-link .ob-snippet,
+            .ob-section-quote{
+                color: inherit;
+            }
+
+            .ob-text h3,
+            .ob-text h4,
+            .ob-text h5 {
+                color: #FFF;
+                font-family: 'Georgia', Georgia, "Times New Roman", Times, serif;
+                margin: 15px 0 5px;
+            }
+            .ob-text h3 {font-size: 18px;}
+            .ob-text h4 {font-size: 16px;}
+            .ob-text h5 {font-size: 14px; font-weight: bold;}
+            .ob-text pre{
+                border-left: 3px solid #808080;
+                margin: 7px;
+                padding: 7px;
+            }
+            .ob-text p {margin-bottom: 15px;}
+            .navigation .alignleft{
+                float: left;
+            }
+            .navigation .alignright{
+                float: right;
+            }
+            #header{
+                height: auto;
+            }
+
+            /* Section File */
+            .ob-section-file .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
+            .ob-section-file .ob-ctn a.ob-link,
+            .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom('custom_links_color') }}; text-decoration: none; text-shadow: none;}
+            .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom('custom_links_color') }}; text-decoration: underline;}
+            .ob-section-file .ob-ctn {display:block;width:598px;max-width:none;}
+            .ob-section-file .ob-link {max-width:510px;font-weight:normal;line-height: 240%;}
+
+            /* Section Quote */
+            .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); margin-bottom: 20px;}
+            .ob-section-quote p {color: #FFCFE2; min-height: 20px;}
+            .ob-section-quote .ob-quote p {color: #FFCFE2;font-size:12px; margin: 40px 70px 0px;}
+            .ob-section-quote p:before {margin: -82px 0 0 -87px;}
+            .ob-section-quote p:after {margin: -30px 0 0 -0;}
+            .ob-section-quote .ob-quote p:before {color: {{ Custom('custom_links_color') }};}
+            .ob-section-quote .ob-quote p:after {color: {{ Custom('custom_links_color') }};}
+            .ob-section-quote p.ob-author,
+            .ob-section-quote p.ob-source {background: #EEE; color: #555; font-size: 12px; font-style: italic; margin: 25px 0 0; max-height: 24px; max-width: 510px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
+
+            .ob-section-quote p.ob-author, .ob-section-quote p.ob-source {background: #63645f; background:rgba(255, 255, 255, 0.2);}
+            .ob-section-quote .ob-link {color: white;}
+            .ob-section-quote .ob-link:hover {color:#CCC;}
+
+            /* Section Link */ 
+            .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
+            .ob-section-link .ob-media-left {margin: 0;}
+            .ob-section-link .ob-img {float: left; width: 170px;}
+            .ob-section-link p.ob-title {color: {{ Custom('custom_links_color') }}; margin-left: 20px; max-height: 24px; overflow: hidden;}
+            .ob-section-link p.ob-title .ob-link {color: {{ Custom('custom_links_color') }};}
+            .ob-section-link p.ob-snippet {color: #FFCFE2;margin-bottom: 35px; margin-left: 20px; max-height: 50px; overflow: hidden;font-size:12px;}
+            .ob-section-link p.ob-url {background: #63645f; background: rgba(255, 255, 255, 0.2);margin: 0; max-height: 24px; max-width: 390px; padding-bottom: 0\9;}
+            .ob-section-link .ob-url .ob-link {color: white;}
+            .ob-section-link .ob-url .ob-link:hover {color:#CCC;}
+            .ob-section-link .ob-desc {margin-top: 5px;}
+            .ob-section-link .ob-url .ob-link {font-size:12px;}
+
+
+            .ob-section-link .ob-title .ob-link,
+            .ob-section-link .ob-snippet,
+            .ob-section-link .ob-url .ob-link {
+                font-family: Georgia, "Times New Roman", Times, serif;
+            }
+
+            .ob-section-link .ob-ctn,
+            .ob-section-file .ob-ctn,
+            .ob-section-quote {
+                border: 1px solid #636360;
+                background: #682038; background: rgba(255, 255, 255, 0.1);
+            }
+
+        </style>
+        <!--[if lt IE 8]>
+            <style type="text/css">
+                .ob-input-submit{
+                    padding: 2px 6px;
+                }
+                form.search{
+                    margin-left: 15px;
+                }
+            </style>
+        <![endif]-->
+        
+        <!-- Custom vars -->
+        <meta name="constant:displayArticlesLimit" content="10" />
+        
+        <meta name="string:custom_menu_1_tag:Menu tag 1" group="Navigation" />
+        <meta name="string:custom_menu_1_title:Menu tag 1 custom title" default="My pinned posts" group="Navigation" />
+        
+        <meta name="string:custom_footer_1_tag:Footer list 1 tag" group="Footer" />
+        <meta name="string:custom_footer_2_tag:Footer list 2 tag" group="Footer" />
+        <meta name="string:custom_footer_3_tag:Footer list 3 tag" group="Footer" />
+        
+        <meta name="list:custom_titles_font:Titles font" items="Aladin, Boogaloo, Cookie, Crushed, Dosis, Electrolize, Flavors, Georgia, Italiana, Italianno, Julee, Kranky, Ledger, Lobster, Lusitana, Marmelad, Metamorphous, Miltonian, Montez, Nosifer, Ovo, Oxygen, Philosopher, Plaster, Playball, Redressed, Rochester, Sail, Salsa, Sancreek, Signika, Smokum, Sunshiney, Wellfleet" default="Georgia" group="Design" />
+        <meta name="color:custom_page_background_color:Page background color" default="#510C21" group="Design" />
+        <meta name="color:custom_footer_border_color:Footer border color" default="#FF4E00" group="Design" />
+        <meta name="color:custom_links_color:Links color" default="#FF0462" group="Design" />
+        <meta name="list:custom_sidebar_position:Sidebar position" items="left, right" default="left" group="Design" />
+        
+        <meta name="boolean:custom_hide_widget_search_form:Hide Widget &quot;Search form&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_biography:Hide Widget &quot;Biography&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_categories:Hide Widget &quot;Categories&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
+        
+        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Social Networks" />
+        <meta name="string:facebook_profile_id:Enter your FaceBook Profile ID" group="Social Networks" />
+        <meta name="string:twitter_account:Enter your Twitter login" group="Social Networks" />
+        
+        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
+        <meta name="list:custom_facebook_comments_color_theme:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+        
+        <meta name="string:custom_headline:Headline text" group="Settings" />
+        <meta name="string:custom_footer:Enter footer text" group="Settings" />
+        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
+        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
+        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header-wrapper">
+                <!-- shortcut:[Header content] -->
+                <div id="header">
+                    <div id="logo">
+                        <h1><a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title|truncate(25, true) }}</a></h1>
+                        {% if Custom('custom_headline') is not empty %}
+                            <!-- Headline -->
+                            <p>{{ Custom('custom_headline') }}</p>
+                        {% endif %}
+                    </div>
+                    <div id="menu">
+                        <ul>
+                            <!-- Index -->
+                            <li class="page_item{% if isIndex %} current_page_item{% endif %}">
+                                <a {% if isIndex %} {% endif %} href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
+                            </li>
+                            <!-- Custom menu 1 -->
+                            {% if Custom('custom_menu_1_tag') is not empty %}
+                                <li class="page_item{% if isTag and Tag is not empty and Tag.Title == Custom('custom_menu_1_tag') %} current_page_item{% endif %}">
+                                    <a href="/tag/{{ Custom('custom_menu_1_tag') }}">
+                                        {% if Custom('custom_menu_1_title') is not empty %}
+                                            {{ Custom('custom_menu_1_title') }}
+                                        {% else %}
+                                            {{ Custom('custom_menu_1_tag') }}
+                                        {% endif %}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="page_item"><a href="/contact">{{ Lang.Get('Contact') }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="page">
+                <!-- shortcut:[Main content] -->
+                <div id="content">
+                    {% if isSpecial %}
+                    <div class="special">
+                        {{ SpecialContent }}
+                    </div>
+                    {% elseif isSingle %}
+                        <!-- Single Page -->
+                        <div class="post">
+                            <h2 class="title">
+                                <a title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}" href="{{ Post.PermaLink }}">
+                                    {% if Post.Title is not empty %}
+                                        {{ Post.Title }}
+                                    {% else %}
+                                        {{ Lang.Get('From') }}
+                                        {% list Post.Sources %}
+                                            {{ Lang.Get(Source) }}
+                                            {% if not loop.last %}
+                                                 {{ Lang.Get('and') }}
+                                            {% endif %}
+                                        {% endlist %}
+                                    {% endif %}
+                                </a>
+                            </h2>
+                            <p class="meta">
+                                <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:ia") }}</span>
+                                {% if Post.Author and Post.Author is not empty %}
+                                    <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                                {% endif %}
+                                {% list Post.Tags %}
+                                    {% if loop.index == 1 %}
+                                        <br/><strong>{{ Lang.Get('Tags:') }}</strong>
+                                    {% endif %}
+                                    <a href="{{Tag.Url}}" title="{{Tag.Title}}">{{Tag.Title}}</a>
+                                    {% if not loop.last %}
+                                        , 
+                                    {% endif %}
+                                {% endlist %}
+                            </p>
+                            <div class="entry">
+                                {{ Post.Body }}
+                                <div class="ob-section m-social-networks">
+                                    <!-- Social networks : share -->
+                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                    <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}" {% endif %}></a>
+                                </div>
+                                {% if not isPage %}
+                                    <div class="bloc-comment" id="comments">
+                                        <!-- Comments -->
+                                        <div class="item-comments">
+                                            {% if Custom("comment") == "Facebook" %}
+                                                <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="590" data-colorscheme="{{ Custom("custom_facebook_comments_color_theme")|default('light') }}"></div>
+                                            {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                                <div id="disqus_thread"></div>
+                                                <script type="text/javascript">
+                                                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                                    (function() {
+                                                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                                    })();
+                                                </script>
+                                                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                            {% else %}
+                                                {{ Post.Comments }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        <!-- Other pages -->
+                        {% list Posts %}
+                            <div class="post clear">
+                                <h2 class="title">
+                                    <a title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}" href="{{ Post.PermaLink }}">
+                                        {% if Post.Title is not empty %}
+                                            {{ Post.Title }}
+                                        {% else %}
+                                            {{ Lang.Get('From') }}
+                                            {% list Post.Sources %}
+                                                {{ Lang.Get(Source) }}
+                                                {% if not loop.last %}
+                                                     {{ Lang.Get('and') }}
+                                                {% endif %}
+                                            {% endlist %}
+                                        {% endif %}
+                                    </a>
+                                </h2>
+                                <p class="meta">
+                                    <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:ia") }}</span>
+                                    {% if Post.Author and Post.Author is not empty %}
+                                        <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                                    {% endif %}
+                                </p>
+                                <div class="entry">
+                                    <p>
+                                        {% if Post.Cover is not empty %}
+                                            <a href="{{ Post.PermaLink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">
+                                                <img class="ob-media ob-img ob-pull-left ob-media-left" src="{{ Post.Cover|resize(314, 125) }}" alt="" class="border" />
+                                            </a>
+                                        {% endif %}
+                                        {{ Post.Snippet }}
+                                    </p>
+                                    <p class="links clear">
+                                        <a class="more" href="{{ Post.PermaLink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">{{ Lang.Get('Full article') }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        {% endlist %}
+                        {% if isSearch and Posts is empty %}
+                            <!-- No result for search -->
+                            <p>{{ Lang.Get('No result found') }}</p>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Pagination -->
+                    {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
+                        <div class="navigation">
+                            {% if Navigation.PreviousPage is not empty or Navigation.PreviousPost is not empty %}
+                                <p class="alignleft">
+                                    {% if Navigation.PreviousPage is not empty %}
+                                        <a href="{{ Navigation.PreviousPage }}" class="prev">&laquo; {{ Lang.Get('Previous page') }}</a>
+                                    {% elseif Navigation.PreviousPost is not empty %}
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" class="prev" title="{{ Lang.Get('Go to') }} {% if Navigation.PreviousPost.Title is not empty %}&quot;{{ Navigation.PreviousPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('previous post') }}{% endif %}">&laquo; {{ Lang.Get('Previous post') }}</a>
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                            {% if Navigation.NextPage is not empty or Navigation.NextPost is not empty %}
+                                <p class="alignright">
+                                    {% if Navigation.NextPage is not empty %}
+                                        <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
+                                    {% elseif Navigation.NextPost is not empty %}
+                                        <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }} &raquo;</a>
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div style="clear: both;">&nbsp;</div>
+                </div>
+                
+                <!-- shortcut:[Sidebar] -->
+                <div id="sidebar">
+                    <ul>
+                        <!-- Search form -->
+                        {% if Custom('custom_hide_widget_search_form') == false %}
+                            <li>
+                                <form class="search" method="get" action="/search/">
+                                    <div class="ob-section">
+                                        <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text" value="{{ Search }}" />
+                                        <input type="submit" class="ob-input-submit" value="{{ Lang.Get('Search') }}" value="{{ Lang.Get('Go') }}" />
+                                    </div>
+                                </form>
+                            </li>
+                        {% endif %}
+                        
+                        <!-- Blog owner -->
+                        {% if Custom('custom_hide_widget_biography') == false %}
+                            {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
+                                <li>
+                                    <h3>
+                                        {{ Blog.Owner.Nickname }}
+                                    </h3>
+                                    {% if Blog.Owner.Bio is not empty %}
+                                        <p>
+                                            {% if Blog.Owner.Avatar is not empty %}
+                                                <a class="fancybox" title="{{ Blog.Owner.Nickname }}" href="{{ Blog.Owner.Avatar }}"><img class="ob-media ob-img ob-pull-left ob-media-left" src="{{ Blog.Owner.Avatar|resize(45,45) }}" alt="" /></a>
+                                            {% endif %}
+                                            {{Blog.Owner.Bio}}
+                                        </p>
+                                    {% endif %}
+                                    {% if Custom('facebook_profile_id') is not empty or Custom('twitter_account') is not empty %}
+                                        <p class="m-networks">
+                                            {% if Custom('facebook_profile_id') is not empty %}
+                                                <a target="_blank" href="http://www.facebook.com/profile.php?id={{ Custom('facebook_profile_id') }}"><img alt="Facebook" src="http://assets.over-blog-kiwi.com/themes/30/images/facebook.png"></a>
+                                            {% endif %}
+                                            {% if Custom('twitter_account') is not empty %}
+                                                <a target="_blank" href="https://www.twitter.com/{{ Custom('twitter_account') }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/30/images/twitter.png"></a>
+                                            {% endif %}
+                                        </p>
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <!-- Categories -->
+                        {% if Custom('custom_hide_widget_categories') == false %}
+                            {% if Blog.PostsTags() and Blog.PostsTags() is not empty %}
+                                <li>
+                                    <h3>{{ Lang.Get('Categories') }}</h3>
+                                    <ul>
+                                        {% list Blog.PostsTags(10) %}
+                                            <li><a href="{{ PostsTag.Url }}">{{ PostsTag.Title }} ({{ PostsTag.PostCount }})</a></li>
+                                        {% endlist %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <!-- Pages -->
+                        {% if Custom('custom_hide_widget_pages') == false %}
+                            {% if Blog.ListPages and Blog.ListPages is not empty %}
+                                 <li>
+                                    <h3>{{ Lang.Get('Pages') }}</h3>
+                                    <ul>
+                                        {% list Blog.ListPages %}
+                                            <li>
+                                                <a href="{{ListPage.Url}}">{{ListPage.Title}}</a>
+                                            </li>
+                                        {% endlist %} 
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        
+                        <!-- Archives -->
+                        {% if Custom('custom_hide_widget_archives') == false %}
+                            {% if Blog.Archives is not empty %}
+                                <li>
+                                    <h3>{{ Lang.Get('Archives') }}</h3>
+                                    <ul id="archivelist">
+                                        {% list Blog.Archives %}
+                                            <li>
+                                                <a href="#" class"plustext" onclick="javascript: return switch_arch('{{Archive.Year}}')">{{Archive.Year}}</a>
+                                                <ul id="arch_{{Archive.Year}}" class="arch_month">
+                                                {% list Archive.Months %}
+                                                    {% if Month.PostCount > 0 %}
+                                                        <li><a href="{{Month.Url}}">{{Month.Name}}</a> ({{Month.PostCount}})</li>
+                                                    {% endif %}
+                                                {% endlist %}
+                                                </ul>
+                                            </li>
+                                        {% endlist %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div style="clear: both; height: 20px;">&nbsp;</div>
+            </div>
+        </div>
+        <!-- If you'd like to support WordPress, having the "powered by" link somewhere -->
+        <!-- on your blog is the best way, it's our only promotion or advertising.      -->
+        <div id="footer-content">
+            {% if Custom('custom_footer_1_tag') is not empty or Custom('custom_footer_2_tag') is not empty or Custom('custom_footer_3_tag') is not empty %}
+                <div id="footer-bg" class="container">
+                    {% if Custom('custom_footer_1_tag') is not empty %}
+                        <div id="column1">
+                            <h3>{{ Custom('custom_footer_1_tag') }}</h3>
+                            <ul>
+                                {% list Blog.TaggedPosts(Custom('custom_footer_1_tag'), 5) %}
+                                    <li>
+                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ Post.PermaLink }}">
+                                            {% if TaggedPost.Title is not empty %}
+                                                {{ TaggedPost.Title }}
+                                            {% else %}
+                                                {{ TaggedPost.Date|datel(Lang.Get('Default date format')) | title }}, {{ TaggedPost.Date|date("H:ia") }}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if Custom('custom_footer_2_tag') is not empty %}
+                        <div id="column2">
+                            <h3>{{ Custom('custom_footer_2_tag') }}</h3>
+                            <ul>
+                                {% list Blog.TaggedPosts(Custom('custom_footer_2_tag'), 5) %}
+                                    <li>
+                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ Post.PermaLink }}">
+                                            {% if TaggedPost.Title is not empty %}
+                                                {{ TaggedPost.Title }}
+                                            {% else %}
+                                                {{ TaggedPost.Date|datel(Lang.Get('Default date format')) | title }}, {{ TaggedPost.Date|date("H:ia") }}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if Custom('custom_footer_3_tag') is not empty %}
+                        <div id="column3">
+                            <h3>{{ Custom('custom_footer_3_tag') }}</h3>
+                            <ul>
+                                {% list Blog.TaggedPosts(Custom('custom_footer_3_tag'), 5) %}
+                                    <li>
+                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ Post.PermaLink }}">
+                                            {% if TaggedPost.Title is not empty %}
+                                                {{ TaggedPost.Title }}
+                                            {% else %}
+                                                {{ TaggedPost.Date|datel(Lang.Get('Default date format')) | title }}, {{ TaggedPost.Date|date("H:ia") }}
+                                            {% endif %}
+                                        </a>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <div id="footer">
+                {% if Custom('custom_footer') %}
+                    <p id="legal">{{ Custom('custom_footer') }}</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Google Analytics -->
+        {% if Custom('google_analytics') is not empty %}
+            <script type="text/javascript">
+                window.google_analytics_uacct = '{{ Custom('google_analytics') }}';
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', '{{ Custom('google_analytics') }}']);
+                _gaq.push(['_trackPageview']);
+                _gaq.push(['_trackPageLoadTime']);
+
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+        {% endif %}
+        
+        <!-- Archives -->
+        {% if Custom('custom_hide_widget_archives') == false %}
+            <script type="text/javascript">
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, archiveMonths, displayStyle;
+                    displayStyle = '';
+                    archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            // Hide years without months
+                            archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
+                        }
+                        archiveYear.style.display = displayStyle;
+                    }
+                    return false;
+                }
+            </script>
+        {% endif%}
+        
+        <!-- Social networks : Facebook -->
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
+        <!-- Social networks : Twitter -->
+        <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");</script>
+        
+        <!-- jQuery onReady -->
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                // Fancy box
+                {% if isSingle %}
+                    jQuery('.ob-section-images .ob-img').parent('a').attr('rel', 'fancyGroup');
+                {% endif%}
+                jQuery(".ob-section-images .ob-img").parent('a').add(".fancybox").fancybox({
+                    'overlayShow'   : true,
+                    'transitionIn'  : 'elastic',
+                    'transitionOut' : 'elastic',
+                    'type': 'image'
+                });
+                
+                (function() {
+                    {% if Custom('custom_hide_widget_search_form') == false %}
+                        // HTML5 placeholder fallback
+                        function isPlaceholderSupported() {
+                            'use strict';
+                            var o = document.createElement('input');
+                            return 'placeholder' in o;
+                        }
+                        function initPlaceHolder(el){
+                            if(jQuery.trim(el.val()) === '' || jQuery.trim(el.val()) === el.attr('placeholder')){
+                                el.val(el.attr('placeholder'));
+                                el.css({'color': '#999'});
+                            }
+                        }
+                        function togglePlaceholder(el, submitMode) {
+                            'use strict';
+                            var v = jQuery.trim(el.val()), p = el.attr('placeholder');
+                            if (v === '' && !submitMode) {
+                                el.val(p);
+                                el.css({'color': '#999'});
+                            } else if (v === p) {
+                                el.val('');
+                            }
+                        }
+                        function emulatePlaceholder(form) {
+                            'use strict';
+                            if (!isPlaceholderSupported()) {
+                                jQuery('input[placeholder]', form).each(function () {
+                                    initPlaceHolder(jQuery(this));
+                                }).focus(function () {
+                                    togglePlaceholder(jQuery(this), false);
+                                }).blur(function () {
+                                    initPlaceHolder(jQuery(this));
+                                });
+                                form.submit(function () {
+                                    jQuery(this).find('input[placeholder]').each(function () {
+                                        togglePlaceholder(jQuery(this), true);
+                                    });
+                                });
+                            }
+                        }
+                        
+                        // Search form
+                        function obSearchForm() {
+                            'use strict';
+                            var i= 0, form = jQuery('form.search');
+                            if (form.length) {
+                                form.each(function () {
+                                    emulatePlaceholder($(this));
+                                    var qInput = jQuery('input[name=q]', $(this));
+                                    if (qInput.length) {
+                                        $(this).submit(function (e) {
+                                            e.preventDefault();
+                                            window.location = jQuery(this).attr('action') + qInput.val();
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                        obSearchForm();
+                    {% endif%}
+                    
+                    // Fluid video containers
+                    var vidContainers;
+                    var frameParentWidth;
+                    var frameWidth;
+                    var frameHeight;
+                    var ratioFrame;
+                    vidContainers = jQuery('.ob-section-video iframe, .ob-section-video object');
+                    if (vidContainers.length > 0) {
+                        vidContainers.each(function () {
+                            frameParentWidth = jQuery(this).parent().innerWidth();
+                            frameWidth = vidContainers.innerWidth();
+                            if (frameWidth && frameParentWidth < frameWidth) {
+                                frameHeight = vidContainers.innerHeight();
+                                if (frameHeight) {
+                                    ratioFrame = frameHeight / frameWidth;
+                                    vidContainers.attr('width', frameParentWidth + 'px');
+                                    vidContainers.attr('height', frameParentWidth * ratioFrame + 'px');
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Archives
+                    {% if Custom('custom_hide_widget_archives') == false %}
+                        {% list Blog.Archives %}
+                            switch_arch('{{Archive.year}}');
+                        {% endlist %}
+                    {% endif%}
+                })();
+            });
+        </script>
+    </body>
+</html>
