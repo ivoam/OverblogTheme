@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="{{ Blog.Lang | default('en') }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <title>{% if isSingle %}{{ Post.Title }} - {% endif %}{{ Blog.Title }}</title>
+    <meta name="description" content="{{ Blog.Description }}" />
+    <script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
+
+    <style type="text/css" media="screen">
+        body {
+            overflow: hidden;
+            font-family: impact;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        h1,
+        p.loadmoar,
+        p.backhome {
+            position: absolute;
+            z-index: 99;
+            top: 5px;
+            right: 5px;
+            font-size: 64px;
+            color: white;
+            -webkit-text-stroke: 2px black;
+            text-shadow:
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+        }
+        p.loadmoar,
+        p.backhome {
+            top: auto;
+            bottom: 5px;
+        }
+        h1:hover,
+        p.loadmoar:hover,
+        p.backhome:hover {
+            cursor: pointer;
+            color: #333;
+        }
+        /* Sky */
+        #posts .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: #003366;
+        }
+
+        /* Stars */
+        #posts .star {
+            position: absolute;
+            background: no-repeat;
+            width: 150px;
+            height: 150px;
+        }
+
+        #posts .star0 {
+            top: 0;
+            left: 0;
+        }
+        #posts .star1 {
+            top: 10%;
+            left: 40%;
+        }
+        #posts .star2 {
+            top: 30%;
+            left: 60%;
+        }
+        #posts .star3 {
+            top: 50%;
+            left: 90%;
+        }
+        #posts .star4 {
+            top: 70%;
+            left: 40%;
+        }
+        #posts .star5 {
+            top: 80%;
+            left: 10%;
+        }
+
+        #posts .star.step0 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/star/step1.png');
+        }
+        #posts .star.step1 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/star/step2.png');
+        }
+        #posts .star.step2 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/star/step3.png');
+        }
+        #posts .star.step3 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/star/step4.png');
+        }
+        #posts .star.step4 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/star/step5.png');
+        }
+        #posts .star.step5 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/star/step6.png');
+        }
+
+        /* Cats */
+        #posts .nyan {
+            position: absolute;
+            width: 800px;
+            height: 120px;
+            background: no-repeat top right;
+            -webkit-background-size: 100% 100%;
+            -o-background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+        }
+        #posts .nyan.step1 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/nyan/step1.png')
+        }
+        #posts .nyan.step2 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/nyan/step2.png')
+        }
+        #posts .nyan.step3 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/nyan/step3.png')
+        }
+        #posts .nyan.step4 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/nyan/step4.png')
+        }
+        #posts .nyan.step5 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/nyan/step5.png')
+        }
+        #posts .nyan.step6 {
+            background-image: url('http://assets.over-blog-kiwi.com/themes/10/images/nyan/step6.png')
+        }
+
+        #posts .nyan .content {
+            text-align: right;
+            padding-right: 25%;
+        }
+        #posts .nyan .content .title,
+        .static a {
+            text-decoration: none;
+            color: white;
+            -webkit-text-stroke: 2px black;
+            font-size: 36px;
+            line-height: 60px;
+            margin: 0;
+            text-shadow:
+                3px 3px 0 #000,
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000;
+            overflow: hidden;
+            height: 50px;
+        }
+        #posts .nyan .content .title:hover {
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Panel */
+        .yui3-panel-focused {
+            outline: none;
+        }
+        .yui3-widget-hd {
+            background: url(http://assets.over-blog-kiwi.com/themes/10/images/rainbow.png) repeat-x top right;
+            height: 40px;
+            margin-right: 20px;
+        }
+        .yui3-panel-content h2 {
+            padding: 0;
+            line-height: 30px;
+            font-size: 24px;
+            margin: 0;
+            margin-right: 40%;
+            color: white;
+            -webkit-text-stroke: 1px black;
+            font-weight: bold;
+            overflow: hidden;
+            height: 40px;
+        }
+        .yui3-widget-hd .yui3-widget-buttons .yui3-button-close {
+            position: absolute;
+            top: -4px;
+            right: -30px;
+            display: block;
+            width: 70px;
+            height: 40px;
+            margin-left: 15px;
+            background: url(http://assets.over-blog-kiwi.com/themes/10/images/nyancats.png) no-repeat 0 0;
+            text-indent: -10000px;
+            -moz-box-shadow: none; /* FF3.5+ */
+            -webkit-box-shadow: none; /* Saf3+, Chrome */
+            box-shadow: none; /* Standard. Opera 10.5, IE9 */
+        }
+        .yui3-widget-hd .yui3-widget-buttons .yui3-button-close:hover {
+            background-position: 0 -40px;
+        }
+        .yui3-widget-modal .details {
+            position: absolute;
+            top: 0;
+            right: 10px;
+            line-height: 5px;
+            font-size: 14px;
+            margin-right: 0;
+            width: 40%;
+        }
+        .yui3-widget-modal .comments {
+            border-top: 1px solid #333;
+        }
+        .yui3-widget-modal .comments iframe {
+            border: none;
+            width: 100%;
+        }
+        .yui3-widget-bd {
+            margin-top: -15px;
+            font-family: 'comic sans ms';
+            overflow: auto;
+            background: white;
+            border: 2px solid #333;
+            padding: 10px;
+        }
+
+        /* static state */
+        #posts .nyan.pos1 {
+            width: 775px;
+            height: 116px;
+            top: 49%;
+            opacity: 0.9;
+            z-index: 96;
+            left: 10%;
+        }
+        #posts .nyan.pos2 {
+            width: 620px;
+            height: 93px;
+            top: 26%;
+            opacity: 0.8;
+            z-index: 77;
+            left: 15%;
+        }
+        #posts .nyan.pos3 {
+            width: 400px;
+            height: 60px;
+            top: 5%;
+            opacity: 0.5;
+            z-index: 50;
+            left: 20%;
+        }
+        #posts .nyan.pos4 {
+            width: 765px;
+            height: 114px;
+            top: 70%;
+            opacity: 0.9;
+            z-index: 95;
+            left: 25%;
+        }
+        #posts .nyan.pos5 {
+            width: 516px;
+            height: 77px;
+            top: 58%;
+            opacity: 0.6;
+            z-index: 64;
+            left: 30%;
+        }
+        #posts .nyan.pos6 {
+            width: 400px;
+            height: 60px;
+            top: 24%;
+            opacity: 0.5;
+            z-index: 50;
+            left: 35%;
+        }
+        #posts .nyan.pos7 {
+            width: 400px;
+            height: 60px;
+            top: 50%;
+            opacity: 0.5;
+            z-index: 50;
+            left: 40%;
+        }
+        #posts .nyan.pos8 {
+            width: 717px;
+            height: 107px;
+            top: 38%;
+            opacity: 0.9;
+            z-index: 89;
+            left: 45%;
+        }
+        #posts .nyan.pos9 {
+            width: 400px;
+            height: 60px;
+            top: 7%;
+            opacity: 0.5;
+            z-index: 50;
+            left: 50%;
+        }
+        #posts .nyan.pos10 {
+            width: 507px;
+            height: 76px;
+            top: 50%;
+            opacity: 0.6;
+            z-index: 63;
+            left: 55%;
+        }
+
+    </style>
+</head>
+<body>
+    <{% if isSingle %}p{% else %}h1{% endif %}>{{ Blog.Title }}</{% if isSingle %}p{% else %}h1{% endif %}>
+
+    <div id="posts">
+
+        <div class="sky">
+            <div class="star star0 step1"></div>
+            <div class="star star1 step2"></div>
+            <div class="star star2 step3"></div>
+            <div class="star star3 step4"></div>
+            <div class="star star4 step5"></div>
+            <div class="star star5 step0"></div>
+        </div>
+
+        <div class="nyans static">
+            {% list Posts %}
+            <div class="nyan step5 pos{{ loop.index }}">
+                <article class="content">
+
+                    <h{% if isSingle %}1{% else %}2{% endif %} class="title">
+                        <a href="{{Post.Permalink}}">
+                            {% if Post.Title is not empty %}{{ Post.Title }}{% else %}#{{ Post.Date }}{% endif %}
+                        </a>
+                    </h{% if isSingle %}1{% else %}2{% endif %}>
+                    <div class="hidden">
+                        <p class="date">
+                            {{Post.Author}} nyaned this on {{Post.Date|date('Y-m-d h:m:s')}}
+                        </p>
+                        <div class="content">
+                            {{Post.Body}}
+                        </div>
+                        <div class="comments">
+                            {{ Post.Comments }}
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endlist %}
+        <div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+        YUI({
+            lang: '{{ Blog.Lang | default('en') }}',
+            groups: {
+                nyan: {
+                    combine: false,
+                    base: 'http://assets.over-blog-kiwi.com/themes/10/js/',
+                    modules: {
+                        nyancat: {
+                            path: 'nyan.js',
+                            requires: ['node', 'view', 'widget', 'collection', 'datatype-date', 'substitute', 'event-mouseenter', 'io', 'json', 'panel', 'dd-plugin', 'controller']
+                        }
+                    }
+                }
+            }
+        }).use('nyancat', function(Y)
+        {
+            var posts = /*START*/[{% list Posts %}{
+                        "date": "{{Post.Date|date('Y-m-d h:m:s')}}",
+                        "author": "{{Post.Author}}",
+                        "title": "{% if Post.Title is not empty %}{{ Post.Title }}{% else %}#{{ Post.Date }}{% endif %}",
+                        "url": "{{Post.Permalink}}",
+                        "tags": [{% list Post.Tags %}"{{Tag.Name}}"{% if loop.last is empty %},{% endif%}{% endlist%}]
+                    }{% if loop.last is empty %},{% endif%}{% endlist %}]/*END*/,
+                ctn = Y.one('#posts'),
+                view = new Y.NyanCatView({
+                    posts: posts,
+                    perpage: 5
+                }),
+                as = Y.all('article');
+
+            /* Get the bodies */
+            Y.each(
+                posts,
+                function(p)
+                {
+                    as.some(
+                        function(a)
+                        {
+                            if (a.one('.title a').getAttribute('href') === p.url)
+                            {
+                                return (
+                                    (p.body = a.one('.content').get('innerHTML')) &&
+                                    (p.comments = a.one('.comments').get('innerHTML'))
+                                );
+                            }
+                        }
+                    );
+                }
+            );
+
+            ctn.set('innerHTML', '');
+            ctn.append(view.render());
+        });
+    //]]>
+    </script>
+</body>
+</html>
