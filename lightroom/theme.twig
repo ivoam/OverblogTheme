@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="{{ Blog.Lang | default('en') }}">
+<head>
+
+    <title>{% if isSingle%}{{ Post.Title }} - {% elseif isTag and Tag is not empty %}{{ Tag.Title|title }} - {% elseif isSearch and Search is not empty %}{{ Search|title }} - {% endif %}{{Blog.Title}}</title>
+
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+
+    <link href='{{ Blog.FaviconUrl }}' rel='icon' type='image/x-icon'/>
+    <link href='{{ Blog.Url }}' rel='canonical'/>
+    <link rel="alternate" type="application/rss+xml" title="{{ Blog.Title }} RSS" href="{{ Blog.RssUrl }}" />
+
+    <meta name="constant:displayArticlesLimit" content="16" />
+
+    <meta name="image:global_bg:Global background" groupe="Design" default="http://assets.over-blog-kiwi.com/themes/9/images/bg.jpg" />
+    <meta name="image:bloglogo:Blog logo" groupe="Design" default="http://assets.over-blog-kiwi.com/themes/9/images/logo.png" />
+
+    <meta name="list:nb_recent:Number of recent posts in sidebar" group="Content" default="2" items="[0,1,2,3,4,5]" />
+
+    <meta name="string:page_url_1:First page URL" group="Navigation" />
+    <meta name="string:page_title_1:First page title" group="Navigation" />
+    <meta name="string:page_url_2:Second page URL" group="Navigation" />
+    <meta name="string:page_title_2:Second page title" group="Navigation" />
+    <meta name="string:page_url_3:Third page URL" group="Navigation" />
+    <meta name="string:page_title_3:Third page title" group="Navigation" />
+    <meta name="string:page_url_4:Fourth page URL" group="Navigation" />
+    <meta name="string:page_title_4:Fourth page title" group="Navigation" />
+    <meta name="string:page_url_5:Fifth page URL" group="Navigation" />
+    <meta name="string:page_title_5:Fifth page title" group="Navigation" />
+
+    <style type="text/css">
+        #navbar-iframe { display:block }
+        /*
+        **************************************************
+        Template name: Lightroom (Advanced)
+        Version:1.0
+        Designer: Biyan
+        url: http://www.dzignine.com
+        ************************************************** */
+
+        /* GENERAL
+        ******************** */
+        body {
+            background: #efe0cb url({{ Custom('global_bg') }}) no-repeat fixed top center /* Credit: sndr (http://www.istockphoto.com/googleimages.php?id=5888266&platform=blogger) */;
+            margin: 0;
+            padding: 0;
+            color: #898989;
+        }
+        #protector {
+            width: 100%;
+            height: 100%;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/protector.png)
+        }
+        #outer-wrapper {
+            width: 960px;
+            text-align: left;
+            font: normal normal 12px 'Times New roman', serif;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/out.png) repeat-y center center;
+        }
+        a:link {
+            color: #5378b3;
+            text-decoration: none;
+        }
+        a:visited {
+            color: #5378b3;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #111111;
+            text-decoration: underline;
+        }
+        a img {
+            border-width: 0;
+        }
+        #navbar-iframe, .feed-links, .jump-link, .status-msg-wrap {
+            display: none
+        }
+        h1 {
+            font-size: 24px;
+        }
+        h2 {
+            font-size: 14px;
+        }
+        h3 {
+            font-size: 18px;
+        }
+        h4 {
+            font-size: 12px;
+        }
+        h5 {
+            font-size: 10px;
+        }
+        h6 {
+            font-size: 8px;
+        }
+        hr {
+            background-color: #9a9a9a;
+            border: 0;
+            height: 1px;
+            margin-bottom: 2px;
+            clear: both;
+        }
+        .two-columns {
+            -moz-column-count: 2;
+            -moz-column-gap: 3em;
+            -moz-column-rule: 1px dashed #ddd;
+            -webkit-column-count: 2;
+            -webkit-column-gap: 3em;
+            -webkit-column-rule: 1px dashed #ddd;
+        }
+        /*HEADER
+        *********************** */
+        #header-wrapper {
+            height: auto;
+        }
+        #header {
+            text-align: left;
+            overflow: hidden;
+            padding: 25px 15px;
+        }
+        #header h1 {
+            margin: 0 auto;
+            padding: 0;
+            text-decoration: none;
+            font: italic normal 40px Palatino Linotype, Garamond, Georgia, Times New Roman, serif;
+            color: #fafafa;
+            letter-spacing: -1px;
+        }
+        #header a {
+            color: #fafafa;
+            text-decoration: none;
+        }
+        #header a:hover {
+            color: #fafafa;
+        }
+        #header .description {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            font: normal normal 10px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+            color: #fafafa;
+            text-transform: uppercase;
+        }
+        #header img {
+            margin: 0;
+        }
+        /* NAVIGATION
+        **************************/
+        #PageList1 {
+            padding: 0;
+            margin: 0;
+        }
+        #PageList1 h2 {
+            display: none
+        }
+        #PageList1 li {
+            background: #980000;
+            margin-bottom: 1px;
+            padding: 5px 15px;
+            text-align: center
+        }
+        #PageList1 li a {
+            color: #fff;
+            font: normal normal 20px Dancing Script;
+        }
+        #PageList1 li a:hover {
+            color: #000;
+        }
+        #PageList1 .selected {
+            background: #980000 url(http://assets.over-blog-kiwi.com/themes/9/images/navigation.png) no-repeat center top
+        }
+        #PageList1 .widget-content {
+            padding: 0;
+        }
+        /* PRIMARY CONTENT
+        ********************************** */
+        #main-wrapper {
+            width: 750px;
+            margin: 0;
+            float: right;
+            text-align: left;
+            clear: both;
+        }
+        #main {
+            padding: 30px;
+            font: normal normal 13px 'Times New Roman', Serif;
+        }
+        .list-title {
+            position: absolute;
+            top: -15px;
+            left: 240px;
+        }
+        /** Posts **/
+        #main p:first-child:first-letter {
+            float: left;
+            padding: 4px 4px 0 0;
+            font-size: 30px;
+            margin: 4px 5px 0 0;
+            text-transform: uppercase;
+        }
+        #main p:first-child:first-line {
+            font-variant: small-caps;
+        }
+        .post-body p:first-child:first-letter {
+            float: left;
+            padding: 7px 5px 0 0 !important;
+            font-size: 45px !important;
+            margin: 5px 5px -5px 0 !important;
+            text-transform: uppercase;
+        }
+        .crop {
+            width: 150px;
+            height: 130px;
+            overflow: hidden;
+            float: left;
+            margin: 0;
+            .margin:-20px 0 0 0;
+        }
+        .rmlink {
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 17px;
+        }
+        .rmlink a {
+            color: #2dcf12;
+        }
+        .main .Blog {
+            border-bottom-width: 0;
+        }
+        .post {
+            margin: 0;
+        }
+        .post-title a, .post-title a:visited, .post-title strong {
+            width: 100%;
+            font: normal normal 25px 'Times New Roman', Serif;
+            float: left;
+            text-decoration: none;
+            color: #818181;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        .post-header-line-1 {
+            clear: both;
+            text-align: center;
+            line-height: 20px;
+            margin: 0 0 35px;
+            font-size: 13px;
+            font-style: italic;
+            font-family: 'Palatino Linotype', Garamond, 'times new roman', serif;
+        }
+        .entry-date {
+            margin-right: 10px
+        }
+        .post-title a, .post-title a:visited, .post-title strong {
+            display: block;
+            text-decoration: none;
+            color: #818181;
+        }
+        .post h3 strong, .post h3 a:hover {
+            color: #111111;
+        }
+        .post-body {
+            margin: 0 0 .75em;
+            line-height: 2em;
+        }
+        .post-body blockquote {
+            line-height: 2em;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/quote.png) no-repeat left 10px;
+            padding: 0 20px;
+            font-style: italic
+        }
+        .post blockquote {
+            margin: 1em 20px;
+        }
+        .post blockquote p {
+            margin: .75em 0;
+        }
+        .post-footer-line-1, .post-footer-line-3 {
+            margin: 10px 0 0;
+            padding: 15px 0 0;
+            color: #898989;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+            line-height: 1.4em;
+        }
+        .comment-link {
+            margin-left: .6em;
+        }
+        .post img, table.tr-caption-container {
+            max-width: 690px;
+            height: auto;
+            overflow: hidden;
+        }
+        .tr-caption-container img {
+            border: none;
+            padding: 0;
+        }
+        /* Secondary Content
+        ************************************************** */
+        #left-content {
+            float: left;
+            width: 210px;
+            overflow: hidden;
+            color: #888;
+        }
+        #left-content a, #left-content a:hover {
+            color: #999;
+        }
+        #sidebar-wrapper {
+            clear: both;
+            width: 100%;
+            text-align: right;
+        }
+        .sidebar {
+            line-height: 1.5em;
+            padding: 0;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/horizontal-border.png) repeat-x left top;
+        }
+        .sidebar h2 {
+            margin: 0 0 6px 0;
+            padding: 4px 0 4px 0;
+            font: normal normal 16px 'Times New Roman';
+            color: #f2f2f2;
+        }
+        .sidebar ul {
+            list-style: none;
+            margin: 0 0 0;
+            padding: 0 0 0;
+        }
+        .sidebar li {
+            margin: 0;
+            padding: 0;
+            line-height: 2em;
+        }
+        .sidebar .widget {
+            padding: 15px;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/horizontal-border.png) repeat-x left bottom;
+        }
+        .sidebar .widget .item-thumbnail {
+            float: right;
+            margin: 7px 0 0 10px
+        }
+        .sidebar .widget .item-title {
+            text-transform: uppercase;
+            text-decoration: underline;
+            font-size: 11px;
+        }
+        .sidebar .widget .item-snippet {
+            line-height: 1.7em;
+        }
+        .sidebar .widget-content {
+            padding: 5px 0 10px 0;
+        }
+
+        .title {
+            color: white;
+            font-size: 18px;
+            line-height: 18px;
+            margin: 0;
+            padding: 0;
+        }
+        /** Comments Content **/
+        .comments h4 {
+            font: normal normal 25px 'Times New Roman', Serif;
+            font-size: 12px !important;
+            color: #818181;
+            clear: both;
+            width: 690px;
+            text-align: center;
+        }
+        .author-name {
+            font-size: 14px;
+        }
+        /* PAGE NAVIGATION
+        *********************************** */
+        #blog-pager {
+            text-align: center;
+            padding: 1px;
+            clear: both
+        }
+        #blog-pager-newer-link, #blog-pager-newer-link a {
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/slider-li.gif) no-repeat right top;
+            float: right;
+            text-indent: -8000px;
+            width: 26px;
+            height: 26px
+        }
+        #blog-pager-newer-link a:hover {
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/slider-li.gif) no-repeat right bottom
+        }
+        #blog-pager-older-link, #blog-pager-older-link a {
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/slider-li.gif) no-repeat left top;
+            float: left;
+            text-indent: -8000px;
+            width: 26px;
+            height: 26px
+        }
+        #blog-pager-older-link a:hover {
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/slider-li.gif) no-repeat left bottom
+        }
+        /** Admin Profile **/
+        .profile-img {
+            float: left;
+            margin-top: 0;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            margin-left: 0;
+            padding: 4px;
+            border: 1px solid #9a9a9a;
+        }
+        .profile-data {
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+            color: #898989;
+            font-weight: bold;
+            line-height: 1.6em;
+        }
+        .profile-datablock {
+            margin: .5em 0 .5em;
+        }
+        .profile-textblock {
+            margin: 0.5em 0;
+            line-height: 1.6em;
+        }
+        .profile-link {
+            font: normal normal 78% 'Trebuchet MS', Trebuchet, Arial, Verdana, Sans-serif;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+        /* FOOTER CREDIT
+        ******************************** */
+        #footer-wrapper {
+            width: 930px;
+            clear: both;
+            margin: 0 auto -15px auto;
+            padding: 0 15px;
+            overflow: auto;
+            color: #777;
+            font-family: 'Times New Roman', Serif;
+            line-height: 2em;
+            font-size: 10px;
+            background: #111 url(http://assets.over-blog-kiwi.com/themes/9/images/left-content-bg.png);
+        }
+        #footer-wrapper p {
+            margin: 0;
+        }
+        #footer-wrapper, #footer-wrapper a:visited {
+            text-decoration: none;
+        }
+        #footer-wrapper a, #footer-wrapper a:visited {
+            color: #999;
+        }
+        #footer-wrapper a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        .footer-left, .footer-right {
+            padding: 15px 0;
+        }
+        .footer-left {
+            width: 50%;
+            float: left;
+            text-align: left;
+        }
+        .footer-right {
+            width: 50%;
+            float: right;
+            text-align: right;
+        }
+    </style>
+
+    {% if isSingle is empty %}
+    <style type='text/css'>
+        #main {
+            padding: 15px;
+        }
+
+        .post {
+            width: 150px;
+            height: 130px;
+            float: left;
+            margin: 15px;
+            overflow: hidden;
+        }
+
+        .post-body {
+            height: 130px;
+            overflow: hidden;
+        }
+
+        .post-title,
+        .post-header-line-1,
+        .entry-date,
+        .post-footer,
+        .snippet {
+            display: none
+        }
+
+        .post-entry-title {
+            border-bottom: none;
+            position: absolute;
+            z-index: 1000;
+            width: 150px;
+            height: 130px;
+            display: none;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/in.png);
+        }
+
+        a.post-entry-title {
+            width: 150px;
+            height: 130px;
+            text-indent: -9000px;
+        }
+
+        a:hover.post-entry-title {
+            width: 150px;
+            height: 130px;
+            background: url(http://assets.over-blog-kiwi.com/themes/9/images/in.png);
+        }
+
+        .post-body:hover .post-entry-title {
+            display: block
+        }
+
+        .post-body:hover {
+            opacity: 0.9;
+        }
+    </style>
+    {% endif %}
+
+</head>
+<body>
+    <div id='protector'>
+        <div id='outer-wrapper'>
+            <div id='wrap2'>
+            <!-- skip links for text browsers -->
+            <span id='skiplinks' style='display:none;'>
+                <a href='#main'>{{ Lang.Get('skip to main') }}</a> /
+                <a href='#bottom'>{{ Lang.Get('skip to footer') }}</a>
+            </span>
+            <div id='content-wrapper'>
+                <div id='main-wrapper'>
+                    <div class='main section' id='main'>
+                        <div class='widget Blog'>
+                            <div class='blog-posts hfeed'>
+
+                                {# List title #}
+                                {% if isSearch %}
+                                <h1 class="list-title">Search for “{{ Search }}”</h1>
+                                {% endif %}
+                                {% if isTag %}
+                                <h1 class="list-title">Posts with #<strong>{{ Tag.Title }}</strong> tag</h1>
+                                {% endif %}
+
+                                {% if Posts is empty %}
+
+                                {% if isSearch %}
+                                <div class="contenuArticle">
+                                    <p>
+                                        No result… Try again !
+                                    </p>
+                                    <form action="/search" method="get">
+                                        <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
+                                        <button type="submit">{{ Lang.Get('Search') }}!</button>
+                                    </form>
+                                </div>
+                                {% else %}
+                                <div class="contenuArticle">
+                                    <p>
+                                        {{ Lang.Get('No post') }}…
+                                    </p>
+                                </div>
+                                {% endif %}
+                                {% else %}
+
+                                {% list Posts %}
+
+                                <div class='post-outer'>
+                                    <div class='post hentry'>
+                                        <h{% if isSingle %}1{% else %}2{% endif %} class='post-title'>
+                                            <a href='{{ Post.Permalink }}'>
+                                                {{ Post.Title | default(Post.Snippet | truncate(100)) }}
+                                            </a>
+                                        </h{% if isSingle %}1{% else %}2{% endif %}>
+                                        <div class='post-header'>
+                                            <div class='post-header-line-1'>
+                                                <span class='post-author vcard' style='margin-right:10px;'>
+                                                    {{ Lang.Get('Posted by') }}
+                                                    <span class='fn'>
+                                                        {{ Post.Author | default('Anonymous') }}
+                                                    </span>
+                                                </span>
+                                                <time class='entry-date' datetime="{{ Post.Date }}">
+                                                    {{ Post.Date }}
+                                                </time>
+                                                <span class='post-comment-link'>
+                                                    <a class='comment-link' href='{{ Post.Permalink }}#comments' onclick=''>
+                                                        {{ Post.CommentCount('comment', 'comments') }}
+                                                    </a>
+                                                </span>
+                                                <span class='post-labels'>
+                                                    Labels:
+                                                    {% list Post.Tags %}
+                                                        <a href='{{ Tag.Url}}' rel='tag'>{{ Tag.Title }}</a>{% if loop.last is empty %},{% endif %}
+                                                    {% endlist %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class='post-body entry-content'>
+                                            <a  class='post-entry-title' href='{{ Post.Permalink }}'
+                                                title="{{ Post.Title | default(Post.Snippet | truncate(100)) }}">
+                                                {{ Post.Title | default(Post.Snippet | truncate(100)) }}
+                                            </a>
+                                            {% if not isSingle %}
+                                            <div class="crop">
+                                                <img    src="{{ Post.Cover | default('http://assets.over-blog-kiwi.com/themes/9/images/bg.jpg')|resize(210, 140)|crop }}"
+                                                        width="210px"
+                                                        alt="{{ Post.Title | default(Post.Snippet | truncate(100)) }}" />
+                                            </div>
+                                            <p class="snippet">
+                                                {{ Post.Snippet }}
+                                            </p>
+                                            {% else %}
+                                            <article>
+                                                {{ Post.Body }}
+                                            <article>
+                                            {% endif %}
+
+                                            <div style='clear: both;'></div>
+                                        </div>
+                                        <div class='post-footer'>
+                                            {# TODO : add some social buttons#}
+                                            <div class='post-footer-line-1'>
+                                            </div>
+                                            <div class='post-footer-line-2'>
+                                            </div>
+                                            <div class='post-footer-line-3'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if isSingle %}
+                                    <div class="comments">
+                                        <a name="comments"></a>
+                                        <h4>~ {{ Post.CommentCount('comment', 'comments') }}: ~</h4>
+                                        {{ Post.Comments }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                {% endlist %}
+                                {% endif %}
+                            </div>
+                            <div class="blog-pager" id="blog-pager">
+                                {% if Navigation.NextPage is not empty %}
+                                <span id="blog-pager-newer-link">
+                                <a class="blog-pager-newer-link" href="{{ Navigation.NextPage }}" title="Newer Post">| {{ Lang.Get('Next page')}} \\</a>
+                                </span>
+                                {% endif %}
+                                {% if Navigation.PreviousPage is not empty %}
+                                <span id="blog-pager-older-link">
+                                <a class="blog-pager-older-link" href="{{ Navigation.PreviousPage }}" title="Older Post">// {{ Lang.Get('Previous page') }} |</a>
+                                </span>
+                                {% endif %}
+                            </div>
+
+                            <div class='clear'></div>
+                        </div>
+                    </div>
+                </div>
+                <div id='left-content'>
+                    <div id='header-wrapper'>
+                        <div class='header section' id='header'>
+                            <div class='widget Header' id='Header1'>
+                                <div id='header-inner'>
+                                    <a href='{{ Blog.Url }}' style='display: block'>
+                                        <img alt='{{ Blog.Title }}' height='100px; ' src='{{ Custom('bloglogo') }}' style='display: block' width='180px;'/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='sidebar-wrapper'>
+                        <div class='sidebar section' id='rightsidebar'>
+                            <div class='widget PageList' id='PageList1'>
+                                <h2>{{ Lang.Get('Pages') }}</h2>
+                                <div class='widget-content'>
+                                    <ul>
+                                        <li class='selected'>
+                                            <a href='{{ Blog.Url }}'>
+                                                {{ Lang.Get('Home') }}
+                                            </a>
+                                        </li>
+                                        {% if Custom('page_url_1') %}
+                                        <li>
+                                            <a href='{{ Custom('page_url_1') }}'>
+                                                {{ Custom('page_title_1') }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% if Custom('page_url_2') %}
+                                        <li>
+                                            <a href='{{ Custom('page_url_2') }}'>
+                                                {{ Custom('page_title_2') }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% if Custom('page_url_3') %}
+                                        <li>
+                                            <a href='{{ Custom('page_url_3') }}'>
+                                                {{ Custom('page_title_3') }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% if Custom('page_url_4') %}
+                                        <li>
+                                            <a href='{{ Custom('page_url_4') }}'>
+                                                {{ Custom('page_title_4') }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                        {% if Custom('page_url_5') %}
+                                        <li>
+                                            <a href='{{ Custom('page_url_5') }}'>
+                                                {{ Custom('page_title_5') }}
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                    <div class='clear'></div>
+                                </div>
+                            </div>
+                            <div class='widget HTML'>
+                                <div class='widget-content'>
+                                    <{% if isIndex %}h1{% else %}p{% endif %} class="title">{{ Blog.Title }}</{% if isIndex %}h1{% else %}p{% endif %}>
+                                    <p>{{ Blog.Description }}</p>
+                                </div>
+                                <div class='clear'></div>
+                            </div>
+                            <div class='widget PopularPosts'>
+                                <div class='widget-content popular-posts'>
+                                    <ul>
+                                        {% list Blog.Posts(Custom('nb_recent')) %}
+                                        <li>
+                                            <div class='item-content'>
+                                                {% if Post.Cover %}
+                                                <div class='item-thumbnail'>
+                                                    <a href='{{ Post.Permalink }}'>
+                                                        <img alt='' border='0' height='72' src='{{ Post.Cover | resize(72) }}' width='72'/>
+                                                    </a>
+                                                </div>
+                                                {% endif %}
+                                                <div class='item-title'>
+                                                    <a href='{{ Post.Permalink }}'>
+                                                        {{ Post.Title | default(Post.Snippet | truncate(100)) }}
+                                                    </a>
+                                                </div>
+                                                <div class='item-snippet'>
+                                                    {{ Post.Snippet | truncate(100) }}
+                                                </div>
+                                            </div>
+                                            <div style='clear: both;'></div>
+                                        </li>
+                                        {% endlist %}
+                                    </ul>
+                                    <div class='clear'></div>
+                                </div>
+                            </div>
+                            <div class='widget Label' id='Label1'>
+                                <h2>{{ Lang.Get('Categories') }}</h2>
+                                <div class='widget-content cloud-label-widget-content'>
+                                    {% list Blog.PostsTags(15) %}
+                                    <span class='label-size label-size-1'>
+                                        <a href='{{ PostsTag.Url }}'>{{ PostsTag.Title }}</a>
+                                    </span>
+                                    {% endlist %}
+                                    <div class='clear'></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id='footer-wrapper'>
+                    <div class='footer-left'>
+                        <p>Copyright &#169; 2011 <a href='http://lightroom-dzignine.blogspot.com/'>Lightroom</a>, All rights reserved</p>
+
+                        <p>Design by: <a href='http://www.dzignine.com'>DZIGNINE</a> .com and <a href='http://1000wordsinside.com'>1000 Words Inside</a></p>
+                    </div>
+                    <div class='footer-right'>
+                        <p><a href='{{ Blog.Url }}'>Home</a> / {#<a href='http://lightroom-dzignine.blogspot.com/feeds/posts/default'>Posts</a> / #}{#<a href='http://lightroom-dzignine.blogspot.com/feeds/comments/default'>Comments RSS</a> / #}<a href='#'>Top</a></p>
+
+                        <p>Hosted by <a href="http://over-blog.com">Overblog</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

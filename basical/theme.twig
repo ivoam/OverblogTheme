@@ -1,0 +1,2249 @@
+<!doctype html>
+<html lang="{{ Blog.Lang | default('en') }}">
+    <head>
+        <!-- shortcut:[Meta] -->
+        <!-- title, description, keyword, robots -->
+        {% if isSingle%}
+            {% list Posts %}
+            <title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
+            <meta name="description" content="{{ Post.Snippet }}" />
+            <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
+                <meta name="robots" content="index,follow" />
+            {% endlist %}
+        {% elseif isTag and Tag is not empty %}
+            <title>{{ Tag.Title|title }} - {{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="keywords" content="{{ Tag.Title|title }}" />
+            <meta name="robots" content="index,follow" />
+        {% elseif isSearch and Search is not empty %}
+            <title>{{ Search|title }} - {{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="keywords" content="{{ Search|title }}" />
+            <meta name="robots" content="noindex" />
+        {% else %}
+            <title>{{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="robots" content="index,follow" />
+        {% endif %}
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        <!-- Social setting : Facebook, G+ .. -->
+        <meta property="og:site_name" content="{{ Blog.Title }}" />
+        <meta property="og:type" content="blog" />
+        <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
+        <meta itemprop="name" content="{{ Blog.Title }}" />
+        
+        {% if isSingle %}
+            {% list Posts %}
+                <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
+                <meta property="og:description" content="{{ Post.Snippet }}" />
+                <meta itemprop="description" content="{{ Post.Snippet }}" />
+                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+                {% if Post.Cover %}
+                    <meta property="og:image" content="{{ Post.Cover }}"/>
+                    <meta itemprop="image" content="{{ Post.Cover }}" />
+                {% endif %}
+            {% endlist %}
+            <meta property="og:type" content="overblogkiwi:see" />
+        {% else %}
+            <meta property="og:title" content="{{ Blog.Title }}"/>
+            <meta property="og:description" content="{{ Blog.Description }}" />
+            <meta itemprop="description" content="{{ Blog.Description }}" />
+            {% if Blog.Avatar %}
+                <meta property="og:image" content="{{ Blog.Avatar }}"/>
+                <meta itemprop="image" content="{{ Blog.Avatar }}" />
+            {% else %}
+                {% list Posts %}
+                    {% if loop.index == 1 and Post.Cover %}
+                        <meta property="og:image" content="{{ Post.Cover }}"/>
+                        <meta itemprop="image" content="{{ Post.Cover }}" />
+                    {% endif %}
+                {% endlist %}
+            {% endif %}
+            {% if isSearch %}
+                <meta property="og:type" content="overblogkiwi:search" />
+            {% else %}
+                <meta property="og:type" content="overblogkiwi:visit" />
+            {% endif %}
+        {% endif %}
+
+        <!-- shortcut:[Includes] -->
+        <!-- favicon -->
+        {% if Blog.FaviconUrl is not empty %}
+            <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
+        {% else %}
+            <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
+            <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
+            <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
+        {% endif %} 
+        
+        <!-- SEO -->
+        {% if Custom('google_webmaster_id') is not empty %}
+            <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
+        {% endif %}
+        {% if Custom('msn_webmaster_id') is not empty %}
+            <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
+        {% endif %}
+
+        <!-- includes -->
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
+        {% if Blog.CssUrl is not empty %}
+            <link rel="stylesheet" href="{{ Blog.CssUrl }}" type="text/css" />
+        {% endif %}
+        
+        <!-- Style -->
+        <style type="text/css">
+            /*----- Reset -----*/
+            body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,textarea,blockquote,th,td{ margin:0; padding:0;}
+            table{ border-collapse:collapse; border-spacing:0;}
+            fieldset,img{ border:0;}
+            address,caption,cite,code,dfn,var{ font-style:normal; font-weight:normal;}
+            ol,ul{ list-style:none;}
+            caption,th{ text-align:left;}
+            h1,h2,h3,h4,h5,h6{ font-size:100%; font-weight:normal;}
+            q:before,q:after{ content:'';}
+            abbr,acronym{ border:0;}
+        </style>
+        
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        
+        <!-- NivoSlider -->
+        <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/themes/default/default.css" type="text/css" />
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+        
+        <!-- Fancybox -->
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+        
+        <!-- Template resources -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- respond.js (add media query support for IE) -->
+        <!--[if lt IE 9]>
+            <script src="http://assets.over-blog-kiwi.com/themes/33/js/respond.js"></script>
+        <![endif]-->
+        <!-- html5.js (HTML5 Shiv for IE) -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="http://assets.over-blog-kiwi.com/themes/33/js/theme.script.js"></script>
+        <style type="text/css">
+            div.wpcf7 {
+                margin: 0;
+                padding: 0;
+            }
+
+            div.wpcf7-response-output {
+                margin: 2em 0.5em 1em;
+                padding: 0.2em 1em;
+            }
+
+            div.wpcf7-mail-sent-ok {
+                border: 2px solid #398f14;
+            }
+
+            div.wpcf7-mail-sent-ng {
+                border: 2px solid #ff0000;
+            }
+
+            div.wpcf7-spam-blocked {
+                border: 2px solid #ffa500;
+            }
+
+            div.wpcf7-validation-errors {
+                border: 2px solid #f7e700;
+            }
+
+            span.wpcf7-form-control-wrap {
+                position: relative;
+            }
+
+            span.wpcf7-not-valid-tip {
+                position: absolute;
+                top: 20%;
+                left: 20%;
+                z-index: 100;
+                background: #fff;
+                border: 1px solid #ff0000;
+                font-size: 10pt;
+                width: 280px;
+                padding: 2px;
+            }
+
+            span.wpcf7-not-valid-tip-no-ajax {
+                color: #f00;
+                font-size: 10pt;
+                display: block;
+            }
+
+            span.wpcf7-list-item {
+                margin-left: 0.5em;
+            }
+
+            .wpcf7-display-none {
+                display: none;
+            }
+
+            div.wpcf7 img.ajax-loader {
+                border: none;
+                vertical-align: middle;
+                margin-left: 4px;
+            }
+
+            div.wpcf7 .watermark {
+                color: #888;
+            }
+            
+            /*  
+            Theme Name: Base
+            Theme URI: http://webdesignerwall.com/general/free-base-wordpress-theme
+            Version: 1.0.0
+            Author: Themify
+            Author URI: http://www.themify.me
+            */
+
+            /************************************************************************************
+            RESET
+            *************************************************************************************/
+            html, body, address, blockquote, div, dl, form, h1, h2, h3, h4, h5, h6, ol, p, pre, table, ul,
+            dd, dt, li, tbody, td, tfoot, th, thead, tr, button, del, ins, map, object,
+            a, abbr, acronym, b, bdo, big, br, cite, code, dfn, em, i, img, kbd, q, samp, small, span,
+            strong, sub, sup, tt, var, legend, fieldset, figure {
+                margin: 0;
+                padding: 0;
+            }
+
+            img, fieldset {
+                border: 0;
+            }
+
+            /* set html5 elements to block */
+            article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+                display: block;
+            }
+
+            /* set img max-width */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            /* ie 8 img max-width */
+            @media \0screen {
+              img { width: auto;}
+            }
+
+            /************************************************************************************
+            GENERAL STYLING
+            *************************************************************************************/
+            body {
+                font: .81em/150% Arial, Helvetica, sans-serif;
+                color: #666;
+            }
+            a {
+                color: #1f7bb6;
+                text-decoration: none;
+                outline: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            p {
+                margin: 0 0 15px;
+                padding: 0;
+            }
+            small {
+                font-size: 87%;
+            }
+            blockquote {
+                font: italic 110%/130% "Times New Roman", Times, serif;
+                padding: 8px 30px 15px;
+            }
+
+            /* LIST
+            ================================================ */
+            ul, ol {
+                margin: 1em 0 1.4em 24px;
+                padding: 0;
+                line-height: 140%;
+            }
+            li {
+                margin: 0;
+                padding: 0;
+            }
+            .ob-text li:last-child {
+                margin-bottom: 15px;
+            }
+            li p {
+                margin-bottom: 5px;
+            }
+
+            /* HEADINGS
+            ================================================ */
+            h1, h2, h3, h4, h5, h6 {
+                line-height: 1.4em;
+                margin: 20px 0 .4em;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            h3 {
+                font-size: 1.6em;
+            }
+            h4 {
+                font-size: 1.4em;
+            }
+            h5 {
+                font-size: 1.2em;
+            }
+            h6 {
+                font-size: 1em;
+            }
+
+            .ob-text h3,
+            .ob-text h4,
+            .ob-text h5 {margin: 15px 0 5px;}
+            .ob-text h3 {font-size: 18px; font-weight: normal;}
+            .ob-text h4 {font-size: 16px; font-weight: normal;}
+            .ob-text h5 {font-size: 14px; font-weight: bold;}
+
+            /* FORM
+            ================================================ */
+            /* form input */
+            input, textarea, select, input[type=search], button {
+                font-size: 100%;
+                font-family: inherit;
+            }
+            input[type=text], input[type=password], textarea, input[type=search] {
+                background: #f3f3f3;
+                border: solid 1px #ddd;
+                padding: 6px 10px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                -webkit-appearance: none;
+            }
+            input[type=text], input[type=search] {
+                max-width: 90%;
+            }
+
+            /* text area */
+            textarea {
+                line-height: 150%;
+                width: 94%;
+            }
+
+            /* form input:focus */
+            textarea:focus, input[type=password]:focus, input[type=text]:focus, input[type=search]:focus {
+                outline: none;
+                background: #f9f9f9;
+            }
+
+            /* form button */
+            input[type=reset], input[type=submit], button {
+                background: #333;
+                color: #fff;
+                border: none;
+                padding: 7px 20px;
+                cursor: pointer;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+
+            /* form button:hover */
+            input[type=reset]:hover, input[type=submit]:hover, button:hover {
+                background: #000;
+                color: #fff;
+            }
+
+            /************************************************************************************
+            STRUCTURE
+            *************************************************************************************/
+            /* main page width */
+            .pagewidth {
+                width: 978px;
+                margin: 0 auto;
+            }
+
+            /* content */
+            #content {
+                width: 676px;
+                float: left;
+                padding: 5% 0 3%;
+            }
+
+            /* sidebar */
+            #sidebar {
+                width: 252px;
+                float: right;
+                padding: 5% 0 3%;
+            }
+
+            /* sidebar left */
+            .sidebar-left #content {
+                float: right;
+            }
+            .sidebar-left #sidebar {
+                float: left;
+            }
+
+            /* sidebar none */
+            .sidebar-none #content {
+                width: 100%;
+                float: none;
+            }
+
+            /************************************************************************************
+            GRID
+            *************************************************************************************/
+            .col,
+            .col4-1,
+            .col4-2,
+            .col4-3,
+            .col3-1,
+            .col3-2,
+            .col2-1
+            {
+                float: left;
+                margin-left: 30px;
+            }
+            .col4-1 {
+                width: 222px;
+            }
+            .col4-2, .col2-1 {
+                width: 474px;
+            }
+            .col4-3 {
+                width: 726px;
+            }
+            .col3-1 {
+                width: 306px;
+            }
+            .col3-2 {
+                width: 642px;
+            }
+
+            /* sidebar1 grid */
+            .sidebar1 .col4-1,
+            .sidebar1 .col4-2,
+            .sidebar1 .col4-3,
+            .sidebar1 .col3-1,
+            .sidebar1 .col3-2,
+            .sidebar1 .col2-1
+            {
+                margin-left: 2%;
+            }
+            .sidebar1 .col4-1 {
+                max-width: 23%;
+            }
+            .sidebar1 .col4-2, .sidebar1 .col2-1 {
+                max-width: 48%;
+            }
+            .sidebar1 .col4-3 {
+                max-width: 72%;
+            }
+            .sidebar1 .col3-1 {
+                max-width: 31%;
+            }
+            .sidebar1 .col3-2 {
+                max-width: 62%;
+            }
+
+            /* first col */
+            .col.first,
+            .col4-1.first,
+            .col4-2.first,
+            .col4-3.first,
+            .col3-1.first,
+            .col3-2.first,
+            .col2-1.first
+            {
+                margin-left: 0;
+                clear: left;
+            }
+
+            /************************************************************************************
+            HEADER
+            *************************************************************************************/
+            #header {
+                position: relative;
+                height: 170px;
+                border-bottom: solid 1px #ccc;
+            }
+
+            /* 
+            SITE LOGO
+            ================================================ */
+            #site-logo {
+                position: absolute;
+                top: 20px;
+                font-size: 36px;
+                margin: 0;
+            }
+            #site-logo a {
+                text-decoration: none;
+            }
+            #site-logo a:hover {
+                text-decoration: none;
+            }
+
+            /* 
+            SITE DESCRIPTION
+            ================================================ */
+            #site-description {
+                position: absolute;
+                top: 75px;
+                font-size: 12px;
+                font-weight: normal;
+                line-height: 100%;
+                margin: 0;
+            }
+
+            /* 
+            SOCIAL WIDGET
+            ================================================ */
+            .social-widget {
+                float: right;
+                position: absolute;
+                bottom: 10px;
+                right: 0;
+            }
+            .social-widget a {
+                text-decoration: none;
+            }
+            .social-widget a:hover {
+                text-decoration: none;
+            }
+            .social-widget .widget {
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+                margin: 0 2px 0 0;
+            }
+            .social-widget .widget div {
+                display: inline;
+            }
+            .social-widget .widgettitle {
+                width: auto;
+                font-weight: bold;
+                font-size: 100%;
+                text-transform: none;
+                border: none;
+                letter-spacing: 0;
+                position: static;
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+                margin: 5px 8px 2px 0;
+                padding: 0;
+                background: transparent;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+            }
+            .social-widget ul {
+                margin: 6px 0 0 !important;
+                padding: 0;
+                display: inline;
+            }
+            .social-widget ul li {
+                padding: 0 2px 5px 0;
+                margin: 0;
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+                border: none !important;
+                clear: none;
+                line-height: 100%;
+            }
+            .social-widget li img {
+                vertical-align: middle;
+                margin-top: -5px;
+            }
+
+            /* 
+            RSS
+            ================================================ */
+            .social-widget .rss {
+                display: inline;
+            }
+            .social-widget .rss a {
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/rss.png) no-repeat left center;
+                padding: 3px 0 2px 30px;
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+            }
+
+            /* 
+            SEARCH FORM
+            ================================================ */
+            #header #searchform {
+                position: absolute;
+                right: 0;
+                top: 40px;
+                width: 160px;
+            }
+            #header #searchform #s {
+                width: 100px;
+                color: #a5a099;
+                background: #eee url(http://assets.over-blog-kiwi.com/themes/33/images/search.png) no-repeat 8px center;
+                border: solid 1px #ddd;
+                padding-left: 28px;
+                float: right;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                -webkit-transition: width .7s;
+                -moz-transition: width .7s;
+                transition: width .7s;
+            }
+            #header #searchform #s:focus {
+                width: 140px;
+                color: #333;
+            }
+
+            /* 
+            MAIN NAVIGATION
+            ================================================ */
+            #main-nav {
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                left: 0;
+                bottom: 10px;
+                z-index: 100;
+            }
+            #main-nav li {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                float: left;
+                position: relative;
+            }
+
+            /* main level link */
+            #main-nav a {
+                display: block;
+                padding: 5px 15px;
+                margin: 0 5px 0 0;
+                text-decoration: none;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+            /* main level link :hover */
+            #main-nav a:hover {
+                background: #eee;
+            }
+
+            /* current link */
+            #main-nav .current_page_item a, #main-nav .current-menu-item a {
+                background: #333;
+                color: #fff;
+            }
+            /* current link :hover */
+            #main-nav .current_page_item a:hover, #main-nav .current-menu-item a:hover {
+                color: #fff;
+            }
+
+            /* sub-levels link */
+            #main-nav ul a, #main-nav .current_page_item ul a, #main-nav ul .current_page_item a, #main-nav .current-menu-item ul a, #main-nav ul .current-menu-item a, #main-nav li:hover > ul a  {
+                color: #666;
+                font-size: 100%;
+                line-height: 140%;
+                font-weight: normal;
+                text-transform: none;
+                padding: 6px 6px 6px 15px;
+                margin: 0;
+                display: block;
+                width: 180px;
+                background: none;
+                border: none;
+                text-shadow: none;
+                -webkit-border-radius: 0;
+                -moz-border-radius: 0;
+                border-radius: 0;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+            }
+            /* sub-levels link :hover */
+            #main-nav ul a:hover, #main-nav .current_page_item ul a:hover, #main-nav ul .current_page_item a:hover, #main-nav .current-menu-item ul a:hover, #main-nav ul .current-menu-item a:hover, #main-nav li:hover > ul a:hover {
+                background: #F3F3F3;
+                color: #000;
+                color: black;
+            }
+            /* dropdown ul */
+            #main-nav ul {
+                margin: 0;
+                padding: 5px 0;
+                list-style: none;
+                position: absolute;
+                background: #fff;
+                border: solid 1px #ccc;
+                z-index: 100;
+                display: none;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+            }
+            #main-nav ul li {
+                background: none;
+                padding: 0;
+                margin: 0;
+                float: none;
+            }
+            /* sub-levels dropdown */
+            #main-nav ul ul {
+                left: 190px;
+                top: -2px;
+            }
+            /* show dropdown ul */
+            #main-nav li:hover > ul {
+                display: block;
+            }
+
+            /************************************************************************************
+            PAGE
+            *************************************************************************************/
+            /* page title */
+            .page-title {
+                margin: 0 0 15px;
+                padding: 0;
+                font-size: 300%;
+                line-height: 110%;
+            }
+
+            /************************************************************************************
+            POST
+            *************************************************************************************/
+            .post {
+                margin-bottom: 50px;
+            }
+
+            /* post content */
+            .post-content {
+                min-width: 120px;
+            }
+
+            /* post title */
+            .post-title {
+                font-size: 26px;
+                margin: 0 0 5px;
+                padding: 0;
+            }
+            .post-title a {
+            }
+
+            /* post image */
+            .post-image {
+                margin: 0 0 5px;
+            }
+            .post-image.left {
+                float: left;
+                margin-right: 15px;
+            }
+            .post-image.right {
+                float: right;
+                margin-left: 15px;
+            }
+
+            /* lightbox zoom image */
+            .post-image .lightbox {
+                position: relative;
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+                max-width: 100%;
+            }
+            .post-image .lightbox .zoom {
+                width: 40px;
+                height: 40px;
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/icon-zoom.png) no-repeat center center;
+                margin: -20px 0 0 -20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                -webkit-border-radius: 10em;
+                -moz-border-radius: 10em;
+                border-radius: 10em;
+            }
+            .post-image .lightbox:hover .zoom {
+                background-color: #000;
+            }
+
+            /* post meta */
+            .post-meta {
+                margin: 0 0 7px;
+            }
+            .post-meta .post-author {
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/post-author.png) no-repeat 0 5px;
+                padding: 2px 0 2px 16px;
+                margin-right: 7px;
+            }
+            .post-meta .post-category {
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/post-category.png) no-repeat 0 5px;
+                padding: 2px 0 2px 16px;
+                margin-right: 7px;
+            }
+            .post-meta .post-tag {
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/post-tag.png) no-repeat 0 3px;
+                padding: 2px 0 2px 16px;
+                margin-right: 7px;
+            }
+            .post-meta .post-comment a {
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/post-comment.png) no-repeat 0 3px;
+                padding: 2px 0 2px 16px;
+            }
+
+            /************************************************************************************
+            POST VIDEO (css for fluid video)
+            *************************************************************************************/
+            .post-video {
+                position: relative;
+                padding-bottom: 56.25%;
+                height: 0;
+                overflow: hidden;
+                margin-bottom: 15px;
+            }
+            .post-video iframe,  
+            .post-video object,  
+            .post-video embed {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            /************************************************************************************
+            PAGE NAVIGATION
+            *************************************************************************************/
+            .pagenav {
+                clear: both;
+                padding-bottom: 20px;
+                text-align: right;
+            }
+            .pagenav a, .pagenav span {
+                line-height: 100%;
+                padding: 6px 0 0;
+                margin: 0 2px;
+                vertical-align: middle;
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+                min-width: 24px;
+                min-height: 18px;
+                text-align: center;
+                -webkit-border-radius: 10em;
+                -moz-border-radius: 10em;
+                border-radius: 10em;
+            }
+            .pagenav a {
+                background: #111;
+                color: #fff;
+                text-decoration: none;
+            }
+            .pagenav a:hover {
+                background-color: #000;
+            }
+            .pagenav .current {
+                text-decoration: none;
+            }
+
+            /************************************************************************************
+            POST NAVIGATION
+            *************************************************************************************/
+            .post-nav {
+                margin: 0 0 30px;
+                padding: 15px 0;
+                clear: both;
+            }
+            .post-nav span {
+                width: 47%;
+                position: relative;
+            }
+            .post-nav a {
+                text-decoration: none;
+                display: block;
+            }
+            .post-nav a:hover {
+                text-decoration: none;
+            }
+            .post-nav .prev {
+                float: left;
+            }
+            .post-nav .next {
+                float: right;
+                text-align: right;
+            }
+
+            /* post nav arrow */
+            .post-nav span span {
+                background: #333;
+                color: #fff;
+                font: normal 20px/100% "Times New Roman", Times, serif;
+                display: block;
+                width: auto;
+                float: left;
+                width: 32px;
+                height: 28px;
+                padding: 4px 0 0;
+                text-align: center;
+                margin: -8px 10px 17px 0;
+                -webkit-border-radius: 10em;
+                -moz-border-radius: 10em;
+                border-radius: 10em;
+            }
+            .post-nav .next span {
+                float: right;
+                margin-left: 10px;
+                margin-right: 0;
+            }
+            .post-nav a:hover span {
+                background: #000;
+            }
+
+            /************************************************************************************
+            COMMENTS
+            *************************************************************************************/
+            .commentwrap {
+                margin: 10px 0 20px;
+                position: relative;
+                clear: both;
+            }
+
+            /* comment title */
+            .comment-title, #reply-title {
+                font-size: 140%;
+                margin: 0 0 10px;
+                padding: 0;
+            }
+
+            /* comment pagenav */
+            .commentwrap .pagenav {
+                margin: 10px 0;
+                border: none;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
+            }
+            .commentwrap .pagenav.top {
+                margin: 0;
+                position: absolute;
+                top: 10px;
+                right: 0;
+            }
+
+            /* commentlist */
+            .commentlist {
+                margin: 0 0 30px;
+                padding: 5px 0 0;
+                border-top: solid 1px #ddd;
+            }
+            .commentlist li {
+                margin: 0;
+                padding: 15px 0 0;
+                list-style: none;
+                position: relative;
+            }
+            .commentlist .comment-author {
+                margin: 2px 0 5px;
+                padding: 0;
+            }
+            .commentlist .avatar {
+                float: left;
+                margin: 0 15px 0 0;
+            }
+            .commentlist cite {
+                font-style: normal;
+                font-size: 130%;
+            }
+            .commentlist cite a {
+                text-decoration: none;
+            }
+            .commentlist .bypostauthor > .comment-author cite {
+                background: url(http://assets.over-blog-kiwi.com/themes/33/images/icon-author-comment.png) no-repeat 0 2px;
+                padding-left: 18px;
+            }
+            .commentlist .comment-time {
+                font-size: 75%;
+                text-transform: uppercase;
+            }
+            .commentlist .commententry {
+                border-bottom: solid 1px #ddd;
+                position: relative;
+                min-height: 40px;
+                overflow: hidden;
+                padding-bottom: 5px;
+                word-wrap: break-word;
+            }
+            .commentlist ul, .commentlist ol {
+                margin: 0 0 0 7%;
+                padding: 0;
+            }
+
+            /* reply link */
+            .commentlist .reply {
+                position: absolute;
+                right: 0;
+                top: 8px;
+            }
+            .commentlist .comment-reply-link {
+                font-size: 11px;
+                text-transform: uppercase;
+                text-decoration: none;
+            }
+            .commentlist .comment-reply-link:hover {
+                text-decoration: none;
+            }
+
+            /* 
+            COMMENT FORM
+            ================================================ */
+            #respond {
+                margin: 0;
+                padding: 10px 0 0;
+                position: relative;
+                clear: both;
+            }
+            #respond #cancel-comment-reply-link {
+                position: absolute;
+                top: 20px;
+                right: 0;
+                font-size: 85%;
+                line-height: 100%;
+                text-decoration: none;
+                padding: 5px 10px;
+                display: block;
+                color: #fff;
+                background: #F30;
+            }
+            #respond #cancel-comment-reply-link:hover {
+                background: #333;
+            }
+            #commentform {
+                margin: 15px 0 0;
+            }
+            #commentform input[type=text] {
+                width: 206px;
+                margin-right: 5px;
+            }
+            #commentform label {
+                font-weight: bold;
+            }
+            #commentform label small {
+                font-weight: normal;
+            }
+            #commentform textarea {
+                height: 140px;
+            }
+            #commentform input#submit {
+                padding: 7px 20px;
+            }
+
+            /************************************************************************************
+            SIDEBAR
+            *************************************************************************************/
+            .widget {
+                margin: 0 0 30px;
+                word-wrap: break-word;
+            }
+            .widgettitle {
+                margin: 0 0 10px;
+                padding: 0; 
+                font-size: 120%;
+            }
+            .widget ul {
+                margin: 0;
+                padding: 0;
+            }
+            .widget li {
+                margin: 0;
+                padding: 6px 0;
+                list-style: none;
+                clear: both;
+                border-top: solid 1px #ddd;
+            }
+            .widget ul ul {
+                margin: 6px 0 -6px 0px;
+                padding: 0;
+                border-top: none;
+            }
+            .widget ul ul li {
+                margin: 0;
+                padding-left: 10px;
+            }
+
+            /************************************************************************************
+            FOOTER
+            *************************************************************************************/
+            #footer {
+                padding: 30px 0;
+                clear: both;
+                border-top: solid 1px #ccc;
+            }
+
+            /* back to top */
+            .back-top {
+                clear: both;
+                float: left;
+                margin-top: -3px;
+            }
+            .back-top a {
+                background: #000 url(http://assets.over-blog-kiwi.com/themes/33/images/arrow-up.png) no-repeat center center;
+                display: block;
+                width: 30px;
+                height: 30px;
+                margin: 0 10px 10px 0;
+                text-indent: -900em;
+                -webkit-border-radius: 10em;
+                -moz-border-radius: 10em;
+                border-radius: 10em;    
+            }
+            .back-top a:hover {
+                background-color: #333;
+            }
+
+            /* footer nav */
+            .footer-nav {
+                margin: 7px 0 10px;
+                padding: 0;
+                text-align: left;
+            }
+            .footer-nav li {
+                padding: 0;
+                margin: 0 8px 5px 0;
+                list-style: none;
+                display: inline-block;
+                zoom:1;
+                *display:inline;
+            }
+
+            /* footer text */
+            .footer-text {
+                font-size: 90%;
+                clear: both;
+            }
+
+            /************************************************************************************
+            WORDPRESS POST FORMATTING
+            *************************************************************************************/
+            img.alignleft, img.aligncenter, img.alignright, img.alignnone {
+                margin-bottom: 15px;
+            }
+            .alignleft {
+                float: left;
+                margin-right: 30px;
+            }
+            .alignright {
+                float: right;
+                margin-left: 30px;
+            }
+            .aligncenter {
+                text-align: center;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .wp-caption {
+                text-align: center;
+                margin-bottom: 15px;
+                max-width: 100%;
+            }
+            .wp-caption-text {
+                font-style: italic;
+                font-size: 95%;
+                line-height: 120%;
+                margin: 6px 0;
+            }
+
+            /************************************************************************************
+            GALLERY
+            *************************************************************************************/
+            #body .gallery {
+                margin: 5px 0 20px 0;
+            }
+            #body .gallery img {
+                border: none;
+            }
+
+            /* gallery item */
+            #body .gallery dl {
+                margin: 0 8px 8px 0;
+                display: inline-block;
+                vertical-align: top;
+                zoom:1;
+                *display:inline;
+                width: auto;
+                float: none;
+                text-align: center;
+            }
+
+            /* gallery caption */
+            #body .gallery dd {
+                width: 140px;
+                line-height: 120%;
+                font-size: 90%;
+                text-align: center;
+                margin: 5px 0 0;
+            }
+
+            /* get rid of br tag */
+            .gallery br {
+                display:none;
+            }
+
+            /************************************************************************************
+            CLEAR & ALIGNMENT
+            *************************************************************************************/
+            .clear {
+                clear: both;
+            }
+            .left {
+                float: left;
+            }
+            .right {
+                float: right;
+            }
+            .textleft {
+                text-align: left;
+            }
+            .textright {
+                text-align: right;
+            }
+            .textcenter {
+                text-align: center;
+            }
+
+            /* clearfix */
+            .clearfix:after, .widget li:after, #body:after, #footer:after, footer:after, .pagenav:after, #main-nav:after, .menu:after, .gallery:after, #content:after
+            { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+            .clearfix, .widget li, #body, #footer, footer, .pagenav, #main-nav, .menu, .gallery, #content
+            { display: inline-block; }
+            /* clearfix for ie7 */
+            .clearfix, .widget li, #body, #footer, footer, .pagenav, #main-nav, .menu, .gallery, #content
+            { display: block; zoom: 1; }
+            
+            @media screen and (max-width: 980px) {
+                .obsoundplayer .obsoundplayername{
+                    width: 205px !important;
+                }
+                /************************************************************************************
+                STRUCTURE
+                *************************************************************************************/
+                .pagewidth {
+                    max-width: 94%;
+                }
+                    
+                /* content */
+                #content {
+                    max-width: 67.8%;
+                }
+                
+                /* sidebar */
+                #sidebar {
+                    margin: 7% 0 5%;
+                    max-width: 26.2%;
+                }
+                    
+                /************************************************************************************
+                GRID
+                *************************************************************************************/
+                .col4-1,
+                .col4-2,
+                .col4-3,
+                .col3-1,
+                .col3-2,
+                .col2-1
+                {
+                    margin-left: 2%;
+                }
+                .first {
+                    margin-left: 0;
+                }
+                .col4-1 {
+                    max-width: 23%;
+                }
+                .col4-2, .col2-1 {
+                    max-width: 48%;
+                }
+                .col4-3 {
+                    max-width: 72%;
+                }
+                .col3-1 {
+                    max-width: 31%;
+                }
+                .col3-2 {
+                    max-width: 62%;
+                }
+                
+            }
+
+            @media screen and (max-width: 760px) {
+                .obsoundplayer .obsoundplayername{
+                    width: 130px !important;
+                }
+                /************************************************************************************
+                STRUCTURE
+                *************************************************************************************/
+                #content {
+                    width: 100%;
+                    max-width: 100%;
+                    float: none;
+                    clear: both;
+                }
+                
+                /* sidebar */
+                #sidebar {
+                    width: 100%;
+                    max-width: 100%;
+                    float: none;
+                    clear: both;
+                }
+                
+                /************************************************************************************
+                HEADER
+                *************************************************************************************/
+                /* reset absolute elements to static */
+                #site-logo, #site-description, #main-nav  {
+                    position: static;
+                    float: none;
+                    clear: both;
+                }
+                
+                /* header */
+                #header {
+                    height: auto;
+                    padding-top: 20px;
+                }
+                
+                /* social widget */
+                .social-widget {
+                    position: static;
+                    padding: 10px 0;
+                    float: none;
+                }
+
+                /* searchform */
+                #header #searchform {
+                    left: inherit;
+                    right: 0;
+                    top: 20px;
+                    width: 150px;
+                }
+                #header #searchform #s {
+                    float: right;
+                    width: 50px;
+                }
+                #header #searchform input#s:focus {
+                    width: 150px;
+                }
+                
+                /* site logo */
+                #site-logo a {
+                    font-size: 30px;
+                }
+
+                /* site description */
+                #site-description {
+                    margin: 0 0 10px;
+                }
+                
+                /* nav bar */
+                #nav-bar {
+                    display: none;
+                }
+
+                /************************************************************************************
+                MAIN NAV
+                *************************************************************************************/
+                #main-nav {
+                    height: auto;
+                    margin: 10px 0;
+                }
+                
+            }
+
+            @media screen and (max-width: 480px) {
+
+                /* disable webkit text size adjust (for iPhone) */
+                html {
+                    -webkit-text-size-adjust: none;
+                }
+
+                /************************************************************************************
+                GRID
+                *************************************************************************************/
+                .col4-1,
+                .col4-2, .col2-1,
+                .col4-3,
+                .col3-1,
+                .col3-2  {
+                    margin-left: 0;
+                    width: 100%;
+                    max-width: 100%;
+                }
+
+                /************************************************************************************
+                MOBILE NAV BUTTON
+                *************************************************************************************/
+                .mobile-button {
+                    position: relative;
+                    width: 32px;
+                    height: 30px;
+                    margin-bottom: 3px;
+                    margin-right: 3px;
+                    display: block;
+                    float: right;
+                    cursor: pointer;
+                }
+                .mobile-button:after {
+                    border: solid 1px #7a7a7a;
+                    padding: 1px;
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: -1px;
+                    left: -1px;
+                    z-index: -1;
+                    
+                    background-color: #c3c3c3;
+
+                    background-image: -moz-linear-gradient(top,  #d8d8d8 0%, #999898 100%);
+                    background-image: -webkit-linear-gradient(top,  #d8d8d8 0%,#999898 100%);
+                    background-image: linear-gradient(top,  #d8d8d8 0%,#999898 100%);
+                    
+                    -webkit-box-shadow: inset 0 0 1px rgba(255,255,255,.4), inset 0 1px rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.2);
+                    -moz-box-shadow: inset 0 0 1px rgba(255,255,255,.4), inset 0 1px rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.2);
+                    box-shadow: inset 0 0 1px rgba(255,255,255,.4), inset 0 1px rgba(255,255,255,.5), 0 1px 2px rgba(0,0,0,.2);
+                    
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                }
+
+                /************************************************************************************
+                MAIN NAV (MOBILE)
+                *************************************************************************************/
+                #main-nav-wrap {
+                    position: absolute;
+                    top: 5px;
+                    right: 0;
+                    z-index: 1000;
+                }
+                
+                /* menu icon */
+                #menu-icon {
+                    background: url(http://assets.over-blog-kiwi.com/themes/33/images/menu-icon.png) no-repeat center center;
+                }
+                
+                /* main nav */
+                #main-nav {
+                    clear: both;
+                    position: static;
+                    width: 180px;
+                    z-index: 1000;
+                    padding: 10px 5px;
+                    background: #fff;
+                    border: solid 1px #999;
+                    display: none; /* visibility will be toggled with jquery */
+                    
+                    -webkit-box-shadow: 1px 2px 0 rgba(0,0,0,.2);
+                    -moz-box-shadow: 1px 2px 0 rgba(0,0,0,.2);
+                    box-shadow: 1px 2px 0 rgba(0,0,0,.2);
+                    
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                }
+                #main-nav li {
+                    clear: both;
+                    float: none;
+                    margin: 5px 0 5px 10px !important;
+                    position: static !important;
+                    padding: 0;
+                    border: none;
+
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                }
+                #main-nav a, 
+                #main-nav ul a {
+                    font: inherit;
+                    text-transform: inherit;
+                    background: none !important;
+                    width: auto;
+                    display: inline !important;
+                    padding: 0 !important;
+                    color: #666 !important;
+                    border: none;
+
+                    text-shadow: none;
+
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                }
+                #main-nav a:hover, 
+                #main-nav ul a:hover {
+                    background: none;
+                    color: #000 !important;
+                }
+                
+                /* dropdown */
+                #main-nav ul {
+                    position: static;
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    background: none;
+                    border: none;
+                    
+                    -webkit-border-radius: 0;
+                    -moz-border-radius: 0;
+                    border-radius: 0;
+                    
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                }
+                
+                /************************************************************************************
+                SEARCH FORM
+                *************************************************************************************/
+                #searchform-wrap {
+                    position: absolute;
+                    top: 5px;
+                    right: 40px;
+                    z-index: 1000;
+                }
+                #search-icon {
+                    background: url(http://assets.over-blog-kiwi.com/themes/33/images/search-icon.png) no-repeat center center;
+                }
+                
+                #header #searchform {
+                    clear: both;
+                    width: auto;
+                    position: static;
+                    overflow: hidden;
+                    background: #fff;
+                    border: solid 1px #999;
+                    padding: 5px;
+                    display: none; /* visibility will be toggled with jquery */
+                    
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    
+                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.3);
+                    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+                }
+                #header #searchform #s {
+                    background: #eee;
+                    color: #444;
+                    padding-left: 8px;
+                }
+                
+                /************************************************************************************
+                LAYOUT
+                *************************************************************************************/
+                /* post */
+                .post {
+                    width: 100%;
+                    margin-left: 0;
+                    float: none;
+                }
+                
+                /************************************************************************************
+                POST NAV
+                *************************************************************************************/
+                .post-nav .prev, .post-nav .next {
+                    display: block;
+                    width: 100%;
+                    clear: both;
+                    margin-bottom: 10px;
+                }
+                
+                /************************************************************************************
+                COMMENTS
+                *************************************************************************************/
+                .commentlist {
+                    padding-left: 0;
+                }
+                .commentlist .commententry {
+                    clear: left;
+                }
+                .commentlist .avatar {
+                    float: left;
+                    width: 40px;
+                    height: 40px;
+                    margin: 0 10px 10px 0;
+                }
+                /* Deezer Player */
+                .obsoundplayer{
+                    background: #313131 !important;
+                    -moz-border-radius: 6px;
+                    -ms-border-radius: 6px;
+                    -o-border-radius: 6px;
+                    -webkit-border-radius: 6px;
+                    border-radius: 6px;
+                    height: 163px !important;
+                }
+                .obsoundplayer .obsoundplayername{
+                    width: 80% !important;
+                }
+                .obsoundplayer .obsoundplayervolume{
+                    float: right !important;
+                }
+                .obsoundplayer .obsoundplayerlogo{
+                    margin-right: 0 !important;
+                }
+            }
+        </style>
+        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+        <style type="text/css">
+            h1, h2, h3, h4, h5, h6{
+                font-weight: 700;
+            }
+            .clear{
+                clear: both;
+            }
+            .ob-text ol,
+            .ob-text ul{
+                margin: 0 0 0 35px;
+            }
+            .ob-text ol li,
+            .ob-text ul li{
+                list-style: disc;
+                margin: 3px 0;
+            }
+            .ob-text ol li{
+                list-style: decimal;
+            }
+            #header{
+                height: auto;
+            }
+            #header hgroup h1,
+            #header hgroup h2{
+                margin-right: 150px;
+            }
+            #main-nav,
+            #site-logo,
+            #site-description{
+                left: auto;
+                position: static;
+                top: auto;
+            }
+            #site-description{
+                line-height: 1.3em;
+            }
+            #site-description,
+            #main-nav{
+                margin: 7px 0;
+            }
+            #site-logo{
+                line-height: 1.3em;
+            }
+            .widgettitle a{
+                color: #666;
+            }
+            
+            /* Fluid styles */
+            .entry-content,
+            .ob-section-images,
+            .ob-section-video,
+            .ob-section-map,
+            .ob-section-images .ob-slideshow{
+                width: 100%;
+            }
+            .fb-comments, .fb-comments iframe[style],
+            .fb-comments, .fb-comments span{
+                width: 100% !important;
+            }
+            .ob-section-map .ob-map,
+            .ob-section-map .ob-desc{
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            /* Section File */
+            .ob-section-file .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); display: block; max-width: 640px !important;}
+            .ob-section-file .ob-ctn a.ob-link,
+            .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom("custom_theme_color") }}; text-decoration: underline; max-width: 555px !important;}
+            .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom("custom_theme_color") }}; text-decoration: none;}
+             
+            /* Section Quote */
+            .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); margin-bottom: 20px;}
+            .ob-section-quote .ob-quote {padding: 0;}
+            .ob-section-quote .ob-quote p {color: #666; font-size: 16px; margin: 40px 11% 20px; min-height: 20px;}
+            .ob-section-quote .ob-quote p:before {color: {{ Custom("custom_theme_color") }}; font-size: 110%/130%;  margin: 20px 0 0 -85px;}
+            .ob-section-quote .ob-quote p:after {color: {{ Custom("custom_theme_color") }}; margin: 70px 0 0;}
+            .ob-section-quote p.ob-author,
+            .ob-section-quote p.ob-source {background: #EEE; color: gray; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 24px; max-width: 550px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
+            .ob-section-quote p.ob-author .ob-link,
+            .ob-section-quote p.ob-source .ob-link {color: gray;}
+            .ob-section-quote p.ob-author .ob-link:hover,
+            .ob-section-quote p.ob-source .ob-link:hover {color: #222;}
+             
+            /* Section Link */
+            .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
+            .ob-section-link .ob-media-left {margin: 0;}
+            .ob-section-link .ob-img {float: left; position: relative; width: 170px; z-index: 99;}
+            .ob-section-link p.ob-title {color: {{ Custom('font_color') }}; margin-left: 20px; max-height: 40px; overflow: hidden;}
+            .ob-section-link p.ob-title .ob-link {color: {{ Custom("custom_theme_color") }};}
+            .ob-section-link p.ob-snippet {color: #666; margin-bottom: 35px; margin-left: 20px; max-height: 30px; overflow: hidden;}
+            .ob-section-link p.ob-url {background: #EEE; margin: 0; max-height: 24px; max-width: 430px; padding-bottom: 0\9;}
+            .ob-section-link .ob-desc {margin-top: 5px;}
+            
+            /* Custom styles*/
+            {% if Custom("custom_theme_color") is not empty %}
+                a, a:visited {
+                    color: {{ Custom("custom_theme_color") }};
+                }
+            {% endif %}
+            
+            input[type="email"] {
+                background: #F3F3F3;
+                border: 1px solid #DDD;
+                border-radius: 5px;
+                padding: 6px 10px;
+            }
+            
+            .m-networks a{
+                margin-right: 4px;
+            }
+            .m-networks a:last-child{
+                margin-right: 0;
+            }
+            .entry{
+                word-wrap: break-word;
+            }
+            .ob-text pre{
+                border: 1px dashed #CCC;
+                margin: 10px;
+                padding: 10px;
+                white-space: pre-wrap;
+            }
+            .navigation{
+                padding-top: 22px;
+            }
+            .navigation .prev{
+                margin-right: 18px;
+            }
+        </style>
+        
+        <!-- Custom vars -->
+        <meta name="constant:displayArticlesLimit" content="10" />
+        
+        <meta name="color:custom_theme_color:Theme color" default="#1F7BB6" group="Design" />
+        
+        <meta name="boolean:custom_hide_widget_search_form:Hide Widget &quot;Search form&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_biography:Hide Widget &quot;Biography&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_categories:Hide Widget &quot;Categories&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
+        
+        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
+        <meta name="list:custom_facebook_comments_color_theme:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+        
+        <meta name="string:custom_footer:Enter your footer text" group="Settings" />
+        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
+        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
+        <meta name="string:facebook_profile_id:Enter your FaceBook Profile ID" group="Settings" />
+        <meta name="string:twitter_account:Enter your Twitter login" group="Settings" />
+        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
+        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+    </head>
+    <body class="home blog">
+        <div id="pagewrap">
+            <!-- shortcut:[Header content] -->
+            <header id="header" class="pagewidth">
+                <hgroup>
+                    <h1 id="site-logo"><a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a></h1>
+                    <p id="site-description">{{ Blog.Description }}</p>
+                </hgroup>
+                <nav id="main-nav-wrap">
+                    <ul id="main-nav" class="main-nav clearfix">
+                        <li {% if isIndex %} class="current_page_item" {% endif %}>
+                            <a href="/">{{ Lang.Get('home') }}</a>
+                        </li>
+                        {% list Blog.ListPages %}
+                            <li class="page_item">
+                                <a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a>
+                            </li>
+                        {% endlist %}
+                        <li class="page_item">
+                            <a href="#">{{ Lang.Get('Tags') }}</a>
+                            <ul class='children'>
+                                {% list Blog.PostsTags(15, 'SORT_POSTS_NUMBER_DESC') %}
+                                    {% if PostsTag.Title != Custom('custom_menu_1_tag') and PostsTag.Title != Custom('custom_menu_2_tag') %}
+                                        <li class="page_item{% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} current_menu_item{% endif %}"><a href="{{ PostsTag.Url }}"><span>{{ PostsTag.Title }}</span></a></li>
+                                    {% endif %}
+                                {% endlist %}
+                            </ul>
+                        </li>
+                        <li><a href="/contact">{{ Lang.Get('contact') }}</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Search form -->
+                {% if Custom('custom_hide_widget_search_form') == false %}
+                    <div id="searchform-wrap">
+                        <form class="search" id="searchform" method="get" action="/search/">
+                            <div>
+                                <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}" id="s" value="{{ Search }}" />
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="social-widget">
+                    <div class="rss"><a href="{{ Blog.RssUrl }}">RSS</a></div>
+                </div>
+            </header>
+            
+            <!-- shortcut:[Main content] -->
+            <div id="body" class="pagewidth clearfix">
+                <div id="content" class="clearfix">
+                    {% if isSpecial %}
+                        {{SpecialContent}}
+                    {% elseif isSingle %}
+                        <!-- Single Page -->
+                        <article class="post type-post hentry clearfix">
+                            <time datetime="{{ Post.Date }}" class="post-date" pubdate>{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:ia") }}</time>
+                            <h2 class="post-title">
+                                {% if Post.Title is not empty %}
+                                    {{ Post.Title }}
+                                {% else %}
+                                    {{ Lang.Get('From') }} 
+                                    {% list Post.Sources %}
+                                        {{ Lang.Get(Source) }}
+                                        {% if not loop.last %}
+                                             {{ Lang.Get('and') }} 
+                                        {% endif %}
+                                    {% endlist %}
+                                {% endif %}
+                            </h2>
+                            <p class="post-meta"> 
+                                {% if Post.Author and Post.Author is not empty %}
+                                    <span class="post-author">{{Post.Author}}</span>
+                                {% endif %}
+                                {% list Post.Tags %}
+                                    {% if loop.index == 1 %}
+                                        <span class="post-category">
+                                    {% endif %}
+                                    <a href="{{Tag.Url}}" title="{{Tag.Title}}">{{Tag.Title}}</a>
+                                    {% if not loop.last %}
+                                        , 
+                                    {% endif %}
+                                    {% if loop.length > 0 and loop.last %}
+                                        </span>
+                                    {% endif %}
+                                {% endlist %}
+                            </p>
+                            {{ Post.Body }}
+                            <div class="ob-section m-social-networks">
+                                <!-- Social networks : share -->
+                                <h4>{{ Lang.Get('Share this post') }}</h4>
+                                <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}" {% endif %}></a>
+                            </div>
+                            {% if not isPage %}
+                                <div class="bloc-comment" id="comments">
+                                    <!-- Comments -->
+                                    <div class="item-comments">
+                                        {% if Custom("comment") == "Facebook" %}
+                                            <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="640" data-colorscheme="{{ Custom("custom_facebook_comments_color_theme")|default('light') }}"></div>
+                                        {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                            <div id="disqus_thread"></div>
+                                            <script type="text/javascript">
+                                                var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                                (function() {
+                                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                                })();
+                                            </script>
+                                            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                        {% else %}
+                                            {{ Post.Comments }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </article>
+                        <div class="return">
+                            <a href="{{ Blog.Url }}">{{ Lang.Get('Return to home') }}</a>
+                        </div>
+                    {% else %}
+                        <!-- Other Pages -->
+                        {% list Posts %}
+                            <article class="post type-post hentry clearfix">
+                                <time datetime="{{ Post.Date }}" class="post-date" pubdate>{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:ia") }}</time>
+                                <h2 class="post-title">
+                                    <a title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}" href="{{ Post.PermaLink }}">
+                                        {% if Post.Title is not empty %}
+                                            {{ Post.Title }}
+                                        {% else %}
+                                            {{ Lang.Get('From') }} 
+                                            {% list Post.Sources %}
+                                                {{ Lang.Get(Source) }}
+                                                {% if not loop.last %}
+                                                     {{ Lang.Get('and') }} 
+                                                {% endif %}
+                                            {% endlist %}
+                                        {% endif %}
+                                    </a>
+                                </h2>
+                                <p class="post-meta"> 
+                                    {% if Post.Author and Post.Author is not empty %}
+                                        <span class="post-author">{{Post.Author}}</span>
+                                    {% endif %}
+                                    
+                                    <!-- Comments count -->
+                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                        <span class="post-comment">
+                                            <a title="{{ Lang.Get('comments') }}" href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread"></a>
+                                        </span>
+                                    {% else %}
+                                        <span class="post-comment">
+                                            <a title="{{ Lang.Get('comments') }}" href="{{ Post.PermaLink }}#comments">
+                                                {% if Custom("comment") == "Facebook" %}
+                                                    <fb:comments-count href={{ Blog.Url }}{{ Post.Permalink }}></fb:comments-count> {{ Lang.Get('comments') }}
+                                                {% else %}
+                                                    {{ Post.CommentCount(Lang.Get('comment'), Lang.Get('comments')) }}
+                                                {% endif %}
+                                            </a>
+                                        </span>
+                                    {% endif %}
+                                </p>
+                                <p class="entry">
+                                    {% if Post.Cover is not empty %}
+                                        {% if isIndex %}
+                                            <img class="ob-media ob-img ob-pull-left ob-media-left" src="{{ Post.Cover|resize(300, 225) }}" alt="" />
+                                        {% else %}
+                                            <img class="ob-media ob-img ob-pull-left ob-media-left" src="{{ Post.Cover|resize(200, 150) }}" alt="" />
+                                        {% endif %}
+                                    {% endif %}
+                                    {{ Post.Snippet }}
+                                </p>
+                            </article>
+                        {% endlist %}
+                        
+                        {% if isSearch and Posts is empty %}
+                            <!-- No result for search -->
+                            <p>{{ Lang.Get('No result found') }}</p>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Pagination -->
+                    {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
+                        <div class="navigation">
+                            {% if Navigation.PreviousPage is not empty or Navigation.PreviousPost is not empty %}
+                                {% if Navigation.PreviousPage is not empty %}
+                                    <a href="{{ Navigation.PreviousPage }}" class="prev">&laquo; {{ Lang.Get('Previous page') }}</a>
+                                {% elseif Navigation.PreviousPost is not empty %}
+                                    <a href="{{ Navigation.PreviousPost.Permalink }}" class="prev" title="{{ Lang.Get('Go to') }} {% if Navigation.PreviousPost.Title is not empty %}&quot;{{ Navigation.PreviousPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('previous post') }}{% endif %}">&laquo; {{ Lang.Get('Previous post') }}</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if Navigation.NextPage is not empty or Navigation.NextPost is not empty %}
+                                {% if Navigation.NextPage is not empty %}
+                                    <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
+                                {% elseif Navigation.NextPost is not empty %}
+                                    <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }} &raquo;</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- shortcut:[Sidebar content] -->
+                <aside id="sidebar">
+                    <!-- Search form -->
+                    {% if Custom('custom_hide_widget_search_form') == false %}
+                        <div id="search-2" class="widget widget_search">
+                            <form class="search" id="searchform" method="get" action="/search/">
+                                <div>
+                                    <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}"  id="s" value="{{ Search }}" />
+                                </div>
+                            </form>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Blog owner -->
+                    {% if Custom('custom_hide_widget_biography') == false %}
+                        {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
+                            <div class="widget">
+                                <h3 class="widgettitle">
+                                    {{ Blog.Owner.Nickname }}
+                                </h3>
+                                {% if Blog.Owner.Bio is not empty %}
+                                    <p>
+                                        {% if Blog.Owner.Avatar is not empty %}
+                                            <a title="{{ Blog.Owner.Nickname }}" href="{{ Blog.Owner.Avatar }}" class="fancybox ob-media ob-img ob-pull-left ob-media-left"><img class="m-avatar-img" src="{{ Blog.Owner.Avatar|resize(60,60) }}" alt="" /></a>
+                                        {% endif %}
+                                        {{Blog.Owner.Bio}}
+                                    </p>
+                                {% endif %}
+                                {% if Custom('facebook_profile_id') is not empty or Custom('twitter_account') is not empty %}
+                                    <p class="m-networks">
+                                        {% if Custom('facebook_profile_id') is not empty %}
+                                            <a title="Facebook" target="_blank" href="http://www.facebook.com/profile.php?id={{ Custom('facebook_profile_id') }}"><img alt="Facebook" src="http://assets.over-blog-kiwi.com/themes/33/images/facebook.png"></a>
+                                        {% endif %}
+                                        {% if Custom('twitter_account') is not empty %}
+                                            <a title="Twitter" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_account') }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/33/images/twitter.png"></a>
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Categories -->
+                    {% if Custom('custom_hide_widget_categories') == false %}
+                        {% if Blog.PostsTags() and Blog.PostsTags() is not empty %}
+                            <div class="widget">
+                                <h3 class="widgettitle">{{ Lang.Get('Tags') }}</h3>
+                                <ul>
+                                    {% list Blog.PostsTags(10) %}
+                                        <li><a href="{{ PostsTag.Url }}">{{ PostsTag.Title }} ({{ PostsTag.PostCount }})</a></li>
+                                    {% endlist %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Pages -->
+                    {% if Custom('custom_hide_widget_pages') == false %}
+                        {% if Blog.ListPages and Blog.ListPages is not empty %}
+                             <div class="widget">
+                                <h3 class="widgettitle">{{ Lang.Get('Pages') }}</h3>
+                                <ul>
+                                    {% list Blog.ListPages %}
+                                        <li>
+                                            <a href="{{ListPage.Url}}">{{ListPage.Title}}</a>
+                                        </li>
+                                    {% endlist %} 
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <!-- Archives -->
+                    {% if Custom('custom_hide_widget_archives') == false %}
+                        {% if Blog.Archives is not empty %}
+                            <div class="widget">
+                                <h3 class="widgettitle">{{ Lang.Get('Archives') }}</h3>
+                                <ul id="archivelist">
+                                    {% list Blog.Archives %}
+                                        <li>
+                                            <a href="#" class"plustext" onclick="javascript: return switch_arch('{{Archive.Year}}')">{{Archive.Year}}</a>
+                                            <ul id="arch_{{Archive.Year}}" class="arch_month">
+                                            {% list Archive.Months %}
+                                                {% if Month.PostCount > 0 %}
+                                                    <li><a href="{{Month.Url}}">{{Month.Name}}</a> ({{Month.PostCount}})</li>
+                                                {% endif %}
+                                            {% endlist %}
+                                            </ul>
+                                        </li>
+                                    {% endlist %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </aside>
+            </div> 
+            <footer id="footer" class="pagewidth clearfix">
+                <p class="back-top"><a href="#header">&uarr;</a></p>    
+                <!-- shortcut:[Footer content] -->
+                <div class="footer-text clearfix">
+                    {% if Custom('custom_footer') is not empty %}
+                        <p>{{ Custom('custom_footer') }}</p>
+                    {% endif %}
+                </div>
+            </footer>
+        </div>
+        
+        <!-- Template Scripts -->
+        <script type='text/javascript' src='http://assets.over-blog-kiwi.com/themes/33/js/jqueryForm.js'></script>
+            <script type='text/javascript'>
+            /* <![CDATA[ */
+            var _wpcf7 = {"loaderUrl":"http:\/\/www.efusia.net\/overblog\/basical\/images\/ajax-loader.gif","sending":"Envoi en cours ..."};
+            /* ]]> */
+        </script>
+        
+        <!-- Google Analytics -->
+        {% if Custom('google_analytics') is not empty %}
+            <script type="text/javascript">
+                window.google_analytics_uacct = '{{ Custom('google_analytics') }}';
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', '{{ Custom('google_analytics') }}']);
+                _gaq.push(['_trackPageview']);
+                _gaq.push(['_trackPageLoadTime']);
+
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+        {% endif %}
+        
+        <!-- Archives -->
+        {% if Custom('custom_hide_widget_archives') == false %}
+            <script type="text/javascript">
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, archiveMonths, displayStyle;
+                    displayStyle = '';
+                    archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            // Hide years without months
+                            archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
+                        }
+                        archiveYear.style.display = displayStyle;
+                    }
+                    return false;
+                }
+            </script>
+        {% endif%}
+        
+        <!-- Social networks : Facebook -->
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
+        <!-- Social networks : Twitter -->
+        <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");</script>
+        
+        <!-- jQuery onReady -->
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                // Fancy box
+                {% if isSingle %}
+                    jQuery('.ob-section-images .ob-img').parent('a').attr('rel', 'fancyGroup');
+                {% endif%}
+                jQuery(".ob-section-images .ob-img").parent('a').add(".fancybox").fancybox({
+                    'overlayShow'   : true,
+                    'transitionIn'  : 'elastic',
+                    'transitionOut' : 'elastic',
+                    'type': 'image'
+                });
+                
+                (function() {
+                    {% if Custom('custom_hide_widget_search_form') == false %}
+                        // HTML5 placeholder fallback
+                        function isPlaceholderSupported() {
+                            'use strict';
+                            var o = document.createElement('input');
+                            return 'placeholder' in o;
+                        }
+                        function initPlaceHolder(el){
+                            if(jQuery.trim(el.val()) === '' || jQuery.trim(el.val()) === el.attr('placeholder')){
+                                el.val(el.attr('placeholder'));
+                                el.css({'color': '#999'});
+                            }
+                        }
+                        function togglePlaceholder(el, submitMode) {
+                            'use strict';
+                            var v = jQuery.trim(el.val()), p = el.attr('placeholder');
+                            if (v === '' && !submitMode) {
+                                el.val(p);
+                                el.css({'color': '#999'});
+                            } else if (v === p) {
+                                el.val('');
+                            }
+                        }
+                        function emulatePlaceholder(form) {
+                            'use strict';
+                            if (!isPlaceholderSupported()) {
+                                jQuery('input[placeholder]', form).each(function () {
+                                    initPlaceHolder(jQuery(this));
+                                }).focus(function () {
+                                    togglePlaceholder(jQuery(this), false);
+                                }).blur(function () {
+                                    initPlaceHolder(jQuery(this));
+                                });
+                                form.submit(function () {
+                                    jQuery(this).find('input[placeholder]').each(function () {
+                                        togglePlaceholder(jQuery(this), true);
+                                    });
+                                });
+                            }
+                        }
+                        
+                        // Search form
+                        function obSearchForm() {
+                            'use strict';
+                            var i= 0, form = jQuery('form.search');
+                            if (form.length) {
+                                form.each(function () {
+                                    emulatePlaceholder($(this));
+                                    var qInput = jQuery('input[name=q]', $(this));
+                                    if (qInput.length) {
+                                        $(this).submit(function (e) {
+                                            e.preventDefault();
+                                            window.location = jQuery(this).attr('action') + qInput.val();
+                                        });
+                                    }
+                                });
+                            }
+                        }
+                        obSearchForm();
+                    {% endif%}
+                    
+                    // Fluid video containers
+                    var vidContainers;
+                    var frameParentWidth;
+                    var frameWidth;
+                    var frameHeight;
+                    var ratioFrame;
+                    vidContainers = jQuery('.ob-section-video iframe, .ob-section-video object');
+                    if (vidContainers.length > 0) {
+                        vidContainers.each(function () {
+                            frameParentWidth = jQuery(this).parent().innerWidth();
+                            frameWidth = vidContainers.innerWidth();
+                            if (frameWidth && frameParentWidth < frameWidth) {
+                                frameHeight = vidContainers.innerHeight();
+                                if (frameHeight) {
+                                    ratioFrame = frameHeight / frameWidth;
+                                    vidContainers.attr('width', frameParentWidth + 'px');
+                                    vidContainers.attr('height', frameParentWidth * ratioFrame + 'px');
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Archives
+                    {% if Custom('custom_hide_widget_archives') == false %}
+                        {% list Blog.Archives %}
+                            switch_arch('{{Archive.year}}');
+                        {% endlist %}
+                    {% endif%}
+                })();
+            });
+        </script>
+    </body>
+</html>

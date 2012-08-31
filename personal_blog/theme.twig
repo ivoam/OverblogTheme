@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="{{ Blog.Lang | default('en') }}">
+<head>
+    <title>{% if isSingle%}{{ Post.Title }} - {% elseif isTag and Tag is not empty %}{{ Tag.Title|title }} - {% elseif isSearch and Search is not empty %}{{ Search|title }} - {% endif %}{{Blog.Title}}</title>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <link href='{{ Blog.FaviconUrl }}' rel='icon' type='image/x-icon'/>
+    <link href='{{ Blog.Url }}' rel='canonical'/>
+    <link rel="alternate" type="application/rss+xml" title="{{ Blog.Title }} - RSS" href="{{ Blog.RssUrl }}" />
+
+    <style type='text/css'>
+        #navbar-iframe {
+            display: none !important;
+        }
+        body,h1,h2,h3,h4,h5,ul,li,a,p,span,img {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            outline: none
+        }
+        body {
+            background: #799666;
+            color: #292727;
+            font-family: Arial;
+            font-size: 11px;
+            line-height: 14px;
+            vertical-align: top;
+            width: 100%;
+        }
+        a {
+            color: #292727
+        }
+        a:hover {
+        }
+        pre {
+            overflow: auto;
+        }
+        .list-title {
+            margin: 0 .5em 1em .5em;
+            font-size: 2em;
+        }
+        .sidebar h2 {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/a1.gif) no-repeat scroll 0 0 transparent;
+            color: #454545;
+            font-size: 1.01em;
+            margin-top: 7px;
+            padding: 6px 0 8px 28px;
+            text-transform: uppercase
+        }
+        .tall-l {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/tall-l.gif) repeat-y scroll left center #FFFFFF;
+            width: 100%;
+        }
+        .tall-r {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/tall-r.gif) repeat-y scroll right center transparent;
+        }
+        .tall-t {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/tall-t.gif) repeat-x scroll center top transparent;
+        }
+        .tall-b {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/tall-b.gif) repeat-x scroll center bottom transparent;
+            width: 100%;
+        }
+        .k-tl {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/k-tl.jpg) no-repeat scroll left top transparent;
+        }
+        .k-tr {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/k-tr.jpg) no-repeat scroll right top transparent;
+        }
+        .k-bl {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/k-bl.jpg) no-repeat scroll left bottom transparent;
+            width: 100%;
+        }
+        .k-br {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/k-br.jpg) no-repeat scroll right bottom transparent;
+            width: 100%;
+        }
+        #PageList1 li.selected a {
+            font-weight: normal
+        }
+        #header-wrapper {
+            padding-right: 76px;
+        }
+        #header-inner {
+            padding: 125px 0 0 87px;
+        }
+        #header .title {
+            font-family: arial;
+            font-size: 50px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 60px;
+        }
+        #header,#header a {
+            color: #6A9933;
+        }
+        #header a:hover {
+        }
+        #header .description {
+            font-size: 14px
+        }
+        #header img {
+        }
+        #outer-wrapper {
+        }
+        #content-wrapper {
+        }
+        #main-wrapper {
+            padding: 22px 12px 20px 13px;
+            background: #fff;
+            border: 3px solid #9eb46c;
+            border-radius: 16px;
+            float: left;
+            width: 59%;
+            margin: 8px 76px 0 0;
+        }
+        #sidebar-wrapper {
+            float: left;
+            width: 30%;
+        }
+        .post-share-buttons {
+            display: none
+        }
+        .post {
+            margin-bottom: 30px
+        }
+        .post-body {
+            padding: 20px 12px
+        }
+        .post-title,.post-title a {
+            color: #98AE6D;
+            font-size: 1.01em;
+            line-height: 20px;
+            text-transform: uppercase
+        }
+        .post-footer {
+        }
+        .post img {
+            max-width: 500px;
+        }
+        .post blockquote {
+            font: italic 13px georgia;
+            margin: 1em 20px;
+        }
+        .post-header {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/line.gif) repeat-x scroll left bottom transparent;
+            padding: 0 70px 24px 11px;
+        }
+        .post-author {
+            color: #000000;
+        }
+        .post-timestamp {
+            color: #000000;
+            font-weight: bold;
+        }
+        .post-comment-link,.post-comment-link a {
+            color: #131516;
+            font-weight: bold;
+            text-decoration: underline
+        }
+        .post-labels {
+        }
+        .sidebar {
+            padding: 10px 26px 50px 89px;
+        }
+        .sidebar .widget {
+            margin-bottom: 14px;
+        }
+        .sidebar ul {
+            line-height: 1.65em;
+            margin: 2px 0 0 26px;
+        }
+        .sidebar li {
+            background: url(http://assets.over-blog-kiwi.com/themes/11/images/a2.gif) no-repeat scroll 0 6px transparent;
+            padding-left: 12px;
+        }
+        .sidebar li a {
+            color: #454545;
+        }
+        .sidebar li a:hover {
+            text-decoration: underline;
+        }
+        #comments h4 {
+            color: #666666;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 1.4em;
+            margin: 1em 0;
+            text-transform: none;
+        }
+        #comments-block {
+            line-height: 1.6em;
+            margin: 1em 0 1.5em;
+        }
+        #comments-block .comment-author {
+            -moz-background-inline-policy: continuous;
+            background: none repeat scroll 0 0 #EEEEEE;
+            border: 1px solid #EEEEEE;
+            font-size: 15px;
+            font-weight: normal;
+            margin-right: 20px;
+            padding: 5px;
+        }
+        #comments .blogger-comment-icon, .blogger-comment-icon {
+            -moz-background-inline-policy: continuous;
+            background: none repeat scroll 0 0 #E8DEC4;
+            border-color: #E8DEC4;
+            border-style: solid;
+            border-width: 2px 1px 1px;
+            line-height: 16px;
+            padding: 5px;
+        }
+        #comments-block .comment-body {
+            border-left: 1px solid #EEEEEE;
+            border-right: 1px solid #EEEEEE;
+            margin-left: 0;
+            margin-right: 20px;
+            padding: 7px;
+        }
+        #comments-block .comment-footer {
+            border-bottom: 1px solid #EEEEEE;
+            border-left: 1px solid #EEEEEE;
+            border-right: 1px solid #EEEEEE;
+            font-size: 11px;
+            line-height: 1.4em;
+            margin: -0.25em 20px 2em 0;
+            padding: 5px;
+            text-transform: none;
+        }
+        .deleted-comment {
+            color: gray;
+            font-style: italic;
+        }
+        #blog-pager-newer-link {
+            float: left;
+            padding: 7px;
+        }
+        #blog-pager-older-link {
+            float: right;
+            padding: 7px;
+        }
+        .blog-pager {
+            margin: 0;
+            text-align: center;
+            clear: both;
+        }
+        #headertw,.date-header,.feed-links {
+            display: none
+        }
+        #footer-bg {
+            clear: both;
+        }
+        #footer {
+            color: #8EA45D;
+            font-weight: bold;
+            padding: 15px 35px 120px 90px;
+        }
+        #footer a {
+            text-decoration: underline
+        }
+        #searchbox {
+            float: right;
+            color: #fff;
+            font-weight: bold;
+            padding: 35px 14px 35px 24px;
+            margin: 129px 0 70px;
+            text-transform: uppercase;
+            background: #adbe72;
+            border-radius: 16px;
+        }
+        #searchbox .textfield {
+            margin: 0 14px 0 0;
+            width: 225px;
+            float: left
+        }
+        #searchbox .button {
+        }
+        .slideshow-container {
+            position: relative;
+            height: 100px;
+        }
+        .slideshow-container img {
+            position: absolute;
+        }
+    </style>
+
+    <meta name="string:slideshowtag:Choose a tag for the side slideshow" group="Sidebar" default="photos" />
+    <meta name="list:nb_tags:Number of tags in sidebar" group="Sidebar" default="10" items="[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" />
+    <meta name="list:nb_recentposts:Number of recent posts in sidebar" group="Sidebar" default="5" items="[0,1,2,3,4,5,6,7,8,9,10]" />
+
+    <meta name="string:static_link_url_1:First link URL" group="Pages" />
+    <meta name="string:static_link_label_1:First link Label" group="Pages" />
+    <meta name="string:static_link_url_2:First link URL" group="Pages" />
+    <meta name="string:static_link_label_2:First link Label" group="Pages" />
+    <meta name="string:static_link_url_3:First link URL" group="Pages" />
+    <meta name="string:static_link_label_3:First link Label" group="Pages" />
+    <meta name="string:static_link_url_4:First link URL" group="Pages" />
+    <meta name="string:static_link_label_4:First link Label" group="Pages" />
+    <meta name="string:static_link_url_5:First link URL" group="Pages" />
+    <meta name="string:static_link_label_5:First link Label" group="Pages" />
+</head>
+<body>
+    <div id='wrapper'>
+        <div class='tall-l'>
+            <div class='tall-r'>
+                <div class='tall-t'>
+                    <div class='tall-b'>
+                        <div class='k-tl'>
+                            <div class='k-tr'>
+                                <div class='k-bl'>
+                                    <div class='k-br'>
+                                        <div id='outer-wrapper'>
+                                            <div id='header-wrapper'>
+                                                <div id='searchbox'>
+                                                    <form action='/search/' id='searchthis' method='get'>
+                                                        <div class='content'>
+                                                            <input class='textfield' name='q' size='24' type='text' value='' />
+                                                            <input class='button' src='http://assets.over-blog-kiwi.com/themes/11/images/search.gif' type='image' value='submit'/>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class='header section' id='header'>
+                                                    <div class='widget Header'>
+                                                        <div id='header-inner'>
+                                                            <div class='titlewrapper'>
+                                                                <{% if isIndex %}h1{% else %}p{% endif %} class="title">
+                                                                    <a href="{{ Blog.Url }}">
+                                                                        {{ Blog.Title }}
+                                                                    </a>
+                                                                </{% if isIndex %}h1{% else %}p{% endif %} class="title">
+                                                            </div>
+                                                            <div class='descriptionwrapper'>
+                                                                <p class='description'><span>{{ Blog.Description }}</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='clear'></div>
+                                            <div id='sidebar-wrapper'>
+                                                <div class='sidebar section' id='sidebar'>
+                                                    <div class='widget Slideshow'>
+                                                        <h2 class='title'>{{ Lang.Get('Slideshow') }}</h2>
+                                                        <div class='widget-content'>
+                                                            <div class='slideshow-container'>
+                                                                <div class="ob-slideshow">
+                                                                    {% list Blog.TaggedPosts(Custom('slideshowtag'), 10) %}
+                                                                    {% if TaggedPost.Cover is not empty %}
+                                                                    <a href="{{ TaggedPost.Cover }}">
+                                                                        <img src="{{ TaggedPost.Cover | resize(150, 100) }}" alt="{{ TaggedPost.Title | default(TaggedPost.Snippet | truncate(100)) }}" />
+                                                                    </a>
+                                                                    {% endif %}
+                                                                    {% endlist %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class='clear'></div>
+                                                    </div>
+                                                    <div class='widget PageList'>
+                                                        <h2>{{ Lang.Get('Pages List') }}</h2>
+                                                        <div class='widget-content'>
+                                                            <ul>
+                                                                <li><a href='{{ Blog.Url }}'>{{ Lang.Get('Home') }}</a></li>
+                                                                {% if Custom('static_link_url_1') is not empty %}
+                                                                <li><a href='{{ Custom('static_link_url_1') }}'>{{ Custom('static_link_label_1') }}</a></li>
+                                                                {% endif %}
+                                                                {% if Custom('static_link_url_2') is not empty %}
+                                                                <li><a href='{{ Custom('static_link_url_2') }}'>{{ Custom('static_link_label_2') }}</a></li>
+                                                                {% endif %}
+                                                                {% if Custom('static_link_url_3') is not empty %}
+                                                                <li><a href='{{ Custom('static_link_url_3') }}'>{{ Custom('static_link_label_3') }}</a></li>
+                                                                {% endif %}
+                                                                {% if Custom('static_link_url_4') is not empty %}
+                                                                <li><a href='{{ Custom('static_link_url_4') }}'>{{ Custom('static_link_label_4') }}</a></li>
+                                                                {% endif %}
+                                                                {% if Custom('static_link_url_5') is not empty %}
+                                                                <li><a href='{{ Custom('static_link_url_5') }}'>{{ Custom('static_link_label_5') }}</a></li>
+                                                                {% endif %}
+                                                                <li><a href='/contact'>{{ Lang.Get('Contact') }}</a></li>
+                                                            </ul>
+                                                            <div class='clear'></div>
+                                                        </div>
+                                                    </div>
+
+                                                    {% if Custom('nb_tags') > 0 %}
+                                                    <div class='widget Label'>
+                                                        <h2>{{ Lang.Get('Labels') }}</h2>
+                                                        <div class='widget-content list-label-widget-content'>
+                                                            <ul>
+                                                                {% list Blog.PostsTags(Custom('nb_tags')) %}
+                                                                <li>
+                                                                    <a href='{{ PostsTag.Url }}'>{{ PostsTag.Title }}</a>
+                                                                    <span dir='ltr'>({{ PostsTag.PostCount }})</span>
+                                                                </li>
+                                                                {% endlist %}
+                                                            </ul>
+                                                            <div class='clear'></div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if Custom('nb_recentposts') > 0 %}
+                                                    <div class='widget PopularPosts'>
+                                                        <h2>{{ Lang.Get('Popular Posts') }}</h2>
+                                                        <div class='widget-content popular-posts'>
+                                                            <ul>
+                                                                {% list Blog.Posts(Custom('nb_recentposts')) %}
+                                                                <li>
+                                                                    <div class='item-content'>
+                                                                        {% if Post.Cover is not empty %}
+                                                                        <div class='item-thumbnail'>
+                                                                            <img alt='{{ Post.Title | default(Post.Snippet | truncate(100)) }}' border='0' height='72' src='{{ Post.Cover | resize(72) | crop }}' width='72' />
+                                                                        </div>
+                                                                        {% endif %}
+                                                                        <div class='item-title'><a href='{{ Post.Permalink }}'>{{ Post.Title | default(Post.Snippet | truncate(100)) }}</a></div>
+                                                                        <div class='item-snippet'>{{ Post.Snippet | truncate(100) }}</div>
+                                                                    </div>
+                                                                    <div style='clear: both;'></div>
+                                                                </li>
+                                                                {% endlist %}
+                                                            </ul>
+                                                            <div class='clear'></div>
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div id='content-wrapper'>
+                                                <div id='main-wrapper'>
+                                                    <div class='main section' id='main'>
+                                                        <div class='widget Blog'>
+                                                            <div class='blog-posts hfeed'>
+
+                                                                {# List title #}
+                                                                {% if isSearch %}
+                                                                <h1 class="list-title">Search for “{{ Search }}”</h1>
+                                                                {% endif %}
+                                                                {% if isTag %}
+                                                                <h1 class="list-title">Posts with #<strong>{{ Tag.Title }}</strong> tag</h1>
+                                                                {% endif %}
+
+                                                                {# Posts #}
+                                                                {% if Posts is empty %}
+
+                                                                {% if isSearch %}
+                                                                <div>
+                                                                    <p>
+                                                                        No result… Try again !
+                                                                    </p>
+                                                                    <form action="/search" method="get">
+                                                                        <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
+                                                                        <button type="submit">{{ Lang.Get('Search') }}!</button>
+                                                                    </form>
+                                                                </div>
+                                                                {% else %}
+                                                                <div>
+                                                                    <p>
+                                                                        {{ Lang.Get('No post') }}…
+                                                                    </p>
+                                                                </div>
+                                                                {% endif %}
+
+                                                                {% else %}
+
+                                                                {% list Posts %}
+                                                                <div class="date-outer">
+                                                                    <p class='date-header'>
+                                                                        <span><time datetime="{{ Post.Date }}">{{ Post.Date }}</time></span>
+                                                                    </p>
+                                                                    <div class="date-posts">
+                                                                        <div class='post-outer'>
+                                                                            <div class='post hentry'>
+                                                                                <div class='post-header'>
+                                                                                    <h{% if isSingle %}1{% else %}2{% endif %} class='post-title'>
+                                                                                        <a href='{{ Post.Permalink }}'>{{ Post.Title | default(Post.Snippet | truncate(100)) }}</a>
+                                                                                    </h{% if isSingle %}1{% else %}2{% endif %}>
+                                                                                    <div class='post-author'>
+                                                                                        {{ Lang.Get('Author') }}: <span class='fn'>{{ Post.Author }}</span>
+                                                                                        /
+                                                                                        <a class='comment-link' href='{{ Post.Permalink }}#comments'>
+                                                                                            {{ Post.CommentCount('comment', 'comments') }}
+                                                                                        </a>
+                                                                                        /
+                                                                                        {% list Post.Tags %}
+                                                                                        <a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if not loop.last %}, {% endif %}
+                                                                                        {% endlist %}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class='post-body entry-content'>
+                                                                                    <article>
+                                                                                        {% if isSingle %}
+                                                                                        {{ Post.Body }}
+                                                                                        {% else %}
+                                                                                        {{ Post.Body(1) }}
+                                                                                        {% endif %}
+                                                                                    </article>
+                                                                                </div>
+                                                                                {% if isSingle %}
+                                                                                <div id="comments" class="comments">
+                                                                                    <h2>
+                                                                                        {{ Post.CommentCount('comment', 'comments') }}
+                                                                                    </h2>
+                                                                                    {{ Post.Comments }}
+                                                                                </div>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {% endlist %}
+
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class='blog-pager'>
+                                                                {% if Navigation.PreviousPage is not empty %}
+                                                                <span id="blog-pager-older-link">
+                                                                    <a href="{{ Navigation.PreviousPage }}" class="blog-pager-older-link" title="{{ Lang.Get('Previous page') }}">{{ Lang.Get('Older posts') }}</a>
+                                                                </span>
+                                                                {% endif %}
+
+                                                                {% if Navigation.NextPage is not empty %}
+                                                                <span id="blog-pager-newer-link">
+                                                                    <a href="{{ Navigation.NextPage }}" class="blog-pager-newer-link" title="{{ Lang.Get('Next page') }}">{{ Lang.Get('Newer posts') }}</a>
+                                                                </span>
+                                                                {% endif %}
+
+                                                                <a class='home-link' href='{{ Blog.Url }}'>{{ Lang.Get('Home') }}</a>
+                                                            </div>
+                                                            <div class='clear'></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id='footer-bg'>
+                                                <div id='footer'>
+                                                    <!-- Remmeber!!! This free Blogger template is licensed under the Creative Commons Attribution 3.0 License. You are required to keep the footer links intact which provides due credit to its Author and Supporters. -->
+                                                    <p>Copyright &#169; 2011 <a href='http://personal-blog-nbtemplate.blogspot.com/'>Personal Blog</a>.
+                                                        Template by <a href='http://www.newbloggertemplate.net'>New Blogger Template</a>.
+                                                        Hosted by <a href="http://over-blog.com">Overblog</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
