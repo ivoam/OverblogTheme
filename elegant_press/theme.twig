@@ -5,7 +5,7 @@
         <!-- title, description, keyword, robots -->
         {% if isSingle%}
             <title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
-            <meta name="description" content="{% if isPage %}{% list Blog.ListPages(1) %}{{ ListPage.Snippet }}{% endlist %}{% else %}{{ Post.Snippet }}{% endif %}" />
+            <meta name="description" content="{{ Post.Snippet }}" />
             <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
             <meta name="robots" content="index,follow" />
         {% elseif isTag and Tag is not empty %}
@@ -86,41 +86,42 @@
             <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
         {% endif %}
 
-        <!-- Custom vars -->
-        <meta name="constant:displayArticlesLimit" content="9" />
+        <!-- Custom vars -->        
+        <meta name="string:custom_tagline_text:label.headline" default="Welcome to my blog" />
+        <meta name="string:custom_footer_left:label.footer" default="Theme: Elegant press &copy; 2012" />
+
+        <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,20,30,40,50" default="10" group="Navigation" />
         
-        <meta name="string:custom_tagline_text:Enter tagline text" default="Welcome to my blog" />
-        <meta name="string:custom_footer_left:Enter left footer text" default="Theme: Elegant press &copy; 2012" />
+        <meta name="image:custom_default_post_thumbnail:Posts default cover" default="http://assets.over-blog-staging.com/themes/32/images/thumb.jpg" group="Design" />
         
-        <meta name="image:custom_default_post_thumbnail:Posts default cover" default="http://assets.over-blog-kiwi.com/themes/32/images/thumb.jpg" group="Design" />
+        <meta name="tag:pinned_tag:label.pinnedTag" group="Slider" />
+        <meta name="image:custom_home_slider_default_image:Slider default image" default="http://assets.over-blog-staging.com/themes/32/images/slider3.jpg" group="Slider" />
         
-        <meta name="tag:custom_home_slider_tag:Slider tag" group="Slider" />
-        <meta name="image:custom_home_slider_default_image:Slider default image" default="http://assets.over-blog-kiwi.com/themes/32/images/slider3.jpg" group="Slider" />
-        <meta name="boolean:custom_hide_widget_search_form:Hide Widget &quot; Search form&quot; " group="Widgets" />
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <meta name="string:flickr_username:Enter your Flickr username" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
+        
+        <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_biography:Hide Widget &quot; Biography&quot; " group="Widgets" />
         <meta name="boolean:custom_hide_widget_about_blog:Hide Widget &quot; About this blog&quot; " group="Widgets" />
-        <meta name="boolean:custom_hide_widget_follow_me:Hide Widget &quot; Follow me&quot; " group="Widgets" />
-        <meta name="boolean:custom_hide_widget_archives:Hide Widget &quot; Archives&quot; " group="Widgets" />
+        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_last_post:Hide Widget &quot; Last posts&quot; " group="Widgets" />
-        
-        <meta name="string:facebook_username:Enter your FaceBook username" group="Social" />
-        <meta name="string:twitter_username:Enter your Twitter username" group="Social" />
-        <meta name="string:flickr_username:Enter your Flickr username" group="Social" />
-        <meta name="list:share_service:Choose your(s) share social service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-        
-        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
-        <meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
-        
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
+
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
         
         <!-- jQuery (loaded by template script) -->
-        <script src="http://assets.over-blog-kiwi.com/themes/32/scripts/elegant-press.js" type="text/javascript"></script>
+        <script src="http://assets.over-blog-staging.com/themes/32/scripts/elegant-press.js" type="text/javascript"></script>
         
         <!-- NivoSlider -->
         <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
@@ -200,9 +201,6 @@
                 font-style:normal;
                 font-weight:normal;
             }
-            ol,ul {
-                list-style:none;
-            }
             caption,th {
                 text-align:left;
             }
@@ -216,28 +214,23 @@
             abbr,acronym {
                 border:0;
             }
-            .clearfix:before,.clearfix:after {
-                content:"";
-                display:table
-            }
-            .clearfix:after {
-                clear:both
-            }
-            .clearfix {
-                zoom:1
-            }
-            
             /*----- Import fonts -----*/
             @font-face {
                 font-family:'ChunkFive Regular';
-                src:url('http://assets.over-blog-kiwi.com/themes/32/styles/fonts/Chunkfive.eot');
-                src:local('ChunkFive Regular'),local('ChunkFive'),url('http://assets.over-blog-kiwi.com/themes/32/styles/fonts/Chunkfive.woff') format('woff'),url('http://assets.over-blog-kiwi.com/themes/32/styles/fonts/Chunkfive.otf') format('opentype');
+                src: url('http://assets.over-blog-staging.com/themes/32/styles/fonts/Chunkfive.eot');
+                src: local('ChunkFive Regular'),
+                     local('ChunkFive'),
+                    url('http://assets.over-blog-staging.com/themes/32/styles/fonts/Chunkfive.woff') format('woff'),
+                     url('http://assets.over-blog-staging.com/themes/32/styles/fonts/Chunkfive.otf') format('opentype');
             }
             @font-face {
                 font-family:'Artifika';
-                font-style:normal;
-                font-weight:normal;
-                src:local('Artifika Medium'),local('Artifika-Medium'),url('http://assets.over-blog-kiwi.com/themes/32/styles/fonts/Artifika-Regular.woff') format('woff'),url('http://assets.over-blog-kiwi.com/themes/32/styles/fonts/Artifika-Regular.ttf') format('truetype');
+                font-style: normal;
+                font-weight: normal;
+                src: local('Artifika Medium'),
+                     local('Artifika-Medium'),
+                     url('http://assets.over-blog-staging.com/themes/32/styles/fonts/Artifika-Regular.woff') format('woff'),
+                     url('http://assets.over-blog-staging.com/themes/32/styles/fonts/Artifika-Regular.ttf') format('truetype');
             }
 
             /*----- Global -----*/
@@ -245,7 +238,7 @@
                 font-size:13px;
                 font-family:Tahoma,Georgia,"Times New Roman",Times,serif;
                 color:#333;
-                background:#eee url(http://assets.over-blog-kiwi.com/themes/32/images/bg.png) repeat;
+                background:#eee url(http://assets.over-blog-staging.com/themes/32/images/bg.png) repeat;
                 padding:0
             }
             .justify {
@@ -309,22 +302,23 @@
                 padding:0
             }
             .main-container h1 {
-                font-size:30px
+                font-size:30px;
             }
             .main-container h2 {
-                font-size:28px
+                font-size: 28px;
             }
+
             .main-container h3 {
-                font-size:26px
+                font-size: 26px;
             }
             .main-container h4 {
-                font-size:24px
+                font-size: 18px;
             }
             .main-container h5 {
-                font-size:22px
+                font-size: 22px;
             }
             .main-container h6 {
-                font-size:18px
+                font-size: 18px;
             }
 
             /*----- Header ----*/
@@ -436,7 +430,7 @@
             .sidebar .subnav a {
                 display: block;
                 color: black;
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/red_file.gif) no-repeat 10px center #F9F9F9;
+                background: url(http://vivienkaufinger.com/ob/elegantpress/red_file.gif) no-repeat 10px center #F9F9F9;
                 text-decoration: none;
                 border-bottom: 1px dotted #666;
                 margin: 0;
@@ -537,7 +531,7 @@
             }
 
             .grid-container {
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/textured-light-bg.gif) repeat #f2f2f2;
+                background: url(http://assets.over-blog-staging.com/themes/32/images/textured-light-bg.gif) repeat #f2f2f2;
                 width: 100%
             }
             .grid h1,
@@ -546,9 +540,9 @@
             .grid p,
             .grid ul,
             .grid a {
-                font-weight:400;
-                list-style:none;
-                line-height:normal;
+                font-weight: 400;
+                list-style: none;
+                line-height: normal;
                 margin:0;
                 padding:0
             }
@@ -603,7 +597,7 @@
             .grid .latestgallery li {
                 float:right;
                 display:block;
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/image-frames-thumb.png) top left no-repeat;
+                background: url(http://assets.over-blog-staging.com/themes/32/images/image-frames-thumb.png) top left no-repeat;
                 height: 110px;
                 width: 160px;
                 padding: 4px
@@ -615,6 +609,7 @@
                 padding: 0;
                 width: 220px;
             }
+
             .grid .footbox li {
                 color: #333!important;
                 margin: 22px 0 0;
@@ -654,7 +649,7 @@
                 width: 200px;
             }
             .icons {
-                background: url('http://assets.over-blog-kiwi.com/themes/32/images/social.png') no-repeat;
+                background: url('http://vivienkaufinger.com/ob/elegantpress/social.png') no-repeat;
                 bottom: 5px;
                 display:  block;
                 height: 26px;
@@ -663,7 +658,7 @@
                 width: 25px;
             }
 
-            .icons.rss {background: url('http://assets.over-blog-kiwi.com/themes/32/images/rss.png') no-repeat;}
+            .icons.rss {background: url('http://vivienkaufinger.com/ob/elegantpress/rss.png') no-repeat;}
             
             #social a.facebook .icons.facebook {
                 background-position:-50px 0;
@@ -676,19 +671,18 @@
             }
             #social a.facebook {
                 background:#4669AB;
-                background:-webkit-gradient(linear,0 0,0 0,from(#4669AB),to(#304886));
                 background:-webkit-linear-gradient(,#4669AB,#304886);
                 background:-moz-linear-gradient(,#4669AB,#304886);
                 background:-o-linear-gradient(,#4669AB,#304886);
                 background:-ms-linear-gradient(,#4669AB,#304886);
                 background:linear-gradient(,#4669AB,#304886);
                 border-top:1px solid #8EA4CD;
-                color:rgba(21,31,53,1);
+                color: #151F35;
+                color: rgb(21,31,53);
                 text-shadow:0 1px 1px rgba(255,255,255,.35);
             }
             #social a.facebook:active {
                 background: #304886;
-                background: -webkit-gradient(linear, 0 0, 0 0, from(#304886), to(#4669AB));
                 background: -webkit-linear-gradient(, #304886, #4669AB);
                 background: -moz-linear-gradient(, #304886, #4669AB);
                 background: -o-linear-gradient(, #304886, #4669AB);
@@ -697,18 +691,17 @@
             }
             #social a.twitter {
                 background:#65ACC8;
-                background:-webkit-gradient(linear,0 0,0 0,from(#65ACC8),to(#4586AE));
                 background:-webkit-linear-gradient(,#65ACC8,#4586AE);
                 background:-moz-linear-gradient(,#65ACC8,#4586AE);
                 background:-o-linear-gradient(,#65ACC8,#4586AE);
                 background:-ms-linear-gradient(,#65ACC8,#4586AE);
                 background:linear-gradient(,#65ACC8,#4586AE);
                 border-top:1px solid #A1CDDE;
+                color: #192D37;
                 color:rgba(25,45,55,.9);
             }
             #social a.twitter:active {
                 background: #4586AE;
-                background: -webkit-gradient(linear, 0 0, 0 0, from(#4586AE), to(#65ACC8));
                 background: -webkit-linear-gradient(, #4586AE, #65ACC8);
                 background: -moz-linear-gradient(, #4586AE, #65ACC8);
                 background: -o-linear-gradient(, #4586AE, #65ACC8);
@@ -717,18 +710,17 @@
             }
             #social a.rss {
                 background: #ed8b00;
-                background:-webkit-gradient(linear,0 0,0 0,from(#ed8b00),to(#304886));
-                background:-webkit-linear-gradient(,#ed8b00,#304886);
-                background:-moz-linear-gradient(,#ed8b00,#304886);
-                background:-o-linear-gradient(,#ed8b00,#304886);
-                background:-ms-linear-gradient(,#ed8b00,#304886);
-                background:linear-gradient(,#ed8b00,#304886);
-                border-top:1px solid #ff9600;
-                color:rgba(25,45,55,.9);
+                background: -webkit-linear-gradient(,#ed8b00,#304886);
+                background: -moz-linear-gradient(,#ed8b00,#304886);
+                background: -o-linear-gradient(,#ed8b00,#304886);
+                background: -ms-linear-gradient(,#ed8b00,#304886);
+                background: linear-gradient(,#ed8b00,#304886);
+                border-top: 1px solid #ff9600;
+                color: #192D37;
+                color: rgba(25,45,55,.9);
             }
             #social a.rss:active {
                 background: #d87603;
-                background:-webkit-gradient(linear,0 0,0 0,from(#d87603),to(#b76b00));
                 background:-webkit-linear-gradient(,#d87603,#b76b00);
                 background:-moz-linear-gradient(,#d87603,#b76b00);
                 background:-o-linear-gradient(,#d87603,#b76b00);
@@ -737,18 +729,17 @@
             }
             #social a.flickr {
                 background: #EA66AC;
-                background:-webkit-gradient(linear,0 0,0 0,from(#EA66AC),to(#DA3868));
                 background:-webkit-linear-gradient(,#EA66AC,#DA3868);
                 background:-moz-linear-gradient(,#EA66AC,#DA3868);
                 background:-o-linear-gradient(,#EA66AC,#DA3868);
                 background:-ms-linear-gradient(,#EA66AC,#DA3868);
                 background:linear-gradient(,#EA66AC,#DA3868);
                 border-top:1px solid #F3A2CD;
-                color:rgba(74,4,32,1);
+                color: #4A0420;
+                color: rgba(74,4,32,1);
             }
             #social a.flickr:active {
                 background: #DA3868;
-                background: -webkit-gradient(linear, 0 0, 0 0, from(#DA3868), to(#EA66AC));
                 background: -webkit-linear-gradient(, #DA3868, #EA66AC);
                 background: -moz-linear-gradient(, #DA3868, #EA66AC);
                 background: -o-linear-gradient(, #DA3868, #EA66AC);
@@ -793,7 +784,7 @@
             #list1,#list2,#list3 {
                 text-indent:5px;
                 list-style-position:outside;
-                list-style-image:url(http://assets.over-blog-kiwi.com/themes/32/images/list-checkmark.png);
+                list-style-image:url(http://assets.over-blog-staging.com/themes/32/images/list-checkmark.png);
                 list-style-type:square;
                 margin:2px;
                 padding:6px;
@@ -883,20 +874,20 @@
                 text-decoration: none;
                 padding-top: 15px;
                 font-family: 'Artifika',Verdana,Geneva,sans-serif;
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/futured_button.png) no-repeat left top;
+                background: url(http://assets.over-blog-staging.com/themes/32/images/futured_button.png) no-repeat left top;
                 padding: 18px!important;
             }
             a.more:hover {
                 color:#ddd!important;
             }
             .callout {
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/textured-light-bg.gif) repeat #f2f2f2;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/textured-light-bg.gif) repeat #f2f2f2;
                 width:100%;
                 margin:20px 0 40px;
             }
             .calloutoverlay {
                 height:77px;
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/hash-overlay.png) repeat-x top left;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/hash-overlay.png) repeat-x top left;
                 position:absolute;
                 top:-40px;
                 left:0;
@@ -904,7 +895,7 @@
             }
             .calloutoverlaybottom {
                 height:77px;
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/hash-overlay-bottom.png) repeat-x top left;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/hash-overlay-bottom.png) repeat-x top left;
                 position:absolute;
                 bottom:-41px;
                 left:0;
@@ -929,7 +920,7 @@
                 color:#fff!important;
                 text-decoration:none;
                 margin-top:18px;
-                background:#454545 url(http://assets.over-blog-kiwi.com/themes/32/images/arrow_01.png) no-repeat right 7px;
+                background:#454545 url(http://assets.over-blog-staging.com/themes/32/images/arrow_01.png) no-repeat right 7px;
                 margin-left:15px;
                 padding:5px 30px 5px 10px;
                 -webkit-border-radius: 10px;
@@ -1040,7 +1031,7 @@
                 height:10px;
                 text-indent:-999em;
                 overflow:hidden;
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/nav_arrows.png) no-repeat -10px -100px
+                background:url(http://assets.over-blog-staging.com/themes/32/images/nav_arrows.png) no-repeat -10px -100px
             }
             a>.sf-sub-indicator {
                 top: .8em;
@@ -1130,10 +1121,11 @@
             #home_featured2 img {
                 display:inline
             }
+
             #home_featured2 .imgholder {
                 display:block;
                 width: 290px;
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/image-frames.png) top left no-repeat;
+                background: url(http://assets.over-blog-staging.com/themes/32/images/image-frames.png) top left no-repeat;
                 height: 160px!important;
                 margin: 0;
                 padding: 9px
@@ -1204,7 +1196,7 @@
             #slide1 span,
             #slide2 span,
             #slide3 span {
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/contentBg.png) repeat top left transparent;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/contentBg.png) repeat top left transparent;
                 position:absolute;
                 bottom:20px;
                 right:20px;
@@ -1243,7 +1235,7 @@
                 top:1px
             }
             .jFlowNext div {
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/arrows.png) no-repeat scroll 0 -35px transparent;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/arrows.png) no-repeat scroll 0 -35px transparent;
                 height:130px;
                 position:absolute;
                 top:140px;
@@ -1252,7 +1244,7 @@
                 cursor:pointer
             }
             .jFlowPrev div {
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/arrows.png) no-repeat scroll -84px -35px transparent;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/arrows.png) no-repeat scroll -84px -35px transparent;
                 height:130px;
                 position:absolute;
                 top:140px;
@@ -1295,7 +1287,7 @@
                 background:#e0e0e0
             }
             .nav li li,.nav li li li {
-                background:#eee url(http://assets.over-blog-kiwi.com/themes/32/images/bg.png) repeat
+                background:#eee url(http://assets.over-blog-staging.com/themes/32/images/bg.png) repeat
             }
             .nav ul .sf-sub-indicator,
             .nav ul a:focus>.sf-sub-indicator,
@@ -1332,10 +1324,10 @@
                 height:51px;
                 border:none;
                 text-indent:-999px;
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/ui.totop.png) no-repeat left top
+                background:url(http://assets.over-blog-staging.com/themes/32/images/ui.totop.png) no-repeat left top
             }
             #toTopHover {
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/ui.totop.png) no-repeat left -51px;
+                background:url(http://assets.over-blog-staging.com/themes/32/images/ui.totop.png) no-repeat left -51px;
                 width:51px;
                 height:51px;
                 display:block;
@@ -1376,8 +1368,12 @@
             }
             .m-social-networks .google,
             .m-social-networks .twitter,
-            .m-social-networks .facebook {
+            .m-social-networks .facebook,
+            .m-social-networks .pinterest {
                 float: left;
+            }
+            .m-social-networks .facebook {
+                margin-right: 30px;
             }
             #archivelist ul {
                 margin: 3px 0 3px 18px;
@@ -1393,7 +1389,7 @@
             .grid .meta {
                 color:#666;
                 font-weight:bold;
-                margin:5px 0;
+                margin: 5px 0;
             }
             .grid .entry {
                 margin: 40px 0 15px;
@@ -1403,6 +1399,7 @@
                 color: white;
                 display: block;
                 font-family: "ChunkFive Regular", Georgia, serif;
+                font-weight: 100;
                 font-size: 35px;
                 height: 40px;
                 letter-spacing: 2px;
@@ -1437,10 +1434,14 @@
                 background:#333;
                 background:rgba(0,0,0,0.5);
                 bottom: 20px;
+                display: block;
+                max-width:420px;
                 padding: 10px;
                 position:absolute;
                 right:20px;
-                max-width:420px;
+            }
+            .m-slides a {
+                display: block;
             }
             .ob-section img {
                 display:inline;
@@ -1480,9 +1481,9 @@
                 color: #FFF;
             }
             #pagination .prev {
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/futured_button_left.png) no-repeat left top;
+                background: url(http://vivienkaufinger.com/ob/elegantpress/futured_button_left.png) no-repeat left top;
                 float: left;
-                padding: 19px 0 0 25px;
+                padding: 19px 0 0 {% if Blog.Lang == 'fr' %}33px{% else %}25px{% endif %};
                 text-align: center;
                 width: 130px;    
             }
@@ -1491,11 +1492,11 @@
                 left: 48%;
             }
             #pagination .next {
-                background: url(http://assets.over-blog-kiwi.com/themes/32/images/futured_button.png) no-repeat left top;
+                background: url(http://assets.over-blog-staging.com/themes/32/images/futured_button.png) no-repeat left top;
                 float: right;
-                padding: 19px 47px 0;
+                padding: 19px 47px 0 {% if Blog.Lang == 'fr' %}27px{% endif %};
                 text-align: left; 
-                width: 62px;   
+                width: {% if Blog.Lang == 'fr' %}83px{% else %}62px{% endif %};   
             }
 
             .entry {
@@ -1530,6 +1531,9 @@
             }
             .ob-section li p {
                 margin-bottom: 0;
+            }
+            .ob-section-text img {
+                max-width: 100%;
             }
             
             /* Section File */
@@ -1619,6 +1623,7 @@
         
     </head>
     <body>
+        <div id="fb-root"></div>
         <div class="main-container">
             <!-- shortcut:[Header content] -->
             <header class="container">
@@ -1665,7 +1670,7 @@
                         <li>
                             <a href="#">{{ Lang.Get('Tags') }}</a>
                             <ul>
-                                {% list Blog.PostsTags(10, 'SORT_POSTS_NUMBER_DESC') %}
+                                {% list Blog.PostsTags(Custom('tag_number')|default('10'), 'SORT_POSTS_NUMBER_DESC') %}
                                     <li {% if isTag and Tag.Title == PostsTag.Title %} class="active" {% endif %}>
                                         <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
                                     </li>
@@ -1706,7 +1711,7 @@
                                         {% if Post.Title is not empty %}
                                             {{ Post.Title }}
                                         {% else %}
-                                            {{ Lang.Get('A post from') }}
+                                            {{ Lang.Get('Published from') }}
                                             {% list Post.Sources %}
                                                 {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                             {% endlist %}
@@ -1734,7 +1739,7 @@
                                     <div class="entry">
                                         {{ Post.Body }}
                                         
-                                        {% if Custom('share_service') is not empty and Custom('share_service') != 'None' or isSingle %}
+                                        {% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
                                             <div class="ob-section m-social-networks clear">
                                                 {% if isSingle and Custom('share_service') != 'None' %}
                                                     <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
@@ -1754,6 +1759,13 @@
                                                         <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                                     </div>
                                                 {% endif %}
+                                                {% if Custom('share_service') == 'Pinterest' %}
+                                                    <div class="pinterest">
+                                                        <a href="http://pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
+                                                            <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
                                                 {% if Custom('share_service') == 'All' %}
                                                     <div class="google">
                                                         <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
@@ -1763,6 +1775,11 @@
                                                     </div>
                                                     <div class="facebook">
                                                         <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                    </div>
+                                                    <div class="pinterest">
+                                                        <a href="http://pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
+                                                            <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                                                        </a>
                                                     </div>
                                                 {% endif %}
                                             </div>
@@ -1786,7 +1803,7 @@
                                             <!-- Comments -->
                                             <div class="item-comments">
                                                 {% if Custom("comment") == "Facebook" %}
-                                                    <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600" data-colorscheme="{{ Custom('custom_facebook_comments_color_theme')|default('light') }}"></div>
+                                                    <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600" data-colorscheme="dark"></div>
                                                 {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <div id="disqus_thread"></div>
                                                     <script type="text/javascript">
@@ -1884,7 +1901,7 @@
                                         {% elseif Custom('custom_home_slider_default_image') is not empty %}
                                             <img src="{{ Custom('custom_home_slider_default_image')|resize(960, 426)|crop }}" alt="{{ TaggedPost.Title }}" />
                                         {% else %}
-                                            <img src="http://assets.over-blog-kiwi.com/themes/32/images/slider3.jpg" alt="{{ TaggedPost.Title }}" />
+                                            <img src="http://assets.over-blog-staging.com/themes/32/images/slider3.jpg" alt="{{ TaggedPost.Title }}" />
                                         {% endif %}
                                         <span>
                                             {% if TaggedPost.Title is not empty %}
@@ -1903,7 +1920,7 @@
                                         {% elseif Custom('custom_home_slider_default_image') is not empty %}
                                             <img src="{{ Custom('custom_home_slider_default_image')|resize(960, 426)|crop }}" alt="{{ Post.Title }}" />
                                         {% else %}
-                                            <img src="http://assets.over-blog-kiwi.com/themes/32/images/slider3.jpg" alt="{{ Post.Title }}" />
+                                            <img src="http://assets.over-blog-staging.com/themes/32/images/slider3.jpg" alt="{{ Post.Title }}" />
                                         {% endif %}
                                         <span>
                                             {% if Post.Title is not empty %}
@@ -1981,7 +1998,7 @@
                                                 {% elseif Custom('custom_default_post_thumbnail') is not empty %}
                                                     <img class="ob-media ob-img ob-pull-left ob-media-left" src="{{ Custom('custom_default_post_thumbnail')|resize(275, 145)|crop }}" alt="" width="275" height="145" />
                                                 {% else %}
-                                                    <img class="ob-media ob-img ob-pull-left ob-media-left" src="http://assets.over-blog-kiwi.com/themes/32/images/thumb.jpg" width="275" height="145" alt="" />
+                                                    <img class="ob-media ob-img ob-pull-left ob-media-left" src="http://assets.over-blog-staging.com/themes/32/images/thumb.jpg" width="275" height="145" alt="" />
                                                 {% endif %}
                                             </a>
                                         </div>
@@ -1990,7 +2007,7 @@
                                                 {% if Post.Title is not empty %}
                                                     {{ Post.Title }}
                                                 {% else %}
-                                                    {{ Lang.Get('From') }}
+                                                    {{ Lang.Get('Published from') }}
                                                     {% list Post.Sources %}
                                                         {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }}{% endif %} 
                                                     {% endlist %}
@@ -2033,7 +2050,7 @@
                     <div class="grid"> 
                         <div class="footbox">
                             <!-- Archives -->
-                            {% if Custom('custom_hide_widget_archives') == false %}
+                            {% if Custom('custom_hide_widget_blog_archive') == false %}
                                 {% if Blog.Archives is not empty %}
                                     <h3>{{ Lang.Get('Blog archives') }}</h3>
                                     <ul id="archivelist">
@@ -2043,7 +2060,7 @@
                                                 <ul id="arch_{{Archive.Year}}" class="arch_month">
                                                 {% list Archive.Months %}
                                                     {% if Month.PostCount > 0 %}
-                                                        <li><a href="{{Month.Url}}">{{ Month.Name }}</a> ({{ Month.PostCount }})</li>
+                                                        <li><a href="{{Month.Url}}">{{ Lang.Get(Month.Name) }}</a> ({{ Month.PostCount }})</li>
                                                     {% endif %}
                                                 {% endlist %}
                                                 </ul>
@@ -2053,7 +2070,7 @@
                                 {% endif %}
                             {% endif %}
                         </div>
-                        {% if Custom('custom_hide_widget_social') == false %}
+                        {% if Custom('custom_hide_widget_follow_us') == false %}
                             <div class="footbox last">
                                 <!-- Social networks -->
                                 <h3>{{ Lang.Get('We are social!') }}</h3>
@@ -2094,7 +2111,7 @@
                                                 {% elseif Custom('custom_default_post_thumbnail') is not empty %}
                                                     <img src="{{ Custom('custom_default_post_thumbnail')|resize(150, 95)|crop }}" alt="{{ TaggedPost.Title }}" width="150" height="95" />
                                                 {% else %}
-                                                    <img src="http://assets.over-blog-kiwi.com/themes/32/images/thumb.jpg" width="150" height="95" alt="{{ TaggedPost.Title }}" />
+                                                    <img src="http://assets.over-blog-staging.com/themes/32/images/thumb.jpg" width="150" height="95" alt="{{ TaggedPost.Title }}" />
                                                 {% endif %}
                                             </a>
                                         </li>
@@ -2109,9 +2126,8 @@
                 </div> 
             </div>
         </div>
-        
         <footer>
-            <div class="footer-text clearfix">
+            <div class="footer-text">
                 {% if Custom('custom_footer_left') %}
                     <p class="tagline_left">{{ Custom('custom_footer_left') }}</p>
                 {% endif %}
@@ -2122,30 +2138,9 @@
             <div class="clear" />
         </footer>
 
-        <!-- Google Analytics -->
-        {% if Custom('google_analytics') is not empty %}
-            <script type="text/javascript">
-                window.google_analytics_uacct = '{{ Custom('google_analytics') }}'; 
-                var _gaq = _gaq || []; 
-                _gaq.push(['_setAccount', '{{ Custom('google_analytics') }}']); 
-                _gaq.push(['_trackPageview']); 
-                _gaq.push(['_trackPageLoadTime']); 
-
-                (function() {
-                    var ga = document.createElement('script');  
-                    ga.type = 'text/javascript'; 
-                    ga.async = true; 
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
-                    var s = document.getElementsByTagName('script')[0];  
-                    s.parentNode.insertBefore(ga, s); 
-                })(); 
-            </script>
-        {% endif %}
-        
-       
-        {% if Custom('custom_hide_widget_archives') == false %}
-            <!-- Archives -->
-            <script type="text/javascript">
+        <script type="text/javascript">
+            {% if Custom('custom_hide_widget_archives') == false %}
+                // Archives
                 function switch_arch(year) {
                     'use strict'; 
                     var archiveYear, archiveMonths, displayStyle; 
@@ -2165,23 +2160,24 @@
                     }
                     return false; 
                 }
-            </script>
-        {% endif%}
-        
-        <!-- Social networks : Facebook -->
-        <div id="fb-root"></div>
-        <script type="text/javascript">
+                {% list Blog.Archives %}
+                    {% if Archive.Year != "now"|date("Y") %}
+                        switch_arch('{{Archive.Year}}');
+                    {% endif %}
+                {% endlist %}
+            {% endif %}
+
+            // Facebook button
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0]; 
                 if (d.getElementById(id)) return; 
-                js = d.createElement(s);  js.id = id; 
-                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}"; 
-                fjs.parentNode.insertBefore(js, fjs); 
+                    js = d.createElement(s);  
+                    js.id = id; 
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}"; 
+                    fjs.parentNode.insertBefore(js, fjs); 
             }(document, 'script', 'facebook-jssdk')); 
-        </script>
-        
-        <!-- Social networks : Twitter -->
-        <script type="text/javascript">
+            
+            // Twitter button
             !function(d,s,id){
                 var js,fjs=d.getElementsByTagName(s)[0]; 
                 if(!d.getElementById(id)){
@@ -2191,26 +2187,52 @@
                     fjs.parentNode.insertBefore(js,fjs);  
                 }
             }(document,"script","twitter-wjs"); 
+
+            {% if Custom('share_service') == 'Google' or Custom('share_service') == 'All' %}
+                // Google + button
+                window.___gcfg = {lang: '{{ Blog.Lang }}'};
+            
+                (function() {
+                    var po = document.createElement('script'); 
+                        po.type = 'text/javascript'; 
+                        po.async = true;
+                        po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0]; 
+                        s.parentNode.insertBefore(po, s);
+                })();
+            {% endif %}
+
+            {% if Custom('google_analytics') is not empty %}
+                // Google Analytics 
+                window.google_analytics_uacct = '{{ Custom('google_analytics') }}'; 
+                
+                var _gaq = _gaq || []; 
+                    _gaq.push(['_setAccount', '{{ Custom('google_analytics') }}']); 
+                    _gaq.push(['_trackPageview']); 
+                    _gaq.push(['_trackPageLoadTime']); 
+                (function() {
+                    var ga = document.createElement('script');  
+                        ga.type = 'text/javascript'; 
+                        ga.async = true; 
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+                    var s = document.getElementsByTagName('script')[0];  
+                        s.parentNode.insertBefore(ga, s); 
+                })(); 
+            {% endif %}     
         </script>
 
-        <!-- Google + button -->
-        <script type="text/javascript">
-          window.___gcfg = {lang: '{{ Blog.Lang }}'};
+        {% if Custom('share_service') == 'All' or Custom('share_service') == 'Pinterest' %}
+            <!-- Pinterest button -->
+            <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+        {% endif %}    
         
-          (function() {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-          })();
-        </script>
-        
-        <!-- jQuery onReady -->
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 // Fancy box
                 $(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox"); 
                 $("a[rel=fancybox]").fancybox({
                     'overlayShow'   : true,
+                    'titlePosition' : 'over',
                     'transitionIn'  : 'fadin',
                     'transitionOut' : 'fadin',
                     'type'          : 'image'
@@ -2276,15 +2298,6 @@
                             }
                         }
                         obSearchForm(); 
-                    {% endif%}
-                    
-                    // Archives
-                    {% if Custom('custom_hide_widget_archives') == false %}
-                        {% list Blog.Archives %}
-                            {% if Archive.Year != "now"|date("Y") %}
-                                switch_arch('{{Archive.Year}}');
-                            {% endif %}
-                        {% endlist %}
                     {% endif%}
                 })(); 
             }); 
