@@ -109,8 +109,9 @@
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_last_post:Hide Widget &quot; Last posts&quot; " group="Widgets" />
 
-        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
-        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="list:facebook_comments_theme_color:Facebook comments theme color" items="Light, Dark" default="Light" group="Comments" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
 
         <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
@@ -569,11 +570,6 @@
                 text-align: center
             }
             .grid .latestgallery ul li {
-/*                -webkit-opacity: 1;
-                   -moz-opacity: 1;
-                    -ms-opacity: 1;
-                     -o-opacity: 1;
-                        opacity: 1;*/
                 -webkit-transition: opacity 300ms ease-out;
                    -moz-transition: opacity 300ms ease-out;
                     -ms-transition: opacity 300ms ease-out;
@@ -1803,7 +1799,7 @@
                                             <!-- Comments -->
                                             <div class="item-comments">
                                                 {% if Custom("comment") == "Facebook" %}
-                                                    <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600" data-colorscheme="dark"></div>
+                                                    <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600" data-colorscheme="{{ Custom('facebook_comments_theme_color')|default('Light')|lower }}"></div>
                                                 {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <div id="disqus_thread"></div>
                                                     <script type="text/javascript">
