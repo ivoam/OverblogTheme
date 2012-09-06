@@ -1036,35 +1036,35 @@
             {% endif %}
 
             {% if Custom('custom_hide_widget_blog_archives') == false %}
-                    // Archives
-                    function switch_arch(year) {
-                        'use strict';
-                        var archiveYear, 
-                            archiveMonths, 
-                            displayStyle;
-                            displayStyle = '';
-                            archiveYear = document.getElementById('arch_' + year);
-                        if (typeof (archiveYear) !== 'undefined') {
-                            if (archiveYear.style.display !== 'none') {
-                                
-                                // Hide years without months
+                // Archives
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, 
+                        archiveMonths, 
+                        displayStyle;
+                        displayStyle = '';
+                        archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            
+                            // Hide years without months
                                 archiveMonths = archiveYear.getElementsByTagName('li');
-                                if (!archiveMonths.length) {
-                                    archiveYear.parentNode.style.display = 'none';
-                                }
-                                // Onclick management
-                                displayStyle = 'none';
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
                             }
-                            archiveYear.style.display = displayStyle;
+                            // Onclick management
+                            displayStyle = 'none';
                         }
-                        return false;
+                        archiveYear.style.display = displayStyle;
                     }
-                    
-                    $(document).ready(function(){       
-                        $('.plustext').click(function() {
-                            return false; 
-                        });
+                    return false;
+                }
+                
+                $(document).ready(function(){       
+                    $('.plustext').click(function() {
+                        return false; 
                     });
+                });
         
                 {% list Blog.Archives %}
                     {% if Archive.Year != "now"|date("Y") %}
