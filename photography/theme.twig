@@ -984,7 +984,7 @@
                                             <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
                                                 {% list Archive.Months %}
                                                     {% if Month.PostCount > 0 %}
-                                                        <li><a href="{{ Month.Url }}">{{ Month.Name }}</a><span class="number">{{ Month.PostCount }}</span></li>
+                                                        <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a><span class="number">{{ Month.PostCount }}</span></li>
                                                     {% endif %}
                                                 {% endlist %}
                                             </ul>
@@ -1003,7 +1003,7 @@
             <div class="content list-content">
                 <div class="wrap">
                     {% if isSearch %}
-                        <p>{{ Lang.Get('Search for') }} “{{ Search.Keyword }}”</p>
+                        <p>{{ Lang.Get('Search for') }} ï¿½{{ Search.Keyword }}ï¿½</p>
                         {% if Posts is empty %}
                             <p>{{ Lang.Get('No posts found for this expression.') }}</p>
                         {% endif %}

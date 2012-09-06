@@ -1039,7 +1039,7 @@
                                                 <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
                                                     {% list Archive.Months %}
                                                         {% if Month.PostCount > 0 %}
-                                                            <li><a href="{{ Month.Url }}">{{ Month.Name }}</a><span class="number">{{ Month.PostCount }}</span></li>
+                                                            <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a><span class="number">{{ Month.PostCount }}</span></li>
                                                         {% endif %}
                                                     {% endlist %}
                                                 </ul>

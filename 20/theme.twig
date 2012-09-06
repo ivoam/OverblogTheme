@@ -1768,7 +1768,7 @@
                                     <ul id="arch_{{Archive.Year}}" class="arch_month">
                                     {% list Archive.Months %}
                                         {% if Month.PostCount > 0 %}
-                                            <li><a href="{{Month.Url}}">{{Month.Name}} ({{Month.PostCount}})</a></li>
+                                            <li><a href="{{Month.Url}}">{{Lang.Get(Month.Name)}} ({{Month.PostCount}})</a></li>
                                         {% endif %}
                                     {% endlist %}
                                     </ul>
