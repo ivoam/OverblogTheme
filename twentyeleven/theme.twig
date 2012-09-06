@@ -71,35 +71,32 @@
         {% endif %}
 
         <!-- shortcut:[Options] -->	
-        <meta name="constant:displayArticlesLimit" content="10" />
-        
-        <!-- shortcut:[Custom vars] -->
-        <meta name="list:display_mode:How many sections to display?" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-        <meta name="string:footer_content:Footer content" default="All rights reserved" />
+        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+        <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" default="9" group="Navigation" />
         
         <meta name="image:background:Define your background image" group="design" />
         <meta name="image:blog_cover: Define your blog cover" default="http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg" group="design" />
 		<meta name="image:post_cover: Define your default post cover" group="design" />
 		
-		<meta name="list:tag_number:Tags to be displayed" items="3,6,9" default="9" group="Navigation" />
-		
-		<meta name="boolean:display_widget_profile:Hide Widget &quot;About me&quot;" group="Widgets" />
-		<meta name="boolean:display_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
-		<meta name="boolean:display_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
+        <meta name="string:footer_content:label.footer" default="Theme: Twentyeleven &copy; 2012" group="footer" />
+
+		<meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
+		<meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
+		<meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
 		<meta name="boolean:display_widget_last:Hide Widget &quot;Last posts&quot;" group="Widgets" />
-		<meta name="boolean:display_widget_follow:Hide Widget &quot;Follow me&quot;" group="Widgets" />
+		<meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
 		
-		<meta name="string:facebook_username:Enter your Facebook Username" group="Social" />	    
-		<meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
-		<meta name="list:share_service:Choose your(s) share social service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+		<meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 		
-		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
-		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
-		
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+		<meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
+
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
         
         <!-- shortcut:[Includes] -->
         <!-- favicon -->       
@@ -121,13 +118,6 @@
 
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
-        {% if Blog.CssUrl is not empty %}
-        <link rel="stylesheet" href="{{ Blog.CssUrl }}" type="text/css" />
-        {% endif %}
-
-        {% if Blog.JsUrl is not empty %}
-            <script src="{{Blog.JsUrl}}" type="text/javascript"></script>
-        {% endif %}
         
         <!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -160,7 +150,7 @@
 					     -o-background-size: cover; 
 					        background-size: cover;
 			   {% else %}
-			   		background: #E2E2E2;
+			   		background: #E7E7E7;
 			   {% endif %} 
 			   color: #373737; 
 			   font-size: 14px; 
@@ -171,11 +161,11 @@
 			
 			#global {				
 				background-color: #fff;
-				-webkit-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.8);
-				   -moz-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.8);
-				    -ms-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.8);
-				     -o-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.8);
-				        box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.8);
+				-webkit-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
+				   -moz-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
+				    -ms-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
+				     -o-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
+				        box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
 				 margin: 20px auto; 
 				 width: 1000px; 
 		    }
@@ -275,10 +265,10 @@
 				
 				#menu {
 					background: #222; 
-					background: -moz-linear-gradient(#252525, #0A0A0A); 
 					background: -webkit-linear-gradient(#252525, #0A0A0A); 
-					background: -o-linear-gradient(#252525, #0A0A0A);  
-					background: linear-gradient(#252525, #0A0A0A); 
+					   background: -moz-linear-gradient(#252525, #0A0A0A); 
+						 background: -o-linear-gradient(#252525, #0A0A0A);  
+						    background: linear-gradient(#252525, #0A0A0A); 
 					-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
 					   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
 					    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
@@ -311,10 +301,10 @@
 							#menu a:hover {
 								color: #373737; 
 								background: #F9F9F9; 
-								background: -moz-linear-gradient(#F9F9F9, #E5E5E5); 
 								background: -webkit-linear-gradient(#F9F9F9, #E5E5E5); 
-								background: -o-linear-gradient(#F9F9F9, #E5E5E5);  
-								background: linear-gradient(#F9F9F9, #E5E5E5);
+								   background: -moz-linear-gradient(#F9F9F9, #E5E5E5); 
+									 background: -o-linear-gradient(#F9F9F9, #E5E5E5);  
+										background: linear-gradient(#F9F9F9, #E5E5E5);
 							}
 			
 			/*********
@@ -453,16 +443,7 @@
 					}
 
 			/* Sections */
-			.ob-section-text, 
-			.ob-section-images, 
-			.ob-section-video, 
-			.ob-section-audio, 
-			.ob-section-quote, 
-			.ob-row-1-col, 
-			.ob-row-2-col,
-			.ob-row-3-col 
-			.ob-section-map, 
-			.ob-section-file {
+			.ob-section {
 				width: 100%;
 			}
 			
@@ -506,10 +487,10 @@
 				overflow: auto;
 				padding: 10px; 
 				white-space: -webkit-pre-wrap; 
-				white-space: -moz-pre-wrap; 
-				white-space: -ms-pre-wrap; 
-				white-space: -o-pre-wrap;
-				white-space: pre-wrap;
+				   white-space: -moz-pre-wrap; 
+					white-space: -ms-pre-wrap; 
+					 white-space: -o-pre-wrap;
+						white-space: pre-wrap;
 				width: 578px;  
 				word-wrap: break-word;
 			}
@@ -698,8 +679,8 @@
 			.twitter-share {
 				float: left;
 			}
-			.share h4, 
-			.item-comments h4 {
+			.share h6, 
+			.item-comments h6 {
 				color: #666;
 				font-size: 18px; 
 				font-weight: 300;
@@ -827,11 +808,6 @@
 								float: left;
 								height: 40px;
 								margin: 10px 15px auto 0;
-								-webkit-transition: background-color 100ms;
-								   -moz-transition: background-color 100ms;
-								    -ms-transition: background-color 100ms;
-								     -o-transition: background-color 100ms;
-								     	transition: background-color 100ms;
 								width: 40px;					
 							}
 							.widget.follow ul li:hover {
@@ -967,6 +943,7 @@
 		</style>
 	</head>
 	<body>
+		<div id="fb-root"></div>
 		<div id="global">
 			<header id="blog-header" role="banner">
 				<div class="title">
@@ -1015,7 +992,7 @@
 					{% if isSearch or isTag %}
 						<h2 class="other-title">
 							{% if isSearch %}
-								{{ Lang.Get('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;
+								{{ Lang.Get('Search results for') }} &ldquo;{{ Search.Keyword }}&rdquo;
 							{% else %}
 								{{ Lang.Get('Posts with') }} <strong>#{{ Tag.Title }}</strong> tag
 							{% endif %}
@@ -1104,7 +1081,7 @@
 								{% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
 									<div class="share">
                                     	{% if isSingle and Custom('share_service') != 'None' %}
-                                    		<h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
+                                    		<h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                     	{% endif %}
                                     	{% if Custom('share_service') == 'Google +' %}
                                             <div class="google-share">
@@ -1139,11 +1116,11 @@
 					         	{% if isSingle and Navigation.PreviousPost is not empty or Navigation.NextPost is not empty and not isPage%}
 									<div id="navigation" class="single">
 										{% if Navigation.PreviousPost is not empty %}
-					                    	<a class="prev" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">? {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+					                    	<a class="prev" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">&laquo; {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
 					                    {% endif %}
 											
 										{% if Navigation.NextPost is not empty %}
-					                    	<a class="next" href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" >{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} ?</a>
+					                    	<a class="next" href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" >{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} &raquo;</a>
 					                    {% endif %}
 									</div>
 									<div class="cb"></div>
@@ -1151,9 +1128,8 @@
 					         	
 					         	{% if isSingle and isPage == false %}
 						         	<div class="item-comments" id="comments" >
-						         		<h4>{{ Lang.Get('Comment this post') }}</h4>
 									    {% if Custom("comment") == "Facebook" %}
-									    	<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="590"></div>
+									    	<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600"></div>
 									    {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 									        <div id="disqus_thread"></div>
 									        <script type="text/javascript">
@@ -1169,6 +1145,7 @@
 									        </script>
 									        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 									    {% else %}
+									    	<h6>{{ Lang.Get('Comment this post') }}</h6>
 									        {{ Post.Comments }}
 									    {% endif %}
 									</div>
@@ -1283,11 +1260,11 @@
 	           	{% if isPage == false %}
 					<div id="navigation">
 						{% if Navigation.PreviousPage is not empty %}
-							<a class="prev" href="{{ Navigation.PreviousPage }}" >? {{ Lang.Get('Previous page') }}</a>
+							<a class="prev" href="{{ Navigation.PreviousPage }}" >&laquo; {{ Lang.Get('Previous page') }}</a>
 						{% endif %}
 							
 						{% if Navigation.NextPage is not empty %}
-							<a class="next" href="{{ Navigation.NextPage }}">{{ Lang.Get('Next page') }} ?</a>
+							<a class="next" href="{{ Navigation.NextPage }}">{{ Lang.Get('Next page') }} &raquo;</a>
 						{% endif %}
 					</div>
 				{% endif %}
@@ -1295,49 +1272,49 @@
 			{% endif %}
 			
 			<footer id="blog-footer">
-				<p>{{ Lang.Get(Custom('footer_content')) }} - <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://over-blog.com" target="_blank">Overblog</a></p>
+				<p>{{ Lang.Get(Custom('footer_content'))|default('Theme: Twentyeleven &copy; 2012') }} - <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://over-blog.com" target="_blank">Overblog</a></p>
 			</footer>
 		</div>
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	 {% if Custom('display_widget_archives') != true %}
-		<script type="text/javascript">
-	        function switch_arch(year) {
-	            'use strict';
-	            var archiveYear, archiveMonths, displayStyle;
-	            displayStyle = '';
-	            archiveYear = document.getElementById('arch_' + year);
-	            if (typeof (archiveYear) !== 'undefined') {
-	                if (archiveYear.style.display !== 'none') {
-	                    // Hide years without months
-	                    archiveMonths = archiveYear.getElementsByTagName('li');
-	                    if (!archiveMonths.length) {
-	                        archiveYear.parentNode.style.display = 'none';
-	                    }
-	                    // Onclick management
-	                    displayStyle = 'none';
-	                }
-	                archiveYear.style.display = displayStyle;
-	            }
-	            return false;
-	        }
-	        
-	        $(document).ready(function(){		
-		    	$('.plustext').click(function() {
-		    		return false; 
-				});
-		    });
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
-	      	{% list Blog.Archives %}
-	      		{% if Archive.Year != "now"|date("Y") %}
-	        		switch_arch('{{ Archive.Year }}');
-	        	{% endif %}
-	    	{% endlist %}  
-	    </script>
-	{% endif %} 
-	    
-	    <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
+	
+		<script>
+			{% if Custom('display_widget_archives') != true %}
+		        function switch_arch(year) {
+		            'use strict';
+		            var archiveYear, archiveMonths, displayStyle;
+		            displayStyle = '';
+		            archiveYear = document.getElementById('arch_' + year);
+		            if (typeof (archiveYear) !== 'undefined') {
+		                if (archiveYear.style.display !== 'none') {
+		                    // Hide years without months
+		                    archiveMonths = archiveYear.getElementsByTagName('li');
+		                    if (!archiveMonths.length) {
+		                        archiveYear.parentNode.style.display = 'none';
+		                    }
+		                    // Onclick management
+		                    displayStyle = 'none';
+		                }
+		                archiveYear.style.display = displayStyle;
+		            }
+		            return false;
+		        }
+		        
+		        $(document).ready(function(){		
+			    	$('.plustext').click(function() {
+			    		return false; 
+					});
+			    });
+
+		      	{% list Blog.Archives %}
+		      		{% if Archive.Year != "now"|date("Y") %}
+		        		switch_arch('{{ Archive.Year }}');
+		        	{% endif %}
+		    	{% endlist %}  
+		    {% endif %}
+
+		    $(document).ready(function() {
 				$(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox");
 				$("a[rel=fancybox]").fancybox({
 					'overlayShow'	: true,
@@ -1345,86 +1322,8 @@
 					'transitionOut'	: 'fadin',
 					'type'			: 'image'
 				});
-			});		 			
-		</script>
-		
-     	<!-- Disqus comments count -->
-	{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-	    <script type="text/javascript">
-	        var disqus_shortname = "{{ Custom('comment_disqus') }}";
-	        (function () {
-	            var s = document.createElement('script'); 
-	            	s.async = true;
-	            	s.type = 'text/javascript';
-	            	s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-	            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-	        }());
-	    </script>
-	{% endif %}
-     
-		<!-- Facebook Script -->
-		<div id="fb-root"></div>
-		<script type="text/javascript">
-		    (function(d, s, id) {
-		        var js, fjs = d.getElementsByTagName(s)[0];
-		        if (d.getElementById(id)) return;
-			        js = d.createElement(s); 
-			        js.id = id;
-			        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-			        fjs.parentNode.insertBefore(js, fjs);
-			    }(document, 'script', 'facebook-jssdk'));
-		</script>
-		
-		<!-- Twitter Script -->
-        <script>
-        	!function(d,s,id){
-        		var js, fjs = d.getElementsByTagName(s)[0];
-        		if(!d.getElementById(id)){
-	        		js = d.createElement(s);
-	        		js.id = id;
-	        		js.src = "//platform.twitter.com/widgets.js";
-	        		fjs.parentNode.insertBefore(js,fjs); 
-	        	}
-	        }(document,"script","twitter-wjs");
-        </script>
-		
-		<!-- Google + button -->
-		<script type="text/javascript">
-		  window.___gcfg = {lang: '{{ Blog.Lang }}'};
-		
-		  (function() {
-		    var po = document.createElement('script'); 
-		    	po.type = 'text/javascript'; 
-		    	po.async = true;
-		    	po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; 
-		    	s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
-	
-	{% if Custom('google_analytics') is not empty %}
-		<!-- Google Analytics -->
-		 <script type="text/javascript">
-		    window.google_analytics_uacct = '{{Custom('google_analytics')}}';
-		    var _gaq = _gaq || [];
-			    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
-			    _gaq.push(['_trackPageview']);
-			    _gaq.push(['_trackPageLoadTime']);
-		
-		    (function() {
-		        var ga = document.createElement('script'); 
-			        ga.type = 'text/javascript'; 
-			        ga.async = true;
-			        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		        var s = document.getElementsByTagName('script')[0]; 
-		        	s.parentNode.insertBefore(ga, s);
-		    })();
-		</script>
-	{% endif %}
 
-        <script type="text/javascript">
-        	$(document).ready(function() {
-                (function() {
+				(function() {
                     // HTML5 placeholder fallback
                     function isPlaceholderSupported() {
                         'use strict';
@@ -1484,7 +1383,69 @@
                     }
                     obSearchForm();
                 })();
-            });
-    	</script>
+			});	
+
+			{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+				// Disqus comments
+		        var disqus_shortname = "{{ Custom('comment_disqus') }}";
+		        (function () {
+		            var s = document.createElement('script'); 
+		            	s.async = true;
+		            	s.type = 'text/javascript';
+		            	s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+		            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		        }());
+			{% endif %}	
+
+			// Facebook comments + share
+			(function(d, s, id) {
+		        var js, fjs = d.getElementsByTagName(s)[0];
+		        if (d.getElementById(id)) return;
+			        js = d.createElement(s); 
+			        js.id = id;
+			        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+			        fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+
+			// Twitter share + posts
+			!function(d,s,id){
+        		var js, fjs = d.getElementsByTagName(s)[0];
+        		if(!d.getElementById(id)){
+	        		js = d.createElement(s);
+	        		js.id = id;
+	        		js.src = "//platform.twitter.com/widgets.js";
+	        		fjs.parentNode.insertBefore(js,fjs); 
+	        	}
+	        }(document,"script","twitter-wjs");
+
+	        // Google + button
+        	window.___gcfg = {lang: '{{ Blog.Lang }}'};
+		  	(function() {
+			    var po = document.createElement('script'); 
+			    	po.type = 'text/javascript'; 
+			    	po.async = true;
+			    	po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; 
+			    	s.parentNode.insertBefore(po, s);
+		  	})();
+
+		  	{% if Custom('google_analytics') is not empty %}
+		  		// Google analytics
+				window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+				var _gaq = _gaq || [];
+				    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+				    _gaq.push(['_trackPageview']);
+				    _gaq.push(['_trackPageLoadTime']);
+				
+				(function() {
+				    var ga = document.createElement('script'); 
+				        ga.type = 'text/javascript'; 
+				        ga.async = true;
+				        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				    var s = document.getElementsByTagName('script')[0]; 
+				    	s.parentNode.insertBefore(ga, s);
+				})();
+			{% endif %}
+	    </script>	
 	</body>
 </html>
