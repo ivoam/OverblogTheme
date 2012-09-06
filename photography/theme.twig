@@ -83,6 +83,7 @@
         <meta name="boolean:custom_hide_widget_biography:Hide Widget &quot;Biography&quot;" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:Hide widget &quot;Search form&quot;" group="Widgets">
         <meta name="boolean:custom_hide_widget_follow:Hide widget &quot;Follow me&quot;" group="Widgets">
+        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="string:flickr_user_id:Enter your Flickr user id" group="Widgets">
 
         <meta name="string:facebook_username:Enter your FaceBook username" group="Social" />
@@ -973,7 +974,7 @@
                             </div>
                         {% endif %}
 
-                        {% if Custom('display_widget_archives') == false %}
+                        {% if Custom('custom_hide_widget_blog_archive') == false %}
                              <!-- Follow us -->
                             <div class="widget archives" >
                                 <h3>{{ Lang.Get(' Blog archives') }}</h3>
@@ -1181,7 +1182,7 @@
         {% endif %}
 
         {% if isSingle or isSpecial %}
-            {% if Custom('custom_hide_widget_blog_archives') == false %}
+            {% if Custom('custom_hide_widget_blog_archive') == false %}
                 <!-- Archives -->
                 <script type="text/javascript">
                     function switch_arch(year) {
