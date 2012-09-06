@@ -3,7 +3,7 @@
     <head>
         <!-- shortcut:[Meta] -->
         <!-- title, description, keyword, robots -->
-         {% if isSingle %}
+        {% if isSingle %}
             <title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
             <meta name="description" content="{% if isPage %}{% list Blog.ListPages %}{{ ListPage.Snippet }}{% endlist %}{% else %}{{ Post.Snippet }}{% endif %}" />
             <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
@@ -14,7 +14,7 @@
             <meta name="keywords" content="{{ Tag.Title|title }}" />
             <meta name="robots" content="index,follow" />
         {% elseif isSearch and Search is not empty %}
-            <title>{{ Search | title }} - {{ Blog.Title }}</title>
+            <title>{{ Search|title }} - {{ Blog.Title }}</title>
             <meta name="description" content="{{ Blog.Description }}" />
             <meta name="keywords" content="{{ Search|title }}" />
             <meta name="robots" content="noindex" />
@@ -70,34 +70,33 @@
             {% endif %}
         {% endif %}
 
-        <meta name="constant:displayArticlesLimit" content="10" />
-        <meta name="list:display_mode:How many sections to display ?" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+        <!-- shortcut:[Options] -->
+        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
 
         <meta name="list:theme_style:Chose the theme color scheme" items="Jungle, Bridge, Moon" default="Moon" group="design"/>
         <meta name="image:background:Define your background image" group="design" />
         <meta name="image:post_cover: Define your default post cover" group="design" />
         <meta name="list:font_title:Choose your blog title font." items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />  
         
-        <meta name="boolean:display_widget_profile:Hide Widget &quot;About me&quot;" group="Widgets" />
-        <meta name="boolean:display_widget_search:Hide Widget &quot;Search&quot;" group="Widgets" />
-        <meta name="boolean:display_widget_last_posts:Hide Widget &quot;Last Posts&quot;" group="Widgets" />
-        <meta name="boolean:display_widget_tags:Hide Widget &quot;Tags&quot;" group="Widgets" />
-        <meta name="list:display_tags:How many tags to display ?" items="2,4,6,8,10" default="6" group="Widgets"/>
-        <meta name="boolean:display_widget_social:Hide Widget &quot;Social&quot;" group="Widgets" />
-        <meta name="boolean:display_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_display_widget_last_posts:Hide Widget &quot;Last Posts&quot;" group="Widgets" />
+        <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="6" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_blog_archives:label.hideArchives" group="Widgets" />
         
-        <meta name="string:facebook_username:Enter your Facebook Username" group="Social" />        
-        <meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
-        <meta name="list:share_service:Choose your(s) Social sharing service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
         
-        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="dark" group="Comments" />
-        <meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comments" />
-        
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
+
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
         
         <!-- shortcut:[Includes] -->
         <!-- favicon -->       
@@ -165,18 +164,18 @@
 
             #global {margin:0px auto; width:950px;}
             .header {margin: 110px 0 20px; text-align:left;}
-            #top .title {font-family: {{ Custom('font_title') }}, cusrive; font-size: 60px; left: 0; letter-spacing: 2px; line-height: 60px; text-shadow: 0 5px 5px #333; text-transform: uppercase;}
-            #top .description {font-family: {{ Custom('font_title') }}, cusrive; font-size:60px; font-size: 20px; letter-spacing: 2px; text-shadow: 0 2px 1px #333;}
+            #top .title {font-family: {{ Custom('font_title')|default('Carter One') }}, cusrive; font-size: 60px; left: 0; letter-spacing: 2px; line-height: 60px; text-shadow: 0 5px 5px #333; text-transform: uppercase;}
+            #top .description {font-family: {{ Custom('font_title')|default('Carter One') }}, cusrive; font-size:60px; font-size: 20px; letter-spacing: 2px; text-shadow: 0 2px 1px #333;}
             article {margin-bottom: 35px;}
             
                 /** Article **/
                 .article, 
-                .page {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 10px;}
+                .page {background: #141414; background: rgba(20,20,20,0.9); border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 10px;}
                 
                 .beforeArticle {margin-bottom: 10px;}
                 .divTitreArticle .post-title, 
-                .divPageTitle .post-title {border-bottom: 1px solid; font-size:30px; letter-spacing:2px; margin-bottom: 10px; padding-bottom:5px;}
-                .titreArticle {}
+                .divPageTitle .post-title,
+                .special h3 {border-bottom: 1px solid; font-size: 30px; letter-spacing:2px; margin-bottom: 10px; padding-bottom:5px;}
                 .contenuArticle, .pageContent {padding-top:10px;}
                 .contenuArticle p, 
                 .pageContent p .contenuArticle ol,
@@ -218,21 +217,21 @@
                     .ob-map div {color: #282924;}
                     
                     /* Section file */
-                    .ob-section-file .ob-ctn {background: #333; border-color: #000;}
+                    .ob-section-file .ob-ctn {background: #222; border: none; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); display: block; max-width: 100%;}
                     .ob-section-file .ob-ctn a.ob-link,
-                    .ob-section-file .ob-c a.ob-link:visited {color: #FFF; text-decoration: underline; text-shadow: none;}
+                    .ob-section-file .ob-c a.ob-link:visited {color: #FFF; text-decoration: underline; max-width: 521px;}
                     .ob-section-file .ob-ctn a.ob-link:hover {color: #FFF; text-decoration: none;}
 
                     /* Section Quote */
-                    .ob-section-quote {background: #333; border-color: #000; margin-bottom: 20px; width: 100%;}
+                    .ob-section-quote {background: #222; border: none; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); margin-bottom: 20px; width: 100%;}
                     .ob-section-quote .ob-quote p {color: #FFF; min-height: 20px;}
                     .ob-section-quote .ob-quote p:before {color: #444; margin: 20px 0 0 -85px;}
                     .ob-section-quote .ob-quote p:after {color: #444; margin: 80px 0 0;}
                     .ob-section-quote p.ob-author,
-                    .ob-section-quote p.ob-source {background: #444; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 22px; max-width: 510px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
+                    .ob-section-quote p.ob-source {background: #444; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 22px; max-width: 517px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
                     
                     /* Section Link */ 
-                    .ob-section-link .ob-ctn {background: #333; border-color: #000;}
+                    .ob-section-link .ob-ctn {background: #222; border: none; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
                     .ob-section-link .ob-media-left {margin: 0;}
                     .ob-section-link p.ob-url {background: #444; margin: 0; max-height: 20px; max-width: 395px;}
                     .ob-section-link p.ob-title {color: #FFF; margin-bottom: 0; margin-left: 20px;} 
@@ -253,8 +252,9 @@
                     .ob-section .twt-border {max-width: 100% !important;}
                     
                     /* Share buttons */
-                    .share {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; margin: 10px 0; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 8px 13px; position: relative; width: 600px; z-index: 1;/* iframe Facebook */}
-                    .share h4 {margin-bottom: 10px; font-size: 16px; line-height: 16px;}
+                    .share {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; margin: 10px 0; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 9px 13px 8px; position: relative; width: 600px; z-index: 1;/* iframe Facebook */}
+                    .share h6,
+                    .item-comments h6 {margin-bottom: 10px; font-size: 16px; line-height: 16px;}
                     .google-share {float: left; margin: 4px 10px 0 0;}
                     .twitter-share {float: left; margin: 4px 10px 0 0;}
                     .facebook-share {float: left;}
@@ -279,7 +279,7 @@
                 /** Sidebar **/
                 .box {background: #141414; border: 2px solid #333; margin-bottom:10px; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding:10px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;}
                 .box{/* ie6 hack */_background:#000;}
-                .box-titre h3 {border-bottom: 1px solid; font-family: {{ Custom('font_title') }}; font-size: 20px; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 2px; text-shadow: 1px 1px 1px black; text-transform: uppercase;}
+                .box-titre h3 {border-bottom: 1px solid; font-family: {{ Custom('font_title')|default('Carter One') }}; font-size: 20px; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 2px; text-shadow: 1px 1px 1px black; text-transform: uppercase;}
                 .box-content {font-size: 14px; line-height:18px;}
                 .box-content strong {font-weight:normal;}
                 .box-footer {display:none;}
@@ -288,18 +288,19 @@
                     .profile .avatar {float: left; margin-right: 10px;}
                     .profile .avatar img {background: #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; -moz-opacity: 0.8; -webkit-opacity: 0.8; -o-opacity: 0.8; -ms-opacity: 0.8; opacity: 0.8; padding: 3px; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
                     .profile .avatar img:hover {-moz-opacity: 1; -webkit-opacity: 1; -o-opacity: 1; -ms-opacity: 1; opacity: 1;}
-                    .profile .blog-owner-nickname {font-style: italic;}
+                    .profile .blog-owner-nickname {font-style: italic; display: block; margin-top: 10px; text-align: right;}
                 
                     /* Sidebar > Search */
                     .search form {position:relative;}
                     .search form input {border: 2px solid #333; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; border-radius: 3px; color: #676767; padding: 5px 0; width: 70%;}
                     .search form button {border: 0; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; border-radius: 3px; cursor: pointer; font-weight: bold; padding: 5px 0; width: 13%;}
         
-                    /* Sidebar > Articles Récents */
+                    /* Sidebar > Last Posts */
                     .last li {float: left;}
-                    .last li a img {background: #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; -moz-opacity: 0.8; -webkit-opacity: 0.8; -o-opacity: 0.8; -ms-opacity: 0.8; opacity: 0.8; margin-bottom: 5px; padding: 3px; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
+                    .last ul:hover img {-moz-opacity: 0.7; -webkit-opacity: 0.7; -o-opacity: 0.7; -ms-opacity: 0.7; opacity: 0.7; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
+                    .last ul img {background: #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; margin-bottom: 5px; padding: 3px; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
                     .last li.left img {margin-right: 8px;}
-                    .last li a:hover img {-moz-opacity: 1; -webkit-opacity: 1; -o-opacity: 1; -ms-opacity: 1; opacity: 1;}
+                    .last ul img:hover {-moz-opacity: 1; -webkit-opacity: 1; -o-opacity: 1; -ms-opacity: 1; opacity: 1; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
                 
                     /* Sidebar > Tags */
                     .tags li {border-bottom: 1px solid #222; margin: 10px 0; padding: 10px 0;}
@@ -308,7 +309,7 @@
                     
                     /* Sidebar > Follow me */
                     .follow li {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; display: block; float: left; height: 83px; text-indent: -9999999%; width: 83px;}
-                    .follow li a {background: url("http://vivienkaufinger.com/ob/fullmoon/follow-me.png") no-repeat; display: block; height: 100%; width: 100%;}
+                    .follow li a {background: url("http://assets.over-blog-kiwi.com/themes/5/images/follow-me.png") no-repeat; display: block; height: 100%; width: 100%;}
                     .follow .facebook-follow {margin-right: 10px;}
                     .follow .facebook-follow:hover {background: #3b5999; border-color: #3b5999;}
                     .follow .facebook-follow a {background-position: center 18px;}
@@ -338,34 +339,32 @@
                 .pagination .next {float: right;}
                 
                 /** Credits **/
-                .credits {display: block; margin-top: 20px; text-align: center; text-shadow: 1px 1px 1px #000;}
+                .credits {display: block; margin: 20px 0; text-align: center; text-shadow: 1px 1px 1px #000;}
             
             
             /*** Themes ***/
                 
                 /** JUNGLE **/
-                {% if Custom('theme_style') == 'Jungle' %}
+                {% if Custom('theme_style') == 'Jungle'|default('Moon') %}
                     
                     /* BACKGROUND */
-                    {% if Custom('background') is not empty %}
-                        body {background: url('{{ Custom('background') }}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
-                    {% else %}
-                        body {background: #000 url("http://vivienkaufinger.com/ob/fullmoon/header-jungle.jpg") no-repeat center top fixed;}
-                    {% endif %}
+                    body {background-image: url({{ Custom('background')|default('http://assets.over-blog-kiwi.com/themes/5/images/jungle/header-jungle.jpg') }}); background-attachment: fixed; {% if Custom('background') is not empty %} background-position: center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{% else %}background-position: center top;{% endif %}background-repeat: no-repeat;}
                     
                     /* TOP */
                     #top .title a,
-                    #top .title a:visited {color: #fff;}
+                    #top .title a:visited {color: #6F8A10;}
                     #top .title a:hover,
-                    #top .description {color: #d6ea78;}
+                    #top .description {color: #fff;}
                     
                     /* POSTS */
                     .beforeArticle .tags a,
                     .beforeArticle .tags a:visited {color: #fff;}
                     .beforeArticle .tags a:hover {color: #d6ea78;}
-                    .post-title {border-bottom-color: #2d360b;}
+                    .post-title,
+                    .special h3, {border-bottom-color: #2d360b;}
                     .post-title a, 
                     .post-title a:visited,
+                    .special h3,
                     .ob-text h3,
                     .ob-text h4,
                     .ob-text h5 {color: #6F8A10;}
@@ -458,25 +457,23 @@
                 {% elseif Custom('theme_style') == 'Bridge' %}
                     
                     /* BACKGROUND */
-                    {% if Custom('background') is not empty %}
-                        body {background: url('{{ Custom('background') }}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
-                    {% else %}
-                        body{ background: #000 url("http://vivienkaufinger.com/ob/fullmoon/header-bridge.jpg") no-repeat center top fixed;}
-                    {% endif %}
+                    body {background-image: url("{{ Custom('background')|default('http://assets.over-blog-kiwi.com/themes/5/images/bridge/header-bridge.jpg') }}"); background-attachment: fixed; {% if Custom('background') is not empty %} background-position: center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{% else %}background-position: center top;{% endif %}background-repeat: no-repeat;}
                     
                     /* TOP */
                     #top .title a,
-                    #top .title a:visited {color: #fff;}
+                    #top .title a:visited {color: #ff8604;}
                     #top .title a:hover,
-                    #top .description {color: #ff8604;}
+                    #top .description {color: #FFF;}
                     
                     /* POSTS */
                     .beforeArticle .tags a,
                     .beforeArticle .tags a:visited {color: #ff8604;}
                     .beforeArticle .tags a:hover {color: #fff;}
-                    .post-title {border-bottom-color: #fff; color: #ff8604;}
+                    .post-title,
+                    .special h3, {border-bottom-color: #fff;}
                     .post-title a, 
                     .post-title a:visited,
+                    .special h3,
                     .ob-text h3,
                     .ob-text h4,
                     .ob-text h5 {color: #ff8604;}
@@ -561,15 +558,11 @@
                 .credits a:hover {color: #fff;}
 
                 /** MOON **/                   
-                {% elseif Custom('theme_style') == 'Moon' %}
+                {% else %}
                     
                     /* BACKGROUND */
-                    {% if Custom('background') is not empty %}
-                        body {background: url('{{ Custom('background') }}') no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;}
-                    {% else %}
-                        body {background: #000 url("http://vivienkaufinger.com/ob/fullmoon/header-moon.jpg") no-repeat center top fixed;}
-                    {% endif %}
-                    
+                    body {background-image: url("{{ Custom('background')|default('http://assets.over-blog-kiwi.com/themes/5/images/moon/header-moon.jpg') }}"); background-attachment: fixed; {% if Custom('background') is not empty %} background-position: center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{% else %}background-position: center top;{% endif %}background-repeat: no-repeat;}
+                                        
                     /* TOP */
                     #top .title a,
                     #top .title a:visited {color: #9bb1c5;}
@@ -580,9 +573,11 @@
                         .beforeArticle .tags a,
                         .beforeArticle .tags a:visited {color: #9bb1c5;}
                         .beforeArticle .tags a:hover {color: #fff;}
-                        .post-title {border-bottom-color:#1e3249;}
+                        .post-title,
+                        .special h3 {border-bottom-color: #1e3249;}
                         .post-title a, 
                         .post-title a:visited,
+                        .special h3,
                         .ob-text h3,
                         .ob-text h4,
                         .ob-text h5 {color: #9bb1c5;}
@@ -693,7 +688,7 @@
                                     {% if isTag %}
                                         {{ Lang.Get('Posts with') }} <strong>#{{ Tag.Title }}</strong> {{ Lang.Get('tag') }}
                                     {% else %}
-                                        {{ Lang.Get('Search for') }} &ldquo;<strong>{{ Search.Keyword }}</strong>&rdquo;
+                                        {{ Lang.Get('Search results for') }} &ldquo;<strong>{{ Search.Keyword }}</strong>&rdquo;
                                     {% endif %}
                                 </p>
                             {% endif %}
@@ -708,7 +703,7 @@
                                     </div>
                                 {% elseif isSpecial %}
                                     <div class="article">
-                                        <div class="contenuArticle">
+                                        <div class="contenuArticle special">
                                             {{ SpecialContent }}
                                         </div>
                                     </div>
@@ -727,7 +722,7 @@
                                                     <span class="publishedBy">
                                                         {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
                                                     </span>
-                                                    {{ Lang.Get('on') }} <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format')) | title }}</time>
+                                                    {{ Lang.Get('on') }} <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
                                                 </div>
                                                 <span class="tags">
                                                     {% list Post.Tags %}
@@ -744,7 +739,10 @@
                                                         {% if Post.Title is not empty %}
                                                             {{ Post.Title }}
                                                         {% else %}
-                                                            {{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}
+                                                            {{ Lang.Get('Published from') }} 
+                                                            {% list Post.Sources %}
+                                                                {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
+                                                            {% endlist %}
                                                         {% endif %}
                                                     </a>
                                                 </h2>
@@ -755,7 +753,12 @@
                                                 {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
                                                     {{ Post.Body(Custom('display_mode')) }}
                                                 {% else %}
-                                                    {{ Post.Snippet }}
+                                                    {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
+                                                        <a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+                                                            <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(600,350)|crop }}{% else %}{{ Custom('post_cover')|resize(600,350)|crop }}{% endif %}" alt="" title="" width="600" height="350" />
+                                                        </a>
+                                                    {% endif %}
+                                                    <p>{{ Post.Snippet }}</p>
                                                 {% endif %}
                                             </div>
                                             <div class="clear"></div>
@@ -764,9 +767,9 @@
             
                                         <!-- Share buttons + comments -->
                                         <div class="share">
-                                            {% if Custom('share_service') is not empty and Custom('share_service') != 'None' or isSingle %}
+                                            {% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
                                                 {% if isSingle and Custom('share_service') != 'None' %}
-                                                    <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
+                                                    <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'Google +' %}
                                                     <div class="google-share">
@@ -817,10 +820,10 @@
                                                 {% if isPage == false %}
                                                     <div class="pagination clearfix">
                                                         {% if Navigation.PreviousPost is not empty %}
-                                                            <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">← {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                                            <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">← {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title|truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
                                                         {% endif %}
                                                         {% if Navigation.NextPost is not empty %}
-                                                            <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} →</a>
+                                                            <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title|truncate(20) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} →</a>
                                                         {% endif %}
                                                     </div>
                                                 {% endif %}
@@ -828,8 +831,7 @@
                                             
                                             <!-- Comments -->
                                             {% if isSingle and isPage == false %}
-                                                <div class="item-comments">
-                                                    <h4 id="comments">{{ Lang.Get('Comments') }}</h4>
+                                                <div id="comments" class="item-comments">
                                                     {% if Custom("comment") == "Facebook" %}
                                                         <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
                                                     {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
@@ -846,6 +848,7 @@
                                                         </script>
                                                         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                                                     {% else %}
+                                                        <h6>{{ Lang.Get('Comments') }}</h6>
                                                         {{ Post.Comments }}
                                                     {% endif %}
                                                 </div>
@@ -876,7 +879,7 @@
                 <div id="cl_1_1" class="cl">
                     <div class="column_content">
                         <!-- Blog description -->
-                        {% if Custom('display_widget_profile') == false %}
+                        {% if Custom('custom_hide_widget_biography') == false %}
                             <div class="box profile" >
                                 <div class="box-titre">
                                     <h3>{{ Lang.Get('About me') }}</a></h3>
@@ -885,7 +888,7 @@
                                     {% if Blog.Avatar or Blog.Owner.Avatar is not empty %}
                                         <p class="avatar">
                                             <a href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-                                                <img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar | resize(100) }}{% else %}{{ Blog.Avatar | resize(100) }}{% endif %}" alt="{{ Blog.Title }}" width="100" />
+                                                <img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="{{ Blog.Title }}" width="100" />
                                             </a>
                                         </p>
                                     {% endif %}
@@ -900,7 +903,7 @@
                         {% endif %}
     
                         <!-- Search -->
-                        {% if Custom('display_widget_search') == false %}
+                        {% if Custom('custom_hide_widget_search_form') == false %}
                             <div class="box search" >
                                 <div class="box-titre">
                                     <h3>
@@ -943,7 +946,7 @@
                         </div>
                         
                         
-                        {% if Custom('display_widget_last_posts') == false %}
+                        {% if Custom('custom_display_widget_last_posts') == false %}
                             <!-- Last posts -->
                             <div class="box last" >
                                 <div class="box-titre">
@@ -958,7 +961,7 @@
                                                 <li {% if loop.first is not empty or loop.index == 3 or loop.index == 5 %}class="left"{% endif %}>
                                                     <h3> 
                                                         <a href="{{ Blog.Url}}{{ Post.Permalink }}" title="{{ Post.Permalink }}">
-                                                            <img src="{% if Post.Cover is not empty %}{{ Post.Cover | resize(126,90) | crop }}{% else %}{{ Custom('post_cover') | resize(126,90) | crop }}{% endif %}" alt="" width="126" height="90" />
+                                                            <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(126,90)|crop }}{% else %}{{ Custom('post_cover')|resize(126,90)|crop }}{% endif %}" alt="" width="126" height="90" />
                                                         </a>
                                                     </h3>
                                                 </li>
@@ -974,7 +977,7 @@
                         {% endif %}
     
                         
-                        {% if Custom('display_widget_tags') == false %}
+                        {% if Custom('tag_number') > 0 %}
                             <!-- Tags -->
                             <div class="box tags" >
                                 <div class="box-titre">
@@ -984,7 +987,7 @@
                                 </div>
                                 <div class="box-content">
                                     <ul>
-                                        {% list Blog.PostsTags(Custom('display_tags')) %}
+                                        {% list Blog.PostsTags(Custom('tag_number')) %}
                                             <li>
                                                 <a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">#{{ PostsTag.Title }}</a> <span class="number">{{ PostsTag.PostCount }}</span>
                                             </li>
@@ -995,7 +998,7 @@
                         {% endif %}
                             
                        
-                        {% if Custom('display_widget_social') == false %}
+                        {% if Custom('custom_hide_widget_follow_us') == false %}
                              <!-- Follow us -->
                             <div class="box follow" >
                                 <div class="box-titre">
@@ -1024,7 +1027,7 @@
                             </div>
                         {% endif %}
                         
-                        {% if Custom('display_widget_archives') == false %}
+                        {% if Custom('custom_hide_widget_blog_archives') == false %}
                             <div class="box archives" >
                                 <div class="box-titre">
                                     <h3>
@@ -1059,12 +1062,13 @@
                 <div class="clear"></div>
             </div>
         </div>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
         
-        <!-- Fancybox -->
-        <script type="text/javascript">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        
+        <script>
             $(document).ready(function() {
+                // Fancybox
                 $(".ob-section-images a, .avatar a, .ob-link-img").attr("rel", "fancybox");
                 $("a[rel=fancybox]").fancybox({
                     'overlayShow'   : true,
@@ -1072,107 +1076,9 @@
                     'transitionOut' : 'fadin',
                     'type'          : 'image'
                 });
-            });                 
-        </script>
-        
-        {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-            <!-- Disqus comments count -->
-            <script type="text/javascript">
-                var disqus_shortname = "{{ Custom('comment_disqus') }}";
-                (function () {
-                    var s = document.createElement('script'); s.async = true;
-                    s.type = 'text/javascript';
-                    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-                }());
-            </script>
-        {% endif %}
-     
-        <!-- Facebook Script -->
-        <div id="fb-root"></div>
-        <script type="text/javascript">
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>
-        
-        <!-- Twitter Script -->
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");</script>
-        
-        
-        <!-- Google + button -->
-        <script type="text/javascript">
-            window.___gcfg = {lang: '{{ Blog.Lang }}'};
-                (function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-            })();
-        </script>
 
-        {% if Custom('google_analytics') is not empty %}
-        <!-- Google Analytics -->
-         <script type="text/javascript">
-            window.google_analytics_uacct = '{{Custom('google_analytics')}}';
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
-            _gaq.push(['_trackPageview']);
-            _gaq.push(['_trackPageLoadTime']);
-        
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-        {% endif %}
-        
-        {% if Custom('custom_hide_widget_blog_archives') == false %}
-            <!-- Archives -->
-            <script type="text/javascript">
-                function switch_arch(year) {
-                    'use strict';
-                    var archiveYear, archiveMonths, displayStyle;
-                    displayStyle = '';
-                    archiveYear = document.getElementById('arch_' + year);
-                    if (typeof (archiveYear) !== 'undefined') {
-                        if (archiveYear.style.display !== 'none') {
-                            
-                            // Hide years without months
-                            archiveMonths = archiveYear.getElementsByTagName('li');
-                            if (!archiveMonths.length) {
-                                archiveYear.parentNode.style.display = 'none';
-                            }
-                            // Onclick management
-                            displayStyle = 'none';
-                        }
-                        archiveYear.style.display = displayStyle;
-                    }
-                    return false;
-                }
-                
-                $(document).ready(function(){       
-                    $('.plustext').click(function() {
-                        return false; 
-                    });
-                });
-    
-            {% list Blog.Archives %}
-                {% if Archive.Year != "now"|date("Y") %}
-                    switch_arch('{{ Archive.Year }}');
-                {% endif %}
-            {% endlist %}  
-            </script>
-        {% endif %}
-
-        {% if Custom('custom_hide_widget_search_form') == false %}
-            <!-- Placholder Script -->
-            <script type="text/javascript">
-                $(document).ready(function() {
+                {% if Custom('custom_hide_widget_search_form') == false %}
+                    // Placholder Script 
                     (function() {
                         // HTML5 placeholder fallback
                         function isPlaceholderSupported() {
@@ -1233,8 +1139,106 @@
                         }
                         obSearchForm();
                     })();
+                {% endif %}
+            });
+
+            {% if Custom('custom_hide_widget_blog_archives') == false %}
+                // Archives
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, 
+                        archiveMonths, 
+                        displayStyle;
+                        displayStyle = '';
+                        archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            
+                            // Hide years without months
+                            archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
+                        }
+                        archiveYear.style.display = displayStyle;
+                    }
+                    return false;
+                }
+                
+                $('.plustext').click(function() {
+                    return false; 
                 });
-            </script>
-        {% endif %}
+        
+                {% list Blog.Archives %}
+                    {% if Archive.Year != "now"|date("Y") %}
+                        switch_arch('{{ Archive.Year }}');
+                    {% endif %}
+                {% endlist %}  
+            {% endif %} 
+
+            {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                // Disqus comments count -->
+                var disqus_shortname = "{{ Custom('comment_disqus') }}";
+                (function () {
+                    var s = document.createElement('script'); 
+                        s.async = true;
+                        s.type = 'text/javascript';
+                        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            {% endif %}
+
+            // Facebook comments + share
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                    js = d.createElement(s); 
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                    fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));   
+
+            // Twitter share + tweets
+            !function(d,s,id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if(!d.getElementById(id)){
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js,fjs); 
+                }
+            }(document,"script","twitter-wjs");             
+        
+            // Google + button        
+            window.___gcfg = {lang: '{{ Blog.Lang }}'};
+                (function() {
+                var po = document.createElement('script'); 
+                    po.type = 'text/javascript'; 
+                    po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; 
+                    s.parentNode.insertBefore(po, s);
+            })();
+
+             {% if Custom('google_analytics') is not empty %}
+                // Google Analytics
+                window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+                var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+                    _gaq.push(['_trackPageview']);
+                    _gaq.push(['_trackPageLoadTime']);
+                
+                (function() {
+                    var ga = document.createElement('script'); 
+                        ga.type = 'text/javascript'; 
+                        ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; 
+                        s.parentNode.insertBefore(ga, s);
+                })();
+            {% endif %}
+        </script>
     </body>
 </html>
