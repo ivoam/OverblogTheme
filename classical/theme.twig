@@ -558,51 +558,25 @@
                                                     {% endif %}
                                                 </h2>
                                                 
+                                                <p class="meta">
+                                                    <span>{{ Post.Date|datel(Lang.Get("Default date format"))|title }}</span>
+                                                    {% if Post.Author is not empty %}, {{ Lang.Get('Written by') }} {{ Post.Author }}{% endif %}
+                                                    {% if Post.tags is not empty %}
+                                                        <span class="tags">
+                                                            {% list Post.Tags %}
+                                                                {% if loop.first is not empty %}
+                                                                    {{ Lang.Get('Tagged on') }} 
+                                                                {% endif %}
+                                                                <a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+                                                            {% endlist %}
+                                                        </span>
+                                                    {% endif %}
+                                                </p>
                                                 {% if isSingle or Custom('display_mode') == 'All' %}
-                                                    <p class="meta">
-                                                        <span>{{ Post.Date|datel(Lang.Get("Default date format"))|title }}</span>
-                                                        {% if Post.Author is not empty %}, {{ Lang.Get('Written by') }} {{ Post.Author }}{% endif %}
-                                                        {% if Post.tags is not empty %}
-                                                            <span class="tags">
-                                                                {% list Post.Tags %}
-                                                                    {% if loop.first is not empty %}
-                                                                        {{ Lang.Get('Tagged on') }} 
-                                                                    {% endif %}
-                                                                    <a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-                                                                {% endlist %}
-                                                            </span>
-                                                        {% endif %}
-                                                    </p>
                                                     <p>{{ Post.Body }}</p>
                                                 {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
-                                                    <p class="meta">
-                                                        <span>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</span>
-                                                        {% if Post.tags is not empty %}
-                                                            <span class="tags">
-                                                                {% list Post.Tags %}
-                                                                    {% if loop.first is not empty %}
-                                                                        {{ Lang.Get('Tagged on') }} 
-                                                                    {% endif %}
-                                                                    <a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-                                                                {% endlist %}
-                                                            </span>
-                                                        {% endif %}
-                                                    </p>
                                                     {{ Post.Body(Custom('display_mode')) }}
                                                 {% else %}
-                                                    <p class="meta">
-                                                        <span>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</span>
-                                                        {% if Post.tags is not empty %}
-                                                            <span class="tags">
-                                                                {% list Post.Tags %}
-                                                                    {% if loop.first is not empty %}
-                                                                        {{ Lang.Get('Tagged on') }} 
-                                                                    {% endif %}
-                                                                    <a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-                                                                {% endlist %}
-                                                            </span>
-                                                        {% endif %}
-                                                    </p>
                                                     {{ Post.Snippet }}
                                                 {% endif %}
                                             </div>
