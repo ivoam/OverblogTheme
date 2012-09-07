@@ -73,7 +73,7 @@
         <!-- shortcut:[Custom vars] -->
         <meta name="constant:displayArticlesLimit" content="6" />
         
-        <meta name="string:text_publishedby:“Published by”" default="Published by" group="Wordings" />
+        <meta name="string:text_publishedby:&quot;Published by&quot;" default="Published by" group="Wordings" />
     
         <meta name="list:snippet:On index, display post as" items="snippet, first section, full post" default="snippet" group="Posts" />
         <meta name="image:default_post_cover:Default post cover (Only with snippet display mode)" group="Posts" />
@@ -273,7 +273,7 @@
             .ob-text h5 {font-size: 14px; font-weight: bold;}
             .ob-text ol, .ob-text ul {margin-left: 15px;}
             .ob-text strong {font-weight: bold;}
-            .ob-text pre {width: 480px;  white-space: pre-wrap; /* CSS 3 */ white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ white-space: -pre-wrap; /* Opera 4 à 6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* IE 5.5+ */ overflow: auto;/* IE 6 */}
+            .ob-text pre {width: 480px;  white-space: pre-wrap; /* CSS 3 */ white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ white-space: -pre-wrap; /* Opera 4 - 6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* IE 5.5+ */ overflow: auto;/* IE 6 */}
             
             /* Section map */
             .ob-map div {color: #282924;}
@@ -366,7 +366,7 @@
                         <div>
                         {# List title #}
                             {% if isSearch %}
-                            <p class="list-title">{{ Lang.Get('Search for') }} “{{ Search }}”</p>
+                            <p class="list-title">{{ Lang.Get('Search for') }} &quot;{{ Search }}&quot;</p>
                             {% endif %}
                             
                             {% if isTag %}
@@ -377,7 +377,7 @@
                             {% if Posts is empty %}
                                 {% if isSearch %}
                                 <div class="contenuArticle">
-                                    <p>{{ Lang.Get('No result… Try again') }}  !</p>
+                                    <p>{{ Lang.Get('No result, try again') }}  !</p>
                                 </div>
                                 {% elseif isSpecial %}
                                 <div class="contenuArticle">
@@ -385,7 +385,7 @@
                                 </div>
                                 {% else %}
                                 <div class="contenuArticle">
-                                    <p>{{ Lang.Get('No post') }}…</p>
+                                    <p>{{ Lang.Get('No post') }}</p>
                                 </div>
                                 {% endif %}
                             {% else %}
@@ -397,7 +397,7 @@
                                             <div class="date">
                                                 <time datetime="{{ Post.Date }}">
                                                     <span class="day">{{ Post.Date | datel('dd') }}</span>
-                                                    <span class="month">{{ Post.Date | datel(Lang.Get('MMMM')) | title }}</span>
+                                                    <span class="month">{{ Post.Date | Lang.Get(datel('MMMM')) | title }}</span>
                                                     <span class="year">{{ Post.Date | date('Y') }}</span>
                                                 </time>
                                             </div>
@@ -552,7 +552,7 @@
                                 {% endif %}
                                 {% if Blog.Description is not empty %}
                                 <p>
-                                    “{{ Blog.Description }}”
+                                    &quot;{{ Blog.Description }}&quot;
                                 </p>
                                 {% endif %}
                                 {% if Blog.Owner.Nickname is not empty %}
