@@ -5,7 +5,7 @@
         <!-- title, description, keyword, robots -->
          {% if isSingle %}
             <title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
-            <meta name="description" content="{% if isPage %}{% list Blog.ListPages %}{{ ListPage.Snippet }}{% endlist %}{% else %}{{ Post.Snippet }}{% endif %}" />
+            <meta name="description" content="{{ Post.Snippet }}" />
             <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
             <meta name="robots" content="index,follow" />
         {% elseif isTag and Tag is not empty %}
@@ -19,7 +19,7 @@
             <meta name="keywords" content="{{ Search|title }}" />
             <meta name="robots" content="noindex" />
         {% else %}
-            <title>{{Blog.Title}}</title>
+            <title>{{ Blog.Title }}</title>
             <meta name="description" content="{{ Blog.Description }}" />
             <meta name="robots" content="index,follow" />
         {% endif %}
@@ -71,19 +71,18 @@
         <!-- options -->
         <meta name="constant:displayArticlesLimit" content="16" />
         
-        <meta name="list:display_tags:How many tags to display ?" items="3,6,9" default="9" />
+        <meta name="list:display_tags:How many tags to display ?" items="0,1,2,3,4,5,6,7,8,9,10" default="8" />
         
-        <meta name="image:post_cover:Default cover image" default="http://assets.over-blog-kiwi.com/themes/2/images/default-cover.jpg" group="Design" />
+        <meta name="image:post_cover:Default cover image" default="http://assets.over-blog-staging.com/themes/2/images/default-cover.jpg" group="Design" />
         <meta name="list:custom_titles_font:Titles font" items="Anton, Arvo, Bevan, Montserrat, Oswald, Lato, Squada One" default="Arvo" group="Design" />
         <meta name="list:custom_text_font:Text font" items="Actor, Arvo, Cabin Condensed, Lato, Telex" default="Actor" group="Design" />
-        <meta name="list:background_color:Theme color" items="Dark, Light" default="Dark" group="Design" />
+        <meta name="list:theme_color:Theme color" items="Dark, Light" default="Dark" group="Design" />
         <meta name="image:custom_background_image:Background image" group="Design" />
 
         <meta name="boolean:custom_hide_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
         <meta name="boolean:custom_hide_widget_biography:Hide Widget &quot;Biography&quot;" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:Hide widget &quot;Search form&quot;" group="Widgets">
         <meta name="boolean:custom_hide_widget_follow:Hide widget &quot;Follow me&quot;" group="Widgets">
-        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="string:flickr_user_id:Enter your Flickr user id" group="Widgets">
 
         <meta name="string:facebook_username:Enter your FaceBook username" group="Social" />
@@ -91,13 +90,13 @@
         <meta name="string:flickr_username:Enter your Flickr username" group="Social" />
         <meta name="list:share_service:Choose your(s) social sharing service(s)" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
         
-        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
-        <meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
-        
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
+
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
         
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
@@ -124,18 +123,17 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         
-        <!-- jQuery -->
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        
-        <!-- Fancybox -->
-        <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+        {% if not isIndex or not isSpecial %}
+            <!-- Fancybox -->
+            <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+        {% endif %}
         
         <!-- Template resources -->
         {% if Custom('custom_titles_font') is not empty and Custom('custom_titles_font') != "Arial" %}
-            <link href="http://fonts.googleapis.com/css?family={{ Custom('custom_titles_font') }}" rel="stylesheet" type="text/css" />
+            <link href="http://fonts.googleapis.com/css?family={{ Custom('custom_titles_font')|default('Arvo') }}" rel="stylesheet" type="text/css" />
         {% endif %}
         {% if Custom('custom_text_font') is not empty and Custom('custom_text_font') != "Arial" %}
-            <link href="http://fonts.googleapis.com/css?family={{ Custom('custom_text_font') }}" rel="stylesheet" type="text/css" />
+            <link href="http://fonts.googleapis.com/css?family={{ Custom('custom_text_font')|default('Actor') }}" rel="stylesheet" type="text/css" />
         {% endif %}
 
         <style type="text/css">
@@ -147,25 +145,20 @@
             address,caption,cite,code,dfn,var{ font-style:normal; font-weight:normal;}
             ol,ul{ list-style:none;}
             caption,th{ text-align:left;}
-            h1,h2,h3,h4,h5,h6{ font-size:100%; font-weight:normal;}
+            h1,h2,h3,h4,h5,h6 {font-weight:normal;}
             q:before,q:after{ content:'';}
             abbr,acronym{ border:0;}
             
             /*----- Intro -----*/
             body {
-                {% if Custom('custom_background_image')is not empty %}
-                    background: url('{{ Custom('custom_background_image') }}') no-repeat fixed center center;
-                    -webkit-background-size: cover; 
-                       -moz-background-size: cover; 
-                         -o-background-size: cover; 
-                            background-size: cover;
+                {% if Custom('custom_background_image')is not empty %}background: url('{{ Custom('custom_background_image') }}') no-repeat fixed center center; -webkit-background-size: cover;  -moz-background-size: cover;  -o-background-size: cover;  background-size: cover;
                 {% else %}
-                    {% if Custom('background_color') == 'Light' %}
+                    {% if Custom('theme_color') == 'Light'|default('Dark') %}
                         background-color: #EEE;
                     {% else %}
                         background-color: #212123;
                     {% endif %}
-                {% endif %} color: #777777; font-family: {{ Custom('custom_text_font') }}, Arial,Helvetica,sans-serif; font-size: 15px; line-height: 1.36em;}
+                {% endif %} color: #777777; font-family: "{{ Custom('custom_text_font')|default('Actor') }}", Arial,Helvetica,sans-serif; font-size: 15px; line-height: 1.36em;}
             textarea{ resize:none;}
             a:link, a:visited, a:hover, a:active { outline:none }
             a{color: #777777;cursor:pointer;outline:none;position:relative;text-decoration:none;}
@@ -173,22 +166,15 @@
             ::-moz-focus-inner{ border:0; }
             .wrap{ margin:0 auto; position:relative; width: 950px; }
             .cl,.cr,.cb{ display:block !important; float:none !important; height:0 !important; width:0 !important;}
-            .cl{ clear:left;}
-            .cr{ clear:right;}
-            .cb{ clear:both;}
+            .cl {clear:left;}
+            .cr {clear:right;}
+            .cb {clear:both;}
             .bold {font-weight:bold;}
             input[type="text"] {outline: none;}
             .logo a,
-            .logo a:visited {font-family: '{{ Custom("custom_titles_font") }}'; font-size: 36px; font-weight: normal; color: #FFF; line-height: 40px; {% if Custom('background_color') == 'Dark' %}text-shadow: 0px 2px 2px #000;{% endif %}}
-            .logo a:active {color: #000; {% if Custom('background_color') == 'Dark' %}text-shadow: 0px 1px 0px #333333;{% endif %}}
-            .logo p {
-                color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; 
-                font-size: 14px;
-                {% if Custom('background_color') == 'Dark' %}
-                    text-shadow: 0px 1px 0px #000;
-                {% endif %} 
-                padding-top: 8px;
-            }
+            .logo a:visited {font-family: '{{ Custom("custom_titles_font")|default('Arvo') }}'; font-size: 36px; font-weight: normal; color: #FFF; line-height: 40px; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 2px 2px #000;{% endif %}}
+            .logo a:active {color: #000; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #333333;{% endif %}}
+            .logo p {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %};  font-size: 14px; {% if Custom('theme_color') == 'Dark'|default('Dark') %} text-shadow: 0px 1px 0px #000; {% endif %}  padding-top: 8px; }
             ::selection {color: white;  background: #000;}
             ::-moz-selection {color: white; background: #000;}
             ::-webkit-selection {color: white; background: #000;}
@@ -197,9 +183,10 @@
             .header {min-height: 90px; padding-bottom: 20px; padding-top: 50px; border-top: 1px solid #000000; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-top.png") repeat-x;}
             .logo {float: left; max-width: 640px; word-wrap: break-word;}
             .nav {float: right; max-width: 400px;}
-            .nav li {cursor: pointer; float: left; margin-right: 30px; font-size: 16px; letter-spacing: -1px; {% if Custom('background_color') == 'Dark' %}text-shadow: 0px 1px 0px #000;{% endif %} line-height: 26px; position: relative;}
+            .nav li {cursor: pointer; float: left; margin-right: 30px; font-size: 16px; letter-spacing: -1px; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %} line-height: 26px; position: relative;}
+            .nav a {display: inline-block;}
             .nav a.active {
-                {% if Custom('background_color') == 'Dark' %}border-bottom: 1px solid #2D2D2D;{% endif %} 
+                {% if Custom('theme_color') == 'Dark'|default('Dark') %}border-bottom: 1px solid #2D2D2D;{% endif %} 
                 background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-nav.png") no-repeat; text-align: center; height: 27px; color: white; padding: 0 5px 0 20px; float: left;}
             .nav li.last {margin-right: 0;}
             .nav li.last a.active {margin-right: 0;}
@@ -211,13 +198,7 @@
             .sub-nav .search {float: right;}
             .sub-nav .search input[type="submit"] {display: none;}
             .sub-nav .search input[type="text"] {
-                {% if Custom('background_color') == 'Dark' %}
-                    background: url("http://assets.over-blog-kiwi.com/themes/2/images/search.png") no-repeat scroll 0 0 transparent;
-                    border: medium none;
-                    color: #EEE;
-                    padding-bottom: 5px;
-                    padding-left: 25px;
-                    padding-top: 5px; 
+                {% if Custom('theme_color') == 'Dark'|default('Dark') %} background: url("http://assets.over-blog-kiwi.com/themes/2/images/search.png") no-repeat scroll 0 0 transparent; border: medium none; color: #EEE; padding-bottom: 5px; padding-left: 25px; padding-top: 5px; 
                 {% else %}
                     background: #D5D5D5;
                     border: none;
@@ -233,58 +214,58 @@
                     width: 180px;
             }
             .sub-nav .search input[type="text"]:focus {
-                {% if Custom('background_color') == 'Dark' %}
+                {% if Custom('theme_color') == 'Dark'|default('Dark') %}
                     background: url("http://assets.over-blog-kiwi.com/themes/2/images/search.png") 0 -30px no-repeat; color: #FFF;
                 {% endif %}
             }
             .sub-nav .categories {float: left; padding-top: 6px;}
             .sub-nav .categories ul {float: left;}
-            .sub-nav .categories li {float: left; {% if Custom('background_color') == 'Dark' %}text-shadow: 0px 1px 0px #000;{% endif %}}
-            .sub-nav .categories li a { {% if Custom('custom_text_font') == 'Arvo' %}font-size: 13px;{% endif %} padding-left: 15px; padding-right: 15px;}
+            .sub-nav .categories li {float: left; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %}}
+            .sub-nav .categories li a { {% if Custom('custom_text_font') == 'Arvo'|default('Actor') %}font-size: 13px;{% endif %} padding-left: 15px; padding-right: 15px;}
             .sub-nav li.active a {color: #FFF; border-bottom: 1px solid #888889; padding-bottom: 16px;}
             .sub-nav li a:hover {color: #FFF; border-bottom: 1px solid #888889; padding-bottom: 16px;}
 
             /* Content */
             .content {clear: both; padding-bottom: 20px; }
-            .content .wrap ul {width: 960px;}
+            .content .wrap ul {width: 960px; {% if isSearch %}margin-top: 20px;{% endif %}}
             .content ul {float: left; margin-bottom: 40px;}
             
             /* THUMBS */
-            .list-content li {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %}; float: left; height: 163px; margin: 0 10px 19px 0; overflow: hidden; padding: 8px; text-align: center; width: 214px;}
+            .list-content li {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %};}
             .list-content li.last {margin-right: 0px;}
             .list-content li h3 {height: 100px; margin: 0;}
             
             .content.single .ob-section-text img,
             .content.single .ob-section-text .ob-img,
             .ob-section-images img {max-width: 600px;}
-            .ob-section-images .ob-slideshow {height: 438px !important;}
+            .ob-section-images .ob-slideshow {height: 438px !important; width: 100%;}
 
             /* Section file */
-            .ob-section-file .ob-ctn {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; 
+            .ob-section-file .ob-ctn {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; 
                 -webkit-border-radius: 0; 
                    -moz-border-radius: 0; 
                     -ms-border-radius: 0; 
                      -o-border-radius: 0; 
                         border-radius: 0;
-                border: none; border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %}; display: block; max-width: 100%;}
+                border: none; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %}; display: block; max-width: 100%;}
             .ob-section-file .ob-ctn a.ob-link,
-            .ob-section-file .ob-c a.ob-link:visited {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; max-width: 513px; text-decoration: underline;}
-            .ob-section-file .ob-ctn a.ob-link:hover {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; text-decoration: none;}
+            .ob-section-file .ob-c a.ob-link:visited {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; max-width: 513px; text-decoration: underline;}
+            .ob-section-file .ob-ctn a.ob-link:hover {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; text-decoration: none;}
 
             /* Section Quote */
-            .ob-section-quote {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; 
+            .ob-section-quote {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; 
                 -webkit-border-radius: 0; 
                    -moz-border-radius: 0; 
                     -ms-border-radius: 0; 
                      -o-border-radius: 0; 
                         border-radius: 0;
-                border: none; border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %};}
-            .ob-section-quote .ob-quote p {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; min-height: 20px;}
-            .ob-section-quote .ob-quote p:before {color: {% if Custom('background_color') == 'Dark' %}#222{% else %}#BBB{% endif %}; margin: 20px 0 0 -85px;}
-            .ob-section-quote .ob-quote p:after {color: {% if Custom('background_color') == 'Dark' %}#222{% else %}#BBB{% endif %}; margin: 71px 0 0;}
+                border: none; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %};}
+            .ob-section-quote .ob-quote p {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; min-height: 20px;}
+            .ob-section-quote .ob-quote p:before {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#222{% else %}#BBB{% endif %}; margin: 20px 0 0 -85px;}
+            .ob-section-quote .ob-quote p:after {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#222{% else %}#BBB{% endif %}; margin: 53px 0 0;}
             .ob-section-quote p.ob-author,
             .ob-section-quote p.ob-source {
-                background: {% if Custom('background_color') == 'Dark' %}#222{% else %}#DDD{% endif %}; 
+                background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#222{% else %}#DDD{% endif %}; 
                 -webkit-border-bottom-right-radius: 0; 
                    -moz-border-bottom-right-radius: 0; 
                     -ms-border-bottom-right-radius: 0; 
@@ -292,19 +273,19 @@
                         border-bottom-right-radius: 0; 
                         font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 23px; max-width: 510px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
             .ob-section-quote p.ob-author .ob-link,
-            .ob-section-quote p.ob-source .ob-link {color: {% if Custom('background_color') == 'Dark' %}#777{% else %}#333{% endif %};}
+            .ob-section-quote p.ob-source .ob-link {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#777{% else %}#333{% endif %};}
             .ob-section-quote p.ob-author .ob-link:hover,
-            .ob-section-quote p.ob-source .ob-link:hover {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#000{% endif %};}
+            .ob-section-quote p.ob-source .ob-link:hover {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#000{% endif %};}
 
             
             /* Section Link */ 
-            .ob-section-link .ob-ctn {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; 
+            .ob-section-link .ob-ctn {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; 
                 -webkit-border-radius: 0; 
                    -moz-border-radius: 0; 
                     -ms-border-radius: 0; 
                      -o-border-radius: 0; 
                         border-radius: 0;
-                border: none; border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %};}
+                border: none; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %};}
             .ob-section-link .ob-img {
                 -webkit-border-radius: 0; 
                    -moz-border-radius: 0; 
@@ -313,26 +294,26 @@
                         border-radius: 0;
                 float: left; width: 170px;}
             .ob-section-link .ob-media-left {margin: 0;}
-            .ob-section-link p.ob-title {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; margin-bottom: 10px; margin-left: 20px;}
-            .ob-section-link p.ob-title .ob-link {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; font-family: {{ Custom('custom_text_font') }}, Arial,Helvetica,sans-serif; max-height: 42px; overflow: hidden;} 
-            .ob-section-link p.ob-title .ob-link:hover {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %};} 
-            .ob-section-link p.ob-snippet {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %}; font-family: {{ Custom('custom_text_font') }}, Arial,Helvetica,sans-serif; margin-left: 20px; margin-top: 0; margin-bottom: 45px; max-height: 30px; overflow: hidden;}
+            .ob-section-link p.ob-title {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; margin-bottom: 10px; margin-left: 20px;}
+            .ob-section-link p.ob-title .ob-link {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; font-family: {{ Custom('custom_text_font')|default('Actor') }}, Arial,Helvetica,sans-serif; max-height: 42px; overflow: hidden;} 
+            .ob-section-link p.ob-title .ob-link:hover {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %};} 
+            .ob-section-link p.ob-snippet {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; font-family: {{ Custom('custom_text_font')|default('Actor') }}, Arial,Helvetica,sans-serif; margin-left: 20px; margin-top: 0; margin-bottom: 45px; max-height: 30px; overflow: hidden;}
             .ob-section-link p.ob-url {
-                background: {% if Custom('background_color') == 'Dark' %}#222{% else %}#DDD{% endif %}; 
+                background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#222{% else %}#DDD{% endif %}; 
                 -webkit-border-bottom-right-radius: 0; 
                    -moz-border-bottom-right-radius: 0; 
                     -ms-border-bottom-right-radius: 0; 
                      -o-border-bottom-right-radius: 0; 
                         border-bottom-right-radius: 0;
                 margin: 0; max-height: 23px; max-width: 395px; padding-bottom: 0\9;}
-            .ob-section-link p.ob-url .ob-link {color: {% if Custom('background_color') == 'Dark' %}#777{% else %}#333{% endif %}; font-family: {{ Custom('custom_text_font') }}, Arial,Helvetica,sans-serif;}
-            .ob-section-link p.ob-url .ob-link:hover {color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#000{% endif %};}
+            .ob-section-link p.ob-url .ob-link {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#777{% else %}#333{% endif %}; font-family: {{ Custom('custom_text_font')|default('Actor') }}, Arial,Helvetica,sans-serif;}
+            .ob-section-link p.ob-url .ob-link:hover {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#000{% endif %};}
             .ob-section-link .ob-desc {margin-top: 5px;}
             
             
             .ob-row-1-col,
             .ob-slideshow,
-            .ob-map {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid  {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %}; display: block; max-width: 584px !important; padding: 8px;}
+            .ob-map {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %}; display: block; max-width: 584px !important; padding: 8px;}
             .ob-section-images .ob-slideshow img,
             .ob-section-images .ob-row-1-col img {-moz-box-shadow: 0 1px 3px #000; -webkit-box-shadow: 0 1px 3px #000; -ms-box-shadow: 0 1px 3px #000; -o-box-shadow: 0 1px 3px #000; box-shadow: 0 1px 3px #000; display: block; max-width: 584px;}
             
@@ -349,19 +330,22 @@
             .content.single a:hover {color: #FFFFFF;}
             .content.single .ob-section {clear: both; margin-bottom: 30px !important;}
 
-            .wrap h1 {font-weight: bold; font-size: 25px; line-height: 28px; margin-bottom: 5px;}
-            .wrap .comments h3 {margin-bottom: 20px;}
+            .wrap h1,
+            .wrap .search-title {font-weight: bold; font-size: 25px; line-height: 28px; margin-bottom: 5px;}
+            .wrap .search-title {font-weight: normal;}
             
             .social {margin: 20px 0 40px; width: 100%;}
+            .social h6 {font-size: 15px;  margin-bottom: 5px;}
+            .social .fb-like {margin-right: 33px;}
             .social .fb-like iframe {margin: -4px 0 0 0;}
 
-            #fancybox-content {border-color: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#FFF{% endif %};}
+            #fancybox-content {border-color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#FFF{% endif %};}
 
             /* Navigation */
             .navigation {clear:both; margin: 0 0 50px 0;}
             .navigation .single-post {margin-bottom: 50px;}
             .navigation a,
-            .navigation a:visited {color: #FFF;}
+            .navigation a:visited {color: #FFF; display: inline-block;}
 
             .navigation .prev {float: left;}
             .navigation .next {float: right;}
@@ -385,19 +369,6 @@
                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#131313',GradientType=0 ); /* IE6-8 */
             }
 
-            .btn:hover,
-            .contact input[type="submit"]:hover {
-                background: #000000; /* Old browsers */
-                /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-                background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQlIiBzdG9wLWNvbG9yPSIjMWIxYjFiIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOCUiIHN0b3AtY29sb3I9IiMxMTExMTEiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1NCUiIHN0b3AtY29sb3I9IiMwNjA2MDYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI5NiUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMTMxMzEzIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-                background: -moz-linear-gradient(top,  #000000 0%, #1b1b1b 4%, #111111 8%, #060606 54%, #000000 96%, #131313 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(4%,#1b1b1b), color-stop(8%,#111111), color-stop(54%,#060606), color-stop(96%,#000000), color-stop(100%,#131313)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top,  #000000 0%,#1b1b1b 4%,#111111 8%,#060606 54%,#000000 96%,#131313 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top,  #000000 0%,#1b1b1b 4%,#111111 8%,#060606 54%,#000000 96%,#131313 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top,  #000000 0%,#1b1b1b 4%,#111111 8%,#060606 54%,#000000 96%,#131313 100%); /* IE10+ */
-                background: linear-gradient(top,  #000000 0%,#1b1b1b 4%,#111111 8%,#060606 54%,#000000 96%,#131313 100%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#131313',GradientType=0 ); /* IE6-8 */
-            }
             .btn:active,
             .contact input[type="submit"]:active {
                 background: #000000; /* Old browsers */
@@ -413,20 +384,21 @@
             }
 
             /* Effect Hover Picture */
-            .thumbs li a,
-            .thumbs li a img {-moz-box-shadow: 0 1px 3px #000; -webkit-box-shadow: 0 1px 3px #000; -ms-box-shadow: 0 1px 3px #000; -o-box-shadow: 0 1px 3px #000; box-shadow: 0 1px 3px #000; display: block; position: relative;}
-            .thumbs li a {overflow: hidden;}
-            .thumbs li a div {background: {% if Custom('background_color') == 'Dark' %}#222{% else %}#EEE{% endif %}; background: {% if Custom('background_color') == 'Dark' %}rgba(17, 17, 17, 0.6) {% else %}rgba(255,255,255,0.6){% endif %}; height: 100%; position: absolute; width: 100%;}
-            .thumbs li a div.da-animate {-webkit-transition: all 0.3s ease-in-out; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
-            .da-slideFromTop {left: 0px; top: -100%;}
-            .da-slideFromBottom {left: 0px; top: 100%;}
-            .da-slideFromLeft {top: 0px; left: -100%;}
-            .da-slideFromRight {top: 0px; left: 100%;}
-            .da-slideTop {top: 0px;}
-            .da-slideLeft {left: 0px;}
-            .thumbs li a div span {
-                border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}rgba(255,255,255,0.5){% else %}rgba(0,0,0,0.7){% endif %}; 
-                {% if Custom('background_color') == 'Dark' %}
+            #thumbs li {float: left; height: 163px; margin: 0 10px 10px 0; padding: 8px; position: relative; width: 214px;}
+            #thumbs li a,
+            #thumbs li a img {-moz-box-shadow: 0 1px 3px #000; -webkit-box-shadow: 0 1px 3px #000; -ms-box-shadow: 0 1px 3px #000; -o-box-shadow: 0 1px 3px #000; box-shadow: 0 1px 3px #000; display: block; position: relative;}
+            #thumbs li a {overflow: hidden;}
+            #thumbs li a div {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#222{% else %}#EEE{% endif %}; background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}rgba(17, 17, 17, 0.7) {% else %}rgba(255,255,255,0.6){% endif %}; height: 100%; position: absolute; width: 100%;}
+            #thumbs li a div.da-animate {-webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease-in-out; -o-transition: all 0.3s ease-in-out; -ms-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
+            #thumbs .da-slideFromTop {left: 0px; top: -100%;}
+            #thumbs .da-slideFromBottom {left: 0px; top: 100%;}
+            #thumbs .da-slideFromLeft {top: 0px; left: -100%;}
+            #thumbs .da-slideFromRight {top: 0px; left: 100%;}
+            #thumbs .da-slideTop {top: 0px;}
+            #thumbs .da-slideLeft {left: 0px;}
+            #thumbs li a div span {
+                border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}rgba(255,255,255,0.5){% else %}rgba(0,0,0,0.7){% endif %}; 
+                {% if Custom('theme_color') == 'Dark'|default('Dark') %}
                     -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.1), 0 -10px 0 rgba(255,255,255,0.3);
                        -moz-box-shadow: 0 1px 0 rgba(0,0,0,0.1), 0 -10px 0 rgba(255,255,255,0.3);  
                         -ms-box-shadow: 0 1px 0 rgba(0,0,0,0.1), 0 -10px 0 rgba(255,255,255,0.3); 
@@ -439,7 +411,7 @@
                          -o-box-shadow: 0 1px 0 rgba(0,0,0,0.1), 0 -10px 0 rgba(0,0,0,0.7); 
                             box-shadow: 0 1px 0 rgba(0,0,0,0.1), 0 -10px 0 rgba(0,0,0,0.7);
                 {% endif %}
-                color: {% if Custom('background_color') == 'Dark' %}rgba(255,255,255,0.9){% else %}rgba(0,0,0,0.7){% endif %}; 
+                color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}rgba(255,255,255,0.9){% else %}rgba(0,0,0,0.7){% endif %}; 
                 display: block; 
                 font-size: 22px;
                 font-weight: normal; 
@@ -448,7 +420,7 @@
                 max-height: 55px;
                 overflow: hidden;
                 padding: 10px 0; 
-                text-shadow: {% if Custom('background_color') == 'Dark' %}1px 1px 1px rgba(0,0,0,0.9){% else %}1px 1px 1px #CCC{% endif %}; 
+                text-shadow: {% if Custom('theme_color') == 'Dark'|default('Dark') %}1px 1px 1px rgba(0,0,0,0.9){% else %}1px 1px 1px #CCC{% endif %}; 
                 text-transform: uppercase;
             }
             <noscript>
@@ -461,23 +433,23 @@
             .top-footer {background: url("http://assets.over-blog-kiwi.com/themes/2/images/top-footer.png") repeat-x; clear: both; height: 8px;}
             .footer {background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-footer.jpg") repeat; clear: both; padding-top: 30px; padding-bottom: 50px;}
             .footer .about {width: 430px; float: left; color: #FFF; margin-top: 20px; border-top: 1px solid #353638; margin-right: 70px;background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture2.png") no-repeat scroll -45px -32px transparent;}
-            .footer .about h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; border-bottom: 1px solid #888889; float: left; padding-bottom: 4px;}
+            .footer .about h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
             .footer .about .avatar {background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-avatar.png") no-repeat; width: 69px; text-align: center; padding: 8px 10px 0 0; float: left;}
             .footer .about .avatar img {width: 50px; height: 50px; padding-bottom: 4px;}
             .footer .about p {}
 
             .footer .social {width: 190px; float: left; color: #FFF; margin-top: 20px; border-top: 1px solid #353638; margin-right: 70px; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture2.png") no-repeat scroll -65px -32px transparent;}
-            .footer .social h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; border-bottom: 1px solid #888889; float: left; padding-bottom: 4px;}
+            .footer .social h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
             .footer .social li {background: url("http://assets.over-blog-kiwi.com/themes/2/images/social-sep.png") 0 33px no-repeat; padding-bottom: 8px; padding-top: 7px;}
             .footer .social a.twitter {background: url("http://assets.over-blog-kiwi.com/themes/2/images/twitter.png") no-repeat left 1px; padding-left: 25px;}
             .footer .social a.twitter:hover {background: url("http://assets.over-blog-kiwi.com/themes/2/images/twitter.png") 0 -17px no-repeat; padding-left: 25px;}
             .footer .social a.facebook {background: url("http://assets.over-blog-kiwi.com/themes/2/images/facebook.png") no-repeat left 1px; padding-left: 25px;}
             .footer .social a.facebook:hover {background: url("http://assets.over-blog-kiwi.com/themes/2/images/facebook.png") 0 -16px no-repeat; padding-left: 25px;}
-            .footer .social a.flickr {background: url("http://assets.over-blog-kiwi.com/themes/2/images/flickr.png") left 3px no-repeat; padding-left: 25px;}
-            .footer .social a.flickr:hover {background: url("http://assets.over-blog-kiwi.com/themes/2/images/flickr.png") 0 -9px no-repeat; padding-left: 25px;}
+            .footer .social a.flickr {background: url("http://assets.over-blog-kiwi.com/themes/2/images/flickr.png") left 4px no-repeat; display: inline-block; padding-left: 25px;}
+            .footer .social a.flickr:hover {background: url("http://vivienkaufinger.com/ob/photography/flickr.png") 0 -8px no-repeat; padding-left: 25px;}
 
             .footer .myflickr {width: 190px; float: left; color: #FFF; margin-top: 20px; border-top: 1px solid #353638; margin-right: 0px; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture.png") no-repeat scroll 0 -32px transparent;}
-            .footer .myflickr h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; border-bottom: 1px solid #888889; float: left; padding-bottom: 4px;}
+            .footer .myflickr h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
             .footer .flickrBody li {background: #000; border-bottom: 1px solid #1B1B1B; float: left; margin-right: 10px; margin-bottom: 4px; opacity: 1.0; padding: 3px;}
             .footer .flickrBody img {-moz-box-shadow: 0 1px 3px #000; -webkit-box-shadow: 0 1px 3px #000; -ms-box-shadow: 0 1px 3px #000; -o-box-shadow: 0 1px 3px #000; box-shadow: 0 1px 3px #000; display: block; height: 50px; width: 50px;}
             .footer .myflickr #flickr {width: 200px;}
@@ -495,11 +467,11 @@
             .contact input[type="text"],
             .contact input[type="email"],  
             .contact textarea {
-                background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %};
+                background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %};
                 border: none;
-                border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2d2d2d{% else %}#FFF{% endif %};
+                border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2d2d2d{% else %}#FFF{% endif %};
                 border-radius: 15px;
-                color: {% if Custom('background_color') == 'Dark' %}#5E5E5E{% else %}#333{% endif %};
+                color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#5E5E5E{% else %}#333{% endif %};
                 font-size: 11px;
                 padding-bottom: 5px;
                 padding-left: 25px;
@@ -517,28 +489,25 @@
                 padding: 0;
                 width: 90px;
             }
-            .contact input[type="submit"]:hover {
-                color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#000{% endif %};
-            }
             .logo a,
             .logo a:visited,{
                 line-height: 1.1em;
             }
-            .meta .date,
-            .meta .post-tags{
-                margin-left: 12px;
+            .meta {
+                margin: 5px 0 20px;
             }
-            .meta{
-                padding: 10px 0;
+            .meta span {
+                display: inline-block;
             }
+
             .content .meta a{
                 color: #777;
                 text-decoration: none;
             }
             
             .nav .children{
-                background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %};
-                border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2d2d2d{% else %}#FFF{% endif %};
+                background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %};
+                border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2d2d2d{% else %}#FFF{% endif %};
                 -webkit-border-radius: 8px;
                    -moz-border-radius: 8px;  
                     -ms-border-radius: 8px; 
@@ -564,7 +533,7 @@
                 z-index: 1000;
             }
             .nav .children li{
-                border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#222{% else %}#BBB{% endif %};
+                border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#222{% else %}#BBB{% endif %};
                 display: block;
                 float: none;
                 margin: 2px 0;
@@ -574,7 +543,7 @@
                 border: none;
             }
             .nav .children li a {
-                color: {% if Custom('background_color') == 'Dark' %}#888{% else %}#555{% endif %};
+                color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#888{% else %}#555{% endif %};
                 display: block;
                 -webkit-transition: all 0.3s ease 0s;
                    -moz-transition: all 0.3s ease 0s;
@@ -583,7 +552,7 @@
                         transition: all 0.3s ease 0s;
             }
              .nav .children li a:hover{
-                color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#000{% endif %};
+                color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#000{% endif %};
             }
             .nav li:hover .children{
                 -webkit-opacity: 0;
@@ -608,7 +577,7 @@
             }
             .ob-text ol,
             .ob-text ul{
-                margin: 0 0 0 35px;
+                margin: 0 0 20px 35px;
             }
             .ob-text ol li,
             .ob-text ul li {
@@ -624,7 +593,7 @@
 
             .ob-video iframe {
                 max-height: 346px;
-                width: 100% !important;
+                width: 100%;
             }
             .obsoundplayer .obsoundplayername {
                 width: 140px !important;
@@ -635,69 +604,28 @@
                 word-wrap: break-word;
                 float: left;
             }
-            h1{
-                font-size: 2.308em;
-            }
-            h2,
-                font-size: 1.846em;
-            }
-            h3,
-                font-size: 1.424em;
-            }
-            h4,
-                font-size: 1.211em;
-            }
             
             .ob-text h3,
             .ob-text h4,
-            .ob-text h4 {
-                font-weight: normal;
-                line-height: 1.1em;
-                margin: 15px 0 5px;
-            }
-            .ob-text h3 {
-                font-size: 18px;
-            }
-            .ob-text h4 {
-                font-size: 16px;
-            }
-            .ob-text h5 {
-                font-size: 14px;
-                font-weight: bold;
-            }
-            {% if Custom('custom_titles_font') is not empty and Custom('custom_titles_font') != "Arial" %}
-                h1, h2, h3, h4, h5 {
-                    font-family: '{{ Custom("custom_titles_font") }}', Arial, Helvetica, sans-serif;
-                    line-height: 25px;
-                }
-            {%endif %}
-            .footer h3{
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            .ob-text pre{
-                border-left: dotted 1px #CCC;
-                margin: 15px 0;
-                padding: 7px 7px 7px 12px;
-                white-space: pre-wrap;
-            }
+            .ob-text h4 {font-weight: normal; line-height: 1.1em; margin: 15px 0 5px; }
+            .ob-text h3 {font-size: 18px;}
+            .ob-text h4 {font-size: 16px;}
+            .ob-text h5 {font-size: 14px; font-weight: bold; }
+
+
+            .footer h3 {font-family: Arial, Helvetica, sans-serif;}
+            .ob-text pre {border-left: dashed 1px {% if Custom('theme_color') == 'Dark'|default('Dark') %}#777{% else %}#333{% endif %};s; margin: 15px 0; padding: 7px 7px 7px 12px; white-space: pre-wrap;}
             .ob-desc {font-style: italic;}
             .ob-section-map .ob-map, 
             .ob-section-map .ob-desc,
-            .ob-section-map .ob-map .ob-section-map .ob-desc{
-                margin-left: 0;
-                margin-right: 0;
-            }
-            .ob-section-map .ob-map h3 {
-                color: #333;
-            }
+            .ob-section-map .ob-map .ob-section-map .ob-desc {margin-left: 0; margin-right: 0; }
+            .ob-section-map .ob-map h3 {color: #333;}
 
             /* twitter box */
             .ob-section .twitter-tweet-rendered,
             .ob-section .twt-border {max-width: 100% !important;}
-
             
             
-            .ob-text pre{border-left: dotted 1px {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %};}
             a, a:hover,
             .content.single a:hover,
             .sub-nav li.active a,
@@ -712,71 +640,41 @@
             .ob-text h4, 
             .ob-text h4 a,
             .ob-text h5, 
-            .ob-text h5 a{
-                color: {% if Custom('background_color') == 'Dark' %}#FFF{% else %}#333{% endif %};;
-            }
+            .ob-text h5 a,
+            .search-title,
+            .social h6 {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#333{% endif %}; font-family: "{{ Custom('custom_titles_font')|default('Arvo') }}", Arial, Helvetica, sans-serif;}
 
-            .sub-nav li.active a{border-bottom: solid 1px {% if Custom('background_color') == 'Dark' %}#777{% else %}#333{% endif %};}
+            .sub-nav li.active a {border-bottom: solid 1px {% if Custom('theme_color') == 'Dark'|default('Dark') %}#777{% else %}#333{% endif %};}
             .logo a,
             .logo a:visited,
             .ob-section-quote,
             .ob-section-link .ob-snippet,
             .content .meta a,
-            body {color: {% if Custom('background_color') == 'Dark' %}#777{% else %}#333{% endif %};}
+            body {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#777{% else %}#333{% endif %};}
             
             .sidebar {float: right; width: 290px;}
-            .sidebar .widget {width: 100%;}
+            .sidebar .widget {margin-bottom: 20px; width: 100%;}
             .sidebar .widget h3 {display: block; font-size: 1.1em; font-weight: 400; margin-bottom: 15px; text-transform: uppercase;}
             .sidebar ul {margin-bottom: 10px; width: 100% !important;}
-            .sidebar .widget.lasts li {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %}; float: left; margin: 0 5px 5px 0; padding: 5px;}
+            .sidebar .widget.lasts li {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %}; float: left; margin: 0 5px 5px 0; padding: 5px;}
             .sidebar .widget.lasts li h3 {margin: 0 !important;}
             .sidebar .widget.lasts li.left {margin-right: 10px;}
-            .sidebar .widget.lasts li img { 
-                -webkit-box-shadow: 0 1px 3px #000;
-                   -moz-box-shadow: 0 1px 3px #000; 
-                    -ms-box-shadow: 0 1px 3px #000; 
-                     -o-box-shadow: 0 1px 3px #000; 
-                        box-shadow: 0 1px 3px #000; 
-                        display: block;
-            }
-            .sidebar .widget.lasts:hover li img {
-                -webkit-opacity: 0.5;
-                   -moz-opacity: 0.5; 
-                    -ms-opacity: 0.5; 
-                     -o-opacity: 0.5; 
-                        opacity: 0.5;
-                -webkit-transition: opacity 0.4s;
-                   -moz-transition: opacity 0.4s;
-                    -ms-transition: opacity 0.4s;
-                     -o-transition: opacity 0.4s;
-                        transition: opacity 0.4s;
-            }
-            .sidebar .widget.lasts:hover li:hover img {
-                -webkit-opacity: 1;
-                   -moz-opacity: 1; 
-                    -ms-opacity: 1; 
-                     -o-opacity: 1; 
-                        opacity: 1;
-                -webkit-transition: opacity 0.4s;
-                   -moz-transition: opacity 0.4s;
-                    -ms-transition: opacity 0.4s;
-                     -o-transition: opacity 0.4s;
-                        transition: opacity 0.4s;
-            }
+            .sidebar .widget.lasts li img {-webkit-box-shadow: 0 1px 3px #000; -moz-box-shadow: 0 1px 3px #000;  -ms-box-shadow: 0 1px 3px #000;  -o-box-shadow: 0 1px 3px #000;  box-shadow: 0 1px 3px #000;  display: block; }
+            .sidebar .widget.lasts:hover li img {-webkit-opacity: 0.5; -moz-opacity: 0.5;  -ms-opacity: 0.5;  -o-opacity: 0.5;  opacity: 0.5; -webkit-transition: opacity 0.4s; -moz-transition: opacity 0.4s; -ms-transition: opacity 0.4s; -o-transition: opacity 0.4s; transition: opacity 0.4s; }
+            .sidebar .widget.lasts:hover li:hover img {-webkit-opacity: 1; -moz-opacity: 1;  -ms-opacity: 1;  -o-opacity: 1;  opacity: 1; -webkit-transition: opacity 0.4s; -moz-transition: opacity 0.4s; -ms-transition: opacity 0.4s; -o-transition: opacity 0.4s; transition: opacity 0.4s; }
 
             .sidebar .widget.archives .archivelist {margin-bottom: 30px;}
             .sidebar .widget.archives a:hover {color: #666;}
             .sidebar .widget.archives .plustext {font-size: 20px;}
             .sidebar .widget.archives .arch_month {margin: 10px 0 0 15px;}
             .sidebar .widget.archives .arch_month li {margin-bottom: 20px;}
-            .sidebar .widget.archives .arch_month .number {background: {% if Custom('background_color') == 'Dark' %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('background_color') == 'Dark' %}#2D2D2D{% else %}#FFF{% endif %}; color: #5E5E5E; float: right; line-height: 23px; margin-right: 25px; min-width: 20px; padding: 0 3px; text-align: center;}
+            .sidebar .widget.archives .arch_month .number {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %}; color: #5E5E5E; float: right; line-height: 23px; margin-right: 25px; min-width: 20px; padding: 0 3px; text-align: center;}
 
             .footer a {color: #FFF;}
-        </style>
-        
-        
+        </style>  
     </head>
     <body>
+        <div id="fb-root"></div>
         <div class="header">
             <div class="wrap">
                 <div class="logo">
@@ -793,7 +691,7 @@
                             </li>
                         <!-- Pages -->
                         {% if Custom('custom_hide_widget_pages') == false %}
-                            {% list Blog.ListPages(10) %}
+                            {% list Blog.ListPages %}
                                 {% if loop.first %}
                                     <li>
                                         <a href="#">{{ Lang.Get('Pages') }}</a>
@@ -854,18 +752,18 @@
                                         {% if Post.Title is not empty %}
                                             {{ Post.Title }}
                                         {% else %}
-                                            {{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }}{% endif %} {% endlist %}
+                                            {{ Lang.Get('A post from') }} {% list Post.Sources %}{{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }}{% endif %} {% endlist %}
                                         {% endif %}
                                     </a>
                                 </h2>
                                 <p class="meta">
                                     {% if Post.Author and Post.Author is not empty %}
-                                        <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>
+                                        <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>&nbsp;-&nbsp;
                                     {% endif %}
-                                    <span class="date">{{ Post.Date|datel(Lang.Get("Default date format")) | title }}, {{ Post.Date|date("H:i") }}</span>
+                                    <span class="date">{{ Post.Date|datel(Lang.Get("Default date format"))|title }}, {{ Post.Date|date("H:i") }}</span>
                                     {% list Post.Tags %}
                                         {% if loop.first %}
-                                            <span class="post-tags">{{ Lang.Get('Tags:') }}</span> 
+                                            &nbsp;-&nbsp;<span class="post-tags">{{ Lang.Get('Tags:') }}</span> 
                                         {% endif %}                                    
                                         <a href="{{Tag.Url}}" title="{{Tag.Title}}">#{{ Tag.Title }}</a>{% if not loop.last %}, {% endif %}   
                                     {% endlist %}
@@ -875,9 +773,9 @@
                                 </div>
                                 
                                 <div class="social">
-                                    {% if Custom('share_service') is not empty and Custom('share_service') != 'None' or isSingle %}
+                                    {% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
                                         {% if isSingle and Custom('share_service') != 'None' %}
-                                            <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
+                                            <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                         {% endif %}
                                         {% if Custom('share_service') == 'Google +' %}
                                             <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
@@ -923,14 +821,16 @@
                                         <!-- Comments -->
                                         <div class="item-comments">
                                             {% if Custom("comment") == "Facebook" %}
-                                                <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{% if Custom('backgroun_color') == 'Dark' %}dark{% else %}light{% endif %}"></div>
+                                                <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{% if Custom('backgroun_color') == 'Dark'|default('Dark') %}dark{% else %}light{% endif %}"></div>
                                             {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                 <div id="disqus_thread"></div>
                                                 <script type="text/javascript">
                                                     var disqus_shortname = '{{ Custom('comment_disqus') }}';
                                                     (function() {
-                                                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                                                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                        var dsq = document.createElement('script'); 
+                                                            dsq.type = 'text/javascript'; 
+                                                            dsq.async = true;
+                                                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
                                                         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                                                     })();
                                                 </script>
@@ -959,7 +859,7 @@
                                             <li>
                                                 <h3>
                                                     <a href="{{ Blog.Url}}{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-                                                        <img src="{% if Post.Cover is not empty %}{{ Post.Cover | resize(130,100) | crop }}{% else %}{{ Custom('post_cover') | resize(130,100) | crop }}{% endif %}" alt="" width="130" height="100" />
+                                                        <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(130,100)|crop }}{% else %}{{ Custom('post_cover')|resize(130,100)|crop }}{% endif %}" alt="" width="130" height="100" />
                                                     </a>
                                                 </h3>
                                             </li>
@@ -974,7 +874,7 @@
                             </div>
                         {% endif %}
 
-                        {% if Custom('custom_hide_widget_blog_archive') == false %}
+                        {% if Custom('display_widget_archives') == false %}
                              <!-- Follow us -->
                             <div class="widget archives" >
                                 <h3>{{ Lang.Get(' Blog archives') }}</h3>
@@ -1004,17 +904,17 @@
             <div class="content list-content">
                 <div class="wrap">
                     {% if isSearch %}
-                        <p>{{ Lang.Get('Search for') }} �{{ Search.Keyword }}�</p>
+                        <p class="search-title">{{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”</p>
                         {% if Posts is empty %}
-                            <p>{{ Lang.Get('No posts found for this expression.') }}</p>
+                            <p class="search-empty">{{ Lang.Get('No posts found for this expression.') }}</p>
                         {% endif %}
                     {% elseif isTag %}
                         {% if Posts is empty %}
-                            <p>{{ Lang.Get('No posts found for this tag.') }}</p>
+                            <p class="tag-empty">{{ Lang.Get('No posts found for this tag.') }}</p>
                         {% endif %}
                     {% else %}
                         {% if Posts is empty %}
-                            <p>{{ Lang.Get('Sorry we haven\'t found any post.') }}</p>
+                            <p >{{ Lang.Get('Sorry we haven\'t found any post.') }}</p>
                         {% endif %}
                     {% endif %}
 
@@ -1022,7 +922,7 @@
                         {% list Posts %}
                             <li>
                                 <h2>
-                                    <a href="{{ Post.PermaLink }}" title="{{ Post.Snippet }}">
+                                    <a href="{{ Post.PermaLink }}">
                                         {% if Post.Cover is not empty %}
                                             <img alt="{{ Post.Title }}" src="{{ Post.Cover|resize(214, 163)|crop }}" />
                                         {% elseif Custom('post_cover') is not empty %}
@@ -1043,8 +943,10 @@
                                     </a>
                                 </h2>
                             </li>
+                            {% if loop.index % 4 == 0 %}
+                                <div class="cb"></div>
+                            {% endif %}
                         {% endlist %}
-                        <div class="cb"></div>
                     </ul>
                     <div class="cb"></div>
                 </div>
@@ -1074,7 +976,7 @@
                 {% if Custom('custom_hide_widget_biography') == false %}
                     {% if Blog.Owner.Bio is not empty %}
                         <div class="about">
-                            <h3>{{ Lang.Get('More about me') }}</h3>
+                            <h3>{{ Lang.Get('About me') }}</h3>
                             <div class="cb"></div>
                              {% if Blog.Owner.Avatar is not empty %}
                                 <div class="avatar">
@@ -1121,35 +1023,26 @@
                                     });
                                 });
                             </script>
-
-
                         </div>
                     </div>
                 {% endif %}
                 <div class="cb"></div>
             </div>
         </div>
-
-        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         {% if not isSingle and not isSpecial %}
-            <script type="text/javascript" src="http://assets.over-blog-kiwi.com/themes/2/js/jquery.hoverdir.js"></script>
+            <script type="text/javascript" src="http://vivienkaufinger.com/ob/photography/jquery.hoverdir.js"></script>
         {% endif %}
         {% if Custom('flickr_username') is not empty %}
             <script src="http://assets.over-blog-kiwi.com/themes/2/js/flickr/jquery.zflickrfeed.js" type="text/javascript"></script>
         {% endif %}
-        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
-        
-        {% if isIndex %}
-            <script type="text/javascript">
-                $(function() {
-                    $('#thumbs > li').hoverdir();
-                });
-            </script>
+        {% if not isIndex %}
+            <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
         {% endif %}
+        
 
         {% if isSingle %}
             <!-- Social networks : Facebook -->
-            <div id="fb-root"></div>
             <script type="text/javascript">
                 (function(d, s, id) {
                     var js, fjs = d.getElementsByTagName(s)[0];
@@ -1182,7 +1075,7 @@
         {% endif %}
 
         {% if isSingle or isSpecial %}
-            {% if Custom('custom_hide_widget_blog_archive') == false %}
+            {% if Custom('custom_hide_widget_blog_archives') == false %}
                 <!-- Archives -->
                 <script type="text/javascript">
                     function switch_arch(year) {
@@ -1212,46 +1105,58 @@
                         });
                     });
         
-                {% list Blog.Archives %}
-                     {% if Archive.Year != "now"|date("Y") %}
-                        switch_arch('{{Archive.Year}}');
-                    {% endif %}
-                {% endlist %}  
+                    {% list Blog.Archives %}
+                         {% if Archive.Year != "now"|date("Y") %}
+                            switch_arch('{{Archive.Year}}');
+                        {% endif %}
+                    {% endlist %}  
                 </script>
             {% endif %}
         {% endif %}
         
         
-        <!-- Google Analytics -->
+        
         {% if Custom('google_analytics') is not empty %}
+        <!-- Google Analytics -->
             <script type="text/javascript">
                 window.google_analytics_uacct = '{{ Custom('google_analytics') }}';
                 var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', '{{ Custom('google_analytics') }}']);
-                _gaq.push(['_trackPageview']);
-                _gaq.push(['_trackPageLoadTime']);
+                    _gaq.push(['_setAccount', '{{ Custom('google_analytics') }}']);
+                    _gaq.push(['_trackPageview']);
+                    _gaq.push(['_trackPageLoadTime']);
 
                 (function() {
-                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    var ga = document.createElement('script'); 
+                        ga.type = 'text/javascript'; 
+                        ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; 
+                        s.parentNode.insertBefore(ga, s);
                 })();
             </script>
         {% endif %}
         
         <!-- Scripts -->
         <script type="text/javascript">
-            //<![CDATA[
             $(document).ready(function() {
-                // Fancybox
-                $(".ob-section-images a, .ob-link-img, .blog-avatar").attr("rel", "fancybox");
-                $("a[rel=fancybox]").fancybox({
-                    'overlayColor'  : '#333', 
-                    'overlayShow'   : true,
-                    'transitionIn'  : 'fadin',
-                    'transitionOut' : 'fadin',
-                    'type'          : 'image' 
-                });
+                {% if not isSingle %}
+                    // Thumbs hover
+                    $(function() {
+                        $('#thumbs > li').hoverdir();
+                    });
+                {% endif %}
+                {% if not isIndex %}
+                    // Fancybox
+                    $(".ob-section-images a, .ob-link-img, .blog-avatar").attr("rel", "fancybox");
+                    $("a[rel=fancybox]").fancybox({
+                        'overlayColor'  : '#333', 
+                        'overlayShow'   : true,
+                        
+                        'transitionIn'  : 'fadin',
+                        'transitionOut' : 'fadin',
+                        'type'          : 'image' 
+                    });
+                {% endif %}
                                 
                 // Template script onload
                 (function() {
@@ -1314,10 +1219,9 @@
                             }
                         }
                         obSearchForm();
-                    {% endif%}
+                    {% endif %}
                 })();
             });
-            //]]>
         </script>
     </body>
 </html>
