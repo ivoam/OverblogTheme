@@ -31,6 +31,9 @@
         <meta property="og:site_name" content="{{ Blog.Title }}" />
         <meta property="og:type" content="blog" />
         <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
+        {% if Custom('facebook_username') is not empty %}
+            <meta property="fb:admins" content="{{ Custom('facebook_username') }}"/>
+        {% endif %}
         <meta itemprop="name" content="{{ Blog.Title }}" />
         
         {% if isSingle %}
@@ -173,7 +176,7 @@
             .clear {clear: both;}
             
             /* Global properties */
-            body {background: {{ Custom("custom_page_background_color")|default('#1F1F1F') }}; border: 0; font: 14px Arial, Helvetica, sans-serif; color: {{ Custom("custom_page_font_color")|default('#0f0f0f') }}; line-height: 20px;}
+            body {background: {{ Custom("custom_page_background_color")|default('#1F1F1F') }}; border: 0; font: 14px "Arial", Helvetica, sans-serif; color: {{ Custom("custom_page_font_color")|default('#0f0f0f') }}; line-height: 20px;}
             a {color: #13c5ff; outline: none; text-decoration: none;}
 
 
@@ -234,17 +237,17 @@
                         .post .cover:hover img {-webkit-opacity: 0.5; -moz-opacity: 0.5; -ms-opacity: 0.5; -o-opacity: 0.5; opacity: 0.5;}
                         .post .snippet {margin-bottom: 20px; {% if not isSingle or not isSpecial %}max-height: 80px;{% endif %} overflow: hidden;}
                         .post .buttons {min-height: 0;}
-                        .comment-count {background-color: #13c5ff; background: rgba(34, 34, 34, 0.7) url(http://vivienkaufinger.com/ob/photofolio/bubble.png) no-repeat 40px 9px; bottom: -30%; display: block; height: 30%; position: absolute; -webkit-transition: bottom 200ms ease 0s; width: 100%;}
+                        .comment-count {background-color: #13c5ff; background: rgba(34, 34, 34, 0.7) url(http://vivienkaufinger.com/ob/photofolio/bubble.png) no-repeat 40px 9px; bottom: -30%; display: block; height: 30%; position: absolute; -webkit-transition: bottom 200ms ease 0s; -moz-transition: bottom 200ms ease 0s; -ms-transition: bottom 200ms ease 0s; -o-transition: bottom 200ms ease 0s; transition: bottom 200ms ease 0s; width: 100%;}
                             .comment-count a {color: #FFF; display: block; font-weight: bold; height: 100%; padding: 7px 0 0 12px; text-align: center; width: 100%;}
                         .post .cover:hover .comment-count {bottom: 0;}
                     .post .meta {font-size: 18px; margin-bottom: 15px;}
                     
             
                 /* single page */
-                .pageSingle .date {color: #13c5ff; font-size: 30px; line-height: 2em; margin: -4px 10px 0 -4px; text-align: center; width: 53px;}
+                .pageSingle .date {color: #13c5ff; font-size: 30px; line-height: 2em; margin: 0 10px 0 0; text-align: center; width: 53px;}
                 .pageSingle .date .day {display: block; font-size: 53px; letter-spacing: -2px; line-height: 1.2em; margin-top: -8px; margin-bottom: -22px;}
                 .pageSingle .date .month {line-height: 55px;}
-                .pageSingle h2 {font-size: 53px; line-height: 40px; margin: 0 0 5px;}
+                .pageSingle h2 {font-size: 53px; line-height: 53px; margin: 0 0 5px;}
                 .pageSingle .meta {font-size: 20px; margin: 10px 0 40px;}
                 .pageSingle .meta a:hover {text-decoration: underline;}
 
@@ -261,7 +264,7 @@
                     .ob-text h5 {margin: 15px 0 5px;}
                     .ob-text h3 {font-size: 18px;}
                     .ob-text h4 {font-size: 16px;}
-                    .ob-text h5 {font-size: 14px; font-weight: bold;}
+                    .ob-text h5 {font-size: 13px; font-weight: bold;}
                     .ob-text pre {background: #EEE; border: 1px dashed #AAA; margin: 15px 0; overflow: auto; padding: 7px; white-space: -webkit-pre-wrap; white-space: -moz-pre-wrap;  white-space: pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
                     .ob-text p {margin-bottom: 7px;}
                     .ob-text ol,
@@ -349,7 +352,7 @@
                         
             /* Special page */
             .special h3 {font-size: 2.143em;}
-            .ob-form-field {margin: 0;}
+            .ob-form-field {margin: 0 0 5px;}
             .ob-label {font-weight: bold; width: 20%;}
             .ob-form .ob-input-text,
             .ob-form .ob-input-email,
@@ -406,7 +409,7 @@
             .sidebar .follow li > a, 
             .tag-title, 
             .widget .last-post .title,
-            .widget .plustext {font-family: "{{ Custom('custom_titles_font')|default('Dosis') }}", Georgia, "Times New Roman", serif; font-weight: normal;}
+            .widget .plustext {font-family: "{{ Custom('custom_titles_font')|default('Dosis') }}", Georgia, Times New Roman, serif; font-weight: normal;}
             
 
             #content2 {color: {{ Custom('custom_footer_font_color')|default('#FFF') }};}
