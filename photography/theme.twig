@@ -203,7 +203,11 @@
                     background: #D5D5D5;
                     border: none;
                     border-bottom: 1px solid #FFF;
-                    border-radius: 15px;
+                    -webkit-border-radius: 15px;
+                       -moz-border-radius: 15px;
+                        -ms-border-radius: 15px;
+                         -o-border-radius: 15px;
+                            border-radius: 15px;
                     color: #333;
                     padding-bottom: 5px;
                     padding-left: 25px;
@@ -216,6 +220,8 @@
             .sub-nav .search input[type="text"]:focus {
                 {% if Custom('theme_color') == 'Dark'|default('Dark') %}
                     background: url("http://assets.over-blog-kiwi.com/themes/2/images/search.png") 0 -30px no-repeat; color: #FFF;
+                {% else %}
+                    background-color: #DDD;
                 {% endif %}
             }
             .sub-nav .categories {float: left; padding-top: 6px;}
