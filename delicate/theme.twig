@@ -450,7 +450,7 @@
                             {% list Blog.Posts(10) %}
                                 <article>
                                     <div class="tagline">
-                                        <a title="{{ Post.Snippet }}" href="{{ TaggedPost.PermaLink }}">
+                                        <a title="{{ Post.Snippet }}" href="{{ Post.PermaLink }}">
                                             {% if Post.Title is not empty %}
                                                 {{ Post.Title }}
                                             {% else %}
