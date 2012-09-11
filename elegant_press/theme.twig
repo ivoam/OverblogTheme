@@ -447,22 +447,6 @@
                 width: 270px;
                 margin-bottom:  20px
             }
-            /*.sidebar .holder h2.title {
-                display:block;
-                width:100%;
-                height:65px;
-                font-size:20px;
-                line-height:normal;
-                border-bottom:1px dotted #666;
-                margin:0;
-                padding:15px 0 0
-            }
-            .sidebar .holder h2.title img {
-                float: left;
-                border: 1px solid #666;
-                margin: -15px 8px 0 0;
-                padding: 5px; 
-            }*/
             .sidebar div.imgholder {
                 border: 1px solid #666;
                 display: block;
@@ -1735,10 +1719,10 @@
                                     <div class="entry">
                                         {{ Post.Body }}
                                         
-                                        {% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
+                                        {% if Custom('share_service') is not empty and Custom('share_service') != 'None' %}
                                             <div class="ob-section m-social-networks clear">
                                                 {% if isSingle and Custom('share_service') != 'None' %}
-                                                    <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
+                                                    <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'Google +' %}
                                                     <div class="google">
@@ -1812,6 +1796,7 @@
                                                     </script>
                                                     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                                                 {% else %}
+                                                    <h6>{{ Lang.Get('Comment this post') }}</h6>
                                                     {{ Post.Comments }}
                                                 {% endif %}
                                             </div>
