@@ -397,7 +397,7 @@
                                             <div class="date">
                                                 <time datetime="{{ Post.Date }}">
                                                     <span class="day">{{ Post.Date | datel('dd') }}</span>
-                                                    <span class="month">{{ Post.Date | Lang.Get(datel('MMMM')) | title }}</span>
+                                                    <span class="month">{{ Post.Date | datel('MMMM') | title }}</span>
                                                     <span class="year">{{ Post.Date | date('Y') }}</span>
                                                 </time>
                                             </div>
