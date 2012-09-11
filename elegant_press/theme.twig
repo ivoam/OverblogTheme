@@ -2109,7 +2109,7 @@
         </div>
         <footer>
             <div class="footer-text">
-                {% if Custom('custom_footer_left') %}
+                {% if Custom('custom_footer_left') is not empty %}
                     <p class="tagline_left">{{ Custom('custom_footer_left') }}</p>
                 {% endif %}
                 <p class="tagline_right">
