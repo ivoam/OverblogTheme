@@ -663,9 +663,9 @@
 						{% if not isPage %}
 		                    {% if Post.ShowComments is not empty or Custom("comment") is not empty %}
 								<div class="comments" id="comments">
-									<h6>{{ Lang.Get('Comment this post') }}</h6>
 									<div class="item-comments">
 										{% if Custom("comment") == "Facebook" %}
+											<h6>{{ Lang.Get('Comment this post') }}</h6>
 											<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="640"></div>
 										{% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 											<div id="disqus_thread"></div>
@@ -680,6 +680,7 @@
 											</script>
 											<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 										{% else %}
+											<h6>{{ Lang.Get('Comment this post') }}</h6>
 											{{ Post.Comments }}
 										{% endif %}
 									</div>
@@ -779,7 +780,7 @@
 									</div>
 
 									<div class="post">
-										<p>{% if Custom('nb_sections') != 'All' %}{{ Post.Body(Custom('nb_sections')|default(2)) }}{% else %}{{ Post.Body }}{% endif %}</p>
+										<p>{% if Custom('display_mode') != 'All' %}{{ Post.Body(Custom('display_mode')|default(2)) }}{% else %}{{ Post.Body }}{% endif %}</p>
 									</div>
 
 									<div class="footer">
@@ -814,7 +815,7 @@
 			                            </div>
 				                        {% endif %}
 
-										{% if Custom('nb_sections') != 'All' %}
+										{% if Custom('display_mode') != 'All' %}
 										<a class="original" href="{{ Post.PermaLink }}" title="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}">{{ Lang.Get('Read the post') }}</a>
 										{% else %}
 										<a class="original" href="{{ Post.PermaLink }}#comments">{{ Lang.Get('Comments') }}</a>
@@ -867,7 +868,7 @@
 									</div>
 
 									<div class="post">
-										{% if Custom('nb_sections') != 'All' %}{{ Post.Body(Custom('nb_sections')|default(2)) }}{% else %}{{ Post.Body }}{% endif %}
+										{% if Custom('display_mode') != 'All' %}{{ Post.Body(Custom('display_mode')|default(2)) }}{% else %}{{ Post.Body }}{% endif %}
 									</div>
 
 									<div class="footer">
@@ -902,7 +903,7 @@
 			                            </div>
 				                        {% endif %}
 
-										{% if Custom('nb_sections') != 'All' %}
+										{% if Custom('display_mode') != 'All' %}
 										<a class="original" href="{{ Post.PermaLink }}" title="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}">{{ Lang.Get('Read the post') }}</a>
 										{% else %}
 										<a class="original" href="{{ Post.PermaLink }}#comments">{{ Lang.Get('Comment') }}</a>
