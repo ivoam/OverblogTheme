@@ -73,7 +73,7 @@
 		<!-- shortcut:[Options] -->
 		<meta name="constant:displayArticlesLimit" content="10" />
 		<!-- options -->
-		<meta name="list:display_mode:How many sections to display?" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+		<meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
 		
 		<meta name="list:background:Choose the background image" items="Beach, Desert, Forest, Sky, Storm" default="Forest" group="Design" />
 		<meta name="image:background_custom:Define your background image" group="Design" />
@@ -82,23 +82,23 @@
 	    <meta name="color:font_color:Define the posts font color" default="#9C9A9A" group="Design" />
 	    <meta name="color:footer_color:Define the footer font color" default="#F5F5F5" group="Design" />
 	    
-		<meta name="boolean:custom_hide_widget_search_form:Hide Widget &quot;Search form&quot;" group="Widgets" />
-		<meta name="boolean:custom_hide_widget_follow:Hide Widget &quot;Follow me&quot;" group="Widgets" />
+		<meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+		<meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
 	
-		<meta name="string:wording_footer:Copyright" default="Theme : Simple Image &copy; 2012" group="Footer" />
+		<meta name="string:footer:label.footer" default="Theme : Simple Image &copy; 2012" group="Wording"  />
 	
-	    <meta name="string:facebook_username:Enter your Facebook Username" group="Social" />	    
-		<meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
-		<meta name="list:share_service:Choose your(s) share social service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-		
-		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
-		<meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
-		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comments" />
-	    
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+	    <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+	    <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
+
+	    <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+	    <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+	    <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+	    <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 	
 		<!-- favicon -->
 		{% if Blog.FaviconUrl is not empty %}
@@ -208,13 +208,15 @@
 			.header {
 				color: white;
 				font-family: 'Leckerli One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-				padding: 8px;
+				display: block;
+				margin: 15px 20px;
 			}
 			
-			.header .logo a{
-				font-size: 40px;
-				line-height: 48px;
+			.header .logo a {
+				display: block;
 				color: {{ Custom('title_color') }};
+				font-size: 40px;
+				line-height: 50px;
 				-webkit-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				   -moz-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 					 -o-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
@@ -222,9 +224,10 @@
 			}
 			
 			.header .description {
-				font-size: 22px;
-				margin-top: 0.8em;
 				color: rgba(255,255,255, 0.8);
+				font-size: 22px;
+				line-height: 28px;
+				margin-top: 5px;
 			}
 			
 			.main {
@@ -1119,11 +1122,11 @@
 	            </form>
 			{% endif %}
 			<p>
-	        	<a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a> -<span>{{ Custom('wording_footer') }}</span>- {{ Lang.Get('Hosted by') }} <a class="credits" href="http://overblog.com" target="_blank">Overblog</a>
+	        	<a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a> -<span>{{ Custom('footer') }}</span>- {{ Lang.Get('Hosted by') }} <a class="credits" href="http://overblog.com" target="_blank">Overblog</a>
 			</p>
 		</footer>
 		
-		{% if Custom('custom_hide_widget_follow') == false %}
+		{% if Custom('custom_hide_widget_follow_us') == false %}
 			<div class="follow">
 				{% if Custom('facebook_username') is not empty %}
 					<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank">{{ Lang.Get('Follow me on') }} Facebook</a>
@@ -1360,4 +1363,4 @@
 	    	</script>
 	    {% endif %}
 	</body>
-</html>
+</html>""
