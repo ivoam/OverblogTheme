@@ -1003,14 +1003,15 @@
 												{% if Custom('display_mode') != 'All' %}
 													<a href="{{ Post.Permalink}}" title="{{Post.Title}}">{{ Lang.Get('Read this post') }}</a>
 				                                    &nbsp;—&nbsp;
-				                                {% else %}
+				                                {% elseif Post.ShowComments %}
 				                                	<a href="{{ Post.Permalink}}" title="{{ Lang.Get('Comment this post') }}">{{ Lang.Get('Comment this post') }}</a>
 				                                    &nbsp;—&nbsp;
 				                                {% endif %}
+				                                {% if Post.ShowComments %}
 			                                    <!-- Comments count -->
-			                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+				                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 			                                        <a title="{{ Lang.Get('comments') }}" class="comments" href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread"></a>
-			                                    {% else %}
+				                                    {% else %}
 			                                        <a title="{{ Lang.Get('comments') }}" class="comments" href="{{ Post.PermaLink }}#comments">
 			                                            {% if Custom("comment") == "Facebook" %}
 			                                                <fb:comments-count href={{ Blog.Url }}{{ Post.Permalink }}></fb:comments-count> {{ Lang.Get('comment(s)') }}
@@ -1018,6 +1019,7 @@
 			                                                {{ Post.CommentCount(Lang.Get('comment'), Lang.Get('comments')) }}
 			                                            {% endif %}
 			                                        </a>
+				                                    {% endif %}
 			                                    {% endif %}
 											</div>
 										{% endif %}
@@ -1060,7 +1062,7 @@
 									{% endif %}
 									<!-- End Pagination -->
 		
-									{% if isSingle and not isPage %}
+									{% if isSingle and not isPage and Post.ShowComments %}
 										<div class="item-comments" id="comments">
 											{% if Custom("comment") == "Facebook" %}
 												<div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
