@@ -325,8 +325,8 @@
 				.wrapper-timeline .ob-section-images .ob-desc,
 				.wrapper-timeline .ob-section object {width: 408px;}
 				.wrapper-timeline .ob-section-video iframe {max-height: 235px;}
-				.wrapper-timeline .ob-section object  {width: 408px;height:306px;}
-				.wrapper-timeline .ob-section-map .ob-map{width: 408px;height: 200px;}
+				.wrapper-timeline .ob-section object  {width: 408px; height:306px;}
+				.wrapper-timeline .ob-section-map .ob-map{width: 408px; height: 408px;}
 				.wrapper-timeline .obsoundplayer .obsoundplayername {width: 45px;}
 				.wrapper-timeline {position: relative; padding-bottom: 50px;}
 
@@ -343,12 +343,12 @@
 
 				/* Nav */
 				.item .nav-post {width: 100%; margin: 20px 0;}
-				.item .nav-post .prev {float: left;}
-				.item .nav-post .prev span {float: left; display: block; width: 7px; height: 9px; margin: 3px 5px 0 0; background: url('http://assets.over-blog-kiwi.com/themes/13/images/timeline-prev-next.png') no-repeat top left;}
-				.item .nav-post .prev:hover span {background-position: bottom left;}
+				.item .nav-post a {display: block; max-width: 44%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+				.item .nav-post .prev {float: left;} 
+				.item .nav-post .prev:before {content: "‹"; font-weight: bold; margin-right: 5px;}
 				.item .nav-post .next {float: right;}
-				.item .nav-post .next span {float: right; display: block; width: 7px; height: 9px; margin: -13px 0 0 5px; background: url('http://assets.over-blog-kiwi.com/themes/13/images/timeline-prev-next.png') no-repeat top right;}
-				.item .nav-post .next:hover span {background-position: bottom right;}
+				.item .nav-post span {color: #4B9FD3; float: right; font-weight: bold; margin-left: 5px;}
+				.item .nav-post:hover span {color: #6594B5;}
 
 				/* Load more */
 				.items-wrapper .item {display:none;}
@@ -412,13 +412,13 @@
 				{% endif %}
 
 				{% if Custom('background_image') is not empty %}
-				#wrapper-container {background: url({{ Custom('background_image') }}) center top no-repeat;}
+					#wrapper-container {background: url({{ Custom('background_image') }}) center top no-repeat;}
 				{% else %}
-				#wrapper-container {background: url(http://assets.over-blog-kiwi.com/themes/13/images/bg-justice.png) center top no-repeat;}
+					#wrapper-container {background: url(http://assets.over-blog-kiwi.com/themes/13/images/bg-justice.png) center top no-repeat;}
 				{% endif %}
 
 				{% if Custom('header_spacing') is not empty %}
-				.informations {margin-bottom: {{Custom('header_spacing')}};}
+					.informations {margin-bottom: {{Custom('header_spacing')}};}
 				{% endif %}
 			</style>
 
@@ -637,54 +637,54 @@
 	                        </div>
 	                    {% endif %}
 	                    {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-						<div class="nav-post">
-							{% if Navigation.PreviousPost is not empty %}
-		                    	<a class="prev" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">
-		                    	<span></span>
-		                    	{% if Navigation.PreviousPost.Title is not empty %}
-		                    		{{ Navigation.PreviousPost.Title | truncate(20) }}
-		                    	{% else %}
-		                    		{{ Lang.Get('Previous post') }}
-		                    	{% endif %}</a>
-		                    {% endif %}
-							{% if Navigation.NextPost is not empty %}
-		                    	<a class="next" href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" >
-		                    	{% if Navigation.NextPost.Title is not empty %}
-		                    		{{ Navigation.NextPost.Title | truncate(20) }}
-		                    	{% else %}
-		                    		{{ Lang.Get('Next post') }}
-		                    	{% endif %}
-		                    	<span></span>
-		                    	</a>
-		                    {% endif %}
-							<div class="cb"></div>
-						</div>
+							<div class="nav-post">
+								{% if Navigation.PreviousPost is not empty %}
+			                    	<a class="prev" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">
+				                    	{% if Navigation.PreviousPost.Title is not empty %}
+				                    		{{ Navigation.PreviousPost.Title }}
+				                    	{% else %}
+				                    		{{ Lang.Get('Previous post') }}
+				                    	{% endif %}
+				                    </a>
+			                    {% endif %}
+								{% if Navigation.NextPost is not empty %}
+									<span>›</span>
+			                    	<a class="next" href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" >
+				                    	{% if Navigation.NextPost.Title is not empty %}
+				                    		{{ Navigation.NextPost.Title }}
+				                    	{% else %}
+				                    		{{ Lang.Get('Next post') }}
+				                    	{% endif %}
+			                    	</a>
+			                    {% endif %}
+								<div class="cb"></div>
+							</div>
 						{% endif %}
 						{% if not isPage %}
-	                    {% if Post.ShowComments or Custom("comment") is not empty %}
-						<div class="comments" id="comments">
-							<h6>{{ Lang.Get('Comment this post') }}</h6>
-							<div class="item-comments">
-								{% if Custom("comment") == "Facebook" %}
-									<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="640"></div>
-								{% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-									<div id="disqus_thread"></div>
-									<script type="text/javascript">
-										var disqus_shortname = '{{ Custom('comment_disqus') }}';
+		                    {% if Post.ShowComments or Custom("comment") is not empty %}
+								<div class="comments" id="comments">
+									<h6>{{ Lang.Get('Comment this post') }}</h6>
+									<div class="item-comments">
+										{% if Custom("comment") == "Facebook" %}
+											<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="640"></div>
+										{% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+											<div id="disqus_thread"></div>
+											<script type="text/javascript">
+												var disqus_shortname = '{{ Custom('comment_disqus') }}';
 
-										(function() {
-											var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-											dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-											(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-										})();
-									</script>
-									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-								{% else %}
-									{{ Post.Comments }}
-								{% endif %}
-							</div>
-						</div>
-						{% endif %}
+												(function() {
+													var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+													dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+													(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+												})();
+											</script>
+											<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+										{% else %}
+											{{ Post.Comments }}
+										{% endif %}
+									</div>
+								</div>
+							{% endif %}
 						{% endif %}
 						<div class="back">
 							<a href="{{ Blog.Url }}">{{ Lang.Get('Back to home') }}</a>
@@ -825,13 +825,17 @@
 							{% else %}
 								<div class="item">
 									<div class="title">
-										<img alt="Post type Text" src="http://assets.over-blog-kiwi.com/themes/13/images/social-overblog.png" />
-										<h3><a href="{{ Post.PermaLink }}">{{ Lang.Get('No post found') }}</a></h3>
+										<h3>
+											<a href="{{ Post.PermaLink }}">{{ Lang.Get('No post found') }}</a>
+										</h3>
 									</div>
-									<div class="post">
-										<p>{{ Lang.Get("Sorry, we haven't post for this request") }}</p>
-										<p><a href="/">{{ Lang.Get('Back to home') }}</a></p>
-									</div>
+									{% if not isIndex %}
+										<div class="post">
+											<p style="text-align: center">
+												<a href="/">{{ Lang.Get('Back to home') }}</a>
+											</p>
+										</div>
+									{% endif %}
 								</div>
 							{% endlist %}
 							</div>
@@ -926,23 +930,22 @@
 		{% endif %}
 
 		{% if Custom('share_service') != 'none' and Custom('share_service') == 'Google +' or Custom('share_service') != 'none' and Custom('share_service') == 'All' or Custom('share_service') is empty %}
-        <!-- Social networks : Google + -->
-		<script type="text/javascript">
-			window.___gcfg = {lang: '{{ Blog.Lang }}'};
+	        <!-- Social networks : Google + -->
+			<script type="text/javascript">
+				window.___gcfg = {lang: '{{ Blog.Lang }}'};
 
-			(function() {
-		    	var po = document.createElement('script');
-		    	po.type = 'text/javascript';
-		    	po.async = true;
-		    	po.src = 'https://apis.google.com/js/plusone.js';
-		    	var s = document.getElementsByTagName('script')[0];
-		    	s.parentNode.insertBefore(po, s);
-		    })();
-		</script>
+				(function() {
+			    	var po = document.createElement('script');
+				    	po.type = 'text/javascript';
+				    	po.async = true;
+				    	po.src = 'https://apis.google.com/js/plusone.js';
+			    	var s = document.getElementsByTagName('script')[0];
+			    		s.parentNode.insertBefore(po, s);
+			    })();
+			</script>
 		{% endif %}
 
         <!-- Social networks : Facebook -->
-        <div id="fb-root"></div>
         <script type="text/javascript">
         	(function(d, s, id) {
 				var js, fjs = d.getElementsByTagName(s)[0];
@@ -969,21 +972,23 @@
 
 
 		{% if Custom('google_analytics') is not empty %}
-		<!-- Google Analytics -->
-		 <script type="text/javascript">
-			window.google_analytics_uacct = '{{Custom('google_analytics')}}';
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
-			_gaq.push(['_trackPageview']);
-			_gaq.push(['_trackPageLoadTime']);
+			<!-- Google Analytics -->
+			 <script type="text/javascript">
+				window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+				var _gaq = _gaq || [];
+					_gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+					_gaq.push(['_trackPageview']);
+					_gaq.push(['_trackPageLoadTime']);
 
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
-		<!-- End Google Analytics -->
+				(function() {
+					var ga = document.createElement('script'); 
+						ga.type = 'text/javascript'; 
+						ga.async = true;
+						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+			</script>
+			<!-- End Google Analytics -->
 		{% endif %}
 
 		<script type="text/javascript">
@@ -1054,7 +1059,7 @@
 				Timeline.UpdateLoadMore();
 			},
 			Timeline.EnhancePictures = function (elements) {
-				elements.find('.ob-section-text img, .ob-section-images img').each(function(){
+				elements.find('.ob-section-text img, .ob-section-images img, .ob-section-map .ob-map').each(function(){
 
 					if(!$(this).parent('.ob-section-images').hasClass('.ob-layout900'))
 					{
