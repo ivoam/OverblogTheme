@@ -602,7 +602,7 @@
 						<ul>
                             {% list Blog.ListPages %}
                             <li>
-                                <a  href="{{ Blog.Url}}/{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
                             </li>
                             {% endlist %}
                         </ul>

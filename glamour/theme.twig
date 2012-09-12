@@ -74,7 +74,7 @@
         <meta name="list:theme_style:Theme color scheme" items="teens, simple, glamour" default="glamour">
         <meta name="list:fonts:Fonts" items="Antic Slab, Port Lligat Sans, Oxygen, Marmelad" default="Marmelad">
     
-        <meta name="string:text_publishedby:“Published by”" default="Published by" group="Wordings">
+        <meta name="string:text_publishedby:ï¿½Published byï¿½" default="Published by" group="Wordings">
     
         <meta name="list:snippet:On index, display post as" items="snippet, first section, full post" default="snippet" group="Posts">
         <meta name="image:default_post_cover:Default post cover (Only with snippet display mode)" group="Posts" />
@@ -280,7 +280,7 @@
             .newsletter li {}
     
     
-            /* Sidebar > Articles Récents */
+            /* Sidebar > Articles Rï¿½cents */
             .articlerecent .box-content ul{ margin-bottom:10px;}
             .articlerecent .box-content li{ background:url(http://assets.over-blog-kiwi.com/themes/7/images/bullet.png) 0px 7px no-repeat; color:#000; font-size:14px; line-height:20px; padding-left:25px;}
             .articlerecent .box-content li a{ color:#000;}
@@ -370,11 +370,11 @@
                                 <div class="article">
                                     <div class="divTitreArticle">
                                         <h2 class="post-title">
-                                            <span class="titreOther">{{ Lang.Get('Search for') }} “{{ Search.Keyword }}”</span>
+                                            <span class="titreOther">{{ Lang.Get('Search for') }} ï¿½{{ Search.Keyword }}ï¿½</span>
                                         </h2>
                                     </div>
                                     <div class="contenuArticle">
-                                        <p>{{ Lang.Get('No result… Try again') }} !</p>
+                                        <p>{{ Lang.Get('No resultï¿½ Try again') }} !</p>
                                     </div>
                                 </div>
                                 {% elseif isSpecial %}
@@ -385,7 +385,7 @@
                                     </div>
                                 {% else %}
                                 <div class="contenuArticle">
-                                    <p>{{ Lang.Get('No post') }}…</p>
+                                    <p>{{ Lang.Get('No post') }}ï¿½</p>
                                 </div>
                                 {% endif %}
                             {% else %}
@@ -556,7 +556,7 @@
                                     {% endif %}
                                     {% if Blog.Description is not empty %}
                                     <p>
-                                        “{{ Blog.Description }}” {% if Blog.Owner.Nickname is not empty %} -<span>{{ Blog.Owner.Nickname }}.</span> {% endif %}
+                                        ï¿½{{ Blog.Description }}ï¿½ {% if Blog.Owner.Nickname is not empty %} -<span>{{ Blog.Owner.Nickname }}.</span> {% endif %}
                                     </p>
                                     <p class="author-bio">
                                         <span>{{ Lang.Get('Bio') }}</span> 
@@ -609,7 +609,7 @@
                                     <ul>
                                         {% list Blog.ListPages %}
                                         <li>
-                                            <a  href="{{ Blog.Url}}/{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                            <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
                                         </li>
                                         {% endlist %}
                                     </ul>
