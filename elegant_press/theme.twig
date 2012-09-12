@@ -1778,7 +1778,7 @@
                                             <div class="clear"></div>
                                         </div>
                                     {% endif %}
-                                    {% if not isPage %}
+                                    {% if not isPage and Post.ShowComments is not empty %}
                                         <div class="bloc-comment" id="comments">
                                             <!-- Comments -->
                                             <div class="item-comments">

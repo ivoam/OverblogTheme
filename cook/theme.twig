@@ -443,7 +443,7 @@
                                         {% if Post.Author is not empty %}
                                             <span class="publishedBy">{{ Custom('text_publishedby') }} {{ Post.Author|default('Blog.Owner.Nickname') }}</span>
                                         {% endif %}
-                                        {% if isPage == false %} 
+                                        {% if isPage == false and Post.ShowComments is not empty %}
                                             {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                 <a href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
                                             {% else %}
@@ -486,7 +486,7 @@
                                     {% endif %}
 
                                     {# Comments #}
-                                    {% if isSingle and isPage == false %}
+                                    {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                     <div class="item-comments">
                                         <h4 class="h2commentMessage" id="comments">{{ Lang.Get('Comments') }}</h4>
                                         {% if Custom("comment") == "Facebook" %}

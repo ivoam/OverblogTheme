@@ -140,7 +140,7 @@
 			.cl {clear: left;}
 			.cr {clear: right;}
 			
-			#global {width: 600px;}
+			#globalï¿½{width: 600px;}
 			
 			
 			/********
@@ -321,7 +321,7 @@
 						<a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
 						<g:plusone size="medium"></g:plusone>
 		         	</div>
-		         	{% if isPage == false %}
+		         	{% if isPage == false and Post.ShowComments is not empty %}
 		         	<div class="item-comments">
 		         		<h4>{{ Lang.Get('Comment this post') }}</h4>
 					    {% if Custom("comment") == "Facebook" %}
@@ -546,10 +546,10 @@
 					
 					<div id="prev">
 					{% if Navigation.PreviousPage is not empty %}
-						<a href="{{ Navigation.PreviousPage }}">« {{ Lang.Get('prev') }}</a>
+						<a href="{{ Navigation.PreviousPage }}">ï¿½ {{ Lang.Get('prev') }}</a>
 					{% elseif Navigation.PreviousPost is not empty %}
                     	<a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">
-                    		« {% if Navigation.PreviousPost.Title is not empty %}
+                    		ï¿½ {% if Navigation.PreviousPost.Title is not empty %}
                     			{{ Navigation.PreviousPost.Title | truncate(25) }}
                     		{% else %}
                     			{{ Lang.Get('Previous post') }}
@@ -559,14 +559,14 @@
 					
 					<div id="next">
 					{% if Navigation.NextPage is not empty %}
-						<a href="{{ Navigation.NextPage }}">{{ Lang.Get('next') }} »</a>
+						<a href="{{ Navigation.NextPage }}">{{ Lang.Get('next') }} ï¿½</a>
 					{% elseif Navigation.NextPost is not empty %}
                     	<a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}">
                     	{% if Navigation.NextPost.Title is not empty %}
                 			{{ Navigation.NextPost.Title | truncate(25) }}
                 		{% else %}
                 			{{ Lang.Get('Next post') }}
-                		{% endif %} »</a>
+                		{% endif %} ï¿½</a>
                     {% endif %}
 					</div>
 					<div class="cr"></div>
@@ -612,7 +612,7 @@
 						{% if Custom('facebook_account') is not empty %}
 							<a class="contact-button facebook" href="http://facebook.com/{{ Custom('facebook_account') }}" title="{{ Lang.Get('Follow us on') }} Facebook">{{ Lang.Get('Follow us on') }} Facebook</a>
 						{% endif %}
-						<a class="contact-button contact" href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact us') }}</a>
+						<a class="contact-button contact" href="{{ Blog.Urlï¿½}}/contact">{{ Lang.Get('Contact us') }}</a>
 					</div>
 					<div class="cb"></div>
 				</div>
@@ -620,7 +620,7 @@
 			<div id="footer-wrapper">
 				<div id="footer-inner">
 					<div id="footer-left">
-						<p>Copyright © 2012 <a href="{{ Blog.Url }}">{{ Blog.Title }}</a></p>
+						<p>Copyright ï¿½ 2012 <a href="{{ Blog.Url }}">{{ Blog.Title }}</a></p>
 					</div>
 					<div id="footer-right">
 						<p><span>{{ Lang.Get('from') }}</span> <a href="http://www.dzignine.com/" target="_blank">Dzignine</a> w/ ?</p>

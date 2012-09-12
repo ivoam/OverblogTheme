@@ -423,7 +423,7 @@
 							{% endif %}
 			         	</div>
 			         	{% endif %}
-			         	{% if isPage == false %}
+			         	{% if isPage == false and Post.ShowComments is not empty %}
 				         	<div class="item-comments">
 				         		<h4>{{ Lang.Get('Comment this post') }}</h4>
 							    {% if Custom("comment") == "Facebook" %}
@@ -572,7 +572,7 @@
 					</div>
 
 					<div id="footer-bottom">
-						<div id="footer-rights">{% if Custom('footer_content') is not empty %}{{ Custom('footer_content') }}{% else %}Copyright © 2011 <a href="http://www.dzignine.com/" target="_blank">Point of View (white)</a>, {{ Lang.Get('All rights reserved') }}{% endif %}</div>
+						<div id="footer-rights">{% if Custom('footer_content') is not empty %}{{ Custom('footer_content') }}{% else %}Copyright ï¿½ 2011 <a href="http://www.dzignine.com/" target="_blank">Point of View (white)</a>, {{ Lang.Get('All rights reserved') }}{% endif %}</div>
 						<div id="footer-links">
 							<ul>
 								<li><a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a> /</li>

@@ -661,7 +661,7 @@
 							</div>
 						{% endif %}
 						{% if not isPage %}
-		                    {% if Post.ShowComments or Custom("comment") is not empty %}
+		                    {% if Post.ShowComments is not empty or Custom("comment") is not empty %}
 								<div class="comments" id="comments">
 									<h6>{{ Lang.Get('Comment this post') }}</h6>
 									<div class="item-comments">

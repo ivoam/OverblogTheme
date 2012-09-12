@@ -799,7 +799,7 @@
                                                 {% endif %}
                                             {% endif %}
                                             
-                                            {% if isSingle == false %} 
+                                            {% if isSingle == false and Post.ShowComments is not empty %}
                                                 {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <a class="comment-number" href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
                                                 {% else %}
@@ -830,7 +830,7 @@
                                             {% endif %}
                                             
                                             <!-- Comments -->
-                                            {% if isSingle and isPage == false %}
+                                            {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                                 <div id="comments" class="item-comments">
                                                     {% if Custom("comment") == "Facebook" %}
                                                         <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>

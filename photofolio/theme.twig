@@ -669,7 +669,7 @@
                                     <div class="clear"></div>
                                 {% endif %}
 
-                                {% if not isPage %}
+                                {% if not isPage and Post.ShowComments is not empty %}
                                     <!-- Comments -->
                                     <div id="comments" class="item-comments">
                                         {% if Custom("comment") == "Facebook" %}

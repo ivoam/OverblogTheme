@@ -432,21 +432,23 @@
 									<article class="post-block">
 										<header class="post-title">
 											<h2>
-												{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty and not isSingle %}
-												    <span class="comment-bubble">
-												    	<a href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
-												    </span>
-												{% else %}
-													<span class="comment-bubble">
-													    <a href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}">
-													        {% if Custom("comment") == "Facebook" %}
-													            <fb:comments-count href={{ Blog.Url }}{{ Post.Permalink }}></fb:comments-count> 
-													        {% else %}
-													            {{ Post.CommentCount }}
-													        {% endif %}
-													    </a>
-													</span>
-												{% endif %}
+                                                {% if Post.ShowComments is not empty %}
+                                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty and not isSingle %}
+                                                        <span class="comment-bubble">
+                                                            <a href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="comment-bubble">
+                                                            <a href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}">
+                                                                {% if Custom("comment") == "Facebook" %}
+                                                                    <fb:comments-count href={{ Blog.Url }}{{ Post.Permalink }}></fb:comments-count>
+                                                                {% else %}
+                                                                    {{ Post.CommentCount }}
+                                                                {% endif %}
+                                                            </a>
+                                                        </span>
+                                                    {% endif %}
+                                                {% endif %}
 												<a title="{{ Post.Snippet }}" href="{{ Post.PermaLink }}">
 													{% if Post.Title is not empty %}
 														{{ Post.Title }}
@@ -534,7 +536,7 @@
 												</div>
 											{% endif %}
 
-									        {% if isSingle and isPage == false %}
+									        {% if isSingle and isPage == false and Post.ShowComments is not empty %}
 									         	<div id="comments" class="item-comments">
 												    {% if Custom("comment") == "Facebook" %}
 												    	<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="475"></div>

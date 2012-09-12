@@ -488,7 +488,7 @@
                         {% list Posts %}
                             <article class="post">
                                 <header>
-                                    {% if not isSingle %}
+                                    {% if not isSingle and Post.ShowComments is not empty %}
                                         {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                             <a title="{{ Lang.Get('comments') }}" class="comments right" href="{{ Post.PermaLink }}#disqus_thread"></a>
                                         {% else %}
@@ -584,7 +584,7 @@
                                     </nav>
                                 {% endif %} 
 
-                                {% if isSingle and not isPage %}
+                                {% if isSingle and not isPage and Post.ShowComments is not empty%}
                                     <!-- Comments -->
                                     <div class="item-comments">
                                         {% if Custom("comment") == "Facebook" %}

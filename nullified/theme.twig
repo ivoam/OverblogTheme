@@ -984,7 +984,7 @@
                                         </div>
                                     {% endif %}
 
-                                    {% if isSingle and not isPage %}
+                                    {% if isSingle and not isPage and Post.ShowComments is not empty %}
                                         <div class="bloc-comment" id="comments">
                                             <!-- Comments -->
                                             <h4>{{ Lang.Get('Comment this post') }}</h4>

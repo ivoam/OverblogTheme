@@ -77,7 +77,7 @@
         <meta name="image:custom_background:Custom blog background" />
         <meta name="image:custom_blog_cover:Custom blog cover (Recommended size : 900x200 )" />
     
-        <meta name="string:text_publishedby:“Published by”" default="Published by" group="Wordings">
+        <meta name="string:text_publishedby:ï¿½Published byï¿½" default="Published by" group="Wordings">
     
         <meta name="list:snippet:On index, display post as" items="snippet, first section, full post" default="snippet" group="Posts">
         <meta name="image:default_post_cover:Default post cover (Only with snippet display mode)" group="Posts" />
@@ -1092,7 +1092,7 @@
             .ob-row-3-col img {width: 190px;}
             .ob-text li:last-child {margin-bottom: 15px;}
             .ob-text li p {margin-bottom: 5px;}
-            .ob-text pre {width: 570px;  white-space: pre-wrap; /* CSS 3 */ white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ white-space: -pre-wrap; /* Opera 4 à 6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* IE 5.5+ */ overflow: auto;/* IE 6 */}
+            .ob-text pre {width: 570px;  white-space: pre-wrap; /* CSS 3 */ white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ white-space: -pre-wrap; /* Opera 4 ï¿½ 6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* IE 5.5+ */ overflow: auto;/* IE 6 */}
             .ob-section-audio .obsoundplayer .obsoundplayername {height: 31px; width: 200px; overflow: hidden;}
 
             .ob-form + a {display: block; margin-top: 80px; text-align: center;}
@@ -1143,7 +1143,7 @@
                             
                             {# List title #}
                             {% if isSearch %}
-                            <h3 class="list-title">{{ Lang.Get ('Search for') }} “{{ Search }}”</h1>
+                            <h3 class="list-title">{{ Lang.Get ('Search for') }} ï¿½{{ Search }}ï¿½</h1>
                             {% endif %}
                             {% if isTag %}
                             <h3 class="list-title">{{ Lang.Get('Posts with') }} #<strong>{{ Tag.Title }}</strong> {{ Lang.Get('tag') }}</h1>
@@ -1155,7 +1155,7 @@
                             {% if isSearch %}
                             <div class="contenuArticle">
                                 <p>
-                                    {{ Lang.Get('No result… Try again') }} !
+                                    {{ Lang.Get('No resultï¿½ Try again') }} !
                                 </p>
                             </div>
                             {% elseif isSpecial %}
@@ -1165,7 +1165,7 @@
                             {% else %}
                             <div class="contenuArticle">
                                 <p>
-                                    {{ Lang.Get('No post') }}…
+                                    {{ Lang.Get('No post') }}ï¿½
                                 </p>
                             </div>
                             {% endif %}
@@ -1222,7 +1222,7 @@
                                 {% if Post.Author is not empty %}
                                     <span class="publishedBy">{{ Custom('text_publishedby') }} {{ Post.Author|default('Blog.Owner.Nickname') }}</span>
                                 {% endif %}
-                                {% if isPage == false %} 
+                                {% if isPage == false and Post.ShowComments is not empty %}
                                     {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                         - <a href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
                                     {% else %}
@@ -1265,7 +1265,7 @@
                             {% endif %}
 
                             {# Comments #}
-                            {% if isSingle and isPage == false %}
+                            {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                 <div class="item-comments">
                                     <h4 class="h4commentMessage" id="comments">{{ Lang.Get('Comments') }}</h4>
                                     {% if Custom("comment") == "Facebook" %}
@@ -1331,7 +1331,7 @@
                                 {% endif %}
                                 {% if Blog.Description is not empty %}
                                 <p>
-                                    “{{ Blog.Description }}”
+                                    ï¿½{{ Blog.Description }}ï¿½
                                 </p>
                                 {% endif %}
                                 {% if Blog.Owner.Nickname is not empty %}

@@ -1002,7 +1002,7 @@
 					{% list Posts %}
 						<article class="post">
 							<header class="header">
-								{% if not isSingle and not isPage %} 
+								{% if not isSingle and not isPage and Post.ShowComments is not empty %}
 		                            <div class="comments-number">
 		                                {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 										    <a href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
@@ -1126,7 +1126,7 @@
 									<div class="cb"></div>
 								{% endif %}
 					         	
-					         	{% if isSingle and isPage == false %}
+					         	{% if isSingle and isPage == false and Post.ShowComments is not empty %}
 						         	<div class="item-comments" id="comments" >
 									    {% if Custom("comment") == "Facebook" %}
 									    	<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600"></div>
