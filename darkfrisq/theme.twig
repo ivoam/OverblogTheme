@@ -77,7 +77,7 @@
         <meta name="image:custom_background:Custom blog background" />
         <meta name="image:custom_blog_cover:Custom blog cover (Recommended size : 900x200 )" />
     
-        <meta name="string:text_publishedby:�Published by�" default="Published by" group="Wordings">
+        <meta name="string:text_publishedby: &quot;Published by &quot;" default="Published by" group="Wordings">
     
         <meta name="list:snippet:On index, display post as" items="snippet, first section, full post" default="snippet" group="Posts">
         <meta name="image:default_post_cover:Default post cover (Only with snippet display mode)" group="Posts" />
@@ -88,8 +88,8 @@
         <meta name="boolean:display_widget_tags:Hide Widget &quot;Tags&quot;" group="Widgets" />
         <meta name="boolean:display_widget_social:Hide Widget &quot;Social&quot;" group="Widgets" />
         
-        <meta name="string:facebook_account:Enter your Facebook Username" default="overblog" group="Social" />
-        <meta name="string:twitter_account:Enter your Twitter Username" default="overblog" group="Social" />
+        <meta name="string:facebook_account:Enter your Facebook Username" group="Social" />
+        <meta name="string:twitter_account:Enter your Twitter Username" group="Social" />
         <meta name="list:share_button:Chose your(s) share button(s)" items="Facebook, Twitter, Google +, All" default="All" group="Social">
         
         <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
@@ -1092,7 +1092,7 @@
             .ob-row-3-col img {width: 190px;}
             .ob-text li:last-child {margin-bottom: 15px;}
             .ob-text li p {margin-bottom: 5px;}
-            .ob-text pre {width: 570px;  white-space: pre-wrap; /* CSS 3 */ white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ white-space: -pre-wrap; /* Opera 4 � 6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* IE 5.5+ */ overflow: auto;/* IE 6 */}
+            .ob-text pre {width: 570px;  white-space: pre-wrap; /* CSS 3 */ white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ white-space: -pre-wrap; /* Opera 4 & 6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* IE 5.5+ */ overflow: auto;/* IE 6 */}
             .ob-section-audio .obsoundplayer .obsoundplayername {height: 31px; width: 200px; overflow: hidden;}
 
             .ob-form + a {display: block; margin-top: 80px; text-align: center;}
@@ -1122,28 +1122,28 @@
                         <div>
                             {# Pagination #}
                             {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                            {% if isPage == false %}
-                            <div class="before_articles">
-                                <div class="pagination clearfix">
-                                    {% if Navigation.PreviousPage is not empty %}
-                                    <a href="{{ Navigation.PreviousPage }}" class="previous">? {{ Lang.Get('Previous page') }}</a>
-                                    {% elseif Navigation.PreviousPost is not empty %}
-                                    <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">? {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
-                                    {% endif %}
-    
-                                    {% if Navigation.NextPage is not empty %}
-                                    <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} ?</a>
-                                    {% elseif Navigation.NextPost is not empty %}
-                                    <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} ?</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% endif %}
+                                {% if isPage == false %}
+                                    <div class="before_articles">
+                                        <div class="pagination clearfix">
+                                            {% if Navigation.PreviousPage is not empty %}
+                                            <a href="{{ Navigation.PreviousPage }}" class="previous">&laquo; {{ Lang.Get('Previous page') }}</a>
+                                            {% elseif Navigation.PreviousPost is not empty %}
+                                            <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">&laquo; {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                            {% endif %}
+                                            <a href="#" title="{{ Lang.Get('Go top') }}" class="top">{{ Lang.Get('Top') }}</a>
+                                            {% if Navigation.NextPage is not empty %}
+                                            <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
+                                            {% elseif Navigation.NextPost is not empty %}
+                                            <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} &raquo;</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
                             {% endif %}
                             
                             {# List title #}
                             {% if isSearch %}
-                            <h3 class="list-title">{{ Lang.Get ('Search for') }} �{{ Search }}�</h1>
+                            <h3 class="list-title">{{ Lang.Get ('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;</h1>
                             {% endif %}
                             {% if isTag %}
                             <h3 class="list-title">{{ Lang.Get('Posts with') }} #<strong>{{ Tag.Title }}</strong> {{ Lang.Get('tag') }}</h1>
@@ -1155,7 +1155,7 @@
                             {% if isSearch %}
                             <div class="contenuArticle">
                                 <p>
-                                    {{ Lang.Get('No result� Try again') }} !
+                                    {{ Lang.Get('No result') }} !
                                 </p>
                             </div>
                             {% elseif isSpecial %}
@@ -1165,7 +1165,7 @@
                             {% else %}
                             <div class="contenuArticle">
                                 <p>
-                                    {{ Lang.Get('No post') }}�
+                                    {{ Lang.Get('No post') }}.
                                 </p>
                             </div>
                             {% endif %}
@@ -1295,23 +1295,23 @@
                         
                         {# Pagination #}
                         {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                        {% if isPage == false %}
-                        <div class="before_articles">
-                            <div class="pagination clearfix">
-                                {% if Navigation.PreviousPage is not empty %}
-                                <a href="{{ Navigation.PreviousPage }}" class="previous">? {{ Lang.Get('Previous page') }}</a>
-                                {% elseif Navigation.PreviousPost is not empty %}
-                                <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">? {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
-                                {% endif %}
-                                <a href="#" title="{{ Lang.Get('Go top') }}" class="top">{{ Lang.Get('Top') }}</a>
-                                {% if Navigation.NextPage is not empty %}
-                                <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} ?</a>
-                                {% elseif Navigation.NextPost is not empty %}
-                                <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} ?</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% endif %}
+                            {% if isPage == false %}
+                                <div class="before_articles">
+                                    <div class="pagination clearfix">
+                                        {% if Navigation.PreviousPage is not empty %}
+                                        <a href="{{ Navigation.PreviousPage }}" class="previous">&laquo; {{ Lang.Get('Previous page') }}</a>
+                                        {% elseif Navigation.PreviousPost is not empty %}
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">&laquo; {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                        {% endif %}
+                                        <a href="#" title="{{ Lang.Get('Go top') }}" class="top">{{ Lang.Get('Top') }}</a>
+                                        {% if Navigation.NextPage is not empty %}
+                                        <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
+                                        {% elseif Navigation.NextPost is not empty %}
+                                        <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} &raquo;</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
@@ -1331,7 +1331,7 @@
                                 {% endif %}
                                 {% if Blog.Description is not empty %}
                                 <p>
-                                    �{{ Blog.Description }}�
+                                    {{ Blog.Description }}
                                 </p>
                                 {% endif %}
                                 {% if Blog.Owner.Nickname is not empty %}
