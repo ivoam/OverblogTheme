@@ -1874,8 +1874,8 @@
                     {% if isIndex %}
                         <!-- shortcut:[Slider] -->
                         <div id="mySlides">
-                            {% if Custom('custom_home_slider_tag') is not empty %}
-                                {% list Blog.TaggedPosts(Custom('custom_home_slider_tag'), 3) %}
+                            {% if Custom('pinned_tag') is not empty %}
+                                {% list Blog.TaggedPosts(Custom('pinned_tag')) %}
                                     <div class="m-slides">
                                         {% if TaggedPost.Cover is not empty %}
                                             <img src="{{ TaggedPost.Cover|resize(960, 426)|crop }}" alt="{{ TaggedPost.Title }}" />
