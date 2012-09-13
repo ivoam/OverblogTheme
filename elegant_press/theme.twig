@@ -1914,15 +1914,17 @@
                                 {% endlist %}
                             {% endif %}
                         </div>
+                        
                         <section class="jFlowPrev">
                             <div></div>
                         </section>
                         <section class="jFlowNext">
                             <div></div>
                         </section>
+                           
                         <div id="myController">
-                            {% if Custom('custom_home_slider_tag') is not empty %}
-                                {% list Blog.TaggedPosts(Custom('custom_home_slider_tag'), 3) %}
+                            {% if Custom('pinned_tag') is not empty %}
+                                {% list Blog.TaggedPosts(Custom('pinned_tag')) %}
                                     <span class="jFlowControl"></span>
                                 {% endlist %}
                             {% else %}
