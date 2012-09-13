@@ -96,6 +96,8 @@
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="10" group="Navigation" />
         
         <meta name="tag:pinned_tag:label.pinnedTag" group="Slider" />
+        <meta name="image:custom_default_slider_cover:Default slider cover" default="http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg" group="Slider" />
+
 
         <meta name="string:footer:label.footer" default="Theme: Delicate &copy; 2012" group="Wording"  />
 
@@ -247,6 +249,10 @@
                     .ob-section {width: 100%;}
                     .ob-media {max-width: 100%;}
                     .ob-desc {font-style: italic; font-weight: bold;}
+                    .ob-section ul {list-style: disc; margin-bottom: 20px; padding-left: 20px;}
+                    .ob-section ol {list-style: decimal; margin-bottom: 20px; padding-left: 45px;}
+
+                    .ob-media-left {margin: 0 30px 20px 0;}
 
                     /* section texte */
                     .ob-text h3,
@@ -280,6 +286,18 @@
                     .ob-section-quote p.ob-author, .ob-section-quote p.ob-source {background: #EFEFEF;}
                     .ob-section-quote .ob-link {color: #4D4D4F;}
 
+                    /* section video */
+                    .ob-section-video iframe {max-height: 346px; position: relative; width: 100%; z-index: 1;}
+
+                    .tags {border-top: 1px dotted #d5d5d5; color: #878789; font-size: 11px; margin-top: 15px; padding: 3px 2px 10px 2px; text-align: left;}
+                    .tags .tag {padding: 5px 0 6px 0;}
+                    .tags .tag a {padding-top: 5px; color: #878789;}
+                    .tags .tag a:hover {color: #0E73B8;}
+                    .tags .tag:first-child {background: url(http://assets.over-blog-kiwi.com/themes/28/images/icons/meta-tags.gif) no-repeat 0 5px; padding-left: 18px;}
+
+                    /* Section audio */
+                    .obsoundplayer .obsoundplayername {width: 175px !important;}
+
                     /* section links */ 
                     .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
                     .ob-section-link .ob-media-left {margin: 0;}
@@ -307,14 +325,6 @@
                     .social-sharing h6,
                     .item-comments h6 {font-size: 16px; margin-bottom: 5px;}
                     
-                    /* section video */
-                    .ob-section-video iframe {max-height: 346px; position: relative; width: 100%; z-index: 1;}
-
-                    .tags {border-top: 1px dotted #d5d5d5; color: #878789; font-size: 11px; margin-top: 15px; padding: 3px 2px 10px 2px; text-align: left;}
-                    .tags .tag {padding: 5px 0 6px 0;}
-                    .tags .tag a {padding-top: 5px; color: #878789;}
-                    .tags .tag a:hover {color: #0E73B8;}
-                    .tags .tag:first-child {background: url(http://assets.over-blog-kiwi.com/themes/28/images/icons/meta-tags.gif) no-repeat 0 5px; padding-left: 18px;}
 
                 /*** SPECIAL PAGE ***/
                 .special h3 {color: #4D4D4F; font-size: 24px; line-height: 35px;}
@@ -443,7 +453,7 @@
                                             </a>
                                         </h2>
                                     </div>
-                                    <img src="{% if TaggedPost.Cover is not empty %}{{ TaggedPost.Cover|resize(970,300)|crop }}{% else %}{{ Custom('custom_slider_default_image')|resize(970, 225)|crop|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg') }}{% endif %}" title="{{ TaggedPost.Title }}" alt="" />
+                                    <img src="{% if TaggedPost.Cover is not empty %}{{ TaggedPost.Cover|resize(970,300)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,300)|crop }}{% endif %}" title="{{ TaggedPost.Title }}" alt="" width="970" height="300" />
                                 </article>
                             {% endlist %}
                         {% else %}
@@ -461,7 +471,7 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,300)|crop }}{% else %}{{ Custom('custom_slider_default_image')|resize(970, 225)|crop|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg') }}{% endif %}" title="{{ Post.Title }}" alt="" />
+                                    <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,300)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,300)|crop }}{% endif %}" title="{{ Post.Title }}" alt="" width="970" height="300" />
                                 </article>
                             {% endlist %}
                         {% endif %}  
@@ -738,7 +748,8 @@
 
         <script>
             jQuery(document).ready(function($) {
-                $(".ob-input-submit").addClass("button");
+                var formSubmit = $(".ob-input-submit")
+                formSubmit.addClass("button");
 
                 $('.slideshow').cycle({
                     fx                  : 'fade',
@@ -751,8 +762,8 @@
                 });
               
                 // Fancybox
-                $(".ob-section-images a, .avatar, .ob-link-img").attr("rel", "fancybox");
-                $("a[rel=fancybox]").fancybox({
+                $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+                $("a[rel=fancybox], .avatar").fancybox({
                     'overlayShow'   : true,
                     'titlePosition' : 'over',
                     'transitionIn'  : 'fadin',
