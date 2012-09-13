@@ -364,13 +364,13 @@
 								<h2>+ {{ Lang.Get('Links') }}</h2>
 								<ul>
 									<li {% if isIndex %}class="selected"{% endif %}><a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a></li>
-									{% if Custom('nav_1_link') is not empty %}
+									{% if Custom('nav_1_title') is not empty and Custom('nav_1_link') is not empty %}
 									<li><a href="{{ Custom('nav_1_link') }}">{{ Custom('nav_1_title') }}</a></li>
 									{% endif %}
-									{% if Custom('nav_2_link') is not empty %}
+									{% if Custom('nav_2_title') is not empty  and Custom('nav_2_link') is not empty %}
 									<li><a href="{{ Custom('nav_2_link') }}">{{ Custom('nav_2_title') }}</a></li>
 									{% endif %}
-									{% if Custom('nav_3_link') is not empty %}
+									{% if Custom('nav_3_title') is not empty and Custom('nav_3_link') is not empty %}
 									<li><a href="{{ Custom('nav_3_link') }}">{{ Custom('nav_3_title') }}</a></li>
 									{% endif %}
 									<li><a href="{{ Blog.url }}/contact">{{ Lang.Get('Contact') }}</a></li>
