@@ -75,8 +75,8 @@
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" default="9" group="Navigation" />
         
         <meta name="image:background:Define your background image" group="design" />
-        <meta name="image:blog_cover: Define your blog cover" default="http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg" group="design" />
-		<meta name="image:post_cover: Define your default post cover" group="design" />
+        <meta name="image:blog_cover:Define your blog cover" default="http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg" group="design" />
+		<meta name="image:post_cover:Define your default post cover" group="design" />
 		
         <meta name="string:footer_content:label.footer" default="Theme: Twentyeleven &copy; 2012" group="footer" />
 
@@ -961,7 +961,7 @@
 				<div class="cb"></div>
 				<div id="blog-cover">
 					<a href="{{ Blog.Url }}">
-						<img src="{% if Custom('blog_cover')  is not empty %}{{ Custom('blog_cover')|resize(1000,288)|crop }}{% else %}http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg{% endif %}" alt="" title="{{ Blog.Description }}" width="1000" height="288" />
+						<img src="{% if Custom('blog_cover') is not empty or Custom('blog_cover') != '' %}{{ Custom('blog_cover')|resize(1000,288)|crop }}{% else %}http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg{% endif %}" alt="" title="{{ Blog.Description }}" width="1000" height="288" />
 					</a>
 				</div>
 				<nav id="menu" role="navigation">
