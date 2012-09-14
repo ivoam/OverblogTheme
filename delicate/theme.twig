@@ -453,7 +453,7 @@
                                             </a>
                                         </h2>
                                     </div>
-                                    <img src="{% if TaggedPost.Cover is not empty %}{{ TaggedPost.Cover|resize(970,300)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,300)|crop }}{% endif %}" title="{{ TaggedPost.Title }}" alt="" width="970" height="300" />
+                                    <img src="{% if TaggedPost.Cover is not empty %}{{ TaggedPost.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ TaggedPost.Title }}" alt="" width="970" height="301" />
                                 </article>
                             {% endlist %}
                         {% else %}
@@ -471,7 +471,7 @@
                                             {% endif %}
                                         </a>
                                     </div>
-                                    <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,300)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,300)|crop }}{% endif %}" title="{{ Post.Title }}" alt="" width="970" height="300" />
+                                    <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ Post.Title }}" alt="" width="970" height="301" />
                                 </article>
                             {% endlist %}
                         {% endif %}  
