@@ -188,7 +188,6 @@
             .main {margin: {% if not isSingle or not isSpecial %}40{% else %}30{% endif %}px auto 0; position: relative; width: 916px;}
             .m-top {position: relative;}
             .m-top .s-bg {background: -moz-radial-gradient(center, ellipse cover,  rgba(130,130,130,1) 0%, rgba(63,63,63,0) 63%, rgba(24,24,24,0) 100%); /* FF3.6+ */ background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(130,130,130,1)), color-stop(63%,rgba(63,63,63,0)), color-stop(100%,rgba(24,24,24,0))); /* Chrome,Safari4+ */ background: -webkit-radial-gradient(center, ellipse cover, rgba(130,130,130,1) 0%,rgba(63,63,63,0) 63%,rgba(24,24,24,0) 100%); /* Chrome10+,Safari5.1+ */ background: -o-radial-gradient(center, ellipse cover, rgba(130,130,130,1) 0%,rgba(63,63,63,0) 63%,rgba(24,24,24,0) 100%); /* Opera 12+ */ background: -ms-radial-gradient(center, ellipse cover,  rgba(130,130,130,1) 0%,rgba(63,63,63,0) 63%,rgba(24,24,24,0) 100%); /* IE10+ */ background: radial-gradient(center, ellipse cover,  rgba(130,130,130,1) 0%,rgba(63,63,63,0) 63%,rgba(24,24,24,0) 100%); /* W3C */ height: 750px; left: 0; position: absolute; top: 0; width: 100%; z-index: -1;}
-            .m-top .wrapper {overflow: hidden; position: relative;}
             .m-bottom {background: {{ Custom("custom_footer_background_color")|default('#414141') }};} 
             .m-bottom .main {overflow: hidden; position: relative;}
             .m-list {float: left; width: 600px;}
@@ -200,29 +199,28 @@
                 #logo {margin-top: 14px; max-width: 530px; margin-bottom: 5px; padding: 0;}
                 #logo a {color: {{ Custom('custom_header_font_color')|default('#FFF') }}; display: block; font-size: 50px; line-height: 67px; max-height: 100px; max-width: 100%; overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-space: nowrap;}
                 #logo a:first-letter {color: #13C5FF;}
-                #headline {color: {{ Custom("custom_headline_font_color")|default('#A9A9A9') }}; float: left; font-size: 20px; line-height: 20px; max-width: 520px; padding: 0;}
+                #headline {color: {{ Custom("custom_headline_font_color")|default('#A9A9A9') }}; float: left; font-size: 20px; line-height: 25px; max-width: 520px; {% if not isIndex %}padding: 0 0 30px;{% endif %}}
                 
                 #search {padding: 41px 20px 0 0;}
-                #search .input {float:right;width:148px;padding:5px 8px; font:14px Arial, Helvetica, sans-serif;background:#fff;color:#999;height:16px}
+                #search .input {float:right;width:148px;padding: 5px 8px; font:14px Arial, Helvetica, sans-serif; background: #fff; color:#999;height:16px}
                 #search .submit {background: #FFF url(http://assets.over-blog-kiwi.com/themes/34/images/search.gif) center center no-repeat; border: none; cursor:pointer; display:block; float: right; height: 30px; margin-left: 4px; width: 30px;}
                 
-                #menu {float: right; max-width: 520px; padding: 40px 19px 0 0;}
-                #menu li {float:left; padding-right: 28px; position: relative; z-index: 1000;}
-                #menu .end {padding-right: 0;}
-                #menu li ul {background: {{ Custom("custom_page_background_color")|default('#1F1F1F') }}; -webkit-border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px; -ms-border-radius: 0 0 5px 5px; -o-border-radius: 0 0 5px 5px; border-radius: 0 0 5px 5px; left: 0; -webkit-opacity: 0; -moz-opacity: 0; -ms-opacity: 0; -o-opacity: 0;  opacity: 0; padding-bottom: 7px; position: absolute; -webkit-transition: opacity 400ms ease; -moz-transition: opacity 400ms ease; -ms-transition: opacity 400ms ease; -o-transition: opacity 400ms ease; transition: opacity 400ms ease; visibility: hidden; width: 180px; z-index: 1000;}
-                #menu li:hover ul {left: -4px; top: 20px; -webkit-opacity: 1; -moz-opacity: 1; -ms-opacity: 1; -o-opacity: 1; opacity: 1; visibility: visible;}
-                #menu li:hover ul li {float: none; display: block; padding: 2px 5px;}
-                #menu li.active ul li a {color: #FFF;}
-                #menu li.active ul li.active a,
-                #menu li ul li a:hover {color: #13C5FF;}
-                #menu li a {background: url(http://assets.over-blog-kiwi.com/themes/34/images/menu_marker.png) 0 4px no-repeat; color: {{ Custom('custom_header_font_color')|default('#FFF') }}; display: block; font-size: 16px; max-width: 100%; overflow: hidden; padding-left: 18px; text-overflow: ellipsis; text-decoration: none; text-transform: capitalize; white-space: nowrap; position: relative; z-index: 2000;}
-                #menu li a:hover, 
+                #menu {float: right; max-width: 520px; margin: 40px 19px 40px 0;}
+                #menu li {float: left; padding-right: 28px;}
+                #menu li.end {padding-right: 0;}
+                #menu a {background: url(http://assets.over-blog-kiwi.com/themes/34/images/menu_marker.png) 0 4px no-repeat; color: {{ Custom('custom_header_font_color')|default('#FFF') }}; display: block; font-size: 16px; max-width: 100%; overflow: hidden; padding-left: 18px; text-overflow: ellipsis; text-decoration: none; text-transform: capitalize; white-space: nowrap;}
+                #menu a:hover, 
                 #menu .active a {color: #13c5ff;}
                 
-                #gallery {height: 520px; margin: 40px 0 -105px;}
-                #gallery img {display: block; height: 100%; -webkit-transition: all 300ms ease 0s; -moz-transition: all 300ms ease 0s; -ms-transition: all 300ms ease 0s; -o-transition: all 300ms ease 0s; transition: all 300ms ease 0s; width: 100%;}
-                #myRoundabout .roundabout-holder {height: 5em;}
-                #myRoundabout .roundabout-moveable-item {background: #FFF; border: solid 14px {{ Custom("custom_images_border_color")|default('#FFF') }}; -webkit-box-shadow: 0 60px 30px -60px #000; -moz-box-shadow: 0 60px 30px -60px #000; -ms-box-shadow: 0 60px 30px -60px #000; -o-box-shadow: 0 60px 30px -60px #000; box-shadow: 0 60px 30px -60px #000; display: block; height: 478px; margin-top: 229px; overflow: hidden; position: relative; width: 636px;}
+                #menu li ul {background: {{ Custom("custom_page_background_color")|default('#1F1F1F') }}; -webkit-border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px; -ms-border-radius: 0 0 5px 5px; -o-border-radius: 0 0 5px 5px; border-radius: 0 0 5px 5px; -webkit-opacity: 0; -moz-opacity: 0; -ms-opacity: 0; -o-opacity: 0;  opacity: 0; padding-bottom: 7px; position: absolute; -webkit-transition: opacity 400ms ease; -moz-transition: opacity 400ms ease; -ms-transition: opacity 400ms ease; -o-transition: opacity 400ms ease; margin-right: 8px; transition: opacity 400ms ease; visibility: hidden; width: 180px; z-index: 1000;}
+                #menu li:hover ul { -webkit-opacity: 1; -moz-opacity: 1; -ms-opacity: 1; -o-opacity: 1; opacity: 1; visibility: visible;}
+                #menu li ul li {display: block; float: none; padding: 2px 5px;}
+                #menu li:hover ul li a {display: block; visibility: visible;}
+                
+                #gallery {height: 520px; margin: 0 0 -70px; width: 100%;}
+                #myRoundabout {height: 100%; margin-left: -9px; width: 100%;}
+                #myRoundabout .roundabout-moveable-item {background: #FFF; border: solid 14px {{ Custom("custom_images_border_color")|default('#FFF') }}; -webkit-box-shadow: 0 60px 30px -60px #000; -moz-box-shadow: 0 60px 30px -60px #000; -ms-box-shadow: 0 60px 30px -60px #000; -o-box-shadow: 0 60px 30px -60px #000; box-shadow: 0 60px 30px -60px #000; display: block; overflow: hidden; position: relative; width: 709px;}
+                #myRoundabout .roundabout-moveable-item img {display: block; height: 100%; -webkit-transition: all 300ms ease 0s; -moz-transition: all 300ms ease 0s; -ms-transition: all 300ms ease 0s; -o-transition: all 300ms ease 0s; transition: all 300ms ease 0s;}
                 #myRoundabout .caption {background: #111; background: rgba(34, 34, 34, 0.7); bottom: -50px; color: #FFF; display: block; font-size: 20px; font-weight: bold; line-height: 25px; max-height: 30px; padding: 7px 10px 10px; position: absolute; text-overflow: ellipsis; -webkit-transition: all 200ms ease 0s; -moz-transition: all 200ms ease 0s; -ms-transition: all 200ms ease 0s; -o-transition: all 200ms ease 0s; transition: all 200ms ease 0s; overflow: hidden; white-space: nowrap; width: 97%;}
                 #myRoundabout .roundabout-in-focus:hover img {-webkit-opacity: 0.5; -moz-opacity: 0.5; -ms-opacity: 0.5; -o-opacity: 0.5; opacity: 0.5;}
                 #myRoundabout .roundabout-in-focus:hover .caption {bottom: 0;}
@@ -490,18 +488,24 @@
                                 <li{% if isIndex %} class="active"{% endif %}>
                                     <a {% if isIndex %} {% endif %} href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                                 </li>
-                                <li {% if isTag %} class="active"{% endif %}>
-                                    <a href="#">{{ Lang.Get('Tags') }}</a>
-                                    <ul>
-                                        {% list Blog.PostsTags(10, 'SORT_POSTS_NUMBER_DESC') %}
-                                            <li {% if isTag and Tag.Title == PostsTag.Title %} class="active" {% endif %}>
-                                                <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
-                                            </li>
-                                        {% endlist %}
-                                    </ul>
-                                </li>
+                                    
+                                {% list Blog.PostsTags(10, 'SORT_POSTS_NUMBER_DESC') %}
+                                    {% if loop.first is not empty %}
+                                        <li {% if isTag %} class="active"{% endif %}>
+                                            <a href="#">{{ Lang.Get('Tags') }}</a>
+                                            <ul>
+                                    {% endif %}
+                                                <li {% if isTag and Tag.Title == PostsTag.Title %} class="active" {% endif %}>
+                                                    <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
+                                                </li>
+                                    {% if loop.last is not empty %}
+                                            </ul>
+                                        </li>
+                                    {% endif %}
+                                {% endlist %}
+                                    
                                 {% list Blog.ListPages %}
-                                    {% if loop.first %}
+                                    {% if loop.first is not empty %}
                                         <li {% if isPage %} class="active"{% endif %}>
                                             <a href="#">{{ Lang.Get('Pages') }}</a>
                                             <ul>
@@ -509,12 +513,12 @@
                                                 <li>
                                                     <a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a>
                                                 </li>
-                                    {% if loop.last %}
+                                    {% if loop.last is not empty %}
                                             </ul>
                                         </li>
                                     {% endif %}
                                 {% endlist %}
-                                <li class="end">
+                                <li class="end{% if isSpecial %} active{% endif %}">
                                     <a href="/contact">{{ Lang.Get('Contact') }}</a>
                                 </li>
                             </ul>
@@ -738,7 +742,7 @@
                                                     <li class="fb">
                                                         <a href="{{ Custom('facebook_username') }}">Facebook</a>
                                                         <span>
-                                                            <a href="http://facebook.com/{{ Custom('facebook_username') }}">http://facebook.com/{{ Custom('facebook_username') }}</a>
+                                                            <a href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank">http://facebook.com/{{ Custom('facebook_username') }}</a>
                                                         </span>
                                                     </li>
                                                 {% endif %}
@@ -746,14 +750,14 @@
                                                     <li class="twt">
                                                         <a href="{{ Custom('twitter_username') }}">Twitter</a>
                                                         <span>
-                                                            <a href="http://twitter.com/{{ Custom('twitter_username') }}">http://twitter.com/{{ Custom('twitter_username') }}</a>
+                                                            <a href="http://twitter.com/{{ Custom('twitter_username') }}" target="_blank">http://twitter.com/{{ Custom('twitter_username') }}</a>
                                                         </span>
                                                     </li>
                                                 {% endif %}
                                                 <li class="rss">
                                                     <a href="{{ Blog.RssUrl }}">RSS</a>
                                                     <span>
-                                                        <a href="{{ Blog.RssUrl }}">{{ Blog.Url }}{{ Blog.RssUrl }}</a>
+                                                        <a href="{{ Blog.RssUrl }}" target="_blank">{{ Blog.Url }}{{ Blog.RssUrl }}</a>
                                                     </span>
                                                 </li>
                                             </ul>
@@ -781,9 +785,9 @@
                                     <figure class="cover">
                                         <a class="" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}" href="{{ Post.PermaLink }}">
                                             {% if Post.Cover is not empty %}
-                                                <img alt="" src="{{ Post.Cover|resize(222,110)|crop }}" width="222" height="110" alt="" />
+                                                <img alt="" src="{{ Post.Cover|resize(222,122)|crop }}" width="222" height="122" alt="" />
                                             {% else %}
-                                                <img src="{{ Custom('custom_default_post_cover')|default('http://www.vivienkaufinger.com/ob/photofolio/default_cover.jpg')|resize(222,110)|crop }}" width="222" height="110" alt="" />
+                                                <img src="{{ Custom('custom_default_post_cover')|default('http://www.vivienkaufinger.com/ob/photofolio/default_cover.jpg')|resize(222,122)|crop }}" width="222" height="122" alt="" />
                                             {% endif %}
                                         </a>
                                         {%  if Post.ShowComments is not empty %}
@@ -839,7 +843,7 @@
         <!-- shortcut:[Widgets] -->
         <div class="m-bottom">
             <div class="main">
-                <section id="content2">
+                <div id="content2">
                     {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
                         <!-- Archives -->
                         <article class="widget left">
@@ -897,7 +901,7 @@
                         </article>
                     {% endif %}
                     <div class="clear"></div>
-                </section>
+                </div>
             </div>
         </div>
 
