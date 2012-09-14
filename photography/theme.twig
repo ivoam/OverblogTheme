@@ -68,10 +68,8 @@
             {% endif %}
         {% endif %}
         
-        <!-- options -->
-        <meta name="constant:displayArticlesLimit" content="16" />
-        
-        <meta name="list:display_tags:How many tags to display ?" items="0,1,2,3,4,5,6,7,8,9,10" default="8" />
+        <!-- options -->        
+        <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="8" group="Menu" />
         
         <meta name="image:post_cover:Default cover image" default="http://assets.over-blog-staging.com/themes/2/images/default-cover.jpg" group="Design" />
         <meta name="list:custom_titles_font:Titles font" items="Anton, Arvo, Bevan, Montserrat, Oswald, Lato, Squada One" default="Arvo" group="Design" />
@@ -79,16 +77,16 @@
         <meta name="list:theme_color:Theme color" items="Dark, Light" default="Dark" group="Design" />
         <meta name="image:custom_background_image:Background image" group="Design" />
 
-        <meta name="boolean:custom_hide_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:Hide Widget &quot;Biography&quot;" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:Hide widget &quot;Search form&quot;" group="Widgets">
-        <meta name="boolean:custom_hide_widget_follow:Hide widget &quot;Follow me&quot;" group="Widgets">
         <meta name="string:flickr_user_id:Flickr photo gallery (enter your Flickr user id)" group="Widgets">
 
-        <meta name="string:facebook_username:Enter your FaceBook username" group="Social" />
-        <meta name="string:twitter_username:Enter your Twitter username" group="Social" />
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="string:flickr_username:Enter your Flickr username" group="Social" />
-        <meta name="list:share_service:Choose your(s) social sharing service(s)" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
         
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
@@ -419,13 +417,13 @@
                 {% endif %}
                 color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}rgba(255,255,255,0.9){% else %}rgba(0,0,0,0.7){% endif %}; 
                 display: block; 
-                font-size: 22px;
+                font-size: 18px;
                 font-weight: normal; 
-                line-height: 30px;
+                line-height: 27px;
                 margin: 45px 20px 20px 20px; 
-                max-height: 55px;
+                max-height: 45px;
                 overflow: hidden;
-                padding: 10px 0; 
+                padding: 5px 0 12px; 
                 text-shadow: {% if Custom('theme_color') == 'Dark'|default('Dark') %}1px 1px 1px rgba(0,0,0,0.9){% else %}1px 1px 1px #CCC{% endif %}; 
                 text-transform: uppercase;
             }
@@ -448,11 +446,11 @@
             .footer .social h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
             .footer .social li {background: url("http://assets.over-blog-kiwi.com/themes/2/images/social-sep.png") 0 33px no-repeat; padding-bottom: 8px; padding-top: 7px;}
             .footer .social a.twitter {background: url("http://assets.over-blog-kiwi.com/themes/2/images/twitter.png") no-repeat left 2px; padding-left: 25px;}
-            .footer .social a.twitter:hover {background: url("http://assets.over-blog-kiwi.com/themes/2/images/twitter.png") 0 -16px no-repeat; padding-left: 25px;}
+            .footer .social a.twitter:hover {background-position: left -16px;}
             .footer .social a.facebook {background: url("http://assets.over-blog-kiwi.com/themes/2/images/facebook.png") no-repeat left 2px; padding-left: 25px;}
-            .footer .social a.facebook:hover {background: url("http://assets.over-blog-kiwi.com/themes/2/images/facebook.png") 0 -15px no-repeat; padding-left: 25px;}
-            .footer .social a.flickr {background: url("http://assets.over-blog-kiwi.com/themes/2/images/flickr.png") left 5px no-repeat; display: inline-block; padding-left: 25px;}
-            .footer .social a.flickr:hover {background: url("http://vivienkaufinger.com/ob/photography/flickr.png") 0 -7px no-repeat; padding-left: 25px;}
+            .footer .social a.facebook:hover {background-position: left -15px;}
+            .footer .social a.flickr {background: url("http://vivienkaufinger.com/ob/photography/flickr.png") left 7px no-repeat; display: inline-block; padding-left: 25px;}
+            .footer .social a.flickr:hover {background-position: left -8px;}
 
             .footer .myflickr {width: 190px; float: left; color: #FFF; margin-top: 20px; border-top: 1px solid #353638; margin-right: 0px; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture.png") no-repeat scroll 0 -32px transparent;}
             .footer .myflickr h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
@@ -585,6 +583,9 @@
             .ob-text ul{
                 margin: 0 0 20px 35px;
             }
+
+            .ob-media-left {margin-right: 30px;}
+            .ob-media-right {margin-left: 30px;}
             .ob-text ol li,
             .ob-text ul li {
                 list-style: disc;
@@ -693,7 +694,7 @@
                     <ul>
                         <li>
                             <a {% if isIndex %}class="active"{% endif %} href="{{ Blog.Url }}/">{{ Lang.Get('Home') }}</a>
-                            {% if isIndex %}<span class="bg-nav-end"></span>{% endif %}
+                                {% if isIndex %}<span class="bg-nav-end"></span>{% endif %}
                             </li>
                         <!-- Pages -->
                         {% if Custom('custom_hide_widget_pages') == false %}
@@ -728,11 +729,13 @@
                         <li {% if isIndex %}class="active"{% endif %}>
                             <a href="{{ Blog.Url }}">{{ Lang.Get('All') }}</a>
                         </li>
-                        {% list Blog.PostsTags(Custom('display_tags'), count) %}
-                            <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}>
-                                <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
-                            </li>
-                        {% endlist %}
+                        {% if Custom('tag_number') > 0 %}
+                            {% list Blog.PostsTags(Custom('tag_number'), count) %}
+                                <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}>
+                                    <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
+                                </li>
+                            {% endlist %}
+                        {% endif %}
                     </ul>
                 </div>
                 {% if Custom('custom_hide_widget_search_form') == false %}
@@ -861,17 +864,15 @@
                                 <h3>{{ Lang.Get('Last Posts') }}</h3>
                                 <ul>
                                     {% list Blog.Posts(6) %}
-                                        {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
-                                            <li>
-                                                <h3>
-                                                    <a href="{{ Blog.Url}}{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-                                                        <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(130,100)|crop }}{% else %}{{ Custom('post_cover')|resize(130,100)|crop }}{% endif %}" alt="" width="130" height="100" />
-                                                    </a>
-                                                </h3>
-                                            </li>
-                                            {% if loop.index == 2 or loop.index == 4 %}
-                                                <div class="cb"></div>
-                                            {% endif %}
+                                        <li>
+                                            <h3>
+                                                <a href="{{ Blog.Url}}{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+                                                    <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(130,100)|crop }}{% else %}{{ Custom('post_cover')|default('http://assets.over-blog-staging.com/themes/2/images/default-cover.jpg')|resize(130,100)|crop }}{% endif %}" alt="" width="130" height="100" />
+                                                </a>
+                                            </h3>
+                                        </li>
+                                        {% if loop.index == 2 or loop.index == 4 %}
+                                            <div class="cb"></div>
                                         {% endif %}
                                     {% endlist %}
                                     <div class="cb"></div>
@@ -880,7 +881,7 @@
                             </div>
                         {% endif %}
 
-                        {% if Custom('display_widget_archives') == false %}
+                        {% if Custom('custom_hide_widget_blog_archive') == false %}
                              <!-- Follow us -->
                             <div class="widget archives" >
                                 <h3>{{ Lang.Get(' Blog archives') }}</h3>
@@ -931,8 +932,8 @@
                                     <a href="{{ Post.PermaLink }}">
                                         {% if Post.Cover is not empty %}
                                             <img alt="{{ Post.Title }}" src="{{ Post.Cover|resize(214, 163)|crop }}" />
-                                        {% elseif Custom('post_cover') is not empty %}
-                                            <img alt="{{ Post.Title }}" src="{{ Custom('post_cover')|resize(214, 163)|crop }}" />
+                                        {% else %}
+                                            <img alt="{{ Post.Title }}" src="{{ Custom('post_cover')|default('http://assets.over-blog-staging.com/themes/2/images/default-cover.jpg')|resize(214, 163)|crop }}" />
                                         {% endif %}
                                         <div>
                                             <span>
@@ -986,8 +987,8 @@
                             <div class="cb"></div>
                              {% if Blog.Owner.Avatar is not empty %}
                                 <div class="avatar">
-                                    <a class="fancybox blog-avatar" href="{{ Blog.Owner.Avatar }}" title="{{Blog.Owner.Nickname}}">
-                                        <img alt="{{Blog.Owner.Nickname}}" src="{{ Blog.Owner.Avatar|resize(50,54)|crop }}" />
+                                    <a class="blog-avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
+                                        <img alt="{{ Blog.Owner.Nickname }}" src="{{ Blog.Owner.Avatar|resize(50,54)|crop }}" />
                                     </a>
                                 </div>
                             {% endif %}
@@ -997,24 +998,22 @@
                     {% endif %}
                 {% endif %}
 
-                {% if Custom('custom_hide_widget_follow') == false %}
-                    {% if Custom('twitter_username') is not empty or Custom('facebook_username') is not empty or Custom('flickr_username') is not empty %}
-                        <div class="social">
-                            <h3>{{ Lang.Get('Follow me') }}</h3>
-                            <div class="cb"></div>
-                            <ul>
-                                {% if Custom('twitter_username') is not empty %}
-                                    <li><a class="twitter" href="http://twitter.com/{{ Custom('twitter_username') }}" target="_blank">{{ Lang.Get('Follow me') }}</a></li>
-                                {% endif %}
-                                {% if Custom('facebook_username') is not empty %}
-                                    <li><a class="facebook" href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank">{{ Lang.Get('Like my page') }}</a></li>
-                                {% endif %}
-                                {% if Custom('flickr_username') is not empty %}
-                                    <li><a class="flickr" href="http://www.flickr.com/photos/{{ Custom('flickr_username') }}" target="_blank">{{ Lang.Get('See my work') }}</a></li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    {% endif %}
+                {% if Custom('twitter_username') is not empty or Custom('facebook_username') is not empty or Custom('flickr_username') is not empty %}
+                    <div class="social">
+                        <h3>{{ Lang.Get('Follow me') }}</h3>
+                        <div class="cb"></div>
+                        <ul>
+                            {% if Custom('twitter_username') is not empty %}
+                                <li><a class="twitter" href="http://twitter.com/{{ Custom('twitter_username') }}" target="_blank">{{ Lang.Get('Follow me') }}</a></li>
+                            {% endif %}
+                            {% if Custom('facebook_username') is not empty %}
+                                <li><a class="facebook" href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank">{{ Lang.Get('Like my page') }}</a></li>
+                            {% endif %}
+                            {% if Custom('flickr_username') is not empty %}
+                                <li><a class="flickr" href="http://www.flickr.com/photos/{{ Custom('flickr_username') }}" target="_blank">{{ Lang.Get('See my work') }}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 {% endif %}
 
                 {% if Custom('flickr_user_id') is not empty %}
@@ -1028,14 +1027,12 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        {% if not isSingle and not isSpecial %}
-            <script src="http://vivienkaufinger.com/ob/photography/jquery.hoverdir.js"></script>
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+        {% if not isSingle or not isSpecial %}
+            <script src="http://assets.over-blog-kiwi.com/themes/2/js/jquery.hoverdir.js"></script>
         {% endif %}
         {% if Custom('flickr_username') is not empty %}
             <script src="http://assets.over-blog-kiwi.com/themes/2/js/flickr/jquery.zflickrfeed.js"></script>
-        {% endif %}
-        {% if not isIndex %}
-            <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         {% endif %}
         {% if Custom('share_service') == 'All' or Custom('share_service') == 'Pinterest' %}
             <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
@@ -1080,37 +1077,37 @@
                 }(document,"script","twitter-wjs");
             {% endif %}
 
-            // Archives
-            function switch_arch(year) {
-                'use strict';
-                var archiveYear, archiveMonths, displayStyle;
-                displayStyle = '';
-                archiveYear = document.getElementById('arch_' + year);
-                if (typeof (archiveYear) !== 'undefined') {
-                    if (archiveYear.style.display !== 'none') {
-                        
-                        // Hide years without months
-                        archiveMonths = archiveYear.getElementsByTagName('li');
-                        if (!archiveMonths.length) {
-                            archiveYear.parentNode.style.display = 'none';
+            {% if isSingle or isSpecial and Custom('custom_hide_widget_blog_archives') == false %}
+                // Archives
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, 
+                        archiveMonths, 
+                        displayStyle;
+                        displayStyle = '';
+                        archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            
+                            // Hide years without months
+                                archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
                         }
-                        // Onclick management
-                        displayStyle = 'none';
+                        archiveYear.style.display = displayStyle;
                     }
-                    archiveYear.style.display = displayStyle;
+                    return false;
                 }
-                return false;
-            }
-            
-            $('.plustext').click(function() {
-                return false; 
-            });
-            
-            {% list Blog.Archives %}
-                 {% if Archive.Year != "now"|date("Y") %}
-                    switch_arch('{{Archive.Year}}');
-                {% endif %}
-            {% endlist %}
+        
+                {% list Blog.Archives %}
+                    {% if Archive.Year != "now"|date("Y") %}
+                        switch_arch('{{ Archive.Year }}');
+                    {% endif %}
+                {% endlist %}             
+            {% endif %}
 
             {% if Custom('google_analytics') is not empty %}
                 <!-- Google Analytics -->
@@ -1131,6 +1128,11 @@
             {% endif %}
     
             $(document).ready(function() {
+                {% if isSingle or isSpecial %}
+                     $('.plustext').click(function() {
+                        return false; 
+                    });
+                {% endif %}
                 {% if not isSingle %}
                     // Thumbs hover
                     $(function() {
@@ -1144,18 +1146,16 @@
                     });
                 {% endif %}
                 
-                {% if not isIndex %}
-                    // Fancybox
-                    $(".ob-section-images a, .ob-link-img, .blog-avatar").attr("rel", "fancybox");
-                    $("a[rel=fancybox]").fancybox({
-                        'overlayColor'  : '#333', 
-                        'overlayShow'   : true,
-                        'titlePosition' : 'over',
-                        'transitionIn'  : 'fadin',
-                        'transitionOut' : 'fadin',
-                        'type'          : 'image' 
-                    });
-                {% endif %}
+                // Fancybox
+                $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+                $("a[rel=fancybox], .blog-avatar").fancybox({
+                    'overlayColor'  : '#333', 
+                    'overlayShow'   : true,
+                    'titlePosition' : 'over',
+                    'transitionIn'  : 'fadin',
+                    'transitionOut' : 'fadin',
+                    'type'          : 'image' 
+                });
                                 
                 // Template script onload
                 (function() {
