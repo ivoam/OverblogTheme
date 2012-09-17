@@ -96,7 +96,7 @@
         
         <meta name="tag:pinned_tag:label.pinnedTag" group="Slider" />
         
-        <meta name="image:custom_default_post_cover:Define default post cover" default="http://www.vivienkaufinger.com/ob/photofolio/default_cover.jpg" group="Home" />
+        <meta name="image:custom_default_post_cover:Define default post cover" default="http://assets.over-blog-kiwi.com/themes/34/images/default_cover.jpg" group="Home" />
         
         <meta name="list:custom_titles_font:Titles font" items="Aladin, Boogaloo, Cookie, Dosis, Kranky, Lusitana, Marmelad, Montez, Oxygen, Playball" default="Dosis" group="Design" />
         <meta name="color:custom_page_background_color:Page background color" default="#1F1F1F" group="Design" />
@@ -236,7 +236,7 @@
                         .post .cover:hover img {-webkit-opacity: 0.5; -moz-opacity: 0.5; -ms-opacity: 0.5; -o-opacity: 0.5; opacity: 0.5;}
                         .post .snippet {margin-bottom: 20px; {% if not isSingle or not isSpecial %}max-height: 80px;{% endif %} overflow: hidden;}
                         .post .buttons {min-height: 0;}
-                        .comment-count {background-color: #13c5ff; background: rgba(34, 34, 34, 0.7) url(http://vivienkaufinger.com/ob/photofolio/bubble.png) no-repeat 40px 9px; bottom: -30%; display: block; height: 30%; position: absolute; -webkit-transition: bottom 200ms ease 0s; -moz-transition: bottom 200ms ease 0s; -ms-transition: bottom 200ms ease 0s; -o-transition: bottom 200ms ease 0s; transition: bottom 200ms ease 0s; width: 100%;}
+                        .comment-count {background-color: #13c5ff; background: rgba(34, 34, 34, 0.7) url(http://assets.over-blog-kiwi.com/themes/34/images/bubble.png) no-repeat 40px 9px; bottom: -30%; display: block; height: 30%; position: absolute; -webkit-transition: bottom 200ms ease 0s; -moz-transition: bottom 200ms ease 0s; -ms-transition: bottom 200ms ease 0s; -o-transition: bottom 200ms ease 0s; transition: bottom 200ms ease 0s; width: 100%;}
                             .comment-count a {color: #FFF; display: block; font-weight: bold; height: 100%; padding: 7px 0 0 12px; text-align: center; width: 100%;}
                         .post .cover:hover .comment-count {bottom: 0;}
                     .post .meta {font-size: 18px; margin-bottom: 15px;}
@@ -328,7 +328,7 @@
                         .sidebar .bio img:hover {-webkit-opacity: 0.5; -moz-opacity: 0.5; -ms-opacity: 0.5; -o-opacity: 0.5; opacity: 0.5;}
                         .sidebar .button {margin: 30px 0 0;}
 
-                        .sidebar .follow li {background: url(http://vivienkaufinger.com/ob/photofolio/social.png) no-repeat; height: 40px; margin-bottom: 15px; max-width: 100%;}/* http://www.yootheme.com/icons */
+                        .sidebar .follow li {background: url(http://assets.over-blog-kiwi.com/themes/34/images/social.png) no-repeat; height: 40px; margin-bottom: 15px; max-width: 100%;}/* http://www.yootheme.com/icons */
                         .sidebar .follow .fb {background-position: left top;}
                         .sidebar .follow .twt {background-position: left center;}
                         .sidebar .follow .rss {background-position: left bottom;}
@@ -786,7 +786,7 @@
                                             {% if Post.Cover is not empty %}
                                                 <img alt="" src="{{ Post.Cover|resize(222,122)|crop }}" width="222" height="122" alt="" />
                                             {% else %}
-                                                <img src="{{ Custom('custom_default_post_cover')|default('http://www.vivienkaufinger.com/ob/photofolio/default_cover.jpg')|resize(222,122)|crop }}" width="222" height="122" alt="" />
+                                                <img src="{{ Custom('custom_default_post_cover')|default('http://assets.over-blog-kiwi.com/themes/34/images/default_cover.jpg')|resize(222,122)|crop }}" width="222" height="122" alt="" />
                                             {% endif %}
                                         </a>
                                         {%  if Post.ShowComments is not empty %}
