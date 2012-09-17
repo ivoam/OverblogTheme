@@ -2171,19 +2171,17 @@
                 }
             }(document,"script","twitter-wjs"); 
 
-            {% if Custom('share_service') == 'Google' or Custom('share_service') == 'All' %}
-                // Google + button
-                window.___gcfg = {lang: '{{ Blog.Lang }}'};
-            
-                (function() {
-                    var po = document.createElement('script'); 
-                        po.type = 'text/javascript'; 
-                        po.async = true;
-                        po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0]; 
-                        s.parentNode.insertBefore(po, s);
-                })();
-            {% endif %}
+            // Google + button
+            window.___gcfg = {lang: '{{ Blog.Lang }}'};
+        
+            (function() {
+                var po = document.createElement('script'); 
+                    po.type = 'text/javascript'; 
+                    po.async = true;
+                    po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; 
+                    s.parentNode.insertBefore(po, s);
+            })();
 
             {% if Custom('google_analytics') is not empty %}
                 // Google Analytics 
@@ -2212,8 +2210,8 @@
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 // Fancy box
-                $(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox"); 
-                $("a[rel=fancybox]").fancybox({
+                $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox"); 
+                $("a[rel=fancybox], .avatar").fancybox({
                     'overlayShow'   : true,
                     'titlePosition' : 'over',
                     'transitionIn'  : 'fadin',
