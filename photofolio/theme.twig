@@ -206,7 +206,7 @@
                 #search .submit {background: #FFF url(http://assets.over-blog-kiwi.com/themes/34/images/search.gif) center center no-repeat; border: none; cursor:pointer; display:block; float: right; height: 30px; margin-left: 4px; width: 30px;}
                 
                 #menu {float: right; max-width: 520px; margin: 40px 19px 40px 0;}
-                #menu li {float: left; padding-right: 28px;}
+                #menu li {display: inline-block; padding-right: 28px;}
                 #menu li.end {padding-right: 0;}
                 #menu a {background: url(http://assets.over-blog-kiwi.com/themes/34/images/menu_marker.png) 0 4px no-repeat; color: {{ Custom('custom_header_font_color')|default('#FFF') }}; display: block; font-size: 16px; max-width: 100%; overflow: hidden; padding-left: 18px; text-overflow: ellipsis; text-decoration: none; text-transform: capitalize; white-space: nowrap;}
                 #menu a:hover, 
@@ -215,7 +215,6 @@
                 #menu li ul {background: {{ Custom("custom_page_background_color")|default('#1F1F1F') }}; -webkit-border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px; -ms-border-radius: 0 0 5px 5px; -o-border-radius: 0 0 5px 5px; border-radius: 0 0 5px 5px; -webkit-opacity: 0; -moz-opacity: 0; -ms-opacity: 0; -o-opacity: 0;  opacity: 0; padding-bottom: 7px; position: absolute; -webkit-transition: opacity 400ms ease; -moz-transition: opacity 400ms ease; -ms-transition: opacity 400ms ease; -o-transition: opacity 400ms ease; margin-right: 8px; transition: opacity 400ms ease; visibility: hidden; width: 180px; z-index: 1000;}
                 #menu li:hover ul { -webkit-opacity: 1; -moz-opacity: 1; -ms-opacity: 1; -o-opacity: 1; opacity: 1; visibility: visible;}
                 #menu li ul li {display: block; float: none; padding: 2px 5px;}
-                #menu li:hover ul li a {display: block; visibility: visible;}
                 
                 #gallery {height: 520px; margin: 0 0 -70px; width: 100%;}
                 #myRoundabout {height: 100%; margin-left: -9px; width: 100%;}
@@ -1006,13 +1005,6 @@
                         }
                         obSearchForm();
                     {% endif%}
-                    
-                    // Archives
-                    {% list Blog.Archives %}
-                        {% if Archive.Year != "now"|date("Y") %}
-                            switch_arch('{{ Archive.Year }}');
-                        {% endif %}
-                    {% endlist %} 
                 })();                
 
                 // posts border / background management
