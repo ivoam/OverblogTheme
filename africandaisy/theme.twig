@@ -895,9 +895,9 @@
         <meta name="string:custom_menu_1_tag:Menu tag 1" group="Navigation" />
         <meta name="string:custom_menu_1_title:Menu tag 1 custom title" default="My pinned posts" group="Navigation" />
         
-        <meta name="string:custom_footer_1_tag:Footer list 1 tag" group="Footer" />
-        <meta name="string:custom_footer_2_tag:Footer list 2 tag" group="Footer" />
-        <meta name="string:custom_footer_3_tag:Footer list 3 tag" group="Footer" />
+        <meta name="tag:custom_footer_1_tag:Footer list 1 tag" group="Footer" />
+        <meta name="tag:custom_footer_2_tag:Footer list 2 tag" group="Footer" />
+        <meta name="tag:custom_footer_3_tag:Footer list 3 tag" group="Footer" />
         
         <meta name="list:custom_titles_font:Titles font" items="Aladin, Boogaloo, Cookie, Crushed, Dosis, Electrolize, Flavors, Georgia, Italiana, Italianno, Julee, Kranky, Ledger, Lobster, Lusitana, Marmelad, Metamorphous, Miltonian, Montez, Nosifer, Ovo, Oxygen, Philosopher, Plaster, Playball, Redressed, Rochester, Sail, Salsa, Sancreek, Signika, Smokum, Sunshiney, Wellfleet" default="Georgia" group="Design" />
         <meta name="color:custom_page_background_color:Page background color" default="#510C21" group="Design" />
@@ -1216,7 +1216,7 @@
                             <ul>
                                 {% list Blog.TaggedPosts(Custom('custom_footer_1_tag'), 5) %}
                                     <li>
-                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ Post.PermaLink }}">
+                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ TaggedPost.Permalink }}">
                                             {% if TaggedPost.Title is not empty %}
                                                 {{ TaggedPost.Title }}
                                             {% else %}
@@ -1234,7 +1234,7 @@
                             <ul>
                                 {% list Blog.TaggedPosts(Custom('custom_footer_2_tag'), 5) %}
                                     <li>
-                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ Post.PermaLink }}">
+                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ TaggedPost.Permalink }}">
                                             {% if TaggedPost.Title is not empty %}
                                                 {{ TaggedPost.Title }}
                                             {% else %}
@@ -1252,7 +1252,7 @@
                             <ul>
                                 {% list Blog.TaggedPosts(Custom('custom_footer_3_tag'), 5) %}
                                     <li>
-                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ Post.PermaLink }}">
+                                        <a title="{{ Lang.Get('Read full article') }}" href="{{ TaggedPost.Permalink }}">
                                             {% if TaggedPost.Title is not empty %}
                                                 {{ TaggedPost.Title }}
                                             {% else %}
