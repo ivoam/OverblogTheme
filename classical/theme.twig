@@ -177,11 +177,12 @@
         .head {background: url("http://assets.over-blog-kiwi.com/themes/1/images/header.jpg") no-repeat; width: 986px; height: 240px; padding-top: 40px;}
 
         /*---- Logo ----*/
-        .logo {float: left; width: 640px; line-height: 34px; overflow: hidden;}
+        .logo {float: left; width: 640px; overflow: hidden;}
+        .logo h1 {float: left;}
         .logo a,
         .logo a:visited,
-        .logo a:hover {float: left; margin-right: 10px; padding-right: 10px; text-shadow: 0px 2px 1px #000; border-right: 1px solid #1a1a1a; color: #FFF; font-size: 30px; text-decoration: none;}
-        .slogan {float:left; color: #a6a5a5; font-style: italic; font-size: 14px; line-height: 20px; text-shadow: 0px 1px 0px #000;}
+        .logo a:hover {line-height: 34px; margin-right: 10px; padding-right: 10px; text-shadow: 0px 2px 1px #000; border-right: 1px solid #1a1a1a; color: #FFF; font-size: 30px; text-decoration: none;}
+        .slogan {float:left; color: #a6a5a5; font-style: italic; font-size: 14px; line-height: 34px; text-shadow: 0px 1px 0px #000;}
 
         /*---- Search ----*/
         .search {float: right; position: relative;}
@@ -479,9 +480,6 @@
                         {% if isIndex %}
                             <!-- Index Page -->
                             {% if Custom('custom_hide_widget_slider') == false %}
-                                {% if Custom('pinned_tag') is not empty %}
-                                    <strong>#{{ Custom('pinned_tag') }}</strong>
-                                {% endif %}
                                 <div id="slider" class="theme-default">
                                     {% if Custom('pinned_tag') is not empty %}
                                         {% list Blog.TaggedPosts(Custom('pinned_tag'), 10) %}
