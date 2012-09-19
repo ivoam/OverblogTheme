@@ -114,6 +114,11 @@
 			<meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
 		{% endif %}
 	
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
 		<!-- includes -->
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
 
@@ -901,10 +906,6 @@
 		</style>
 		
 		<!-- End CSS -->
-	
-		<!--[if lt IE 9]>
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
 	</head>
 	<body>
 		<div id="fb-root"></div>
@@ -1139,17 +1140,19 @@
 		{% if Custom('custom_hide_widget_follow_us') == false %}
 			<div class="follow">
 				{% if Custom('facebook_username') is not empty %}
-					<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank">{{ Lang.Get('Follow me on') }} Facebook</a>
+					<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook" target="_blank"></a>
 				{% endif %}
 				{% if Custom('twitter_username') is not empty %}
-				<a class="tw" href="http://twitter.com/{{ Custom('twitter_username') }}" target="_blank">{{ Lang.Get('Follow me on') }} Twitter</a>
+				<a class="tw" href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter" target="_blank"></a>
 				{% endif %}
-				<a class="rss" href="{{ Blog.RssUrl }}" target="_blank">{{ Lang.Get('Subscribe to') }} RSS {{ Lang.Get('feed') }}</a>
+				<a class="rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subscribe to') }} RSS {{ Lang.Get('feed') }}" target="_blank"></a>
 			</div>
 		{% endif %}
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<script src="http://vivienkaufinger.com/ob/jquery.ias.min.js"></script>
+		<!--[if !IE 8]>
+			<script src="http://vivienkaufinger.com/ob/jquery.ias.min.js"></script>
+		<![endif]-->
 		<script src="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 		
 		<script>
