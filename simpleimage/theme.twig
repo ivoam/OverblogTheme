@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ Blog.Lang|default('en') }}">
-    <head>
+	<head>
 		<!-- shortcut:[Meta] -->
 		<!-- title, description, keyword, robots -->
 		{% if isSingle%}
 			<title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
-            <meta name="description" content="{% if isPage %}{% list Blog.ListPages %}{{ ListPage.Snippet }}{% endlist %}{% else %}{{ Post.Snippet }}{% endif %}" />
+            <meta name="description" content="{{ Post.Snippet }}" />
             <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
             <meta name="robots" content="index,follow" />
 		{% elseif isTag and Tag is not empty %}
@@ -19,7 +19,7 @@
 			<meta name="keywords" content="{{ Search|title }}" />
 			<meta name="robots" content="noindex" />
 		{% else %}
-			<title>{{Blog.Title}}</title>
+			<title>{{ Blog.Title }}</title>
 			<meta name="description" content="{{ Blog.Description }}" />
 			<meta name="robots" content="index,follow" />
 		{% endif %}
@@ -71,9 +71,7 @@
 		{% endif %}
 	
 		<!-- shortcut:[Options] -->
-		<meta name="constant:displayArticlesLimit" content="10" />
-		<!-- options -->
-		<meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+		<meta name="list:nb_sections:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="2" />
 		
 		<meta name="list:background:Choose the background image" items="Beach, Desert, Forest, Sky, Storm" default="Forest" group="Design" />
 		<meta name="image:background_custom:Define your background image" group="Design" />
@@ -85,20 +83,19 @@
 		<meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
 		<meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
 	
-		<meta name="string:footer:label.footer" default="Theme : Simple Image &copy; 2012" group="Wording"  />
+		<meta name="string:wording_footer:label.footer" default="Theme: Simple Image &copy; 2012" group="Footer" />
 	
 	    <meta name="string:twitter_username:label.twitterUsername" group="Social" />
-        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
-        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+		<meta name="string:facebook_username:label.facebookUsername" group="Social" />
+		<meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+		
+		<meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+		<meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
 
-        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
-        <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
-	    <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
-
-	    <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
-	    <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
-	    <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
-	    <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
+		<meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+		<meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+		<meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+		<meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 	
 		<!-- favicon -->
 		{% if Blog.FaviconUrl is not empty %}
@@ -119,6 +116,8 @@
 	
 		<!-- includes -->
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
+
+		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 	
 		<!-- shortcut:[Styles] -->
 		<style type="text/css">
@@ -159,9 +158,9 @@
 			/*** Theme*/
 			html {
 				{% if Custom('background_custom') is not empty %}
-					background: url({{ Custom('background_custom') | default('Forest') }}) no-repeat center center fixed;
-				{% elseif Custom('background') is not empty %}
-					background: url(http://assets.over-blog-kiwi.com/themes/14/images/bg-{{ Custom('background') }}.jpg) no-repeat center center fixed;
+					background: url({{ Custom('background_custom') }}) no-repeat center center fixed;
+				{% elseif Custom('background')|default('Forest') is not empty %}
+					background: url(http://assets.over-blog-staging.com/themes/14/images/bg-{{ Custom('background')|default('Forest') }}.jpg) no-repeat center center fixed;
 				{% endif %}
 				-webkit-background-size: cover;
 				   -moz-background-size: cover;
@@ -208,15 +207,13 @@
 			.header {
 				color: white;
 				font-family: 'Leckerli One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-				display: block;
-				margin: 15px 20px;
+				padding: 8px;
 			}
 			
-			.header .logo a {
-				display: block;
-				color: {{ Custom('title_color') }};
+			.header .logo a{
 				font-size: 40px;
-				line-height: 50px;
+				line-height: 48px;
+				color: {{ Custom('title_color') }};
 				-webkit-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				   -moz-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 					 -o-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
@@ -224,10 +221,9 @@
 			}
 			
 			.header .description {
-				color: rgba(255,255,255, 0.8);
 				font-size: 22px;
-				line-height: 28px;
-				margin-top: 5px;
+				margin-top: 0.8em;
+				color: rgba(255,255,255, 0.8);
 			}
 			
 			.main {
@@ -248,6 +244,9 @@
 				font-size: 23px;
 				margin: 20px 0 30px;
 				text-align: center;
+			}
+			.indications:first-letter {
+				text-transform: capitalize;
 			}
 			.indications span {
 				font-family: 'Leckerli One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -280,6 +279,12 @@
 			.index .readmore {
 				margin-top: 10px;
 				margin-bottom: 10px;
+			}
+			.index .readmore a {
+				display: inline-block;
+			}
+			.index .readmore a:first-letter {
+				text-transform: capitalize;
 			}
 	
 			.index .post {
@@ -362,13 +367,13 @@
 			/* Section File */
 	        .index .ob-section-file .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none; display: block;}
 	        .index .ob-section-file .ob-ctn a.ob-link,
-	        .index .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom('font_color') }}; max-width: 270px; text-decoration: underline; text-shadow: none;}
-	        .index .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom('font_color') }}; text-decoration: none;}
-            .ob-section-file .ob-icon {background-image: url(http://assets.over-blog-kiwi.com/b/blog/bundles/overblogblogblog/images/paperclip.png?v=1);}
+	        .index .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-width: 270px; text-decoration: underline; text-shadow: none;}
+	        .index .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom('font_color')|default('#9C9A9A') }}; text-decoration: none;}
+            .ob-section-file .ob-icon {background-image: url(http://assets.over-blog-staging.com/b/blog/bundles/overblogblogblog/images/paperclip.png?v=1);}
 
 			 /* Section Quote */
 			.index .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none; margin-bottom: 20px;}
-			.index .ob-section-quote p {color: {{ Custom('font_color') }}; min-height: 20px;}
+			.index .ob-section-quote p {color: {{ Custom('font_color')|default('#9C9A9A') }}; min-height: 20px;}
 			.index .ob-section-quote p:before {color: #EEE; margin: -82px 0 0 -87px;}
 			.index .ob-section-quote p:after {color: #EEE; margin: -30px 0 0 -0;}
 	        .index .ob-section-quote p.ob-author,
@@ -379,8 +384,8 @@
 	        .index .ob-section-link .ob-media-left {margin: 0 !important;}
 	        .index .ob-section-link p.ob-url {background: #EEE; margin: 0; max-height: 24px; max-width: 160px; padding-bottom: 0px\9;}
 	        .index .ob-section-link p.ob-title, 
-	        .index .ob-section-link p.ob-snippet {color: {{ Custom('font_color') }}; margin-bottom: 10px; margin-left: 20px;}
-	        .index .ob-section-link p.ob-title .ob-link {color: {{ Custom('font_color') }}; max-height: 42px; overflow: hidden;}
+	        .index .ob-section-link p.ob-snippet {color: {{ Custom('font_color')|default('#9C9A9A') }}; margin-bottom: 10px; margin-left: 20px;}
+	        .index .ob-section-link p.ob-title .ob-link {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-height: 42px; overflow: hidden;}
         	.index .ob-section-link p.ob-snippet {margin-bottom: 35px; max-height: 30px; overflow: hidden;}
 	        .index .ob-section-link .ob-img {float: left; width: 170px;}
 	        .index .ob-section-link .ob-desc {margin-top: 5px;}
@@ -425,11 +430,9 @@
 				   -moz-border-radius: 5px;
 				    -ms-border-radius: 5px;
 				     -o-border-radius: 5px;
+				max-width: 100%;
 			}
-	        .single .post ul{
-	            margin: 0 0 12px 0;
-	        }
-			.single ol li {list-style: decimal; margin-left: 20px;}
+			.single ol li {list-style: decimal; margin-left: 35px;}
 			.single ul li {list-style: disc; margin-left: 20px;}
 			.single pre {border-left: 3px solid #3A3A3A; padding-left: 4px; margin-top: 10px; margin-bottom: 10px;}
 			.body .ob-text h3, 
@@ -439,14 +442,14 @@
 			/* Section File */
 	        .single .ob-section-file .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none; display: block; max-width: 100%;}
 	        .single .ob-section-file .ob-ctn a.ob-link,
-	        .single .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom('font_color') }}; max-width: 513px; text-decoration: underline; text-shadow: none;}
-	        .single .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom('font_color') }}; text-decoration: none;}
+	        .single .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-width: 513px; text-decoration: underline; text-shadow: none;}
+	        .single .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom('font_color')|default('#9C9A9A') }}; text-decoration: none;}
 
 			/* Section Quote */
 			.single .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none; margin-bottom: 20px;}
-			.single .ob-section-quote p {color: {{ Custom('font_color') }}; min-height: 20px;}
+			.single .ob-section-quote p {color: {{ Custom('font_color')|default('#9C9A9A') }}; min-height: 20px;}
 			.single .ob-section-quote p:before {color: #EEE; margin: -82px 0 0 -87px;}
-			.single .ob-section-quote p:after {color: #EEE; margin: -30px 0 0 -0;}
+			.single .ob-section-quote p:after {color: #EEE; margin: -49px 0 0 0;}
 	        .single .ob-section-quote p.ob-author,
 	        .single .ob-section-quote p.ob-source {background: #EEE; color: gray; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 24px; max-width: 510px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
 	        .single .ob-section-quote p.ob-author .ob-link,
@@ -459,8 +462,8 @@
 	        .single .ob-section-link .ob-media-left {margin: 0;}
 	        .single .ob-section-link p.ob-url {background: #EEE; margin: 0; max-height: 24px; max-width: 390px; padding-bottom: 0\9;}
 	        .single .ob-section-link p.ob-title, 
-	        .single .ob-section-link p.ob-snippet {color: {{ Custom('font_color') }}; margin-bottom: 10px; margin-left: 20px;}
-	        .single .ob-section-link p.ob-title .ob-link {color: {{ Custom('font_color') }}; max-height: 42px; overflow: hidden;}
+	        .single .ob-section-link p.ob-snippet {color: {{ Custom('font_color')|default('#9C9A9A') }}; margin-bottom: 10px; margin-left: 20px;}
+	        .single .ob-section-link p.ob-title .ob-link {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-height: 42px; overflow: hidden;}
         	.single .ob-section-link p.ob-snippet {margin-bottom: 35px; max-height: 30px; overflow: hidden;}
 	        .single .ob-section-link .ob-img {float: left; margin-bottom: 0; width: 170px;}
 	        .single .ob-section-link .ob-desc {margin-top: 5px;}
@@ -476,26 +479,31 @@
 				width: 400px;
 			}
 			.item-content {
-				-moz-border-radius: 5px;
 				-webkit-border-radius: 5px;
-				border-radius: 5px;
+				   -moz-border-radius: 5px;
+				   	-ms-border-radius: 5px;
+				     -o-border-radius: 5px;
+						border-radius: 5px;
 				-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-				-moz-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-				-o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-				box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+				   -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+				   	-ms-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+					 -o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+						box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				position: relative;
 				clear: both;
-				color: {{ Custom('font_color') }};
+				color: {{ Custom('font_color')|default('#9C9A9A') }};
 				font-size: 116%;
 				line-height: 1.4;
 				padding: 15px;
 				position: relative;
-				text-shadow: 0 1px 0 white;
+				{% if Custom('background_item') == '#F5F5F5' %}
+					text-shadow: 0 1px 0 white;
+				{% endif %}
 	            word-wrap: break-word;
 			}
-	        .item-content{
+	        .item-content {
 	            {% if Custom('background_item') %}
-	                background: {{ Custom('background_item') }};
+	                background: {{ Custom('background_item')|default('#F5F5F5') }};
 	            {% else %}
 	                background: #F5F5F5;
 	            {% endif %}
@@ -505,9 +513,13 @@
 				color: #3A3A3A;
 				font-size: 20px;
 				font-weight: normal !important;
+				line-height: 1.1;
 				margin-bottom: 8px;
 				word-wrap: break-word;
-				line-height: 1.1;
+			}
+			.item-content .title:first-letter,
+			.special h3:first-letter {
+				text-transform: capitalize;
 			}
 			.item-content a,
 			.item-content a:visited {
@@ -531,7 +543,9 @@
 				color: #9C9A9A;
 				font-size: 16px;
 				line-height: 1.4;
-				text-shadow: 0 1px 0 white;
+				{% if Custom('background_item') == '#F5F5F5' %}
+					text-shadow: 0 1px 0 white;
+				{% endif %}
 			}
 			
 			.item-content .meta .author,
@@ -553,6 +567,9 @@
 				margin-top: 10px;
 				margin-bottom: 10px;
 			}
+			.item-content .body:first-letter {
+				text-transform: capitalize;
+			}
 			
 			.item-content .body h1,
 			.item-content .body h2,
@@ -560,7 +577,7 @@
 			.item-content .body h4,
 			.item-content .body h5 {
 				font-weight: bold;
-				color :#3A3A3A;
+				color: #3A3A3A;
 				margin-bottom: 10px;
 			}
 			
@@ -588,8 +605,12 @@
 			}
 			
 			.item-content .body .ob-text ul li {
-				list-style-type:disc;
+				list-style-type: disc;
 				margin-left: 20px;
+			}
+			.item-content .body .ob-text ol li {
+				list-style-type: decimal;
+				margin-left: 45px;
 			}
 			
 			.item-content .body .ob-text li p {
@@ -625,7 +646,12 @@
 			}
 			
 			.navigation a {
+				display: inline-block;
 				font-size: 16px;
+			}
+			.navigation a:first-letter,
+			.navigation .prev:first-letter {
+				text-transform: capitalize;
 			}
 			
 			
@@ -639,14 +665,14 @@
 			
 			.footer {
 				{% if Custom('custom_hide_widget_search_form') == true %}
-					margin: -20px 0 20px;
+					margin: {% if isSingle or isSpecial %}0{% else %}-20px{% endif %} 0 20px;
 				{% endif %}
 	        	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 	        }
 			.footer p,
 			.footer a,
 			.footer a:visited {
-				color: {{ Custom('footer_color') }};
+				color: {{ Custom('footer_color')|default('#F5F5F5') }};
 				text-align: center;
 			}
 			.footer a:hover {
@@ -658,8 +684,9 @@
 			
 			.footer span {
 				display: inline-block;
-				margin-left: 4px;
-				margin-right: 4px;
+			}
+			.footer span:first-letter {
+				text-transform: capitalize;
 			}
 	
 			.search {
@@ -677,7 +704,7 @@
 				        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				padding: 5px;
 			{% if Custom('background_item') != '#F5F5F5' %}
-				background-color: {{ Custom('background_item') }};
+				background-color: {{ Custom('background_item')|default('#F5F5F5') }};
 			{% else %}
 				background-color: rgba(255,255,255,0.8);
 			{% endif %}
@@ -770,6 +797,12 @@
 				margin-bottom: 20px;
 				text-align: center;
 			}
+			.main .posts .load-more a {
+	        	display: inline-block;
+			}
+			.main .posts .load-more a:first-letter {
+	        	text-transform: capitalize;
+			}
 			
 	        .main .posts .read-more {
 				margin: 20px 0 0 0;
@@ -802,35 +835,23 @@
 			}
 			
 			/* Infinite Scroll loader */
-			#infscr-loading { 
+			.loader { 
 			  color: #FFF;
-			  background-color: #000;
+			  background: #FFF;
+			  background: rgba(255,255,255,0.9);
 			  -webkit-border-radius: 10px;
 				 -moz-border-radius: 10px;
 				  -ms-border-radius: 10px;
 				   -o-border-radius: 10px;
 					  border-radius: 10px;
 			  bottom: 60px;
-			  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 			  font-size: 16px;
-			  left: 45%;
-			  -webkit-opacity: 0.8;
-			  	 -moz-opacity: 0.8;
-			  	  -ms-opacity: 0.8;
-			  	   -o-opacity: 0.8;
-			  	      opacity: 0.8;
-			  padding: 10px;
+			  left: 48%;
+			  padding: 10px 15px;
 			  position: fixed;
 			  text-align: center;
-			  width: 150px;
 			  z-index: 100;
-			  
 			}
-				#infscr-loading img {
-					height: 60px;
-					margin: 0 auto;
-					width: 60px;
-				}
 			
 			.follow {
 				bottom: 10px;
@@ -838,7 +859,7 @@
 				right: 0px;
 			}
 				.follow a {
-					background: #F5F5F5 url("http://assets.over-blog-kiwi.com/themes/14/images/social.png") no-repeat;
+					background: #F5F5F5 url("http://assets.over-blog-staging.com/themes/14/images/social.png") no-repeat;
 					-webkit-border-radius: 6px;
 					   -moz-border-radius: 6px;
 					    -ms-border-radius: 6px;
@@ -881,21 +902,9 @@
 		
 		<!-- End CSS -->
 	
-		<!-- shortcut:[Javascript] -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-		{% if not isSingle or isSpecial %}
-			<script src="http://assets.over-blog-kiwi.com/themes/13/js/jquery.infinitescroll.min.js" type="text/javascript"></script>
-		{% endif %}
-		<script src="http://assets.over-blog-kiwi.com/themes/14/js/modernizr.js" type="text/javascript"></script>
-		
-		<!-- Fancybox -->
-		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
-		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-	
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<!-- End Javascript -->
 	</head>
 	<body>
 		<div id="fb-root"></div>
@@ -942,7 +951,7 @@
 					{% list Posts %}
 						<!-- Post item -->
 						<div class="post{% list Post.Sources %} {{ Source }}{% endlist %}">
-								{% if not isSingle and Post.Cover is not empty and Custom('display_mode') == 'Summary' %}
+								{% if not isSingle and Post.Cover is not empty and Custom('nb_sections') == 'Summary' %}
 									<div class="item-cover">
 										<a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}" class="border-img">
 											<img src="{{ Post.Cover|resize(400,266)|crop }}" alt="{{ Post.Title }}" title="{{ Post.Title }}" width="400" height="266" />
@@ -959,8 +968,9 @@
 														{% if Post.Title is not empty %}
 															{{ Post.Title }}
 														{% else %}
+															{{ Lang.Get('published from') }} 
 															{% list Post.Sources %}
-																{{ Lang.Get('A post from') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %} {{ Lang.Get('and') }} {% endif %}{% endlist %}
+																{{ Lang.Get(Source) }} {% if not loop.last %} {{ Lang.Get('and') }} {% endif %}
 															{% endlist %}
 														{% endif %}
 												{% if not isSingle %}
@@ -971,7 +981,7 @@
 												{% if Post.Author is not empty %}
 													<span class="author">{{ Post.Author }}</span> — 
 												{% endif %}
-												<time pubdate>{{ Post.Date|datel(Lang.Get('Default date format')) | title }}</time> 
+												<time pubdate>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time> 
 												{% list Post.Tags %}
 													{% if loop.first %}
 														— <span class="tags">
@@ -982,9 +992,9 @@
 										</hgroup>
 									</header>
 									<div class="body">
-										{% if isSingle or Custom('display_mode') == 'All' %}
+										{% if isSingle or Custom('nb_sections') == 'All'|default('All') %}
 											{{ Post.Body }}
-										{% elseif Custom('display_mode') == 'Summary' %}
+										{% elseif Custom('nb_sections') == 'Summary' %}
 											{% list Post.Sources %}
 												{% if loop.first %}
 													{% if Source == 'TW' %}
@@ -995,23 +1005,22 @@
 												{% endif %}
 											{% endlist %}
 										{% else %}
-											{{ Post.Body(Custom('display_mode')) }}
+											{{ Post.Body(Custom('nb_sections')) }}
 										{% endif %}
 		
 										{% if not isSingle %}
 											<div class="readmore">
-												{% if Custom('display_mode') != 'All' %}
+												{% if Custom('nb_sections') != 'All' %}
 													<a href="{{ Post.Permalink}}" title="{{Post.Title}}">{{ Lang.Get('Read this post') }}</a>
 				                                    &nbsp;—&nbsp;
-				                                {% elseif Post.ShowComments %}
+				                                {% else %}
 				                                	<a href="{{ Post.Permalink}}" title="{{ Lang.Get('Comment this post') }}">{{ Lang.Get('Comment this post') }}</a>
 				                                    &nbsp;—&nbsp;
 				                                {% endif %}
-				                                {% if Post.ShowComments %}
 			                                    <!-- Comments count -->
-				                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+			                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 			                                        <a title="{{ Lang.Get('comments') }}" class="comments" href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread"></a>
-				                                    {% else %}
+			                                    {% else %}
 			                                        <a title="{{ Lang.Get('comments') }}" class="comments" href="{{ Post.PermaLink }}#comments">
 			                                            {% if Custom("comment") == "Facebook" %}
 			                                                <fb:comments-count href={{ Blog.Url }}{{ Post.Permalink }}></fb:comments-count> {{ Lang.Get('comment(s)') }}
@@ -1019,14 +1028,13 @@
 			                                                {{ Post.CommentCount(Lang.Get('comment'), Lang.Get('comments')) }}
 			                                            {% endif %}
 			                                        </a>
-				                                    {% endif %}
 			                                    {% endif %}
 											</div>
 										{% endif %}
 									</div>
 		
 									<div class="social">
-										{% if Custom('share_service') != 'None' or isSingle %}
+										{% if Custom('share_service') != 'None'|default('All') or isSingle %}
 	                                    	{% if isSingle and Custom('share_service') != 'None' %}
 	                                    		<h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
 	                                    	{% endif %}
@@ -1062,7 +1070,7 @@
 									{% endif %}
 									<!-- End Pagination -->
 		
-									{% if isSingle and not isPage and Post.ShowComments %}
+									{% if isSingle and not isPage %}
 										<div class="item-comments" id="comments">
 											{% if Custom("comment") == "Facebook" %}
 												<div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
@@ -1124,7 +1132,7 @@
 	            </form>
 			{% endif %}
 			<p>
-	        	<a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a> -<span>{{ Custom('footer') }}</span>- {{ Lang.Get('Hosted by') }} <a class="credits" href="http://overblog.com" target="_blank">Overblog</a>
+	        	<span><a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a></span>&nbsp;-&nbsp;<span>{{ Custom('wording_footer') }}</span>&nbsp;-&nbsp;<span>{{ Lang.Get('Hosted by') }}<span>&nbsp;<span><a class="credits" href="http://overblog.com" target="_blank">Overblog</a><span> 
 			</p>
 		</footer>
 		
@@ -1140,162 +1148,119 @@
 			</div>
 		{% endif %}
 
-		<!--End Footer-->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
-				$("a[rel=fancybox]").fancybox({
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="http://vivienkaufinger.com/ob/jquery.ias.min.js"></script>
+		<script src="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+		
+		<script>
+			{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                // Disqus comments count
+                var disqus_shortname = "{{ Custom('comment_disqus') }}";
+                (function () {
+                    var s = document.createElement('script'); 
+                        s.async = true;
+                        s.type = 'text/javascript';
+                        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            {% endif %} 
+
+            {% if Custom('share_service') == 'Facebook' or Custom('share_service') == 'All' or Custom('comment') == 'Facebook' %}
+	            // Facebook button + comments
+	            (function(d, s, id) {
+	                var js, fjs = d.getElementsByTagName(s)[0];
+	                if (d.getElementById(id)) return;
+	                    js = d.createElement(s); 
+	                    js.id = id;
+	                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
+	                    fjs.parentNode.insertBefore(js, fjs);
+	            }(document, 'script', 'facebook-jssdk'));
+	        {% endif %}
+
+            // Twitter button
+            !function(d,s,id){
+                var js,fjs=d.getElementsByTagName(s)[0];
+                if(!d.getElementById(id)){
+                    js=d.createElement(s);
+                    js.id=id;
+                    js.src="//platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js,fjs); 
+                }
+            }(document,"script","twitter-wjs");
+
+            {% if Custom('share_service') == 'Google +' or Custom('share_service') == 'All' %}
+	            // Google + button
+	            window.___gcfg = {lang: '{{ Blog.Lang }}'};
+	            (function() {
+	            var po = document.createElement('script'); 
+	                po.type = 'text/javascript'; 
+	                po.async = true;
+	                po.src = 'https://apis.google.com/js/plusone.js';
+	            var s = document.getElementsByTagName('script')[0]; 
+	                s.parentNode.insertBefore(po, s);
+	            })();
+	        {% endif %}
+
+            {% if Custom('google_analytics') is not empty %}
+                // Google Analytics 
+                window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+                var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+                    _gaq.push(['_trackPageview']);
+                    _gaq.push(['_trackPageLoadTime']);
+            
+                (function() {
+                    var ga = document.createElement('script'); 
+                        ga.type = 'text/javascript'; 
+                        ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; 
+                        s.parentNode.insertBefore(ga, s);
+                })();
+            {% endif %}
+
+            // Fancybox
+            $(document).ready(function() { 
+            	// Fancy box
+            	$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+				$("a[rel='fancybox']").fancybox({
 					'overlayShow'	: true,
-					'transitionIn'	: 'fadin',
-					'transitionOut'	: 'fadin',
+					'overlayColor'  : '#000',
+					'transitionIn'	: 'elastic',
+					'transitionOut'	: 'elastic',
 					'type'			: 'image'
 				});
-			});		 			
-		
-			{% if not isSingle and not isSpecial %}
-				var Scroll = new Array();
-				Scroll.PaginationPath = function ()
-				{
-					var path = window.location.pathname.replace(/\/([0-9]+)$/i, '');
-					if(path == '/')
-					{
-						path = '/page';
-					}
-	
-					path += '/';
-	
-					return path;
-				},
-				
-				Scroll.CurrentPage = function ()
-				{
-					var result = window.location.pathname.match(/\/([0-9]+)$/i);
-	
-					if(result)
-					{
-						return parseInt(result[1]);
-					}
-					else
-					{
-						return 1;
-					}
-				}
-							
-				// On document load
-				$(document).ready(function(){					
-					$('.load-more').hide();
-	
-					$('.posts').infinitescroll({
-						navSelector  : '.load-more',	// selector for the paged navigation 
-						nextSelector : '.load-more a',  // selector for the NEXT link (to page 2)
-						itemSelector : '.post',	 		// selector for all items you'll retrieve
-						loadingImg   : "http://assets.over-blog-kiwi.com/themes/13/images/loader.gif",
-						loadingText  : "{{ Lang.Get('Loading new posts...') }}",
-						loading: {
-							finishedMsg: "{{ Lang.Get('No more post') }}",
-							img: "http://assets.over-blog-kiwi.com/themes/13/images/loader.gif"
-						},
-						state        : {
-						currPage     : Scroll.CurrentPage()
-						},
-						pathParse: [Scroll.PaginationPath(),'']
-					},
-					
-					function( newElements ) {
-						$(".ob-section-images a img, .ob-link-img").attr("rel", "group1");
-						$("a[rel='group1']").fancybox({
+
+				jQuery.ias({
+					'container' 	: ".posts",
+					'item' 			: ".post",
+					'pagination' 	: ".load-more",
+					'next'			: ".load-more a",
+					'loader' 		: "<div class='loader'><img src='http://vivienkaufinger.com/ob/loader.gif' alt='' title='' /></div>",
+					onRenderComplete : function() { 
+						if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
+						
+						if (typeof twttr != "undefined") { twttr.widgets.load(); }
+						
+						if (typeof gapi != "undefined") { gapi.plusone.go(); }
+
+						{% if Custom('comment') == 'Disqus' %}
+							// Disqus comment count
+							if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS.getCount(); }
+						{% endif %}
+
+						$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+						$("a[rel='fancybox']").fancybox({
 							'overlayShow'	: true,
 							'overlayColor'  : '#000',
 							'transitionIn'	: 'elastic',
 							'transitionOut'	: 'elastic',
 							'type'			: 'image'
-						});					
-							
-						//Facebook button
-						if (typeof FB !== "undefined") { FB.XFBML.parse(document.body); }
-			
-						//Twitter button
-						if (typeof twttr !== "undefined") { twttr.widgets.load(); }
-						
-						// Google button
-						if (typeof gapi !== "undefined") { gapi.plusone.go(); }
-						
-						{% if Custom('comment') == 'Disqus' %}
-							// Disqus comment count
-							if (typeof DISQUSWIDGETS !== "undefined" ){ DISQUSWIDGETS.getCount(); }
-						{% endif %}
-					});
+						});
+					},
 				});
-			{% endif %}	
+			});
 		</script>
-		
-		
-		<!-- Google + button -->
-		<script type="text/javascript">
-		  window.___gcfg = {lang: '{{ Blog.Lang }}'};
-		
-		  (function() {
-		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-		    po.src = 'https://apis.google.com/js/plusone.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
-	
-		<!-- Twitter Script -->
-		<script type="text/javascript">
-			!function(d,s,id){
-				var js,fjs=d.getElementsByTagName(s)[0];
-				if(!d.getElementById(id)){
-					js=d.createElement(s);
-					js.id=id;
-					js.src="//platform.twitter.com/widgets.js";
-					fjs.parentNode.insertBefore(js,fjs); 
-				}
-			}(document,"script","twitter-wjs");
-		</script>
-	
-		<!-- Facebook Script -->
-		<script type="text/javascript">(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-				js = d.createElement(s); 
-				js.id = id;
-				js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712') }}";
-				fjs.parentNode.insertBefore(js, fjs);
-			}
-			(document, 'script', 'facebook-jssdk'));
-		</script>
-		
-		{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-			<!-- Disqus comments count -->
-		    <script type="text/javascript">
-		        var disqus_shortname = "{{ Custom('comment_disqus') }}";
-		        (function () {
-		            var s = document.createElement('script'); s.async = true;
-		            s.type = 'text/javascript';
-		            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-		            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-		        }());
-		    </script>
-		{% endif %}
-	
-		{% if Custom('google_analytics') is not empty %}
-			<!-- Google Analytics -->
-			 <script type="text/javascript">
-			    window.google_analytics_uacct = '{{Custom('google_analytics')}}';
-			    var _gaq = _gaq || [];
-			    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
-			    _gaq.push(['_trackPageview']);
-			    _gaq.push(['_trackPageLoadTime']);
-		
-			    (function() {
-			        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			    })();
-			</script>
-			<!-- End Google Analytics -->
-		{% endif %}
 
 		{% if Custom('custom_hide_widget_search_form') == false %}
 			<!-- Placholder Script -->
@@ -1365,4 +1330,4 @@
 	    	</script>
 	    {% endif %}
 	</body>
-</html>""
+</html>
