@@ -74,21 +74,21 @@
 
         <!-- shortcut:[Options] -->
 	    <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-    
+
         <meta name="string:footer:label.footer" default="Theme: Kesemutan &copy; 2012" group="Footer"  />
-        
-        <meta name="image:post_cover:Custom post cover" group="Options" />
-        
+
+        <meta name="image:post_cover:label.defaultPostCover" group="Options" />
+
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
 	    <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,8,9,10,20,30,40" default="10" group="Widgets" />
-		<meta name="boolean:display_widget_last:Hide Widget &quot;Last posts&quot;" group="Widgets" />
-		
+		<meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
+
 		<meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-   		        
+
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
 
@@ -98,15 +98,15 @@
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
         <!-- shortcut:[Includes] -->
-        <!-- favicon -->       
+        <!-- favicon -->
         {% if Blog.FaviconUrl is not empty %}
             <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
         {% else %}
             <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
             <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
             <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-        {% endif %}   
-       
+        {% endif %}
+
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
             <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -117,15 +117,15 @@
 
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
-        
+
         <!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
+
 		<!-- Fancybox -->
 		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
-        <!-- shortcut:[Styles] -->		
+        <!-- shortcut:[Styles] -->
         <style type="text/css">
 			/**********
 			** RESET **
@@ -150,8 +150,8 @@
 			#global {width: 1000px; margin: 0 auto;}
 
 			.clear {clear: both;}
-			
-			
+
+
 			/***********
 			** HEADER **
 			***********/
@@ -160,15 +160,15 @@
 			#title-wrapper a,
 			#title-wrapper a:visited {font-size: 30px; font-family: 'Trebuchet MS','Lucida Grande',Verdana,Arial,Halvetica,Sans-Serif; font-weight: bold; color: #3D3D3D;}
 			#description-title {font-size: 14px; text-transform: uppercase; color: #3D3D3D;}
-			
-			
+
+
 			/************
 			** CONTENT **
 			************/
 			#content-wrapper {width: 866px; margin: 0 auto; background: url('http://assets.over-blog-kiwi.com/themes/38/img/outer-bg.png') no-repeat top left;}
 			#content-inner {width: 724px; margin-left: 127px; background: url('http://assets.over-blog-kiwi.com/themes/38/img/content2.png') repeat-y top; border-left: 1px solid #B7B295;}
 			#content-left {float: left; width: 510px; margin: 0; background: url('http://assets.over-blog-kiwi.com/themes/38/img/main-top-background.png') no-repeat top right;}
-			
+
 			/** menu **/
 			#menu-wrapper {width: 448px; height: 40px; background: url('http://assets.over-blog-kiwi.com/themes/38/img/navigational.png') no-repeat left top;}
 			#menu ul {height: 30px; margin: 0; list-style: none;}
@@ -177,7 +177,7 @@
 			#menu li.active a {color: #3D3D3D; font-weight: bold;}
 			#menu li a:hover {padding: 5px 20px 8px; background-color: #d28156;}
 
-			
+
 			/** list post **/
 			#post-wrapper {margin: 30px 17px 0 22px;}
 			.post-block {width: 475px; margin-bottom: 40px; background: url('http://assets.over-blog-kiwi.com/themes/38/img/post-footer.png') no-repeat center bottom; border-bottom: 1px solid #F2F2F2; }
@@ -191,38 +191,38 @@
 
 			/** post body **/
 			.post-header {margin: 5px 0 20px 2px; font-size: 12px;}
-			.post-author, 
-			.post-date, 
+			.post-author,
+			.post-date,
 			.post-tag {margin: 0 2px 0 0; padding: 2px 4px; background-color: #F2F2F2; border: 1px dashed #C76D4B;}
 			.post-tag a {color: #C76D4B;}
 			.post-tag a:hover {text-decoration: underline;}
 			.post-cover {margin-bottom: 10px;}
 			.post-body {background: url('http://assets.over-blog-kiwi.com/themes/38/img/post-bodybgcenter.png') no-repeat left top; border-bottom: 1px solid #f2f2f2; line-height: 20px; word-wrap: break-word;}
-			.post-body h3, 
-			.post-body h4, 
+			.post-body h3,
+			.post-body h4,
 			.post-body h5 {font-family: 'Arial', 'Helvetica', sans-serif; font-weight: normal; margin: 15px 0 5px;}
 			.post-body h3 {font-size: 18px;}
 			.post-body h4 {font-size: 16px;}
 			.post-body h5 {font-size: 14px; font-weight: bold;}
-			.ob-section-text, 
-			.ob-section-images, 
-			.ob-section-video, 
-			.ob-section-audio, 
+			.ob-section-text,
+			.ob-section-images,
+			.ob-section-video,
+			.ob-section-audio,
 			.ob-section-quote {width: 100%;}
 			.ob-text p {margin-bottom: 15px;}
 			.ob-text {margin: 0 auto 5px; padding-left: 1px;}
 			.ob-text a, .ob-link {color: #3D3D3D; text-decoration: underline;}
 			.ob-text a:hover, .ob-link:hover {color: #C76D4B; text-decoration: none;}
-			.ob-text ol, 
+			.ob-text ol,
 			.ob-text ul {margin: 0 0 15px 30px;}
-			.ob-text ol p, 
+			.ob-text ol p,
 			.ob-text ul p {margin-bottom: 5px;}
 			.ob-text ol {list-style: decimal;}
 			.ob-text ul {list-style: square;}
 			.ob-text pre {background-color: #F2F2F2; border: 1px dashed #C76D4B; clear: both; display: block; padding: 10px 15px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; overflow: auto;}
-			.ob-cell, 
-			.ob-img, 
-			.ob-media, 
+			.ob-cell,
+			.ob-img,
+			.ob-media,
 			.ob-video {max-width: 475px !important;}
 			.ob-video iframe {max-height: 276px; width: 100%;}
 			.ob-section-audio .obsoundplayer .obsoundplayername {height: 31px; width: 57px; overflow: hidden;}
@@ -236,7 +236,7 @@
             .ob-section-file .ob-ctn a.ob-link,
             .ob-section-file .ob-c a.ob-link:visited {color: #C76D4B; text-decoration: underline; max-width: 388px;}
             .ob-section-file .ob-ctn a.ob-link:hover {color: #C76D4B; text-decoration: none;}
-             
+
             /* Section Quote */
             .ob-section-quote {background: #f9f4f1; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); margin-bottom: 20px;}
             .ob-section-quote .ob-quote p {color: #333; min-height: 20px;}
@@ -248,7 +248,7 @@
             .ob-section-quote p.ob-source:hover,
             .ob-section-quote p.ob-author .ob-link:hover,
             .ob-section-quote p.ob-source .ob-link:hover {color: #333 !important;}
-             
+
             /* Section Link */
             .ob-section-link .ob-ctn {background: #f9f4f1; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
             .ob-section-link .ob-media-left {margin: 0;}
@@ -262,7 +262,7 @@
             .ob-section-link .ob-url .ob-link:hover {color: #333 !important;}
 
 			.ob-desc {color: #3D3D3D; font-size: 12px; font-style: italic;}
-			
+
 			/** SEARCH **/
 			.search-block {width: 475px; margin-bottom: 40px;}
 			.search-body {padding: 10px 20px 20px 1px; font-size: 12px; line-height: 20px; word-wrap: break-word;}
@@ -280,7 +280,7 @@
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c76d4b', endColorstr='#c46846',GradientType=0 ); /* IE6-8 */
  				border: 1px solid #A3593D; color: #333; line-height: 12px; padding: 5px 10px;}
 			.search input[type="submit"]:hover {color: #FFF; cursor: pointer;}
-			
+
 			/** CONTACT **/
 			.ob-terms {color: #C76D4B; display: block; margin-top: 80px; padding-bottom: 10px; text-align: center;}
 			.ob-form + a:hover,
@@ -316,17 +316,17 @@
 			.fb-like iframe {margin-top: 0px;}
 			.item-comments h4 {margin-bottom: 10px; font-size: 12px;}
 			.ob-ctn-add-comment iframe {height: 200px !important;}
-			
+
 			/** footer content **/
 			#navigation {margin: 0 0 10px; min-height: 25px; {% if not isSingle %}padding-left: 24px;{% endif %}}
-			#navigation a, 
+			#navigation a,
 			#navigation a:visited {color: #C76D4B; font-size: 12px;}
 			#navigation a:hover {text-decoration: underline;}
 			#top-link {background: url('http://assets.over-blog-kiwi.com/themes/38/img/mini-blogroll.gif') no-repeat left -2px; display: block; left: 44.5%; margin-top: 2px; padding: 0 12px 0; position: absolute; text-align: right;}
-			#navigation .prev {float:left;}	
+			#navigation .prev {float:left;}
 			#navigation .next {float: right; text-align: right;}
 			#bkg-rss {display: block; width: 16px; height: 12px; margin: -14px 0 0 25px; padding-top: -1px; background: url('http://assets.over-blog-kiwi.com/themes/38/img/mini-rss.gif') no-repeat left top;}
-				
+
 			/************
 			** SIDEBAR **
 			************/
@@ -340,14 +340,14 @@
 			.sidebar-block li a:hover {text-decoration: underline;}
 			.sidebar-block li ul li {margin-top: 5px; border: none; text-indent: 20px;}
 			.plustext {font-size: 14px; font-weight: bold;}
-			
+
 			.last-posts ul li {-webkit-opacity: 1; -moz-opacity: 1; -ms-opacity: 1; -o-opacity: 1; opacity: 1; -webkit-transition: opacity 300ms ease-out; -moz-transition: opacity 300ms ease-out; -ms-transition: opacity 300ms ease-out; -otransition: opacity 300ms ease-out; transition: opacity 300ms ease-out;}
 			.last-posts ul:hover li {-webkit-opacity: 0.7; -moz-opacity: 0.7; -ms-opacity: 0.7; -o-opacity: 0.7; opacity: 0.7;}
 			.last-posts ul:hover li:hover {-webkit-opacity: 1; -moz-opacity: 1; -ms-opacity: 1; -o-opacity: 1; opacity: 1;}
 			.last-posts li {border: none; float: left; height: 80px; width: 80px;}
 			.last-posts li.left {margin-right: 8px;}
 			.last-posts img {border: 2px solid #D3D3D3;}
-			
+
 			.social-widget li {background: url(http://assets.over-blog-kiwi.com/themes/38/img/social.png) no-repeat; border-bottom: 0; height: 27px; margin-bottom: 10px;}
             /* http://www.yootheme.com/icons */
             .social-widget .fb {background-position: left top;}
@@ -384,7 +384,7 @@
 					</p>
 				</div>
 			</div>
-			
+
 			<!-- CONTENT -->
 			<div id="content-wrapper">
 				<div id="content-inner">
@@ -399,7 +399,7 @@
 		                                    <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}><a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title|title }}</a></li>
 		                                {% endif %}
 		                            {% endlist %}
-									
+
 								</ul>
 							</div>
 						</div>
@@ -418,14 +418,14 @@
 									<div class="search-block">
 										<div class="post-title">
 											<h3>{{ Lang.Get('Search results for') }} &ldquo;{{ Search.Keyword }}&rdquo;</h3>
-										</div>			
+										</div>
 									</div>
 								{% elseif isTag %}
 									<!-- [Search Page] -->
 									<div class="search-block">
 										<div class="post-title">
 											<h3>{{ Lang.Get('Posts with') }} #{{ Tag.Title }} {{ Lang.Get('tag') }}</h3>
-										</div>			
+										</div>
 									</div>
 								{% endif %}
 								{% list Posts %}
@@ -456,7 +456,7 @@
 														{{ Lang.Get('published from') }} {% list Post.Sources %} {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }}{% endif %}{% endlist %}
 													{% endif %}
 												</a>
-											</h2>								
+											</h2>
 										</header>
 										<div class="post-header">
 											<span class="post-author">{{ Lang.Get('Posted by') }} {{ Post.Author | default(Blog.Owner.Nickname) }}</span>
@@ -466,9 +466,9 @@
 											<div class="post-cover">
 												<a href="{{ Post.PermaLink }}" title="{{ Post.Snippet }}">
 													{% if Post.Cover is not empty %}
-														<img src="{{ Post.Cover|resize(465,150)|crop }}" alt="" title="" width="465" height="150" />	
+														<img src="{{ Post.Cover|resize(465,150)|crop }}" alt="" title="" width="465" height="150" />
 													{% elseif Custom('custom_thumbnail') is not empty %}
-														<img src="{{ Custom('custom_thumbnail')|resize(465,150)|crop }}" alt="" title="" width="465" height="150" />	
+														<img src="{{ Custom('custom_thumbnail')|resize(465,150)|crop }}" alt="" title="" width="465" height="150" />
 													{% endif %}
 												</a>
 											</div>
@@ -487,7 +487,7 @@
 											{% list Post.Tags %}
 												{% if loop.index == 1 %}
 													<span class="post-tag">{{ Lang.Get('Labels') }} :
-												{% endif %} 
+												{% endif %}
 													<a href="{{ Tag.Url | lower }}">#{{ Tag.Title | lower }}</a>{% if loop.last %}</span>{% else %}, {% endif %}
 											{% endlist %}
 
@@ -544,10 +544,10 @@
 												        <div id="disqus_thread"></div>
 												        <script type="text/javascript">
 													        var disqus_shortname = '{{ Custom('comment_disqus') }}';
-													
+
 													        (function() {
-														        var dsq = document.createElement('script'); 
-															        dsq.type = 'text/javascript'; 
+														        var dsq = document.createElement('script');
+															        dsq.type = 'text/javascript';
 															        dsq.async = true;
 															        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
 														        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -558,7 +558,7 @@
 												        {{ Post.Comments }}
 												    {% endif %}
 												</div>
-											{% endif %}	
+											{% endif %}
 										</footer>
 									</article>
 								{% else %}
@@ -566,7 +566,7 @@
 								{% endlist %}
 							{% endif %}
 						</div>
-						{% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}	
+						{% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
 							<div id="navigation">
 								{% if Navigation.PreviousPage is not empty %}
 									<a href="{{ Navigation.PreviousPage }}" class="prev">← {{ Lang.Get('Previous page') }}</a>
@@ -583,7 +583,7 @@
 							</div>
 						{% endif %}
 					</div>
-					
+
 					<!-- [Widgets Sidebar] -->
 					<div id="sidebar-wrapper">
 						<aside id="sidebar">
@@ -596,7 +596,7 @@
 									</form>
 				                </div>
 				            {% endif %}
-			                
+
 							{% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
 								<div class="sidebar-block">
 		                          	<h2>{{ Lang.Get('Archives') }}</h2>
@@ -615,9 +615,9 @@
 				                    {% endlist %}
 				                  	</ul>
 				                </div>
-				            {% endif %}	
-				                
-				            {% if Custom('custom_hide_widget_pages') == false and Blog.ListPages is not empty %}						
+				            {% endif %}
+
+				            {% if Custom('custom_hide_widget_pages') == false and Blog.ListPages is not empty %}
 								<div class="sidebar-block">
 									<h2>{{ Lang.Get('Pages') }}</h2>
 									<ul>
@@ -639,8 +639,8 @@
 									</ul>
 								</div>
 							{% endif %}
-								
-							{% if Custom('display_widget_last') == false and Blog.Posts is not empty %}	
+
+							{% if Custom('display_widget_last') == false and Blog.Posts is not empty %}
 								<div class="sidebar-block last-posts">
 									<h2>{{ Lang.Get('Last posts') }}</h2>
 									<ul>
@@ -661,8 +661,8 @@
 									</ul>
 								</div>
 							{% endif %}
-								
-							{% if Custom('display_widget_social') == false %}						
+
+							{% if Custom('display_widget_social') == false %}
 								<div class="sidebar-block social-widget">
 									<h2>{{ Lang.Get('Follow us') }}</h2>
 									<ul>
@@ -691,17 +691,17 @@
 									</ul>
 								</div>
 							{% endif %}
-						</aside>						
+						</aside>
 					</div>
 					<div class="clear"></div>
 				</div>
-				
+
 				<!-- footer -->
 				<div id="footer-wrapper">
 					<footer id="footer">
 						<p>{% if Custom('footer') is not empty %}{{ Custom('footer') }}&nbsp;-&nbsp;{% endif %}{{ Lang.Get('Hosted by') }} <a href="http://overblog.com/" target="_blank">Overblog</a>
 					</footer>
-				</div> 
+				</div>
 			</div>
 			<!-- FIN CONTENT -->
 		</div>
@@ -709,7 +709,7 @@
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="http://assets.over-blog-kiwi.com/themes/1/js/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
-		
+
         <script type="text/javascript">
             {% if Custom('custom_hide_widget_blog_archive') == false %}
                 // Archives
@@ -720,7 +720,7 @@
                     archiveYear = document.getElementById('arch_' + year);
                     if (typeof (archiveYear) !== 'undefined') {
                         if (archiveYear.style.display !== 'none') {
-                            
+
                             // Hide years without months
                             archiveMonths = archiveYear.getElementsByTagName('li');
                             if (!archiveMonths.length) {
@@ -733,38 +733,38 @@
                     }
                     return false;
                 }
-                
-                $(document).ready(function(){       
+
+                $(document).ready(function(){
                     $('.plustext').click(function() {
-                        return false; 
+                        return false;
                     });
                 });
-    
+
                 {% list Blog.Archives %}
                     {% if Archive.Year != "now"|date("Y") %}
                         switch_arch('{{ Archive.Year }}');
                     {% endif %}
                 {% endlist %}
-            {% endif %}             
-            
+            {% endif %}
+
             {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                 // Disqus comments count
                 var disqus_shortname = "{{ Custom('comment_disqus') }}";
                 (function () {
-                    var s = document.createElement('script'); 
+                    var s = document.createElement('script');
                         s.async = true;
                         s.type = 'text/javascript';
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
                     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
                 }());
-            {% endif %} 
+            {% endif %}
 
 
             // Facebook button + comments
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                    js = d.createElement(s); 
+                    js = d.createElement(s);
                     js.id = id;
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
                     fjs.parentNode.insertBefore(js, fjs);
@@ -777,7 +777,7 @@
                     js=d.createElement(s);
                     js.id=id;
                     js.src="//platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs); 
+                    fjs.parentNode.insertBefore(js,fjs);
                 }
             }(document,"script","twitter-wjs");
 
@@ -785,28 +785,28 @@
             // Google + button
             window.___gcfg = {lang: '{{ Blog.Lang }}'};
             (function() {
-            var po = document.createElement('script'); 
-                po.type = 'text/javascript'; 
+            var po = document.createElement('script');
+                po.type = 'text/javascript';
                 po.async = true;
                 po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; 
+            var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(po, s);
             })();
 
             {% if Custom('google_analytics') is not empty %}
-                // Google Analytics 
+                // Google Analytics
                 window.google_analytics_uacct = '{{Custom('google_analytics')}}';
                 var _gaq = _gaq || [];
                     _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
                     _gaq.push(['_trackPageview']);
                     _gaq.push(['_trackPageLoadTime']);
-            
+
                 (function() {
-                    var ga = document.createElement('script'); 
-                        ga.type = 'text/javascript'; 
+                    var ga = document.createElement('script');
+                        ga.type = 'text/javascript';
                         ga.async = true;
                         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; 
+                    var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(ga, s);
                 })();
             {% endif %}
@@ -836,6 +836,6 @@
             } else {
                 $('input[type="text"]').val('');
             }
-        </script>			
+        </script>
 	</body>
 </html>
