@@ -857,6 +857,10 @@
 			  text-align: center;
 			  z-index: 100;
 			}
+				.loader img {
+					height: 35px;
+					width: 35px;
+				}
 			
 			.follow {
 				bottom: 10px;
@@ -969,7 +973,7 @@
 														{% if Post.Title is not empty %}
 															{{ Post.Title }}
 														{% else %}
-															{{ Lang.Get('published from') }} 
+															{{ Lang.Get('Published from') }} 
 															{% list Post.Sources %}
 																{{ Lang.Get(Source) }} {% if not loop.last %} {{ Lang.Get('and') }} {% endif %}
 															{% endlist %}
@@ -1150,9 +1154,7 @@
 		{% endif %}
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-		<!--[if !IE 8]>
-			<script src="http://vivienkaufinger.com/ob/jquery.ias.min.js"></script>
-		<![endif]-->
+		<script src="http://vivienkaufinger.com/ob/jquery.ias.min.js"></script>
 		<script src="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 		
 		<script>
@@ -1233,35 +1235,35 @@
 					'transitionOut'	: 'elastic',
 					'type'			: 'image'
 				});
+				
+			});
 
-				jQuery.ias({
-					'container' 	: ".posts",
-					'item' 			: ".post",
-					'pagination' 	: ".load-more",
-					'next'			: ".load-more a",
-					'loader' 		: "<div class='loader'><img src='http://vivienkaufinger.com/ob/loader.gif' alt='' title='' /></div>",
-					onRenderComplete : function() { 
-						if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-						
-						if (typeof twttr != "undefined") { twttr.widgets.load(); }
-						
-						if (typeof gapi != "undefined") { gapi.plusone.go(); }
+			jQuery.ias({
+				'container' 	: ".posts",
+				'item' 			: ".post",
+				'pagination' 	: ".load-more",
+				'next'			: ".load-more a",
+				'loader' 		: "<div class='loader'><img src='http://vivienkaufinger.com/ob/ajax_loader.gif' alt='' title='' /></div>",
+				onRenderComplete : function() { 
+					if (typeof OB != "undefined") { OB.restart && OB.restart(); }
 
-						{% if Custom('comment') == 'Disqus' %}
-							// Disqus comment count
-							if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS.getCount(); }
-						{% endif %}
+					if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
+					
+					if (typeof twttr != "undefined") { twttr.widgets.load(); }
+					
+					if (typeof gapi != "undefined") { gapi.plusone.go(); }
 
-						$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
-						$("a[rel='fancybox']").fancybox({
-							'overlayShow'	: true,
-							'overlayColor'  : '#000',
-							'transitionIn'	: 'elastic',
-							'transitionOut'	: 'elastic',
-							'type'			: 'image'
-						});
-					},
-				});
+					if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS && DISQUSWIDGETS.getCount(); }
+
+					$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+					$("a[rel='fancybox']").fancybox({
+						'overlayShow'	: true,
+						'overlayColor'  : '#000',
+						'transitionIn'	: 'elastic',
+						'transitionOut'	: 'elastic',
+						'type'			: 'image'
+					});
+				},
 			});
 		</script>
 
