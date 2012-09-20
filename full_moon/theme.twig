@@ -73,14 +73,14 @@
         <!-- shortcut:[Options] -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
 
-        <meta name="list:theme_style:Choose the theme color scheme" items="Jungle, Bridge, Moon" default="Moon" group="design"/>
-        <meta name="image:background:Define your background image" group="design" />
-        <meta name="image:post_cover:Define your default post cover" group="design" />
-        <meta name="list:font_title:Choose your blog title font." items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />  
+        <meta name="list:theme_style:label.appearance" items="Jungle, Bridge, Moon" default="Moon" group="design"/>
+        <meta name="image:background:label.backgroundImage" group="design" />
+        <meta name="image:post_cover:label.defaultPostCover" group="design" />
+        <meta name="list:font_title:label.Titles font" items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />  
         
         <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
-        <meta name="boolean:custom_display_widget_last_posts:Hide Widget &quot;Last Posts&quot;" group="Widgets" />
+        <meta name="boolean:custom_display_widget_last_posts:label.hidelastPosts" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="6" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archives:label.hideArchives" group="Widgets" />
@@ -90,7 +90,7 @@
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
         
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
-        <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="dark" group="Comments" />
+        <meta name="list:facebook_comments_color:label.facebookCommentsColorTheme" items="light, dark" default="dark" group="Comments" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
 
         <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
@@ -120,7 +120,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
         
         <!--[if lt IE 9]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     
         {# Styles #}
@@ -207,8 +207,8 @@
                     .ob-text pre {width: 600px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -webkit-pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; overflow: auto;}
                     
                     /* Section image */
-                    .ob-media-left,
-                    .ob-media-right {max-width: 100%;}
+                    .ob-media-left {margin-right: 30px;}
+                    .ob-media-right {margin-left: 30px; max-width: 100%;}
                     .ob-row-1-col img {width: 100%;}
                     .ob-row-2-col img {width: 50%; margin-top: 0; margin-bottom: 0;}
                     .ob-row-3-col img {width: 200px; margin-top: 0; margin-bottom: 0;}
@@ -1068,8 +1068,8 @@
         <script>
             $(document).ready(function() {
                 // Fancybox
-                $(".ob-section-images a, .avatar a, .ob-link-img").attr("rel", "fancybox");
-                $("a[rel=fancybox]").fancybox({
+                $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+                $("a[rel=fancybox], .avatar a").fancybox({
                     'overlayShow'   : true,
                     'transitionIn'  : 'fadin',
                     'transitionOut' : 'fadin',
