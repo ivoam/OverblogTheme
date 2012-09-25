@@ -1051,14 +1051,14 @@
 	                                            <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
 	                                        {% endif %}
 	                                        {% if Custom('share_service') == 'Facebook' %}
-	                                            <iframe src="//www.facebook.com/plugins/like.php?href={{ Blog.Url }}{{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width: 90px; height: 20px;" allowTransparency="true"></iframe>
+                                                <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
 	                                        {% endif %}
 	                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
 	                                            <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
 
 	                                            <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
 
-	                                            <iframe src="//www.facebook.com/plugins/like.php?href={{ Blog.Url }}{{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width: 90px; height: 20px;" allowTransparency="true"></iframe>
+	                                            <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
 	                                        {% endif %}
                                         {% endif %}
 									</div>
