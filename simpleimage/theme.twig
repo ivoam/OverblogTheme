@@ -367,7 +367,7 @@
 			.index .ob-section-html object.flowplayer,
 			.index .ob-section-images .ob-slideshow {
 				width: 372px;
-				height: 279px;
+				height: 272px;
 			}
 
 			/* Section File */
@@ -424,7 +424,7 @@
 				margin-right: auto;
 			}
 			.index .ob-map {
-				height: 300px;
+				height: 272px;
 				width: 372px;
 			}
 
@@ -564,7 +564,6 @@
 				font-weight: bold;
 			}
 			.index .item-content .body img{
-				max-height: 272px;
 				max-width: 372px;
 			}
 
@@ -1236,21 +1235,14 @@
 					'transitionOut'	: 'elastic',
 					'type'			: 'image'
 				});
-
-				$('.ob-section-text img, .ob-section-images img').each(function(){
-					if(!$(this).parent('.ob-section-images').hasClass('.ob-layout3-3')){
+				{% if not isSingle %}
+					$('.ob-section-text img, .ob-section-images img').each(function(){
 						$(this).attr(
 							'src',
-							$(this).attr('src').replace(/size=[0-9]+x[0-9]+(\-ct)?/, "size=408x200").replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/375x275")
+							$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/372x272-ct")
 						);
-					}
-					else{
-						$(this).attr(
-							'src',
-							$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/375x275-ct")
-						);
-					}
-				});
+					});
+				{% endif %}
 			});
 
 
@@ -1264,20 +1256,15 @@
 					'loader' 		: "<img src='http://assets.over-blog-staging.com/themes/14/images/ajax_loader.gif' alt='' title='' />",
 					'tresholdMargin' : -200,
 					onRenderComplete : function() {
-						$('.ob-section-text img, .ob-section-images img').each(function(){
-							if(!$(this).parent('.ob-section-images').hasClass('.ob-layout3-3, .ob-layout900')){
-								$(this).attr(
-									'src',
-									$(this).attr('src').replace(/size=[0-9]+x[0-9]+(\-ct)?/, "size=408x200").replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/372x272")
-								);
-							}
-							else{
+						{% if not isSingle %}
+							$('.ob-section-text img, .ob-section-images img').each(function(){
 								$(this).attr(
 									'src',
 									$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/372x272-ct")
 								);
-							}
-						});
+							});
+						{% endif %}
+
 						if (typeof OB != "undefined") { OB.restart && OB.restart(); }
 
 						if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
