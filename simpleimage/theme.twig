@@ -24,9 +24,9 @@
 			<meta name="robots" content="index,follow" />
 		{% endif %}
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	
-	
-		<!-- Social setting : Facebook, G+ .. --> 
+
+
+		<!-- Social setting : Facebook, G+ .. -->
 		<meta property="og:site_name" content="{{ Blog.Title }}" />
 		<meta property="og:type" content="blog" />
 		<meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
@@ -34,7 +34,7 @@
         	<meta property="fb:admins" content="{{ Custom('facebook_username') }}"/>
         {% endif %}
 		<meta itemprop="name" content="{{ Blog.Title }}" />
-	
+
 		{% if isSingle %}
 			{% list Posts %}
 				<meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
@@ -62,34 +62,34 @@
 				{% endif %}
 				{% endlist %}
 			{% endif %}
-	
+
 			{% if isSearch %}
 				<meta property="og:type" content="overblogkiwi:search" />
 			{% else %}
 				<meta property="og:type" content="overblogkiwi:visit" />
 			{% endif %}
 		{% endif %}
-	
+
 		<!-- shortcut:[Options] -->
 		<meta name="list:nb_sections:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="2" />
-		
+
 		<meta name="list:background:label.backgroundImage" items="Beach, Desert, Forest, Sky, Storm" default="Forest" group="Design" />
 		<meta name="image:background_custom:label.backgroundImage" group="Design" />
 	    <meta name="color:background_item:label.backgroundPostsColor" default="#F5F5F5" group="Design" />
-	    
+
 	    <meta name="color:title_color:label.blogTitleColor" default="#F5F5F5" group="Colors" />
 	    <meta name="color:font_color:label.postsFontColor" default="#9C9A9A" group="Colors" />
 	    <meta name="color:footer_color:label.footerFontColor" default="#F5F5F5" group="Colors" />
-	    
+
 		<meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
 		<meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
-	
+
 		<meta name="string:wording_footer:label.footer" default="Theme: Simple Image &copy; 2012" group="Footer" />
-	
+
 	    <meta name="string:twitter_username:label.twitterUsername" group="Social" />
 		<meta name="string:facebook_username:label.facebookUsername" group="Social" />
 		<meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-		
+
 		<meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
 		<meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
 
@@ -97,7 +97,7 @@
 		<meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
 		<meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
 		<meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
-	
+
 		<!-- favicon -->
 		{% if Blog.FaviconUrl is not empty %}
 			<link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
@@ -105,8 +105,8 @@
 			<link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
 			<link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
 			<link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-		{% endif %}	
-		
+		{% endif %}
+
 		<!-- SEO -->
 		{% if Custom('google_webmaster_id') is not empty %}
 			<meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -114,7 +114,7 @@
 		{% if Custom('msn_webmaster_id') is not empty %}
 			<meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
 		{% endif %}
-	
+
 
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -124,7 +124,7 @@
 		<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
 
 		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-	
+
 		<!-- shortcut:[Styles] -->
 		<style type="text/css">
 			/* Image copyright :
@@ -134,12 +134,12 @@
 				- Sky: http://www.flickr.com/photos/frankpierson/4562163986/sizes/o/in/photostream/
 				- Desert : Gerald LONLAS
 			*/
-		
+
 			/**
 			 * Fonts import
 			 */
 			@import url(http://fonts.googleapis.com/css?family=Leckerli+One);
-	
+
 			/**
 			 * YUI 3.4.1 (build 4118)
 			 * Copyright 2011 Yahoo! Inc. All rights reserved.
@@ -160,7 +160,7 @@
 			input,textarea,select {font-family:inherit;font-size:inherit;font-weight:inherit}
 			input,textarea,select {*font-size:100%}
 			legend {color:#000}
-	
+
 			/*** Theme*/
 			html {
 				{% if Custom('background_custom') is not empty %}
@@ -184,7 +184,7 @@
 				background: none;
 				padding-bottom: 20px;
 			}
-	
+
 			a, a:focus, a:visited, a:hover {
 				color: whiteSmoke;
 				text-decoration: none;
@@ -194,28 +194,28 @@
 				     -o-transition: color 300ms ease-in;
 				        transition: color 300ms ease-in;
 			}
-			
+
 			img {
 				border: 0;
 				-ms-interpolation-mode: bicubic;
 			}
-	
+
 			input, select, button, textarea {
 				border: 1px solid #C4C7D0;
 				font-size: 13px;
 				font-family: arial,sans-serif;
 			}
-	
+
 			.clearboth {
 				clear: both;
 			}
-			
+
 			.header {
 				color: white;
 				font-family: 'Leckerli One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 				padding: 8px;
 			}
-			
+
 			.header .logo a{
 				font-size: 40px;
 				line-height: 48px;
@@ -225,17 +225,17 @@
 					 -o-text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 						text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 			}
-			
+
 			.header .description {
 				font-size: 22px;
 				margin-top: 0.8em;
 				color: rgba(255,255,255, 0.8);
 			}
-			
+
 			.main {
 				margin-top: 40px;
 			}
-			
+
 			.posts {
 				position: relative;
 				display: table;
@@ -243,7 +243,7 @@
 				margin: 0 auto;
 				table-layout: fixed;
 			}
-			
+
 			.indications {
 				color: whitesmoke;
 				display: block;
@@ -263,25 +263,25 @@
 				display: block;
 				margin-top: 15px;
 			}
-			
-	
+
+
 			.single, .special {
 				width: 630px;
 				max-width: 630px;
 			}
-			
+
 			.special {
-				margin-bottom: 20px; 
+				margin-bottom: 20px;
 			}
 			.single .post {
 				margin-bottom: 20px;
 			}
-	
+
 			.index {
 				width: 402px;
 				max-width: 400px;
 			}
-			
+
 			.index .readmore {
 				margin-top: 10px;
 				margin-bottom: 10px;
@@ -292,7 +292,7 @@
 			.index .readmore a:first-letter {
 				text-transform: capitalize;
 			}
-	
+
 			.index .post {
 				margin-bottom: 40px;
 			}
@@ -301,25 +301,25 @@
 				margin-bottom: 10px;
 				position: relative;
 			}
-			
+
 			.post .item-cover img {
 				-webkit-border-radius: 6px;
 				   -moz-border-radius: 6px;
 				    -ms-border-radius: 6px;
 				     -o-border-radius: 6px;
 				   		border-radius: 6px;
-				
+
 				-webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				   -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				     -o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
-				        
+
 				-webkit-opacity: 0.9;
 				   -moz-opacity: 0.9;
 				    -ms-opacity: 0.9;
 				     -o-opacity: 0.9;
 				   		opacity: 0.9;
-			
+
 			-webkit-transition: opacity 300ms;
 			   -moz-transition: opacity 300ms;
 			    -ms-transition: opacity 300ms;
@@ -333,8 +333,8 @@
 				     -o-opacity: 1;
 				   		opacity: 1;
 			}
-			
-			.border-img {	
+
+			.border-img {
 				border: 1px solid rgba(255, 255, 255, 0.3);
 				-webkit-border-radius: 5px;
 				   -moz-border-radius: 5px;
@@ -350,11 +350,11 @@
 				height: 100%;
 				width: 100%;
 			}
-			
+
 			.ob-section {
 				clear: both;
 			}
-	
+
 			/* Sections on Index  */
 			.index .ob-section img,
 			.index .ob-section .ob-desc,
@@ -363,7 +363,7 @@
 			.index .ob-section-html object {
 				width: 372px;
 			}
-	
+
 			.index .ob-section-html object.flowplayer,
 			.index .ob-section-images .ob-slideshow {
 				width: 372px;
@@ -384,18 +384,18 @@
 			.index .ob-section-quote p:after {color: #EEE; margin: -30px 0 0 -0;}
 	        .index .ob-section-quote p.ob-author,
 	        .index .ob-section-quote p.ob-source {background: #EEE; color: #555; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 24px; max-width: 280px; overflow: hidden; padding-bottom: 0px\9; position: relative; text-overflow: ellipsis; -ms-white-space: nowrap; white-space: nowrap; z-index: 11;}
-	        
-	        /* Section Link */ 
+
+	        /* Section Link */
 	        .index .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none;}
 	        .index .ob-section-link .ob-media-left {margin: 0 !important;}
 	        .index .ob-section-link p.ob-url {background: #EEE; margin: 0; max-height: 24px; max-width: 160px; padding-bottom: 0px\9;}
-	        .index .ob-section-link p.ob-title, 
+	        .index .ob-section-link p.ob-title,
 	        .index .ob-section-link p.ob-snippet {color: {{ Custom('font_color')|default('#9C9A9A') }}; margin-bottom: 10px; margin-left: 20px;}
 	        .index .ob-section-link p.ob-title .ob-link {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-height: 42px; overflow: hidden;}
         	.index .ob-section-link p.ob-snippet {margin-bottom: 35px; max-height: 30px; overflow: hidden;}
 	        .index .ob-section-link .ob-img {float: left; width: 170px;}
 	        .index .ob-section-link .ob-desc {margin-top: 5px;}
-	        
+
 
 			.index .obsoundplayercover {
 				width: 50px;
@@ -404,7 +404,7 @@
 			.index .ob-section .obsoundplayer .obsoundplayername {
 				width: 44px;
 			}
-	
+
 			.index .obsoundplayer .obsoundplayervolume {
 				margin: 10px 5px 5px 10px;
 			}
@@ -414,7 +414,7 @@
 			.index .ob-section .ob-media-left {
 				float: none;
 			}
-	
+
 			.index .ob-section img {
 				float: none;
 			}
@@ -441,7 +441,7 @@
 			.single ol li {list-style: decimal; margin-left: 35px;}
 			.single ul li {list-style: disc; margin-left: 20px;}
 			.single pre {border-left: 3px solid #3A3A3A; padding-left: 4px; margin-top: 10px; margin-bottom: 10px;}
-			.body .ob-text h3, 
+			.body .ob-text h3,
 			.body .ob-text h4,
 			.body .ob-text h5 {margin: 15px 0 5px;}
 
@@ -462,22 +462,22 @@
 	        .single .ob-section-quote p.ob-source .ob-link {color: gray;}
 	        .single .ob-section-quote p.ob-author .ob-link:hover,
 	        .single .ob-section-quote p.ob-source .ob-link:hover {color: #000;}
-	        
-	        /* Section Link */ 
+
+	        /* Section Link */
 	        .single .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none;}
 	        .single .ob-section-link .ob-media-left {margin: 0;}
 	        .single .ob-section-link p.ob-url {background: #EEE; margin: 0; max-height: 24px; max-width: 390px; padding-bottom: 0\9;}
-	        .single .ob-section-link p.ob-title, 
+	        .single .ob-section-link p.ob-title,
 	        .single .ob-section-link p.ob-snippet {color: {{ Custom('font_color')|default('#9C9A9A') }}; margin-bottom: 10px; margin-left: 20px;}
 	        .single .ob-section-link p.ob-title .ob-link {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-height: 42px; overflow: hidden;}
         	.single .ob-section-link p.ob-snippet {margin-bottom: 35px; max-height: 30px; overflow: hidden;}
 	        .single .ob-section-link .ob-img {float: left; margin-bottom: 0; width: 170px;}
 	        .single .ob-section-link .ob-desc {margin-top: 5px;}
-	
+
 			.post .ob-section-images a {
 				cursor: default;
 			}
-	
+
 			.item-cover {
 				margin-bottom: 5px;
 			}
@@ -544,7 +544,7 @@
 				     -o-transition: color 300ms ease-in;
 				        transition: color 300ms ease-in;
 			}
-			
+
 			.item-content .meta{
 				color: #9C9A9A;
 				font-size: 16px;
@@ -553,7 +553,7 @@
 					text-shadow: 0 1px 0 white;
 				{% endif %}
 			}
-			
+
 			.item-content .meta .author,
 			.item-content .meta .tags,
 			.item-content .meta time{
@@ -567,7 +567,7 @@
 				max-height: 272px;
 				max-width: 372px;
 			}
-	
+
 			.item-content .body {
 				font-size: 14px;
 				text-align: justify;
@@ -577,7 +577,7 @@
 			.item-content .body:first-letter {
 				text-transform: capitalize;
 			}
-			
+
 			.item-content .body h1,
 			.item-content .body h2,
 			.item-content .body h3,
@@ -587,12 +587,12 @@
 				color: #3A3A3A;
 				margin-bottom: 10px;
 			}
-			
+
 			.item-content .body .ob-text h3 {
 				font-size: 18px;
 				font-weight: normal;
 			}
-			
+
 			.item-content .body .ob-text h4 {
 				font-size: 16px;
 				font-weight: normal;
@@ -602,15 +602,15 @@
 				font-size: 14px;
 				font-weight: bold;
 			}
-			
+
 			.item-content .body .ob-text p {
 				margin-bottom: 15px;
 			}
-			
+
 			.item-content .body .ob-text strong {
 				font-weight: bold;
 			}
-			
+
 			.item-content .body .ob-text ul li {
 				list-style-type: disc;
 				margin-left: 20px;
@@ -619,39 +619,39 @@
 				list-style-type: decimal;
 				margin-left: 45px;
 			}
-			
+
 			.item-content .body .ob-text li p {
 				margin-bottom: 0;
 			}
-			
+
 			.item-content .body .ob-desc {
-				font-size: 13px; 
+				font-size: 13px;
 				font-style: italic;
 				font-weight: bold;
 				margin-top: 5px;
 			}
-			
+
 			.item-comments {
 				margin-top: 20px;
 			}
-			
+
 			.single .social {
 				clear: both;
 			}
 			.single .social h4 {
 				margin-bottom: 10px;
 			}
-			
+
 			.social .fb-like iframe {
 				margin-top: -3px;
 			}
-			
+
 			.navigation .prev,
 			.navigation .next {
 				color: #3A3A3A;
 				margin: 20px 0;
 			}
-			
+
 			.navigation a {
 				display: inline-block;
 				font-size: 16px;
@@ -660,16 +660,16 @@
 			.navigation .prev:first-letter {
 				text-transform: capitalize;
 			}
-			
-			
+
+
 			.navigation .prev {
 				float: left;
 			}
-			
+
 			.navigation .next {
 				float: right;
 			}
-			
+
 			.footer {
 				{% if Custom('custom_hide_widget_search_form') == true %}
 					margin: {% if isSingle or isSpecial %}0{% else %}-20px{% endif %} 0 20px;
@@ -688,20 +688,20 @@
 	        .footer a.credits {
 	        	color: #ffae00 !important;
 	        }
-			
+
 			.footer span {
 				display: inline-block;
 			}
 			.footer span:first-letter {
 				text-transform: capitalize;
 			}
-	
+
 			.search {
 				margin-left: auto;
 				margin-right: auto;
 				margin-bottom: 10px;
 			}
-	
+
 			.search input[type=text]{
 				border: none;
 				border-radius: 5px;
@@ -727,16 +727,16 @@
 				margin-top: 10px;
 				width: 620px;
 			}
-			
+
 			.search input[type=submit]{
 				display: none;
 			}
-			
+
 			/* Fix Deezer Section */
 			.single .obsoundplayer .obsoundplayername {
 			width: 235px;
 			}
-			
+
 			/* Section Image with Slidshow */
 			.ob-section-images .ob-slideshow img {width: 100%;}
 
@@ -747,7 +747,7 @@
 			/* twitter box */
 	        .ob-section .twitter-tweet-rendered,
 	        .ob-section .twt-border {max-width: 100% !important;}
-	        
+
 	        .m-networks{
 	            margin: 20px 0 10px 0;
 	            text-align: center;
@@ -796,8 +796,8 @@
 	        .ob-input-submit:active{
 	            border: 1px solid #AAA;
 	        }
-	        
-	        
+
+
 	        .main .posts .load-more {
 	        	display: block;
 				font-size: 18px;
@@ -810,7 +810,7 @@
 			.main .posts .load-more a:first-letter {
 	        	text-transform: capitalize;
 			}
-			
+
 	        .main .posts .read-more {
 				margin: 20px 0 0 0;
 			}
@@ -823,7 +823,7 @@
 				    -ms-border-radius: 2px;
 				     -o-border-radius: 2px;
 				     	border-radius: 2px;
-				
+
 				color: #FFF;
 				display: table;
 				font-size: 14px;
@@ -840,9 +840,9 @@
 			.main .posts .read-more a:hover {
 				background: #C40037;
 			}
-			
+
 			/* Infinite Scroll loader */
-			.ias_loader { 
+			.ias_loader {
 			  color: #FFF;
 			  background: #FFF;
 			  background: rgba(255,255,255,0.9);
@@ -863,7 +863,7 @@
 					height: 35px;
 					width: 35px;
 				}
-			
+
 			.follow {
 				bottom: 10px;
 				position: fixed;
@@ -910,7 +910,7 @@
 					background-position: -161px -74px;
 				}
 		</style>
-		
+
 		<!-- End CSS -->
 	</head>
 	<body>
@@ -931,7 +931,7 @@
 			</div>
 		</header>
 		<!-- End Header -->
-	
+
 		<!-- shortcut:[Main] -->
 		<div class="main">
 			<section class="posts {% if isSingle %}single{% elseif isSpecial%}special{% else %}index{% endif %}">
@@ -946,7 +946,7 @@
 				{% else %}
 					{% if isSearch %}
 						<p class="indications">
-							{{ Lang.Get('Search results for') }} 
+							{{ Lang.Get('Search results for') }}
 							<span class="keyword">“{{ Search.Keyword }}”</span>
 						</p>
 					{% elseif isTag %}
@@ -954,7 +954,7 @@
 							<span>#{{ Tag.Title }}</span>
 						</p>
 					{% endif %}
-					
+
 					{% list Posts %}
 						<!-- Post item -->
 						<div class="post{% list Post.Sources %} {{ Source }}{% endlist %}">
@@ -975,7 +975,7 @@
 														{% if Post.Title is not empty %}
 															{{ Post.Title }}
 														{% else %}
-															{{ Lang.Get('Published from') }} 
+															{{ Lang.Get('Published from') }}
 															{% list Post.Sources %}
 																{{ Lang.Get(Source) }} {% if not loop.last %} {{ Lang.Get('and') }} {% endif %}
 															{% endlist %}
@@ -986,9 +986,9 @@
 											</h2>
 											<div class="meta">
 												{% if Post.Author is not empty %}
-													<span class="author">{{ Post.Author }}</span> — 
+													<span class="author">{{ Post.Author }}</span> —
 												{% endif %}
-												<time pubdate>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time> 
+												<time pubdate>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
 												{% list Post.Tags %}
 													{% if loop.first %}
 														— <span class="tags">
@@ -1014,7 +1014,7 @@
 										{% else %}
 											{{ Post.Body(Custom('nb_sections')) }}
 										{% endif %}
-		
+
 										{% if not isSingle %}
 											<div class="readmore">
 												{% if Custom('nb_sections') != 'All' %}
@@ -1039,7 +1039,7 @@
 											</div>
 										{% endif %}
 									</div>
-		
+
 									<div class="social">
 										{% if Custom('share_service') != 'None'|default('All') or isSingle %}
 	                                    	{% if isSingle and Custom('share_service') != 'None' %}
@@ -1056,21 +1056,21 @@
 	                                        {% endif %}
 	                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
 	                                            <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
-	                                            		
+
 	                                            <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
 
 	                                            <iframe src="//www.facebook.com/plugins/like.php?href={{ Blog.Url }}{{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width: 90px; height: 20px;" allowTransparency="true"></iframe>
 	                                        {% endif %}
                                         {% endif %}
 									</div>
-									
+
 									<!-- Pagination -->
 									{% if (Navigation.PreviousPost is not empty or Navigation.NextPost is not empty) %}
 										<nav class="navigation">
 											{% if Navigation.PreviousPost is not empty %}
 												<a href="{{ Navigation.PreviousPost.Permalink }}" class="prev">&larr; {{ Lang.Get('Previous post') }}</a>
 											{% endif %}
-											
+
 											{% if Navigation.NextPost is not empty %}
 												<a href="{{ Navigation.NextPost.Permalink }}" class="next">{{ Lang.Get('Next post') }} &rarr;</a>
 											{% endif %}
@@ -1078,7 +1078,7 @@
 										</nav>
 									{% endif %}
 									<!-- End Pagination -->
-		
+
 									{% if isSingle and not isPage %}
 										<div class="item-comments" id="comments">
 											{% if Custom("comment") == "Facebook" %}
@@ -1087,10 +1087,10 @@
 												<div id="disqus_thread"></div>
 												<script type="text/javascript">
 													var disqus_shortname = '{{ Custom('comment_disqus') }}';
-				
+
 													(function() {
-														var dsq = document.createElement('script'); 
-														dsq.type = 'text/javascript'; 
+														var dsq = document.createElement('script');
+														dsq.type = 'text/javascript';
 														dsq.async = true;
 														dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
 														(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -1121,16 +1121,16 @@
 						</div>
 					{% endlist %}
 				{% endif %}
-				
+
 				{% if Navigation.NextPage or Navigation.PreviousPage is not empty %}
 					<!-- Pagination -->
-					<p class="load-more">	
+					<p class="load-more">
 						<a href="{{ Navigation.NextPage }}" title="Load more">{{ Lang.Get('Load more') }}</a>
 					</p>
 				{% endif %}
 			</section>
 		</div>
-		
+
 		<!-- shortcut:[Footer] -->
 		<footer class="footer clearboth">
 			{% if Custom('custom_hide_widget_search_form') == false and not isSpecial %}
@@ -1140,10 +1140,10 @@
 	            </form>
 			{% endif %}
 			<p>
-	        	<span><a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a></span>&nbsp;-&nbsp;<span>{{ Custom('wording_footer') }}</span>&nbsp;-&nbsp;<span>{{ Lang.Get('Hosted by') }}<span>&nbsp;<span><a class="credits" href="http://overblog.com" target="_blank">Overblog</a><span> 
+	        	<span><a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a></span>&nbsp;-&nbsp;<span>{{ Custom('wording_footer') }}</span>&nbsp;-&nbsp;<span>{{ Lang.Get('Hosted by') }}<span>&nbsp;<span><a class="credits" href="http://overblog.com" target="_blank">Overblog</a><span>
 			</p>
 		</footer>
-		
+
 		{% if Custom('custom_hide_widget_follow_us') == false %}
 			<div class="follow">
 				{% if Custom('facebook_username') is not empty %}
@@ -1161,25 +1161,25 @@
 			<script src="http://assets.over-blog-staging.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
 		<!--><![endif]-->
 		<script src="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-		
+
 		<script>
 			{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                 // Disqus comments count
                 var disqus_shortname = "{{ Custom('comment_disqus') }}";
                 (function () {
-                    var s = document.createElement('script'); 
+                    var s = document.createElement('script');
                         s.async = true;
                         s.type = 'text/javascript';
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
                     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
                 }());
-            {% endif %} 
-            
+            {% endif %}
+
             // Facebook button + comments
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                    js = d.createElement(s); 
+                    js = d.createElement(s);
                     js.id = id;
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
                     fjs.parentNode.insertBefore(js, fjs);
@@ -1192,41 +1192,41 @@
                     js=d.createElement(s);
                     js.id=id;
                     js.src="//platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs); 
+                    fjs.parentNode.insertBefore(js,fjs);
                 }
             }(document,"script","twitter-wjs");
 
             // Google + button
             window.___gcfg = {lang: '{{ Blog.Lang }}'};
             (function() {
-            var po = document.createElement('script'); 
-                po.type = 'text/javascript'; 
+            var po = document.createElement('script');
+                po.type = 'text/javascript';
                 po.async = true;
                 po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; 
+            var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(po, s);
             })();
 
             {% if Custom('google_analytics') is not empty %}
-                // Google Analytics 
+                // Google Analytics
                 window.google_analytics_uacct = '{{Custom('google_analytics')}}';
                 var _gaq = _gaq || [];
                     _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
                     _gaq.push(['_trackPageview']);
                     _gaq.push(['_trackPageLoadTime']);
-            
+
                 (function() {
-                    var ga = document.createElement('script'); 
-                        ga.type = 'text/javascript'; 
+                    var ga = document.createElement('script');
+                        ga.type = 'text/javascript';
                         ga.async = true;
                         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; 
+                    var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(ga, s);
                 })();
             {% endif %}
 
             // Fancybox
-            $(document).ready(function() { 
+            $(document).ready(function() {
             	// Fancy box
             	$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
 				$("a[rel='fancybox']").fancybox({
@@ -1249,7 +1249,7 @@
 							'src',
 							$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/375x275-ct")
 						);
-					}	
+					}
 				});
 			});
 
@@ -1262,7 +1262,7 @@
 					'pagination' 	: ".load-more",
 					'next'			: ".load-more a",
 					'loader' 		: "<img src='http://assets.over-blog-staging.com/themes/14/images/ajax_loader.gif' alt='' title='' />",
-					'tresholdMargin' : -1000,
+					'tresholdMargin' : -200,
 					onRenderComplete : function() {
 						$('.ob-section-text img, .ob-section-images img').each(function(){
 							if(!$(this).parent('.ob-section-images').hasClass('.ob-layout3-3, .ob-layout900')){
@@ -1276,14 +1276,14 @@
 									'src',
 									$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "/372x272-ct")
 								);
-							}	
-						}); 
+							}
+						});
 						if (typeof OB != "undefined") { OB.restart && OB.restart(); }
 
 						if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-						
+
 						if (typeof twttr != "undefined") { twttr.widgets.load(); }
-						
+
 						if (typeof gapi != "undefined") { gapi.plusone.go(); }
 
 						if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS && DISQUSWIDGETS.getCount(); }
@@ -1298,7 +1298,7 @@
 						});
 					}
 				});
-			</script>			
+			</script>
 		{% if Custom('custom_hide_widget_search_form') == false %}
 			<!-- Placholder Script -->
 		 	<script type="text/javascript">
@@ -1343,7 +1343,7 @@
 	                            });
 	                        }
 	                    }
-	                    
+
 	                    // Search form
 	                    function obSearchForm() {
 	                        'use strict';
