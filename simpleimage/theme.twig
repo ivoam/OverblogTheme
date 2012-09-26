@@ -166,7 +166,7 @@
 				{% if Custom('background_custom') is not empty %}
 					background: url({{ Custom('background_custom') }}) no-repeat center center fixed;
 				{% elseif Custom('background')|default('Forest') is not empty %}
-					background: url(http://assets.over-blog-staging.com/themes/14/images/bg-{{ Custom('background')|default('Forest') }}.jpg) no-repeat center center fixed;
+					background: url(http://assets.over-blog-kiwi.com/themes/14/images/bg-{{ Custom('background')|default('Forest') }}.jpg) no-repeat center center fixed;
 				{% endif %}
 				-webkit-background-size: cover;
 				   -moz-background-size: cover;
@@ -375,7 +375,7 @@
 	        .index .ob-section-file .ob-ctn a.ob-link,
 	        .index .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom('font_color')|default('#9C9A9A') }}; max-width: 270px; text-decoration: underline; text-shadow: none;}
 	        .index .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom('font_color')|default('#9C9A9A') }}; text-decoration: none;}
-            .ob-section-file .ob-icon {background-image: url(http://assets.over-blog-staging.com/b/blog/bundles/overblogblogblog/images/paperclip.png?v=1);}
+            .ob-section-file .ob-icon {background-image: url(http://assets.over-blog-kiwi.com/b/blog/bundles/overblogblogblog/images/paperclip.png?v=1);}
 
 			 /* Section Quote */
 			.index .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); border: none; margin-bottom: 20px;}
@@ -869,7 +869,7 @@
 				right: 0px;
 			}
 				.follow a {
-					background: #F5F5F5 url("http://assets.over-blog-staging.com/themes/14/images/social.png") no-repeat;
+					background: #F5F5F5 url("http://assets.over-blog-kiwi.com/themes/14/images/social.png") no-repeat;
 					-webkit-border-radius: 6px;
 					   -moz-border-radius: 6px;
 					    -ms-border-radius: 6px;
@@ -1157,9 +1157,9 @@
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<!--[if gt IE 8]><!-->
-			<script src="http://assets.over-blog-staging.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
+			<script src="http://assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
 		<!--><![endif]-->
-		<script src="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
 		<script>
 			{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
@@ -1253,7 +1253,7 @@
 					'item' 			: ".post",
 					'pagination' 	: ".load-more",
 					'next'			: ".load-more a",
-					'loader' 		: "<img src='http://assets.over-blog-staging.com/themes/14/images/ajax_loader.gif' alt='' title='' />",
+					'loader' 		: "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' />",
 					'tresholdMargin' : -200,
 					onRenderComplete : function() {
 						{% if not isSingle %}
