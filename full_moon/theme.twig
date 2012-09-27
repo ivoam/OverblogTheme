@@ -76,19 +76,19 @@
         <meta name="list:theme_style:label.appearance" items="Jungle, Bridge, Moon" default="Moon" group="design"/>
         <meta name="image:background:label.backgroundImage" group="design" />
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
-        <meta name="list:font_title:label.Titles font" items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />  
-        
+        <meta name="list:font_title:label.Titles font" items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />
+
         <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
-        <meta name="boolean:custom_display_widget_last_posts:label.hidelastPosts" group="Widgets" />
+        <meta name="boolean:custom_display_widget_last_posts:label.hideLastPosts" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="6" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archives:label.hideArchives" group="Widgets" />
-        
+
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-        
+
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <meta name="list:facebook_comments_color:label.facebookCommentsColorTheme" items="light, dark" default="dark" group="Comments" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
@@ -97,17 +97,17 @@
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
-        
+
         <!-- shortcut:[Includes] -->
-        <!-- favicon -->       
+        <!-- favicon -->
         {% if Blog.FaviconUrl is not empty %}
             <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
         {% else %}
             <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
             <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
             <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-        {% endif %}   
-       
+        {% endif %}
+
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
             <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -115,14 +115,14 @@
         {% if Custom('msn_webmaster_id') is not empty %}
             <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
         {% endif %}
-    
+
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
-        
+
         <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    
+
         {# Styles #}
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,700,400italic,700italic|Chicle|Fredericka+the+Great|Fugaz+One|PT+Sans+Caption:400,700|Happy+Monkey|Carter+One|Piedra' rel='stylesheet' type='text/css'>
@@ -131,31 +131,31 @@
         <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
         <style type="text/css">
             /*** RESET ***/
-            .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;} 
-            .clearfix {display: inline-block;} /* Hides from IE-mac \*/ 
-            * html .clearfix {height: 1%;} 
-            .clearfix {display: block;}             
+            .clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
+            .clearfix {display: inline-block;} /* Hides from IE-mac \*/
+            * html .clearfix {height: 1%;}
+            .clearfix {display: block;}
             * {margin:0; padding:0;}
             body {background-color: #000; color: #fff; font-family: 'PT Sans Caption', sans-serif; font-size: 12px;}
             a {text-decoration: none;}
-            h1, 
-            h2, 
-            h3, 
-            h4, 
-            h5, 
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
             h6 { font-weight:normal;}
             img {border:none;}
             .box li {list-style:none;}
-            #cl_1_0 ul, 
+            #cl_1_0 ul,
             #cl_1_0 ol {margin-left: 0; padding-left: 25px;}
-    
+
             /*** General ***/
             .ln {clear: both;}
             #ln_2 {padding-bottom: 20px;}
             .cl {float:left;}
             .clear {clear:both;}
             .list-title {font-size: 24px; margin: 10px 0 10px 10px; text-shadow: 1px 1px 1px #000;a}
-            
+
             /*** Structure ***/
             #cl_0_0 {margin-bottom:0; width:100%;}
             #cl_1_0 {display:inline; padding:0 20px 0 0; width:630px; }
@@ -167,55 +167,55 @@
             #top .title {font-family: {{ Custom('font_title')|default('Carter One') }}, cusrive; font-size: 60px; left: 0; letter-spacing: 2px; line-height: 60px; text-shadow: 0 5px 5px #333; text-transform: uppercase;}
             #top .description {font-family: {{ Custom('font_title')|default('Carter One') }}, cusrive; font-size:60px; font-size: 20px; letter-spacing: 2px; text-shadow: 0 2px 1px #333;}
             article {margin-bottom: 35px;}
-            
+
                 /** Article **/
-                .article, 
+                .article,
                 .page {background: #141414; background: rgba(20,20,20,0.9); border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 10px;}
-                
+
                 .beforeArticle {margin-bottom: 10px;}
-                .divTitreArticle .post-title, 
+                .divTitreArticle .post-title,
                 .divPageTitle .post-title,
                 .special h3 {border-bottom: 1px solid; font-size: 30px; letter-spacing:2px; margin-bottom: 10px; padding-bottom:5px;}
                 .contenuArticle, .pageContent {padding-top:10px;}
-                .contenuArticle p, 
+                .contenuArticle p,
                 .pageContent p .contenuArticle ol,
                 .contenuArticle ul {font-size: 14px; line-height: 22px; padding-bottom: 8px;}
-            
+
                     /* Sections */
-                    .ob-section-text, 
-                    .ob-section-images, 
-                    .ob-section-video, 
-                    .ob-section-audio, 
-                    .ob-section-quote, 
+                    .ob-section-text,
+                    .ob-section-images,
+                    .ob-section-video,
+                    .ob-section-audio,
+                    .ob-section-quote,
                     .ob-secton-map {width: 600px;}
-                    
+
                     /* Medias */
-                    .ob-video iframe, 
-                    .ob-section-images .ob-slideshow, 
+                    .ob-video iframe,
+                    .ob-section-images .ob-slideshow,
                     .ob-slideshow img, .ob-section-map .ob-map {width: 600px;}
                     .ob-video iframe {max-height: 345px;}
                     .ob-section-audio .obsoundplayer .obsoundplayername {height: 31px; width: 200px; overflow: hidden;}
-                    
+
                     /* Section texte */
                     .ob-text h3,
-                    .ob-text h4,    
+                    .ob-text h4,
                     .ob-text h5 {margin: 15px 0 5px;}
                     .ob-text h3 {font-size: 18px; line-height: 18px;}
-                    .ob-text h4 {font-size: 16px; line-height: 16px;}   
+                    .ob-text h4 {font-size: 16px; line-height: 16px;}
                     .ob-text h5 {font-size: 14px; font-weight: bold; line-height: 14px;}
 
                     .ob-text pre {width: 600px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -webkit-pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; overflow: auto;}
-                    
+
                     /* Section image */
                     .ob-media-left {margin-right: 30px;}
                     .ob-media-right {margin-left: 30px; max-width: 100%;}
                     .ob-row-1-col img {width: 100%;}
                     .ob-row-2-col img {width: 50%; margin-top: 0; margin-bottom: 0;}
                     .ob-row-3-col img {width: 200px; margin-top: 0; margin-bottom: 0;}
-                    
+
                     /* Section map */
                     .ob-map div {color: #282924;}
-                    
+
                     /* Section file */
                     .ob-section-file .ob-ctn {background: #222; border: none; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); display: block; max-width: 100%;}
                     .ob-section-file .ob-ctn a.ob-link,
@@ -229,28 +229,28 @@
                     .ob-section-quote .ob-quote p:after {color: #444; margin: 80px 0 0;}
                     .ob-section-quote p.ob-author,
                     .ob-section-quote p.ob-source {background: #444; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 22px; max-width: 517px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
-                    
-                    /* Section Link */ 
+
+                    /* Section Link */
                     .ob-section-link .ob-ctn {background: #222; border: none; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
                     .ob-section-link .ob-media-left {margin: 0;}
                     .ob-section-link p.ob-url {background: #444; margin: 0; max-height: 20px; max-width: 395px;}
-                    .ob-section-link p.ob-title {color: #FFF; margin-bottom: 0; margin-left: 20px;} 
+                    .ob-section-link p.ob-title {color: #FFF; margin-bottom: 0; margin-left: 20px;}
                     .ob-section-link p.ob-snippet {color: #FFF; margin-bottom: 10px; margin-left: 20px; margin-top: 0;}
                     .ob-section-link p.ob-title .ob-link {color: #FFF; max-height: 42px; overflow: hidden;}
                     .ob-section-link p.ob-snippet {margin-bottom: 35px; max-height: 40px; overflow: hidden;}
                     .ob-section-link .ob-img {float: left; width: 170px;}
                     .ob-section-link .ob-desc {margin-top: 5px;}
-                    
-                    
-                    
+
+
+
                     /* Description */
                     .contenuArticle .ob-desc {font-size: 13px; font-style: italic;}
-                    
-                    
+
+
                     /* twitter box */
                     .ob-section .twitter-tweet-rendered {max-width: 100% !important;}
                     .ob-section .twt-border {max-width: 100% !important;}
-                    
+
                     /* Share buttons */
                     .share {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; margin: 10px 0; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 9px 13px 8px; position: relative; width: 600px; z-index: 1;/* iframe Facebook */}
                     .share h6,
@@ -263,19 +263,19 @@
                     .item-comments {
                         {% if Custom('share_service') != 'None' %}margin-top: 30px;{% endif %}
                     }
-                    
+
                     /* Contact */
                     .ob-form {margin-bottom: 80px;}
                     .ob-form-field {margin: 5px 0 0 80px;}
                     .ob-label {width: 20%; font-size: 14px;}
-                    .ob-input-submit, 
+                    .ob-input-submit,
                     .ob-error {margin-left: 31%;}
-                    .ob-input-text, 
-                    .ob-input-email, 
+                    .ob-input-text,
+                    .ob-input-email,
                     .ob-input-textarea {padding: 6px 0; border: 2px solid #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px;}
                     .ob-input-submit {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; display: block; font-weight: bold; line-height: 17px; margin-top: 5px; padding: 2px 7px; text-align: center;}
                     .ob-form + a {display: block; text-align: center;}
-    
+
                 /** Sidebar **/
                 .box {background: #141414; border: 2px solid #333; margin-bottom:10px; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding:10px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;}
                 .box{/* ie6 hack */_background:#000;}
@@ -283,30 +283,30 @@
                 .box-content {font-size: 14px; line-height:18px;}
                 .box-content strong {font-weight:normal;}
                 .box-footer {display:none;}
-        
+
                     /* Sidebar > About */
                     .profile .avatar {float: left; margin-right: 10px;}
                     .profile .avatar img {background: #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; -moz-opacity: 0.8; -webkit-opacity: 0.8; -o-opacity: 0.8; -ms-opacity: 0.8; opacity: 0.8; padding: 3px; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
                     .profile .avatar img:hover {-moz-opacity: 1; -webkit-opacity: 1; -o-opacity: 1; -ms-opacity: 1; opacity: 1;}
                     .profile .blog-owner-nickname {font-style: italic; display: block; margin-top: 10px; text-align: right;}
-                
+
                     /* Sidebar > Search */
                     .search form {position:relative;}
                     .search form input {border: 2px solid #333; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; border-radius: 3px; color: #676767; padding: 5px 0; width: 70%;}
                     .search form button {border: 0; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; border-radius: 3px; cursor: pointer; font-weight: bold; padding: 5px 0; width: 13%;}
-        
+
                     /* Sidebar > Last Posts */
                     .last li {float: left;}
                     .last ul:hover img {-moz-opacity: 0.7; -webkit-opacity: 0.7; -o-opacity: 0.7; -ms-opacity: 0.7; opacity: 0.7; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
                     .last ul img {background: #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; margin-bottom: 5px; padding: 3px; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
                     .last li.left img {margin-right: 8px;}
                     .last ul img:hover {-moz-opacity: 1; -webkit-opacity: 1; -o-opacity: 1; -ms-opacity: 1; opacity: 1; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
-                
+
                     /* Sidebar > Tags */
                     .tags li {border-bottom: 1px solid #222; margin: 10px 0; padding: 10px 0;}
                     .tags li a {font-size: 16px;}
                     .tags .number {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; float: right; font-weight: bold; line-height: 17px; margin-top: -2px; padding: 2px 7px; text-align: center;}
-                    
+
                     /* Sidebar > Follow me */
                     .follow li {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; display: block; float: left; height: 83px; text-indent: -9999999%; width: 83px;}
                     .follow li a {background: url("http://assets.over-blog-kiwi.com/themes/5/images/follow-me.png") no-repeat; display: block; height: 100%; width: 100%;}
@@ -318,59 +318,59 @@
                     .follow .twitter-follow a {background-position: center -74px;}
                     .follow .rss-follow:hover {background: #ff8604; border-color: #ff8604;}
                     .follow .rss-follow a {background-position: center -166px;}
-                    
+
                     /* Sidebar > Archives */
                     .plustext {font-size: 16px;}
                     .arch_month {margin-left: 20px;}
                     .arch_month li {border-bottom: 1px solid #222; margin: 10px 0; padding: 10px 0;}
                     .archives .number {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; float: right; font-weight: bold; line-height: 17px; margin-top: -2px; padding: 2px 7px; text-align: center;}
-            
-            
+
+
                 /** Pagination **/
-                .pagination { 
+                .pagination {
                     {% if isSingle %}
                         margin: 30px auto 20px; width: 600px;
                     {% else %}
                         margin: 0 auto 20px; width: 630px;
-                    {% endif %} 
+                    {% endif %}
                     font-size: 14px; padding: 2px 0;}
                 .pagination a {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; float: right; line-height: 17px; margin-top: -2px; padding: 2px 7px; text-align: center; text-transform: uppercase;}
                 .pagination .previous {float: left;}
                 .pagination .next {float: right;}
-                
+
                 /** Credits **/
                 .credits {display: block; margin: 20px 0; text-align: center; text-shadow: 1px 1px 1px #000;}
-            
-            
+
+
             /*** Themes ***/
-                
+
                 /** JUNGLE **/
                 {% if Custom('theme_style') == 'Jungle'|default('Moon') %}
-                    
+
                     /* BACKGROUND */
                     body {background-image: url({{ Custom('background')|default('http://assets.over-blog-kiwi.com/themes/5/images/jungle/header-jungle.jpg') }}); background-attachment: fixed; {% if Custom('background') is not empty %} background-position: center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{% else %}background-position: center top;{% endif %}background-repeat: no-repeat;}
-                    
+
                     /* TOP */
                     #top .title a,
                     #top .title a:visited {color: #6F8A10;}
                     #top .title a:hover,
                     #top .description {color: #fff;}
-                    
+
                     /* POSTS */
                     .beforeArticle .tags a,
                     .beforeArticle .tags a:visited {color: #fff;}
                     .beforeArticle .tags a:hover {color: #d6ea78;}
                     .post-title,
                     .special h3, {border-bottom-color: #2d360b;}
-                    .post-title a, 
+                    .post-title a,
                     .post-title a:visited,
                     .special h3,
                     .ob-text h3,
                     .ob-text h4,
                     .ob-text h5 {color: #6F8A10;}
                     .post-title a:hover {color: #d6ea78;}
-                    
-                    .contenuArticle a, 
+
+                    .contenuArticle a,
                     .contenuArticle a:visited {color: #6F8A10;}
                     .contenuArticle a:hover {color: #d6ea78;}
 
@@ -390,14 +390,14 @@
                     .ob-section-quote p.ob-source:hover,
                     .ob-section-quote p.ob-author .ob-link:hover,
                     .ob-section-quote p.ob-source .ob-link:hover {color: #d6ea78;}
-                    
+
                     /* Section Link */
-                    .ob-section-link p.ob-url , 
+                    .ob-section-link p.ob-url ,
                     .ob-section-link p.ob-url .ob-link,
                     .ob-section-link p.ob-url .ob-link
                     .ob-section-link p.ob-url .ob-link {color: #FFF;}
                     .ob-section-link p.ob-url .ob-link:hover {color: #d6ea78;}
-                    
+
                     /* SIDEBAR */
                     .box-titre h3 {border-bottom-color: #2d360b; color: #c4c4c4;}
                     .box-content strong {color: #bebebe;}
@@ -405,14 +405,14 @@
                     .box-content a:visited {color: #6F8A10;}
                     .box-content a:hover {color: #d6ea78;}
                     .blog-owner-nickname {color: #6f8a10;}
-                    
+
                     .archives .number,
                     .box-content form button,
                     .comment-number,
                     .follow li,
                     .ob-input-submit,
                     .pagination a,
-                    .tags .number {                 
+                    .tags .number {
                         background: #6f8a10; /* Old browsers */
                         /* IE9 SVG, needs conditional override of 'filter' to 'none' */
                         background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZmOGExMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjY1JSIgc3RvcC1jb2xvcj0iIzU0NjkwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
@@ -425,12 +425,12 @@
                         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6f8a10', endColorstr='#546900',GradientType=0 ); /* IE6-8 */
                         border: 1px solid #6f8a10; color: #fff; text-shadow: 1px 1px 1px #141414;
                     }
-                    
+
                     .box-content form button:hover,
                     .comment-number:hover,
                     .ob-input-submit:hover,
                     .pagination a:hover {color: #141414; text-shadow: none;}
-                    
+
                     .box-content form button:active,
                     .comment-number:active,
                     .ob-input-submit:active,
@@ -446,40 +446,40 @@
                         background: linear-gradient(to bottom,  #546900 35%,#6f8a10 100%); /* W3C */
                         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#546900', endColorstr='#6f8a10',GradientType=0 ); /* IE6-8 */
                     }
-                    
+
                     /* CREDITS */
                     .credits a,
                     .credits a:visited {color: #6f8a10;}
                     .credits a:hover {color: #d6ea78;}
-            
-            
+
+
                 /** BRIDGE **/
                 {% elseif Custom('theme_style') == 'Bridge' %}
-                    
+
                     /* BACKGROUND */
                     body {background-image: url("{{ Custom('background')|default('http://assets.over-blog-kiwi.com/themes/5/images/bridge/header-bridge.jpg') }}"); background-attachment: fixed; {% if Custom('background') is not empty %} background-position: center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{% else %}background-position: center top;{% endif %}background-repeat: no-repeat;}
-                    
+
                     /* TOP */
                     #top .title a,
                     #top .title a:visited {color: #ff8604;}
                     #top .title a:hover,
                     #top .description {color: #FFF;}
-                    
+
                     /* POSTS */
                     .beforeArticle .tags a,
                     .beforeArticle .tags a:visited {color: #ff8604;}
                     .beforeArticle .tags a:hover {color: #fff;}
                     .post-title,
                     .special h3, {border-bottom-color: #fff;}
-                    .post-title a, 
+                    .post-title a,
                     .post-title a:visited,
                     .special h3,
                     .ob-text h3,
                     .ob-text h4,
                     .ob-text h5 {color: #ff8604;}
                     .post-title a:hover {color: #fff;}
-                    
-                    .contenuArticle a, 
+
+                    .contenuArticle a,
                     .contenuArticle a:visited {color: #ff8604;}
                     .contenuArticle a:hover {color: #fff;}
 
@@ -499,15 +499,15 @@
                     .ob-section-quote p.ob-source:hover,
                     .ob-section-quote p.ob-author .ob-link:hover,
                     .ob-section-quote p.ob-source .ob-link:hover {color: #fff;}
-                    
+
                     /* Section Link */
-                    .ob-section-link p.ob-url , 
+                    .ob-section-link p.ob-url ,
                     .ob-section-link p.ob-url .ob-link,
                     .ob-section-link p.ob-url .ob-link
                     .ob-section-link p.ob-url .ob-link {color: #ff8604;}
                     .ob-section-link p.ob-url .ob-link:hover {color: #fff;}
 
-                   
+
                     /* SIDEBAR */
                     .box-titre h3 {border-bottom-color: #b05900; color: #ff8604;}
                     .box-content strong {color: #bebebe;}
@@ -515,7 +515,7 @@
                     .box-content a:visited {color: #fff;}
                     .box-content a:hover {color: #ff8604;}
                     .blog-owner-nickname {color: #ff8604;}
-                    
+
                     .archives .number,
                     .box-content form button,
                     .comment-number,
@@ -535,7 +535,7 @@
                         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8500', endColorstr='#b05900',GradientType=0 ); /* IE6-8 */
 
                         border: 1px solid #b05900; color: #fff; text-shadow: 1px 1px 1px #141414;}
-                    
+
                     .box-content form button:active,
                     .comment-number:active,
                     .ob-input-submit:active,
@@ -551,39 +551,39 @@
                         background: linear-gradient(to bottom,  #b05900 35%,#ff8500 100%); /* W3C */
                         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b05900', endColorstr='#ff8500',GradientType=0 ); /* IE6-8 */
                     }
-                
+
                 /* CREDITS */
                 .credits a,
                 .credits a:visited {color: #ff8604;}
                 .credits a:hover {color: #fff;}
 
-                /** MOON **/                   
+                /** MOON **/
                 {% else %}
-                    
+
                     /* BACKGROUND */
                     body {background-image: url("{{ Custom('background')|default('http://assets.over-blog-kiwi.com/themes/5/images/moon/header-moon.jpg') }}"); background-attachment: fixed; {% if Custom('background') is not empty %} background-position: center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;{% else %}background-position: center top;{% endif %}background-repeat: no-repeat;}
-                                        
+
                     /* TOP */
                     #top .title a,
                     #top .title a:visited {color: #9bb1c5;}
                     #top .title a:hover,
                     #top .description {color: #fff;}
-                    
+
                         /* POSTS */
                         .beforeArticle .tags a,
                         .beforeArticle .tags a:visited {color: #9bb1c5;}
                         .beforeArticle .tags a:hover {color: #fff;}
                         .post-title,
                         .special h3 {border-bottom-color: #1e3249;}
-                        .post-title a, 
+                        .post-title a,
                         .post-title a:visited,
                         .special h3,
                         .ob-text h3,
                         .ob-text h4,
                         .ob-text h5 {color: #9bb1c5;}
                         .post-title a:hover {color: #fff;}
-                        
-                        .contenuArticle a, 
+
+                        .contenuArticle a,
                         .contenuArticle a:visited {color: #9bb1c5;}
                         .contenuArticle a:hover {color: #fff;}
 
@@ -603,21 +603,21 @@
                         .ob-section-quote p.ob-source:hover,
                         .ob-section-quote p.ob-author .ob-link:hover,
                         .ob-section-quote p.ob-source .ob-link:hover {color: #fff;}
-                        
+
                         /* Section Link */
-                        .ob-section-link p.ob-url , 
+                        .ob-section-link p.ob-url ,
                         .ob-section-link p.ob-url .ob-link,
                         .ob-section-link p.ob-url .ob-link
                         .ob-section-link p.ob-url .ob-link {color: #9bb1c5;}
                         .ob-section-link p.ob-url .ob-link:hover {color: #fff;}
-                        
+
                         /* SIDEBAR */
                         .box-titre h3 {border-bottom-color: #254870; color: #fff;}
-                        
+
                         .box-content strong {color:#bebebe;}
                         .box-content a {color: #9bb1c5;}
                         .box-content a:hover {color: #fff;}
-                        
+
                         .archives .number,
                         .box-content form button,
                         .comment-number,
@@ -636,7 +636,7 @@
                             background: linear-gradient(to bottom,  #2e5fa4 0%,#22406d 65%); /* W3C */
                             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2e5fa4', endColorstr='#22406d',GradientType=0 ); /* IE6-8 */
                             border: 1px solid #2d5eab; color: #fff; text-shadow: 1px 1px 1px #141414;}
-                        
+
                         .box-content form button:active,
                         .comment-number:active,
                         .ob-input-submit:active,
@@ -651,14 +651,14 @@
                             background: linear-gradient(to bottom,  #22406d 35%,#2e5fa4 100%); /* W3C */
                             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#22406d', endColorstr='#2e5fa4',GradientType=0 ); /* IE6-8 */
                         }
-                        
+
                         .blog-owner-nickname {color: #254870;}
-                   
+
                     /* CREDITS */
                     .credits a,
                     .credits a:visited {color: #fff;}
                     .credits a:hover {color: #9bb1c5;}
-                {% endif %}        
+                {% endif %}
         </style>
     </head>
     <body>
@@ -666,7 +666,7 @@
             <div id="ln_0" class="ln">
                 <div id="cl_0_0" class="cl">
                     <div class="column_content">
-                        <div class="header">   
+                        <div class="header">
                             <div id="top">
                                 <h1 class="title">
                                     <a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
@@ -692,7 +692,7 @@
                                     {% endif %}
                                 </p>
                             {% endif %}
-    
+
                             <!-- Posts -->
                             {% if Posts is empty %}
                                 {% if isSearch %}
@@ -739,7 +739,7 @@
                                                         {% if Post.Title is not empty %}
                                                             {{ Post.Title }}
                                                         {% else %}
-                                                            {{ Lang.Get('Published from') }} 
+                                                            {{ Lang.Get('Published from') }}
                                                             {% list Post.Sources %}
                                                                 {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                                             {% endlist %}
@@ -764,7 +764,7 @@
                                             <div class="clear"></div>
                                         </div>
                                         <div class="clear"></div>
-            
+
                                         <!-- Share buttons + comments -->
                                         <div class="share">
                                             {% if Custom('share_service') is not empty and Custom('share_service') != 'None' %}
@@ -796,7 +796,7 @@
                                                     </div>
                                                 {% endif %}
                                             {% endif %}
-                                            
+
                                             {% if isSingle == false and Post.ShowComments is not empty %}
                                                 {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <a class="comment-number" href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
@@ -812,7 +812,7 @@
                                                 {% endif %}
                                             {% endif %}
                                             <div class="clear"></div>
-                                            
+
                                             <!-- Pagination -->
                                             {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
                                                 {% if isPage == false %}
@@ -826,7 +826,7 @@
                                                     </div>
                                                 {% endif %}
                                             {% endif %}
-                                            
+
                                             <!-- Comments -->
                                             {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                                 <div id="comments" class="item-comments">
@@ -838,8 +838,8 @@
                                                         <script type="text/javascript">
                                                             var disqus_shortname = '{{ Custom('comment_disqus') }}';
                                                             (function() {
-                                                                var dsq = document.createElement('script'); 
-                                                                dsq.type = 'text/javascript'; 
+                                                                var dsq = document.createElement('script');
+                                                                dsq.type = 'text/javascript';
                                                                 dsq.async = true;
                                                                 dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
                                                                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -857,7 +857,7 @@
                                 {% endlist %}
                             {% endif %}
                         </div>
-    
+
                         <!-- Pagination -->
                         {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty %}
                             {% if isPage == false %}
@@ -872,7 +872,7 @@
                                     </div>
                                 </div>
                             {% endif %}
-                        {% endif %}                        
+                        {% endif %}
                     </div>
                 </div>
                 <div id="cl_1_1" class="cl">
@@ -900,7 +900,7 @@
                                 </div>
                             </div>
                         {% endif %}
-    
+
                         <!-- Search -->
                         {% if Custom('custom_hide_widget_search_form') == false %}
                             <div class="box search" >
@@ -919,7 +919,7 @@
                                 </div>
                             </div>
                         {% endif %}
-                        
+
                         <!-- Navigation -->
                         <div class="box navigation" >
                             <div class="box-titre">
@@ -943,13 +943,13 @@
                                 </ul>
                             </div>
                         </div>
-                        
-                        
+
+
                         {% if Custom('custom_display_widget_last_posts') == false %}
                             <!-- Last posts -->
                             <div class="box last" >
                                 <div class="box-titre">
-                                    <h3>    
+                                    <h3>
                                         <span>{{ Lang.Get('Last Posts') }}</span>
                                     </h3>
                                 </div>
@@ -958,7 +958,7 @@
                                         {% list Blog.Posts(6) %}
                                             {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
                                                 <li {% if loop.index is odd %}class="left"{% endif %}>
-                                                    <h3> 
+                                                    <h3>
                                                         <a href="{{ Blog.Url}}{{ Post.Permalink }}" title="{{ Post.Permalink }}">
                                                             <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(126,90)|crop }}{% else %}{{ Custom('post_cover')|resize(126,90)|crop }}{% endif %}" alt="" width="126" height="90" />
                                                         </a>
@@ -974,8 +974,8 @@
                                 </div>
                             </div>
                         {% endif %}
-    
-                        
+
+
                         {% if Custom('tag_number') > 0 %}
                             <!-- Tags -->
                             <div class="box tags" >
@@ -995,8 +995,8 @@
                                 </div>
                             </div>
                         {% endif %}
-                            
-                       
+
+
                         {% if Custom('custom_hide_widget_follow_us') == false %}
                              <!-- Follow us -->
                             <div class="box follow" >
@@ -1025,7 +1025,7 @@
                                 </div>
                             </div>
                         {% endif %}
-                        
+
                         {% if Custom('custom_hide_widget_blog_archives') == false %}
                             <div class="box archives" >
                                 <div class="box-titre">
@@ -1052,7 +1052,7 @@
                                 </div>
                             </div>
                         {% endif %}
-                        
+
                         <p class="credits">
                             {{ Lang.Get('Hosted by') }} <a href="http://over-blog.com" target="_blank">Overblog</a>
                         </p>
@@ -1061,10 +1061,10 @@
                 <div class="clear"></div>
             </div>
         </div>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-        
+
         <script>
             $(document).ready(function() {
                 // Fancybox
@@ -1077,7 +1077,7 @@
                 });
 
                 {% if Custom('custom_hide_widget_search_form') == false %}
-                    // Placholder Script 
+                    // Placholder Script
                     (function() {
                         // HTML5 placeholder fallback
                         function isPlaceholderSupported() {
@@ -1118,7 +1118,7 @@
                                 });
                             }
                         }
-                        
+
                         // Search form
                         function obSearchForm() {
                             'use strict';
@@ -1145,14 +1145,14 @@
                 // Archives
                 function switch_arch(year) {
                     'use strict';
-                    var archiveYear, 
-                        archiveMonths, 
+                    var archiveYear,
+                        archiveMonths,
                         displayStyle;
                         displayStyle = '';
                         archiveYear = document.getElementById('arch_' + year);
                     if (typeof (archiveYear) !== 'undefined') {
                         if (archiveYear.style.display !== 'none') {
-                            
+
                             // Hide years without months
                             archiveMonths = archiveYear.getElementsByTagName('li');
                             if (!archiveMonths.length) {
@@ -1165,23 +1165,23 @@
                     }
                     return false;
                 }
-                
+
                 $('.plustext').click(function() {
-                    return false; 
+                    return false;
                 });
-        
+
                 {% list Blog.Archives %}
                     {% if Archive.Year != "now"|date("Y") %}
                         switch_arch('{{ Archive.Year }}');
                     {% endif %}
-                {% endlist %}  
-            {% endif %} 
+                {% endlist %}
+            {% endif %}
 
             {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                 // Disqus comments count -->
                 var disqus_shortname = "{{ Custom('comment_disqus') }}";
                 (function () {
-                    var s = document.createElement('script'); 
+                    var s = document.createElement('script');
                         s.async = true;
                         s.type = 'text/javascript';
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
@@ -1193,11 +1193,11 @@
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                    js = d.createElement(s); 
+                    js = d.createElement(s);
                     js.id = id;
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                     fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));   
+            }(document, 'script', 'facebook-jssdk'));
 
             // Twitter share + tweets
             !function(d,s,id){
@@ -1206,18 +1206,18 @@
                     js = d.createElement(s);
                     js.id = id;
                     js.src = "//platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs); 
+                    fjs.parentNode.insertBefore(js,fjs);
                 }
-            }(document,"script","twitter-wjs");             
-        
-            // Google + button        
+            }(document,"script","twitter-wjs");
+
+            // Google + button
             window.___gcfg = {lang: '{{ Blog.Lang }}'};
                 (function() {
-                var po = document.createElement('script'); 
-                    po.type = 'text/javascript'; 
+                var po = document.createElement('script');
+                    po.type = 'text/javascript';
                     po.async = true;
                     po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; 
+                var s = document.getElementsByTagName('script')[0];
                     s.parentNode.insertBefore(po, s);
             })();
 
@@ -1228,13 +1228,13 @@
                     _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
                     _gaq.push(['_trackPageview']);
                     _gaq.push(['_trackPageLoadTime']);
-                
+
                 (function() {
-                    var ga = document.createElement('script'); 
-                        ga.type = 'text/javascript'; 
+                    var ga = document.createElement('script');
+                        ga.type = 'text/javascript';
                         ga.async = true;
                         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; 
+                    var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(ga, s);
                 })();
             {% endif %}
