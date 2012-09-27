@@ -70,26 +70,26 @@
             {% endif %}
         {% endif %}
 
-        <!-- shortcut:[Options] -->	
+        <!-- shortcut:[Options] -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" default="9" group="Navigation" />
-        
+
         <meta name="image:background:label.backgroundImage" group="design" />
         <meta name="image:blog_cover:label.headerImage" default="http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg" group="design" />
 		<meta name="image:post_cover:label.defaultPostCover" group="design" />
-		
+
         <meta name="string:footer_content:label.footer" default="Theme: Twentyeleven &copy; 2012" group="footer" />
 
 		<meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
 		<meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
 		<meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
-		<meta name="boolean:display_widget_last:label.hidelastPosts" group="Widgets" />
+		<meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
 		<meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
-		
+
 		<meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-		
+
 		<meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
 
@@ -97,17 +97,17 @@
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
-        
+
         <!-- shortcut:[Includes] -->
-        <!-- favicon -->       
+        <!-- favicon -->
         {% if Blog.FaviconUrl is not empty %}
             <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
         {% else %}
             <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
             <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
             <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-        {% endif %}   
-       
+        {% endif %}
+
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
             <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -118,11 +118,11 @@
 
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
-        
+
         <!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
+
 		<!-- Fancybox -->
 		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 		<!-- shortcut:[Style] -->
@@ -138,148 +138,148 @@
 			h1,h2,h3,h4,h5,h6{ font-size:100%; font-weight:normal;}
 			q:before,q:after{ content:'';}
 			abbr,acronym{ border:0;}
-			
+
 			/***********
 			** GLOBAL **
 			***********/
-			body { 
+			body {
 				{% if Custom('background') is not empty %}
-					background: url({{ Custom('background') }}) no-repeat center center fixed; 
-					-webkit-background-size: cover; 
-					   -moz-background-size: cover; 
-					     -o-background-size: cover; 
+					background: url({{ Custom('background') }}) no-repeat center center fixed;
+					-webkit-background-size: cover;
+					   -moz-background-size: cover;
+					     -o-background-size: cover;
 					        background-size: cover;
 			   {% else %}
 			   		background: #E7E7E7;
-			   {% endif %} 
-			   color: #373737; 
-			   font-size: 14px; 
-			   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
-			   font-weight: 300; 
+			   {% endif %}
+			   color: #373737;
+			   font-size: 14px;
+			   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+			   font-weight: 300;
 			   line-height: 1.625em;
 			}
-			
-			#global {				
+
+			#global {
 				background-color: #fff;
 				-webkit-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
 				   -moz-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
 				    -ms-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
 				     -o-box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
 				        box-shadow: 0 0 5px 1px rgba(68, 68, 68, 0.5);
-				 margin: 20px auto; 
-				 width: 1000px; 
+				 margin: 20px auto;
+				 width: 1000px;
 		    }
 			.cb {
 				clear: both;
 			}
-			
+
 			/***********
 			** HEADER **
 			***********/
-			#blog-header { 
-				height: 80px;  
+			#blog-header {
+				height: 80px;
 				padding-bottom: 10px;
 				width: 100%;
 			}
 				#blog-header .title {
-					float: left; 
+					float: left;
 					width: 70%;
 				}
 					#blog-header .title a,
 					#blog-header .title a:visited {
 					 	color: #111;
-					 	display: block; 
-					 	font-size: 30px; 
-					 	font-weight: bold; 
+					 	display: block;
+					 	font-size: 30px;
+					 	font-weight: bold;
 					 	line-height: 36px;
 					 	margin: 50px 50px 0 80px;
 					 	text-decoration: none;
 					 	-webkit-transition: color 300ms;
-						   -moz-transition: color 300ms;  
-						     -o-transition: color 300ms; 
-						        transition: color 300ms; 
+						   -moz-transition: color 300ms;
+						     -o-transition: color 300ms;
+						        transition: color 300ms;
 					}
 					#blog-header .title a:hover {
 						color: #1982D1;
 					}
 				#blog-header .description {
-					color: #7A7A7A; 
+					color: #7A7A7A;
 					font-size: 14px;
-					margin: 0 50px 50px 80px; 
+					margin: 0 50px 50px 80px;
 				}
-			
+
 				#search {
-					float: right; 
+					float: right;
 					margin-top: 50px;
-					width: 30%; 
+					width: 30%;
 				}
 					#search form {
-						float: right; 
+						float: right;
 						margin-right: 80px;
 					}
 						#search input[type="text"] {
 							background: url('http://assets.over-blog-kiwi.com/themes/41/img/search.png') no-repeat 5px 6px;
-							border: 1px solid #DDD; 
-							-webkit-border-radius: 2px; 
-							   -moz-border-radius: 2px; 
-							    -ms-border-radius: 2px; 
+							border: 1px solid #DDD;
+							-webkit-border-radius: 2px;
+							   -moz-border-radius: 2px;
+							    -ms-border-radius: 2px;
 							     -o-border-radius: 2px;
-							        border-radius: 2px; 
-							-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1); 
-							   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1); 
-							   	-ms-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1); 
+							        border-radius: 2px;
+							-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+							   -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+							   	-ms-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
 							   	 -o-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
-							   	 	box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);  
-							color: #888888; 
-							font-size: 14px; 
-							font-weight: 100; 
-							height: 22px; 
+							   	 	box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+							color: #888888;
+							font-size: 14px;
+							font-weight: 100;
+							height: 22px;
 							padding: 4px 10px 4px 28px;
 							text-align: left;
 							-webkit-transition: width 400ms ease;
 							   -moz-transition: width 400ms ease;
 							    -ms-transition: width 400ms ease;
 							     -o-transition: width 400ms ease;
-							        transition: width 400ms ease; 
+							        transition: width 400ms ease;
 							width: 100px;
 						}
-							
+
 						#search input[type="text"]:focus {
-							background-color: #f9f9f9; 
+							background-color: #f9f9f9;
 							outline: none;
 							width: 200px;
 						}
 						#search input[type="submit"] {
 							display: none;
 						}
-				
+
 				#blog-cover {
-					height: 288px; 
+					height: 288px;
 					margin: 0 auto;
-					width: 100%; 
+					width: 100%;
 				}
 					#blog-cover img {
 						height: 100%;
 						width: 100%;
 					}
-				
+
 				#menu {
-					background: #222; 
-					background: -webkit-linear-gradient(#252525, #0A0A0A); 
-					   background: -moz-linear-gradient(#252525, #0A0A0A); 
-						 background: -o-linear-gradient(#252525, #0A0A0A);  
-						    background: linear-gradient(#252525, #0A0A0A); 
-					-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
-					   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
-					    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
+					background: #222;
+					background: -webkit-linear-gradient(#252525, #0A0A0A);
+					   background: -moz-linear-gradient(#252525, #0A0A0A);
+						 background: -o-linear-gradient(#252525, #0A0A0A);
+						    background: linear-gradient(#252525, #0A0A0A);
+					-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+					   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+					    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
 					     -o-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
 					        box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
-					margin: 0 auto 6px; 
+					margin: 0 auto 6px;
 					width: 100%;
 				}
 					#menu ul {
 						font-size: 13px;
-						list-style: none; 
+						list-style: none;
 						margin-left: 50px;
 					}
 						#menu li {
@@ -288,38 +288,38 @@
 						#menu li.selected {
 							font-weight: bold;
 						}
-							#menu a, 
+							#menu a,
 							#menu a:visited {
 								color: #EEE;
 								display: block;
-								float: left; 
-								line-height: 40px;  
-								padding: 0 16px; 
-								text-decoration: none; 
+								float: left;
+								line-height: 40px;
+								padding: 0 16px;
+								text-decoration: none;
 								text-transform: capitalize;
 							}
 							#menu a:hover {
-								color: #373737; 
-								background: #F9F9F9; 
-								background: -webkit-linear-gradient(#F9F9F9, #E5E5E5); 
-								   background: -moz-linear-gradient(#F9F9F9, #E5E5E5); 
-									 background: -o-linear-gradient(#F9F9F9, #E5E5E5);  
+								color: #373737;
+								background: #F9F9F9;
+								background: -webkit-linear-gradient(#F9F9F9, #E5E5E5);
+								   background: -moz-linear-gradient(#F9F9F9, #E5E5E5);
+									 background: -o-linear-gradient(#F9F9F9, #E5E5E5);
 										background: linear-gradient(#F9F9F9, #E5E5E5);
 							}
-			
+
 			/*********
 			** MAIN **
 			*********/
 			#main {
 				width: 100%;
 			}
-			
+
 			/** left content **/
 			#left-content {
-				float: left; 
+				float: left;
 				width: 65%;
 			}
-			
+
 				.other-title {
 					color: #1982D1;
 					font-size: 22px;
@@ -329,27 +329,27 @@
 				p.error {
 					padding: 10px 40px;
 				}
-			
+
 			.post {
 				padding: 50px 0 50px 50px;
 			}
-			
+
 				.post .header {
 					margin-bottom: 30px;
 				}
-					.post .title a, 
+					.post .title a,
 					.post .title a:visited,
 					.post .title span {
-						color: #111; 
-						font-size: {% if isSingle %}26px{% else %}18px{% endif %}; 
-						font-weight: bold; 
+						color: #111;
+						font-size: {% if isSingle %}26px{% else %}18px{% endif %};
+						font-weight: bold;
 						line-height: {% if isSingle %}26px{% else %}18px{% endif %};
 						-webkit-transition: color 300ms ease;
 						   -moz-transition: color 300ms ease;
 						    -ms-transition: color 300ms ease;
 						     -o-transition: color 300ms ease;
 						     	transition: color 300ms ease;
-						text-decoration: none; 
+						text-decoration: none;
 					}
 					.post .title:first-letter {
 						text-transform: capitalize;
@@ -357,32 +357,32 @@
 					.post .title a:hover {
 						color: #1982D1;
 					}
-					
+
 					.comments-number {
 						float: right;
 						padding-left: 15px;
 					}
-					.comments-number a, 
+					.comments-number a,
 					.comments-number a:visited {
 						background: #EEE url('http://assets.over-blog-kiwi.com/themes/41/img/comment-bubble.png') no-repeat top left;
 						color: #666;
 						display: block;
 						font-size: 13px;
-						height: 36px; 
-						line-height: 35px; 
-						text-align: center; 
+						height: 36px;
+						line-height: 35px;
+						text-align: center;
 						text-decoration: none;
-						width: 43px;   
+						width: 43px;
 						-webkit-transition: background-color 300ms;
-						   -moz-transition: background-color 300ms;  
-						     -o-transition: background-color 300ms; 
-						        transition: background-color 300ms;   
+						   -moz-transition: background-color 300ms;
+						     -o-transition: background-color 300ms;
+						        transition: background-color 300ms;
 					}
 					.comments-number a:hover {
-						background-color: #1982D1; 
+						background-color: #1982D1;
 						color: #fff;
 					}
-					.post .date, 
+					.post .date,
 					.post .tags {
 						color: #666;
 						font-size: 13px;
@@ -397,39 +397,39 @@
 					.post .tag:first-letter {
 						text-transform: capitalize;
 					}
-					.date, 
-					.post .tag a, 
-					.post .tag a:visited, 
-					.comment a, 
+					.date,
+					.post .tag a,
+					.post .tag a:visited,
+					.comment a,
 					.comment a:visited {
-						color: #1982D1; 
+						color: #1982D1;
 						font-weight: bold;
-						line-height: 18px; 
+						line-height: 18px;
 						text-decoration: none;
 					}
-					.tag a:hover, 
+					.tag a:hover,
 					.comment a:hover {
 						text-decoration: underline;
 					}
 					.comment a {font-weight: bold;}
 					.post-cover {margin: 20px 0;}
 					.post-cover img {
-						border: 1px solid #EEE; 
+						border: 1px solid #EEE;
 						padding: 8px;
 						-webkit-transition: opacity 400ms;
-						   -moz-transition: opacity 400ms;  
-						     -o-transition: opacity 400ms; 
+						   -moz-transition: opacity 400ms;
+						     -o-transition: opacity 400ms;
 						        transition: opacity 400ms;
 					}
 					.post-cover:hover img {
-						-webkit-opacity: 0.8; 
-						   -moz-opacity: 0.8; 
-						     -o-opacity: 0.8; 
+						-webkit-opacity: 0.8;
+						   -moz-opacity: 0.8;
+						     -o-opacity: 0.8;
 						        opacity: 0.8;
 					}
-					.top-link a, 
+					.top-link a,
 					.top-link a:visited {
-						color: #1982D1; 
+						color: #1982D1;
 						text-decoration: none;
 						text-transform: capitalize;
 					}
@@ -438,158 +438,158 @@
 					}
 					.post-footer {
 						border-bottom: 1px solid #DDD;
-						margin: 30px 0 20px; 
-						padding-bottom: 20px; 
+						margin: 30px 0 20px;
+						padding-bottom: 20px;
 					}
 
 			/* Sections */
 			.ob-section {
 				width: 100%;
 			}
-			
+
 			/* Medias */
-	        .ob-cell, 
+	        .ob-cell,
 	        .ob-img,
 	        .ob-media-left,
-	        .ob-media-right, 
+	        .ob-media-right,
 	        .ob-video {
 	        	max-width: 100%;
 	        }
-			
+
 			/* Section texte */
-			.ob-text, 
-			.ob-quote, 
+			.ob-text,
+			.ob-quote,
 			.ob-link {hyphens: auto; word-wrap: break-word;}
 			.ob-text p {
 				margin-bottom: 15px;
 			}
 			.ob-text li:last-child {margin-bottom: 15px;}
-			.ob-text h3, 
-			.ob-text h4, 
+			.ob-text h3,
+			.ob-text h4,
 			.ob-text h5 {margin: 15px 0 5px;}
 			.ob-text h3 {font-size: 18px; line-height: 18px;}
 	        .ob-text h4 {font-size: 16px; line-height: 16px;}
-	        .ob-text h5 {font-size: 14px; font-weight: bold; line-height: 14px;}	
+	        .ob-text h5 {font-size: 14px; font-weight: bold; line-height: 14px;}
 			.ob-section ol {margin-left: 30px;}
 			.ob-section ul {margin-left: 20px;}
 			.ob-section li p {margin: 0;}
-			.ob-text a, 
-			.ob-text a:visited, 
-			.ob-link, 
+			.ob-text a,
+			.ob-text a:visited,
+			.ob-link,
 			.ob-author {color: #1982D1; text-decoration: none;}
-			.ob-text a:hover, 
-			.ob-link:hover, 
+			.ob-text a:hover,
+			.ob-link:hover,
 			.ob-author:hover {text-decoration: underline;}
 			.ob-text pre {
 				background: #EEE;
 				border: 1px solid #DDD;
-				margin-bottom: 20px;  
+				margin-bottom: 20px;
 				overflow: auto;
-				padding: 10px; 
-				white-space: -webkit-pre-wrap; 
-				   white-space: -moz-pre-wrap; 
-					white-space: -ms-pre-wrap; 
+				padding: 10px;
+				white-space: -webkit-pre-wrap;
+				   white-space: -moz-pre-wrap;
+					white-space: -ms-pre-wrap;
 					 white-space: -o-pre-wrap;
 						white-space: pre-wrap;
-				width: 578px;  
+				width: 578px;
 				word-wrap: break-word;
 			}
 			.ob-desc {clear: both; font-size: 12px; font-style: italic; font-weight: bold;}
 			.ob-quote {font-family: 'Georgia', "Bitstream Charter", serif; font-size: italic;}
-				        
+
 	        /* Section map */
 	        .ob-section-map .ob-map, .ob-section-map .ob-desc {width: 600px;}
-	        
+
 	        /* Section image */
 			.ob-row-1-col img {width: 100%;}
 			.ob-row-2-col img {width: 50%; }
 			.ob-row-3-col img {width: 33.33%;}
-			.ob-section-images .ob-slideshow, 
-			.ob-slideshow, .yui3-slideshow-content, 
+			.ob-section-images .ob-slideshow,
+			.ob-slideshow, .yui3-slideshow-content,
 			.yui3-slideshow-content .ob-img {
-				height: 428px; 
-				width: 600px; 
+				height: 428px;
+				width: 600px;
 			}
-			
+
 			/* Section audio */
 			.obsoundplayer .obsoundplayername {
 				font-size: 12px;
-				height: 31px; 
+				height: 31px;
 				overflow: hidden;
 				width: 130px !important;
 			}
-			
+
 			/* Section video */
 			.ob-video iframe {
 				max-height: 346px;
 				width: 600px;
 			}
-			
+
 			/* Section File */
 	        .ob-section-file .ob-ctn {
-	        	background: #fff; 
-	        	border-color: #DDD; 
-	        	border-bottom-color: #BBB; 
-	        	border-top-color: #EEE; 
-	        	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
+	        	background: #fff;
+	        	border-color: #DDD;
+	        	border-bottom-color: #BBB;
+	        	border-top-color: #EEE;
+	        	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 	        	        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 	        	display: block;
 	        	max-width: 100%
 	        }
 	        .ob-section-file .ob-ctn a.ob-link,
 	        .ob-section-file .ob-c a.ob-link:visited {
-	        	color: #373737; 
+	        	color: #373737;
 	        	max-width: 513px;
 	        	text-decoration: underline;
 	        }
 	        .ob-section-file .ob-ctn a.ob-link:hover {
-	        	color: #373737; 
+	        	color: #373737;
 	        	text-decoration: none;
 	        }
 
 			/* Section Quote */
 			.ob-section-quote {
-				background: #fff; 
-				border-color: #DDD; 
-				border-bottom-color: #BBB; 
-				border-top-color: #EEE; 
-				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
+				background: #fff;
+				border-color: #DDD;
+				border-bottom-color: #BBB;
+				border-top-color: #EEE;
+				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 	        	        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 				margin-bottom: 20px;
 			}
 			.ob-section-quote .ob-quote p {
-				color: #373737; 
+				color: #373737;
 				min-height: 20px;
 			}
 			.ob-section-quote .ob-quote p:before {
-				color: #1982D1; 
+				color: #1982D1;
 				margin: 18px 0 0 -85px;
 			}
 			.ob-section-quote .ob-quote p:after {
-				color: #1982D1; 
+				color: #1982D1;
 				margin: 73px 0 0;
 			}
 	        .ob-section-quote p.ob-author,
 	        .ob-section-quote p.ob-source {
-	        	background: #F1F1F1; 
-	        	color: gray; 
-	        	font-size: 14px; 
-	        	font-style: italic; 
-	        	margin: 25px 0 0; 
-	        	max-height: 24px; 
-	        	max-width: 510px; 
-	        	overflow: hidden; 
+	        	background: #F1F1F1;
+	        	color: gray;
+	        	font-size: 14px;
+	        	font-style: italic;
+	        	margin: 25px 0 0;
+	        	max-height: 24px;
+	        	max-width: 510px;
+	        	overflow: hidden;
 	        	padding-bottom: 0\9; /* for IE */
 	        	position: relative;
-	        	text-decoration: none; 
-	        	text-overflow: ellipsis; 
-	        	white-space: nowrap; 
+	        	text-decoration: none;
+	        	text-overflow: ellipsis;
+	        	white-space: nowrap;
 	        	z-index: 11;
 	        }
 	        .ob-section-quote p.ob-author a.ob-link,
@@ -607,49 +607,49 @@
 	        .ob-section-quote p.ob-source a.ob-link:hover {
 	        	color: #222;
 	        }
-	        
-	        /* Section Link */ 
+
+	        /* Section Link */
 	        .ob-section-link .ob-ctn {
-				background: #fff; 
-				border-color: #DDD; 
-				border-bottom-color: #BBB; 
-				border-top-color: #EEE; 
-				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-	        	     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
+				background: #fff;
+				border-color: #DDD;
+				border-bottom-color: #BBB;
+				border-top-color: #EEE;
+				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	    -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+	        	     -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 	        	        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 	        }
 	        .ob-section-link .ob-media-left {
 	        	margin: 0;
 	        }
 	        .ob-section-link .ob-img {
-	        	float: left; 
+	        	float: left;
 	        	width: 170px;
 	        }
-	        .ob-section-link p.ob-title, 
+	        .ob-section-link p.ob-title,
 	        .ob-section-link p.ob-snippet {
-	        	color: #373737; 
-	        	margin-bottom: 10px; 
-	        	margin-left: 20px; 
+	        	color: #373737;
+	        	margin-bottom: 10px;
+	        	margin-left: 20px;
 	        	margin-top: 5px;
 	        }
 	        .ob-section-link p.ob-title .ob-link {
-	        	color: #1982D1; 
+	        	color: #1982D1;
 	        	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	        	max-height: 42px; 
+	        	max-height: 42px;
 	        	overflow: hidden;
 	        }
         	.ob-section-link p.ob-snippet {
         		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        		margin-bottom: 45px; 
-        		max-height: 38px; 
+        		margin-bottom: 45px;
+        		max-height: 38px;
         		overflow: hidden;
         	}
         	.ob-section-link p.ob-url {
-        		background: #F1F1F1; 
-        		max-height: 24px; 
-        		max-width: 390px; 
+        		background: #F1F1F1;
+        		max-height: 24px;
+        		max-width: 390px;
         		padding-bottom: 0\9;
         	}
         	.ob-section-link p.ob-url .ob-link {
@@ -658,18 +658,18 @@
 	        .ob-section-link p.ob-url .ob-link:hover {
 	        	text-decoration: none;
 	        }
-	        
+
 	        .ob-section-link .ob-desc {
 	        	margin-top: 5px;
 	        }
-			
+
 			/* twitter box */
-			.ob-section .twitter-tweet-rendered, 
+			.ob-section .twitter-tweet-rendered,
 			.ob-section .twt-border {
 				max-width: 100% !important;
 			}
-			
-			.share, 
+
+			.share,
 			.item-comments {
 				margin-top: 30px;
 				width: 100%;
@@ -679,21 +679,21 @@
 			.twitter-share {
 				float: left;
 			}
-			.share h6, 
+			.share h6,
 			.item-comments h6 {
 				color: #666;
-				font-size: 18px; 
+				font-size: 18px;
 				font-weight: 300;
-				margin: 0 0 5px; 
+				margin: 0 0 5px;
 			}
-			.share h4:first-letter, 
+			.share h4:first-letter,
 			.item-comments h4:first-letter {
 				text-transform: capitalize;
 			}
 			.fb-like iframe {
 				margin-bottom: -3px;
 			}
-			
+
 			.special h3 {
 				color: #111;
 				font-size: 18px;
@@ -703,48 +703,48 @@
 			.ob-form-field {
 				margin-bottom: 10px;
 			}
-			
-			.ob-form input[type="text"], 
+
+			.ob-form input[type="text"],
 			.ob-form input[type="email"],
 			.ob-form textarea {
-				background: #EEE; 
-				border: 1px solid #CCC; 
-				font-size: 16px; 
+				background: #EEE;
+				border: 1px solid #CCC;
+				font-size: 16px;
 				padding: 6px 0;
 			}
-			.ob-form input[type="text"]:focus, 
+			.ob-form input[type="text"]:focus,
 			.ob-form input[type="email"]:focus,
 			.ob-form textarea:focus {
 				background: #FFF;
 			}
 			.ob-form input[type="submit"] {
-				background: #222; 
-				background: -moz-linear-gradient(#252525, #0A0A0A); 
-				background: -webkit-linear-gradient(#252525, #0A0A0A); 
-				background: -o-linear-gradient(#252525, #0A0A0A);  
-				background: linear-gradient(#252525, #0A0A0A); 
-					-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
-					   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
-					    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px; 
+				background: #222;
+				background: -moz-linear-gradient(#252525, #0A0A0A);
+				background: -webkit-linear-gradient(#252525, #0A0A0A);
+				background: -o-linear-gradient(#252525, #0A0A0A);
+				background: linear-gradient(#252525, #0A0A0A);
+					-webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+					   -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+					    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
 					     -o-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
 					        box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
- 
+
 				border: none;
-				border-radius: 2px; 
-				color: white; 
-				cursor: pointer; 
+				border-radius: 2px;
+				color: white;
+				cursor: pointer;
 				font-size: 12px;
 				font-family: Arial, Helvetica, sans-serif;
 				padding: 10px 9px 9px 9px;
-				text-align: center; 
+				text-align: center;
 				text-decoration: none;
-				width: 66px;  
+				width: 66px;
 			}
 			.ob-form input[type="submit"]:active {
 				background: #EEE;
 				color: #373737;
 			}
-			
+
 			.ob-form {
 				margin-bottom: 80px;
 			}
@@ -758,25 +758,25 @@
 			.ob-form + a:hover {
 				text-decoration: underline;
 			}
-			
+
 			/* right content */
 			#right-content {
-				float: right; 
+				float: right;
 				width: 35%;
 			}
 				#sidebar {
 					padding: 50px;
 				}
-					
+
 					.widget {
 						margin-bottom: 25px;
 					}
 						.widget h3 {
-							color: #666; 
-							font-size: 13px; 
-							font-weight: 500; 
+							color: #666;
+							font-size: 13px;
+							font-weight: 500;
 							letter-spacing: 1px;
-							text-transform: uppercase; 
+							text-transform: uppercase;
 						}
 						.widget .author:before {
 							content: "-";
@@ -784,9 +784,9 @@
 							font-weight: 300;
 						}
 						.widget ul {
-							font-size: 15px; 
+							font-size: 15px;
 							list-style: square;
-							margin-left: 20px; 
+							margin-left: 20px;
 						}
 						.widget.last ul,
 						.widget.follow ul {
@@ -794,7 +794,7 @@
 							margin: 0;
 						}
 							.widget ul li {
-								color: #777; 
+								color: #777;
 								font-size: 13px;
 							}
 							.widget.follow ul li {
@@ -804,11 +804,11 @@
 								    -ms-border-radius: 8px;
 								     -o-border-radius: 8px;
 								     	border-radius: 8px;
-								display: block;	
+								display: block;
 								float: left;
 								height: 40px;
 								margin: 10px 15px auto 0;
-								width: 40px;					
+								width: 40px;
 							}
 							.widget.follow ul li:hover {
 								background: #fff;
@@ -823,37 +823,37 @@
 							}
 							.widget.follow ul li a {
 								background: url("http://assets.over-blog-kiwi.com/themes/41/img/social.png") no-repeat;
-								display: block;	
+								display: block;
 								height: 100%;
 								text-indent: -99999%;
 								width: 100%;
 							}
 							.widget.follow ul li.fb a {
-								background-position: 14px 7px;							
+								background-position: 14px 7px;
 							}
 							.widget.follow ul li.fb:hover a {
-								background-position: 14px -46px;							
+								background-position: 14px -46px;
 							}
 
 							.widget.follow ul li.tw a {
 								background-position: -27px 7px;
 							}
 							.widget.follow ul li.tw:hover a {
-								background-position: -27px -46px;							
+								background-position: -27px -46px;
 							}
 
 							.widget.follow ul li.rss a {
 								background-position: -67px 7px;
 							}
 							.widget.follow ul li.rss:hover a {
-								background-position: -67px -46px;							
+								background-position: -67px -46px;
 							}
 
-								.widget a, 
+								.widget a,
 								.widget a:visited {
-									color: #1982D1; 
-									font-size: 13px; 
-									font-weight: bold; 
+									color: #1982D1;
+									font-size: 13px;
+									font-weight: bold;
 									text-decoration: none;
 								}
 								.widget a:hover {
@@ -866,30 +866,30 @@
 							text-align: left;
 						}
 							.widget span {
-							color: #1982D1; 
+							color: #1982D1;
 							display: block;
 							font-weight: bold;
 							margin-top: 5px;
 							text-align: right;
 						}
 						.widget img {
-							-webkit-transition: opacity 400ms;  
-							   -moz-transition: opacity 400ms;  
-							     -o-transition: opacity 400ms; 
+							-webkit-transition: opacity 400ms;
+							   -moz-transition: opacity 400ms;
+							     -o-transition: opacity 400ms;
 							        transition: opacity 400ms;
 						}
 						.widget.last img {
 							width: 121px;
 						}
 						.widget img:hover {
-							-webkit-opacity: 0.8; 
-							   -moz-opacity: 0.8; 
-							     -o-opacity: 0.8; 
+							-webkit-opacity: 0.8;
+							   -moz-opacity: 0.8;
+							     -o-opacity: 0.8;
 							        opacity: 0.8;
 						}
-			
+
 				#navigation {
-					margin: 0 auto 20px; 
+					margin: 0 auto 20px;
 					padding: 20px 50px;
 				}
 				#navigation.single {
@@ -898,30 +898,30 @@
 					margin-top: 30px;
 				}
 				.prev, .next {
-					color: #1982D1; 
-					font-size: 12px; 
-					font-weight: bold; 
+					color: #1982D1;
+					font-size: 12px;
+					font-weight: bold;
 					text-decoration: none;
 				}
-				.prev:hover, 
+				.prev:hover,
 				.next:hover {text-decoration: underline;}
 				.prev {float: left; }
 				.next {float: right;}
-			
-			
+
+
 			/***********
 			** FOOTER **
 			***********/
 			#blog-footer {
-				background-color: #F9F9F9; 
+				background-color: #F9F9F9;
 				border-top: 1px solid #DEDEDE;
 			}
 				#blog-footer p {
-					font-size: 13px; 
+					font-size: 13px;
 					font-weight: bold;
-					margin: 0 auto; 
-					padding: 25px 0;  
-					text-align: center; 
+					margin: 0 auto;
+					padding: 25px 0;
+					text-align: center;
 					text-shadow: 1px 1px 1px #DDD;
 					width: 100%;
 				}
@@ -934,7 +934,7 @@
 					}
 					#blog-footer a,
 					#blog-footer a:visited {
-						color: #ff9e00; 
+						color: #ff9e00;
 						text-decoration: none;
 					}
 					#blog-footer a:hover {
@@ -982,7 +982,7 @@
 				</nav>
 			</header>
 			<div class="cb"></div>
-			
+
 			<section id="left-content" role="main">
 				{% if isSpecial %}
 					<article class="post special">
@@ -998,7 +998,7 @@
 							{% endif %}
 						</h2>
 					{% endif %}
-						
+
 					{% list Posts %}
 						<article class="post">
 							<header class="header">
@@ -1034,13 +1034,13 @@
 										{% else %}
 											</a>
 										{% endif %}
-									</h2>							
+									</h2>
 								</div>
 								<div class="date">
 									<p>{{ Lang.Get('Published on') }} {{ Post.Date|datel(Lang.Get('Default date format')) | title }}</p>
 								</div>
 							</header>
-							
+
 							<div class="body">
 								{% if isSingle or Custom('display_mode') == 'All' %}
 									{{ Post.Body }}
@@ -1067,7 +1067,7 @@
 									<p>
 										{{ Lang.Get('Written by') }} <span>{{ Post.Author|default(Blog.Owner.Nickname) }}</span>
 									</p>
-										
+
 									<p class="tag">
 										{% list Post.Tags %}
 											{% if loop.first is not empty %}
@@ -1077,7 +1077,7 @@
 										{% endlist %}
 									</p>
 								</div>
-								
+
 								{% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
 									<div class="share">
                                     	{% if isSingle and Custom('share_service') != 'None' %}
@@ -1118,14 +1118,14 @@
 										{% if Navigation.PreviousPost is not empty %}
 					                    	<a class="prev" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">&laquo; {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
 					                    {% endif %}
-											
+
 										{% if Navigation.NextPost is not empty %}
 					                    	<a class="next" href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" >{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} &raquo;</a>
 					                    {% endif %}
 									</div>
 									<div class="cb"></div>
 								{% endif %}
-					         	
+
 					         	{% if isSingle and isPage == false and Post.ShowComments is not empty %}
 						         	<div class="item-comments" id="comments" >
 									    {% if Custom("comment") == "Facebook" %}
@@ -1134,10 +1134,10 @@
 									        <div id="disqus_thread"></div>
 									        <script type="text/javascript">
 										        var disqus_shortname = '{{ Custom('comment_disqus') }}';
-										
+
 										        (function() {
-											        var dsq = document.createElement('script'); 
-											        	dsq.type = 'text/javascript'; 
+											        var dsq = document.createElement('script');
+											        	dsq.type = 'text/javascript';
 											        	dsq.async = true;
 											        	dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
 											        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -1149,7 +1149,7 @@
 									        {{ Post.Comments }}
 									    {% endif %}
 									</div>
-								{% endif %}	
+								{% endif %}
 							</footer>
 						</article>
 					{% else %}
@@ -1159,10 +1159,10 @@
 							{% else %}
 								{{ Lan.Get('No post') }}.
 							{% endif %}
-						</p> 
+						</p>
 					{% endlist %}
 				{% endif %}
-			</section>		
+			</section>
 			<section id="right-content" role="complementary">
 				<aside id="sidebar">
 					{% if Custom('display_widget_profile') == false %}
@@ -1178,10 +1178,10 @@
 									{{ Blog.Owner.Bio }}
 									<span class="author"> {{ Blog.Owner.Nickname }}</span>
 								</p>
-							{% endif %}						
+							{% endif %}
 						</div>
 					{% endif %}
-					
+
 					{% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
 						<div class="widget">
 							<h3>{{ Lang.Get('archives') }}</h3>
@@ -1201,7 +1201,7 @@
                           	</ul>
 						</div>
 					{% endif %}
-					
+
 					{% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
 						<div class="widget">
 							<h3>{{ Lang.Get('pages') }}</h3>
@@ -1212,7 +1212,7 @@
 							</ul>
 						</div>
 					{% endif %}
-					
+
 					{% if Custom('display_widget_last') != true and Blog.Posts is not empty %}
 						<div class="widget last">
 							<h3>{{ Lang.Get('last posts') }}</h3>
@@ -1235,7 +1235,7 @@
 							</ul>
 						</div>
 					{% endif %}
-					
+
 					{% if Custom('display_widget_follow') != true %}
 						<div class="widget follow">
 							<h3>{{ Lang.Get('follow me') }}</h3>
@@ -1266,7 +1266,7 @@
 						{% if Navigation.PreviousPage is not empty %}
 							<a class="prev" href="{{ Navigation.PreviousPage }}" >&laquo; {{ Lang.Get('Previous page') }}</a>
 						{% endif %}
-							
+
 						{% if Navigation.NextPage is not empty %}
 							<a class="next" href="{{ Navigation.NextPage }}">{{ Lang.Get('Next page') }} &raquo;</a>
 						{% endif %}
@@ -1274,7 +1274,7 @@
 				{% endif %}
 				<div class="cb"></div>
 			{% endif %}
-			
+
 			<footer id="blog-footer">
 				<p>{{ Lang.Get(Custom('footer_content'))|default('Theme: Twentyeleven &copy; 2012') }} - <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://over-blog.com" target="_blank">Overblog</a></p>
 			</footer>
@@ -1282,7 +1282,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
-	
+
 		<script>
 			{% if Custom('display_widget_archives') != true %}
 		        function switch_arch(year) {
@@ -1304,10 +1304,10 @@
 		            }
 		            return false;
 		        }
-		        
-		        $(document).ready(function(){		
+
+		        $(document).ready(function(){
 			    	$('.plustext').click(function() {
-			    		return false; 
+			    		return false;
 					});
 			    });
 
@@ -1315,7 +1315,7 @@
 		      		{% if Archive.Year != "now"|date("Y") %}
 		        		switch_arch('{{ Archive.Year }}');
 		        	{% endif %}
-		    	{% endlist %}  
+		    	{% endlist %}
 		    {% endif %}
 
 		    $(document).ready(function() {
@@ -1368,7 +1368,7 @@
                             });
                         }
                     }
-                    
+
                     // Search form
                     function obSearchForm() {
                         'use strict';
@@ -1388,25 +1388,25 @@
                     }
                     obSearchForm();
                 })();
-			});	
+			});
 
 			{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 				// Disqus comments
 		        var disqus_shortname = "{{ Custom('comment_disqus') }}";
 		        (function () {
-		            var s = document.createElement('script'); 
+		            var s = document.createElement('script');
 		            	s.async = true;
 		            	s.type = 'text/javascript';
 		            	s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
 		            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		        }());
-			{% endif %}	
+			{% endif %}
 
 			// Facebook comments + share
 			(function(d, s, id) {
 		        var js, fjs = d.getElementsByTagName(s)[0];
 		        if (d.getElementById(id)) return;
-			        js = d.createElement(s); 
+			        js = d.createElement(s);
 			        js.id = id;
 			        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
 			        fjs.parentNode.insertBefore(js, fjs);
@@ -1419,18 +1419,18 @@
 	        		js = d.createElement(s);
 	        		js.id = id;
 	        		js.src = "//platform.twitter.com/widgets.js";
-	        		fjs.parentNode.insertBefore(js,fjs); 
+	        		fjs.parentNode.insertBefore(js,fjs);
 	        	}
 	        }(document,"script","twitter-wjs");
 
 	        // Google + button
         	window.___gcfg = {lang: '{{ Blog.Lang }}'};
 		  	(function() {
-			    var po = document.createElement('script'); 
-			    	po.type = 'text/javascript'; 
+			    var po = document.createElement('script');
+			    	po.type = 'text/javascript';
 			    	po.async = true;
 			    	po.src = 'https://apis.google.com/js/plusone.js';
-			    var s = document.getElementsByTagName('script')[0]; 
+			    var s = document.getElementsByTagName('script')[0];
 			    	s.parentNode.insertBefore(po, s);
 		  	})();
 
@@ -1441,16 +1441,16 @@
 				    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
 				    _gaq.push(['_trackPageview']);
 				    _gaq.push(['_trackPageLoadTime']);
-				
+
 				(function() {
-				    var ga = document.createElement('script'); 
-				        ga.type = 'text/javascript'; 
+				    var ga = document.createElement('script');
+				        ga.type = 'text/javascript';
 				        ga.async = true;
 				        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				    var s = document.getElementsByTagName('script')[0]; 
+				    var s = document.getElementsByTagName('script')[0];
 				    	s.parentNode.insertBefore(ga, s);
 				})();
 			{% endif %}
-	    </script>	
+	    </script>
 	</body>
 </html>
