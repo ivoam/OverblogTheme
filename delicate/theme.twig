@@ -25,7 +25,7 @@
             <meta name="robots" content="index,follow" />
         {% endif %}
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        
+
         <!-- Social setting : Facebook, G+ .. -->
         <meta property="og:site_name" content="{{ Blog.Title }}" />
         <meta property="og:type" content="blog" />
@@ -34,7 +34,7 @@
             <meta property="fb:admins" content="{{ Custom('facebook_username') }}"/>
         {% endif %}
         <meta itemprop="name" content="{{ Blog.Title }}" />
-        
+
         {% if isSingle %}
             {% list Posts %}
                 <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
@@ -77,8 +77,8 @@
             <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
             <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
             <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-        {% endif %} 
-        
+        {% endif %}
+
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
             <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -90,11 +90,11 @@
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
 
-        <!-- Custom vars -->        
+        <!-- Custom vars -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-        
+
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="10" group="Navigation" />
-        
+
         <meta name="tag:pinned_tag:label.pinnedTag" group="Slider" />
         <meta name="image:custom_default_slider_cover:label.defaultSliderCover" default="http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg" group="Slider" />
 
@@ -106,7 +106,7 @@
         <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="list:categories_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="10" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
-        
+
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
@@ -118,7 +118,7 @@
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
-        
+
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -127,7 +127,7 @@
         <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" type="text/css" />
         <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/nivo-slider.css" type="text/css" />
         <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/themes/default/default.css" type="text/css" />
-        
+
         <style type="text/css">
             /*
             ------------------------------------------------------------------------
@@ -145,7 +145,7 @@
             License:       This version licensed under the terms of GNU General Public License v2.0.
             License URI:   http://www.gnu.org/licenses/gpl-2.0.html
             */
-            
+
             /***** Reset *****/
             body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,textarea,blockquote,th,td{ margin:0; padding:0;}
             table{ border-collapse:collapse; border-spacing:0;}
@@ -191,13 +191,13 @@
 
             body {background: #EDEEEF {% if Custom('background_image') is not empty %}url({{ Custom(background_image) }}) no-repeat center center fixed {% endif %}; color: #222; font-family:"Trebuchet MS",Arial,Helvetica,sans-serif; font-size: 12px; line-height: 18px;}
             .content {background: #FFF; margin: 0 auto; padding: 0 30px; position: relative; width: 970px;}
-            
-            
+
+
             /**** HEADER *****/
                 /*** logo ***/
                 .logo {font-family: "Trebuchet MS",Arial,Helvetica,sans-serif; font-size: 30px; margin: 25px 0 0 0; padding-top: 13px; text-shadow: 2px 2px 3px #CCC; width: 550px;}
                 .logo a {color: #454545; display: block; line-height: 40px; max-width: 500px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-                
+
                 .search {margin-top: 50px; width: 372px;}
                 .search input[type="text"] {background: url(http://assets.over-blog-kiwi.com/themes/28/images/search.png) no-repeat scroll 0 0; border: none; color: #9499A1; float:left; font-family: Arial; font-size:13px; height:17px; margin: 0; padding: 5px 10px 0 38px; width:240px;}
                 .search input[type="submit"] {-webkit-border-radius: 12px; -moz-border-radius: 12px; -ms-border-radius: 12px; -o-border-radius: 12px; border-radius: 12px; cursor: pointer; padding: 5px 10px; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; -ms-transition: all 0.3s ease 0s; transition: all all 0.3s ease 0s;}
@@ -213,12 +213,12 @@
                 .ul-bottom li {background: #FFF; border-top: 1px solid #fff; border-bottom: 1px solid #dbdbdb; padding-right: 0;}
                 .ul-bottom li a {color: #454545; font-size: 11px; line-height: 23px; padding: 5px 10px; overflow: hidden; text-overflow: ellipsis; text-transform: none; white-space: nowrap; width: 160px;}
                 .ul-bottom li:last-child {border-bottom: 0;}
-                
+
                 .ul-top .indicator {background: url(http://assets.over-blog-kiwi.com/themes/28/images/arrow-superfish.png) no-repeat; display:block; height: 10px; overflow:hidden; position: absolute; right:-0.8em; text-indent:-999em; top: 0.7em; width: 10px;}
 
                 /*** slideshow ***/
                 .slideshow-bg {margin-bottom:20px; overflow: hidden; position: relative; width: 970px;}
-                .slideshow {background: #F9F9F9; margin-bottom: 15px; overflow: hidden; position:relative; width: 970px;} 
+                .slideshow {background: #F9F9F9; margin-bottom: 15px; overflow: hidden; position:relative; width: 970px;}
                 .slideshow article {height: 300px; width: 100%;}
                 .slideshow img {height: 100%; width: 100%;}
                 .tagline {background: #fff; max-width: 500px; padding: 6px 12px 4px 12px; position: absolute; right: 0px; text-transform: uppercase; top: 45.2%;}
@@ -226,7 +226,7 @@
                 .tagline a:hover {color: #0E73B8;}
                 .slideshow-nav {bottom: 0px; left: 47%; position: absolute;}
                 .slideshow-nav a.activeSlide {background:url("http://assets.over-blog-kiwi.com/themes/28/images/pagination-small.png") no-repeat 0 0;}
-                .slideshow-nav a {background:url("http://assets.over-blog-kiwi.com/themes/28/images/pagination-small.png") no-repeat 0 -9px; display: block; float: left; height: 9px; margin:0 1px; text-indent: -9999px; width: 9px;} 
+                .slideshow-nav a {background:url("http://assets.over-blog-kiwi.com/themes/28/images/pagination-small.png") no-repeat 0 -9px; display: block; float: left; height: 9px; margin:0 1px; text-indent: -9999px; width: 9px;}
 
 
             /***** MAIN ****/
@@ -298,7 +298,7 @@
                     /* Section audio */
                     .obsoundplayer .obsoundplayername {width: 175px !important;}
 
-                    /* section links */ 
+                    /* section links */
                     .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
                     .ob-section-link .ob-media-left {margin: 0;}
                     .ob-section-link .ob-img {float: left; width: 170px;}
@@ -324,7 +324,7 @@
                     .social-sharing {margin: 30px 0;}
                     .social-sharing h6,
                     .item-comments h6 {font-size: 16px; margin-bottom: 5px;}
-                    
+
 
                 /*** SPECIAL PAGE ***/
                 .special h3 {color: #4D4D4F; font-size: 24px; line-height: 35px;}
@@ -346,7 +346,7 @@
             .widget li:last-child {border-bottom: none;}
             .widget a {background: url(http://assets.over-blog-kiwi.com/themes/28/images/bullets/6.gif) no-repeat left 6px; color: #4D4D4F; display: block; font-size: 14px; line-height: 16px; padding: 4px 0 4px 22px;}
             .widget li.active a,
-            .widget a:hover {color: #0e73b8;}     
+            .widget a:hover {color: #0e73b8;}
             .widget a:before,
             .widget a:after {display: inline-block; margin-right: 8px; vertical-align: middle;}
             .avatar {display: inline !important;}
@@ -381,16 +381,16 @@
                         {% endif %}
                     </a>
                 </h1>
-                      
+
                 {% if Custom('custom_hide_widget_search_form') == false %}
-                    <!-- Search form -->  
-                    <form class="search right" action="/search/" method="post"> 
+                    <!-- Search form -->
+                    <form class="search right" action="/search/" method="post">
                         <input type="text" class="left" title="search" value="{% if isSearch %}{{ Search.Keyword }}{% endif %}" placeholder="{{ Lang.Get('Search somthing here') }}..." name="q" />
                         <input type="submit" class="right button" value="{{ Lang.Get('Search') }}" />
                     </form>
                 {% endif %}
                 <div class="clear"></div>
-                
+
                 <nav class="menu">
                     <ul class="ul-top">
                         <li {% if isIndex %}class="active"{% endif %}>
@@ -445,7 +445,7 @@
                                                 {% if TaggedPost.Title is not empty %}
                                                     {{ TaggedPost.Title }}
                                                 {% else %}
-                                                    {{ Lang.Get('Posted from') }} 
+                                                    {{ Lang.Get('Posted from') }}
                                                     {% list TaggedPost.Sources %}
                                                         {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                                     {% endlist %}
@@ -464,7 +464,7 @@
                                             {% if Post.Title is not empty %}
                                                 {{ Post.Title }}
                                             {% else %}
-                                                {{ Lang.Get('Posted from') }} 
+                                                {{ Lang.Get('Posted from') }}
                                                 {% list Post.Sources %}
                                                     {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                                 {% endlist %}
@@ -474,7 +474,7 @@
                                     <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ Post.Title }}" alt="" width="970" height="301" />
                                 </article>
                             {% endlist %}
-                        {% endif %}  
+                        {% endif %}
                     </div>
                     <div class="slideshow-nav"></div>
                 </div>
@@ -517,7 +517,7 @@
                                             {% if Post.Title is not empty %}
                                                 {{ Post.Title }}
                                             {% else %}
-                                                {{ Lang.Get('Published from') }} 
+                                                {{ Lang.Get('Published from') }}
                                                 {% list Post.Sources %}
                                                     {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                                 {% endlist %}
@@ -557,7 +557,7 @@
                                             </div>
                                         {% endif %}
                                         {% if Custom('share_service') == 'Twitter' %}
-                                           <div class="left">    
+                                           <div class="left">
                                                 <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{{ Blog.Title }}" data-url="{{ Blog.Url }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             </div>
                                         {% endif %}
@@ -566,11 +566,11 @@
                                                 <div class="fb-like" data-href="{{ Blog.Url }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                             </div>
                                         {% endif %}
-                                        {% if Custom('share_service') == 'All' %}
+                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                             <div class="left">
                                                 <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}"></div>
                                             </div>
-                                            <div class="left">   
+                                            <div class="left">
                                                 <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{{ Blog.Title }}" data-url="{{ Blog.Url }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             </div>
                                             <div class="left">
@@ -592,7 +592,7 @@
                                         {% endif %}
                                         <div class="clear"></div>
                                     </nav>
-                                {% endif %} 
+                                {% endif %}
 
                                 {% if isSingle and not isPage and Post.ShowComments is not empty%}
                                     <!-- Comments -->
@@ -604,8 +604,8 @@
                                             <script type="text/javascript">
                                                 var disqus_shortname = '{{ Custom('comment_disqus') }}';
                                                 (function() {
-                                                    var dsq = document.createElement('script'); 
-                                                        dsq.type = 'text/javascript'; 
+                                                    var dsq = document.createElement('script');
+                                                        dsq.type = 'text/javascript';
                                                         dsq.async = true;
                                                         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
                                                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
@@ -622,7 +622,7 @@
                                     {% list Post.Tags %}
                                         {% if loop.index == 1 %}
                                             <p class="tag">
-                                        {% endif %}    
+                                        {% endif %}
                                                 <a href="{{ Tag.Url }}" title="{{ Tag.Title }}">{{ Tag.Title|title }}</a>{% if loop.last is empty %}, {% endif %}
                                         {% if loop.last is not empty %}
                                             </p>
@@ -646,9 +646,9 @@
                             {% if Navigation.NextPage is not empty %}
                                 <a class="next right button" href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
                             {% endif %}
-                            <div class="clear"></div>                          
+                            <div class="clear"></div>
                         </nav>
-                    {% endif %}      
+                    {% endif %}
                 </section>
 
                 <div class="sidebar right">
@@ -664,8 +664,8 @@
                                                 <img class="left" src="{{ Blog.Owner.Avatar|resize(100)|crop }}" alt="" />
                                             </a>
                                         {% endif %}
-                                        
-                                        {{ Blog.Owner.Bio }}                                        
+
+                                        {{ Blog.Owner.Bio }}
                                     </p>
                                 {% endif %}
                             {% endif %}
@@ -709,7 +709,7 @@
                             </ul>
                         </div>
                     {% endif %}
-                    
+
                     <!-- Archives -->
                     {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
                         <div class="widget">
@@ -738,10 +738,10 @@
                 <p>{{ Custom('footer')|default('Theme: Delicate &copy; 2012') }}&nbsp;-&nbsp;{{ Lang.Get('Hosted by') }} <a href="http://overblog.com" target="_blank">Overblog</a></p>
             </footer>
         </div>
-        
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-        
+
         <script src="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
         <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
         <script src="http://assets.over-blog-kiwi.com/themes/28/js/jquery.cycle.all.min.js?ver=3.3.1"></script>
@@ -758,9 +758,9 @@
                     speed               : 1000,
                     pagerEvent          : 'click',
                     pauseOnPagerHover   : true,
-                    cleartypeNoBg       : true 
+                    cleartypeNoBg       : true
                 });
-              
+
                 // Fancybox
                 $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
                 $("a[rel=fancybox], .avatar").fancybox({
@@ -770,7 +770,7 @@
                     'transitionOut' : 'fadin',
                     'type'          : 'image'
                 });
-                
+
                 {% if Custom('custom_hide_widget_search_form') == false %}
                     (function() {
                         // HTML5 placeholder fallback
@@ -812,7 +812,7 @@
                                 });
                             }
                         }
-                        
+
                         // Search form
                         function obSearchForm() {
                             'use strict';
@@ -832,9 +832,9 @@
                         }
                         obSearchForm();
                     })();
-                {% endif%}   
-            });    
-            
+                {% endif%}
+            });
+
             {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                 // Disqus comments count
                 var disqus_shortname = "{{ Custom('comment_disqus') }}";
@@ -855,35 +855,35 @@
                     _gaq.push(['_trackPageLoadTime']);
 
                 (function() {
-                    var ga = document.createElement('script'); 
-                        ga.type = 'text/javascript'; 
+                    var ga = document.createElement('script');
+                        ga.type = 'text/javascript';
                         ga.async = true;
                         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0]; 
+                    var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(ga, s);
                 })();
             {% endif %}
-        
+
             {% if Custom('custom_hide_widget_archives') == false %}
                 // Archives
                 function switch_arch(year) {
-                    'use strict'; 
-                    var archiveYear, archiveMonths, displayStyle; 
-                    displayStyle = ''; 
-                    archiveYear = document.getElementById('arch_' + year); 
+                    'use strict';
+                    var archiveYear, archiveMonths, displayStyle;
+                    displayStyle = '';
+                    archiveYear = document.getElementById('arch_' + year);
                     if (typeof (archiveYear) !== 'undefined') {
                         if (archiveYear.style.display !== 'none') {
                             // Hide years without months
-                            archiveMonths = archiveYear.getElementsByTagName('li'); 
+                            archiveMonths = archiveYear.getElementsByTagName('li');
                             if (!archiveMonths.length) {
-                                archiveYear.parentNode.style.display = 'none'; 
+                                archiveYear.parentNode.style.display = 'none';
                             }
                             // Onclick management
-                            displayStyle = 'none'; 
+                            displayStyle = 'none';
                         }
-                        archiveYear.style.display = displayStyle; 
+                        archiveYear.style.display = displayStyle;
                     }
-                    return false; 
+                    return false;
                 }
                 {% list Blog.Archives %}
                     {% if Archive.Year != "now"|date("Y") %}
@@ -891,17 +891,17 @@
                     {% endif %}
                 {% endlist %}
             {% endif %}
-            
+
             // FAcebook button + comments
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                    js = d.createElement(s); 
+                    js = d.createElement(s);
                     js.id = id;
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                     fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-        
+
             // Twitter share + tweets
             !function(d,s,id){
                 var js, fjs = d.getElementsByTagName(s)[0];
@@ -909,17 +909,17 @@
                     js = d.createElement(s);
                     js.id = id;
                     js.src = "//platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs); 
+                    fjs.parentNode.insertBefore(js,fjs);
                 }
             }(document,"script","twitter-wjs");
 
             // Google + button
                 (function() {
-                    var po = document.createElement('script'); 
-                        po.type = 'text/javascript'; 
+                    var po = document.createElement('script');
+                        po.type = 'text/javascript';
                         po.async = true;
                         po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0]; 
+                    var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(po, s);
                 })();
         </script>
