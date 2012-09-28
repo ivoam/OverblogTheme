@@ -1746,7 +1746,7 @@
                                                         </a>
                                                     </div>
                                                 {% endif %}
-                                                {% if Custom('share_service') == 'All' %}
+                                                {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                                     <div class="google">
                                                         <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
                                                     </div>
@@ -2202,7 +2202,7 @@
             {% endif %}
         </script>
 
-        {% if Custom('share_service') == 'All' or Custom('share_service') == 'Pinterest' %}
+        {% if Custom('share_service') == 'All' or Custom('share_service') is empty or Custom('share_service') == 'Pinterest' %}
             <!-- Pinterest button -->
             <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
         {% endif %}
