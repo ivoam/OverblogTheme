@@ -491,7 +491,7 @@
 													<a href="{{ Tag.Url | lower }}">#{{ Tag.Title | lower }}</a>{% if loop.last %}</span>{% else %}, {% endif %}
 											{% endlist %}
 
-											{% if Custom('share_service') is not empty and Custom('share_service') != 'None' %}
+											{% if Custom('share_service') != 'None' %}
 												<div class="share">
 													<h4>{% if isPage == false %}{{ Lang.Get('Share this post') }}{% else %}{{ Lang.Get('Share this page') }}{% endif %}</h4>
 							                		{% if Custom('share_service') == 'Google +' %}
