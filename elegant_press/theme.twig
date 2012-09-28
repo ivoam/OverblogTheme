@@ -1719,7 +1719,7 @@
                                     <div class="entry">
                                         {{ Post.Body }}
 
-                                        {% if Custom('share_service') is not empty and Custom('share_service') != 'None' %}
+                                        {% if Custom('share_service') != 'None' %}
                                             <div class="ob-section m-social-networks clear">
                                                 {% if isSingle and Custom('share_service') != 'None' %}
                                                     <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
