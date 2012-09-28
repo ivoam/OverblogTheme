@@ -1078,11 +1078,9 @@
 									</p>
 								</div>
 
-								{% if Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') or isSingle %}
+								{% if Custom('share_service') != 'None' %}
 									<div class="share">
-                                    	{% if isSingle and Custom('share_service') != 'None' %}
-                                    		<h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
-                                    	{% endif %}
+                                    	<h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                     	{% if Custom('share_service') == 'Google +' %}
                                             <div class="google-share">
                                             	<div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
@@ -1169,7 +1167,7 @@
 						<div class="widget">
 							<h3>{{ Lang.Get('About me') }}</h3>
 							{% if Blog.Owner.Avatar  is not empty %}
-								<a class="avatar" href="{{ Blog.Owner.Avatar }}">
+								<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
 									<img src="{{ Blog.Owner.Avatar|resize(250,167)|crop }}" alt="{{ Blog.Owner.Nickname }}" title="{{ Blog.Owner.Nickname }}" width="250" height="167" />
 								</a>
 							{% endif %}
@@ -1322,7 +1320,7 @@
 				$(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox");
 				$("a[rel=fancybox]").fancybox({
 					'overlayShow'	: true,
-					'titlePosition' : 'over';
+					'titlePosition' : 'over',
 					'transitionIn'	: 'fadin',
 					'transitionOut'	: 'fadin',
 					'type'			: 'image'
