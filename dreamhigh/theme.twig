@@ -71,8 +71,8 @@
                 <meta property="og:type" content="overblogkiwi:visit" />
             {% endif %}
         {% endif %}
-		
-		
+
+
 		<!-- shortcut:[Options] -->
 
 		<meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
@@ -80,7 +80,7 @@
 		<meta name="image:background:Background image" group="Design" />
 
 		<meta name="string:footer:label.footer" default="Theme: Dreamhigh &copy; 2012" group="Wording"  />
-		
+
 		<meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
@@ -92,18 +92,18 @@
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
-		
-		
+
+
         <!-- shortcut:[Includes] -->
-        <!-- favicon -->       
+        <!-- favicon -->
         {% if Blog.FaviconUrl is not empty %}
             <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
         {% else %}
             <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
             <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
             <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-        {% endif %}   
-       
+        {% endif %}
+
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
             <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -118,10 +118,10 @@
         <!--[if IE 8]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        
+
         <!-- Fancybox -->
 		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
-        
+
         <link href='http://fonts.googleapis.com/css?family=Mountains+of+Christmas' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css' />
@@ -138,11 +138,11 @@
 	        ol,ul {list-style:none;}
 	        caption,th { text-align:left;}
 	        q:before,q:after {content:'';}
-	        abbr,acronym {border:0;}			
+	        abbr,acronym {border:0;}
 	        a, a:hover, a:active, a:active {text-decoration: none; border: none; outline: none;}
 			img {border: none; outline: none;}
-			
-			
+
+
 			/**********
 			** BASIC **
 			**********/
@@ -151,48 +151,48 @@
 			a,
 			a:visited {color: #957F7F; text-decoration: none;}
 			a:hover {color: #FF9A00; text-decoration: underline;}
-			
+
 			.clear {clear: both;}
 			.left {float: left;}
 			.right {float: right;}
-			
+
 			#global {width: 700px; margin: 0 auto 50px;}
 			#header {width: 100%; margin: 20px auto; padding: 20px 0; background: url(http://assets.over-blog-kiwi.com/themes/39/img/border.png) no-repeat scroll center bottom transparent; text-align: center;}
 			#main {width: 100%; margin: 0 auto; padding-top: 400px; background:  url({% if Custom('background') is empty %}http://assets.over-blog-kiwi.com/themes/39/img/planet.png{% endif %}) no-repeat left top;}
 			#footer {margin: 20px auto 0; overflow: hidden; width: 600px;}
-			
-			
+
+
 			/********
 			** TOP **
 			********/
 			.blog-title a {color: #FFF; display: block; font-size: 60px; font-weight: normal; padding: 10px 0; font-family: 'Mountains of Christmas'; text-shadow: 1px 1px 0px #ACC1C5;}
 			.blog-title a:hover {text-decoration: none;}
 			.blog-description {color: #957F7F; font-size: 25px; font-family: 'Josefin Sans', sans-serif; text-shadow: 1px 1px 0px #ACC1C5;}
-			
-			
+
+
 			/*********
 			** MAIN **
 			*********/
 			.post {width: 600px; margin: 0 auto {% if not isSingle %}100px{% endif %}; {% if isSingle %}border-bottom: 1px dashed #DDD;{% endif %}}
 			.post time {display: block; margin-bottom: 10px; font-size: 11px; text-align: center; text-transform: uppercase;}
 			.post .title {background: url(http://assets.over-blog-kiwi.com/themes/39/img/hdr.gif) no-repeat center bottom; margin-bottom: 20px; padding-bottom: 25px; font-size: 35px; font-weight: normal; letter-spacing: -1px; text-align: center;}
-			.post .title a, 
+			.post .title a,
 			.post .title a:visited {color: #7F7F7F; font-size: 35px;}
 			.post .title a:hover {color: #FF9A00; text-decoration: none;}
-			
+
 			.post .cover {margin-bottom: 20px; -webkit-transition: opacity 250ms ease; -moz-transition: opacity 250ms ease; -ms-transition: opacity 250ms ease; -o-transition: opacity 250ms ease; transition: opacity 250ms ease;}
 			.post .cover:hover {-webkit-opacity: 0.8; -moz-opacity: 0.8; -ms-opacity: 0.8; -o-opacity: 0.8; opacity: 0.8;}
-			
+
 			.post .author {height: 30px; font-size: 11px; text-align: center; text-transform: uppercase; line-height: 20px;}
 			.post .author span {font-style: italic; text-transform: lowercase;}
-			
+
 			.post .tags {margin: -10px 0 0; font-size: 11px; text-align: center; text-transform: uppercase; line-height: 20px;}
 			.post .tags span {font-style: italic; text-transform: lowercase;}
 
 			.post .body {margin: 40px 0 10px; line-height: 22px;}
 			.ob-section {width: 100%;}
-			.ob-cell, 
-			.ob-img, 
+			.ob-cell,
+			.ob-img,
 			.ob-media {max-width: 100%;}
 			.ob-media-left {margin-right: 35px;}
 			.ob-media-right {margin-left: 35px;}
@@ -228,7 +228,7 @@
 			.ob-section-quote p.ob-author .ob-link:hover,
 			.ob-section-quote p.ob-source .ob-link:hover {text-decoration: none;}
 
- 			/* Section Link */ 
+ 			/* Section Link */
 			.ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
 			.ob-section-link .ob-media-left {margin: 0;}
 			.ob-section-link .ob-img {float: left; width: 170px;}
@@ -247,35 +247,35 @@
 			/** Tweeter render **/
 			.ob-tweet.twitter-tweet-rendered,
 			.ob-tweet.twitter-tweet-rendered .twt-border {max-width: 100% !important;}
-			
+
 			/** CONTACT **/
 			.special h3 {background: url(http://assets.over-blog-kiwi.com/themes/39/img/hdr.gif) no-repeat center bottom; margin-bottom: 20px; padding-bottom: 25px; font-size: 35px; font-weight: normal; letter-spacing: -1px; text-align: center;}
 			.ob-form {margin: 50px auto 0; padding: 0 20px;}
-			.ob-input, 
+			.ob-input,
 			.ob-text-area {border: none; border: 1px dashed #ACC1C5; margin-bottom: 10px; padding: 5px 10px;}
 			.ob-input-text, .ob-input-email {height: 20px;}
 			.ob-input-submit {background-color: transparent; border: 0; color: #957F7F; font-size: 16px; font-family: Georgia,'Times New Roman', Serif; cursor: pointer; padding: 0;}
-			.ob-input-submit:hover {color: #FF9A00;} 
+			.ob-input-submit:hover {color: #FF9A00;}
 			.ob-terms { display: block; text-align: center; margin-top: 60px;}
-						
+
 			/** Navigation **/
 			.navigation {border-bottom: 1px dashed #DDDDDD; margin: 20px auto; overflow: hidden; width: 600px;}
-			.navigation a, 
+			.navigation a,
 			.navigation a:visited {display: block; font-size: 10px; line-height: 30px; text-transform: uppercase;}
-			#home {left: 48.8%; position: absolute; width: 40px;}	
+			#home {left: 48.8%; position: absolute; width: 40px;}
 
 
 			/** Footer **/
 			#footer h3 {color: #957F7F; font-size: 18px; font-family: 'Covered By Your Grace', cursive; margin-bottom: 15px; text-align: left;}
 			#footer ul {list-style: none;}
-			
-			#footer .left {width: 46.8%;} 
+
+			#footer .left {width: 46.8%;}
 			#footer .left li {border-bottom: 1px dotted #DDDDDD; display: inline-block; margin-bottom: 6px; padding-bottom: 5px; width: 100%;}
 			#footer .left a {display: inline-block; max-width: 209px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-			
+
 			#footer .right {width: 45%;}
 			#footer .right img {border: 2px solid #DDD; float: left; margin: 2px 10px 0 0;}
-			
+
 			.contact-button {float: left; display: block; width: 30px; height: 30px; margin: 20px 10px 0 0; background: url(http://assets.over-blog-kiwi.com/themes/39/img/dreamhigh-social-sprite.png) no-repeat; text-indent: -99999px; }
 			.contact {background-position: left 0;}
 			.contact:hover {background-position: right 0;}
@@ -287,7 +287,7 @@
 			.rss:hover {background-position: right -90px;}
 
 			#footer .credits {border-top: 1px dashed #DDD; margin-top: 20px; overflow: hidden; padding-top: 10px;}
-			#footer .credits .right {text-align: right;}		
+			#footer .credits .right {text-align: right;}
 		</style>
 	</head>
 	<body>
@@ -328,19 +328,19 @@
 										</a>
 									</h2>
 									<p class="author">
-										<span>{{ Lang.Get('by') }}</span> 
+										<span>{{ Lang.Get('by') }}</span>
 										{% if Post.Author is not empty %}
-											{{ Post.Author }} 
-										{% else %}	
+											{{ Post.Author }}
+										{% else %}
 											{{ Blog.Owner.Nickname }}
 										{% endif %}
 									</p>
-									
+
 									{% list Post.Tags %}
 										{% if loop.first is not empty %}
 											<p class="tags">
 												<span>{{ Lang.Get('posted in') }}</span>
-										{% endif %} 
+										{% endif %}
 												<a href="{{ Tag.Url }}">{{ Tag.title }}</a> {% if loop.last is empty %}, {% endif %}
 										{% if loop.last is not empty %}
 											</p>
@@ -393,7 +393,7 @@
 					                            <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
 					                        </div>
 					                    {% endif %}
-					                    {% if Custom('share_service') == 'All' %}
+					                    {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
 					                        <div class="google-share left">
 					                            <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
 					                        </div>
@@ -407,16 +407,16 @@
 					                    {% endif %}
 						         	</div>
 						        {% endif %}
-						        {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}			
+						        {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
 									<nav class="navigation">
 										<a id="home" href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
-										
+
 										{% if Navigation.PreviousPost is not empty %}
 					                    	<a class="left" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">
 					                    		&laquo; {{ Lang.Get('Previous post') }}
 					                    	</a>
 					                    {% endif %}
-										
+
 										{% if Navigation.NextPost is not empty %}
 					                    	<a class="right" href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}">
 					                    		{{ Lang.Get('Next post') }} &raquo;
@@ -440,8 +440,8 @@
 							</article>
 						{% endlist %}
 					{% endif %}
-					
-					{% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty %}			
+
+					{% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty %}
 						<nav class="navigation">
 							{% if Navigation.PreviousPage is not empty %}
 								<a class="left" href="{{ Navigation.PreviousPage }}">&laquo; {{ Lang.Get('prev') }}</a>
@@ -450,14 +450,14 @@
 		                    {% if isIndex == false %}
 								<a id="home" href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
 							{% endif %}
-							
+
 							{% if Navigation.NextPage is not empty %}
 								<a class="right" href="{{ Navigation.NextPage }}">{{ Lang.Get('next') }} &raquo;</a>
 							{% endif %}
 						</nav>
 				{% endif %}
 			</section>
-			
+
 			<footer id="footer">
 				<div class="left">
 					<h3>{{ Lang.Get('Last Posts') }}</h3>
@@ -468,7 +468,7 @@
 								{% if Post.Title is not empty %}
 									{{ Post.Title }}
 								{% else %}
-									{{ Lang.Get('Published from') }} 
+									{{ Lang.Get('Published from') }}
 									{% list Post.Sources %}
 										{{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
 									{% endlist %}
@@ -500,30 +500,30 @@
 				</div>
 			</footer>
 		</div>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-		
+
 		<script>
 			// Facebook
 		    (function(d, s, id) {
 		        var js, fjs = d.getElementsByTagName(s)[0];
 		        if (d.getElementById(id)) return;
-		        js = d.createElement(s); 
+		        js = d.createElement(s);
 		        js.id = id;
 		        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
 		        fjs.parentNode.insertBefore(js, fjs);
 		    }(document, 'script', 'facebook-jssdk'));
 
-		    // Google + button 
+		    // Google + button
 		     window.___gcfg = {lang: '{{ Blog.Lang }}'};
-		
+
 			  (function() {
-			    var po = document.createElement('script'); 
-			    	po.type = 'text/javascript'; 
+			    var po = document.createElement('script');
+			    	po.type = 'text/javascript';
 			    	po.async = true;
 			    	po.src = 'https://apis.google.com/js/plusone.js';
-			    var s = document.getElementsByTagName('script')[0]; 
+			    var s = document.getElementsByTagName('script')[0];
 			    	s.parentNode.insertBefore(po, s);
 			  })();
 
@@ -534,13 +534,13 @@
 			    	_gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
 			    	_gaq.push(['_trackPageview']);
 			    	_gaq.push(['_trackPageLoadTime']);
-			
+
 			    (function() {
-			        var ga = document.createElement('script'); 
-			        	ga.type = 'text/javascript'; 
+			        var ga = document.createElement('script');
+			        	ga.type = 'text/javascript';
 			        	ga.async = true;
 			        	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			        var s = document.getElementsByTagName('script')[0]; 
+			        var s = document.getElementsByTagName('script')[0];
 			        	s.parentNode.insertBefore(ga, s);
 			    })();
 			{% endif %}
@@ -559,20 +559,20 @@
 
 			// Twitter button
             !function(d,s,id){
-                var js,fjs=d.getElementsByTagName(s)[0]; 
+                var js,fjs=d.getElementsByTagName(s)[0];
                 if(!d.getElementById(id)){
-                    js=d.createElement(s); 
-                    js.id=id; 
-                    js.src="//platform.twitter.com/widgets.js"; 
-                    fjs.parentNode.insertBefore(js,fjs);  
+                    js=d.createElement(s);
+                    js.id=id;
+                    js.src="//platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js,fjs);
                 }
-            }(document,"script","twitter-wjs"); 
+            }(document,"script","twitter-wjs");
 
-        	// Disqus 
+        	// Disqus
         	var disqus_shortname = '{{ Custom('comment_disqus') }}';
 			(function() {
-				var dsq = document.createElement('script'); 
-					dsq.type = 'text/javascript'; 
+				var dsq = document.createElement('script');
+					dsq.type = 'text/javascript';
 					dsq.async = true;
 					dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
 				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
