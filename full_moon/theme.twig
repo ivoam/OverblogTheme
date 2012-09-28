@@ -767,7 +767,7 @@
 
                                         <!-- Share buttons + comments -->
                                         <div class="share">
-                                            {% if Custom('share_service') is not empty and Custom('share_service') != 'None' %}
+                                            {% if Custom('share_service') != 'None' %}
                                                 <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                                 {% if Custom('share_service') == 'Google +' %}
                                                     <div class="google-share">
