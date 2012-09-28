@@ -961,7 +961,6 @@
 		{% endif %}
 
 			var Timeline = new Array(),
-				nbBefore,
 				elsStart;
 
 			Timeline.EnhancePictures = function (elements) {
@@ -1001,9 +1000,6 @@
 					'next'			: ".load-more a",
 					'tresholdMargin': -250,
 					'loader' 		: "<div class='loader'><img src='http://assets.over-blog-kiwi.com/themes/13/images/loader.gif' alt='' title='' /></div>",
-					beforePageChange: function(){
-						nbBefore = $('.item').length;
-					},
 					onRenderComplete: function(items){
 						Timeline.EnhancePictures(items);
 
