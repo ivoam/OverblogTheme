@@ -801,7 +801,7 @@
                                                 <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                             </a>
                                         {% endif %}
-                                        {% if Custom('share_service') == 'All' %}
+                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                             <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
                                             <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="117" data-show-faces="false"></div>
@@ -1035,7 +1035,7 @@
         {% if Custom('flickr_username') is not empty %}
             <script src="http://assets.over-blog-kiwi.com/themes/2/js/flickr/jquery.zflickrfeed.js"></script>
         {% endif %}
-        {% if Custom('share_service') == 'All' or Custom('share_service') == 'Pinterest' %}
+        {% if Custom('share_service') == 'All' or Custom('share_service') is empty or Custom('share_service') == 'Pinterest' %}
             <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
         {% endif %}
 
@@ -1052,7 +1052,7 @@
                 }(document, 'script', 'facebook-jssdk'));
 
 
-                {% if Custom('share_service') == 'All' or Custom('share_service') == 'Google +' %}
+                {% if Custom('share_service') == 'All' or Custom('share_service') is empty or Custom('share_service') == 'Google +' %}
                     // Google + button
                     window.___gcfg = {lang: '{{ Blog.Lang }}'};
                         (function() {
