@@ -648,7 +648,7 @@
                                                 <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
                                             </div>
                                         {% endif %}
-                                        {% if Custom('share_service') == 'All' %}
+                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                             <div class="google-share left">
                                                 <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
                                             </div>
@@ -1024,7 +1024,7 @@
                 formSubmit.addClass("button");
             });
 
-            {% if Custom('share_service') == 'Google +' or Custom('share_service') == 'All' %}
+            {% if Custom('share_service') == 'Google +' or Custom('share_service') == 'All' or Custom('share_service') is empty %}
                 // Social networks : Google +
                 window.___gcfg = {lang: '{{ Blog.Lang }}'};
 
