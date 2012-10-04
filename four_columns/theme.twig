@@ -75,95 +75,444 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <link type="text/css" rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+        <link href="http://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css' />
+        <link href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
         <style type="text/css">
-            #global {
-                background: #EEE; 
-                margin: 50px auto;
-                max-width: 1100px; 
+            /*
+            KNACSS.com V1.3 @author : Raphael Goetter, Alsacreations
+            Licence CC-BY http://creativecommons.org/licenses/by/3.0/fr/
+            */
+
+            /* ----------------------------- */
+            /* ==reset */
+            /* ----------------------------- */
+
+            /* base font-size corresponds to equiv 10px */
+            html {font-size: 62.5%;}
+            body {
+                background: #E8E8E8;
+                color: #222;
+                font-family: 'Ropa Sans', sans-serif;
+                line-height: 1.5; /* adapt to your design */
             }
 
-            .main {
-                padding: 30px;
+            /* HTML5 tags */
+            article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {display: block;}
+
+            /* soft reset */
+            html, body, blockquote, ul, ol, form {margin: 0; padding: 0}
+            p {margin: 0 0 1em;}
+            ul, ol {padding-left: 2em;}
+            .mreset {margin: 0 !important;}
+            .preset {padding: 0 !important;}
+
+            /* font-sizing for content */
+            p, li, td, th, textarea, caption, pre {font-size: 1.4em;}
+            li li, li p, td p, th p, li h1, li h2, li h3, li h4, li h5, li h6, button, input, select {font-size: 100%;}
+            h1, .h1-like {font-size: 2.4em;} /* equiv 24 pixels */
+            h2, .h2-like {font-size: 2.0em;} /* equiv 20 pixels */
+            h3, .h3-like {font-size: 1.8em;} /* equiv 18 pixels */
+            h4, .h4-like {font-size: 1.6em;} /* equiv 16 pixels */
+            h5, .h5-like {font-size: 1.4em;} /* equiv 14 pixels */
+
+            /* alternate font-sizing */
+            .smallest {font-size: .7em;}
+            .smaller {font-size: .8em;}
+            .small {font-size: .9em;}
+            .big {font-size: 1.07em;} /* 15 pixels */
+            .bigger {font-size: 1.14em;} /* 16 pixels */
+            .biggest {font-size: 1.28em;} /* 18 pixels */
+
+            /* avoid collapsing margins */
+            h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
+                margin-top: 0;
             }
+            /* avoid last paragraph bottom margin */
+            p:last-child {margin-bottom: 0;}
+
+
+            /* max values */
+            img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video {
+                max-width: 100%; height: auto;
+            }
+
+            /* you shall not pass */
+            textarea, table, td, th, code, pre, samp, div, p {
+                word-wrap: break-word;
+                -webkit-hyphens: auto;
+                   -moz-hyphens: auto;
+                    -ms-hyphens: auto;
+                     -o-hyphens: auto;
+                        hyphens: auto;
+            }
+            code, pre, samp {
+                white-space: pre-wrap;
+            }
+
+            /* pictures */
+            img {width: auto; vertical-align: middle}
+            a img {border: 0;}
+
+            
+            /* ----------------------------- */
+            /* ==GLOBAL */
+            /* ----------------------------- */
+            .global {
+                margin: 0 auto;
+                max-width: 1040px; 
+                padding: 0 20px;
+            }
+
+            .blog-header + .global {margin-top: 100px}
+
+            /* ----------------------------- */
+            /* ==HEADER */
+            /* ----------------------------- */
+            .blog-header {
+                background: #444444; /* Old browsers */
+                /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+                background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ0NDQ0NCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijk0JSIgc3RvcC1jb2xvcj0iIzIyMjIyMiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZjJmMmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                background: -moz-linear-gradient(top,  #444444 0%, #222222 94%, #2f2f2f 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444444), color-stop(94%,#222222), color-stop(100%,#2f2f2f)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #444444 0%,#222222 94%,#2f2f2f 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #444444 0%,#222222 94%,#2f2f2f 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #444444 0%,#222222 94%,#2f2f2f 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #444444 0%,#222222 94%,#2f2f2f 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#2f2f2f',GradientType=0 ); /* IE6-8 */
+
+                font-family: "Lato", sans-serif;
+                margin-bottom: 50px;
+                overflow: hidden;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 9;
+            }
+
+            /* blog title */
+            .blog-header h1 {
+                font-size: 2.8em;
+                margin-bottom: 0;
+                max-width: 70%;
+            }
+            .blog-header a,
+            .blog-header a:visited {
+                color: #888;
+                font-weight: 300; 
+                text-decoration: none;
+                -webkit-transition: color 250ms ease;
+                   -moz-transition: color 250ms ease;
+                    -ms-transition: color 250ms ease;
+                     -o-transition: color 250ms ease;
+                        transition: color 250ms ease;
+            }
+            .blog-header a:hover {color: #FFF;}
+            
+            /* blog description */
+            .blog-header .description {
+                color: #666;
+                font-size: 15px;
+                font-weight: 600;
+                max-width: 70%;
+                min-height: 30px;
+                padding-bottom: 15px;
+            }
+
+            /* search form */
+            .search {
+                float: right;  
+                padding: 16px 0;
+                position: relative;
+            }
+            .search input[type="text"] {
+                background: #333; 
+                border: 1px solid; 
+                border-color: #111; 
+                border-bottom-color: #444; 
+                -webkit-border-radius: 3px; 
+                   -moz-border-radius: 3px; 
+                    -ms-border-radius: 3px; 
+                     -o-border-radius: 3px; 
+                        border-radius: 3px; 
+                color: #FFF; 
+                font-size: 12px;
+                padding: 9px;
+                -webkit-transition: all 300ms ease;
+                   -moz-transition: all 300ms ease;
+                    -ms-transition: all 300ms ease;
+                     -o-transition: all 300ms ease;
+                        transition: all 300ms ease;
+                width: 120px;
+            }
+
+            .search input[type="text"]:focus {
+                background: #EEE;
+                color: #222;
+                width: 200px;
+            }
+
+            .search input[type="submit"] {
+                visibility: hidden;
+            }
+
+            /* ----------------------------- */
+            /* ==TAGS */
+            /* ----------------------------- */
+            .tags {margin-bottom: 35px;}
+            .tags ul {
+                list-style: none;
+                padding-left: 0;
+            }
+            .tags li {
+                display: inline-block;
+                margin: 0 8px 8px 0; 
+            }
+            .tags li.last {margin-right: 0;}
+
+            .tags a,
+            .tags a:visited {
+                background: #EAEAEA; 
+                border: 1px solid #DDD; 
+                border-bottom-color: #F2F2F2; 
+                -webkit-border-radius: 3px; 
+                   -moz-border-radius: 3px; 
+                    -ms-border-radius: 3px; 
+                     -o-border-radius: 3px; 
+                        border-radius: 3px; 
+                color: #555; 
+                display: block; 
+                font-size: 14px;
+                font-weight: 300; 
+                line-height: normal;                 
+                padding: 10px 15px; 
+                text-decoration: none;
+                text-transform: capitalize;
+                -webkit-transition: all 250ms ease; 
+                   -moz-transition: all 250ms ease; 
+                    -ms-transition: all 250ms ease; 
+                     -o-transition: all 250ms ease; 
+                        transition: all 250ms ease;
+            }
+            .tags .active a:after {
+                content: url(http://vivienkaufinger.com/ob/simplissim/small-cross.png); 
+                margin-left: 12px;
+            }
+            .tags a:hover {background: #F1F1F1;}
+            .tags .active a {
+                background: #333;
+                border-color: #333;
+                color: #FFF;
+            }
+
+            /* ----------------------------- */
+            /* ==ITEMS / POSTS */
+            /* ----------------------------- */
+            .posts {padding-bottom: 100px;}
             .item {
-                background-color: #DDD;
                 float: left;
-                margin: 10px;
-                padding: 10px;
-                width: 220px;
+                margin-bottom: 25px;
+                width: 235px;
             }
-            .single .item {
-                margin: 10px;
-                padding: 10px;
-                width: 600px;
+            
+            /* widgets */
+            .widget {
+                background: #EAEAEA;
+                border: 1px solid #DDD;
+                border-bottom-color: #F2F2F2;
+                -webkit-border-radius: 3px; 
+                   -moz-border-radius: 3px; 
+                    -ms-border-radius: 3px; 
+                     -o-border-radius: 3px; 
+                        border-radius: 3px; 
             }
-            .single .about {
-                float: left;
-                max-width: 220px;
+            .widget .profile .content,
+            .widget .social {
+                padding: 13px;
             }
-            .about {
-                background-color: #333;
+            .widget .avatar img {
+                -webkit-border-radius: 3px 3px 0 0; 
+                   -moz-border-radius: 3px 3px 0 0; 
+                    -ms-border-radius: 3px 3px 0 0; 
+                     -o-border-radius: 3px 3px 0 0; 
+                        border-radius: 3px 3px 0 0;
             }
-            .item img {width: 100%;}
+            .widget .contact {
+                background: #DDD;
+                -webkit-border-radius: 3px; 
+                   -moz-border-radius: 3px; 
+                    -ms-border-radius: 3px; 
+                     -o-border-radius: 3px; 
+                        border-radius: 3px;
+                color: #444;
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+            
+            /* posts */
+            .post {
+                background-color: #FFF;
+                border: 1px solid #CCC;
+                -webkit-box-shadow: 0px 0px 17px -1px rgba(66, 53, 14, .25);
+                   -moz-box-shadow: 0px 0px 17px -1px rgba(66, 53, 14, .25);
+                    -ms-box-shadow: 0px 0px 17px -1px rgba(66, 53, 14, .25);
+                     -o-box-shadow: 0px 0px 17px -1px rgba(66, 53, 14, .25);
+                        box-shadow: 0px 0px 17px -1px rgba(66, 53, 14, .25);
+            }
 
-            /* reset tweet */
-            blockquote.ob-tweet {
-                background: none;
-                border: none;
-                -webkit-border-radius: 0;
-                   -moz-border-radius: 0;
-                    -ms-border-radius: 0;
-                     -o-border-radius: 0;
-                        border-radius: 0;
-                -webkit-box-shadow: none;
-                   -moz-box-shadow: none;
-                    -ms-box-shadow: none;
-                     -o-box-shadow: none;
-                        box-shadow: none;
-                font-family: 'Helvetica Neue',Arial,sans-serif;
-                padding: 0;
+            .post .header {margin: 0;}
+            
+            .post .cover,
+            .post .cover img {
+                display: block;
+                width: 100%;
             }
 
-            .twitter-tweet img,
-            blockquote.ob-tweet .ob-media-left {
-                -webkit-border-radius: 0;
-                   -moz-border-radius: 0;
-                    -ms-border-radius: 0;
-                     -o-border-radius: 0;
-                        border-radius: 0;
-                        height: auto;
-                        min-height: 0;
-                        width: auto;
+            .post .date {
+                color: #888;
+                display: block;
+                font-size: 1.4em;
+                padding: 13px 13px 0;
             }
 
-            /* loader */
+            .post .title {
+                margin: 0;
+                padding: 0 13px 13px;
+            }
+            .post .permalink {
+                color: #222;
+                font-weight: 400;
+                text-decoration: none;
+            }
+        
+            .post .snippet {
+                color: #888;
+                margin: 0;
+                padding: 0 13px 13px 13px;
+                word-wrap: break-word;
+            }
+
+            {% if not isSingle %}
+                /* Home tweet layout */
+                .tweet .ob-section {margin-bottom: 0;}
+                blockquote.ob-tweet {
+                    background: none;
+                    border: none;
+                    -webkit-border-radius: 0;
+                       -moz-border-radius: 0;
+                        -ms-border-radius: 0;
+                         -o-border-radius: 0;
+                            border-radius: 0;
+                    -webkit-box-shadow: none;
+                       -moz-box-shadow: none;
+                        -ms-box-shadow: none;
+                         -o-box-shadow: none;
+                            box-shadow: none;
+                    font-family: 'Helvetica Neue',Arial,sans-serif;
+                    padding: 13px;
+                }
+                .twitter-tweet img,
+                blockquote.ob-tweet .ob-media-left {
+                    -webkit-border-radius: 0;
+                       -moz-border-radius: 0;
+                        -ms-border-radius: 0;
+                         -o-border-radius: 0;
+                            border-radius: 0;
+                            height: auto;
+                            min-height: 0;
+                            width: 30px;
+                }
+                blockquote.ob-tweet .ob-tweet-author a {font-size: 12px;}
+                blockquote.ob-tweet .ob-text a {
+                    color: #0084B4;
+                    text-decoration: none;
+                }
+
+                .tweet-actions {text-align: right;}
+                .tweet-actions a {
+                    background-image: url(https://si0.twimg.com/images/dev/cms/intents/icons/sprites/everything-spritev2.png); 
+                    display: inline-block;
+                    height: 16px;
+                    width: 16px;
+                }
+                .tweet-reply:hover {background-position: -16px top;}
+                .tweet-retweet {background-position: -80px top;}
+                .tweet-retweet:hover {background-position: -96px top;}
+                .tweet-favorite {background-position: -32px top;}
+                .tweet-favorite:hover {background-position: -48px top;}
+            {% endif %}
+
+            
+            .post .footer {
+                background: #ECECEC;
+                border-top: 1px solid #DDD;
+                padding: 5px;
+                text-align: center;
+            }
+            .post .share {height: 31px;}
+            .post .share a {
+                display: inline-block;
+                background: url(http://vivienkaufinger.com/ob/four_columns/social.png) no-repeat;
+                height: 31px; 
+                width: 31px;
+            }
+            .post .share .fb {background-position: 0 -37px;}
+            .post .share .twt {background-position: -37px -37px;}
+            .post .share .gplus {background-position: -73px -37px;}
+            
+            .post .share .fb:hover {background-position: 0 -3px;}
+            .post .share .twt:hover {background-position: -37px -3px;}
+            .post .share .gplus:hover {background-position: -73px -3px;}
+            
+
+            /* ----------------------------- */
+            /* ==LOADER */
+            /* ----------------------------- */
             .ias_loader {
-                background: #CCC;
-                border-radius: 5px;
-                bottom: 50px; 
-                left: 50%;
+                bottom: 35px; 
+                font-size: 1em;
+                left: 42%;
                 padding: 15px;
                 position: absolute; 
+                text-align: center;
+                width: 150px;
             }
             .ias_loader img {
-                width: 60px;
+                float: left;
+                margin: 0 10px 10px 0;
+                width: 20px;
             }
         </style>
     </head>
-    <body>
-        <!-- global -->
-        <div id="global">            
-            <!-- header -->
-            <header>
+    <body id="top">
+        <!-- header -->
+        <header class="blog-header">
+            <div class="global">            
+                <!-- search form -->
+                <form class="search" action="/search/" method="post">
+                    <input type="text" placeholder="{{ Lang.Get('Search') }}" value="{{ Search.Keyword }}" name="q" />
+                    <input type="submit" title="{{ Lang.Get('Search') }}" value="{{ Lang.Get('OK') }}" />
+                </form>
+                
+                <!--blog title -->
                 <h1>
                     <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                 </h1>
-                <form method="" action="">
-                    <input type="search" placeholder="{{ Lang.Get('Search') }}" name="" />
-                    <input type="submit" value="{{ Lang.Get('Search on the blog') }}" />
-                </form>
-            </header>
+                <p class="description">{{ Blog.Description }}</p>
+            </div>
+        </header>
+
+        <div class="global"> 
+            <!-- tags -->
+            <nav class="tags">
+                <ul>
+                    {% list Blog.PostsTags(50, count) %}
+                        <li class="{% if loop.index == 1%}first{% elseif loop.last is not empty %}last{% endif %}{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %} active{% endif %}">
+                            <a  href="{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}{{ Blog.Url }}{% else %}{{ PostsTag.Url }}{% endif %}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
+                        </li>
+                    {% endlist %}
+                </ul>
+            </nav>
 
             <!-- main -->
             <section class="main{% if isSpecial %} special{% else %} posts{% endif %}{% if isSingle %} single{% else %} index{% endif %}">
@@ -172,34 +521,42 @@
                         {{ SpecialContent }}
                     </article>
                 {% else %}
-                    {% if not isSingle %}
-                        <div class="item">
-                            <article class="widget">
+                    {% if not isSingle or isSpecial %}
+                        <div class="item widget">
+                            <article class="profile">
                                 {% if Blog.Owner.Avatar is not empty %}
                                     <a class="avatar" href="{{ Blog.Owner.Avatar }}" {% if Blog.Owner.Nickname is not empty %}title="{{ Blog.Owner.Nickname }}"{% endif %}>
-                                        <img src="{{ Blog.Owner.Avatar|resize(220,320)|crop }}" alt="" title="" width="220px" height="302px" />
+                                        <img src="{{ Blog.Owner.Avatar|resize(235,335)|crop }}" alt="" title="" width="235" height="335" />
                                     </a>
                                 {% endif %}
-                                {% if Blog.Owner.Nickname is not empty %}
-                                    <h4>{{ Blog.Owner.Nickname }}</h4>
-                                {% endif %}
-                                {% if Blog.Owner.Bio is not empty %}
-                                    <p>{{ Blog.Owner.Bio }}</p>
-                                {% endif %}
-                                <a href="/contact">{{ Lang.Get('Contact me') }}</a>
+                                <div class="content">
+                                    {% if Blog.Owner.Nickname is not empty %}
+                                        <h3>{{ Blog.Owner.Nickname }}</h3>
+                                    {% endif %}
+                                    {% if Blog.Owner.Bio is not empty %}
+                                        <p>{{ Blog.Owner.Bio }}</p>
+                                    {% endif %}
+                                    <a class="contact" href="/contact">{{ Lang.Get('Contact me') }}</a>
+                                </div>
                             </article>
-                            <article class="widget">
+                            <article class="social">
                                 <h3>{{ Lang.Get('Follow me') }}</h3>
                             </article>
                         </div>
                     {% endif %}
                     {% list Posts %}
-                        <article class="item">
-                            <header>
-                                <time pubdate="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                        <article class="item post">
+                            <header class="header">
+                                {% if not isSingle and Post.Cover is not empty %}
+                                    <a class="cover permalink" href="{{ Blog.Url }}{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
+                                        <img src="{{ Post.Cover|resize(235) }}" alt="" title="" />
+                                    </a>
+                                {% endif %}
+
+                                <time class="date" pubdate="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
                                 
-                                <a class="permalink" href="{{ Post.Cover }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
-                                    <h2>
+                                <h2 class="title">
+                                    <a class="permalink" href="{{ Blog.Url }}{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
                                         {% if Post.Title is not empty %}
                                             {{ Post.Title }}
                                         {% else %}
@@ -208,32 +565,31 @@
                                                 {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                             {% endlist %}
                                         {% endif %}
-                                    </h2>
-                                </a>
-                            </header>
-                            {% if isSingle %}
-                                {{ Post.Body }}
-                            {% else %}
-                                {% if Post.Cover is not empty %}
-                                    <a class="permalink" href="{{ Blog.Url }}{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
-                                        <img src="{{ Post.Cover }}" alt="" title="" width="" />
                                     </a>
-                                {% endif %}
-                                
+                                </h2>
+                            </header>
+                            
+                            {% if isSingle %}
+                                <div class="body">{{ Post.Body }}</div>
+                            {% else %}
                                 {% list Post.Sources %}
                                     {% if loop.first and Source == 'TW' %}
-                                        {{ Post.Body(1) }}
-                                        <p><a class="tweet-reply" href="">Reply</a></p>
-                                        <p><a class="tweet-retweet" href="">Retweet</a></p>
-                                        <p><a class="tweet-favorite" href="">Favorite</a>
+                                        <div class="tweet">
+                                            {{ Post.Body(1) }}
+                                            <div class="tweet-actions">
+                                                <a class="tweet-reply" href=""></a>
+                                                <a class="tweet-retweet" href=""></a>
+                                                <a class="tweet-favorite" href=""></a>
+                                            </div>
+                                        </div>
                                     {% elseif Post.Snippet is not empty %}
-                                        <p>{{ Post.Snippet }}</p>
+                                        <p class="snippet">{{ Post.Snippet }}</p>
                                     {% endif %}
                                 {% endlist %}
                             {% endif %}
 
                             <!-- comments -->
-                            {% if not isPage and Post.ShowComments is not empty %}
+                            {% if isSingle and not isPage and Post.ShowComments is not empty %}
                                 <div class="item-comments" id="comments">
                                     {% if Custom("comment") == "Facebook" %}
                                         <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
@@ -258,28 +614,36 @@
                                 </div>
                             {% endif %}
                             {% list Post.Sources %}
-                                {% if loop.first and Source != 'TW' %}
-                                    {% list Post.Tags %}
-                                        {% if loop.first %}Tag(s) {% endif %}
-                                        <a href="{{ Tag.url }}">{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-                                    {% endlist %}
-                                {% endif %}
+                                {% list Post.Tags %}
+                                    {% if loop.first %}
+                                        <div class="tag">
+                                    {% endif %}
+                                        
+                                        <a href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+                                    
+                                    {% if loop.last is not empty %}
+                                        </div>
+                                    {% endif %}
+                                {% endlist %}
                             {% endlist %}
 
-                            <footer>
+                            <footer class="footer">
                                 {% if not isSingle %}
                                     <div class="share">
-                                        <a href="https://plus.google.com/share?url={ {{ Blog.Url }}{{ Post.Permalink }} }">Share on Google+</a>
-                                        <a href="https://twitter.com/share?url={{ Blog.Url }}{{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via=Vivien&" target="_blank">
-                                            Share on twitter</a>
+                                        <!-- facebook share -->
+                                        <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Blog.Url }}{{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
 
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ Blog.Url }}{{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank">Share on Facebook</a>
+                                        <!-- twitter share -->
+                                        <a class="twt" href="https://twitter.com/share?url={{ Blog.Url }}{{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
+                                        
+                                        <!-- google + share -->
+                                        <a class="gplus" href="https://plus.google.com/share?url={ {{ Blog.Url }}{{ Post.Permalink }} }"></a>
                                     </div>
                                 {% endif %}
                             </footer>
                         </article>
                     {% else %}
-                        <p>{{ Lang.Get('No post found') }}.</p>
+                        <article>{{ Lang.Get('No post found') }}.</article>
                     {% endlist %}
                 {% endif %}
 
@@ -288,7 +652,7 @@
                 </nav>
             </section>
             {% if not isSingle and not isSpecial %}
-                <a href="#global">{{ Lang.Get('Scroll to top') }}</a>
+                <a href="#top">{{ Lang.Get('Scroll to top') }}</a>
             {% endif %}
         </div>
 
@@ -333,29 +697,30 @@
                 $container.imagesLoaded(function(){
                     $container.masonry({
                         itemSelector : ".item",
-                        columnWidth : 20,
-                        isAnimated: true,
-                        isAnimatedFromBottom: true
+                        columnWidth : 260,
+                        isAnimated: true                    
                     });
                 });
 
                 // Fancybox
                 $(".permalink").fancybox({
-                    "autoScale"         :  false,
-                    // "autoDimensions"     : false,
-                    "height"            :  "auto",
-                    "margin"            :  0,
-                    "overlayOpacity"    :  0.9,
-                    "overlayShow"       :  true,
+                    "autoDimensions"    : false,
+                    "height"            : "100%",
+                    "margin"            : 0,
+                    "overlayOpacity"    :  0.93,
                     "overlayColor"      :  "#FFF",
-                    "padding"           :  10,  
-                    "scrolling"         :  "no",
-                    "scrollOutside"     :  false,
-                    "showCloseButton"   :  false,
-                    "titleShow"         :  false,
-                    "transitionIn"      :  "elastic", 
-                    "transitionOut"     :  "elastic",
-                    "width"             :  650                
+                    "showCloseButton"   : false,
+                    "speedIn"           : 50, 
+                    "titleShow"         : false,
+                    "type"              : "iframe",
+                    "width"             : 650,
+                    'onStart': function() { 
+                        $("body").css({"overflow": "hidden"}); 
+                    }, 
+
+                    'onCleanup': function() { 
+                        $("body").css({"overflow": "visible"}); 
+                    } 
                 });
                 
                 // Load more with Masonry 
@@ -364,9 +729,9 @@
                     item           : ".item",
                     pagination     : ".load-more",
                     next           : ".load-more a",
-                    loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' />",
+                    loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...",
                     history        : false,
-                    tresholdMargin : -500,
+                    // tresholdMargin : -500,
                     onLoadItems    : function(items) {
                         var $newElems; 
                         
@@ -383,22 +748,25 @@
                         TwitterControls(items);
                     },
                     onRenderComplete : function() {
-                        $(".permalink").fancybox({
-                            "autoScale"         :  false,
-                            // "autoDimensions"     : false,
-                            "height"            :  "auto",
-                            "margin"            :  0,
-                            "overlayOpacity"    :  0.9,
-                            // "overlayShow"       :  true,
+                         $(".permalink").fancybox({
+                            "autoDimensions"    : false,
+                            "height"            : "100%",
+                            "margin"            : 0,
+                            "overlayOpacity"    :  0.93,
                             "overlayColor"      :  "#FFF",
-                            "padding"           :  10,  
-                            "scrolling"         :  "no",
-                            "scrollOutside"     :  false,
-                            "showCloseButton"   :  false,
-                            "titleShow"         :  false,
-                            "transitionIn"      :  "elastic", 
-                            "transitionOut"     :  "elastic",
-                            "width"             :  650                
+                            "showCloseButton"   : false,
+                            "speedIn"           : 100, 
+                            "speedOut"          : 400, 
+                            "titleShow"         : false,
+                            "type"              : "iframe",
+                            "width"          : 650,
+                            'onStart': function() { 
+                                $("body").css({'overflow':'hidden'}); 
+                            }, 
+
+                            'onCleanup': function() { 
+                                $("body").css({"overflow":"visible"}); 
+                            } 
                         });
                     }
                 });
