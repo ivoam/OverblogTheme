@@ -673,6 +673,7 @@
 				{% if Custom('custom_hide_widget_search_form') == true %}
 					margin: {% if isSingle or isSpecial %}0{% else %}-20px{% endif %} 0 20px;
 				{% endif %}
+				padding-bottom: 100px;
 	        	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 	        }
 			.footer p,
@@ -842,7 +843,7 @@
 
 			/* Infinite Scroll loader */
 			.ias_loader {
-			  color: #FFF;
+			  color: #333;
 			  background: #FFF;
 			  background: rgba(255,255,255,0.9);
 			  -webkit-border-radius: 10px;
@@ -850,23 +851,35 @@
 				  -ms-border-radius: 10px;
 				   -o-border-radius: 10px;
 					  border-radius: 10px;
-			  bottom: 60px;
-			  font-size: 16px;
-			  left: 48%;
+			  bottom: 35px;
+			  font-size: 12px;
+			  left: 45%;
 			  padding: 10px 15px;
 			  position: fixed;
 			  text-align: center;
-			  z-index: 100;
 			}
 				.ias_loader img {
-					height: 35px;
-					width: 35px;
+					float: left;
+					height: 20px;
+					margin: 0 15px 0 0;
+					width: 20px;
+				}
+				.ias_loader p {
+					padding-right: 30px;
+					white-space: nowrap;
 				}
 
 			.follow {
-				bottom: 10px;
+				height: 286px;
+				line-height: 286px;
+				margin-top: -143px;
 				position: fixed;
-				right: 0px;
+				right: 15px;
+				top: 50%;
+			}
+			.follow .wrapper {
+				display: inline-block;
+				vertical-align: middle;
 			}
 				.follow a {
 					background: #F5F5F5 url("http://assets.over-blog-kiwi.com/themes/14/images/social.png") no-repeat;
@@ -880,9 +893,8 @@
 					     -o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 					        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 					display: block;
-					float: left;
 					height: 42px;
-					margin-right: 10px;
+					margin: 0 0 10px;
 					padding: 10px;
 					text-indent: -99999%;
 					width: 35px;
@@ -904,6 +916,7 @@
 				}
 				.follow a.rss {
 					background-position: -161px 3px;
+					margin-bottom: 0;
 				}
 				.follow a.rss:hover {
 					background-position: -161px -74px;
@@ -1145,13 +1158,15 @@
 
 		{% if Custom('custom_hide_widget_follow_us') == false %}
 			<div class="follow">
-				{% if Custom('facebook_username') is not empty %}
-					<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook" target="_blank"></a>
-				{% endif %}
-				{% if Custom('twitter_username') is not empty %}
-				<a class="tw" href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter" target="_blank"></a>
-				{% endif %}
-				<a class="rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subscribe to') }} RSS {{ Lang.Get('feed') }}" target="_blank"></a>
+				<div class="wrapper">
+					{% if Custom('facebook_username') is not empty %}
+						<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook" target="_blank"></a>
+					{% endif %}
+					{% if Custom('twitter_username') is not empty %}
+					<a class="tw" href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter" target="_blank"></a>
+					{% endif %}
+					<a class="rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subscribe to') }} RSS {{ Lang.Get('feed') }}" target="_blank"></a>
+				</div>
 			</div>
 		{% endif %}
 
@@ -1250,10 +1265,11 @@
 			<script type="text/javascript">
 				jQuery.ias({
 					'container' 	: ".posts",
+					'history'		: false,
 					'item' 			: ".post",
 					'pagination' 	: ".load-more",
 					'next'			: ".load-more a",
-					'loader' 		: "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' />",
+					'loader' 		: "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts...') }}</p>",
 					'tresholdMargin' : -200,
 					onRenderComplete : function() {
 						{% if not isSingle %}
