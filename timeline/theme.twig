@@ -926,16 +926,6 @@
 		{% endif %}
 
 		<script type="text/javascript">
-			// FancyBox
-			$(".ob-section-images a, .ob-link-img").attr("rel", "group1");
-			$(".ob-section-images a, .ob-link-img").fancybox({
-				'overlayShow'	: true,
-				'overlayColor'  : '#000',
-				'transitionIn'	: 'elastic',
-				'transitionOut'	: 'elastic',
-				'type'			: 'image'
-			});
-
 
 			// Placeholder Script
 			$('input[placeholder]').each(function(){
@@ -961,16 +951,16 @@
 			});
 
 
-		{% if Custom('background_repeat') == 'strech' and Custom('background_image') is not empty %}
-			// Backstretch
-			$(document).ready(function(){
-				//  Backstrech
-				$.backstretch(
-					'{{ Custom('background_image') }}'
-				);
-				$('#wrapper-container').css('background', 'none');
-			});
-		{% endif %}
+			{% if Custom('background_repeat') == 'strech' and Custom('background_image') is not empty %}
+				// Backstretch
+				$(document).ready(function(){
+					//  Backstrech
+					$.backstretch(
+						'{{ Custom('background_image') }}'
+					);
+					$('#wrapper-container').css('background', 'none');
+				});
+			{% endif %}
 
 			var Timeline = new Array(),
 				elsStart;
@@ -978,6 +968,19 @@
 			Timeline.Socialite = function (elements) {
 				$(elements).find('.share').one('mouseenter', function(){
 					Socialite.load($(this)[0]);
+				});
+			},
+
+			Timeline.Fancybox = function (elements) {
+				// FancyBox
+				var els = $(elements).find(".ob-section-images:not(.ob-layout900) a, .ob-section-text .ob-link-img").attr("rel", "fancybox");
+
+				els.fancybox({
+					'overlayShow'	: true,
+					'overlayColor'  : '#000',
+					'transitionIn'	: 'elastic',
+					'transitionOut'	: 'elastic',
+					'type'			: 'image'
 				});
 			},
 
@@ -1010,6 +1013,7 @@
 				elsStart = $('.item');
 				Timeline.EnhancePictures(elsStart);
 				Timeline.ItemDispatcher(elsStart);
+				Timeline.Fancybox(elsStart);
 				Timeline.Socialite(elsStart);
 
 				jQuery.ias({
@@ -1021,20 +1025,17 @@
 					'loader' 		: "<div class='loader'><img src='http://assets.over-blog-kiwi.com/themes/13/images/loader.gif' alt='' title='' /></div>",
 					onRenderComplete: function(items){
 						Timeline.EnhancePictures(items);
-						Timeline.ItemDispatcher(items);
 						Timeline.Socialite(items);
 
 						if (typeof OB != "undefined") { OB.restart && OB.restart(); }
 
-						if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-
 						if (typeof twttr != "undefined") { twttr.widgets.load(); }
 
-						if (typeof gapi != "undefined") { gapi.plusone.go(); }
+						Timeline.ItemDispatcher(items);
 
-						if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS && DISQUSWIDGETS.getCount(); }
+						Timeline.Fancybox(items);
 
-						$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
+						$(".ob-section-images:not(.ob-layout900) a, div:not(ob-layout900).ob-link-img").attr("rel", "fancybox");
 						$("a[rel='fancybox']").fancybox({
 							'overlayShow'	: true,
 							'overlayColor'  : '#000',
