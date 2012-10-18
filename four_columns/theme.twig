@@ -212,14 +212,19 @@
             /* ----------------------------- */
             .global {
                 margin: 0 auto;
-                width: 980px;
+                max-width: 980px;
             }
 
             .main {
-                margin-bottom: 50px;
-                overflow: hidden;
-                padding-bottom: 150px;
-                width: 980px;
+                margin-bottom: 180px;
+                padding-bottom: 180px;
+                background: transparent;
+            }
+
+            a,
+            a:visited {
+                color: #999;
+                text-decoration: none;
             }
 
             /* ----------------------------- */
@@ -235,7 +240,7 @@
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                 overflow: hidden;
                 margin: 50px auto 8px;
-                width: 962px;
+                max-width: 962px;
             }
 
             .header .banner,
@@ -259,7 +264,7 @@
                 padding: 5px;
             }
             .header .banner h1 {
-                margin: 20px 0 0 ;
+                margin: 0;
                 max-width: 75%;
             }
             .header .banner h1 a {
@@ -277,11 +282,12 @@
                 position: absolute;
                 right: 13px;
                 top: 13px;
+                width: 213px;
             }
             .search input[type="text"] {
                 background: #F5F5F5; 
                 border: 1px solid #DDD; 
-                border-bottom-color: #FFF; 
+                border-bottom-color: #EEE; 
                 -webkit-border-radius: 3px; 
                    -moz-border-radius: 3px; 
                     -ms-border-radius: 3px; 
@@ -290,7 +296,7 @@
                 color: #222; 
                 font-size: 12px;
                 padding: 9px;
-                width: 217px;
+                width: 100%;
             }
             .search input[type="submit"] {
                 background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat -2px -292px;
@@ -306,11 +312,11 @@
             .header .menu {
                 background: #ECECEC;
                 border-top: 1px solid #E0E0E0;
-                -webkit-box-shadow: 0 1px 0 0 white inset;
-                   -moz-box-shadow: 0 1px 0 0 white inset;
-                    -ms-box-shadow: 0 1px 0 0 white inset;
-                     -o-box-shadow: 0 1px 0 0 white inset;
-                        box-shadow: 0 1px 0 0 white inset;
+                -webkit-box-shadow: 0 1px 0 0 #FFF inset;
+                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
+                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
+                     -o-box-shadow: 0 1px 0 0 #FFF inset;
+                        box-shadow: 0 1px 0 0 #FFF inset;
             }
             .header .menu ul {
                 list-style: none;
@@ -403,13 +409,12 @@
             .post .footer {
                 background: #ECECEC;
                 border-top: 1px solid #E0E0E0;
-                -webkit-box-shadow: 0 1px 0 0 white inset;
-                   -moz-box-shadow: 0 1px 0 0 white inset;
-                    -ms-box-shadow: 0 1px 0 0 white inset;
-                     -o-box-shadow: 0 1px 0 0 white inset;
-                        box-shadow: 0 1px 0 0 white inset;
+                -webkit-box-shadow: 0 1px 0 0 #FFF inset;
+                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
+                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
+                     -o-box-shadow: 0 1px 0 0 #FFF inset;
+                        box-shadow: 0 1px 0 0 #FFF inset;
             }
-
 
             /* ----------------------------- */
             /* ==HOME PAGE */
@@ -425,7 +430,7 @@
                         tansition: 200ms all ease;
             }
             .index .post:nth-child(2) {
-                width: 472px;
+                width: 470px;
             }
             .index .post:hover {
                 background: #FFF;
@@ -572,6 +577,9 @@
             .index .post .share .gplus {
                 background-position: 1px -217px;
             }
+            .index .post .share .pint {
+                background-position: 1px -766px;
+            }
             
             .index .post .share .fb:hover {
                 background-position: 1px 1px;
@@ -582,6 +590,9 @@
             .index .post .share .gplus:hover {
                 background-position: 1px -86px;
             }
+            .index .post .share .pint:hover {
+                background-position: 1px -719px;
+            }
 
             /* FANCYBOX */
             .item-fancybox {
@@ -589,7 +600,6 @@
             }
             .item-fancybox .post {
                 border: none;
-                width: 626px;
             }
             .item-fancybox .post .date {
                 display: inline-block;
@@ -626,13 +636,30 @@
             .item-fancybox .post .navigation {
                 display: none;
             }
+
+            /* ----------------------------- */
+            /* ==NO POST */
+            /* ----------------------------- */
+            .no-post {
+                position: absolute;
+                right: 8px;
+                text-align: center;
+                top: 8px;
+                width: 720px;
+            }
+            .no-post p {
+                font-size: 1.4em;
+                margin-top: 20px;
+                text-transform: uppercase;
+            }
+
             /* ----------------------------- */
             /* ==SINGLE PAGE */
             /* ----------------------------- */
             .single .post {
                 float: left;
-                margin: 8px;
-                width: 628px;
+                margin: 8px 8px 70px;
+                width: 610px;
             }
             .single .post .date {
                 display: inline-block;
@@ -671,16 +698,27 @@
             }
 
             .single aside {
+                background: #FFF;
+                border: 1px solid #DDD;
+                -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                   -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                    -ms-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                     -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                        box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                 left: 50%;
-                margin: 98px 0 0 405px;
+                margin: 8px 0 0 387px;
+                padding: 13px;
                 position: fixed;
             }
             .single aside div {
-                margin-bottom: 10px;
+                display: block;
+                margin-bottom: 20px;
+                text-align: center;            
             }
-            .single .fb_edge_widget_with_comment {
-                display: none;
-            }
+            .single aside div:last-child {
+                margin: 0;
+            }            
+
             /* ----------------------------- */
             /* ==WIDGETS */
             /* ----------------------------- */
@@ -696,16 +734,18 @@
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
                 width: 227px;
             }
-            .widget .profile h3 {
-                margin-bottom: 5px;
-                text-align: center;
-            }
             .widget .avatar {
                 display: block;
-                padding: 13px;
+                padding: 13px 13px 0;
             }
             .widget .avatar img {
                 width: 100%;
+            }
+            .widget .profile h3 {
+                margin-bottom: 0;
+            }
+            .widget .profile p {
+                margin-top: 13px;
             }
             .widget .social {
                 margin-top: 10px;
@@ -722,8 +762,8 @@
                 background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat center -500px;
                 background-color: #CCC;
                 border: 1px solid #C9C9C9;
-                border-bottom-color: #FCFCFC;
-                color: white;
+                border-bottom-color: #EEE;
+                color: #FFF;
                 display: inline-block;
                 font-size: 0.6em;
                 font-weight: bold;
@@ -753,11 +793,11 @@
             .widget .footer {
                 background: #ECECEC;
                 border-top: 1px solid #E0E0E0;
-                -webkit-box-shadow: 0 1px 0 0 white inset;
-                   -moz-box-shadow: 0 1px 0 0 white inset;
-                    -ms-box-shadow: 0 1px 0 0 white inset;
-                     -o-box-shadow: 0 1px 0 0 white inset;
-                        box-shadow: 0 1px 0 0 white inset;
+                -webkit-box-shadow: 0 1px 0 0 #FFF inset;
+                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
+                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
+                     -o-box-shadow: 0 1px 0 0 #FFF inset;
+                        box-shadow: 0 1px 0 0 #FFF inset;
             }
                 
 
@@ -779,13 +819,19 @@
             .ob-section-images img {
                 max-width: 100%;
             }
+            .ob-section-images .ob-row-2-col img {
+                width: 50%;
+            }
+            .ob-section-images .ob-row-3-col img {
+                width: 199px;
+            }
             .ob-slideshow img {
                 width: 100%;
             }
             /* VIDEO */
             .ob-section-video iframe,
             .ob-section-video embed {
-                height: 346px;
+                height: 345px;
                 width: 100%;
             }
             /* TWEETS */
@@ -800,13 +846,95 @@
                 margin-bottom: 25px;
             }
             /* AUDIO */
+            .ob-section-audio .obsoundplayer {
+                height: auto;
+                overflow: hidden;
+            }
             div.obsoundplayer span.obsoundplayername {
                 font-size: 1.3em;
                 width: 160px;
             }
-            
+            /* FILE */
+            .ob-section-file .ob-ctn {
+                background: #F1F1F1;
+                border-color: #DDD;
+                display: block;
+                max-width: 100%;
+            }
+            .ob-section-file .ob-link {
+                color: #222;
+                font-size: 1.4em;
+                max-width: 100%;
+            }
+            .ob-section-file .ob-link:hover {
+                text-decoration: underline;
+            }
+            /* QUOTE */
+            .ob-section-quote {
+                background: #F1F1F1;
+                border-color: #DDD;
+                margin-bottom: 20px;
+            }
+            .ob-section-quote .ob-author, 
+            .ob-section-quote .ob-source {
+                color: #666;
+                max-width: 525px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-transition: color 200ms ease;
+                   -moz-transition: color 200ms ease;
+                    -ms-transition: color 200ms ease;
+                     -o-transition: color 200ms ease;
+                        transition: color 200ms ease;
+                white-space: nowrap;
+            }
+            .ob-section-quote .ob-author .ob-link, 
+            .ob-section-quote .ob-source .ob-link {
+                color: #666;
+            }
+            .ob-section-quote .ob-quote p {
+                color: #222;
+                margin-bottom: 40px;
+            }
+            .ob-section-quote .ob-quote p:before {
+                color: #DCDCDC;
+                margin: -64px 0 0 -80px;
+            }
+            .ob-section-quote .ob-quote p:after {
+                color: #DCDCDC;
+                margin: -14px 0 0 0;
+            }
+            /* LINK */
+            .ob-section-link .ob-media-left {
+                margin: 0;
+            }
+            .ob-section-link .ob-title, 
+            .ob-section-link .ob-snippet {
+                padding-left: 20px;
+            }
+            .ob-section-link .ob-title .ob-link {
+                color: #222;
+                font-family: "Lato";
+            }
+            .ob-section-link .ob-snippet {
+                font-family: "Lato";
+            }
+            .ob-section-link .ob-url {
+                background: #DCDCDC;
+                color: gray;
+                max-width: 405px;
+            }
+            .ob-section-link .ob-url .ob-link {
+                font-family: "Lato";
+            }
+            /* MAP */
+            .ob-section-map .ob-map, 
+            .ob-section-map .ob-desc {
+                width: 100%;
+            }
+
             /* ----------------------------- */
-            /* ==SPECIAL PAGE */
+            /* ==NAVIGATION */
             /* ----------------------------- */
             .navigation {
                 margin: 20px 0;
@@ -869,10 +997,11 @@
             }
             .special .ob-input-text, 
             .special .ob-input-email, 
-            .special .ob-input-textarea {
+            .special .ob-input-textarea,
+            .special .ob-input-submit {
                 background: #F5F5F5; 
                 border: 1px solid #DDD; 
-                border-bottom-color: #FFF;
+                border-bottom-color: #EEE;
                 -webkit-border-radius: 3px; 
                    -moz-border-radius: 3px; 
                     -ms-border-radius: 3px; 
@@ -883,16 +1012,15 @@
                 padding: 9px;
             }
             .special .ob-input-submit {
-                background: #CCC;
-                border: 1px solid #DDD; 
-                -webkit-border-radius: 3px; 
-                   -moz-border-radius: 3px; 
-                    -ms-border-radius: 3px; 
-                     -o-border-radius: 3px; 
-                        border-radius: 3px;
                 cursor: pointer;
+                font-weight: bold;
                 margin-left: 27%;
-                padding: 9px;
+                text-transform: capitalize;
+            }
+            .special .ob-succes {
+                font-size: 1.4em;
+                text-align: center;
+                text-transform: uppercase;
             }
 
             .special .ob-terms {
@@ -912,10 +1040,10 @@
             /* ==LOADER */
             /* ----------------------------- */
             .ias_loader {
-                bottom: 0; 
+                bottom: -40px; 
                 left: 50%;
                 margin-left: -100px;
-                padding: 15px;
+                padding: 200px 15px 0;
                 position: absolute; 
                 text-align: center;
                 width: 200px;
@@ -932,16 +1060,16 @@
             /* ----------------------------- */
             /* ==SCROLL TO TOP */
             /* ----------------------------- */
-           /* body.withsharebar */.scroll-to-top {
+            body.withsharebar .scroll-to-top {
                 bottom: 45px;
                 position: fixed;
                 right: 20px;
             }
-/*            .scroll-to-top {
+            .scroll-to-top {
                 bottom: 5px;
                 position: fixed;
                 right: 20px;
-            }*/
+            }
             .scroll-to-top a {
                 background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat -8px -357px; 
                 color: #999;
@@ -993,7 +1121,7 @@
                             {% if Custom('category_number') > 0 %} 
                                 {% list Blog.PostsTags(Custom('category_number'), count) %}
                                     <li class="{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %} active{% endif %}">
-                                        <a  href="{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}{{ Blog.Url }}{% else %}{{ PostsTag.Url }}{% endif %}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
+                                        <a  href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
                                     </li>
                                 {% endlist %}
                             {% endif %}
@@ -1003,9 +1131,6 @@
                         </ul>
                     </nav>
             </header>    
-        </div>
-
-        <div class="global">
             
             <!-- main -->
             <section class="main{% if isSpecial %} special{% endif %}{% if isSingle %} single{% else %} index{% endif %}">
@@ -1055,7 +1180,7 @@
                                 {% if not isSingle and Custom('post_cover') is not empty or not isSingle and Post.Cover is not empty %}
                                     <!-- post cover -->
                                     <a class="cover permalink" href="{{ Blog.Url }}{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
-                                        <img src="{% if Post.Cover is not empty %}{{ Post.Cover }}{% else %}{{ Custom('post_cover') }}{% endif %}" alt="" title="" width="222px" />
+                                        <img src="{% if Post.Cover is not empty %}{{ Post.Cover }}{% else %}{{ Custom('post_cover') }}{% endif %}" alt="" title="" />
                                     </a>
                                 {% endif %}
                                 <!-- post date -->
@@ -1116,7 +1241,8 @@
                                         <div class="tag">
                                             <p>
                                     {% endif %}
-                                                <a href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+                                                <a class="active" href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+                                                {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}{{ PostsTag.Title }}{% endif %}
                                     {% if loop.last is not empty %}
                                             </p>
                                         </div>
@@ -1185,6 +1311,10 @@
                                         
                                         <!-- google + share -->
                                         <a class="gplus" href="https://plus.google.com/share?url={ {{ Blog.Url }}{{ Post.Permalink }} }"></a>
+
+                                        {% if Post.Cover is not empty %}
+                                            <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}"></a>
+                                        {% endif %}
                                     </div>
                                 {% endif %}
                             </footer>
@@ -1194,30 +1324,30 @@
                             <aside role="complementary">
                                 {% if Custom('share_service') == 'Google +' %}
                                     <div>
-                                        <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
+                                        <div class="g-plusone" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-size="tall"></div>
                                     </div>
                                 {% elseif Custom('share_service') == 'Twitter' %}
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %} data-count="vertical"></a>
                                     </div>
                                 {% elseif Custom('share_service') == 'Facebook' %}
-                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
                                 {% elseif Custom('share_service') == 'Pinterest' %}
                                     <div>
-                                        <a class="pinterest" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
+                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" count-layout="vertical">
                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                         </a>
                                     </div>
                                 {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                     <div>
-                                        <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
+                                        <div class="g-plusone" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-size="tall"></div>
                                     </div>
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %} data-count="vertical"></a>
                                     </div>
-                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
                                     <div>
-                                        <a class="pinterest" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
+                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" count-layout="vertical">
                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                         </a>
                                     </div>
@@ -1226,7 +1356,7 @@
                         {% endif %}
                     {% else %}
                         <!-- query without results -->
-                        <article>
+                        <article class="no-post">
                             <p>{{ Lang.Get('No post found') }}.</p>
                         </article>
                     {% endlist %}
@@ -1243,22 +1373,15 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script src="//data.over-blog-kiwi.com/0/19/10/50/201210/ob_ad32bc70512cc054e5acb7574bf2dea8_jquery-masonry-min.js"></script>
         <script src="//assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
-        
+        {% if isSingle %}
+            <script src="//assets.pinterest.com/js/pinit.js"></script>
+        {% endif %}        
         <script src="//fancyapps.com/fancybox/source/jquery.fancybox.pack.js?v=2.1.1"></script>
 
         <script>
             $(document).ready(function(){    
                 {% if isSingle or isSpecial %}
-                    // Facebook comments + share
-                    (function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                            fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
-
+                    
                     // Twitter share + tweets
                     !function(d,s,id){
                         var js, fjs = d.getElementsByTagName(s)[0];
@@ -1269,6 +1392,16 @@
                             fjs.parentNode.insertBefore(js,fjs);
                         }
                     }(document,"script","twitter-wjs");
+
+                    // Facebook comments + share
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                            fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
                     
                     // Google + button
                     window.___gcfg = {lang: '{{ Blog.Lang }}'};
@@ -1280,6 +1413,16 @@
                         var s = document.getElementsByTagName('script')[0];
                             s.parentNode.insertBefore(po, s);
                     })();
+                    
+                    //
+                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                    (function() {
+                        var dsq = document.createElement('script');
+                            dsq.type = 'text/javascript';
+                            dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
 
                     $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox").fancybox({
                         helpers : {
@@ -1290,18 +1433,6 @@
                             }      
                         }
                     });
-
-                    var PinterestPopup = function() {
-                        $(".pinterest").click(function() {
-                            var $popup = window.open($(this).prop("href"), '',"width=680, height=300, scrollbars=0, left=" +((screen.width - 680)/2) + ", top=" + ((screen.height - 300)/2) );
-                            if (window.focus){
-                                $popup.focus();
-                            }
-                            return false;
-                        });
-                    }
-
-                    PinterestPopup();
 
                 {% else %}
                     // Twitter controls
@@ -1317,7 +1448,7 @@
 
                     var SocialPopup = function(elements) {
                         $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
-                            var $popup = window.open($(this).prop("href"), '',"width=500, height=400, scrollbars=0, left=" +((screen.width - 500)/2) + ", top=" + ((screen.height - 400)/2) );
+                            var $popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
                             if (window.focus){
                                 $popup.focus();
                             }
@@ -1336,7 +1467,6 @@
                     $container.imagesLoaded(function(){
                         $container.masonry({
                             itemSelector : ".masonry-item",
-                            columnWidth : 245,
                             isAnimated: true                
                         });
                     });
@@ -1348,19 +1478,20 @@
                         ItemPermalink = $(".permalink");
 
                         ItemPermalink.fancybox({
-                            "closeBtn"    : false,
-                            "closeEffect" : "elastic",
-                            "height"      : 'auto',
-                            "maxWidth"    : 626,
-                            "minWidth"    : 626,
-                            "width"       : 626,
-                            "openEffect"  : 'elastic',
+                            "autoHeight"  : true,
+                            "autoSize"    : false,
+                            "closeEffect" : "fadin",
+                            "openEffect"  : "elastic",
                             "padding"     : 0,
                             "type"        : "ajax",
+                            "width"       : 623,
                             "wrapCSS"     : "item-fancybox",
-                            afterLoad     : function(fancybox) {
-                                fancybox.content = $('article.post', fancybox.content);
+                            afterLoad     : function() {
+                                this.content = $('article.post', this.content);
                                 if (typeof OB != "undefined") { OB.restart && OB.restart(); }
+                            },
+                            afterShow     : function() {
+                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
                             },
                             helpers : {
                                 overlay : {
@@ -1369,13 +1500,6 @@
                                     }
                                 },
                                 title : null      
-                            },
-                            afterShow: function() {
-                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-
-                                if (typeof gapi != "undefined") { gapi.plusone.go(); }
-
-                                if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS; }
                             }
                         });
                     }
@@ -1390,13 +1514,12 @@
                         next           : ".load-more a",
                         loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
                         history        : false,
-                        tresholdMargin : -800,
+                        tresholdMargin : -500,
                         onLoadItems    : function(items) {
                             var $newElems; 
                             
                             items.shift();
-
-                            
+            
                             $newElems = $(items);
                             $newElems.css({ opacity: 0 });
                                                         
@@ -1415,37 +1538,6 @@
                     });
                 {% endif %}
 
-                // Facebook comments + share
-                (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                        fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-                
-                // Google + button
-                window.___gcfg = {lang: '{{ Blog.Lang }}'};
-                (function() {
-                    var po = document.createElement('script');
-                        po.type = 'text/javascript';
-                        po.async = true;
-                        po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(po, s);
-                })();
-                
-                var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                (function() {
-                    var dsq = document.createElement('script');
-                        dsq.type = 'text/javascript';
-                        dsq.async = true;
-                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-
-
                 // Scroll top button
                 $(window).scroll(function() {
                     if($(window).scrollTop() == 0) {
@@ -1455,7 +1547,7 @@
                         if($('.scroll-to-top').length == 0) {
                             $('body').append(
                                 '<div class="scroll-to-top">'+
-                                    "<a href='#'>{{ Lang.Get('Scroll to top') }}</a>"+
+                                    "<a href='#'>{{ Lang.Get('Go top') }}</a>"+
                                 '</div>');
                         }
                         $('.scroll-to-top').slideDown("250");
