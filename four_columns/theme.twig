@@ -92,7 +92,8 @@
 
         <!-- shortcut:[Options] -->
         <meta name="image:background:label.backgroundImage" />
-        <meta name="image:post_cover:label.defaultPostCover" default="//download.fotolia.com/Content/CompImage/FotoliaComp_32265747_R0r80sDgd86bkqSSJuJBgd7WK9wc5wEN" />
+        <meta name="image:post_cover:label.defaultPostCover" default="" />
+
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" default="true"/>
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
@@ -100,7 +101,7 @@
         <meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
 
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
-        <meta name="string:twitter_username:label.twitterUsername" default="mryemery" group="Social" />
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
@@ -595,45 +596,50 @@
             }
 
             /* FANCYBOX */
-            .item-fancybox {
+            .fancybox-wrap {
                 border: 1px solid #DDD;
             }
-            .item-fancybox .post {
+            .fancybox-wrap .post {
                 border: none;
+                -webkit-box-shadow: none;
+                   -moz-box-shadow: none;
+                    -ms-box-shadow: none;
+                     -o-box-shadow: none;
+                        box-shadow: none;
             }
-            .item-fancybox .post .date {
+            .fancybox-wrap .post .date {
                 display: inline-block;
                 float: left;
                 font-size: 1.4em;
                 padding: 13px 13px 0;
             }
-            .item-fancybox .post .author {
+            .fancybox-wrap .post .author {
                 color: #888;
                 float: right;
                 margin: 0;
                 padding: 13px 13px 0;
             }
-            .item-fancybox .post .author span {
+            .fancybox-wrap .post .author span {
                 color: #222;                
                 font-weight: bold;
             }
-            .item-fancybox .post .title {
+            .fancybox-wrap .post .title {
                 clear: both;
                 font-size: 2.6em;
                 margin: 0;
                 padding: 0 13px 13px;
             }
-            .item-fancybox .post .body {
+            .fancybox-wrap .post .body {
                 padding: 13px 13px 0 13px;
             }
-            .item-fancybox .post .tag {
+            .fancybox-wrap .post .tag {
                 margin-bottom: 20px;
             }
-            .item-fancybox .post .tag,
-            .item-fancybox .post .item-comments {
+            .fancybox-wrap .post .tag,
+            .fancybox-wrap .post .item-comments {
                 padding: 13px;
             }
-            .item-fancybox .post .navigation {
+            .fancybox-wrap .post .navigation {
                 display: none;
             }
 
@@ -734,9 +740,18 @@
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
                 width: 227px;
             }
+            .widget .profile,
+            .widget .pages,
+            .widget .archives,
+            .widget .social {
+                padding: 13px;
+            }
+            .widget h3 {
+                margin-bottom: 10px;
+            }
+            /* PROFILE */
             .widget .avatar {
                 display: block;
-                padding: 13px 13px 0;
             }
             .widget .avatar img {
                 width: 100%;
@@ -745,14 +760,74 @@
                 margin-bottom: 0;
             }
             .widget .profile p {
+                color: #999;
                 margin-top: 13px;
             }
+
+            /* PAGES */
+            .list-pages,
+            .list-pages li {
+                list-style: none;
+                padding: 0;
+            }
+            .list-pages li {
+                margin-bottom: 10px;
+            }
+            .list-pages li:last-child {
+                margin: 0;
+            }
+            .list-pages li a:hover {
+                color: #222;
+            }
+
+            /* ARCHIVES */
+            .archives ul,
+            .archives li {
+                list-style: none;
+                padding: 0;
+            }
+            .arch_year .plustext {
+                background: #ECECEC;
+                color: #222;
+                display: block;
+                font-weight: bold;
+                margin-bottom: 5px;
+                padding: 4px 0;
+                text-align: center;
+            }
+            .arch_month .month {
+                margin-bottom: 6px;
+                padding: 3px 4px 3px;
+                -webkit-transition: all 200ms ease; 
+                   -moz-transition: all 200ms ease; 
+                    -ms-transition: all 200ms ease; 
+                     -o-transition: all 200ms ease; 
+                        transition: all 200ms ease;
+            }  
+            .arch_month .month:hover {
+                background: #F6F6F6;
+            }     
+            .arch_month .month a {
+                display: block;
+                font-size: 0.9em;
+                -webkit-transition: all 200ms ease; 
+                   -moz-transition: all 200ms ease; 
+                    -ms-transition: all 200ms ease; 
+                     -o-transition: all 200ms ease; 
+                        transition: all 200ms ease;
+            }
+            .arch_month .month a span {
+                float: right;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+            .arch_month .month:hover a {
+                color: #222;
+            }      
+
+            /* SOCIAL */
             .widget .social {
                 margin-top: 10px;
-            }
-            .widget .profile .content,
-            .widget .social {
-                padding: 13px;
             }
             .widget .social li {
                 display: inline;
@@ -761,8 +836,6 @@
             .widget .social a {
                 background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat center -500px;
                 background-color: #CCC;
-                border: 1px solid #C9C9C9;
-                border-bottom-color: #EEE;
                 color: #FFF;
                 display: inline-block;
                 font-size: 0.6em;
@@ -776,7 +849,7 @@
                     -ms-transition: all 250ms ease; 
                      -o-transition: all 250ms ease; 
                         transition: all 250ms ease;
-                width: 65px;
+                width: 60px;
             }
             .widget .social .tw a {
                 background-position: center -567px;
@@ -788,7 +861,7 @@
                 background-color: #999;
             }
             .widget .social li:nth-child(2) a {
-                margin: 0 5px;
+                margin: 0 12px;
             }
             .widget .footer {
                 background: #ECECEC;
@@ -825,7 +898,8 @@
             .ob-section-images .ob-row-3-col img {
                 width: 199px;
             }
-            .ob-slideshow img {
+            .ob-section-images .ob-slideshow,
+            .ob-section-images .ob-slideshow img {
                 width: 100%;
             }
             /* VIDEO */
@@ -1022,7 +1096,6 @@
                 text-align: center;
                 text-transform: uppercase;
             }
-
             .special .ob-terms {
                 color: #222;
                 display: block;
@@ -1134,46 +1207,83 @@
             
             <!-- main -->
             <section class="main{% if isSpecial %} special{% endif %}{% if isSingle %} single{% else %} index{% endif %}">
-                    <!-- widgets -->
-                    <article class="{% if not isSingle or isSpecial %} masonry-item {% endif %}widget">
-                        <!-- blog owner about -->
-                        <div class="profile">
-                            {% if Blog.Owner.Avatar is not empty %}
-                                <img class="avatar" src="{{ Blog.Owner.Avatar|resize(211,251)|crop }}" alt="" title="" width="211" height="251" />
-                            {% endif %}
-                            <div class="content">
-                                {% if Blog.Owner.Nickname is not empty %}
-                                    <h3>{{ Blog.Owner.Nickname }}</h3>
-                                {% endif %}
-                                {% if Blog.Owner.Bio is not empty %}
-                                    <p>{{ Blog.Owner.Bio }}</p>
-                                {% endif %}
-                            </div>
+                <!-- widgets -->
+                <article class="{% if not isSingle or isSpecial %} masonry-item {% endif %}widget">
+                    <!-- blog owner about -->
+                    <div class="profile">
+                        {% if Blog.Owner.Avatar is not empty %}
+                            <img class="avatar" src="{{ Blog.Owner.Avatar|resize(211,251)|crop }}" alt="" title="" width="211" height="251" />
+                        {% endif %}
+                        {% if Blog.Owner.Nickname is not empty %}
+                            <h3>{{ Blog.Owner.Nickname }}</h3>
+                        {% endif %}
+                        {% if Blog.Owner.Bio is not empty %}
+                            <p>{{ Blog.Owner.Bio }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    {% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
+                        <div class="pages">
+                            <h3>{{ Lang.Get('Pages') }}</h3>
+                            <ul class="list-pages">
+                                {% list Blog.ListPages %}
+                                    <li>
+                                        <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                    </li>
+                                {% endlist %}
+                            </ul>
                         </div>
-                        <!-- follow blog owner -->
-                        <footer class="footer social">
-                            {% if Custom('facebook_username') is not empty %}
-                                <li class="fb">
-                                    <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank" >FACEBOOK</a>
-                                </li>
-                            {% endif %}
-                            {% if Custom('twitter_username') is not empty %}
-                                <li class="tw">
-                                    <a href="//twitter.com/{{ Custom('twitter_username') }}" target="_blank">TWITTER</a>
-                                </li>
-                            {% endif %}
-                            <li class="rss">
-                                <a href="{{ Blog.RssUrl }}" target="_blank" >RSS</a>
+                    {% endif %}
+
+                    {% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
+                    <!-- blog archives -->
+                        <div class="archives">
+                            <h3>{{ Lang.Get('Archives') }}</h3>
+                            <ul id="archivelist">
+                                {% list Blog.Archives %}
+                                     <li class="arch_year">
+                                        <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
+                                        <ul id="arch_{{ Archive.Year }}" class="arch_month">
+                                            {% list Archive.Months%}
+                                                {% if Month.PostCount > 0 %}
+                                                    <li class="month">
+                                                        <a href="{{ Month.Url }}">
+                                                            {{ Lang.Get(Month.Name) }} <span>{{ Month.PostCount }}</span>
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endlist %}
+                                        </ul>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- follow blog owner -->
+                    <div class="footer social">
+                        {% if Custom('facebook_username') is not empty %}
+                            <li class="fb">
+                                <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank" >FACEBOOK</a>
                             </li>
-                        </footer>
+                        {% endif %}
+                        {% if Custom('twitter_username') is not empty %}
+                            <li class="tw">
+                                <a href="//twitter.com/{{ Custom('twitter_username') }}" target="_blank">TWITTER</a>
+                            </li>
+                        {% endif %}
+                        <li class="rss">
+                            <a href="{{ Blog.RssUrl }}" target="_blank" >RSS</a>
+                        </li>
+                    </div>
+                </article>
+                {% if isSpecial %}
+                    <article class="contact">
+                        <div class="inner">
+                            {{ SpecialContent }}
+                        </div>
                     </article>
-                    {% if isSpecial %}
-                        <article class="contact">
-                            <div class="inner">
-                                {{ SpecialContent }}
-                            </div>
-                        </article>
-                    {% else %}
+                {% else %}
                     {% list Posts %}
                         <article class="post{% if not isSingle %} masonry-item{% endif %}">
                             <header>
@@ -1313,7 +1423,7 @@
                                         <a class="gplus" href="https://plus.google.com/share?url={ {{ Blog.Url }}{{ Post.Permalink }} }"></a>
 
                                         {% if Post.Cover is not empty %}
-                                            <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}"></a>
+                                            <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}"></a>
                                         {% endif %}
                                     </div>
                                 {% endif %}
@@ -1347,7 +1457,7 @@
                                     </div>
                                     <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
                                     <div>
-                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" count-layout="vertical">
+                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                         </a>
                                     </div>
@@ -1380,7 +1490,7 @@
 
         <script>
             $(document).ready(function(){    
-                {% if isSingle or isSpecial %}
+                {% if isSingle %}
                     
                     // Twitter share + tweets
                     !function(d,s,id){
@@ -1434,7 +1544,8 @@
                         }
                     });
 
-                {% else %}
+                {% elseif not isSpecial %}
+                    
                     // Twitter controls
                     var TwitterControls = function (elements){
                         $(elements).find(".ob-tweet").each(function(){
@@ -1446,6 +1557,9 @@
                         });
                     }
 
+                    TwitterControls($(".masonry-item"));
+                    
+                    // Social popup
                     var SocialPopup = function(elements) {
                         $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
                             var $popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
@@ -1456,8 +1570,6 @@
                         });
                     }
 
-                    TwitterControls($(".masonry-item"));
-
                     SocialPopup($(".masonry-item"));
 
                     // Masonry
@@ -1467,7 +1579,8 @@
                     $container.imagesLoaded(function(){
                         $container.masonry({
                             itemSelector : ".masonry-item",
-                            isAnimated: true                
+                            columnWidth  : 245,
+                            isAnimated   : true                
                         });
                     });
 
@@ -1478,27 +1591,36 @@
                         ItemPermalink = $(".permalink");
 
                         ItemPermalink.fancybox({
-                            "autoHeight"  : true,
-                            "autoSize"    : false,
-                            "closeEffect" : "fadin",
-                            "minHeight"   : 420,
-                            "openEffect"  : "elastic",
-                            "padding"     : 0,
-                            "type"        : "ajax",
-                            "width"       : 623,
-                            "wrapCSS"     : "item-fancybox",
                             afterLoad     : function() {
                                 this.content = $('article.post', this.content);
                                 if (typeof OB != "undefined") { OB.restart && OB.restart(); }
-                            },
-                            afterShow     : function() {
                                 if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
                             },
+                            beforeShow    : function() {
+                                $('.ob-link-img').click(function() {
+                                    return false;
+                                });
+                                $('.ob-link-img').hover(function() {
+                                    $(this).css('cursor','default');
+                                });
+                            },
+                            ajax : function() {
+                                dataType : 'html'
+                            },
+                            "autoHeight"  : true,
+                            "autoSize"    : false,
+                            "closeEffect" : "elastic",
+                            "minHeight"   : 420,
+                            "openEffect"  : "none",
+                            "padding"     : 0,
+                            "type"        : "ajax",
+                            "width"       : 623,
                             helpers : {
                                 overlay : {
                                     css : {
                                         "background" : "rgba(255, 255, 255, 0.93)"
-                                    }
+                                    },
+                                    showEarly : false
                                 },
                                 title : null      
                             }
@@ -1515,7 +1637,7 @@
                         next           : ".load-more a",
                         loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
                         history        : false,
-                        tresholdMargin : -500,
+                        tresholdMargin : -800,
                         onLoadItems    : function(items) {
                             var $newElems; 
                             
@@ -1524,7 +1646,7 @@
                             $newElems = $(items);
                             $newElems.css({ opacity: 0 });
                                                         
-                            $newElems.imagesLoaded(function(){
+                            $newElems.imagesLoaded(function() { 
                                 $newElems.animate({ opacity: 1 });
                                 $container.masonry( "appended", $newElems, true );
                             });
@@ -1537,6 +1659,40 @@
                              ItemFancybox();
                         }
                     });
+                {% endif %}
+
+                {% if Custom('display_widget_archives') != true %}
+                    function switch_arch(year) {
+                        'use strict';
+                        var archiveYear, archiveMonths, displayStyle;
+                        displayStyle = '';
+                        archiveYear = document.getElementById('arch_' + year);
+                        if (typeof (archiveYear) !== 'undefined') {
+                            if (archiveYear.style.display !== 'none') {
+                                // Hide years without months
+                                archiveMonths = archiveYear.getElementsByTagName('li');
+                                if (!archiveMonths.length) {
+                                    archiveYear.parentNode.style.display = 'none';
+                                }
+                                // Onclick management
+                                displayStyle = 'none';
+                            }
+                            archiveYear.style.display = displayStyle;
+                        }
+                        return false;
+                    }
+
+                    $(document).ready(function(){
+                        $('.plustext').click(function() {
+                            return false;
+                        });
+                    });
+
+                    {% list Blog.Archives %}
+                        {% if Archive.Year != "now"|date("Y") %}
+                            switch_arch('{{ Archive.Year }}');
+                        {% endif %}
+                    {% endlist %}
                 {% endif %}
 
                 // Scroll top button
