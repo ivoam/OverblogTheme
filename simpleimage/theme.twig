@@ -741,8 +741,14 @@
 			.ob-section-images .ob-slideshow img {width: 100%;}
 
 			/* Section Video */
-			.ob-section-video {max-width: 100%;}
+			.ob-section-video,
+			.ob-section-video iframe,
+			.ob-section-video object,
+			.ob-section-video embed {
+				max-width: 100%;
+			}
 			.ob-section-video .ob-video iframe {height: 340px; width: 100%;}
+
 
 			/* twitter box */
 	        .ob-section .twitter-tweet-rendered,
