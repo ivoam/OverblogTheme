@@ -94,15 +94,15 @@
         <meta name="image:background:label.backgroundImage" />
         <meta name="image:post_cover:label.defaultPostCover" default="" />
 
-        <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" default="true"/>
-        <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
-        <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
-        <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="6" group="Widgets" />
+        <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="6" group="Navigation" />
+        <meta name="boolean:display_widget_avatar:label.hideArchives" group="Widgets" />
+        <meta name="boolean:display_widget_bio:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
+        <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
 
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
-        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
 
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
@@ -360,7 +360,7 @@
             /* ==POSTS */
             /* ----------------------------- */
             .post {
-                background-color: #FDFDFD;
+                background-color: #F9F9F9;
                 border: 1px solid #DDD;
                 -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                    -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
@@ -424,11 +424,11 @@
                 float: left;
                 margin: 8px;
                 width: 227px;
-                -webkit-tansition: 200ms all ease;
-                   -moz-tansition: 200ms all ease;
-                    -ms-tansition: 200ms all ease;
-                     -o-tansition: 200ms all ease;
-                        tansition: 200ms all ease;
+                -webkit-transition: all 250ms ease;
+                   -moz-transition: all 250ms ease;
+                    -ms-transition: all 250ms ease;
+                     -o-transition: all 250ms ease;
+                        transition: all 250ms ease;
             }
             .index .post:nth-child(2) {
                 width: 470px;
@@ -446,7 +446,16 @@
                 padding: 13px 13px 0 13px;
             }
             .index .post .cover img {
+                opacity: 0.9;
+                -webkit-transition: all 250ms ease;
+                   -moz-transition: all 250ms ease;
+                    -ms-transition: all 250ms ease;
+                     -o-transition: all 250ms ease;
+                        transition: all 250ms ease;
                 width: 100%;
+            }
+            .index .post:hover .cover img {
+                opacity: 1;
             }
             .index .post .date {
                 padding: 13px 13px 0;
@@ -594,10 +603,16 @@
             .index .post .share .pint:hover {
                 background-position: 1px -719px;
             }
+            .index .share-bar {
+                display: none;
+            }
 
             /* FANCYBOX */
             .fancybox-wrap {
                 border: 1px solid #DDD;
+            }
+            .fancybox-wrap .fancybox-close {
+
             }
             .fancybox-wrap .post {
                 border: none;
@@ -642,7 +657,28 @@
             .fancybox-wrap .post .navigation {
                 display: none;
             }
-
+            .fancybox-wrap aside {
+                background: #F9F9F9;
+                border: 1px solid #DDD;
+                -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                   -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                    -ms-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                     -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                        box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                right: 50%;
+                margin: 0 -408px 0 0;
+                padding: 13px;
+                position: fixed;
+                top: 170px;
+            }
+            .fancybox-wrap aside div {
+                display: block;
+                margin-bottom: 20px;
+                text-align: center;            
+            }
+            .fancybox-wrap aside div:last-child {
+                margin: 0;
+            }    
             /* ----------------------------- */
             /* ==NO POST */
             /* ----------------------------- */
@@ -704,7 +740,7 @@
             }
 
             .single aside {
-                background: #FFF;
+                background: #F9F9F9;
                 border: 1px solid #DDD;
                 -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                    -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
@@ -723,13 +759,13 @@
             }
             .single aside div:last-child {
                 margin: 0;
-            }            
+            }                       
 
             /* ----------------------------- */
             /* ==WIDGETS */
             /* ----------------------------- */
             .widget {
-                background-color: #FDFDFD;
+                background-color: #F9F9F9;
                 border: 1px solid #DDD;
                 float: left;
                 margin: 8px;
@@ -786,7 +822,7 @@
                 list-style: none;
                 padding: 0;
             }
-            .arch_year .plustext {
+            .arch_year .year {
                 background: #ECECEC;
                 color: #222;
                 display: block;
@@ -794,6 +830,9 @@
                 margin-bottom: 5px;
                 padding: 4px 0;
                 text-align: center;
+            }
+            .arch_year .year:hover {
+                background: #E3E3E3;
             }
             .arch_month .month {
                 margin-bottom: 6px;
@@ -896,7 +935,7 @@
                 width: 50%;
             }
             .ob-section-images .ob-row-3-col img {
-                width: 199px;
+                width: 194px;
             }
             .ob-section-images .ob-slideshow,
             .ob-section-images .ob-slideshow img {
@@ -1050,7 +1089,7 @@
             /* ==SPECIAL PAGE */
             /* ----------------------------- */
             .special .contact {
-                background: #FDFDFD;
+                background: #F9F9F9;
                 border: 1px solid #CCC;
                 -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
                    -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
@@ -1144,7 +1183,7 @@
                 right: 20px;
             }
             .scroll-to-top a {
-                background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat -8px -357px; 
+                background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat -8px -360px; 
                 color: #999;
                 display: block;
                 font-size: 1.6em;
@@ -1152,7 +1191,7 @@
                 text-decoration: none;
             }
             .scroll-to-top a:hover {
-                background-position: -8px -394px;
+                background-position: -8px -397px;
                 color: #555;
             }
         </style>
@@ -1217,7 +1256,7 @@
                         {% if Blog.Owner.Nickname is not empty %}
                             <h3>{{ Blog.Owner.Nickname }}</h3>
                         {% endif %}
-                        {% if Blog.Owner.Bio is not empty %}
+                        {% if Blog.Owner.Bio is not empty and Custom('display_widget_bio') == false %}
                             <p>{{ Blog.Owner.Bio }}</p>
                         {% endif %}
                     </div>
@@ -1235,14 +1274,14 @@
                         </div>
                     {% endif %}
 
-                    {% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
+                    {% if Custom('display_widget_archives') == false and Blog.Archives is not empty %}
                     <!-- blog archives -->
                         <div class="archives">
                             <h3>{{ Lang.Get('Archives') }}</h3>
                             <ul id="archivelist">
                                 {% list Blog.Archives %}
                                      <li class="arch_year">
-                                        <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
+                                        <a href="#" class="year" data-year="{{ Archive.Year }}">{{ Archive.Year }}</a>
                                         <ul id="arch_{{ Archive.Year }}" class="arch_month">
                                             {% list Archive.Months%}
                                                 {% if Month.PostCount > 0 %}
@@ -1391,7 +1430,7 @@
                                     <div class="item-comments" id="comments">
                                         <h3>{{ Lang.Get('Comment this post') }}</h3>
                                         {% if Custom("comment") == "Facebook" %}
-                                            <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600"></div>
+                                            <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="582"></div>
                                         {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                             <div id="disqus_thread"></div>
                                             <script type="text/javascript">
@@ -1431,20 +1470,20 @@
                         </article>
 
                         {% if isSingle and Custom('share_service') != 'None' %}
-                            <aside role="complementary">
+                            <aside class="share-bar" role="complementary">
                                 {% if Custom('share_service') == 'Google +' %}
                                     <div>
                                         <div class="g-plusone" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-size="tall"></div>
                                     </div>
                                 {% elseif Custom('share_service') == 'Twitter' %}
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %} data-count="vertical"></a>
+                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
                                     </div>
                                 {% elseif Custom('share_service') == 'Facebook' %}
                                     <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-                                {% elseif Custom('share_service') == 'Pinterest' %}
+                                {% elseif Custom('share_service') == 'Pinterest' and Post.Cover is not empty %}
                                     <div>
-                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" count-layout="vertical">
+                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                         </a>
                                     </div>
@@ -1453,14 +1492,17 @@
                                         <div class="g-plusone" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-size="tall"></div>
                                     </div>
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %} data-count="vertical"></a>
+                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
                                     </div>
                                     <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
-                                    <div>
-                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
-                                            <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
-                                        </a>
-                                    </div>
+                                    {% if Post.Cover is not empty %}
+                                        <div>
+                                            <!-- <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
+                                                <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                                            </a> -->
+                                            <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border: medium none; width: 43px; height: 58px;"></iframe>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
                             </aside>
                         {% endif %}
@@ -1483,72 +1525,26 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         <script src="//data.over-blog-kiwi.com/0/19/10/50/201210/ob_ad32bc70512cc054e5acb7574bf2dea8_jquery-masonry-min.js"></script>
         <script src="//assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
-        {% if isSingle %}
-            <script src="//assets.pinterest.com/js/pinit.js"></script>
-        {% endif %}        
         <script src="//assets.over-blog-staging.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
 
         <script>
             $(document).ready(function(){    
                 {% if isSingle %}
-                    
-                    // Twitter share + tweets
-                    !function(d,s,id){
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if(!d.getElementById(id)){
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "https://platform.twitter.com/widgets.js";
-                            fjs.parentNode.insertBefore(js,fjs);
-                        }
-                    }(document,"script","twitter-wjs");
-
-                    // Facebook comments + share
-                    (function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                            fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
-                    
-                    // Google + button
-                    window.___gcfg = {lang: '{{ Blog.Lang }}'};
-                    (function() {
-                        var po = document.createElement('script');
-                            po.type = 'text/javascript';
-                            po.async = true;
-                            po.src = 'https://apis.google.com/js/plusone.js';
-                        var s = document.getElementsByTagName('script')[0];
-                            s.parentNode.insertBefore(po, s);
-                    })();
-                    
-                    //
-                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                    (function() {
-                        var dsq = document.createElement('script');
-                            dsq.type = 'text/javascript';
-                            dsq.async = true;
-                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-
+                    // Fancybox on single pages via url
                     $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox").fancybox({
                         helpers : {
                             overlay : {
                                 css : {
-                                    'background' : 'rgba(255, 255, 255, 0.93)'
+                                    "background" : "rgba(255, 255, 255, 0.93)"
                                 }
                             }      
                         }
                     });
 
                 {% elseif not isSpecial %}
-                    
                     // Twitter controls
-                    var TwitterControls = function (elements){
-                        $(elements).find(".ob-tweet").each(function(){
+                    var TwitterControls = function(elements) {
+                        $(elements).find(".ob-tweet").each(function() {
                             var $datatwitter = $(this).find("a[data-twitter]").attr("data-twitter");
 
                             $(this).parent().parent().find(".tweet-reply").attr("href", "https://twitter.com/intent/tweet?in_reply_to=" + $datatwitter);
@@ -1558,6 +1554,13 @@
                     }
 
                     TwitterControls($(".masonry-item"));
+
+                    // Disable tweets render
+                    var TwitterDisabled = function(elements) {
+                        $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
+                    }
+
+                    TwitterDisabled($(".masonry-item"));
                     
                     // Social popup
                     var SocialPopup = function(elements) {
@@ -1580,41 +1583,32 @@
                         $container.masonry({
                             itemSelector : ".masonry-item",
                             columnWidth  : 245,
-                            isAnimated   : true                
+                            isAnimated   : true,
+                            animationOptions: {
+                                duration: 100,
+                            }                
                         });
                     });
 
                     // Opening of the posts with fancybox
                     var ItemFancybox = function () {
-                        var ItemPermalink;
+                        var ItemPermalink,
+                            ShareBar;
                         
                         ItemPermalink = $(".permalink");
 
                         ItemPermalink.fancybox({
-                            afterLoad     : function() {
-                                this.content = $('article.post', this.content);
-                                if (typeof OB != "undefined") { OB.restart && OB.restart(); }
-                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-                            },
-                            beforeShow    : function() {
-                                $('.ob-link-img').click(function() {
-                                    return false;
-                                });
-                                $('.ob-link-img').hover(function() {
-                                    $(this).css('cursor','default');
-                                });
-                            },
-                            ajax : function() {
-                                dataType : 'html'
-                            },
-                            "autoHeight"  : true,
-                            "autoSize"    : false,
-                            "closeEffect" : "elastic",
-                            "minHeight"   : 420,
-                            "openEffect"  : "none",
-                            "padding"     : 0,
-                            "type"        : "ajax",
-                            "width"       : 623,
+                            autoHeight  : true,
+                            autoSize    : false,
+                            closeEffect : "elastic",
+                            fitToView   : false,
+                            margin      : [80, 20, 20, 20],
+                            openEffect  : "none",
+                            padding     : 0,
+                            scrolling   : "no",
+                            topRatio    : 0,
+                            type        : "ajax",
+                            width       : 608,
                             helpers : {
                                 overlay : {
                                     css : {
@@ -1623,6 +1617,42 @@
                                     showEarly : false
                                 },
                                 title : null      
+                            },
+                            afterLoad     : function() { 
+                                ShareBar = $(".share-bar", this.content);
+                                this.content = $(".post", this.content);
+                            },
+                            afterShow     : function() {
+                                // Insert share bar
+                                $(".fancybox-inner").append(ShareBar);
+                                
+                                // OB callback
+                                if (typeof OB != "undefined") { OB.restart && OB.restart(); }
+
+                                // FB callback
+                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); } 
+
+                                // TWT callback 
+                                if (typeof twttr != "undefined") { twttr.widgets.load(); }
+
+                                // G+ callback
+                                if (typeof gapi != "undefined") { gapi.plusone.go(); }
+                            
+                                // Disable image link
+                                $('.ob-link-img').click(function() {
+                                    return false;
+                                });
+                                $('.ob-link-img').hover(function() {
+                                    $(this).css('cursor','default');
+                                });
+
+                                DISQUS.reset({
+                                  reload: true,
+                                  config: function () {  
+                                    this.page.identifier = "";  
+                                    this.page.url = $('.permalink').attr('href');
+                                  }
+                                });
                             }
                         });
                     }
@@ -1650,6 +1680,7 @@
                                 $newElems.animate({ opacity: 1 });
                                 $container.masonry( "appended", $newElems, true );
                             });
+                            TwitterDisabled(items);
 
                             TwitterControls(items);
 
@@ -1661,39 +1692,47 @@
                     });
                 {% endif %}
 
-                {% if Custom('display_widget_archives') != true %}
-                    function switch_arch(year) {
-                        'use strict';
-                        var archiveYear, archiveMonths, displayStyle;
-                        displayStyle = '';
-                        archiveYear = document.getElementById('arch_' + year);
-                        if (typeof (archiveYear) !== 'undefined') {
-                            if (archiveYear.style.display !== 'none') {
-                                // Hide years without months
-                                archiveMonths = archiveYear.getElementsByTagName('li');
-                                if (!archiveMonths.length) {
-                                    archiveYear.parentNode.style.display = 'none';
-                                }
-                                // Onclick management
-                                displayStyle = 'none';
-                            }
-                            archiveYear.style.display = displayStyle;
-                        }
-                        return false;
+                //Twitter share
+                !function(d,s,id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if(!d.getElementById(id)){
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js,fjs);
                     }
+                }(document,"script","twitter-wjs");
+                
+                // Google + button
+                window.___gcfg = {lang: '{{ Blog.Lang }}'};
+                (function() {
+                    var po = document.createElement('script');
+                        po.type = 'text/javascript';
+                        po.async = true;
+                        po.src = 'https://apis.google.com/js/plusone.js';
+                    var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(po, s);
+                })();
 
-                    $(document).ready(function(){
-                        $('.plustext').click(function() {
-                            return false;
-                        });
-                    });
+                // Facebook comments + share
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                        fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
 
-                    {% list Blog.Archives %}
-                        {% if Archive.Year != "now"|date("Y") %}
-                            switch_arch('{{ Archive.Year }}');
-                        {% endif %}
-                    {% endlist %}
-                {% endif %}
+                // Disqus comments
+                var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                (function() {
+                    var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
 
                 // Scroll top button
                 $(window).scroll(function() {
@@ -1715,7 +1754,44 @@
                     event.preventDefault();
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
+
+                $('.arch_year > a').click(function() {
+                    switch_arch($(this).attr('data-year'));
+                    {% if not isSingle %}
+                        $container.masonry('reload');
+                    {% endif %}
+                    
+                    return false;
+                });
             });
+
+            {% if Custom('display_widget_archives') == false %}
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, 
+                        archiveMonths, 
+                        displayStyle;
+                        displayStyle = '';
+                    archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            // Hide years without months
+                            archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
+                        }
+                        archiveYear.style.display = displayStyle;
+                    }
+                    return false;
+                }
+
+                {% list Blog.Archives %}
+                    switch_arch('{{ Archive.Year }}');
+                {% endlist %}
+            {% endif %}
         </script>
     </body>
 </html>
