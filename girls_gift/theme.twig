@@ -39,7 +39,7 @@
                 <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
                 <meta property="og:description" content="{{ Post.Snippet }}" />
                 <meta itemprop="description" content="{{ Post.Snippet }}" />
-                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+                <meta property="og:url" content="{{ Post.Permalink }}" />
                 {% if Post.Cover %}
                     <meta property="og:image" content="{{ Post.Cover }}"/>
                     <meta itemprop="image" content="{{ Post.Cover }}" />
@@ -1131,11 +1131,11 @@
                                                         {% if isPage == false %}
                                                         <span class='post-comment-link' style='font-size:11px;'>
                                                             {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-                                                                <a class='comment-link' href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
+                                                                <a class='comment-link' href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
                                                             {% else %}
                                                                 <a class='comment-link' href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}">
                                                                     {% if Custom("comment") == "Facebook" %}
-                                                                        <fb:comments-count href="{{ Blog.Url }}{{ Post.Permalink }}"></fb:comments-count>
+                                                                        <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
                                                                         {{ Lang.Get('comments') }}
                                                                     {% else %}
                                                                         {{ Post.CommentCount(Lang.Get('comment'), Lang.Get('comments')) }}
@@ -1173,8 +1173,8 @@
                                             {% if isSingle %}
                                             <div class="share">
                                                 <h4>{% if isPage == false %}{{ Lang.Get('Share this post') }}{% else %}{{ Lang.Get('Share this page') }}{% endif %}</h4>
-                                                <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
-                                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
+                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
                                                 <g:plusone size="medium"></g:plusone>
                                             </div>
                                             {% endif %}
@@ -1183,7 +1183,7 @@
                                             <div class="item-comments">
                                                 <h4 id="comments">{{ Lang.Get('Comments') }}</h4>
                                                 {% if Custom("comment") == "Facebook" %}
-                                                <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="500"></div>
+                                                <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="500"></div>
                                                 {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <div id="disqus_thread"></div>
                                                     <script type="text/javascript">
