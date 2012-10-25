@@ -39,7 +39,7 @@
 			<meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
 			<meta property="og:description" content="{{ Post.Snippet }}" />
 			<meta itemprop="description" content="{{ Post.Snippet }}" />
-			<meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+			<meta property="og:url" content="{{ Post.Permalink }}" />
 			{% if Post.Cover %}
 				<meta property="og:image" content="{{ Post.Cover }}"/>
 				<meta itemprop="image" content="{{ Post.Cover }}" />
@@ -928,10 +928,10 @@
 							{% if isSingle %}
 							<div class="likeboxes clear">
 								<div class="share share-facebook">
-									<div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="150" data-show-faces="false" data-font="lucida grande" data-colorscheme="{% if Custom('block_variant') == 'light' %}light{% else %}dark{% endif %}"></div>
+									<div class="fb-like" data-href="{{ Post.Permalink }}" data-send="true" data-layout="button_count" data-width="150" data-show-faces="false" data-font="lucida grande" data-colorscheme="{% if Custom('block_variant') == 'light' %}light{% else %}dark{% endif %}"></div>
 								</div>
 								<div class="share share-twitter">
-									<a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
+									<a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
 								</div>
 								<div class="share share-google">
 									<g:plusone size="medium"></g:plusone>
