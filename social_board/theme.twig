@@ -42,7 +42,7 @@
                 <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
                 <meta property="og:description" content="{{ Post.Snippet }}" />
                 <meta itemprop="description" content="{{ Post.Snippet }}" />
-                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+                <meta property="og:url" content="{{ Post.Permalink }}" />
                 {% if Post.Cover %}
                     <meta property="og:image" content="{{ Post.Cover }}"/>
                     <meta itemprop="image" content="{{ Post.Cover }}" />
@@ -1337,7 +1337,7 @@
                             <header>
                                 {% if not isSingle and Custom('post_cover') is not empty or not isSingle and Post.Cover is not empty %}
                                     <!-- post cover -->
-                                    <a class="cover permalink" href="{{ Blog.Url }}{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
+                                    <a class="cover permalink" href="{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
                                         <img src="{% if Post.Cover is not empty %}{{ Post.Cover }}{% else %}{{ Custom('post_cover') }}{% endif %}" alt="" title="" />
                                     </a>
                                 {% endif %}
@@ -1353,7 +1353,7 @@
                                 
                                 <!-- post title -->
                                 <h2 class="title">
-                                    <a class="permalink" href="{{ Blog.Url }}{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
+                                    <a class="permalink" href="{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
                                         {% if Post.Title is not empty %}
                                             {{ Post.Title }}
                                         {% else %}
@@ -1462,16 +1462,16 @@
                                     <!-- post share buttons on home page -->
                                     <div class="share">
                                         <!-- facebook share -->
-                                        <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Blog.Url }}{{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
+                                        <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
 
                                         <!-- twitter share -->
-                                        <a class="twt" href="https://twitter.com/share?url={{ Blog.Url }}{{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
+                                        <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
                                         
                                         <!-- google + share -->
-                                        <a class="gplus" href="https://plus.google.com/share?url={ {{ Blog.Url }}{{ Post.Permalink }} }"></a>
+                                        <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
 
                                         {% if Post.Cover is not empty %}
-                                            <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}"></a>
+                                            <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}"></a>
                                         {% endif %}
                                     </div>
                                 {% endif %}
@@ -1482,31 +1482,31 @@
                             <aside class="share-bar" role="complementary">
                                 {% if Custom('share_service') == 'Google +' %}
                                     <div>
-                                        <div class="g-plusone" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-size="tall"></div>
+                                        <div class="g-plusone" data-href="{{ Post.Permalink }}" data-size="tall"></div>
                                     </div>
                                 {% elseif Custom('share_service') == 'Twitter' %}
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
+                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
                                     </div>
                                 {% elseif Custom('share_service') == 'Facebook' %}
-                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
                                 {% elseif Custom('share_service') == 'Pinterest' and Post.Cover is not empty %}
                                     <div>
-                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
+                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                         </a>
                                     </div>
                                 {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                     <div>
-                                        <div class="g-plusone" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-size="tall"></div>
+                                        <div class="g-plusone" data-href="{{ Post.Permalink }}" data-size="tall"></div>
                                     </div>
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
+                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
                                     </div>
-                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
                                     {% if Post.Cover is not empty %}
                                         <div>
-                                            <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border: medium none; width: 43px; height: 58px;"></iframe>
+                                            <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border: medium none; width: 43px; height: 58px;"></iframe>
                                         </div>
                                     {% endif %}
                                 {% endif %}
