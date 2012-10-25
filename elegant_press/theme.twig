@@ -39,7 +39,7 @@
                 <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
                 <meta property="og:description" content="{{ Post.Snippet }}" />
                 <meta itemprop="description" content="{{ Post.Snippet }}" />
-                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+                <meta property="og:url" content="{{ Post.Permalink }}" />
                 {% if Post.Cover %}
                     <meta property="og:image" content="{{ Post.Cover }}"/>
                     <meta itemprop="image" content="{{ Post.Cover }}" />
@@ -1726,38 +1726,38 @@
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'Google +' %}
                                                     <div class="google">
-                                                        <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
+                                                        <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                     </div>
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'Twitter' %}
                                                     <div class="twitter">
-                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                                     </div>
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'Facebook' %}
                                                     <div class="facebook">
-                                                        <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                        <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                                     </div>
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'Pinterest' %}
                                                     <div class="pinterest">
-                                                        <a href="http://pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
+                                                        <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
                                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                                         </a>
                                                     </div>
                                                 {% endif %}
                                                 {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                                     <div class="google">
-                                                        <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{{ Post.Permalink }}"></div>
+                                                        <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                     </div>
                                                     <div class="twitter">
-                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                                     </div>
                                                     <div class="facebook">
-                                                        <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                        <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                                     </div>
                                                     <div class="pinterest">
-                                                        <a href="http://pinterest.com/pin/create/button/?url={{ Blog.Url }}{{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
+                                                        <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
                                                             <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                                         </a>
                                                     </div>
@@ -1783,7 +1783,7 @@
                                             <!-- Comments -->
                                             <div class="item-comments">
                                                 {% if Custom("comment") == "Facebook" %}
-                                                    <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="10" data-width="600" data-colorscheme="{{ Custom('facebook_comments_theme_color')|default('Light')|lower }}"></div>
+                                                    <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="10" data-width="600" data-colorscheme="{{ Custom('facebook_comments_theme_color')|default('Light')|lower }}"></div>
                                                 {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <div id="disqus_thread"></div>
                                                     <script type="text/javascript">
