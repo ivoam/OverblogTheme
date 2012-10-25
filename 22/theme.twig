@@ -38,7 +38,7 @@
                 <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
                 <meta property="og:description" content="{{ Post.Snippet }}" />
                 <meta itemprop="description" content="{{ Post.Snippet }}" />
-                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+                <meta property="og:url" content="{{ Post.Permalink }}" />
                 {% if Post.Cover %}
                     <meta property="og:image" content="{{ Post.Cover }}"/>
                     <meta itemprop="image" content="{{ Post.Cover }}" />
@@ -567,8 +567,8 @@
                                 <div class="ob-section m-social-networks">
                                     <!-- Social networks : share -->
                                     <h4>{{ Lang.Get('Share this post') }}</h4>
-                                    <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
-                                    <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}" {% endif %}></a>
+                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                    <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}" {% endif %}></a>
                                 </div>
                                 {% if not isPage %}
                                     <div class="bloc-comment">
@@ -576,7 +576,7 @@
                                         <h4>{{ Lang.Get('Comment this post') }}</h4>
                                         <div class="item-comments">
                                             {% if Custom("comment") == "Facebook" %}
-                                                <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="620" data-colorscheme="dark"></div>
+                                                <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="620" data-colorscheme="dark"></div>
                                             {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                 <div id="disqus_thread"></div>
                                                 <script type="text/javascript">
