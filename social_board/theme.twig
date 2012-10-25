@@ -91,14 +91,18 @@
         {% endif %}
 
         <!-- shortcut:[Options] -->
-        <meta name="image:background:label.backgroundImage" />
-        <meta name="image:post_cover:label.defaultPostCover" />
+        <meta name="image:background:label.backgroundImage" group="Background & post cover" />
+        <meta name="image:post_cover:label.defaultPostCover" group="Background & post cover" />
 
         <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="6" group="Navigation" />
+
+        <meta name="color:titles_font_color:Titles font color" default="#222" group="Colors" />
+        <meta name="color:text_font_color:Text font color" default="#888" group="Colors" />
+        <meta name="color:links_font_color:Links font color" default="#668FBA" group="Colors" />
         
-        <meta name="boolean:display_widget_avatar:label.hideArchives" group="Widgets" />
         <meta name="boolean:display_widget_bio:label.hideBiography" group="Widgets" />
-        <meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
+        <meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
+        <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
 
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
@@ -225,7 +229,7 @@
 
             a,
             a:visited {
-                color: #999;
+                color: {{ Custom('links_font_color')|default('#668FBA') }};
                 text-decoration: none;
             }
 
@@ -270,12 +274,13 @@
                 max-width: 75%;
             }
             .header .banner h1 a {
-                color: #999;
+                color: {{ Custom('links_font_color')|default('#668FBA') }};
                 font-size: 1.6em;
                 font-weight: bold;
                 text-decoration: none;
             }
             .header .banner p {
+                color: {{ Custom('text_font_color')|default('#888') }};
                 margin-bottom: 0;
                 max-width: 100%;
             }
@@ -290,11 +295,7 @@
                 background: #F5F5F5; 
                 border: 1px solid #DDD; 
                 border-bottom-color: #EEE; 
-                -webkit-border-radius: 3px; 
-                   -moz-border-radius: 3px; 
-                    -ms-border-radius: 3px; 
-                     -o-border-radius: 3px; 
-                        border-radius: 3px; 
+                border-radius: 3px; 
                 color: #222; 
                 font-size: 12px;
                 padding: 9px;
@@ -334,7 +335,7 @@
             }
             .header .menu a,
             .header .menu a:visited {
-                color: #777; 
+                color: {{ Custom('titles_font_color')|default('#888') }};; 
                 display: block; 
                 font-size: 14px;
                 padding: 0 15px; 
@@ -350,10 +351,9 @@
                 text-transform: uppercase;
             }
             .header .menu a:hover {
-                color: #444;
+                color: {{ Custom('links_font_color')|default('#668FBA') }};
             }
             .header .menu .active a {
-                color: #222;
                 font-weight: bold; 
             }
 
@@ -373,14 +373,14 @@
                 margin: 0;
             }
             .post .date {
-                color: #888;
+                color: {{ Custom('text_font_color')|default('#888') }};
                 display: block;
                 font-size: 1.2em;
                 font-style: italic;
                 font-weight: bold;
             }
             .post .permalink {
-                color: #222;
+                color: {{ Custom('titles_font_color')|default('#222') }};
                 font-weight: bold;
                 line-height: normal;
                 text-decoration: none;
@@ -392,15 +392,14 @@
                 color: #888;
             }
             .post .tag p:before {
-                background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat center -261px;
+                background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat center -263px;
                 content: '';
                 display: inline-block;
                 height: 20px;
-                vertical-align: bottom;
+                vertical-align: middle;
                 width: 20px;
             }
             .post .tag a {
-                color: #888;
                 font-size: 0.9em;
                 font-weight: bold;
                 text-decoration: none;
@@ -417,6 +416,19 @@
                      -o-box-shadow: 0 1px 0 0 #FFF inset;
                         box-shadow: 0 1px 0 0 #FFF inset;
             }
+            .post .footer .item-comments > h3 {
+                color: {{ Custom('titles_font_color')|default('#222') }};
+            }
+            .post .footer .item-comments #disqus_thread h3 {
+                font-size: 1.4em;
+            }
+            .post .footer .item-comments .ob-commentsList .ob-avatar {
+                margin-right: 10px;
+            }   
+            .post .footer .item-comments .ob-commentsList .ob-website,
+            .post .footer .item-comments .ob-commentsList .ob-date {
+                font-size: 0.7em;
+            }        
 
             /* ----------------------------- */
             /* ==HOME PAGE */
@@ -431,7 +443,11 @@
                      -o-transition: all 250ms ease;
                         transition: all 250ms ease;
             }
-            .index .post:nth-child(2) {
+            {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
+                .index .post:nth-child(2) {
+            {% else %} 
+                .index .post:nth-child(1) {
+            {% endif %}
                 width: 470px;
             }
             .index .post:hover {
@@ -446,18 +462,6 @@
                 display: block;
                 padding: 13px 13px 0 13px;
             }
-            .index .post .cover img {
-                opacity: 0.9;
-                -webkit-transition: all 250ms ease;
-                   -moz-transition: all 250ms ease;
-                    -ms-transition: all 250ms ease;
-                     -o-transition: all 250ms ease;
-                        transition: all 250ms ease;
-                width: 100%;
-            }
-            .index .post:hover .cover img {
-                opacity: 1;
-            }
             .index .post .date {
                 padding: 13px 13px 0;
             }
@@ -467,7 +471,7 @@
                 padding: 0 13px 13px;
             }
             .index .post .snippet {
-                color: #888;
+                color: {{ Custom('text_font_color')|default('#888') }};
                 line-height: 1em;
                 margin: 0;
                 padding: 0 13px 13px 13px;
@@ -483,11 +487,7 @@
             .index blockquote.ob-tweet {
                 background: none;
                 border: none;
-                -webkit-border-radius: 0;
-                   -moz-border-radius: 0;
-                    -ms-border-radius: 0;
-                     -o-border-radius: 0;
-                        border-radius: 0;
+                border-radius: 0;
                 -webkit-box-shadow: none;
                    -moz-box-shadow: none;
                     -ms-box-shadow: none;
@@ -499,11 +499,7 @@
             /* Avatar */
             .index .twitter-tweet img,
             .index blockquote.ob-tweet .ob-media-left {
-                -webkit-border-radius: 0;
-                   -moz-border-radius: 0;
-                    -ms-border-radius: 0;
-                     -o-border-radius: 0;
-                        border-radius: 0;
+                border-radius: 0;
                 float: left;
                 height: auto;
                 margin: 0 0 0 0;
@@ -522,10 +518,11 @@
             }
             /* Text */
             .index blockquote.ob-tweet .ob-text {
+                color: {{ Custom('text_font_color')|default('#888') }};
                 padding-top: 50px;
             }
             .index blockquote.ob-tweet .ob-text a {
-                color: #0084B4;
+                color: {{ Custom('links_font_color')|default('#0084B4') }};
                 text-decoration: none;
             }
             .index blockquote.ob-tweet .ob-text a:hover {
@@ -630,13 +627,13 @@
                 padding: 13px 13px 0;
             }
             .fancybox-wrap .post .author {
-                color: #888;
+                color: {{ Custom('text_font_color')|default('#888') }};
                 float: right;
                 margin: 0;
                 padding: 13px 13px 0;
             }
             .fancybox-wrap .post .author span {
-                color: #222;                
+                color: {{ Custom('titles_font_color')|default('#222') }};                
                 font-weight: bold;
             }
             .fancybox-wrap .post .title {
@@ -646,6 +643,7 @@
                 padding: 0 13px 13px;
             }
             .fancybox-wrap .post .body {
+                color: {{ Custom('text_font_color')|default('#888') }};
                 padding: 13px 13px 0 13px;
             }
             .fancybox-wrap .post .tag {
@@ -674,8 +672,12 @@
             }
             .fancybox-wrap aside div {
                 display: block;
-                margin-bottom: 20px;
+                margin: 0 auto 20px;
+                overflow: hidden;
                 text-align: center;            
+            }
+            .fancybox-wrap aside .gplus {
+                width: 50px;
             }
             .fancybox-wrap aside div:last-child {
                 margin: 0;
@@ -701,8 +703,11 @@
             /* ----------------------------- */
             .single .post {
                 float: left;
-                margin: 8px 8px 70px;
+                margin: 8px 8px 70px 251px;
                 width: 610px;
+            }
+            .single .widgets + .post {
+                margin: 8px;
             }
             .single .post .date {
                 display: inline-block;
@@ -712,13 +717,13 @@
             }
             /* author */
             .single .post .author {
-                color: #888;
+                color: {{ Custom('text_font_color')|default('#888') }};
                 float: right;
                 margin: 0;
                 padding: 13px 13px 0;
             }
             .single .post .author span {
-                color: #222;                
+                color: {{ Custom('titles_font_color')|default('#222') }};                
                 font-weight: bold;
             }
             .single .post .title {
@@ -728,6 +733,7 @@
                 padding: 0 13px 13px;
             }
             .single .post .body {
+                color: {{ Custom('text_font_color')|default('#888') }};
                 padding: 13px;
             }
             .single .post .tag {
@@ -755,25 +761,21 @@
             }
             .single aside div {
                 display: block;
-                margin-bottom: 20px;
+                margin: 0 auto 20px;
+                overflow: hidden;
                 text-align: center;            
+            }
+            .single aside .gplus {
+                width: 50px;
             }
             .single aside div:last-child {
                 margin: 0;
-            }   
-
-            .ob-commentsList .ob-avatar {
-                margin-right: 10px;
-            }   
-            .ob-commentsList .ob-website,
-            .ob-commentsList .ob-date {
-                font-size: 0.7em;
-            }                
+            }           
 
             /* ----------------------------- */
             /* ==WIDGETS */
             /* ----------------------------- */
-            .widget {
+            .widgets {
                 background-color: #F9F9F9;
                 border: 1px solid #DDD;
                 float: left;
@@ -785,49 +787,50 @@
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
                 width: 227px;
             }
-            .widget .profile,
-            .widget .pages,
-            .widget .archives,
-            .widget .social {
+            .widgets .profile,
+            .widgets .pages,
+            .widgets .archives,
+            .widgets .social {
                 padding: 13px;
             }
-            .widget h3 {
+            .widgets h3 {
                 margin-bottom: 10px;
             }
             /* PROFILE */
-            .widget .avatar {
+            .widgets .avatar {
                 display: block;
             }
-            .widget .avatar img {
+            .widgets .avatar img {
                 width: 100%;
             }
-            .widget .profile h3 {
+            .widgets h3 {
+                color: {{ Custom('titles_font_color')|default('#222') }};
                 margin-bottom: 0;
             }
-            .widget .profile p {
-                color: #999;
+            .widgets .profile p {
+                color: {{ Custom('text_font_color')|default('#888') }};
                 margin-top: 13px;
             }
 
             /* PAGES */
-            .list-pages,
-            .list-pages li {
+            .widgets .list-pages,
+            .widgets .list-pages li {
                 list-style: none;
                 padding: 0;
             }
-            .list-pages li {
+            .widgets .list-pages li {
                 margin-bottom: 10px;
             }
-            .list-pages li:last-child {
+            .widgets .list-pages li:last-child {
                 margin: 0;
             }
-            .list-pages li a:hover {
+            .widgets .list-pages li a:hover {
                 color: #222;
             }
 
             /* ARCHIVES */
-            .archives ul,
-            .archives li {
+            .widgets .archives ul,
+            .widgets .archives li {
                 list-style: none;
                 padding: 0;
             }
@@ -840,10 +843,10 @@
                 padding: 4px 0;
                 text-align: center;
             }
-            .arch_year .year:hover {
+            .widgets .arch_year .year:hover {
                 background: #E3E3E3;
             }
-            .arch_month .month {
+            .widgets .arch_month .month {
                 margin-bottom: 6px;
                 padding: 3px 4px 3px;
                 -webkit-transition: all 200ms ease; 
@@ -852,10 +855,10 @@
                      -o-transition: all 200ms ease; 
                         transition: all 200ms ease;
             }  
-            .arch_month .month:hover {
+            .widgets .arch_month .month:hover {
                 background: #F6F6F6;
             }     
-            .arch_month .month a {
+            .widgets .arch_month .month a {
                 display: block;
                 font-size: 0.9em;
                 -webkit-transition: all 200ms ease; 
@@ -864,24 +867,33 @@
                      -o-transition: all 200ms ease; 
                         transition: all 200ms ease;
             }
-            .arch_month .month a span {
+            .widgets .arch_month .month a span {
                 float: right;
                 font-size: 0.8em;
                 font-weight: bold;
             }
-            .arch_month .month:hover a {
+            .widgets .arch_month .month:hover a {
                 color: #222;
             }      
 
             /* SOCIAL */
-            .widget .social {
+            .widgets .social {
+                background: #ECECEC;  
+            }
+            .widgets .widget + .social {
+                border-top: 1px solid #E0E0E0;
+                -webkit-box-shadow: 0 1px 0 0 #FFF inset;
+                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
+                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
+                     -o-box-shadow: 0 1px 0 0 #FFF inset;
+                        box-shadow: 0 1px 0 0 #FFF inset;
                 margin-top: 10px;
             }
-            .widget .social li {
+            .widgets .social li {
                 display: inline;
                 list-style: none;
             }
-            .widget .social a {
+            .widgets .social a {
                 background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat center -500px;
                 background-color: #CCC;
                 color: #FFF;
@@ -899,28 +911,18 @@
                         transition: all 250ms ease;
                 width: 60px;
             }
-            .widget .social .tw a {
+            .widgets .social .tw a {
                 background-position: center -567px;
             }
-            .widget .social .rss a {
+            .widgets .social .rss a {
                 background-position: center -637px;
             }
-            .widget .social a:hover {
+            .widgets .social a:hover {
                 background-color: #999;
             }
-            .widget .social li:nth-child(2) a {
+            .widgets .social li:nth-child(2) a {
                 margin: 0 12px;
-            }
-            .widget .footer {
-                background: #ECECEC;
-                border-top: 1px solid #E0E0E0;
-                -webkit-box-shadow: 0 1px 0 0 #FFF inset;
-                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
-                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
-                     -o-box-shadow: 0 1px 0 0 #FFF inset;
-                        box-shadow: 0 1px 0 0 #FFF inset;
-            }
-                
+            }   
 
             /* ----------------------------- */
             /* ==Sections */
@@ -940,13 +942,22 @@
             .ob-section-images img {
                 max-width: 100%;
             }
+            .ob-section-images .ob-row-1-col {
+                margin-bottom: 13px;
+                text-align: center;
+            }
+            .ob-section-images .ob-row-1-col:last-child {
+                margin-bottom: 0;
+            }
             .ob-section-images .ob-row-2-col img {
                 width: 50%;
             }
             .ob-section-images .ob-row-3-col img {
                 width: 194px;
             }
-            .ob-section-images .ob-slideshow,
+            .ob-section-images .ob-slideshow {
+                max-width: 100%;
+            }
             .ob-section-images .ob-slideshow img {
                 width: 100%;
             }
@@ -965,6 +976,7 @@
             /* TEXT */
             .ob-section ul,
             .ob-section ol {
+                display: inline-block;
                 margin-bottom: 25px;
             }
             /* AUDIO */
@@ -1106,11 +1118,17 @@
                      -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, 0.5);
                 float: left;
-                margin: 8px;
+                margin: 8px 8px 8px 251px;
                 width: 720px;
+            }
+            .special .widgets + .contact {
+                margin: 8px;
             }
             .special .inner {
                 padding: 13px;
+            }
+            .special h2 {
+                color: {{ Custom('titles_font_color')|default('#222') }};
             }
             .special .ob-label {
                 font-size: 1.4em;
@@ -1124,11 +1142,7 @@
                 background: #F5F5F5; 
                 border: 1px solid #DDD; 
                 border-bottom-color: #EEE;
-                -webkit-border-radius: 3px; 
-                   -moz-border-radius: 3px; 
-                    -ms-border-radius: 3px; 
-                     -o-border-radius: 3px; 
-                        border-radius: 3px; 
+                border-radius: 3px; 
                 color: #222; 
                 font-size: 12px;
                 padding: 9px;
@@ -1192,16 +1206,17 @@
                 right: 20px;
             }
             .scroll-to-top a {
-                background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat -8px -360px; 
-                color: #999;
+                background: rgba(225, 225, 225, 0.7) url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat left -361px;
+                border-radius: 3px;
+                color: {{ Custom('titles_font_color')|default('#222') }};
                 display: block;
                 font-size: 1.6em;
-                padding: 10px 20px;   
+                padding: 10px 10px 10px 30px;   
                 text-decoration: none;
             }
             .scroll-to-top a:hover {
-                background-position: -8px -397px;
-                color: #555;
+                background-position: left -397px;
+                color: {{ Custom('links_font_color')|default('#668FBA') }};
             }
         </style>
     </head>
@@ -1254,77 +1269,84 @@
             </header>    
             
             <!-- main -->
-            <section class="main{% if isSpecial %} special{% endif %}{% if isSingle %} single{% else %} index{% endif %}">
-                <!-- widgets -->
-                <article class="{% if not isSingle or isSpecial %} masonry-item {% endif %}widget">
-                    <!-- blog owner about -->
-                    <div class="profile">
-                        {% if Blog.Owner.Avatar is not empty %}
-                            <img class="avatar" src="{{ Blog.Owner.Avatar|resize(211,251)|crop }}" alt="" title="" width="211" height="251" />
+            <section class="main{% if isSpecial %} special{% elseif isSingle %} single{% else %} index{% endif %}">
+                {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
+                    <!-- widgets -->
+                    <article class="{% if not isSingle and not isSpecial %}masonry-item {% endif %}widgets">
+                        {% if Custom('display_widget_bio') == false %}
+                            <!-- blog owner about -->
+                            <div class="widget profile">
+                                {% if Blog.Owner.Avatar is not empty %}
+                                    <img class="avatar" src="{{ Blog.Owner.Avatar|resize(211,251)|crop }}" alt="" title="" width="211" height="251" />
+                                {% endif %}
+                                {% if Blog.Owner.Nickname is not empty %}
+                                    <h3>{{ Blog.Owner.Nickname }}</h3>
+                                {% endif %}
+                                {% if Blog.Owner.Bio is not empty %}
+                                    <p>{{ Blog.Owner.Bio }}</p>
+                                {% endif %}
+                            </div>
                         {% endif %}
-                        {% if Blog.Owner.Nickname is not empty %}
-                            <h3>{{ Blog.Owner.Nickname }}</h3>
+                        
+                        {% if Custom('display_widget_pages') == false and Blog.ListPages is not empty %}
+                            <div class="widget pages">
+                                <h3>{{ Lang.Get('Pages') }}</h3>
+                                <ul class="list-pages">
+                                    {% list Blog.ListPages %}
+                                        <li>
+                                            <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                        </li>
+                                    {% endlist %}
+                                </ul>
+                            </div>
                         {% endif %}
-                        {% if Blog.Owner.Bio is not empty and Custom('display_widget_bio') == false %}
-                            <p>{{ Blog.Owner.Bio }}</p>
-                        {% endif %}
-                    </div>
-                    
-                    {% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
-                        <div class="pages">
-                            <h3>{{ Lang.Get('Pages') }}</h3>
-                            <ul class="list-pages">
-                                {% list Blog.ListPages %}
-                                    <li>
-                                        <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
-                                    </li>
-                                {% endlist %}
-                            </ul>
-                        </div>
-                    {% endif %}
 
-                    {% if Custom('display_widget_archives') == false and Blog.Archives is not empty %}
-                    <!-- blog archives -->
-                        <div class="archives">
-                            <h3>{{ Lang.Get('Archives') }}</h3>
-                            <ul id="archivelist">
-                                {% list Blog.Archives %}
-                                     <li class="arch_year">
-                                        <a href="#" class="year" data-year="{{ Archive.Year }}">{{ Archive.Year }}</a>
-                                        <ul id="arch_{{ Archive.Year }}" class="arch_month">
-                                            {% list Archive.Months%}
-                                                {% if Month.PostCount > 0 %}
-                                                    <li class="month">
-                                                        <a href="{{ Month.Url }}">
-                                                            {{ Lang.Get(Month.Name) }} <span>{{ Month.PostCount }}</span>
-                                                        </a>
-                                                    </li>
-                                                {% endif %}
-                                            {% endlist %}
-                                        </ul>
+                        {% if Custom('display_widget_archives') == false and Blog.Archives is not empty %}
+                        <!-- blog archives -->
+                            <div class="widget archives">
+                                <h3>{{ Lang.Get('Archives') }}</h3>
+                                <ul id="archivelist">
+                                    {% list Blog.Archives %}
+                                         <li class="arch_year">
+                                            <a href="#" class="year" data-year="{{ Archive.Year }}">{{ Archive.Year }}</a>
+                                            <ul id="arch_{{ Archive.Year }}" class="arch_month">
+                                                {% list Archive.Months%}
+                                                    {% if Month.PostCount > 0 %}
+                                                        <li class="month">
+                                                            <a href="{{ Month.Url }}">
+                                                                {{ Lang.Get(Month.Name) }} <span>{{ Month.PostCount }}</span>
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endlist %}
+                                            </ul>
+                                        </li>
+                                    {% endlist %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        
+                        {% if Custom('display_widget_follow') == false %}
+                            <!-- follow blog owner -->
+                            <div class="widget social">
+                                {% if Custom('facebook_username') is not empty %}
+                                    <li class="fb">
+                                        <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank" >FACEBOOK</a>
                                     </li>
-                                {% endlist %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                    
-                    <!-- follow blog owner -->
-                    <div class="footer social">
-                        {% if Custom('facebook_username') is not empty %}
-                            <li class="fb">
-                                <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank" >FACEBOOK</a>
-                            </li>
+                                {% endif %}
+                                {% if Custom('twitter_username') is not empty %}
+                                    <li class="tw">
+                                        <a href="//twitter.com/{{ Custom('twitter_username') }}" target="_blank">TWITTER</a>
+                                    </li>
+                                {% endif %}
+                                <li class="rss">
+                                    <a href="{{ Blog.RssUrl }}" target="_blank" >RSS</a>
+                                </li>
+                            </div>
                         {% endif %}
-                        {% if Custom('twitter_username') is not empty %}
-                            <li class="tw">
-                                <a href="//twitter.com/{{ Custom('twitter_username') }}" target="_blank">TWITTER</a>
-                            </li>
-                        {% endif %}
-                        <li class="rss">
-                            <a href="{{ Blog.RssUrl }}" target="_blank" >RSS</a>
-                        </li>
-                    </div>
-                </article>
+                    </article>
+                {% endif %}
+
                 {% if isSpecial %}
                     <article class="contact">
                         <div class="inner">
@@ -1392,21 +1414,17 @@
                                 {% endlist %}
                             {% endif %}
 
-                            {% list Post.Sources %}
-                                {% list Post.Tags %}
-                                    {% if loop.first %}
-                                        <!-- post tag -->
-                                        <div class="tag">
-                                            <p>
-                                    {% endif %}
-                                                <a class="active" href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-                                                {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}{{ PostsTag.Title }}{% endif %}
-                                    {% if loop.last is not empty %}
-                                            </p>
-                                        </div>
-                                    {% endif %}
-                                {% endlist %}
-                            {% endlist %}
+                            {% if Post.Tags is not empty %}
+                                <!-- post tag -->
+                                <div class="tag">
+                                    <p>
+                                        {% list Post.Tags %}
+                                            <a class="active" href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+                                            {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}{{ PostsTag.Title }}{% endif %}
+                                        {% endlist %}
+                                    </p>
+                                </div>
+                            {% endif %}
 
                             {% if not isPage and Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
                                 <!-- Pagination -->
@@ -1442,16 +1460,6 @@
                                             <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="582"></div>
                                         {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                             <div id="disqus_thread"></div>
-                                            <script type="text/javascript">
-                                                var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                                                (function() {
-                                                    var dsq = document.createElement('script');
-                                                        dsq.type = 'text/javascript';
-                                                        dsq.async = true;
-                                                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                                                })();
-                                            </script>
                                             <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                                         {% else %}
                                             {{ Post.Comments }}
@@ -1481,32 +1489,34 @@
                         {% if isSingle and Custom('share_service') != 'None' %}
                             <aside class="share-bar" role="complementary">
                                 {% if Custom('share_service') == 'Google +' %}
-                                    <div>
-                                        <div class="g-plusone" data-href="{{ Post.Permalink }}" data-size="tall"></div>
+                                    <div class="gplus">
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=tall&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 50px; height: 60px;" align="left"></iframe>
                                     </div>
                                 {% elseif Custom('share_service') == 'Twitter' %}
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; width: 66px; height: 62px;"></iframe>
                                     </div>
                                 {% elseif Custom('share_service') == 'Facebook' %}
-                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+                                    <div>
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=box_count&amp;width=58&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90"  style="border:none; overflow:hidden; width:58px; height:61px;"></iframe>
+                                    </div>
                                 {% elseif Custom('share_service') == 'Pinterest' and Post.Cover is not empty %}
                                     <div>
-                                        <a class="pin-it-button" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}" count-layout="vertical">
-                                            <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
-                                        </a>
+                                        <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border:none; overflow:hidden; width: 43px; height: 58px;"></iframe>
                                     </div>
                                 {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
-                                    <div>
-                                        <div class="g-plusone" data-href="{{ Post.Permalink }}" data-size="tall"></div>
+                                    <div class="gplus">
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=tall&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 50px; height: 60px;" align="left"></iframe>
                                     </div>
                                     <div>
-                                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" data-via="{% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}" data-count="vertical"></a>
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; width: 66px; height: 62px;"></iframe>
                                     </div>
-                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="box_count" data-show-faces="false"></div>
+                                    <div>
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=box_count&amp;width=58&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90"  style="border:none; overflow:hidden; width:58px; height:61px;"></iframe>
+                                    </div>
                                     {% if Post.Cover is not empty %}
                                         <div>
-                                            <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border: medium none; width: 43px; height: 58px;"></iframe>
+                                            <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border:none; overflow:hidden; width: 43px; height: 58px;"></iframe>
                                         </div>
                                     {% endif %}
                                 {% endif %}
@@ -1529,14 +1539,143 @@
 
         <!-- Scripts -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-        <script src="//assets.over-blog-staging.com//themes/jquery/masonry/jquery.masonry.min.js"></script>
-        <script src="//assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
+        {% if not isSingle and not isSpecial %}
+            <script src="//assets.over-blog-staging.com//themes/jquery/masonry/jquery.masonry.min.js"></script>
+            <script src="//assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
+        {% endif %}
         <script src="//assets.over-blog-staging.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         {% if Custom('background') is not empty %}
             <script src="http://assets.over-blog-kiwi.com/themes/13/js/jquery.backstretch.min.js" type="text/javascript"></script>
         {% endif %}
 
         <script>
+            {% if not isSingle and not isSpecial %}
+                // Twitter controls
+                var TwitterControls = function(elements) {
+                    $(elements).find(".ob-tweet").each(function() {
+                        var datatwitter = $(this).find("a[data-twitter]").attr("data-twitter");
+
+                        $(this).parent().parent().find(".tweet-reply").attr("href", "https://twitter.com/intent/tweet?in_reply_to=" + datatwitter);
+                        $(this).parent().parent().find(".tweet-retweet").attr("href", "https://twitter.com/intent/retweet?tweet_id=" + datatwitter);
+                        $(this).parent().parent().find(".tweet-favorite").attr("href", "https://twitter.com/intent/favorite?tweet_id=" + datatwitter);
+                    });
+                } 
+
+                // Disable tweets render
+                var TwitterDisabled = function(elements) {
+                    $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
+                } 
+                // Social popup
+                var SocialPopup = function(elements) {
+                    $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
+                        var popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
+                        if (window.focus){
+                            popup.focus();
+                        }
+                        return false;
+                    });
+                } 
+
+                // Opening of the posts with fancybox
+                var ItemFancybox = function (elements) {
+                    var ItemPermalink,
+                        ShareBar,
+                        url;
+                    
+                    ItemPermalink = $(elements).find(".permalink");
+                    if (!ItemPermalink) {
+                        return false;
+                    };
+
+                    ItemPermalink.fancybox({
+                        autoHeight  : true,
+                        autoSize    : false,
+                        closeEffect : "elastic",
+                        fitToView   : false,
+                        margin      : [80, 20, 20, 20],
+                        openEffect  : "none",
+                        padding     : 0,
+                        scrolling   : "no",
+                        topRatio    : 0,
+                        type        : "ajax",
+                        width       : 608,
+                        helpers : {
+                            overlay : {
+                                css : {
+                                    "background" : "rgba(255, 255, 255, 0.93)"
+                                },
+                                showEarly : false
+                            },
+                            title : null      
+                        },
+                        afterLoad     : function() { 
+                            ShareBar = $(".share-bar", this.content);
+                            this.content = $(".post", this.content);
+                        },
+                        beforeShow : function() {
+                            if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                                url = $(this.element).attr('href');
+                                history.pushState("", "", url);
+                            }
+                        },
+                        afterShow     : function() {
+                            // Insert share bar
+                            $(".fancybox-inner").append(ShareBar);
+                            
+                            // OB callback
+                            if (typeof OB != "undefined") { OB.restart && OB.restart(); }
+
+                            {% if Custom('comment') == "Facebook" %}
+                                // FB callback
+                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
+                            {% endif %} 
+
+                            // TWT callback 
+                            if (typeof twttr != "undefined") { twttr.widgets.load(); }
+                        
+                            // Disable image link
+                            $('.ob-link-img').click(function() {
+                                return false;
+                            });
+                            $('.ob-link-img').hover(function() {
+                                $(this).css('cursor','default');
+                            });
+                        },
+                        beforeClose : function() {
+                             if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                                history.back(1);
+                            }
+                        }
+                    });
+                } 
+            {% endif %}
+
+            {% if Custom('display_widget_archives') == false %}
+                // Archives
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear, 
+                        archiveMonths, 
+                        displayStyle;
+
+                        displayStyle = '';
+                    archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+                            // Hide years without months
+                            archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
+                        }
+                        archiveYear.style.display = displayStyle;
+                    }
+                    return false;
+                }
+            {% endif %}
+
             $(document).ready(function(){    
                 {% if isSingle %}
                     // Fancybox on single pages via url
@@ -1551,124 +1690,24 @@
                     });
 
                 {% elseif not isSpecial %}
-                    // Twitter controls
-                    var TwitterControls = function(elements) {
-                        $(elements).find(".ob-tweet").each(function() {
-                            var $datatwitter = $(this).find("a[data-twitter]").attr("data-twitter");
-
-                            $(this).parent().parent().find(".tweet-reply").attr("href", "https://twitter.com/intent/tweet?in_reply_to=" + $datatwitter);
-                            $(this).parent().parent().find(".tweet-retweet").attr("href", "https://twitter.com/intent/retweet?tweet_id=" + $datatwitter);
-                            $(this).parent().parent().find(".tweet-favorite").attr("href", "https://twitter.com/intent/favorite?tweet_id=" + $datatwitter);
-                        });
-                    }
-
-                    TwitterControls($(".masonry-item"));
-
-                    // Disable tweets render
-                    var TwitterDisabled = function(elements) {
-                        $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
-                    }
-
-                    TwitterDisabled($(".masonry-item"));
+                    var container = $(".main");
                     
-                    // Social popup
-                    var SocialPopup = function(elements) {
-                        $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
-                            var $popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
-                            if (window.focus){
-                                $popup.focus();
-                            }
-                            return false;
-                        });
-                    }
-
-                    SocialPopup($(".masonry-item"));
-
                     // Masonry
-                    var $container;
-                    $container = $(".main");
-                    
-                    $container.imagesLoaded(function(){
-                        $container.masonry({
+                    container.imagesLoaded(function(){
+                        container.masonry({
                             itemSelector : ".masonry-item",
                             columnWidth  : 245,
-                            isAnimated   : false,
-                            animationOptions: {
-                                duration: 0,
-                            }                
+                            isAnimated   : false                
                         });
                     });
 
-                    // Opening of the posts with fancybox
-                    var ItemFancybox = function () {
-                        var ItemPermalink,
-                            ShareBar;
-                        
-                        ItemPermalink = $(".permalink");
+                    TwitterControls($(".masonry-item"));
+                    
+                    TwitterDisabled($(".masonry-item"));
+                    
+                    SocialPopup($(".masonry-item"));
 
-                        ItemPermalink.fancybox({
-                            autoHeight  : true,
-                            autoSize    : false,
-                            closeEffect : "elastic",
-                            fitToView   : false,
-                            margin      : [80, 20, 20, 20],
-                            openEffect  : "none",
-                            padding     : 0,
-                            scrolling   : "no",
-                            topRatio    : 0,
-                            type        : "ajax",
-                            width       : 608,
-                            helpers : {
-                                overlay : {
-                                    css : {
-                                        "background" : "rgba(255, 255, 255, 0.93)"
-                                    },
-                                    showEarly : false
-                                },
-                                title : null      
-                            },
-                            afterLoad     : function() { 
-                                ShareBar = $(".share-bar", this.content);
-                                this.content = $(".post", this.content);
-                            },
-                            beforeShow : function(elements) {
-                                $(elements).find(".permalink").each(function() {
-                                    history.pushState("",  "", $(this).attr('href'));
-                                });
-                            },
-                            afterShow     : function() {
-                                // Insert share bar
-                                $(".fancybox-inner").append(ShareBar);
-                                
-                                // OB callback
-                                if (typeof OB != "undefined") { OB.restart && OB.restart(); }
-
-                                // FB callback
-                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); } 
-
-                                // TWT callback 
-                                if (typeof twttr != "undefined") { twttr.widgets.load(); }
-
-                                // G+ callback
-                                if (typeof gapi != "undefined") { gapi.plusone.go(); }
-
-                                $.getScript ("http://" + disqus_shortname + ".disqus.com/count.js");
-                            
-                                // Disable image link
-                                $('.ob-link-img').click(function() {
-                                    return false;
-                                });
-                                $('.ob-link-img').hover(function() {
-                                    $(this).css('cursor','default');
-                                });
-                            },
-                            beforeClose : function() {
-                                history.pushState("",  "", "/");
-                            }
-                        });
-                    }
-
-                    ItemFancybox();
+                    ItemFancybox($(".masonry-item"));
 
                     // Load more with Masonry 
                     jQuery.ias({
@@ -1680,30 +1719,30 @@
                         history        : false,
                         tresholdMargin : -800,
                         onLoadItems    : function(items) {
-                            var $newElems; 
+                            var newElems; 
                             
                             items.shift();
             
-                            $newElems = $(items);
-                            $newElems.css({ opacity: 0 });
-                                                        
-                            $newElems.imagesLoaded(function() { 
-                                $newElems.animate({ opacity: 1 });
-                                $container.masonry( "appended", $newElems, true );
+                            newElems = $(items);
+                            newElems.css({ opacity: 0 });
+                                                       
+                            newElems.imagesLoaded(function() { 
+                                newElems.animate({ opacity: 1 });
+                                container.masonry( "appended", newElems, true );
                             });
-                            TwitterDisabled(items);
 
                             TwitterControls(items);
+                            
+                            TwitterDisabled(items);
 
                             SocialPopup(items);
-                        },
-                        onRenderComplete : function() {
-                             ItemFancybox();
+                            
+                            ItemFancybox($(".masonry-item"));
                         }
                     });
                 {% endif %}
 
-                //Twitter share
+                //Twitter render
                 !function(d,s,id){
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if(!d.getElementById(id)){
@@ -1714,40 +1753,31 @@
                     }
                 }(document,"script","twitter-wjs");
                 
-                // Google + button
-                window.___gcfg = {lang: '{{ Blog.Lang }}'};
-                (function() {
-                    var po = document.createElement('script');
-                        po.type = 'text/javascript';
-                        po.async = true;
-                        po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(po, s);
-                })();
-
-                // Facebook comments + share
-                (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                        fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-
-                // Disqus comments
-                var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                (function() {
-                    var dsq = document.createElement('script');
-                        dsq.type = 'text/javascript';
-                        dsq.async = true;
-                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
+                {% if Custom('comment') == 'Facebook' %}
+                    // Facebook comments 
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                            fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                {% elseif Custom('comment') == 'Disqus' %}
+                    // Disqus comments
+                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                    (function() {
+                        var dsq = document.createElement('script');
+                            dsq.type = 'text/javascript';
+                            dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    })();
+                {% endif %}
 
                 // Scroll top button
                 $(window).scroll(function() {
-                    if($(window).scrollTop() == 0) {
+                    if($(window).scrollTop() <= 0) {
                         $('.scroll-to-top').slideUp("250");
                     } 
                     else {
@@ -1766,53 +1796,30 @@
                     $('html,body').animate({scrollTop: 0}, 'slow');
                 });
 
-                // Archives
-                $('.arch_year > a').click(function() {
-                    switch_arch($(this).attr('data-year'));
-                    {% if not isSingle %}
-                        $container.masonry('reload');
-                    {% endif %}
-                    
-                    return false;
-                });
-
-                if($.browser.msie && $.browser.version <= 8.0 ){
+                {% if Custom('background') is not empty %}
                     // Backstretch
-                    {% if Custom('background') is not empty %}
+                    if($.browser.msie && $.browser.version <= 8.0 ){
                         $.backstretch('{{ Custom('background') }}');
                         $('body').css('background', 'none');
-                    {% endif %}
-                }
-            });
-
-            {% if Custom('display_widget_archives') == false %}
-                // Archives
-                function switch_arch(year) {
-                    'use strict';
-                    var archiveYear, 
-                        archiveMonths, 
-                        displayStyle;
-                        displayStyle = '';
-                    archiveYear = document.getElementById('arch_' + year);
-                    if (typeof (archiveYear) !== 'undefined') {
-                        if (archiveYear.style.display !== 'none') {
-                            // Hide years without months
-                            archiveMonths = archiveYear.getElementsByTagName('li');
-                            if (!archiveMonths.length) {
-                                archiveYear.parentNode.style.display = 'none';
-                            }
-                            // Onclick management
-                            displayStyle = 'none';
-                        }
-                        archiveYear.style.display = displayStyle;
                     }
-                    return false;
-                }
+                {% endif %}
 
-                {% list Blog.Archives %}
-                    switch_arch('{{ Archive.Year }}');
-                {% endlist %}
-            {% endif %}
+                {% if Custom('display_widget_archives') == false %}
+                    // Archives
+                    $('.arch_year > a').click(function() {
+                        switch_arch($(this).attr('data-year'));
+                        {% if not isSingle %}
+                            container.masonry('reload');
+                        {% endif %}
+                        
+                        return false;
+                    });
+
+                    {% list Blog.Archives %}
+                        switch_arch('{{ Archive.Year }}');
+                    {% endlist %}
+                {% endif %}
+            });
         </script>
     </body>
 </html>
