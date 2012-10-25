@@ -980,10 +980,10 @@
 							</span>
 							<div class="clear"></div>
 							<div class="fb-share">
-								<div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="false" data-layout="button_count" data-show-faces="false" data-font="lucida grande" data-width="90"></div>
+								<div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-show-faces="false" data-font="lucida grande" data-width="90"></div>
 							</div>
 							<div class="tw-share">
-								<a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
+								<a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
 							</div>
 							<div class="gg-share">
 								<g:plusone size="medium"></g:plusone>
@@ -993,7 +993,7 @@
 					{% if Post.ShowComments is not empty %}
 						{% if Custom("comment") == "Facebook" %}
 							<div class="comment">
-								<div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="620"></div>
+								<div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="620"></div>
 							</div>
 						{% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 							<div class="comment">
