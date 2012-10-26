@@ -1405,7 +1405,7 @@
                                                 <a class="tweet-favorite" href=""></a>
                                             </div>
                                         </div>
-                                    {% elseif Post.Snippet is not empty %}
+                                    {% elseif loop.first and Post.Snippet is not empty %}
                                         <!-- post snippet -->
                                         <p class="snippet">
                                             {{ Post.Snippet }}
