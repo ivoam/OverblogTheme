@@ -213,18 +213,22 @@
                         box-sizing: border-box;
             }
 
+            /* clearfix */
+            .clearfix:before, .clearfix:after{
+                content: "";
+                display: table;
+            }
+            .clearfix:after{
+                clear: both;
+            }
+
             /* ----------------------------- */
             /* ==GLOBAL */
             /* ----------------------------- */
             .global {
                 margin: 0 auto;
                 max-width: 980px;
-            }
-
-            .main {
-                margin-bottom: 180px;
-                padding-bottom: 180px;
-                background: transparent;
+                padding-bottom: 60px;
             }
 
             a,
@@ -1178,7 +1182,6 @@
                 bottom: -40px;
                 left: 50%;
                 margin-left: -100px;
-                padding: 200px 15px 0;
                 position: absolute;
                 text-align: center;
                 width: 200px;
@@ -1269,7 +1272,7 @@
             </header>
 
             <!-- main -->
-            <section class="main{% if isSpecial %} special{% elseif isSingle %} single{% else %} index{% endif %}">
+            <section class="main{% if isSpecial %} special clearfix{% elseif isSingle %} single clearfix{% else %} index{% endif %}">
                 {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
                     <!-- widgets -->
                     <article class="{% if not isSingle and not isSpecial %}masonry-item {% endif %}widgets">
@@ -1640,10 +1643,26 @@
                             $('.ob-link-img').hover(function() {
                                 $(this).css('cursor','default');
                             });
+
+                            {% if Custom('comment') == 'Disqus' %}
+                                var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                (function() {
+                                    var dsq = document.createElement('script');
+                                        dsq.type = 'text/javascript';
+                                        dsq.async = true;
+                                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                })();
+                            {% endif %}
                         },
                         beforeClose : function() {
-                             if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                            if(!$.browser.msie && !$.browser.version <= 9.0 ){
                                 history.back(1);
+                            }
+
+                            // kill Disqus
+                            if(typeof(DISQUS) === 'object' ){
+                                DISQUS = false;
                             }
                         }
                     });
@@ -1674,6 +1693,40 @@
                     }
                     return false;
                 }
+            {% endif %}
+
+            //Twitter render
+            !function(d,s,id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if(!d.getElementById(id)){
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "https://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js,fjs);
+                }
+            }(document,"script","twitter-wjs");
+
+            // Comments
+            {% if Custom('comment') == 'Facebook' %}
+                // Facebook comments
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                        fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            {% elseif Custom('comment') == 'Disqus' and isSingle %}
+                // Disqus comments
+                var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                (function() {
+                    var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
             {% endif %}
 
             $(document).ready(function(){
@@ -1740,39 +1793,6 @@
                             ItemFancybox(items);
                         }
                     });
-                {% endif %}
-
-                //Twitter render
-                !function(d,s,id){
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if(!d.getElementById(id)){
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "https://platform.twitter.com/widgets.js";
-                        fjs.parentNode.insertBefore(js,fjs);
-                    }
-                }(document,"script","twitter-wjs");
-
-                {% if Custom('comment') == 'Facebook' %}
-                    // Facebook comments
-                    (function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0];
-                        if (d.getElementById(id)) return;
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                            fjs.parentNode.insertBefore(js, fjs);
-                    }(document, 'script', 'facebook-jssdk'));
-                {% elseif Custom('comment') == 'Disqus' %}
-                    // Disqus comments
-                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                    (function() {
-                        var dsq = document.createElement('script');
-                            dsq.type = 'text/javascript';
-                            dsq.async = true;
-                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
                 {% endif %}
 
                 // Scroll top button
