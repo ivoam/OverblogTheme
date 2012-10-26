@@ -650,36 +650,38 @@
 								{{ Post.Body }}
 							</div>
 							{% if Custom('share_service') != 'none' %}
-								<div class="share">
-									{% if Custom('share_service') == 'Google +' %}
-										<div class="google-share">
-											<a class="socialite googleplus-one" href="http://twitter.com/share" data-size="medium" data-href="{{ Post.Permalink }}">
-												Share on Google +
-											</a>
-										</div>
-									{% elseif Custom('share_service') == 'Twitter' %}
-										<div class="twitter-share">
-											<a class="socialite twitter-share" href="http://twitter.com/share" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}>
-												Share on Twitter
-											</a>
-										</div>
-									{% elseif Custom('share_service') == 'Facebook' %}
-										<div class="facebook-share">
-											<a class="socialite facebook-like" href="http://twitter.com/share" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false">
-												Share on Facebook
-											</a>
-										</div>
-									{% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
-										<div class="google-share">
-											<a class="socialite googleplus-one" href="http://twitter.com/share" data-size="medium" data-href="{{ Post.Permalink }}">{{ Lang.Get('Share on') }}' Google +</a>
-										</div>
-										<div class="twitter-share">
-											<a class="socialite twitter-share" href="http://twitter.com/share" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}>{{ Lang.Get('Share on') }}' Twitter</a>
-										</div>
-										<div class="facebook-share">
-											<a class="socialite facebook-like" href="http://twitter.com/share" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false">{{ Lang.Get('Share on') }}' Facebook</a>
-										</div>
-									{% endif %}
+								<div class="footer">
+									<div class="share">
+										{% if Custom('share_service') == 'Google +' %}
+											<div class="google-share">
+												<a class="socialite googleplus-one" href="http://twitter.com/share" data-size="medium" data-href="{{ Post.Permalink }}">
+													Share on Google +
+												</a>
+											</div>
+										{% elseif Custom('share_service') == 'Twitter' %}
+											<div class="twitter-share">
+												<a class="socialite twitter-share" href="http://twitter.com/share" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}>
+													Share on Twitter
+												</a>
+											</div>
+										{% elseif Custom('share_service') == 'Facebook' %}
+											<div class="facebook-share">
+												<a class="socialite facebook-like" href="http://twitter.com/share" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false">
+													Share on Facebook
+												</a>
+											</div>
+										{% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
+											<div class="google-share">
+												<a class="socialite googleplus-one" href="http://twitter.com/share" data-size="medium" data-href="{{ Post.Permalink }}">{{ Lang.Get('Share on') }}' Google +</a>
+											</div>
+											<div class="twitter-share">
+												<a class="socialite twitter-share" href="http://twitter.com/share" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}>{{ Lang.Get('Share on') }}' Twitter</a>
+											</div>
+											<div class="facebook-share">
+												<a class="socialite facebook-like" href="http://twitter.com/share" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false">{{ Lang.Get('Share on') }}' Facebook</a>
+											</div>
+										{% endif %}
+									</div>
 								</div>
 							{% endif %}
 
