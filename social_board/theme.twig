@@ -99,7 +99,7 @@
         <meta name="color:titles_font_color:Titles font color" default="#222" group="Colors" />
         <meta name="color:text_font_color:Text font color" default="#888" group="Colors" />
         <meta name="color:links_font_color:Links font color" default="#668FBA" group="Colors" />
-        
+
         <meta name="boolean:display_widget_bio:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
@@ -292,11 +292,11 @@
                 width: 213px;
             }
             .search input[type="text"] {
-                background: #F5F5F5; 
-                border: 1px solid #DDD; 
-                border-bottom-color: #EEE; 
-                border-radius: 3px; 
-                color: #222; 
+                background: #F5F5F5;
+                border: 1px solid #DDD;
+                border-bottom-color: #EEE;
+                border-radius: 3px;
+                color: #222;
                 font-size: 12px;
                 padding: 9px;
                 width: 100%;
@@ -328,22 +328,22 @@
             .header .menu li {
                 border-right: 1px solid #ddd;
                 display: inline-block;
-                padding: 2px 12px; 
+                padding: 2px 12px;
             }
             .header .menu li.last {
-                border-right: none; 
+                border-right: none;
             }
             .header .menu a,
             .header .menu a:visited {
-                color: {{ Custom('titles_font_color')|default('#888') }};; 
-                display: block; 
+                color: {{ Custom('titles_font_color')|default('#888') }};;
+                display: block;
                 font-size: 14px;
-                padding: 0 15px; 
+                padding: 0 15px;
                 text-decoration: none;
-                -webkit-transition: all 250ms ease; 
-                   -moz-transition: all 250ms ease; 
-                    -ms-transition: all 250ms ease; 
-                     -o-transition: all 250ms ease; 
+                -webkit-transition: all 250ms ease;
+                   -moz-transition: all 250ms ease;
+                    -ms-transition: all 250ms ease;
+                     -o-transition: all 250ms ease;
                         transition: all 250ms ease;
             }
             .header .menu a:first-letter {
@@ -354,7 +354,7 @@
                 color: {{ Custom('links_font_color')|default('#668FBA') }};
             }
             .header .menu .active a {
-                font-weight: bold; 
+                font-weight: bold;
             }
 
             /* ----------------------------- */
@@ -424,11 +424,11 @@
             }
             .post .footer .item-comments .ob-commentsList .ob-avatar {
                 margin-right: 10px;
-            }   
+            }
             .post .footer .item-comments .ob-commentsList .ob-website,
             .post .footer .item-comments .ob-commentsList .ob-date {
                 font-size: 0.7em;
-            }        
+            }
 
             /* ----------------------------- */
             /* ==HOME PAGE */
@@ -445,7 +445,7 @@
             }
             {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
                 .index .post:nth-child(2) {
-            {% else %} 
+            {% else %}
                 .index .post:nth-child(1) {
             {% endif %}
                 width: 470px;
@@ -573,7 +573,7 @@
             .index .post .share a {
                 display: inline-block;
                 background: url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat;
-                height: 32px; 
+                height: 32px;
                 width: 32px;
             }
             .index .post .share .fb {
@@ -588,7 +588,7 @@
             .index .post .share .pint {
                 background-position: 1px -766px;
             }
-            
+
             .index .post .share .fb:hover {
                 background-position: 1px 1px;
             }
@@ -633,7 +633,7 @@
                 padding: 13px 13px 0;
             }
             .fancybox-wrap .post .author span {
-                color: {{ Custom('titles_font_color')|default('#222') }};                
+                color: {{ Custom('titles_font_color')|default('#222') }};
                 font-weight: bold;
             }
             .fancybox-wrap .post .title {
@@ -674,14 +674,14 @@
                 display: block;
                 margin: 0 auto 20px;
                 overflow: hidden;
-                text-align: center;            
+                text-align: center;
             }
             .fancybox-wrap aside .gplus {
                 width: 50px;
             }
             .fancybox-wrap aside div:last-child {
                 margin: 0;
-            }    
+            }
             /* ----------------------------- */
             /* ==NO POST */
             /* ----------------------------- */
@@ -723,7 +723,7 @@
                 padding: 13px 13px 0;
             }
             .single .post .author span {
-                color: {{ Custom('titles_font_color')|default('#222') }};                
+                color: {{ Custom('titles_font_color')|default('#222') }};
                 font-weight: bold;
             }
             .single .post .title {
@@ -763,14 +763,14 @@
                 display: block;
                 margin: 0 auto 20px;
                 overflow: hidden;
-                text-align: center;            
+                text-align: center;
             }
             .single aside .gplus {
                 width: 50px;
             }
             .single aside div:last-child {
                 margin: 0;
-            }           
+            }
 
             /* ----------------------------- */
             /* ==WIDGETS */
@@ -849,22 +849,22 @@
             .widgets .arch_month .month {
                 margin-bottom: 6px;
                 padding: 3px 4px 3px;
-                -webkit-transition: all 200ms ease; 
-                   -moz-transition: all 200ms ease; 
-                    -ms-transition: all 200ms ease; 
-                     -o-transition: all 200ms ease; 
+                -webkit-transition: all 200ms ease;
+                   -moz-transition: all 200ms ease;
+                    -ms-transition: all 200ms ease;
+                     -o-transition: all 200ms ease;
                         transition: all 200ms ease;
-            }  
+            }
             .widgets .arch_month .month:hover {
                 background: #F6F6F6;
-            }     
+            }
             .widgets .arch_month .month a {
                 display: block;
                 font-size: 0.9em;
-                -webkit-transition: all 200ms ease; 
-                   -moz-transition: all 200ms ease; 
-                    -ms-transition: all 200ms ease; 
-                     -o-transition: all 200ms ease; 
+                -webkit-transition: all 200ms ease;
+                   -moz-transition: all 200ms ease;
+                    -ms-transition: all 200ms ease;
+                     -o-transition: all 200ms ease;
                         transition: all 200ms ease;
             }
             .widgets .arch_month .month a span {
@@ -874,11 +874,11 @@
             }
             .widgets .arch_month .month:hover a {
                 color: #222;
-            }      
+            }
 
             /* SOCIAL */
             .widgets .social {
-                background: #ECECEC;  
+                background: #ECECEC;
             }
             .widgets .widget + .social {
                 border-top: 1px solid #E0E0E0;
@@ -904,10 +904,10 @@
                 padding: 55px 0 5px;
                 text-align: center;
                 text-decoration: none;
-                -webkit-transition: all 250ms ease; 
-                   -moz-transition: all 250ms ease; 
-                    -ms-transition: all 250ms ease; 
-                     -o-transition: all 250ms ease; 
+                -webkit-transition: all 250ms ease;
+                   -moz-transition: all 250ms ease;
+                    -ms-transition: all 250ms ease;
+                     -o-transition: all 250ms ease;
                         transition: all 250ms ease;
                 width: 60px;
             }
@@ -922,7 +922,7 @@
             }
             .widgets .social li:nth-child(2) a {
                 margin: 0 12px;
-            }   
+            }
 
             /* ----------------------------- */
             /* ==Sections */
@@ -1009,7 +1009,7 @@
                 border-color: #DDD;
                 margin-bottom: 20px;
             }
-            .ob-section-quote .ob-author, 
+            .ob-section-quote .ob-author,
             .ob-section-quote .ob-source {
                 color: #666;
                 max-width: 525px;
@@ -1022,7 +1022,7 @@
                         transition: color 200ms ease;
                 white-space: nowrap;
             }
-            .ob-section-quote .ob-author .ob-link, 
+            .ob-section-quote .ob-author .ob-link,
             .ob-section-quote .ob-source .ob-link {
                 color: #666;
             }
@@ -1042,7 +1042,7 @@
             .ob-section-link .ob-media-left {
                 margin: 0;
             }
-            .ob-section-link .ob-title, 
+            .ob-section-link .ob-title,
             .ob-section-link .ob-snippet {
                 padding-left: 20px;
             }
@@ -1062,7 +1062,7 @@
                 font-family: "Lato";
             }
             /* MAP */
-            .ob-section-map .ob-map, 
+            .ob-section-map .ob-map,
             .ob-section-map .ob-desc {
                 width: 100%;
             }
@@ -1135,15 +1135,15 @@
                 margin-left: 85px;
                 width: 15%;
             }
-            .special .ob-input-text, 
-            .special .ob-input-email, 
+            .special .ob-input-text,
+            .special .ob-input-email,
             .special .ob-input-textarea,
             .special .ob-input-submit {
-                background: #F5F5F5; 
-                border: 1px solid #DDD; 
+                background: #F5F5F5;
+                border: 1px solid #DDD;
                 border-bottom-color: #EEE;
-                border-radius: 3px; 
-                color: #222; 
+                border-radius: 3px;
+                color: #222;
                 font-size: 12px;
                 padding: 9px;
             }
@@ -1171,15 +1171,15 @@
                 text-decoration: underline;
             }
 
-            /* ----------------------------- */ 
+            /* ----------------------------- */
             /* ==LOADER */
             /* ----------------------------- */
             .ias_loader {
-                bottom: -40px; 
+                bottom: -40px;
                 left: 50%;
                 margin-left: -100px;
                 padding: 200px 15px 0;
-                position: absolute; 
+                position: absolute;
                 text-align: center;
                 width: 200px;
             }
@@ -1211,7 +1211,7 @@
                 color: {{ Custom('titles_font_color')|default('#222') }};
                 display: block;
                 font-size: 1.6em;
-                padding: 10px 10px 10px 30px;   
+                padding: 10px 10px 10px 30px;
                 text-decoration: none;
             }
             .scroll-to-top a:hover {
@@ -1232,7 +1232,7 @@
                                 <img src="{{ Blog.Avatar|resize(100)|crop }}" alt="" title="" width="100" height="100" />
                             </a>
                         {% endif %}
-                        
+
                         <!--blog title -->
                         <h1>
                             <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
@@ -1249,12 +1249,12 @@
                     </div>
 
                     <!-- menu -->
-                    <nav class="menu">                        
+                    <nav class="menu">
                         <ul>
                             <li class="{% if isIndex %} active{% endif %}">
                                 <a  href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                             </li>
-                            {% if Custom('category_number') > 0 %} 
+                            {% if Custom('category_number') > 0 %}
                                 {% list Blog.PostsTags(Custom('category_number'), count) %}
                                     <li class="{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %} active{% endif %}">
                                         <a  href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
@@ -1266,8 +1266,8 @@
                             </li>
                         </ul>
                     </nav>
-            </header>    
-            
+            </header>
+
             <!-- main -->
             <section class="main{% if isSpecial %} special{% elseif isSingle %} single{% else %} index{% endif %}">
                 {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
@@ -1287,7 +1287,7 @@
                                 {% endif %}
                             </div>
                         {% endif %}
-                        
+
                         {% if Custom('display_widget_pages') == false and Blog.ListPages is not empty %}
                             <div class="widget pages">
                                 <h3>{{ Lang.Get('Pages') }}</h3>
@@ -1325,7 +1325,7 @@
                                 </ul>
                             </div>
                         {% endif %}
-                        
+
                         {% if Custom('display_widget_follow') == false %}
                             <!-- follow blog owner -->
                             <div class="widget social">
@@ -1365,14 +1365,14 @@
                                 {% endif %}
                                 <!-- post date -->
                                 <time class="date" pubdate="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                
+
                                 {% if isSingle and Post.Author is not empty %}
                                     <!-- post author -->
                                     <p class="author">
                                         {{ Lang.Get('Published by') }} <span>{{ Post.Author }}</span>
                                     </p>
                                 {% endif %}
-                                
+
                                 <!-- post title -->
                                 <h2 class="title">
                                     <a class="permalink" href="{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
@@ -1387,7 +1387,7 @@
                                     </a>
                                 </h2>
                             </header>
-                            
+
                             {% if isSingle %}
                                 <!-- post body -->
                                 <div class="body">
@@ -1450,7 +1450,7 @@
                                     {% endif %}
                                 </nav>
                             {% endif %}
-            
+
                             <footer class="footer">
                                 {% if isSingle and not isPage and Post.ShowComments is not empty %}
                                     <!-- post comments -->
@@ -1474,7 +1474,7 @@
 
                                         <!-- twitter share -->
                                         <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
-                                        
+
                                         <!-- google + share -->
                                         <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
 
@@ -1559,12 +1559,12 @@
                         $(this).parent().parent().find(".tweet-retweet").attr("href", "https://twitter.com/intent/retweet?tweet_id=" + datatwitter);
                         $(this).parent().parent().find(".tweet-favorite").attr("href", "https://twitter.com/intent/favorite?tweet_id=" + datatwitter);
                     });
-                } 
+                }
 
                 // Disable tweets render
                 var TwitterDisabled = function(elements) {
                     $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
-                } 
+                }
                 // Social popup
                 var SocialPopup = function(elements) {
                     $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
@@ -1574,14 +1574,14 @@
                         }
                         return false;
                     });
-                } 
+                }
 
                 // Opening of the posts with fancybox
                 var ItemFancybox = function (elements) {
                     var ItemPermalink,
                         ShareBar,
                         url;
-                    
+
                     ItemPermalink = $(elements).find(".permalink");
                     if (!ItemPermalink) {
                         return false;
@@ -1606,9 +1606,9 @@
                                 },
                                 showEarly : false
                             },
-                            title : null      
+                            title : null
                         },
-                        afterLoad     : function() { 
+                        afterLoad     : function() {
                             ShareBar = $(".share-bar", this.content);
                             this.content = $(".post", this.content);
                         },
@@ -1621,18 +1621,18 @@
                         afterShow     : function() {
                             // Insert share bar
                             $(".fancybox-inner").append(ShareBar);
-                            
+
                             // OB callback
                             if (typeof OB != "undefined") { OB.restart && OB.restart(); }
 
                             {% if Custom('comment') == "Facebook" %}
                                 // FB callback
                                 if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-                            {% endif %} 
+                            {% endif %}
 
-                            // TWT callback 
+                            // TWT callback
                             if (typeof twttr != "undefined") { twttr.widgets.load(); }
-                        
+
                             // Disable image link
                             $('.ob-link-img').click(function() {
                                 return false;
@@ -1647,15 +1647,15 @@
                             }
                         }
                     });
-                } 
+                }
             {% endif %}
 
             {% if Custom('display_widget_archives') == false %}
                 // Archives
                 function switch_arch(year) {
                     'use strict';
-                    var archiveYear, 
-                        archiveMonths, 
+                    var archiveYear,
+                        archiveMonths,
                         displayStyle;
 
                         displayStyle = '';
@@ -1676,7 +1676,7 @@
                 }
             {% endif %}
 
-            $(document).ready(function(){    
+            $(document).ready(function(){
                 {% if isSingle %}
                     // Fancybox on single pages via url
                     $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox").fancybox({
@@ -1685,31 +1685,31 @@
                                 css : {
                                     "background" : "rgba(255, 255, 255, 0.93)"
                                 }
-                            }      
+                            }
                         }
                     });
 
                 {% elseif not isSpecial %}
                     var container = $(".main");
-                    
+
                     // Masonry
                     container.imagesLoaded(function(){
                         container.masonry({
                             itemSelector : ".masonry-item",
                             columnWidth  : 245,
-                            isAnimated   : false                
+                            isAnimated   : false
                         });
                     });
 
                     TwitterControls($(".masonry-item"));
-                    
+
                     TwitterDisabled($(".masonry-item"));
-                    
+
                     SocialPopup($(".masonry-item"));
 
                     ItemFancybox($(".masonry-item"));
 
-                    // Load more with Masonry 
+                    // Load more with Masonry
                     jQuery.ias({
                         container      : ".main",
                         item           : ".masonry-item",
@@ -1719,25 +1719,25 @@
                         history        : false,
                         tresholdMargin : -800,
                         onLoadItems    : function(items) {
-                            var newElems; 
-                            
+                            var newElems;
+
                             items.shift();
-            
+
                             newElems = $(items);
                             newElems.css({ opacity: 0 });
-                                                       
-                            newElems.imagesLoaded(function() { 
+
+                            newElems.imagesLoaded(function() {
                                 newElems.animate({ opacity: 1 });
                                 container.masonry( "appended", newElems, true );
                             });
 
                             TwitterControls(items);
-                            
+
                             TwitterDisabled(items);
 
                             SocialPopup(items);
-                            
-                            ItemFancybox($(".masonry-item"));
+
+                            ItemFancybox(items);
                         }
                     });
                 {% endif %}
@@ -1752,9 +1752,9 @@
                         fjs.parentNode.insertBefore(js,fjs);
                     }
                 }(document,"script","twitter-wjs");
-                
+
                 {% if Custom('comment') == 'Facebook' %}
-                    // Facebook comments 
+                    // Facebook comments
                     (function(d, s, id) {
                         var js, fjs = d.getElementsByTagName(s)[0];
                         if (d.getElementById(id)) return;
@@ -1779,7 +1779,7 @@
                 $(window).scroll(function() {
                     if($(window).scrollTop() <= 0) {
                         $('.scroll-to-top').slideUp("250");
-                    } 
+                    }
                     else {
                         if($('.scroll-to-top').length == 0) {
                             $('body').append(
@@ -1811,7 +1811,7 @@
                         {% if not isSingle %}
                             container.masonry('reload');
                         {% endif %}
-                        
+
                         return false;
                     });
 
