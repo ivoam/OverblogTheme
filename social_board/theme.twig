@@ -1397,24 +1397,22 @@
                                     {{ Post.Body }}
                                 </div>
                             {% else %}
-                                {% list Post.Sources %}
-                                    {% if loop.first and Source == 'TW' %}
-                                        <!-- tweet on home page -->
-                                        <div class="tweet">
-                                            {{ Post.Body(1) }}
-                                            <div class="tweet-actions">
-                                                <a class="tweet-reply" href=""></a>
-                                                <a class="tweet-retweet" href=""></a>
-                                                <a class="tweet-favorite" href=""></a>
-                                            </div>
+                                {% if Post.getFirstSource == 'TW' %}
+                                    <!-- tweet on home page -->
+                                    <div class="tweet">
+                                        {{ Post.Body(1) }}
+                                        <div class="tweet-actions">
+                                            <a class="tweet-reply" href=""></a>
+                                            <a class="tweet-retweet" href=""></a>
+                                            <a class="tweet-favorite" href=""></a>
                                         </div>
-                                    {% elseif loop.first and Post.Snippet is not empty %}
-                                        <!-- post snippet -->
-                                        <p class="snippet">
-                                            {{ Post.Snippet }}
-                                        </p>
-                                    {% endif %}
-                                {% endlist %}
+                                    </div>
+                                {% else %}
+                                    <!-- post snippet -->
+                                    <p class="snippet">
+                                        {{ Post.Snippet }}
+                                    </p>
+                                {% endif %}
                             {% endif %}
 
                             {% if Post.Tags is not empty %}
