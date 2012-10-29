@@ -591,7 +591,7 @@
 					</div>
 					<div class="search">
 						<form class="search" method="post" action="/search/">
-							<input type="text" name="q" placeholder="{{ Lang.Get('Search something here') }}..." value="{{ Lang.Get('Search something here') }}.." />
+							<input type="text" name="q" placeholder="{{ Lang.Get('Search something here') }}..." value="" />
 						</form>
 					</div>
 				</div>
@@ -1049,7 +1049,7 @@
 			},
 
 			Timeline.Strech = function () {
-				// if($.browser.msie && $.browser.version <= 8.0 ){
+				if($.browser.msie && $.browser.version <= 8.0 ){
 					{% if Custom('background_repeat') == 'strech' and Custom('background_image') is not empty %}
 						// Backstretch
 						$(document).ready(function(){
@@ -1060,11 +1060,11 @@
 							$('.container').css('background', 'none');
 						});
 					{% endif %}
-				// }
+				}
 			}
 
 			$(document).ready(function(){
-				{% if isIndex or isArchive %}
+				{% if not isSingle %}
 					Timeline.elsStart = $('.item');
 					Timeline.EnhancePictures(Timeline.elsStart);
 					$('.items-wrapper').imagesLoaded(function() {
@@ -1088,8 +1088,7 @@
 						'history'		: false,
 						beforePageChange: function(){
 
-							if(Timeline.counter >= Timeline.MAXPAGE)
-							{
+							if(Timeline.counter >= Timeline.MAXPAGE) {
 								$('.load-more').show();
 								return false;
 							}
@@ -1109,7 +1108,7 @@
 							Timeline.counter++;
 						}
 					});
-				{% elseif isSingle %}
+				{% else %}
 					Timeline.elsStart = $('.item');
 					Timeline.Fancybox(Timeline.elsStart);
 					Timeline.Socialite(Timeline.elsStart, false);
