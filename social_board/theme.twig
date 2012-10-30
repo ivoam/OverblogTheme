@@ -236,7 +236,7 @@
             .global {
                 margin: 0 auto;
                 max-width: 980px;
-                padding-bottom: 60px;
+                padding-bottom: 70px;
             }
 
             a,
@@ -1586,6 +1586,13 @@
                     });
                 }
 
+                //Force scrollbar when content don't have one
+                var ForceScrollBar = function() {
+                    if($(window).scrollTop() + $(window).height() == $(document).height()){
+                        $('html').height($(document).height()+10);
+                    }
+                }
+
                 {% if Custom('post_opening') == 'Pop-in' %}
                     // Opening of the posts with fancybox
                     var ItemFancybox = function (elements) {
@@ -1769,10 +1776,12 @@
                     TwitterDisabled($(".masonry-item"));
 
                     SocialPopup($(".masonry-item"));
-                    
+
                     {% if Custom('post_opening') == 'Pop-in' %}
                         ItemFancybox($(".masonry-item"));
                     {% endif %}
+
+                    ForceScrollBar();
 
                     // Load more with Masonry
                     jQuery.ias({
@@ -1782,11 +1791,13 @@
                         next           : ".load-more a",
                         loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
                         history        : false,
-                        tresholdMargin : -800,
+                        tresholdMargin : -200,
                         onLoadItems    : function(items) {
                             var newElems;
 
-                            items.shift();
+                            {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
+                                items.shift();
+                            {% endif %}
 
                             newElems = $(items);
                             newElems.css({ opacity: 0 });
@@ -1804,8 +1815,11 @@
                             {% if Custom('post_opening') == 'Pop-in' %}
                                 ItemFancybox(items);
                             {% endif %}
+
+                            ForceScrollBar();
                         }
                     });
+
                 {% endif %}
 
                 // Placeholder Script
@@ -1825,7 +1839,7 @@
                         });
                     });
                 }
-                
+
                 // Scroll top button
                 $(window).scroll(function() {
                     if($(window).scrollTop() <= 0) {
