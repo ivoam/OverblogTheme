@@ -94,6 +94,8 @@
         <meta name="image:background:label.backgroundImage" group="Background & post cover" />
         <meta name="image:post_cover:label.defaultPostCover" group="Background & post cover" />
 
+        <meta name="list:post_opening:Post opening" items="Pop-in, Single page" default="Pop-in" />
+
         <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="6" group="Navigation" />
 
         <meta name="color:titles_font_color:Titles font color" default="#222" group="Colors" />
@@ -107,7 +109,7 @@
 
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
-        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Google +, Twitter, Facebook, Pinterest, All" default="All" group="Social" />
 
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
@@ -116,6 +118,8 @@
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
+
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
 
         <!--[if lt IE 9]>
             <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -135,7 +139,9 @@
             /* ----------------------------- */
 
             /* base font-size corresponds to equiv 10px */
-            html {font-size: 62.5%;}
+            html {
+                font-size: 62.5%;
+            }
             body {
                 background: #E1E1E1;
                 {% if Custom('background') is not empty %}
@@ -151,7 +157,9 @@
             }
 
             /* HTML5 tags */
-            article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {display: block;}
+            article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+                display: block;
+            }
 
             /* soft reset */
             html, body, blockquote, ul, ol, form {margin: 0; padding: 0}
@@ -244,9 +252,6 @@
                 background: #FDFDFD;
                 border: 1px solid #DDD;
                 -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                   -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                    -ms-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                     -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                 overflow: hidden;
                 margin: 50px auto 8px;
@@ -320,9 +325,6 @@
                 background: #ECECEC;
                 border-top: 1px solid #E0E0E0;
                 -webkit-box-shadow: 0 1px 0 0 #FFF inset;
-                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
-                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
-                     -o-box-shadow: 0 1px 0 0 #FFF inset;
                         box-shadow: 0 1px 0 0 #FFF inset;
             }
             .header .menu ul {
@@ -346,7 +348,6 @@
                 text-decoration: none;
                 -webkit-transition: all 250ms ease;
                    -moz-transition: all 250ms ease;
-                    -ms-transition: all 250ms ease;
                      -o-transition: all 250ms ease;
                         transition: all 250ms ease;
             }
@@ -368,9 +369,6 @@
                 background-color: #F9F9F9;
                 border: 1px solid #DDD;
                 -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                   -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                    -ms-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                     -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
             }
             .post .header {
@@ -415,9 +413,6 @@
                 background: #ECECEC;
                 border-top: 1px solid #E0E0E0;
                 -webkit-box-shadow: 0 1px 0 0 #FFF inset;
-                   -moz-box-shadow: 0 1px 0 0 #FFF inset;
-                    -ms-box-shadow: 0 1px 0 0 #FFF inset;
-                     -o-box-shadow: 0 1px 0 0 #FFF inset;
                         box-shadow: 0 1px 0 0 #FFF inset;
             }
             .post .footer .item-comments > h3 {
@@ -443,7 +438,6 @@
                 width: 227px;
                 -webkit-transition: all 250ms ease;
                    -moz-transition: all 250ms ease;
-                    -ms-transition: all 250ms ease;
                      -o-transition: all 250ms ease;
                         transition: all 250ms ease;
             }
@@ -457,9 +451,6 @@
             .index .post:hover {
                 background: #FFF;
                 -webkit-box-shadow: none;
-                   -moz-box-shadow: none;
-                    -ms-box-shadow: none;
-                     -o-box-shadow: none;
                         box-shadow: none;
             }
             .index .post .cover {
@@ -493,9 +484,6 @@
                 border: none;
                 border-radius: 0;
                 -webkit-box-shadow: none;
-                   -moz-box-shadow: none;
-                    -ms-box-shadow: none;
-                     -o-box-shadow: none;
                         box-shadow: none;
                 font-family: 'Helvetica Neue', Arial, sans-serif;
                 padding: 0;
@@ -558,15 +546,24 @@
                 margin: 0 2px;
                 width: 16px;
             }
-            .index .tweet-reply:hover {background-position: -16px top;}
-            .index .tweet-retweet {background-position: -80px top;}
-            .index .tweet-retweet:hover {background-position: -96px top;}
-            .index .tweet-favorite {background-position: -32px top;}
-            .index .tweet-favorite:hover {background-position: -48px top;}
+            .index .tweet-reply:hover {
+                background-position: -16px top;
+            }
+            .index .tweet-retweet {
+                background-position: -80px top;
+            }
+            .index .tweet-retweet:hover {
+                background-position: -96px top;
+            }
+            .index .tweet-favorite {
+                background-position: -32px top;
+            }
+            .index .tweet-favorite:hover {
+                background-position: -48px top;
+            }
             .index .post .tag {
                 padding: 0 13px 13px;
             }
-
             .index .post .footer {
                 padding: 5px;
                 text-align: center;
@@ -592,7 +589,6 @@
             .index .post .share .pint {
                 background-position: 1px -766px;
             }
-
             .index .post .share .fb:hover {
                 background-position: 1px 1px;
             }
@@ -610,19 +606,20 @@
             }
 
             /* FANCYBOX */
-            .fancybox-wrap {
+            .fancybox-opened .fancybox-skin {
                 border: 1px solid #DDD;
-            }
-            .fancybox-wrap .fancybox-close {
-
+                -webkit-border-radius: 0;
+                   -moz-border-radius: 0;
+                     -o-border-radius: 0;
+                        border-radius: 0;
+                -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                        box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
             }
             .fancybox-wrap .post {
                 border: none;
                 -webkit-box-shadow: none;
-                   -moz-box-shadow: none;
-                    -ms-box-shadow: none;
-                     -o-box-shadow: none;
                         box-shadow: none;
+                width: 608px;
             }
             .fancybox-wrap .post .date {
                 display: inline-block;
@@ -749,7 +746,6 @@
             .single .post .footer > h3 {
                 color: red;
             }
-
             .single aside {
                 background: #F9F9F9;
                 border: 1px solid #DDD;
@@ -800,6 +796,12 @@
             .widgets h3 {
                 margin-bottom: 10px;
             }
+            .widgets a {
+                -webkit-transition: all 200ms ease;
+                   -moz-transition: all 200ms ease;
+                     -o-transition: all 200ms ease;
+                        transition: all 200ms ease;
+            }
             /* PROFILE */
             .widgets .avatar {
                 display: block;
@@ -809,11 +811,9 @@
             }
             .widgets h3 {
                 color: {{ Custom('titles_font_color')|default('#222') }};
-                margin-bottom: 0;
             }
             .widgets .profile p {
                 color: {{ Custom('text_font_color')|default('#888') }};
-                margin-top: 13px;
             }
 
             /* PAGES */
@@ -822,13 +822,16 @@
                 list-style: none;
                 padding: 0;
             }
-            .widgets .list-pages li {
-                margin-bottom: 10px;
-            }
             .widgets .list-pages li:last-child {
                 margin: 0;
             }
+            .widgets .list-pages li a {
+                display: block;
+                font-size: 0.9em;
+                padding: 4px 0;
+            }
             .widgets .list-pages li a:hover {
+                background: #F6F6F6;
                 color: #222;
             }
 
@@ -853,11 +856,6 @@
             .widgets .arch_month .month {
                 margin-bottom: 6px;
                 padding: 3px 4px 3px;
-                -webkit-transition: all 200ms ease;
-                   -moz-transition: all 200ms ease;
-                    -ms-transition: all 200ms ease;
-                     -o-transition: all 200ms ease;
-                        transition: all 200ms ease;
             }
             .widgets .arch_month .month:hover {
                 background: #F6F6F6;
@@ -865,11 +863,6 @@
             .widgets .arch_month .month a {
                 display: block;
                 font-size: 0.9em;
-                -webkit-transition: all 200ms ease;
-                   -moz-transition: all 200ms ease;
-                    -ms-transition: all 200ms ease;
-                     -o-transition: all 200ms ease;
-                        transition: all 200ms ease;
             }
             .widgets .arch_month .month a span {
                 float: right;
@@ -944,6 +937,7 @@
             }
             /* IMAGES */
             .ob-section-images img {
+                margin-bottom: 13px;
                 max-width: 100%;
             }
             .ob-section-images .ob-row-1-col {
@@ -1021,7 +1015,6 @@
                 text-overflow: ellipsis;
                 -webkit-transition: color 200ms ease;
                    -moz-transition: color 200ms ease;
-                    -ms-transition: color 200ms ease;
                      -o-transition: color 200ms ease;
                         transition: color 200ms ease;
                 white-space: nowrap;
@@ -1163,7 +1156,6 @@
                 text-transform: uppercase;
             }
             .special .ob-terms {
-                color: #222;
                 display: block;
                 font-size: 1.1em;
                 font-weight: 600;
@@ -1209,17 +1201,18 @@
                 right: 20px;
             }
             .scroll-to-top a {
-                background: rgba(225, 225, 225, 0.7) url(//vivienkaufinger.com/ob/four_columns/sprite.png) no-repeat left -361px;
                 border-radius: 3px;
                 color: {{ Custom('titles_font_color')|default('#222') }};
                 display: block;
                 font-size: 1.6em;
-                padding: 10px 10px 10px 30px;
+                padding: 10px 10px 10px;
                 text-decoration: none;
             }
             .scroll-to-top a:hover {
-                background-position: left -397px;
                 color: {{ Custom('links_font_color')|default('#668FBA') }};
+            }
+            .scroll-to-top a:active {
+                padding-bottom: 8px;
             }
         </style>
     </head>
@@ -1452,7 +1445,9 @@
                                 </nav>
                             {% endif %}
 
-                            <footer class="footer">
+                            {% if isSingle and not isPage and Post.ShowComments is not empty or not isSingle and Custom('share_service') != 'None' %}
+                                <footer class="footer">
+                            {% endif %}
                                 {% if isSingle and not isPage and Post.ShowComments is not empty %}
                                     <!-- post comments -->
                                     <div class="item-comments" id="comments">
@@ -1467,24 +1462,38 @@
                                         {% endif %}
                                     </div>
                                 {% endif %}
-                                {% if not isSingle %}
+                                {% if not isSingle and Custom('share_service') != 'None' %}
                                     <!-- post share buttons on home page -->
                                     <div class="share">
-                                        <!-- facebook share -->
-                                        <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
-
-                                        <!-- twitter share -->
-                                        <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
-
-                                        <!-- google + share -->
-                                        <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
-
-                                        {% if Post.Cover is not empty %}
+                                        {% if Custom('share_service') == 'Google +' %}
+                                            <!-- google + share -->
+                                            <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
+                                        {% elseif Custom('share_service') == 'Twitter' %}
+                                            <!-- twitter share -->
+                                            <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
+                                        {% elseif Custom('share_service') == 'Facebook' %}
+                                            <!-- facebook share -->
+                                            <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
+                                        {% elseif Custom('share_service') == 'Pinterest' and Post.Cover is not empty %}
                                             <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}"></a>
+                                        {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                            <!-- google + share -->
+                                            <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
+
+                                            <!-- twitter share -->
+                                            <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
+
+                                            <!-- facebook share -->
+                                            <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
+                                            {% if Post.Cover is not empty %}
+                                                <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}"></a>
+                                            {% endif %}
                                         {% endif %}
                                     </div>
                                 {% endif %}
-                            </footer>
+                            {% if isSingle and not isPage and Post.ShowComments is not empty or not isSingle and Custom('share_service') != 'None' %}
+                                </footer>
+                            {% endif %}
                         </article>
 
                         {% if isSingle and Custom('share_service') != 'None' %}
@@ -1577,94 +1586,96 @@
                     });
                 }
 
-                // Opening of the posts with fancybox
-                var ItemFancybox = function (elements) {
-                    var ItemPermalink,
-                        ShareBar,
-                        url;
+                {% if Custom('post_opening') == 'Pop-in' %}
+                    // Opening of the posts with fancybox
+                    var ItemFancybox = function (elements) {
+                        var ItemPermalink,
+                            ShareBar,
+                            url;
 
-                    ItemPermalink = $(elements).find(".permalink");
-                    if (!ItemPermalink) {
-                        return false;
-                    };
+                        ItemPermalink = $(elements).find(".permalink");
+                        if (!ItemPermalink) {
+                            return false;
+                        };
 
-                    ItemPermalink.fancybox({
-                        autoHeight  : true,
-                        autoSize    : false,
-                        closeEffect : "elastic",
-                        fitToView   : false,
-                        margin      : [80, 20, 20, 20],
-                        openEffect  : "none",
-                        padding     : 0,
-                        scrolling   : "no",
-                        topRatio    : 0,
-                        type        : "ajax",
-                        width       : 608,
-                        helpers : {
-                            overlay : {
-                                css : {
-                                    "background" : "rgba(255, 255, 255, 0.93)"
+                        ItemPermalink.fancybox({
+                            autoHeight  : true,
+                            autoSize    : false,
+                            closeEffect : "elastic",
+                            fitToView   : false,
+                            margin      : [80, 20, 20, 20],
+                            openEffect  : "none",
+                            padding     : 0,
+                            scrolling   : "no",
+                            topRatio    : 0,
+                            type        : "ajax",
+                            width       : 610,
+                            helpers : {
+                                overlay : {
+                                    css : {
+                                        "background" : "rgba(255, 255, 255, 0.93)"
+                                    },
+                                    showEarly : false
                                 },
-                                showEarly : false
+                                title : null
                             },
-                            title : null
-                        },
-                        afterLoad     : function() {
-                            ShareBar = $(".share-bar", this.content);
-                            this.content = $(".post", this.content);
-                        },
-                        beforeShow : function() {
-                            if(!$.browser.msie && !$.browser.version <= 9.0 ){
-                                url = $(this.element).attr('href');
-                                history.pushState("", "", url);
+                            afterLoad     : function() {
+                                ShareBar = $(".share-bar", this.content);
+                                this.content = $(".post", this.content);
+                            },
+                            beforeShow : function() {
+                                if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                                    url = $(this.element).attr('href');
+                                    history.pushState("", "", url);
+                                }
+                            },
+                            afterShow     : function() {
+                                // Insert share bar
+                                $(".fancybox-inner").append(ShareBar);
+
+                                // OB callback
+                                if (typeof OB != "undefined") { OB.restart && OB.restart(); }
+
+                                {% if Custom('comment') == "Facebook" %}
+                                    // FB callback
+                                    if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
+                                {% endif %}
+
+                                // TWT callback
+                                if (typeof twttr != "undefined") { twttr.widgets.load(); }
+
+                                // Disable image link
+                                $('.ob-link-img').click(function() {
+                                    return false;
+                                });
+                                $('.ob-link-img').hover(function() {
+                                    $(this).css('cursor','default');
+                                });
+
+                                {% if Custom('comment') == 'Disqus' %}
+                                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                    (function() {
+                                        var dsq = document.createElement('script');
+                                            dsq.type = 'text/javascript';
+                                            dsq.async = true;
+                                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                    })();
+                                {% endif %}
+                            },
+                            beforeClose : function() {
+                                if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                                    history.back(1);
+                                }
+
+                                // kill Disqus
+                                if(typeof(DISQUS) === 'object' ){
+                                    DISQUS = false;
+                                }
                             }
-                        },
-                        afterShow     : function() {
-                            // Insert share bar
-                            $(".fancybox-inner").append(ShareBar);
-
-                            // OB callback
-                            if (typeof OB != "undefined") { OB.restart && OB.restart(); }
-
-                            {% if Custom('comment') == "Facebook" %}
-                                // FB callback
-                                if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
-                            {% endif %}
-
-                            // TWT callback
-                            if (typeof twttr != "undefined") { twttr.widgets.load(); }
-
-                            // Disable image link
-                            $('.ob-link-img').click(function() {
-                                return false;
-                            });
-                            $('.ob-link-img').hover(function() {
-                                $(this).css('cursor','default');
-                            });
-
-                            {% if Custom('comment') == 'Disqus' %}
-                                var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                                (function() {
-                                    var dsq = document.createElement('script');
-                                        dsq.type = 'text/javascript';
-                                        dsq.async = true;
-                                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                                })();
-                            {% endif %}
-                        },
-                        beforeClose : function() {
-                            if(!$.browser.msie && !$.browser.version <= 9.0 ){
-                                history.back(1);
-                            }
-
-                            // kill Disqus
-                            if(typeof(DISQUS) === 'object' ){
-                                DISQUS = false;
-                            }
-                        }
-                    });
-                }
+                        });
+                    }
+                {% endif %}
             {% endif %}
 
             {% if Custom('display_widget_archives') == false %}
@@ -1730,14 +1741,15 @@
             $(document).ready(function(){
                 {% if isSingle %}
                     // Fancybox on single pages via url
-                    $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox").fancybox({
+                    $(".ob-link-img").attr("rel", "fancybox").fancybox({
                         helpers : {
                             overlay : {
                                 css : {
                                     "background" : "rgba(255, 255, 255, 0.93)"
                                 }
                             }
-                        }
+                        },
+                        type    : "image"
                     });
 
                 {% elseif not isSpecial %}
@@ -1757,8 +1769,10 @@
                     TwitterDisabled($(".masonry-item"));
 
                     SocialPopup($(".masonry-item"));
-
-                    ItemFancybox($(".masonry-item"));
+                    
+                    {% if Custom('post_opening') == 'Pop-in' %}
+                        ItemFancybox($(".masonry-item"));
+                    {% endif %}
 
                     // Load more with Masonry
                     jQuery.ias({
@@ -1787,12 +1801,31 @@
                             TwitterDisabled(items);
 
                             SocialPopup(items);
-
-                            ItemFancybox(items);
+                            {% if Custom('post_opening') == 'Pop-in' %}
+                                ItemFancybox(items);
+                            {% endif %}
                         }
                     });
                 {% endif %}
 
+                // Placeholder Script
+                if($.browser.msie && $.browser.version <= 8.0 ){
+                    $('input[placeholder]').each(function(){
+                        var input = $(this);
+                        $(input).val(input.attr('placeholder'));
+                        $(input).focus(function(){
+                             if (input.val() == input.attr('placeholder')) {
+                                 input.val('');
+                             }
+                        });
+                        $(input).blur(function(){
+                            if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                                input.val(input.attr('placeholder'));
+                            }
+                        });
+                    });
+                }
+                
                 // Scroll top button
                 $(window).scroll(function() {
                     if($(window).scrollTop() <= 0) {
