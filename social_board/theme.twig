@@ -1219,49 +1219,50 @@
     <body>
         <div id="fb-root"></div>
 
-        <!-- header -->
-            <div class="global">
-                <header class="header">
-                    <div class="banner">
-                        {% if Blog.Avatar is not empty %}
-                            <a class="avatar" href="{{ Blog.Url }}" title="{{ Blog.Title }}">
-                                <img src="{{ Blog.Avatar|resize(100)|crop }}" alt="" title="" width="100" height="100" />
-                            </a>
+        <div class="global">
+            <!-- header -->
+            <header class="header">
+                <!-- banner -->
+                <div class="banner">
+                    {% if Blog.Avatar is not empty %}
+                        <a class="avatar" href="{{ Blog.Url }}" title="{{ Blog.Title }}">
+                            <img src="{{ Blog.Avatar|resize(100)|crop }}" alt="" title="" width="100" height="100" />
+                        </a>
+                    {% endif %}
+
+                    <!--blog title -->
+                    <h1>
+                        <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
+                    </h1>
+
+                    {% if Blog.Description is not empty %}
+                        <p>{{ Blog.Description }}</p>
+                    {% endif %}
+
+                    <form class="search" action="/search/" method="post">
+                        <input type="text" placeholder="{{ Lang.Get('Search') }}" {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} name="q" />
+                        <input type="submit" title="{{ Lang.Get('Search') }}" value="" />
+                    </form>
+                </div>
+
+                <!-- menu -->
+                <nav class="menu">
+                    <ul>
+                        <li class="{% if isIndex %} active{% endif %}">
+                            <a  href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
+                        </li>
+                        {% if Custom('category_number') > 0 %}
+                            {% list Blog.PostsTags(Custom('category_number'), count) %}
+                                <li class="{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %} active{% endif %}">
+                                    <a  href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
+                                </li>
+                            {% endlist %}
                         {% endif %}
-
-                        <!--blog title -->
-                        <h1>
-                            <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
-                        </h1>
-
-                        {% if Blog.Description is not empty %}
-                            <p>{{ Blog.Description }}</p>
-                        {% endif %}
-
-                        <form class="search" action="/search/" method="post">
-                            <input type="text" placeholder="{{ Lang.Get('Search') }}" {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} name="q" />
-                            <input type="submit" title="{{ Lang.Get('Search') }}" value="" />
-                        </form>
-                    </div>
-
-                    <!-- menu -->
-                    <nav class="menu">
-                        <ul>
-                            <li class="{% if isIndex %} active{% endif %}">
-                                <a  href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
-                            </li>
-                            {% if Custom('category_number') > 0 %}
-                                {% list Blog.PostsTags(Custom('category_number'), count) %}
-                                    <li class="{% if Tag.Title is not empty and PostsTag.Title == Tag.Title %} active{% endif %}">
-                                        <a  href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
-                                    </li>
-                                {% endlist %}
-                            {% endif %}
-                            <li class="{% if isSpecial %} active {% endif %}last">
-                                <a href="/contact">{{ Lang.Get('Contact me') }}</a>
-                            </li>
-                        </ul>
-                    </nav>
+                        <li class="{% if isSpecial %} active {% endif %}last">
+                            <a href="/contact">{{ Lang.Get('Contact me') }}</a>
+                        </li>
+                    </ul>
+                </nav>
             </header>
 
             <!-- main -->
@@ -1413,8 +1414,7 @@
                                 <div class="tag">
                                     <p>
                                         {% list Post.Tags %}
-                                            <a class="active" href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-                                            {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}{{ PostsTag.Title }}{% endif %}
+                                            <a href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
                                         {% endlist %}
                                     </p>
                                 </div>
