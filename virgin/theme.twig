@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ Blog.Lang|default('en') }}">
+<html lang="{{ Blog.Lang|default('en') }}" itemscope="" itemtype="http://schema.org/Blog">
     <head>
         <!-- shortcut:[Meta] -->
         <!-- title, description, keyword, robots -->
@@ -148,25 +148,17 @@
             /* ==CLEARFIX */
             /* ----------------------------- */
             /* blocks that needs to be placed under floats */
-            .clear,
-            .line,
-            .row {
+            .clear {
                 clear: both;
             }
 
             /* blocks that can contain floats */
             .clearfix:before, 
-            .clearfix:after,
-            .line:before, 
-            .line:after,
-            .mod:before, 
-            .mod:after {
+            .clearfix:after {
                 content: "";
                 display: table;
             }
-            .clearfix:after,
-            .line:after,
-            .mod:after {
+            .clearfix:after {
                 clear: both;
             }
 
@@ -200,6 +192,15 @@
 	    		float: left;
 	    		width: 650px;
 	    	}
+
+            .google-share iframe,
+            .facebook-share iframe,
+            .twitter-share iframe {
+                border: none;
+                height: 21px;
+                width: 110px;
+
+            }
 
             /* ----------------------------- */
             /* ==SIDEBAR */
@@ -238,36 +239,36 @@
                     {% else %}
                         <!-- List blog posts -->
                         {% list Posts %}                            
-                            <article class="post">
+                            <article class="post" itemprop="blogPosts" itemscope="" itemtype="http://schema.org/BlogPosting">
                                 {% if isSearch %}
                                     {{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
                                 {% elseif isTag %}
                                     {{ Lang.Get('Posts with') }} #{{ Tag.Title }}
                                 {% endif %}
-	                        	<header>
+	                        	<header itemprop="headline">
                                     <!-- Post author & post date -->
 	                                <p class="metas">
-                                    	<span class="author">
+                                    	<span class="author" itemprop="author">
                                             {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
                                         </span> 
                                         <span class="date">
-                                            {{ Lang.Get('on') }} <time datetime="{{ Post.Date }}">{{ Post.Date|datel('Default date format')|title }}</time>
+                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
                                         </span>
 	                                </p>
 
                                     <!-- Post tags -->
                                     {% if Post.Tags is not empty %}
-    	                                <p class="tags">
+    	                                <p class="tags" itemprop="keywords">
     	                                    <span>{{ Lang.Get('Tagged on') }} : </span>
                                             {% list Post.Tags %}
-    	                                    	<a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+    	                                    	<a href="{{ Tag.Url }}" rel="tag">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
     	                                    {% endlist %}
     	                                </p>
                                     {% endif %}
                             		
                                     <!-- Post title -->
                                     <h2 class="title">
-    	                    	        <a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+    	                    	        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
     	                    	        	{% if Post.Title is not empty %}
     	                    	        		{{ Post.Title }}
     	                    	        	{% else %}
@@ -278,7 +279,7 @@
                                 </header>
                                 
                                 <!-- Post body or post sections or post snippet -->
-                                <div class="body">
+                                <div class="body" itemprop="articleBody">
                                     {% if isSingle or Custom('display_mode') == 'All' %}
                                     	{{ Post.Body }}
                                     {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
@@ -286,7 +287,7 @@
                                     {% else %}
                                         {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
                                             <a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-                                                <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(600,400)|crop }}{% else %}{{ Custom('post_cover')|resize(600,400)|crop }}{% endif %}" title="" alt="{{ Lang.Get('Post.Cover') }}" width="600px" height="400px"/>
+                                                <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(600,400)|crop }}{% else %}{{ Custom('post_cover')|resize(600,400)|crop }}{% endif %}" title="" alt="{{ Lang.Get('Post.Cover') }}" width="600" height="400"/>
                                             </a>
                                         {% endif %}
                                         {{ Post.Snippet }}
@@ -299,37 +300,34 @@
                                     	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
                                     	{% if Custom('share_service') == 'Google +' %}
                                             <div class="google-share">
-                                            	<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 110px; height: 21px;" align="left"></iframe>
+                                            	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
                                             </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'Twitter' %}
+                                        {% elseif Custom('share_service') == 'Twitter' %}
                                         	<div class="twitter-share">
-                                            	<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; width: 110px; height: 21px;"></iframe>
+                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=vertical"></iframe>
                                             </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'Facebook' %}
+                                        {% elseif Custom('share_service') == 'Facebook' %}
                                             <div class="facebook-share">
-                                            	<iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=box_count&amp;width=58&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"  style="border:none; overflow:hidden; width: 110px; height: 20px;"></iframe>
+                                            	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
                                             </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                        {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                         	<div class="google-share">
-                                            	<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 70px; height: 20px;" align="left"></iframe>
+                                            	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
                                             </div>
                                             <div class="twitter-share">
-                                            	<iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=horizontal" style="border:none; overflow:hidden; width: 120px; height: 20px;"></iframe>
+                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
                                             </div>
                                             <div class="facebook-share">
-                                            	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
+                                            	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
                                             </div>
                                         {% endif %}
                                     {% endif %}
                                     
                                     {% if not isSingle %} 
 		                                {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-										    <a class="comment-number" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
+										    <a class="comment-number" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
 										{% else %}
-										    <a class="comment-number" href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}" class="comments">
+										    <a class="comment-number" href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}">
 										        {% if Custom("comment") == "Facebook" %}
 										        	<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
 										        	{{ Lang.Get('comment(s)') }}
@@ -406,12 +404,12 @@
                     {% if Custom('display_widget_profile') == false %}
                         <!-- Blog about -->
 	                    <div class="widget profile" >
-	                        <h3>{{ Lang.Get('About') }}</a></h3>
+	                        <h3>{{ Lang.Get('About') }}</h3>
                         	<p>
                                 <!-- Avatar -->
 	                        	{% if Blog.Owner.Avatar is not empty %}
 		                        	<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-			                        	<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100px" height="100px" />
+			                        	<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100" height="100" />
 		                            </a>
 			                    {% endif %}
                                 
@@ -464,7 +462,7 @@
 		                                <li{% if loop.index % 2 == 0 %} class="clearfix"{% endif %}>
 		                                    <h4> 
 		                                    	<a href="{{ Post.Permalink }}" title="{{ Post.Permalink }}">
-			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(90)|crop }}{% else %}{{ Custom('post_cover')|resize(90)|crop }}{% endif %}" alt="" width="90px" height="90px" />
+			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(90)|crop }}{% else %}{{ Custom('post_cover')|resize(90)|crop }}{% endif %}" alt="" width="90" height="90" />
 			                                    </a>
 		                                    </h4>
 		                                </li>
@@ -476,7 +474,7 @@
 	
                     <!-- Blog tags -->
                     {% if Custom('display_widget_tags') > 0 %}
-	                    <div class="widget tags" >
+	                    <div class="widget tags">
 	                        <h3>{{ Lang.Get('Tags') }}</h3>
                             <ul>
                             	{% list Blog.PostsTags(Custom('display_tags')) %}
@@ -492,7 +490,7 @@
                     {% if Custom('display_widget_social') == false %}
 	                    <div class="widget social" >
 	                        <div class="title">
-	                        	<h3>{{ Lang.Get('Follow us') }}</span></h3>
+	                        	<h3>{{ Lang.Get('Follow us') }}</h3>
 	                        </div>
                             <ul>
                             	{% if Custom('facebook_username') is not empty %}
@@ -537,13 +535,13 @@
                     	{{ Lang.Get('Hosted by') }} <a href="http://www.over-blog.com" target="_blank">Overblog</a>
                     </p>
 	            </div>
-	        </div>
+	        </section>
 	    </div>
 	    
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 	    <script src="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         {% if Custom('background') is not empty %}
-            <script src="//assets.over-blog-staging.com/themes/jquery.backstretch.min.js" type="text/javascript"></script>
+            <script src="//assets.over-blog-staging.com/themes/jquery.backstretch.min.js"></script>
         {% endif %}
 		
 		<script>
