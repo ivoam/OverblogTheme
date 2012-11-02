@@ -14,7 +14,7 @@
             <meta name="keywords" content="{{ Tag.Title|title }}" />
             <meta name="robots" content="index,follow" />
         {% elseif isSearch and Search is not empty %}
-            <title>{{ Search | title }} - {{ Blog.Title }}</title>
+            <title>{{ Search|title }} - {{ Blog.Title }}</title>
             <meta name="description" content="{{ Blog.Description }}" />
             <meta name="keywords" content="{{ Search|title }}" />
             <meta name="robots" content="noindex" />
@@ -69,33 +69,48 @@
             {% endif %}
         {% endif %}
 
-        <meta name="constant:displayArticlesLimit" content="10" />
-        <meta name="list:display_mode:How many sections to display ?" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+        <!-- Define the display mode -->
+        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
 
-	    <meta name="list:theme_style:Chose the theme color scheme" items="Jungle, Bridge, Moon" default="Moon" group="design"/>
-		<meta name="image:background:Define your background image" group="design" />
-		<meta name="image:post_cover: Define your default post cover" group="design" />
-	    <meta name="list:font_title:Choose your blog title font." items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />	
-	    
+        <!-- Define the background image -->
+		<meta name="image:background:label.backgroundImage" group="design" />
+		<!-- Define the default post cover -->
+        <meta name="image:post_cover:label.defaultPostCover" group="design" />
+	   
+       <!-- Hide "About" widget -->
 	    <meta name="boolean:display_widget_profile:Hide Widget &quot;About me&quot;" group="Widgets" />
+        <!-- Hide search form -->
 	    <meta name="boolean:display_widget_search:Hide Widget &quot;Search&quot;" group="Widgets" />
+        <!-- Hide "Last posts" wiget -->
 	    <meta name="boolean:display_widget_last_posts:Hide Widget &quot;Last Posts&quot;" group="Widgets" />
-	    <meta name="boolean:display_widget_tags:Hide Widget &quot;Tags&quot;" group="Widgets" />
-	    <meta name="list:display_tags:How many tags to display ?" items="2,4,6,8,10" default="6" group="Widgets"/>
-	    <meta name="boolean:display_widget_social:Hide Widget &quot;Social&quot;" group="Widgets" />
+        <!-- Define the number of tags which display or hide "Blog tags" wiget -->
+	    <meta name="list:display_widget_tags:How many tags to display ?" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets"/>
+	    <!-- Hide "Social" wiget -->
+        <meta name="boolean:display_widget_social:Hide Widget &quot;Social&quot;" group="Widgets" />
+        <!-- Hide "Blog archives" wiget -->
 	    <meta name="boolean:display_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
 		
-		<meta name="string:facebook_username:Enter your Facebook Username" group="Social" />	    
+        <!-- Define the Twitter username -->	    
 		<meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
+        <!-- Define the Facebook username -->
+        <meta name="string:facebook_username:Enter your Facebook Username" group="Social" />
+        <!-- Choose the service to share posts -->
 		<meta name="list:share_service:Choose your(s) Social sharing service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 		
+        <!-- Choose the comments service -->
 		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <!-- Define facebook comments theme color -->
 		<meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+        <!-- Define the Disqus username -->
 		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comments" />
 	    
+        <!-- Define the Facebook App ID (go to https://developers.facebook.com/apps) -->
         <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
+        <!-- Define the Google Analytics ID-->
         <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
+        <!-- Define the Google Webmaster Tools ID -->
         <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
+        <!-- Define the MSN Webmaster Tools ID -->
         <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
 	    
 	    <!-- shortcut:[Includes] -->
@@ -123,82 +138,135 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
+        <!-- Add here yours external steel sheets (fonts, plugins) -->
 	    <!-- Fancybox -->
 		<link href="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.css" rel="stylesheet" type="text/css" />
 	    
+        <!-- Theme CSS -->
 	    <style type="text/css">
-	    	/* BASICAL */
+            /* ----------------------------- */
+            /* ==CLEARFIX */
+            /* ----------------------------- */
+            /* blocks that needs to be placed under floats */
+            .clear,
+            .line,
+            .row {
+                clear: both;
+            }
+
+            /* blocks that can contain floats */
+            .clearfix:before, 
+            .clearfix:after,
+            .line:before, 
+            .line:after,
+            .mod:before, 
+            .mod:after {
+                content: "";
+                display: table;
+            }
+            .clearfix:after,
+            .line:after,
+            .mod:after {
+                clear: both;
+            }
+
+	    	/* ----------------------------- */
+            /* ==BASICAL */
+            /* ----------------------------- */
+            body {
+                {% if Custom('background') is not empty %}
+                    background: url({{ Custom('background') }}) no-repeat fixed center center;
+                    -webkit-background-size: cover;
+                       -moz-background-size: cover;
+                        -ms-background-size: cover;
+                         -o-background-size: cover;
+                            background-size: cover;
+                {% endif %}
+
+            }
+            /* ----------------------------- */
+            /* ==GLOBAL */
+            /* ----------------------------- */
 	    	#global {
 	    		margin-left: auto;
 	    		margin-right: auto;
 	    		width: 960px;
 	    	}
 
+            /* ----------------------------- */
+            /* ==MAIN CONTENT */
+            /* ----------------------------- */
 	    	#main {
 	    		float: left;
 	    		width: 650px;
 	    	}
 
+            /* ----------------------------- */
+            /* ==SIDEBAR */
+            /* ----------------------------- */
 	    	#sidebar {
 	    		float: right;
 	    		width: 250px;
 	    	}
+            .last-posts li {
+                float: left;
+            }
 	    </style>
 	</head>
 	<body>
+        <!-- Intit Facebook script -->
 		<div id="fb-root"></div>
 	    <div id="global">
-            <header id="header">   
+            <header>   
+                <!-- Blog title -->
             	<h1 class="title">
                  	<a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                 </h1>
+                <!-- Blog description -->
              	<strong class="description">{{ Blog.Description }}</strong>
             </header>
-	        <section id="content">
+
+	        <section class="content clearfix">
 	        	
 	        	<!-- left content -->
 	        	<div id="main">
-                    
-                    {% if isTag or isSearch %}
-                    <!-- Legend -->
-                    	<p class="fallback">
-                    		{% if isTag %}
-                    			{{ Lang.Get('Posts with') }} <strong>#{{ Tag.Title }}</strong> {{ Lang.Get('tag') }}
-                    		{% else %}
-                    			{{ Lang.Get('Search for') }} &ldquo;<strong>{{ Search.Keyword }}</strong>&rdquo;
-                    		{% endif %}
-                    	</p>
-                    {% endif %}
-
-                    {% if Posts is empty %}
-                        <article class="article {% if isSpecial %}special{% elseif isSearch %}search{% elseif isTag %}tag{% else %}no-post{% endif%}">
-                        	{% if isSearch %}
-                        		<p>{{ Lang.Get('No result for this expression') }}.</p>
-                        	 {% elseif isSpecial %}
-		                        {{ SpecialContent }}
-                        	{% else %}
-	                            <p>{{ Lang.Get('No post') }}…</p>
-                        	{% endif %}
+                    <!-- Contact page -->
+                    {% if isSpecial %}
+                        <article class="special">
+		                    {{ SpecialContent }}
                         </article>
                     {% else %}
-                        <!-- list posts -->
-                        {% list Posts %}
-	                        <article class="post">
-	                        	<header class="metas">
-	                                <div class="author date">
-	                                    <p>
-	                                    	{{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %} {{ Lang.Get('on') }} <time datetime="{{ Post.Date }}">{{ Post.Date | datel(Lang.Get('Default date format')) | title }}</time>
-	                                    </p>
-	                                </div>
-	                                <div class="tags">
-	                                    {% list Post.Tags %}
-	                                    	{% if loop.first is not empty %}
-	                                    		<span>{{ Lang.Get('Tagged on') }} : </span>
-	                                    	{% endif %}
-	                                    		<a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-	                                    {% endlist %}
-	                                </span>
-                            		<h2 class="title">
+                        <!-- List blog posts -->
+                        {% list Posts %}                            
+                            <article class="post">
+                                {% if isSearch %}
+                                    {{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
+                                {% elseif isTag %}
+                                    {{ Lang.Get('Posts with') }} #{{ Tag.Title }}
+                                {% endif %}
+	                        	<header>
+                                    <!-- Post author & post date -->
+	                                <p class="metas">
+                                    	<span class="author">
+                                            {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
+                                        </span> 
+                                        <span class="date">
+                                            {{ Lang.Get('on') }} <time datetime="{{ Post.Date }}">{{ Post.Date|datel('Default date format')|title }}</time>
+                                        </span>
+	                                </p>
+
+                                    <!-- Post tags -->
+                                    {% if Post.Tags is not empty %}
+    	                                <p class="tags">
+    	                                    <span>{{ Lang.Get('Tagged on') }} : </span>
+                                            {% list Post.Tags %}
+    	                                    	<a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+    	                                    {% endlist %}
+    	                                </p>
+                                    {% endif %}
+                            		
+                                    <!-- Post title -->
+                                    <h2 class="title">
     	                    	        <a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
     	                    	        	{% if Post.Title is not empty %}
     	                    	        		{{ Post.Title }}
@@ -209,17 +277,23 @@
                             		</h2>
                                 </header>
                                 
+                                <!-- Post body or post sections or post snippet -->
                                 <div class="body">
                                     {% if isSingle or Custom('display_mode') == 'All' %}
                                     	{{ Post.Body }}
                                     {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
                                     	{{ Post.Body(Custom('display_mode')) }}
                                     {% else %}
-                                    	{{ Post.Snippet }}
+                                        {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
+                                            <a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+                                                <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(600,400)|crop }}{% else %}{{ Custom('post_cover')|resize(600,400)|crop }}{% endif %}" title="" alt="{{ Lang.Get('Post.Cover') }}" width="600px" height="400px"/>
+                                            </a>
+                                        {% endif %}
+                                        {{ Post.Snippet }}
                                     {% endif %}
                                 </div>
 
-								<!-- Share buttons + comments -->
+								<!-- Share buttons & comments & comments counter -->
                                 <footer>
                                 	{% if Custom('share_service') != 'None' or isSingle %}
                                     	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
@@ -266,34 +340,32 @@
 										{% endif %}
 									{% endif %}
                                     
-                                    <!-- Pagination on single page -->
+                                    <!-- Pagination on single post page -->
                                     {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                                        {% if isPage == false %}
-                                            <nav class="pagination">
-                                                {% if Navigation.PreviousPost is not empty %}
-                                                    <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.CurrentPage }}" class="previous" rel="">
-                                                        {% if Navigation.PreviousPost.Title is not empty %}
-                                                            {{ Navigation.PreviousPost.Title }}
-                                                        {% else %}
-                                                            {{ Lang.Get('Previous post') }}
-                                                        {% endif %}
-                                                    </a>
-                                                {% endif %}
-                                                {% if Navigation.NextPost is not empty %}
-                                                    <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.CurrentPage }}" class="next" rel="">
-                                                        {% if Navigation.NextPost.Title is not empty %}
-                                                            {{ Navigation.NextPost.Title }}
-                                                        {% else %}
-                                                            {{ Lang.Get('Next post') }}
-                                                        {% endif %}
-                                                    </a>
-                                                {% endif %}
-                                            </nav>
-                                        {% endif %}
+                                        <nav class="pagination">
+                                            {% if Navigation.PreviousPost is not empty %}
+                                                <a href="{{ Navigation.PreviousPost.Permalink }}" class="previous">
+                                                    {% if Navigation.PreviousPost.Title is not empty %}
+                                                        {{ Navigation.PreviousPost.Title }}
+                                                    {% else %}
+                                                        {{ Lang.Get('Previous post') }}
+                                                    {% endif %}
+                                                </a>
+                                            {% endif %}
+                                            {% if Navigation.NextPost is not empty %}
+                                                <a href="{{ Navigation.NextPost.Permalink }}" class="next">
+                                                    {% if Navigation.NextPost.Title is not empty %}
+                                                        {{ Navigation.NextPost.Title }}
+                                                    {% else %}
+                                                        {{ Lang.Get('Next post') }}
+                                                    {% endif %}
+                                                </a>
+                                            {% endif %}
+                                        </nav>
                                     {% endif %}
 
-		                            {% if isSingle and isPage == false %}
-		                            	<!-- Comments -->
+		                            <!-- Post comments -->
+                                    {% if isSingle and isPage == false %}
 							         	<div id="comments" class="item-comments">
 							         		<h3>{{ Lang.Get('Comment this post') }}</h3>
 										    {% if Custom('comment') == 'Facebook' %}
@@ -308,101 +380,102 @@
 		                            {% endif %}
                                 </footer>
 	                        </article>
+                        <!-- If no post found -->
+                        {% else %}
+                            <article class="no-result">
+                                <p>{{ Lang.Get('No post found') }}.</p>
+                            </article>
                         {% endlist %}
                     {% endif %}
                     
+                    <!-- Pagination on other pages -->
                     {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty and isPage == false %}
-                    	<!-- Pagination on other pages -->
                         <nav class="pagination ">
                             {% if Navigation.PreviousPage is not empty %}
-                            	<a class="previous" href="{{ Navigation.PreviousPage }}" title="" rel="">{{ Lang.Get('Previous page') }}</a>
+                            	<a class="previous" href="{{ Navigation.PreviousPage }}" title="{{ Lang.Get('Page') }} {{ Navigation.CurrentPage }}" rel="prev">{{ Lang.Get('Previous page') }}</a>
                             {% endif %}
                             {% if Navigation.NextPage is not empty %}
-                            	<a class="next" href="{{ Navigation.NextPage }}" title="" rel="">{{ Lang.Get('Next page') }}</a>
+                            	<a class="next" href="{{ Navigation.NextPage }}" title="{{ Lang.Get('Page') }} {{ Navigation.CurrentPage }}" rel="next">{{ Lang.Get('Next page') }}</a>
                             {% endif %}
                         </nav>
                     {% endif %}                        
 	            </div>
 
-	            <!-- Right sidebar -->
+	            <!-- Sidebar -->
 	            <div id="sidebar">
                     {% if Custom('display_widget_profile') == false %}
-                    <!-- Blog description -->
+                        <!-- Blog about -->
 	                    <div class="widget profile" >
-	                        <h3>{{ Lang.Get('About me') }}</a></h3>
+	                        <h3>{{ Lang.Get('About') }}</a></h3>
                         	<p>
-	                        	{% if Blog.Avatar or Blog.Owner.Avatar is not empty %}
+                                <!-- Avatar -->
+	                        	{% if Blog.Owner.Avatar is not empty %}
 		                        	<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-			                        	<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar | resize(100) }}{% else %}{{ Blog.Avatar | resize(100) }}{% endif %}" alt="{{ Blog.Title }}" width="100" />
+			                        	<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100px" height="100px" />
 		                            </a>
 			                    {% endif %}
+                                
+                                <!-- Biography -->
 		                        {% if Blog.Owner.Bio is not empty %}
 	                            	<span>“{{ Blog.Owner.Bio }}”</span>
-	                            {% endif %}
-	                            {% if Blog.Owner.Nickname is not empty %}
-	                            	<span>{{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}</span>
 	                            {% endif %}
 	                        </p>
 	                    </div>
                     {% endif %}
                     
+                    <!-- Search form -->
                     {% if Custom('display_widget_search') == false %}
-                    	<!-- Search -->
 	                    <div class="widget search" >
 	                        <h3>{{ Lang.Get('Search') }}</h3>
-                            <form action="/search/" method="get">
-                                <div>
-                                    <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}" value="{{ Search.Keyword }}" />
-                                    <button type="submit">{{ Lang.Get('OK') }}</button>
-                                </div>
+                            <form action="/search/" method="post">
+                                <input type="text" name="q" placeholder="{{ Lang.Get('Search something here') }}..." {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} />
+                                <button type="submit">{{ Lang.Get('Search') }}</button>
                             </form>
 	                    </div>
                     {% endif %}
 						
-                    <!-- Pages -->
+                    <!-- Blog pages -->
                     <div class="widget pages" >
                         <h3>{{ Lang.Get('Navigation') }}</h3>
-                        <ul>
-                            <li>
-                                <a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
-                            </li>
-                            	{% list Blog.ListPages %}
-	                                <li>
-	                                    <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
-	                                </li>
-                               {% endlist %}
-                            <li>
-                                <a href="/contact">{{ Lang.Get('Contact') }}</a>
-                            </li>
-                        </ul>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
+                                </li>
+                                	{% list Blog.ListPages %}
+    	                                <li>
+    	                                    <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+    	                                </li>
+                                   {% endlist %}
+                                <li>
+                                    <a href="/contact">{{ Lang.Get('Contact') }}</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
 	                    
+                    <!-- Last posts -->
                     {% if Custom('display_widget_last_posts') == false %}
-                    	<!-- Last posts -->
-	                    <div class="widget last-posts" >
+	                    <div class="widget last-posts clearfix" >
 	                        <h3>{{ Lang.Get('Last Posts') }}</h3>
                             <ul>
                                 {% list Blog.Posts(6) %}
 	                                {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
-		                                <li {% if loop.first is not empty or loop.index == 3 or loop.index == 5 %}class="left"{% endif %}>
-		                                    <h3> 
+		                                <li{% if loop.index % 2 == 0 %} class="clearfix"{% endif %}>
+		                                    <h4> 
 		                                    	<a href="{{ Post.Permalink }}" title="{{ Post.Permalink }}">
-			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover | resize(126,90) | crop }}{% else %}{{ Custom('post_cover') | resize(126,90) | crop }}{% endif %}" alt="" width="126" height="90" />
+			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(90)|crop }}{% else %}{{ Custom('post_cover')|resize(90)|crop }}{% endif %}" alt="" width="90px" height="90px" />
 			                                    </a>
-		                                    </h3>
+		                                    </h4>
 		                                </li>
-		                                {% if loop.index % 2 == 0 %}
-		                                	<div class="clear"></div>
-		                                {% endif %}
 		                            {% endif %}
                                 {% endlist %}
-                                <div class="clear"></div>
                             </ul>
 	                    </div>
                     {% endif %}
 	
-                    {% if Custom('display_widget_tags') == false %}
-                    	<!-- Tags -->
+                    <!-- Blog tags -->
+                    {% if Custom('display_widget_tags') > 0 %}
 	                    <div class="widget tags" >
 	                        <h3>{{ Lang.Get('Tags') }}</h3>
                             <ul>
@@ -415,8 +488,8 @@
 	                    </div>
                     {% endif %}     
 	                   
+                    <!-- Follow us -->
                     {% if Custom('display_widget_social') == false %}
-                    	<!-- Follow us -->
 	                    <div class="widget social" >
 	                        <div class="title">
 	                        	<h3>{{ Lang.Get('Follow us') }}</span></h3>
@@ -433,20 +506,20 @@
 	                                </li>
                                 {% endif %}
                                 <li class="rss-follow">
-                                    <a href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Follow us with') }} RSS" target="_blank">{{ Lang.Get('Flux RSS') }}</a>
+                                    <a href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Follow us with') }} RSS" target="_blank">{{ Lang.Get('RSS feed') }}</a>
                                 </li>
                             </ul>
 	                    </div>
                     {% endif %}
 	                    
+                    <!-- Blog archives -->
                     {% if Custom('display_widget_archives') == false %}
-                    	<!-- Archives -->
 	                    <div class="widget archives">
                         	<h3>{{ Lang.Get('Archives') }}</h3>
                             <ul id="archivelist">
 			                    {% list Blog.Archives %}
 			                     	 <li class="arch_year">
-			                        	<a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
+			                        	<a href="#" class="year" data-year="{{ Archive.Year }}">{{ Archive.Year }}</a>
 			                        	<ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
 				                        	{% list Archive.Months %}
 				                            	{% if Month.PostCount > 0 %}
@@ -460,8 +533,8 @@
 	                    </div>
                     {% endif %}
 	                    
-                    <p id="credits">
-                    	{{ Lang.Get('Hosted by') }} <a href="http://over-blog.com" target="_blank">Overblog</a>
+                    <p class="credits">
+                    	{{ Lang.Get('Hosted by') }} <a href="http://www.over-blog.com" target="_blank">Overblog</a>
                     </p>
 	            </div>
 	        </div>
@@ -470,7 +543,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 	    <script src="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         {% if Custom('background') is not empty %}
-            <script src="//assets.over-blog-kiwi.com/themes/13/js/jquery.backstretch.min.js" type="text/javascript"></script>
+            <script src="//assets.over-blog-staging.com/themes/jquery.backstretch.min.js" type="text/javascript"></script>
         {% endif %}
 		
 		<script>
@@ -537,7 +610,7 @@
     		{% endif %}
 
             {% if Custom('display_widget_archives') == false %}
-                // Archives
+                // Blog archives
                 function switch_arch(year) {
                     'use strict';
                     var archiveYear,
@@ -569,6 +642,11 @@
                     type    : "image"
                 });
                 $(".avatar").attr("rel", "fancybox").fancybox({
+                    helpers : {
+                        title: {
+                            type: 'inside'
+                        }
+                    },
                     type    : "image"
                 }); 
 
@@ -593,13 +671,9 @@
                 {% endif %}
 
                 {% if Custom('display_widget_archives') == false %}
-                    // Archives
+                    // Blog archives
                     $('.arch_year > a').click(function() {
                         switch_arch($(this).attr('data-year'));
-                        {% if not isSingle %}
-                            container.masonry('reload');
-                        {% endif %}
-
                         return false;
                     });
                     {% list Blog.Archives %}
