@@ -78,17 +78,17 @@
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
 	   
        <!-- Hide "About" widget -->
-	    <meta name="boolean:display_widget_profile:Hide Widget &quot;About me&quot;" group="Widgets" />
+	    <meta name="boolean:display_widget_profile:Hide Widget &amp;quot;About me&amp;quot;" group="Widgets" />
         <!-- Hide search form -->
-	    <meta name="boolean:display_widget_search:Hide Widget &quot;Search&quot;" group="Widgets" />
+	    <meta name="boolean:display_widget_search:Hide Widget &amp;quot;Search&amp;quot;" group="Widgets" />
         <!-- Hide "Last posts" wiget -->
-	    <meta name="boolean:display_widget_last_posts:Hide Widget &quot;Last Posts&quot;" group="Widgets" />
+	    <meta name="boolean:display_widget_last_posts:Hide Widget &amp;quot;Last Posts&amp;quot;" group="Widgets" />
         <!-- Define the number of tags which display or hide "Blog tags" wiget -->
 	    <meta name="list:display_widget_tags:How many tags to display ?" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets"/>
 	    <!-- Hide "Social" wiget -->
-        <meta name="boolean:display_widget_social:Hide Widget &quot;Social&quot;" group="Widgets" />
+        <meta name="boolean:display_widget_social:Hide Widget &amp;quot;Social&amp;quot;" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
-	    <meta name="boolean:display_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
+	    <meta name="boolean:display_widget_archives:Hide Widget &amp;quot;Archives&amp;quot;" group="Widgets" />
 		
         <!-- Define the Twitter username -->	    
 		<meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
@@ -246,7 +246,7 @@
                                     {{ Lang.Get('Posts with') }} #{{ Tag.Title }}
                                 {% endif %}
 	                        	<header itemprop="headline">
-                                    <!-- Post author & post date -->
+                                    <!-- Post author &amp; post date -->
 	                                <p class="metas">
                                     	<span class="author" itemprop="author">
                                             {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
@@ -294,7 +294,7 @@
                                     {% endif %}
                                 </div>
 
-								<!-- Share buttons & comments & comments counter -->
+								<!-- Share buttons &amp; comments &amp; comments counter -->
                                 <footer>
                                 	{% if Custom('share_service') != 'None' or isSingle %}
                                     	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
@@ -315,7 +315,7 @@
                                             	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
                                             </div>
                                             <div class="twitter-share">
-                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
+                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
                                             </div>
                                             <div class="facebook-share">
                                             	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
@@ -363,7 +363,7 @@
                                     {% endif %}
 
 		                            <!-- Post comments -->
-                                    {% if isSingle and isPage == false %}
+                                    {% if isSingle and not isPage %}
 							         	<div id="comments" class="item-comments">
 							         		<h3>{{ Lang.Get('Comment this post') }}</h3>
 										    {% if Custom('comment') == 'Facebook' %}
@@ -573,7 +573,7 @@
                     if (d.getElementById(id)) return;
                         js = d.createElement(s); 
                         js.id = id;
-                        js.src = "//connect.facebook.net/{{ Blog.Lang}}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                        js.src = "//connect.facebook.net/{{ Blog.Lang}}_{{ Blog.Lang|upper }}/all.js#xfbml=1&amp;appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
     	    {% endif %}
@@ -642,7 +642,7 @@
                 $(".avatar").attr("rel", "fancybox").fancybox({
                     helpers : {
                         title: {
-                            type: 'inside'
+                            type: "inside"
                         }
                     },
                     type    : "image"
@@ -683,7 +683,7 @@
 
                 {% if Custom('background') is not empty %}
                     // Background stretch
-                    if($.browser.msie && $.browser.version <= 8.0 ){
+                    if($.browser.msie &amp;&amp; $.browser.version <= 8.0 ){
                         $.backstretch('{{ Custom('background') }}');
                         $('body').css('background', 'none');
                     }
