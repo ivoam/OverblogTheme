@@ -3,7 +3,7 @@
 	<head>
 	    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
 		<title>{{ Blog.Title }}</title>
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;"/>
 
 
 		{% if Blog.FaviconUrl is not empty %}
@@ -895,7 +895,7 @@
 	</head>
 	<body class="yui-skin-ob __blog __mobile fr FR" >
 		<div class="header clearfix">
-			<a class="logo" href="{{Blog.Url}}" title="{{ Blog.Title }}"></a>
+			<a class="logo" href="{{ Blog.Url }}" title="{{ Blog.Title }}"></a>
 			<div class="topLinks">
 				<div class="button-box">
 		            <a class="button-icon search" href="#" title="{{ Lang.Get('Search') }}">
