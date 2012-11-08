@@ -76,7 +76,7 @@
 		<meta name="image:background:label.backgroundImage" group="design" />
 		<!-- Define the default post cover -->
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
-	   
+
        <!-- Hide "About" widget -->
 	    <meta name="boolean:display_widget_profile:Hide Widget &amp;quot;About me&amp;quot;" group="Widgets" />
         <!-- Hide search form -->
@@ -89,21 +89,21 @@
         <meta name="boolean:display_widget_social:Hide Widget &amp;quot;Social&amp;quot;" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
 	    <meta name="boolean:display_widget_archives:Hide Widget &amp;quot;Archives&amp;quot;" group="Widgets" />
-		
-        <!-- Define the Twitter username -->	    
+
+        <!-- Define the Twitter username -->
 		<meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
         <!-- Define the Facebook username -->
         <meta name="string:facebook_username:Enter your Facebook Username" group="Social" />
         <!-- Choose the service to share posts -->
 		<meta name="list:share_service:Choose your(s) Social sharing service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-		
+
         <!-- Choose the comments service -->
 		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <!-- Define facebook comments theme color -->
 		<meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
         <!-- Define the Disqus username -->
 		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comments" />
-	    
+
         <!-- Define the Facebook App ID (go to https://developers.facebook.com/apps) -->
         <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
         <!-- Define the Google Analytics ID-->
@@ -112,17 +112,17 @@
         <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
         <!-- Define the MSN Webmaster Tools ID -->
         <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
-	    
+
 	    <!-- shortcut:[Includes] -->
-	    <!-- favicon -->       
+	    <!-- favicon -->
 	    {% if Blog.FaviconUrl is not empty %}
 	        <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
 	    {% else %}
 	        <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
 	        <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
 	        <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-	    {% endif %}   
-	   
+	    {% endif %}
+
 	    <!-- SEO -->
 	    {% if Custom('google_webmaster_id') is not empty %}
 	        <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -130,10 +130,10 @@
 	    {% if Custom('msn_webmaster_id') is not empty %}
 	        <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
 	    {% endif %}
-	
+
 	    <!-- includes -->
 	    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
-	    
+
 	    <!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -141,7 +141,7 @@
         <!-- Add here yours external steel sheets (fonts, plugins) -->
 	    <!-- Fancybox -->
 		<link href="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-	    
+
         <!-- Theme CSS -->
 	    <style type="text/css">
             /* ----------------------------- */
@@ -153,7 +153,7 @@
             }
 
             /* blocks that can contain floats */
-            .clearfix:before, 
+            .clearfix:before,
             .clearfix:after {
                 content: "";
                 display: table;
@@ -218,7 +218,7 @@
         <!-- Intit Facebook script -->
 		<div id="fb-root"></div>
 	    <div id="global">
-            <header>   
+            <header>
                 <!-- Blog title -->
             	<h1 class="title">
                  	<a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
@@ -228,7 +228,7 @@
             </header>
 
 	        <section class="content clearfix">
-	        	
+
 	        	<!-- left content -->
 	        	<div id="main">
                     <!-- Contact page -->
@@ -238,7 +238,7 @@
                         </article>
                     {% else %}
                         <!-- List blog posts -->
-                        {% list Posts %}                            
+                        {% list Posts %}
                             <article class="post" itemprop="blogPosts" itemscope="" itemtype="http://schema.org/BlogPosting">
                                 {% if isSearch %}
                                     {{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
@@ -250,7 +250,7 @@
 	                                <p class="metas">
                                     	<span class="author" itemprop="author">
                                             {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
-                                        </span> 
+                                        </span>
                                         <span class="date">
                                             {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
                                         </span>
@@ -265,7 +265,7 @@
     	                                    {% endlist %}
     	                                </p>
                                     {% endif %}
-                            		
+
                                     <!-- Post title -->
                                     <h2 class="title">
     	                    	        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
@@ -277,7 +277,7 @@
     	                    	        </a>
                             		</h2>
                                 </header>
-                                
+
                                 <!-- Post body or post sections or post snippet -->
                                 <div class="body" itemprop="articleBody">
                                     {% if isSingle or Custom('display_mode') == 'All' %}
@@ -322,8 +322,8 @@
                                             </div>
                                         {% endif %}
                                     {% endif %}
-                                    
-                                    {% if not isSingle %} 
+
+                                    {% if not isSingle %}
 		                                {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
 										    <a class="comment-number" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
 										{% else %}
@@ -337,7 +337,7 @@
 										   </a>
 										{% endif %}
 									{% endif %}
-                                    
+
                                     <!-- Pagination on single post page -->
                                     {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
                                         <nav class="pagination">
@@ -385,7 +385,7 @@
                             </article>
                         {% endlist %}
                     {% endif %}
-                    
+
                     <!-- Pagination on other pages -->
                     {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty and isPage == false %}
                         <nav class="pagination ">
@@ -396,7 +396,7 @@
                             	<a class="next" href="{{ Navigation.NextPage }}" title="{{ Lang.Get('Page') }} {{ Navigation.CurrentPage }}" rel="next">{{ Lang.Get('Next page') }}</a>
                             {% endif %}
                         </nav>
-                    {% endif %}                        
+                    {% endif %}
 	            </div>
 
 	            <!-- Sidebar -->
@@ -405,33 +405,30 @@
                         <!-- Blog about -->
 	                    <div class="widget profile" >
 	                        <h3>{{ Lang.Get('About') }}</h3>
-                        	<p>
-                                <!-- Avatar -->
-	                        	{% if Blog.Owner.Avatar is not empty %}
-		                        	<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-			                        	<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100" height="100" />
-		                            </a>
-			                    {% endif %}
-                                
-                                <!-- Biography -->
-		                        {% if Blog.Owner.Bio is not empty %}
-	                            	<span>“{{ Blog.Owner.Bio }}”</span>
-	                            {% endif %}
-	                        </p>
+                        	{% if Blog.Owner.Avatar is not empty %}
+								<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
+									<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100" height="100" />
+								</a>
+							{% endif %}
+							
+							<!-- Biography -->
+							{% if Blog.Owner.Bio is not empty %}
+								<p class="biography">{{ Blog.Owner.Bio }}</p>
+							{% endif %}
 	                    </div>
                     {% endif %}
-                    
+
                     <!-- Search form -->
                     {% if Custom('display_widget_search') == false %}
 	                    <div class="widget search" >
 	                        <h3>{{ Lang.Get('Search') }}</h3>
                             <form action="/search/" method="post">
                                 <input type="text" name="q" placeholder="{{ Lang.Get('Search something here') }}..." {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} />
-                                <button type="submit">{{ Lang.Get('Search') }}</button>
+								<input type="submit" value="{{ Lang.Get('Search') }}" />
                             </form>
 	                    </div>
                     {% endif %}
-						
+
                     <!-- Blog pages -->
                     <div class="widget pages" >
                         <h3>{{ Lang.Get('Navigation') }}</h3>
@@ -451,7 +448,7 @@
                             </ul>
                         </nav>
                     </div>
-	                    
+
                     <!-- Last posts -->
                     {% if Custom('display_widget_last_posts') == false %}
 	                    <div class="widget last-posts clearfix" >
@@ -460,9 +457,9 @@
                                 {% list Blog.Posts(6) %}
 	                                {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
 		                                <li{% if loop.index % 2 == 0 %} class="clearfix"{% endif %}>
-		                                    <h4> 
+		                                    <h4>
 		                                    	<a href="{{ Post.Permalink }}" title="{{ Post.Permalink }}">
-			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(90)|crop }}{% else %}{{ Custom('post_cover')|resize(90)|crop }}{% endif %}" alt="" width="90" height="90" />
+			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(90)|crop }}{% else %}{{ Custom('post_cover')|resize(90)|crop }}{% endif %}" alt="{{ Post.Title }}" width="90" height="90" />
 			                                    </a>
 		                                    </h4>
 		                                </li>
@@ -471,7 +468,7 @@
                             </ul>
 	                    </div>
                     {% endif %}
-	
+
                     <!-- Blog tags -->
                     {% if Custom('display_widget_tags') > 0 %}
 	                    <div class="widget tags">
@@ -484,8 +481,8 @@
                                 {% endlist %}
                             </ul>
 	                    </div>
-                    {% endif %}     
-	                   
+                    {% endif %}
+
                     <!-- Follow us -->
                     {% if Custom('display_widget_social') == false %}
 	                    <div class="widget social" >
@@ -509,7 +506,7 @@
                             </ul>
 	                    </div>
                     {% endif %}
-	                    
+
                     <!-- Blog archives -->
                     {% if Custom('display_widget_archives') == false %}
 	                    <div class="widget archives">
@@ -530,20 +527,20 @@
 		                  	</ul>
 	                    </div>
                     {% endif %}
-	                    
+
                     <p class="credits">
                     	{{ Lang.Get('Hosted by') }} <a href="http://www.over-blog.com" target="_blank">Overblog</a>
                     </p>
 	            </div>
 	        </section>
 	    </div>
-	    
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 	    <script src="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         {% if Custom('background') is not empty %}
             <script src="//assets.over-blog-staging.com/themes/jquery.backstretch.min.js"></script>
         {% endif %}
-		
+
 		<script>
             {% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}
                 // Disqus comments
@@ -568,10 +565,10 @@
             {% elseif Custom('comment') == 'Facebook' %}
                 // Facebook comments
                 (function(d, s, id) {
-                    var js, 
+                    var js,
                         fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) return;
-                        js = d.createElement(s); 
+                        js = d.createElement(s);
                         js.id = id;
                         js.src = "//connect.facebook.net/{{ Blog.Lang}}_{{ Blog.Lang|upper }}/all.js#xfbml=1&amp;appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                     fjs.parentNode.insertBefore(js, fjs);
@@ -585,10 +582,10 @@
                     js=d.createElement(s);
                     js.id=id;
                     js.src="//platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs); 
+                    fjs.parentNode.insertBefore(js,fjs);
                 }
             }(document,"script","twitter-wjs");
-    		
+
             {% if Custom('google_analytics') is not empty %}
     		    // Google Analytics
     		    window.google_analytics_uacct = '{{Custom('google_analytics')}}';
@@ -596,13 +593,13 @@
     		        _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
     		        _gaq.push(['_trackPageview']);
     		        _gaq.push(['_trackPageLoadTime']);
-    		
+
     		    (function() {
-    		        var ga = document.createElement('script'); 
-                        ga.type = 'text/javascript'; 
+    		        var ga = document.createElement('script');
+                        ga.type = 'text/javascript';
                         ga.async = true;
     		            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    		        var s = document.getElementsByTagName('script')[0]; 
+    		        var s = document.getElementsByTagName('script')[0];
                         s.parentNode.insertBefore(ga, s);
     		    })();
     		{% endif %}
@@ -646,7 +643,7 @@
                         }
                     },
                     type    : "image"
-                }); 
+                });
 
                 {% if Custom('custom_hide_widget_search_form') == false %}
                     if($.browser.msie && $.browser.version <= 8.0 ){
@@ -678,7 +675,7 @@
                         {% if Archive.Year != "now"|date("Y") %}
                             switch_arch('{{ Archive.Year }}');
                         {% endif %}
-                    {% endlist %}  
+                    {% endlist %}
                 {% endif %}
 
                 {% if Custom('background') is not empty %}
@@ -688,7 +685,7 @@
                         $('body').css('background', 'none');
                     }
                 {% endif %}
-            });                 
+            });
         </script>
 	</body>
 </html>
