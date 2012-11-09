@@ -899,7 +899,7 @@
 		<script src="http://assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
 		<script src="http://assets.over-blog-kiwi.com/themes/jquery/imagesloaded/jquery.imagesloaded.min.js"></script>
 		{% if Custom('background_repeat') == 'strech' and Custom('background_image') is not empty %}
-			<script src="http://assets.over-blog-kiwi.com/themes/13/js/jquery.backstretch.min.js" type="text/javascript"></script>
+			<script src="http://assets.over-blog-kiwi.com/themes/jquery/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 		{% endif %}
 		<script src="http://assets.over-blog-kiwi.com/themes/13/js/socialite/socialite.min.js"></script>
 
@@ -1057,7 +1057,7 @@
 							$.backstretch(
 								'{{ Custom('background_image') }}'
 							);
-							$('.container').css('background', 'none');
+							$('body').css('background', 'none');
 						});
 					{% endif %}
 				}
