@@ -553,28 +553,28 @@
                                         {% endif %}
                                         {% if Custom('share_service') == 'Google +' %}
                                             <div class="left">
-                                                <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}"></div>
+                                                <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                             </div>
                                         {% endif %}
                                         {% if Custom('share_service') == 'Twitter' %}
                                            <div class="left">
-                                                <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{{ Blog.Title }}" data-url="{{ Blog.Url }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                                <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             </div>
                                         {% endif %}
                                         {% if Custom('share_service') == 'Facebook' %}
                                             <div class="left">
-                                                <div class="fb-like" data-href="{{ Blog.Url }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                             </div>
                                         {% endif %}
                                         {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                             <div class="left">
-                                                <div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}"></div>
+                                                <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                             </div>
                                             <div class="left">
-                                                <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{{ Blog.Title }}" data-url="{{ Blog.Url }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                                <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             </div>
                                             <div class="left">
-                                                <div class="fb-like" data-href="{{ Blog.Url }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                             </div>
                                         {% endif %}
                                        <div class="clear"></div>
