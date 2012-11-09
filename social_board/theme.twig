@@ -1470,7 +1470,7 @@
                                     <div class="share">
                                         {% if Custom('share_service') == 'Google +' %}
                                             <!-- google + share -->
-                                            <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
+                                            <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}"></a>
                                         {% elseif Custom('share_service') == 'Twitter' %}
                                             <!-- twitter share -->
                                             <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
