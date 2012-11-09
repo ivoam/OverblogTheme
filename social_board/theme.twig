@@ -1481,7 +1481,7 @@
                                             <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}"></a>
                                         {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                             <!-- google + share -->
-                                            <a class="gplus" href="https://plus.google.com/share?url={ {{ Post.Permalink }} }"></a>
+                                            <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}"></a>
 
                                             <!-- twitter share -->
                                             <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
