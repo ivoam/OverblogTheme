@@ -629,7 +629,7 @@
 			<div class="wrap single">
 				{% if isSingle%}
 					{% list Posts %}
-						<div class="item{% list Post.Sources %} {{ Source }}{% endlist %}">
+						<div class="item {{ Post.getFirstSource }}">
 							<div class="title">
 								<span class="icon"></span>
 								<h2>{{ Post.Title }}</h2>
@@ -789,7 +789,7 @@
 						{# left col #}
 						<div class="items left">
 							{% list Posts %}
-								<div class="item{% list Post.Sources %} {{ Source }}{% endlist %}" style="display:none;">
+								<div class="item {{ Post.getFirstSource }}" style="display:none;">
 									<span class="corner"></span>
 									<header class="title">
 										<span class="icon"></span>
