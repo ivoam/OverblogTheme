@@ -441,7 +441,7 @@
 		.posts .item-content .meta .author {}
 		.posts .item-content .meta time {}
 		.posts .item-content .body {
-			color: {{ Custom('biography_color')|default('rgba(255,255,255,0.9)') }};
+			color: #FFF;
 			font-size: 14px;
 		}
 
@@ -627,7 +627,7 @@
 			max-width: 100%;
 		}
 		.ob-section-link .ob-snippet {
-			color: {{ Custom('biography_color')|default('rgba(255,255,255,0.9)') }};
+			color: #333;
 		}
 
 		.ob-section-link .ob-ctn-image img {
@@ -671,7 +671,7 @@
 		
 		/* Contact form */
 		.special input, .special textarea {
-			color: {{ Custom('biography_color')|default('rgba(255,255,255,0.9)') }};
+			color: #FFF;
 			border: none;
 			background-color: #{% if Custom('block_variant') == 'light' %}b2b2b2{% else %}4d4d4d{% endif %};
 			background: rgba({% if Custom('block_variant') == 'light' %}0,0,0{% else %}255,255,255{% endif %},0.30);
@@ -920,7 +920,7 @@
 								{% if isSingle or Custom('nb_sections') == "All" %}
 								{{ Post.Body }}
 								{% elseif Custom('nb_sections') == "Slider" %}
-								{{Post.Snippet|truncate(125, true, '...')}} <a href="{{Post.Permalink}}" alt="{{ Lang.Get('Read more') }}">{{ Lang.Get('Read more') }}</a>
+								{{ Post.Snippet|truncate(125, true, '...')}} <a href="{{Post.Permalink}}" alt="{{ Lang.Get('Read more') }}">{{ Lang.Get('Read more') }}</a>
 								{% else %}
 								{{Post.Body(Custom('nb_sections'))}} <a href="{{Post.Permalink}}" alt="{{ Lang.Get('Read more') }}">{{ Lang.Get('Read more') }}</a>
 								{% endif %}
