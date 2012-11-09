@@ -574,7 +574,7 @@
                 {% endif %}
                 {% list Posts %}
                     <div class="date" itemprop="startDate" datetime="{{ Post.Date|date("Y-m-d H:i")}}">{{ Post.Date|date("l, F d, Y") }}</div>
-                    <div class="post{% list Post.Sources %} {{ Source }}{% endlist %}" itemscope itemtype="http://schema.org/BlogPosting">
+                    <div class="post {{ Post.getFirstSource }}" itemscope itemtype="http://schema.org/BlogPosting">
                         <h2 class="title"><a href="{{ Post.PermaLink }}" title="{{ Post.Snippet|title }}">
                             {% if Post.Title is not empty %}
                                 {{ Post.Title }}
