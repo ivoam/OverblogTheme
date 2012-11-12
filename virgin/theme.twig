@@ -73,45 +73,45 @@
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
 
         <!-- Define the background image -->
-		<meta name="image:background:label.backgroundImage" group="design" />
-		<!-- Define the default post cover -->
+        <meta name="image:background:label.backgroundImage" group="design" />
+        <!-- Define the default post cover -->
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
-
-       <!-- Hide "About" widget -->
-	    <meta name="boolean:display_widget_profile:Hide Widget &amp;quot;About me&amp;quot;" group="Widgets" />
+       
+        <!-- Hide "About" widget -->
+        <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <!-- Hide search form -->
-	    <meta name="boolean:display_widget_search:Hide Widget &amp;quot;Search&amp;quot;" group="Widgets" />
+        <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
         <!-- Hide "Last posts" wiget -->
-	    <meta name="boolean:display_widget_last_posts:Hide Widget &amp;quot;Last Posts&amp;quot;" group="Widgets" />
+        <meta name="boolean:display_widget_last_posts:label.hideLastPosts" group="Widgets" />
         <!-- Define the number of tags which display or hide "Blog tags" wiget -->
-	    <meta name="list:display_widget_tags:How many tags to display ?" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets"/>
-	    <!-- Hide "Social" wiget -->
-        <meta name="boolean:display_widget_social:Hide Widget &amp;quot;Social&amp;quot;" group="Widgets" />
+        <meta name="list:display_widget_tags:label.numberOfTags" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets" />
+        <!-- Hide "Social" wiget -->
+        <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
-	    <meta name="boolean:display_widget_archives:Hide Widget &amp;quot;Archives&amp;quot;" group="Widgets" />
-
-        <!-- Define the Twitter username -->
-		<meta name="string:twitter_username:Enter your Twitter Username" group="Social" />
+        <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
+        
+        <!-- Define the Twitter username -->        
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <!-- Define the Facebook username -->
-        <meta name="string:facebook_username:Enter your Facebook Username" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <!-- Choose the service to share posts -->
-		<meta name="list:share_service:Choose your(s) Social sharing service(s)" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+        
         <!-- Choose the comments service -->
-		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <!-- Define facebook comments theme color -->
-		<meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+        <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
         <!-- Define the Disqus username -->
-		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comments" />
-
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
+        
         <!-- Define the Facebook App ID (go to https://developers.facebook.com/apps) -->
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
         <!-- Define the Google Analytics ID-->
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <!-- Define the Google Webmaster Tools ID -->
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <!-- Define the MSN Webmaster Tools ID -->
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
 	    <!-- shortcut:[Includes] -->
 	    <!-- favicon -->
@@ -300,15 +300,15 @@
                                     	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
                                     	{% if Custom('share_service') == 'Google +' %}
                                             <div class="google-share">
-                                            	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
+                                                <iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
                                             </div>
                                         {% elseif Custom('share_service') == 'Twitter' %}
                                         	<div class="twitter-share">
-                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=vertical"></iframe>
+                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
                                             </div>
                                         {% elseif Custom('share_service') == 'Facebook' %}
                                             <div class="facebook-share">
-                                            	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
+                                                <iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
                                             </div>
                                         {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                         	<div class="google-share">
