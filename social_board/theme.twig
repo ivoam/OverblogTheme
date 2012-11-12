@@ -891,26 +891,31 @@
                         box-shadow: 0 1px 0 0 #FFF inset;
                 margin-top: 10px;
             }
+            .widgets .social ul {
+                padding-left: 0;
+            }
             .widgets .social li {
-                display: inline;
+                float: left;
                 list-style: none;
+            }
+            .widgets .social li + li {
+                margin-left: 9px;
             }
             .widgets .social a {
                 background: url(//assets.over-blog-kiwi.com/themes/42/images/sprite.png) no-repeat center -500px;
                 background-color: #CCC;
                 color: #FFF;
-                display: inline-block;
+                display: block;
                 font-size: 0.6em;
                 font-weight: bold;
-                margin: 0 -3px;
                 padding: 55px 0 5px;
                 text-align: center;
                 text-decoration: none;
-                -webkit-transition: all 250ms ease;
-                   -moz-transition: all 250ms ease;
-                    -ms-transition: all 250ms ease;
-                     -o-transition: all 250ms ease;
-                        transition: all 250ms ease;
+                -webkit-transition: background-color 250ms ease;
+                   -moz-transition: background-color 250ms ease;
+                    -ms-transition: background-color 250ms ease;
+                     -o-transition: background-color 250ms ease;
+                        transition: background-color 250ms ease;
                 width: 60px;
             }
             .widgets .social .tw a {
@@ -921,9 +926,6 @@
             }
             .widgets .social a:hover {
                 background-color: #999;
-            }
-            .widgets .social li:nth-child(2) a {
-                margin: 0 12px;
             }
 
             /* ----------------------------- */
@@ -1334,19 +1336,21 @@
                         {% if Custom('display_widget_follow') == false %}
                             <!-- follow blog owner -->
                             <div class="widget social">
-                                {% if Custom('facebook_username') is not empty %}
-                                    <li class="fb">
-                                        <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank" >FACEBOOK</a>
+                                <ul class="clearfix">
+                                    {% if Custom('facebook_username') is not empty %}
+                                        <li class="fb">
+                                            <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank" >FACEBOOK</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if Custom('twitter_username') is not empty %}
+                                        <li class="tw">
+                                            <a href="//twitter.com/{{ Custom('twitter_username') }}" target="_blank">TWITTER</a>
+                                        </li>
+                                    {% endif %}
+                                    <li class="rss">
+                                        <a href="{{ Blog.RssUrl }}" target="_blank" >RSS</a>
                                     </li>
-                                {% endif %}
-                                {% if Custom('twitter_username') is not empty %}
-                                    <li class="tw">
-                                        <a href="//twitter.com/{{ Custom('twitter_username') }}" target="_blank">TWITTER</a>
-                                    </li>
-                                {% endif %}
-                                <li class="rss">
-                                    <a href="{{ Blog.RssUrl }}" target="_blank" >RSS</a>
-                                </li>
+                                </ul>
                             </div>
                         {% endif %}
                     </article>
