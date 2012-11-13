@@ -272,6 +272,10 @@
         .articles.single .bloc-comment {margin-top: 25px;}
         .articles.single .bloc-comment h4 {margin-bottom: 5px;}
 
+        /* Repost banner */
+        .ob-repost {background: #E6E6E6; border-radius: 3px; font-weight: bold; border: 1px solid #D3D3D3; font-size: 13px; padding: 0.4em 0.8em; text-align: center; text-shadow: 1px 1px 1px #F6F6F6;}
+        .ob-repost .ob-link {text-decoration: underline;}
+
         /* Section image */
         .ob-section-images {width: 100%;}
         .ob-section-images img {max-width: 622px;}
@@ -570,11 +574,11 @@
                                                     {% endif %}
                                                 </p>
                                                 {% if isSingle or Custom('display_mode') == 'All' %}
-                                                    <p>{{ Post.Body }}</p>
+                                                    {{ Post.Body }}
                                                 {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
                                                     {{ Post.Body(Custom('display_mode')) }}
                                                 {% else %}
-                                                    {{ Post.Snippet }}
+                                                    <p>{{ Post.Snippet }}</p>
                                                 {% endif %}
                                             </div>
 

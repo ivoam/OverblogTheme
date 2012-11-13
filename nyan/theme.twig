@@ -45,6 +45,9 @@
             cursor: pointer;
             color: #333;
         }
+        .ob-repost {
+            text-align: center;
+        }
         /* Sky */
         #posts .sky {
             position: absolute;
@@ -337,7 +340,7 @@
                         <p class="date">
                             {{Post.Author}} nyaned this on {{Post.Date|date('Y-m-d h:m:s')}}
                         </p>
-                        <div class="content">
+                        <div class="content">                            
                             {{Post.Body}}
                         </div>
                         <div class="comments">

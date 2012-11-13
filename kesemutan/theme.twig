@@ -198,6 +198,7 @@
 			.post-tag a:hover {text-decoration: underline;}
 			.post-cover {margin-bottom: 10px;}
 			.post-body {background: url('http://assets.over-blog-kiwi.com/themes/38/img/post-bodybgcenter.png') no-repeat left top; border-bottom: 1px solid #f2f2f2; line-height: 20px; word-wrap: break-word;}
+            .ob-repost {border: 1px dashed #DDD; font-weight: bold; padding: .3em .8em; text-align: center;}
 			.post-body h3,
 			.post-body h4,
 			.post-body h5 {font-family: 'Arial', 'Helvetica', sans-serif; font-weight: normal; margin: 15px 0 5px;}
@@ -475,7 +476,7 @@
 										{% endif %}
 										<div class="post-body">
 											{% if isSingle or Custom('display_mode') == 'All' %}
-												{{ Post.Body }}
+                                                {{ Post.Body }}
 											{% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
 												{{ Post.Body(Custom('display_mode')) }}
 											{% else %}
