@@ -190,6 +190,8 @@
 			.post .tags span {font-style: italic; text-transform: lowercase;}
 
 			.post .body {margin: 40px 0 10px; line-height: 22px;}
+			.ob-repost {padding: .5em .8em; text-align: center;}
+			.ob-repost .ob-link {text-decoration: underline;}
 			.ob-section {width: 100%;}
 			.ob-cell,
 			.ob-img,
@@ -350,7 +352,7 @@
 
 								<div class="body">
 									{% if isSingle or Custom('display_mode') == 'All' %}
-			                            {{ Post.Body }}
+										{{ Post.Body }}
 			                        {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
 			                            {{ Post.Body(Custom('display_mode')) }}
 			                        {% else %}

@@ -394,6 +394,13 @@
 					padding-bottom: 20px;
 					text-align: justify;
 				}
+				.ob-repost {
+					font-weight: bold;
+					text-align: center;
+				}
+				.ob-repost .ob-link {
+					text-decoration: underline;
+				}
 
 				.links {
 					float: right;
@@ -678,7 +685,7 @@
                                 {% endlist %}
                             </p>
                             <div class="entry">
-                                {{ Post.Body }}
+                            	{{ Post.Body }}
                                 <div class="ob-section m-social-networks">
                                     <!-- Social networks : share -->
                                     <h3>{{ Lang.Get('Share this post') }}</h3>

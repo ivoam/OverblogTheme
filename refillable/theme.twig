@@ -344,11 +344,13 @@
 				.post {
 					margin-bottom: 15px;
 				}
-
-				.post-bgtop {
+				.ob-repost {
+					background: #111;
+					font-weight: bold;
+					text-align: center;
 				}
-
-				.post-bgbtm {
+				.ob-repost .ob-link {
+					text-decoration: underline;
 				}
 
 				.post .title {
@@ -743,7 +745,8 @@
                                         </p>
                                         <div style="clear: both;">&nbsp;</div>
                                         <div class="entry">
-                                            {{ Post.Body }}
+                                        	{{ Post.Body }}
+                                           
                                             <div class="ob-section m-social-networks">
                                                 <!-- Social networks : share -->
                                                 <h3>{{ Lang.Get('Share this post') }}</h3>

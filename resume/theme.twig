@@ -521,7 +521,15 @@
 		h3 {
 			font-size: 1.2em;
 		}
-
+		.ob-repost {
+			background-color: #{% if Custom('block_variant') == 'light' %}b2b2b2{% else %}4d4d4d{% endif %};
+			background: rgba({% if Custom('block_variant') == 'light' %}255,255,255{% else %}0,0,0{% endif %},0.{{ Custom('block_opacity')|default('75') }});
+			font-weight: bold;
+			text-align: center;
+		}
+		.ob-repost .ob-link {
+			text-decoration: underline;
+		}
 		.ob-text h2,
 		.ob-text h3,
 		.ob-text h4 {

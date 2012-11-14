@@ -301,6 +301,15 @@
             text-transform: uppercase;
             font-size: 10px;
         }
+        .ob-repost {
+            border: 1px solid #DDD;
+            font-weight: bold;
+            margin: 2em 0 1em;
+            text-align: center;
+        }
+        .ob-repost .ob-link {
+            text-decoration: underline;
+        }
         /* Secondary Content ----------------- */
         #sidebar-wrapper {
             float: right;
@@ -448,12 +457,12 @@
                                                 </div>
                                                 <div class='post-body entry-content'>
                                                     {% if isSingle %}
-                                                    {{ Post.Body }}
+                                                        {{ Post.Body }}
                                                     {% else %}
                                                     {% if Post.Cover %}
-                                                    <p class="cover"><img src="{{ Post.Cover | resize(100) | crop }}" /></p>
+                                                        <p class="cover"><img src="{{ Post.Cover | resize(100) | crop }}" /></p>
                                                     {% endif %}
-                                                    {{ Post.Snippet }}
+                                                        {{ Post.Snippet }}
                                                     {% endif %}
                                                     <div style='clear: both;'></div>
                                                 </div>
@@ -492,14 +501,14 @@
                             </div>
                             <div class='blog-pager' id='blog-pager'>
                                 {% if Navigation.PreviousPage %}
-                                <span id="blog-pager-newer-link">
-                                    <a class="blog-pager-newer-link" href="{{ Navigation.PreviousPage }}" title="{{ Lang.Get('Previous page') }}">{{ Lang.Get('Newer posts') }}</a>
-                                </span>
+                                    <span id="blog-pager-newer-link">
+                                        <a class="blog-pager-newer-link" href="{{ Navigation.PreviousPage }}" title="{{ Lang.Get('Previous page') }}">{{ Lang.Get('Newer posts') }}</a>
+                                    </span>
                                 {% endif %}
                                 {% if Navigation.NextPage %}
-                                <span id="blog-pager-older-link">
-                                    <a class="blog-pager-older-link" href="{{ Navigation.NextPage }}" title="{{ Lang.Get('Next page') }}">{{ Lang.Get('Older posts') }}</a>
-                                </span>
+                                    <span id="blog-pager-older-link">
+                                        <a class="blog-pager-older-link" href="{{ Navigation.NextPage }}" title="{{ Lang.Get('Next page') }}">{{ Lang.Get('Older posts') }}</a>
+                                    </span>
                                 {% endif %}
                             </div>
                             <div class='clear'></div>

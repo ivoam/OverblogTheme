@@ -596,7 +596,6 @@
         .posts-quick .postmetadata,
         .post .postmetadata {
             font-size:12px;
-            float:left;
             width:100%;
             clear:both;
             padding-bottom:5px;
@@ -616,6 +615,12 @@
         .posts-quick .quick-read-more a:hover {
             color:#fff;
             background:#8f2425;
+        }
+        .ob-repost {
+            border: 1px solid #DDD;
+            font-weight: bold;
+            margin-top: 2em;
+            text-align: center;
         }
 
         .edit-link {
@@ -1275,15 +1280,15 @@
 
                             {% if isSingle %}
 
-                            <div class="entry">
-                                <article>
-                                    {{ Post.Body }}
-                                </article>
+                                <div class="entry">
+                                    <article>
+                                        {{ Post.Body }}
+                                    </article>
 
-                                <div id="comments">
-                                    {{ Post.Comments }}
+                                    <div id="comments">
+                                        {{ Post.Comments }}
+                                    </div>
                                 </div>
-                            </div>
 
                             {% else %}
 

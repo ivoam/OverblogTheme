@@ -226,6 +226,8 @@
 			.post-tags {margin-left: 10px;}
 			.post-tags a, .post-tags a:visited {color: #333; font-size: 12px; font-weight: bold; text-decoration: none;}
 			.post-tags a:hover {color: #50c7ef;}
+			.ob-repost {-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; font-size: 13px; font-weight: bold; padding: 0.4em .8em; text-align: center;}
+			.ob-repost .ob-link {text-decoration: underline;}
 
 			/* Sections */
 			.ob-section-text, .ob-section-images, .ob-section-video, .ob-section-audio, .ob-section-quote, .ob-row-1-col, .ob-row-2-col {width: 100%;}
@@ -459,6 +461,7 @@
 								</span>
 							</div>
 						</div>
+
 						{{ Post.Body }}
 						{% if Custom ('share_button') is not empty %}
 						<div class="share">

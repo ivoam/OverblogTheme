@@ -118,6 +118,13 @@
             float: left;
             width: 30%;
         }
+        .ob-repost {
+            font-weight: bold;
+            text-align: center;
+        }
+        .ob-repost .ob-link {
+            text-decoration: underline;
+        }
         .post-share-buttons {
             display: none
         }
@@ -490,7 +497,7 @@
                                                                                 <div class='post-body entry-content'>
                                                                                     <article>
                                                                                         {% if isSingle %}
-                                                                                        {{ Post.Body }}
+                                                                                            {{ Post.Body }}
                                                                                         {% else %}
                                                                                         {{ Post.Body(1) }}
                                                                                         {% endif %}
