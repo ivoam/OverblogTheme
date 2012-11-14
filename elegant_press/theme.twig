@@ -1603,7 +1603,7 @@
                 <div class="headline">
                     <!-- Search form -->
                     {% if Custom('custom_hide_widget_search_form') == false %}
-                        <form class="search" action="/search/" method="get">
+                        <form class="search" action="/search" method="post">
                             <fieldset>
                                 <input type="text" name="q" placeholder="{{ Lang.Get('Search our blog...') }}" value="{{ Search }}" />
                                 <input type="submit" name="go" id="go" value="{{ Lang.Get('Search') }}" />

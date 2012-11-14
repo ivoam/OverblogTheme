@@ -1204,7 +1204,7 @@
                     <!-- Search form -->
                     {% if Custom('custom_hide_widget_search_form') == false %}
                         <li>
-                            <form class="search" method="get" action="/search/">
+                            <form class="search" method="post" action="/search">
                                 <div class="ob-section">
                                     <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text" value="{{ Search }}" />
                                     <input type="submit" value="{{ Lang.Get('Search') }}" class="ob-input-submit" value="{{ Lang.Get('Go') }}" />

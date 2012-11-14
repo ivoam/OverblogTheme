@@ -28,7 +28,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
 
-        <!-- Social setting : Facebook, G+ .. --> 
+        <!-- Social setting : Facebook, G+ .. -->
         <meta property="og:site_name" content="{{ Blog.Title }}" />
         <meta property="og:type" content="blog" />
         <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
@@ -80,13 +80,13 @@
 
 
         <!-- shortcut:[Includes] -->
-        <!-- favicon -->        
+        <!-- favicon -->
         {% if Blog.FaviconUrl is not empty %}
             <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
         {% else %}
             <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
             <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
-        {% endif %} 
+        {% endif %}
 
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
@@ -140,7 +140,7 @@
             body {
                 font: normal normal 15px Tahoma, sans-serif;
                 min-width: 750px;
-                margin: 0; 
+                margin: 0;
                 padding: 0;
             }
             a:link, a:visited {
@@ -174,12 +174,12 @@
                 font-size: 100%;
             }
             .menu {
-                display: block; 
+                display: block;
                 margin: -10px 0 45px 10px;
                 padding: 0;
             }
             .menu li {
-                display: inline; 
+                display: inline;
                 margin: 0 1px;
                 padding: 10px 15px 10px 15px;
                 border-radius: 0 0 10px 10px;
@@ -206,7 +206,7 @@
 
             /* Posts ----------------------------------------------- */
             .date {
-                text-transform: uppercase; 
+                text-transform: uppercase;
                 padding-left: 10px;
                 font-size: 80%;
             }
@@ -292,15 +292,15 @@
                 list-style: none;
             }
             .social .facebook {
-                background: url("http://assets.over-blog-kiwi.com/themes/36/img/social-fb.png") no-repeat scroll 0 3px transparent; 
+                background: url("http://assets.over-blog-kiwi.com/themes/36/img/social-fb.png") no-repeat scroll 0 3px transparent;
                 padding-left: 40px;
             }
             .social .twitter {
-                background: url("http://assets.over-blog-kiwi.com/themes/36/img/social-twitter.png") no-repeat scroll 0 3px transparent; 
+                background: url("http://assets.over-blog-kiwi.com/themes/36/img/social-twitter.png") no-repeat scroll 0 3px transparent;
                 padding-left: 40px;
             }
             .social .rss {
-                background: url("http://assets.over-blog-kiwi.com/themes/36/img/social-rss.png") no-repeat scroll 0 3px transparent; 
+                background: url("http://assets.over-blog-kiwi.com/themes/36/img/social-rss.png") no-repeat scroll 0 3px transparent;
                 padding-left: 40px;
             }
             .social li {
@@ -316,7 +316,7 @@
                 margin-right: 10px;
             }
             .bio .photo img {
-                width: 60px; 
+                width: 60px;
                 height: 60px;
             }
 
@@ -326,7 +326,7 @@
 
             /* Search ----------------------------------------------- */
             .search {
-                float: right; 
+                float: right;
                 position: relative;
                 top: 10px;
             }
@@ -335,9 +335,9 @@
                 -webkit-border-radius: 5px;
                 -goog-ms-border-radius: 5px;
                 border-radius: 5px;
-                height: 19px; 
-                padding: 5px 10px; 
-                width: 152px; 
+                height: 19px;
+                padding: 5px 10px;
+                width: 152px;
             }
             -->
         </style>
@@ -520,7 +520,7 @@
             }
             -->
         </style>
-        {% endif %}                
+        {% endif %}
 
     </head>
     <body>
@@ -529,7 +529,7 @@
             <div class="header">
                 {% if Custom('hide_search') is empty and Custom('hide_search') == false %}
                     <div class="search">
-                        <form class="search" method="post" action="/search/">
+                        <form class="search" method="post" action="/search">
                             <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..." value="{% if isSearch %}{{ Search }}{% endif %}" />
                         </form>
                     </div>
@@ -580,14 +580,14 @@
                                 {{ Post.Title }}
                             {% elseif Post.Snippet is not empty %}
                                 {{ Post.Snippet|truncate(40) }}
-                            {% endif %}     
+                            {% endif %}
                         </a></h2>
                         <div class="entry">
                             {{ Post.Body }}
                         </div>
                         <p class="meta">
                             {% if Post.Author and Post.Author is not empty %}
-                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span> at {{ Post.Date|date("H:ia") }} 
+                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span> at {{ Post.Date|date("H:ia") }}
                             {% endif %}
                             {% if not isSingle and Post.ShowComments is not empty %} -
                                 <a href="{{ Post.Permalink }}#comments">{{ Lang.Get('See comments') }} ({{ Post.CommentCount('', '') }})</a>
@@ -614,9 +614,9 @@
 
             <div class="pagination">
                 {% if Navigation.PreviousPage is not empty %}
-                    <a href="{{ Navigation.PreviousPage }}" class="prev">{{ Lang.Get('Previous page') }}</a>&nbsp;| 
+                    <a href="{{ Navigation.PreviousPage }}" class="prev">{{ Lang.Get('Previous page') }}</a>&nbsp;|
                 {% elseif Navigation.PreviousPost is not empty %}
-                    <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="prev">{{ Lang.Get('Next article') }}</a>&nbsp;| 
+                    <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="prev">{{ Lang.Get('Next article') }}</a>&nbsp;|
                  {% endif %}
                 <a href="{{ Blog.Url }}" class="home">{{ Lang.Get('Home') }}</a>&nbsp;|&nbsp;
                 <a href="#" class="home">{{ Lang.Get('Back to top') }}</a>

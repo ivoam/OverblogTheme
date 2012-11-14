@@ -1162,7 +1162,7 @@
 		<!-- shortcut:[Footer] -->
 		<footer class="footer clearboth">
 			{% if Custom('custom_hide_widget_search_form') == false and not isSpecial %}
-	        	<form class="search {% if isSingle or isSpecial %}single{% else %}index{% endif %}" method="get" action="/search/">
+	        	<form class="search {% if isSingle or isSpecial %}single{% else %}index{% endif %}" method="post" action="/search">
 	                <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..." value="" />
 	                <input type="submit" value="{{ Lang.Get('Search') }}" />
 	            </form>
