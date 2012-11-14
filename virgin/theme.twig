@@ -422,7 +422,7 @@
                     {% if Custom('display_widget_search') == false %}
 	                    <div class="widget search" >
 	                        <h3>{{ Lang.Get('Search') }}</h3>
-                            <form action="/search" method="post">
+                            <form action="/search/" method="post">
                                 <input type="text" name="q" placeholder="{{ Lang.Get('Search something here') }}..." {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} />
 								<input type="submit" value="{{ Lang.Get('Search') }}" />
                             </form>

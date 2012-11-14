@@ -539,7 +539,7 @@
 				</div>
                 {% if Custom('custom_hide_widget_search_form') == false %}
                     <div id="search">
-                        <form method="post" action="/search">
+                        <form method="get" action="/search/">
                             <div>
                                 <input class="form-text" size="32" maxlength="64" type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text" value="" />
                             </div>

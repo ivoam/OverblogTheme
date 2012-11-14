@@ -878,7 +878,7 @@
                                     <!-- Search form -->
                                     {% if Custom('custom_hide_widget_search_form') == false %}
                                         <li>
-                                            <form method="post" class="search" action="/search">
+                                            <form method="get" class="search" action="/search/">
                                                 <input type="text" class="s-input" title="search" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}..." name="q" />
                                                 <input type="submit" class="ob-input-submit" title="Search" value="{{ Lang.Get('Go') }}" />
                                             </form>

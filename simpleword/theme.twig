@@ -805,7 +805,7 @@
                         {% if Custom('custom_hide_widget_search_form') == false %}
                             <li id="search" class="widget widget_search">
                                 <h2>Search</h2>
-                                <form method="post" id="search" action="/search">
+                                <form method="get" id="search" action="/search/">
                                     <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text" value="" />
                                 </form>
                             </li>

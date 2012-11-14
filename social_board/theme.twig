@@ -1249,7 +1249,7 @@
                         <p>{{ Blog.Description }}</p>
                     {% endif %}
 
-                    <form class="search" action="/search" method="post">
+                    <form class="search" action="/search/" method="post">
                         <input type="text" placeholder="{{ Lang.Get('Search') }}" {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} name="q" />
                         <input type="submit" title="{{ Lang.Get('Search') }}" value="" />
                     </form>
