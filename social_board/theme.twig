@@ -1749,32 +1749,6 @@
                 }(document,"script","twitter-wjs");
             {% endif %}
 
-            {% if Custom('display_widget_archives') == false %}
-                // Archives
-                function switch_arch(year) {
-                    'use strict';
-                    var archiveYear,
-                        archiveMonths,
-                        displayStyle;
-
-                        displayStyle = '';
-                    archiveYear = document.getElementById('arch_' + year);
-                    if (typeof (archiveYear) !== 'undefined') {
-                        if (archiveYear.style.display !== 'none') {
-                            // Hide years without months
-                            archiveMonths = archiveYear.getElementsByTagName('li');
-                            if (!archiveMonths.length) {
-                                archiveYear.parentNode.style.display = 'none';
-                            }
-                            // Onclick management
-                            displayStyle = 'none';
-                        }
-                        archiveYear.style.display = displayStyle;
-                    }
-                    return false;
-                }
-            {% endif %}
-
             // Comments
             {% if Custom('comment') == 'Facebook' %}
                 // Facebook comments
@@ -1850,7 +1824,7 @@
 
                             newElems.imagesLoaded(function() {
                                 newElems.animate({ opacity: 1 });
-                                container.masonry( "appended", newElems, true );
+                                container.masonry( "appended", newElems, false );
                             });
 
                             TwitterControls(items);
@@ -1914,17 +1888,24 @@
 
                 {% if Custom('display_widget_archives') == false %}
                     // Archives
+                    // Hide years without months
+                    $(".arch_year").each(function() {
+                        if ($(this).find(".arch_month li").length == 0) {
+                            $(this).hide();
+                        }
+                    });
+                    
+                    $(".arch_month").hide();
                     $('.arch_year > a').click(function() {
-                        switch_arch($(this).attr('data-year'));
-                        {% if not isSingle %}
-                            container.masonry('reload');
+                        {% if isSingle or isSpecial %}
+                            $(this).siblings(".arch_month").slideToggle(10);  
+                        {% else %}
+                            $(this).siblings(".arch_month").slideToggle(10, function(){
+                                container.masonry('reload')
+                            });  
                         {% endif %}
                         return false;
                     });
-
-                    {% list Blog.Archives %}
-                        switch_arch('{{ Archive.Year }}');
-                    {% endlist %}
                 {% endif %}
             });
         </script>
