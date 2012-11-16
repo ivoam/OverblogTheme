@@ -1223,7 +1223,7 @@
             /* ----------------------------- */
             /* ==SCROLL TO TOP */
             /* ----------------------------- */
-            body.withsharebar .scroll-to-top {
+            body.withshareBar .scroll-to-top {
                 bottom: 45px;
                 position: fixed;
                 right: 20px;
@@ -1628,6 +1628,7 @@
                 var TwitterDisabled = function(elements) {
                     $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
                 }
+
                 // Social popup
                 var SocialPopup = function(elements) {
                     $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
@@ -1648,17 +1649,13 @@
 
                 {% if Custom('post_opening') == 'Pop-in' %}
                     // Opening of the posts with fancybox
-                    var ItemFancybox = function (elements) {
+                    var ItemFancybox = function (selector) {
+
                         var ItemPermalink,
-                            ShareBar,
+                            shareBar,
                             url;
 
-                        ItemPermalink = $(elements).find(".permalink");
-                        if (!ItemPermalink) {
-                            return false;
-                        };
-
-                        ItemPermalink.fancybox({
+                        $(selector).fancybox({
                             autoHeight  : true,
                             autoSize    : false,
                             closeEffect : "elastic",
@@ -1676,19 +1673,15 @@
                                 },
                                 title : null
                             },
-                            afterLoad     : function() {
-                                ShareBar = $(".share-bar", this.content);
+                            afterLoad: function() {
+                                shareBar = $(".share-bar", this.content);
                                 this.content = $(".post", this.content);
                             },
-                            beforeShow : function() {
-                                if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                            afterShow: function() {
+                                if(!$.browser.msie || $.browser.msie && $.browser.version > 9.0 ){
                                     url = $(this.element).attr('href');
                                     history.pushState("", "", url);
                                 }
-                            },
-                            afterShow     : function() {
-                                // Insert share bar
-                                $(".fancybox-inner").append(ShareBar);
 
                                 // OB callback
                                 if (typeof OB != "undefined") { OB.restart && OB.restart(); }
@@ -1696,6 +1689,15 @@
                                 {% if Custom('comment') == "Facebook" %}
                                     // FB callback
                                     if (typeof FB != "undefined") { FB.XFBML.parse(document.body); }
+                                {% elseif Custom('comment') == 'Disqus' %}
+                                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                    (function() {
+                                        var dsq = document.createElement('script');
+                                            dsq.type = 'text/javascript';
+                                            dsq.async = true;
+                                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                    })();
                                 {% endif %}
 
                                 //Twitter render
@@ -1709,27 +1711,20 @@
                                     }
                                 }(document,"script","twitter-wjs");
 
+                                // Insert share bar
+                                $(".fancybox-inner").append(shareBar);
+
                                 // Disable image link
                                 $('.ob-link-img').click(function() {
                                     return false;
                                 });
+
                                 $('.ob-link-img').hover(function() {
                                     $(this).css('cursor','default');
                                 });
-
-                                {% if Custom('comment') == 'Disqus' %}
-                                    var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                                    (function() {
-                                        var dsq = document.createElement('script');
-                                            dsq.type = 'text/javascript';
-                                            dsq.async = true;
-                                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                                    })();
-                                {% endif %}
                             },
                             beforeClose : function() {
-                                if(!$.browser.msie && !$.browser.version <= 9.0 ){
+                                if(!$.browser.msie || $.browser.msie && $.browser.version > 9.0 ){
                                     history.back(1);
                                 }
 
@@ -1779,7 +1774,7 @@
                     return false;
                 }
             {% endif %}
-            
+
             // Comments
             {% if Custom('comment') == 'Facebook' %}
                 // Facebook comments
@@ -1791,7 +1786,7 @@
                         js.src = "//connect.facebook.net/{{ Blog.Lang }}_{{ Blog.Lang|upper }}/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                         fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
-            {% elseif Custom('comment') == 'Disqus' and isSingle %}
+            {% elseif isSingle and Custom('comment') == 'Disqus' %}
                 // Disqus comments
                 var disqus_shortname = '{{ Custom('comment_disqus') }}';
                 (function() {
@@ -1807,7 +1802,7 @@
                 {% if isSingle %}
                     // Fancybox on single pages via url
                     $(".ob-link-img").attr("rel", "fancybox").fancybox({
-                        type    : "image"
+                        type: "image"
                     });
 
                 {% elseif not isSpecial %}
@@ -1829,7 +1824,7 @@
                     SocialPopup($(".masonry-item"));
 
                     {% if Custom('post_opening') == 'Pop-in' %}
-                        ItemFancybox($(".masonry-item"));
+                        ItemFancybox($(".permalink"));
                     {% endif %}
 
                     ForceScrollBar();
@@ -1863,9 +1858,6 @@
                             TwitterDisabled(items);
 
                             SocialPopup(items);
-                            {% if Custom('post_opening') == 'Pop-in' %}
-                                ItemFancybox(items);
-                            {% endif %}
 
                             ForceScrollBar();
                         }
