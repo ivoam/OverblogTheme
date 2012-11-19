@@ -2,7 +2,7 @@
 <!--[if lte IE 7]> <html class="ie7 ie67" lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
 <!--[if IE 8]> <html class="ie8" lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
 <!--[if IE 9]><html class="ie9" lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"><![endif]-->
-<!--[if gt IE 8]><!-->
+<!--[if gt IE 9]><!-->
 <html lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog">
 <!--<![endif]-->
     <head>
@@ -1648,15 +1648,15 @@
                         $(this).parent().parent().find(".tweet-retweet").attr("href", "https://twitter.com/intent/retweet?tweet_id=" + datatwitter);
                         $(this).parent().parent().find(".tweet-favorite").attr("href", "https://twitter.com/intent/favorite?tweet_id=" + datatwitter);
                     });
-                }
+                },
 
                 // Disable tweets render
-                var TwitterDisabled = function(elements) {
+                TwitterDisabled = function(elements) {
                     $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
-                }
+                },
 
                 // Social popup
-                var SocialPopup = function(elements) {
+                SocialPopup = function(elements) {
                     $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share a").click(function() {
                         var popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
                         if (window.focus){
@@ -1664,18 +1664,11 @@
                         }
                         return false;
                     });
-                }
-
-                //Force scrollbar when content don't have one
-                var ForceScrollBar = function() {
-                    if($(window).scrollTop() + $(window).height() == $(document).height()){
-                        $('html').height($(document).height()+10);
-                    }
-                }
+                },
 
                 {% if Custom('post_opening') == 'Pop-in' %}
                     // Opening of the posts with fancybox
-                    var ItemFancybox = function (selector) {
+                    ItemFancybox = function (selector) {
 
                         var ItemPermalink,
                             shareBar,
@@ -1760,8 +1753,16 @@
                                 }
                             }
                         });
-                    }
+                    },
                 {% endif %}
+
+                //Force scrollbar when content don't have one
+                ForceScrollBar = function() {
+                    if($(window).scrollTop() + $(window).height() == $(document).height()){
+                        $('html').height($(document).height()+10);
+                    }
+                };
+
             {% elseif isSingle %}
                 //Twitter render
                 !function(d,s,id){
@@ -1920,15 +1921,15 @@
                             $(this).hide();
                         }
                     });
-                    
+
                     $(".arch_month").hide();
                     $('.arch_year > a').click(function() {
                         {% if isSingle or isSpecial %}
-                            $(this).siblings(".arch_month").slideToggle(1);  
+                            $(this).siblings(".arch_month").slideToggle(1);
                         {% else %}
                             $(this).siblings(".arch_month").slideToggle(1, function(){
                                 container.masonry('reload')
-                            });  
+                            });
                         {% endif %}
                         return false;
                     });
