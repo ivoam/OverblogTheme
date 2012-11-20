@@ -320,7 +320,7 @@
                                         <div id='outer-wrapper'>
                                             <div id='header-wrapper'>
                                                 <div id='searchbox'>
-                                                    <form action='/search/' id='searchthis' method='get'>
+                                                    <form action='/search' id='searchthis' method='get'>
                                                         <div class='content'>
                                                             <input class='textfield' name='q' size='24' type='text' value='' />
                                                             <input class='button' src='http://assets.over-blog-kiwi.com/themes/11/images/search.gif' type='image' value='submit'/>
@@ -455,7 +455,7 @@
                                                                     <p>
                                                                         No result… Try again !
                                                                     </p>
-                                                                    <form action="/search" method="get">
+                                                                    <form action="/search" method="post">
                                                                         <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
                                                                         <button type="submit">{{ Lang.Get('Search') }}!</button>
                                                                     </form>

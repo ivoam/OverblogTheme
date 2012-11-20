@@ -1198,7 +1198,7 @@
             </{% if isIndex %}h1{% else %}p{% endif %}>
             <p class="site-description">{{ Blog.Description }}</p>
             <div id="searchTop">
-                <form method="get" id="searchform" action="/search" method="get">
+                <form method="post" id="searchform" action="/search">
                     <input type="text" value="" name="q" id="q" class="txtField" />
                     <input type="submit" id="searchsubmit" class="btnSearch" value="{{ Search }}" />
                 </form>
@@ -1248,7 +1248,7 @@
                     <p>
                         No result… Try again !
                     </p>
-                    <form action="/search" method="get">
+                    <form action="/search" method="post">
                         <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
                         <button type="submit">{{ Lang.Get('Search') }}!</button>
                     </form>
@@ -1369,7 +1369,7 @@
                     <li>
                         <h2>Search</h2>
                         <div id="search">
-                            <form method="get" id="searchform" action="/search/">
+                            <form method="post" id="searchform" action="/search">
                                 <input type="text" value="" name="q" id="q" class="txtField" />
                                 <input type="submit" id="searchsubmit" class="btnSearch" value=" " />
                             </form>

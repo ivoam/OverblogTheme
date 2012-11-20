@@ -1159,7 +1159,7 @@
 					{% if Custom('disable_search') == false %}
 					<div class="item search">
 						<h3>{{ Lang.Get('Search') }}</h3>
-						<form method="get" action="/search/">
+						<form method="post" action="/search">
 							<input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..." value="{{ Lang.Get('Search') }}..." /><input type="submit" value="{{ Lang.Get('Ok') }}" />
 						</form>
 					</div>

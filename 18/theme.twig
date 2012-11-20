@@ -661,7 +661,7 @@
                 <div id="top_search">
                     <!-- Search form -->
                     {% if Custom('custom_hide_widget_search_form') == false %}
-                        <form method="get" id="searchforma" class="search" action="/search/">
+                        <form method="post" id="searchforma" class="search" action="/search">
                             <input type="text" class="search-input png_crop" title="search" value="Search" id="edit-search-theme-form-keys" placeholder="{{ Lang.Get('Search') }}..." name="q" />
                             <input type="image" alt="Search" title="Search" class="search-submit png_crop" name="op" value="" src="http://assets.over-blog-kiwi.com/themes/18/images/submit.png"/>
                         </form>

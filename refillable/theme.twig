@@ -903,7 +903,7 @@
                                 {% if Custom('custom_hide_widget_search_form') == false %}
                                     <li>
                                         <div id="search" >
-                                            <form class="search" method="get" action="/search/">
+                                            <form class="search" method="post" action="/search">
                                                 <div>
                                                     <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text" value="" />
                                                     <input type="submit" value="{{ Lang.Get('Search') }}" id="search-submit" value="{{ Lang.Get('Go') }}" />

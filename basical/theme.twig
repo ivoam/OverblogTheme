@@ -1810,7 +1810,7 @@
                 <!-- Search form -->
                 {% if Custom('custom_hide_widget_search_form') == false %}
                     <div id="searchform-wrap">
-                        <form class="search" id="searchform" method="get" action="/search/">
+                        <form class="search" id="searchform" method="post" action="/search">
                             <div>
                                 <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}" id="s" value="{{ Search }}" />
                             </div>
@@ -1982,7 +1982,7 @@
                     <!-- Search form -->
                     {% if Custom('custom_hide_widget_search_form') == false %}
                         <div id="search-2" class="widget widget_search">
-                            <form class="search" id="searchform" method="get" action="/search/">
+                            <form class="search" id="searchform" method="post" action="/search">
                                 <div>
                                     <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}"  id="s" value="{{ Search }}" />
                                 </div>
