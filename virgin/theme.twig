@@ -329,7 +329,7 @@
 										{% else %}
 										    <a class="comment-number" href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}">
 										        {% if Custom("comment") == "Facebook" %}
-										        	<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+										        	<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count> {{ Lang.Get('comment(s)') }}
 										        	{{ Lang.Get('comment(s)') }}
 										        {% else %}
 										       		{{ Post.CommentCount(Lang.Get('comment'), Lang.Get('comments')) }}
