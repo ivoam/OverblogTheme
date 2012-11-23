@@ -431,7 +431,9 @@
         </style>
     </head>
     <body id="top">
-        <div id="fb-root"></div>
+        {% if Custom('share_service') == 'Facebook' or Custom('share_service') == 'All' or Custom('comment') == 'facebook' %}
+            <div id="fb-root"></div>
+        {% endif %}
         <div class="top">
             {% if Custom('headline') is not empty %}
                 <div class="wrap">
@@ -966,15 +968,17 @@
                     s.parentNode.insertBefore(po, s);
             })();
 
-            // Facebook share + comments
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                    fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
+            {% if Custom('share_service') == 'Facebook' or Custom('share_service') == 'All' or Custom('comment') == 'facebook' %}
+                // Facebook share + comments
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                        fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            {% endif %}
 
             // Twitter share + posts
             !function(d,s,id){
