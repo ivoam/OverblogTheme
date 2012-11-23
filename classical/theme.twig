@@ -173,7 +173,7 @@
 
         /*----- TOP  -----*/
         .top {background: #202224; height: 38px; border-bottom: 1px solid #383b3d; line-height: 38px; color: white; font-weight: bold; text-shadow: 0px 1px 0px #000; font-size: 11px;}
-        .header {background: url("http://assets.over-blog-kiwi.com/themes/1/images/bg-header.jpg") repeat; margin-bottom: 20px;}
+        .header {background: url("http://assets.over-blog-kiwi.com/themes/1/images/bg-header.jpg") repeat;}
         .head {background: url("http://assets.over-blog-kiwi.com/themes/1/images/header.jpg") repeat-y; width: 986px; padding-top: 40px;}
 
         /*---- Logo ----*/
@@ -191,7 +191,7 @@
         .search input[type="submit"] {background: url("http://assets.over-blog-kiwi.com/themes/1/images/search-submit.png") no-repeat; width: 17px; height: 17px; border: none; cursor: pointer; position: absolute;right: 10px;top: 12px;text-indent: -1337px;font-size: 0; display:block; line-height: 0;}
 
         /*---- Navigation ----*/
-        .navigation {background: url("http://assets.over-blog-kiwi.com/themes/1/images/nav.png") no-repeat; width: 926px; margin: 20px auto 26px; float: left; line-height: 60px; overflow: hidden; padding-left: 30px; padding-right: 30px;}
+        .navigation {background: url("http://assets.over-blog-kiwi.com/themes/1/images/nav.png") no-repeat; width: 926px; margin: 20px auto 26px; float: left; line-height: 60px; overflow: hidden; padding: 0 30px;}
         .navigation li {height: 46px;float: left; margin-right: 10px; background: url("http://assets.over-blog-kiwi.com/themes/1/images/nav-sep.png") no-repeat scroll 0 10px transparent; padding-bottom: 10px; margin-right: 20px; padding-left: 20px;}
         .navigation li.first {padding-left: 0px;background: none;}
         .navigation li.last {margin-right: 0px;}
@@ -200,12 +200,12 @@
         .navigation a:hover {text-decoration: none; text-shadow: 0px 0px 4px #00a2ff; transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s;}
 
         /*---- Content ----*/
-        .main {margin-top: -50px; padding-bottom: 20px; position: relative;z-index: 3;}
-        .top-content {background: url("http://assets.over-blog-kiwi.com/themes/1/images/content-top.png") no-repeat; width: 984px; height: 19px; margin: 0 auto;}
-        .content {background: url("http://assets.over-blog-kiwi.com/themes/1/images/content.png") repeat-y scroll 0 0 transparent;float: left;margin: 0 auto 0 1px;padding: 0 10px 7px;width: 964px;}
-        .bottom-content {background: url("http://assets.over-blog-kiwi.com/themes/1/images/content-bottom.png") no-repeat; width: 984px; height: 16px; margin: 0 auto; clear: both;}
+        .main {margin-top: 0px; padding-bottom: 20px; position: relative;z-index: 3;}
+        .content:before {content: url("http://assets.over-blog-kiwi.com/themes/1/images/content-top.png"); left: 0; position: absolute; top: -19px;}
+        .content {background: url("http://assets.over-blog-kiwi.com/themes/1/images/content.png") repeat-y scroll 0 0 transparent; margin: 0 auto 0 1px; padding: 0 10px 7px; position: relative; top: -12px; width: 964px;}
+        .content:after {content: url("http://assets.over-blog-kiwi.com/themes/1/images/content-bottom.png"); left: 0; position: absolute; bottom: -21px;}
         .content-left {float: left; width: 622px; margin-right: 21px; padding-left: 10px; padding-right: 10px;}
-        .sidebar {float: left; width: 300px;}
+        .sidebar {float: right; width: 300px;}
 
         /*---- Slideshow ----*/
         .slideshow {position: relative; width: 622px; height: 299px;}
@@ -271,10 +271,6 @@
         .articles .bloc-infos {float: left; width: 100%; padding-top: 20px; padding-bottom: 20px; border-bottom: 1px solid #F2F2F2; border-top: 1px solid #F2F2F2;}
         .articles.single .bloc-comment {margin-top: 25px;}
         .articles.single .bloc-comment h4 {margin-bottom: 5px;}
-
-        /* Repost banner */
-        .ob-repost {background: #E6E6E6; border-radius: 3px; font-weight: bold; border: 1px solid #D3D3D3; font-size: 13px; padding: 0.4em 0.8em; text-align: center; text-shadow: 1px 1px 1px #F6F6F6;}
-        .ob-repost .ob-link {text-decoration: underline;}
 
         /* Section image */
         .ob-section-images {width: 100%;}
@@ -477,8 +473,7 @@
         </div>
         <div class="main">
             <div class="wrap">
-                <div class="top-content"></div>
-                <div class="content">
+               <div class="content">
                     <div class="content-left">
                         {% if isIndex %}
                             <!-- Index Page -->
@@ -574,11 +569,11 @@
                                                     {% endif %}
                                                 </p>
                                                 {% if isSingle or Custom('display_mode') == 'All' %}
-                                                    {{ Post.Body }}
+                                                    <p>{{ Post.Body }}</p>
                                                 {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
                                                     {{ Post.Body(Custom('display_mode')) }}
                                                 {% else %}
-                                                    <p>{{ Post.Snippet }}</p>
+                                                    {{ Post.Snippet }}
                                                 {% endif %}
                                             </div>
 
@@ -817,15 +812,15 @@
                             </div>
                         {% endif %}
                     </div>
+                    <div class="cb"></div>
                 </div>
-                <div class="bottom-content"></div>
             </div>
         </div>
         <div class="footer">
             <div class="wrap">
                 <p>
                     <span class="bold blue">
-                        {% if Custom('footer') is not empty %} {{ Custom('footer') }}&nbsp;-&nbsp;{% endif %} <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://www.over-blog.com" target="_bank">Overblog</a>
+                        {% if Custom('footer') is not empty %} {{ Custom('footer') }}&nbsp;-&nbsp;{% endif %} <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://overblog.com" target="_bank">Overblog</a>
                     </span>
                 </p>
                 <a href="#top" class="gotop">
@@ -1050,3 +1045,4 @@
         </script>
     </body>
 </html>
+"
