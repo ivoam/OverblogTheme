@@ -1042,15 +1042,6 @@
 				}
 			},
 
-			Timeline.Search = function () {
-				// Search form hack
-				$('form.search').submit(function(e){
-					e.preventDefault();
-					window.location = $(this).attr('action') + $(this).find('input').attr('value');
-					return false;
-				});
-			},
-
 			Timeline.Strech = function () {
 				if($.browser.msie && $.browser.version <= 8.0 ){
 					{% if Custom('background_repeat') == 'strech' and Custom('background_image') is not empty %}
@@ -1077,7 +1068,6 @@
 					Timeline.Fancybox(Timeline.elsStart);
 					Timeline.Socialite(Timeline.elsStart, true);
 					Timeline.Placeholder();
-					Timeline.Search();
 					Timeline.Strech();
 
 					// loadmore plugin
@@ -1116,7 +1106,6 @@
 					Timeline.Fancybox(Timeline.elsStart);
 					Timeline.Socialite(Timeline.elsStart, false);
 					Timeline.Placeholder();
-					Timeline.Search();
 					Timeline.Strech();
 				{% endif %}
 			});
