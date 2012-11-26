@@ -272,6 +272,10 @@
         .articles.single .bloc-comment {margin-top: 25px;}
         .articles.single .bloc-comment h4 {margin-bottom: 5px;}
 
+        /* Repost banner */
+        .ob-repost {background: #E6E6E6; border-radius: 3px; font-weight: bold; border: 1px solid #D3D3D3; font-size: 13px; padding: 0.4em 0.8em; text-align: center; text-shadow: 1px 1px 1px #F6F6F6;}
+        .ob-repost .ob-link {text-decoration: underline;}
+
         /* Section image */
         .ob-section-images {width: 100%;}
         .ob-section-images img {max-width: 622px;}
@@ -571,11 +575,11 @@
                                                     {% endif %}
                                                 </p>
                                                 {% if isSingle or Custom('display_mode') == 'All' %}
-                                                    <p>{{ Post.Body }}</p>
+                                                    {{ Post.Body }}
                                                 {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
                                                     {{ Post.Body(Custom('display_mode')) }}
                                                 {% else %}
-                                                    {{ Post.Snippet }}
+                                                    <p>{{ Post.Snippet }}</p>
                                                 {% endif %}
                                             </div>
 
@@ -822,7 +826,7 @@
             <div class="wrap">
                 <p>
                     <span class="bold blue">
-                        {% if Custom('footer') is not empty %} {{ Custom('footer') }}&nbsp;-&nbsp;{% endif %} <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://overblog.com" target="_bank">Overblog</a>
+                        {% if Custom('footer') is not empty %} {{ Custom('footer') }}&nbsp;-&nbsp;{% endif %} <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://www.over-blog.com" target="_bank">Overblog</a>
                     </span>
                 </p>
                 <a href="#top" class="gotop">
@@ -893,66 +897,22 @@
                 });
 
                 {% if Custom('custom_hide_widget_search_form') == false %}
-                    (function() {
-                        // HTML5 placeholder fallback
-                        function isPlaceholderSupported() {
-                            'use strict';
-                            var o = document.createElement('input');
-                            return 'placeholder' in o;
-                        }
-                        function initPlaceHolder(el){
-                            if(jQuery.trim(el.val()) === '' || jQuery.trim(el.val()) === el.attr('placeholder')){
-                                el.val(el.attr('placeholder'));
-                                el.css({'color': '#999'});
-                            }
-                        }
-                        function togglePlaceholder(el, submitMode) {
-                            'use strict';
-                            var v = jQuery.trim(el.val()), p = el.attr('placeholder');
-                            if (v === '' && !submitMode) {
-                                el.val(p);
-                                el.css({'color': '#999'});
-                            } else if (v === p) {
-                                el.val('');
-                            }
-                        }
-                        function emulatePlaceholder(form) {
-                            'use strict';
-                            if (!isPlaceholderSupported()) {
-                                jQuery('input[placeholder]', form).each(function () {
-                                    initPlaceHolder(jQuery(this));
-                                }).focus(function () {
-                                    togglePlaceholder(jQuery(this), false);
-                                }).blur(function () {
-                                    initPlaceHolder(jQuery(this));
-                                });
-                                form.submit(function () {
-                                    jQuery(this).find('input[placeholder]').each(function () {
-                                        togglePlaceholder(jQuery(this), true);
-                                    });
-                                });
-                            }
-                        }
-
-                        // Search form
-                        function obSearchForm() {
-                            'use strict';
-                            var i= 0, form = jQuery('form.search');
-                            if (form.length) {
-                                form.each(function () {
-                                    emulatePlaceholder(jQuery(this));
-                                    var qInput = jQuery('input[name=q]', jQuery(this));
-                                    if (qInput.length) {
-                                        jQuery(this).submit(function (e) {
-                                            e.preventDefault();
-                                            window.location = jQuery(this).attr('action') + qInput.val();
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                        obSearchForm();
-                    })();
+                    if($.browser.msie && $.browser.version <= 9.0 ){
+                        $('input[placeholder]').each(function(){
+                            var input = $(this);
+                            $(input).val(input.attr('placeholder'));
+                            $(input).focus(function(){
+                                 if (input.val() == input.attr('placeholder')) {
+                                     input.val('');
+                                 }
+                            });
+                            $(input).blur(function(){
+                                if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                                    input.val(input.attr('placeholder'));
+                                }
+                            });
+                        });
+                    }
                 {% endif%}
             });
 
@@ -1049,4 +1009,3 @@
         </script>
     </body>
 </html>
-"
