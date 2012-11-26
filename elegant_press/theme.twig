@@ -2233,25 +2233,6 @@
                                 });
                             }
                         }
-
-                        // Search form
-                        function obSearchForm() {
-                            'use strict';
-                            var i= 0, form = jQuery('form.search');
-                            if (form.length) {
-                                form.each(function () {
-                                    emulatePlaceholder($(this));
-                                    var qInput = jQuery('input[name=q]', $(this));
-                                    if (qInput.length) {
-                                        $(this).submit(function (e) {
-                                            e.preventDefault();
-                                            window.location = jQuery(this).attr('action') + qInput.val();
-                                        });
-                                    }
-                                });
-                            }
-                        }
-                        obSearchForm();
                     {% endif%}
                 })();
             });
