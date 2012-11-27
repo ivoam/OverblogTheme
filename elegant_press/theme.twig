@@ -1286,7 +1286,10 @@
                 height:51px;
                 border:none;
                 text-indent:-999px;
-                background:url(http://assets.over-blog-kiwi.com/themes/32/images/ui.totop.png) no-repeat left top
+                background:url(http://assets.over-blog-kiwi.com/themes/32/images/ui.totop.png) no-repeat left top;
+            }
+            .withsharebar #toTop {
+                bottom: 50px;
             }
             #toTopHover {
                 background:url(http://assets.over-blog-kiwi.com/themes/32/images/ui.totop.png) no-repeat left -51px;
@@ -1625,17 +1628,20 @@
                         <a {% if isIndex %} {% endif %} href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                     </li>
 
-                    <!-- Tags -->
-                    <li>
-                        <a href="#">{{ Lang.Get('Tags') }}</a>
-                        <ul>
-                            {% list Blog.PostsTags(Custom('tag_number')|default('10'), 'SORT_POSTS_NUMBER_DESC') %}
-                                <li {% if isTag and Tag.Title == PostsTag.Title %} class="active" {% endif %}>
-                                    <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
-                                </li>
-                            {% endlist %}
-                        </ul>
-                    </li>
+                    {% if Post.tags is not empty %}
+                        <!-- Tags -->
+                        <li>
+                            <a href="#">{{ Lang.Get('Tags') }}</a>
+                            <ul>
+                                {% list Blog.PostsTags(Custom('tag_number')|default('10'), 'SORT_POSTS_NUMBER_DESC') %}
+                                    <li {% if isTag and Tag.Title == PostsTag.Title %} class="active" {% endif %}>
+                                        <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                    
                     <!-- Pages -->
                     {% list Blog.ListPages %}
                         {% if loop.first %}
