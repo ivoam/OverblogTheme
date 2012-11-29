@@ -1662,8 +1662,20 @@
                 },
 
                 // Disable tweets render
-                TwitterDisabled = function(elements) {
+                TwitterDisabled = function(elements, twitter) {
                     $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
+                    if(twitter){
+                        //Twitter render
+                        !function(d,s,id){
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if(!d.getElementById(id)){
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = "https://platform.twitter.com/widgets.js";
+                                fjs.parentNode.insertBefore(js,fjs);
+                            }
+                        }(document,"script","twitter-wjs");
+                    }
                 },
 
                 // Social popup
@@ -1731,15 +1743,20 @@
                                 {% endif %}
 
                                 //Twitter render
-                                !function(d,s,id){
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if(!d.getElementById(id)){
-                                        js = d.createElement(s);
-                                        js.id = id;
-                                        js.src = "https://platform.twitter.com/widgets.js";
-                                        fjs.parentNode.insertBefore(js,fjs);
-                                    }
-                                }(document,"script","twitter-wjs");
+                                if (typeof twttr != "undefined") { 
+                                    twttr.widgets.load(); 
+                                }
+                                else {
+                                    !function(d,s,id){
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if(!d.getElementById(id)){
+                                            js = d.createElement(s);
+                                            js.id = id;
+                                            js.src = "https://platform.twitter.com/widgets.js";
+                                            fjs.parentNode.insertBefore(js,fjs);
+                                        }
+                                    }(document,"script","twitter-wjs");
+                                }
 
                                 // Insert share bar
                                 $(".fancybox-inner").append(shareBar);
