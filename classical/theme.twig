@@ -248,7 +248,7 @@
         .article h1 {color: #254C67; font-size: 18px; font-family: 'Montserrat', Arial, sans-serif; margin-bottom: 5px;}
         .articles h3,
         .articles h4 {font-size: 18px;}
-        .articles a.readmore {background-color: #24578e; background: -moz-linear-gradient(#24578e 0%, #133d6e 100%); background: -webkit-linear-gradient(#24578e 0%, #133d6e 100%); background: -o-linear-gradient(#24578e 0%, #133d6e 100%); background: -ms-linear-gradient(#24578e 0%, #133d6e 100%); background: linear-gradient(#24578e 0%, #133d6e 100%); border: 1px solid #1D3E71; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; color: #FFF; display: inline-block; float: left; font-weight: bold; line-height: 18px; margin-right: 60px; margin-top: 3px; padding: 7px 10px; text-align: center; text-decoration: none; text-shadow: 0px 1px 1px #0e3965;}
+        .articles a.readmore {background-color: #24578e; background: -moz-linear-gradient(#24578e 0%, #133d6e 100%); background: -webkit-linear-gradient(#24578e 0%, #133d6e 100%); background: -o-linear-gradient(#24578e 0%, #133d6e 100%); background: -ms-linear-gradient(#24578e 0%, #133d6e 100%); background: linear-gradient(#24578e 0%, #133d6e 100%); border: 1px solid #1D3E71; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; color: #FFF; display: inline-block; float: left; font-weight: bold; line-height: 18px; margin-right: 50px; margin-top: 3px; padding: 7px 10px; text-align: center; text-decoration: none; text-shadow: 0px 1px 1px #0e3965;}
             .articles a.readmore:hover {background-color: #3781b2; background: -moz-linear-gradient(#3781b2 0%, #133d6e 55.63%); background: -webkit-linear-gradient(#3781b2 0%, #133d6e 55.63%); background: -o-linear-gradient(#3781b2 0%, #133d6e 55.63%); background: -ms-linear-gradient(#3781b2 0%, #133d6e 55.63%); background: linear-gradient(#3781b2 0%, #133d6e 55.63%);}
             .articles a.readmore:active {background-color: #224F86; background: -moz-linear-gradient(#1D467A 0%, #224F86 100%); background: -webkit-linear-gradient(#1D467A 0%, #224F86 100%); background: -o-linear-gradient(#1D467A 0%, #224F86 100%); background: -ms-linear-gradient(#1D467A 0%, #224F86 100%); background: linear-gradient(#1D467A 0%, #224F86 100%);}
         .article {margin-top: 20px; margin-bottom: 40px; word-wrap:break-word;}
@@ -344,10 +344,12 @@
 
         .excerpt .facebook-share,
         .excerpt .twitter-share,
-        .excerpt .google-share {float: left;}
-        .excerpt .facebook-share {width: 100px;}
-        .excerpt .twitter-share {margin-right: 20px; width: 120px;}
-        .excerpt .google-share {margin-right: 20px; width: 100px;}
+        .excerpt .google-share,
+        .excerpt .ob-share {float: left;}
+        .excerpt .facebook-share {margin-right: 10px; width: 95px;}
+        .excerpt .twitter-share {margin-right: 10px; width: 106px;}
+        .excerpt .google-share {margin-right: 10px; width: 80px;}
+        .excerpt .ob-share .ob-repost-btn {vertical-align: top;}
 
         /*---- Contact ----*/
         .ob-form {margin-bottom: 120px;}
@@ -625,8 +627,11 @@
                                                             <div class="facebook-share">
                                                                 <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
                                                             </div>
-                                                            <div class="cb"></div>
                                                         {% endif %}
+                                                        <div class="ob-share">
+                                                            {{ Post.RepostButton }}
+                                                        </div>
+                                                        <div class="cb"></div>
                                                     </div>
                                                 </div>
                                             {% endif %}
@@ -877,12 +882,7 @@
                             captionOpacity             : 1, // Universal caption opacity
                             prevText                   : '{{ Lang.Get('Previous') }}', // Prev directionNav text
                             nextText                   : '{{ Lang.Get('Next') }}', // Next directionNav text
-                            randomStart                : false, // Start on a random slide
-                            beforeChange               : function(){}, // Triggers before a slide transition
-                            afterChange                : function(){}, // Triggers after a slide transition
-                            slideshowEnd               : function(){}, // Triggers after all slides have been shown
-                            lastSlide                  : function(){}, // Triggers when last slide is shown
-                            afterLoad                  : function(){} // Triggers when slider has loaded
+                            randomStart                : false // Start on a random slide
                         });
                     }
                 {% endif %}
