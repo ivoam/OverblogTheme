@@ -249,9 +249,9 @@
                             <div class="before_articles">
                                 <div class="pagination clearfix">
                                     {% if Navigation.PreviousPage is not empty %}
-                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
+                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
                                     {% elseif Navigation.PreviousPost is not empty %}
-                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
                                     {% endif %}
                                     <a href="#" title="{{ Lang.Get('Go to the top') }}" class="top">^ {{ Lang.Get('Top') }} ^</a>
                                     {% if Navigation.NextPage is not empty %}
@@ -429,9 +429,9 @@
                             <div class="after_articles">
                                 <div class="pagination clearfix">
                                     {% if Navigation.PreviousPage is not empty %}
-                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
+                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
                                     {% elseif Navigation.PreviousPost is not empty %}
-                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
                                     {% endif %}
                                     <a href="#" title="{{ Lang.Get('Go to the top') }}" class="top">^ {{ Lang.Get('Top') }} ^</a>
                                     {% if Navigation.NextPage is not empty %}

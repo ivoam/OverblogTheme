@@ -135,7 +135,6 @@
             /*** General ***/
             .ln {clear: both;}
             #ln_2 {padding-bottom: 20px;}
-            .cl {float:left;}
             .clear {clear:both;}
             #header {min-height: 100px;}
             h1.title {text-align:center; width: 98%;}
@@ -147,8 +146,8 @@
 
             /* modele */
             #cl_0_0 {margin:0px; padding:0px; width:100%;}
-            #cl_1_0 {margin:0 5px; width:580px; padding:0 5px;}
-            #cl_1_1	{margin:0 0 0 20px; width:305px;}
+            #cl_1_0 {margin:0 5px; width:580px; padding:0 5px; float: left;}
+            #cl_1_1	{margin:0 0 0 20px; width:305px; float: right;}
             #cl_2_0 {width:100%;}
 
             .items-comments {width: 600px;}
@@ -264,9 +263,9 @@
                             <div class="before_articles">
                                 <div class="pagination clearfix">
                                     {% if Navigation.PreviousPage is not empty %}
-                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
+                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
                                     {% elseif Navigation.PreviousPost is not empty %}
-                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
                                     {% endif %}
                                     <a href="#" title="{{ Lang.Get('Go to the top') }}" class="top">^ {{ Lang.Get('Top') }} ^</a>
                                     {% if Navigation.NextPage is not empty %}
@@ -444,9 +443,9 @@
                             <div class="after_articles">
                                 <div class="pagination clearfix">
                                     {% if Navigation.PreviousPage is not empty %}
-                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
+                                        <a href="{{ Navigation.PreviousPage }}" class="previous"><< {{ Lang.Get('Previous page') }}</a>
                                     {% elseif Navigation.PreviousPost is not empty %}
-                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous"><< {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(20) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
                                     {% endif %}
                                     <a href="#" title="{{ Lang.Get('Go to the top') }}" class="top">^ {{ Lang.Get('Top') }} ^</a>
                                     {% if Navigation.NextPage is not empty %}
@@ -461,7 +460,6 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="clear"></div>
 
                 <div id="cl_1_1" class="cl">
                     <div class="column_content">
