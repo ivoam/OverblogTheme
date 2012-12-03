@@ -527,6 +527,9 @@
                 padding: .5em .8em;
                 text-align: center;
             }
+            .ob-repost p {
+                margin: 0;
+            }
             .ob-repost .ob-link {
                 text-decoration: underline;
             }
@@ -622,14 +625,15 @@
 
             .m-social-networks .google-share,
             .m-social-networks .twitter-share,
-            .m-social-networks .facebook-share {
+            .m-social-networks .facebook-share,
+            .m-social-networks .ob-share {
                 float: left;
             }
-            .fb_iframe_widget {
-                display: block !important;
+            .facebook-share {
+                width: 105px;
             }
-            .m-social-networks .fb-like {
-                margin-top: -2px;
+            .ob-share {
+                line-height: normal;
             }
 
             .m-social-networks h4,
@@ -898,40 +902,39 @@
                                         <p>{{ Post.Snippet }}</p>
                                         <div class="clear"></div>
                                     {% endif %}
-                                    {% if Custom('share_service') != 'None' %}
                                         <div class="ob-section m-social-networks">
-                                            {% if isSingle and Custom('share_service') != 'None' %}
-                                                <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
+                                            {% if Custom('share_service') != 'None' %}
+                                                {% if isSingle and Custom('share_service') != 'None' %}
+                                                    <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
+                                                {% elseif Custom('share_service') == 'Google +' %}
+                                                    <div class="google-share">
+                                                        <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
+                                                    </div>
+                                                {% elseif Custom('share_service') == 'Twitter' %}
+                                                    <div class="twitter-share">
+                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                                    </div>
+                                                {% elseif Custom('share_service') == 'Facebook' %}
+                                                    <div class="facebook-share">
+                                                        <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+                                                    </div>
+                                                {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                                    <div class="google-share">
+                                                        <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
+                                                    </div>
+                                                    <div class="twitter-share">
+                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                                    </div>
+                                                    <div class="facebook-share">
+                                                        <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+                                                    </div>
+                                                {% endif %}
                                             {% endif %}
-                                            {% if Custom('share_service') == 'Google +' %}
-                                                <div class="google-share">
-                                                    <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                                </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'Twitter' %}
-                                                <div class="twitter-share">
-                                                    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                                </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'Facebook' %}
-                                                <div class="facebook-share">
-                                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                                </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
-                                                <div class="google-share">
-                                                    <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                                </div>
-                                                <div class="twitter-share">
-                                                    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                                </div>
-                                                <div class="facebook-share">
-                                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                                </div>
-                                            {% endif %}
+                                            <div class="ob-share">
+                                                {{ Post.RepostButton }}
+                                            </div>
                                             <div class="clear"></div>
                                         </div>
-                                    {% endif %}
 
                                     {% if (Navigation.PreviousPost is not empty or Navigation.NextPost is not empty) %}
                                         <div class="pagination">

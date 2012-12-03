@@ -596,6 +596,14 @@
                         transition: all 1s ease-out;
             }
 
+            .box:before {
+                border-top: 1px solid #666;
+                content: '';
+                left: 0;
+                position: absolute;
+                top: -31px;
+                width: 960px;
+            }
             .box {
                 background-color:#FFF;
                 border:1px solid #666;
@@ -610,7 +618,8 @@
                      -o-box-shadow:5px 5px 5px #ccc;
                         box-shadow:5px 5px 5px #ccc;
                 margin-top: 30px;
-                padding:29px
+                padding: 29px;
+                position: relative;
             }
             .content {
                 display: block;
@@ -1337,8 +1346,12 @@
             .m-social-networks .pinterest {
                 float: left;
             }
-            .m-social-networks .facebook {
+            .m-social-networks .facebook,
+            .m-social-networks .pinterest {
                 margin-right: 30px;
+            }
+            .m-social-networks .ob-share {
+                margin-top: -2px;
             }
             #archivelist ul {
                 margin: 3px 0 3px 18px;
@@ -1702,34 +1715,28 @@
                                 <div class="entry">
                                     {{ Post.Body }}
 
-                                    {% if Custom('share_service') != 'None' %}
-                                        <div class="ob-section m-social-networks clear">
-                                            {% if isSingle and Custom('share_service') != 'None' %}
-                                                <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
-                                            {% endif %}
+                                    <div class="ob-section m-social-networks clear">
+                                        <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
+                                        {% if Custom('share_service') != 'None' %}
                                             {% if Custom('share_service') == 'Google +' %}
                                                 <div class="google">
                                                     <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                 </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'Twitter' %}
+                                            {% elseif Custom('share_service') == 'Twitter' %}
                                                 <div class="twitter">
                                                     <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                                 </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'Facebook' %}
+                                            {% elseif Custom('share_service') == 'Facebook' %}
                                                 <div class="facebook">
                                                     <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                                 </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'Pinterest' %}
+                                            {% elseif Custom('share_service') == 'Pinterest' %}
                                                 <div class="pinterest">
                                                     <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
                                                         <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                                     </a>
                                                 </div>
-                                            {% endif %}
-                                            {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                            {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                                 <div class="google">
                                                     <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                 </div>
@@ -1740,13 +1747,16 @@
                                                     <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
                                                 </div>
                                                 <div class="pinterest">
-                                                    <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal">
-                                                        <img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
+                                                    <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={{ Post.Snippet }}" class="pin-it-button" count-layout="horizontal" always-show-count="true">
+                                                        <img src="//assets.pinterest.com/images/PinExt.png" title="Pin It" />
                                                     </a>
                                                 </div>
                                             {% endif %}
-                                        </div>
-                                    {% endif %}
+                                            <div class="ob-share">
+                                                {{ Post.RepostButton }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
                                 {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
                                     <!-- Pagination -->

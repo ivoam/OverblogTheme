@@ -326,6 +326,8 @@
                     .twt-border {max-width: 100% !important; width: 100% !important;}
 
                     .social-sharing {margin: 30px 0;}
+                    .social-sharing .fb-like {width: 105px;}
+                    .social-sharing .ob-repost-btn {margin-top: -2px;}
                     .social-sharing h6,
                     .item-comments h6 {font-size: 16px; margin-bottom: 5px;}
 
@@ -550,27 +552,22 @@
                                         <p>{{ Post.Snippet }}</p>
                                     {% endif %}
                                 </div>
-                                {% if Custom('share_service') != 'None' %}
-                                    <div class="social-sharing">
-                                        {% if Custom('share_service') != 'None' %}
-                                            <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
-                                        {% endif %}
+                                <div class="social-sharing">
+                                    <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
+                                    {% if Custom('share_service') != 'None' %}
                                         {% if Custom('share_service') == 'Google +' %}
                                             <div class="left">
                                                 <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                             </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'Twitter' %}
+                                        {% elseif Custom('share_service') == 'Twitter' %}
                                            <div class="left">
                                                 <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'Facebook' %}
+                                        {% elseif Custom('share_service') == 'Facebook' %}
                                             <div class="left">
-                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false"></div>
                                             </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                        {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                             <div class="left">
                                                 <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                             </div>
@@ -578,12 +575,15 @@
                                                 <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                             </div>
                                             <div class="left">
-                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false"></div>
+                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false"></div>
                                             </div>
                                         {% endif %}
-                                       <div class="clear"></div>
-                                    </div>
-                                {% endif %}
+                                    {% endif %}
+                                    <div class="left">
+                                        {{ Post.RepostButton }}
+                                    </div>   
+                                    <div class="clear"></div>
+                                </div>
 
                                 {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
                                     <!-- Pagination -->
@@ -622,17 +622,15 @@
                                         {% endif %}
                                     </div>
                                 {% endif %}
-                                <footer class="tags">
-                                    {% list Post.Tags %}
-                                        {% if loop.index == 1 %}
-                                            <p class="tag">
-                                        {% endif %}
+                                {% if Post.Tags is not empty %}
+                                    <footer class="tags">
+                                        <p class="tag">
+                                            {% list Post.Tags %}
                                                 <a href="{{ Tag.Url }}" title="{{ Tag.Title }}">{{ Tag.Title|title }}</a>{% if loop.last is empty %}, {% endif %}
-                                        {% if loop.last is not empty %}
-                                            </p>
-                                        {% endif %}
-                                    {% endlist %}
-                                </footer>
+                                            {% endlist %}
+                                        </p>
+                                    </footer>
+                                {% endif %}
                             </article>
                         {% else %}
                             <p class="empty">

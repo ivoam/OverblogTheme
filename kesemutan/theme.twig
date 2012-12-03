@@ -313,8 +313,10 @@
 			.share h4 {font-size: 14px; margin-bottom: 5px;}
 			.google-share,
 			.twitter-share,
-			.facebook-share {float: left;}
-			.fb-like iframe {margin-top: 0px;}
+			.facebook-share,
+            .ob-share {float: left;}
+            .facebook-share {width: 105px;}
+            .ob-share {margin-top: -2px;}
 			.item-comments h4 {margin-bottom: 10px; font-size: 12px;}
 			.ob-ctn-add-comment iframe {height: 200px !important;}
 
@@ -492,38 +494,38 @@
 													<a href="{{ Tag.Url | lower }}">#{{ Tag.Title | lower }}</a>{% if loop.last %}</span>{% else %}, {% endif %}
 											{% endlist %}
 
-											{% if Custom('share_service') != 'None' %}
-												<div class="share">
+                                                <div class="share">
 													<h4>{% if isPage == false %}{{ Lang.Get('Share this post') }}{% else %}{{ Lang.Get('Share this page') }}{% endif %}</h4>
-							                		{% if Custom('share_service') == 'Google +' %}
-		                                                <div class="google-share">
-		                                                    <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-		                                                </div>
-		                                            {% endif %}
-		                                            {% if Custom('share_service') == 'Twitter' %}
-		                                                <div class="twitter-share">
-		                                                    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-		                                                </div>
-		                                            {% endif %}
-		                                            {% if Custom('share_service') == 'Facebook' %}
-		                                                <div class="facebook-share">
-		                                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
-		                                                </div>
-		                                            {% endif %}
-		                                            {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
-		                                                <div class="google-share">
-		                                                    <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-		                                                </div>
-		                                                <div class="twitter-share">
-		                                                    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-		                                                </div>
-		                                                <div class="facebook-share">
-		                                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-		                                                </div>
-		                                            {% endif %}
-		                                            <div class="clear"></div>
-									         	</div>
-									        {% endif %}
+                                                     {% if Custom('share_service') != 'None' %}
+    							                		{% if Custom('share_service') == 'Google +' %}
+    		                                                <div class="google-share">
+    		                                                    <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
+    		                                                </div>
+    		                                            {% elseif Custom('share_service') == 'Twitter' %}
+    		                                                <div class="twitter-share">
+    		                                                    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+    		                                                </div>
+    		                                            {% elseif Custom('share_service') == 'Facebook' %}
+    		                                                <div class="facebook-share">
+    		                                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
+    		                                                </div>
+    		                                            {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
+    		                                                <div class="google-share">
+    		                                                    <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
+    		                                                </div>
+    		                                                <div class="twitter-share">
+    		                                                    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+    		                                                </div>
+    		                                                <div class="facebook-share">
+    		                                                    <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+    		                                                </div>
+    		                                            {% endif %}
+                                                        <div class="ob-share">
+                                                            {{ Post.RepostButton }}
+                                                        </div>
+    		                                            <div class="clear"></div>
+                                                    {% endif %}
+    									        </div>
 
 									        {% if isSingle and not isPage %}
 										        <div id="navigation">

@@ -181,6 +181,7 @@
                 .pageContent p .contenuArticle ol,
                 .contenuArticle ul {font-size: 14px; line-height: 22px; padding-bottom: 8px;}
                 .ob-repost {background: #222; border: 1px solid #2A2A2A; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; font-weight: bold; margin: 1em 0; text-align: center;}
+                .ob-repost p {font-size: 12px; line-height: normal; padding: 0;}
                 .ob-repost .ob-link {text-decoration: underline;}
 
                     /* Sections */
@@ -257,11 +258,13 @@
                     .share {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; margin: 10px 0; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 9px 13px 8px; position: relative; width: 600px; z-index: 1;/* iframe Facebook */}
                     .share h6,
                     .item-comments h6 {margin-bottom: 10px; font-size: 16px; line-height: 16px;}
-                    .google-share {float: left; margin: 4px 10px 0 0;}
-                    .twitter-share {float: left; margin: 4px 10px 0 0;}
-                    .facebook-share {float: left;}
-                    .fb-like iframe {margin: 4px 10px -3px 0;}
-                    .comment-number {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; display: block; float: right; font-weight: bold; line-height: 17px; margin-top: 2px; padding: 2px 7px; text-align: center;}
+                    .google-share,
+                    .twitter-share,
+                    .facebook-share,
+                    .ob-share {float: left;}
+                    .facebook-share {width: 105px;}
+                    .ob-share {margin-top: -2px;}
+                    .comment-number {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; display: block; float: right; font-weight: bold; line-height: 17px; padding: 2px 7px; text-align: center;}
                     .item-comments {
                         {% if Custom('share_service') != 'None' %}margin-top: 30px;{% endif %}
                     }
@@ -769,24 +772,21 @@
 
                                         <!-- Share buttons + comments -->
                                         <div class="share">
+                                            <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                             {% if Custom('share_service') != 'None' %}
-                                                <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
                                                 {% if Custom('share_service') == 'Google +' %}
                                                     <div class="google-share">
                                                         <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                     </div>
-                                                {% endif %}
-                                                {% if Custom('share_service') == 'Twitter' %}
+                                                {% elseif Custom('share_service') == 'Twitter' %}
                                                     <div class="twitter-share">
                                                         <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
                                                     </div>
-                                                {% endif %}
-                                                {% if Custom('share_service') == 'Facebook' %}
+                                                {% elseif Custom('share_service') == 'Facebook' %}
                                                     <div class="facebook-share">
                                                         <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
                                                     </div>
-                                                {% endif %}
-                                                {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                                {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                                     <div class="google-share">
                                                         <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                     </div>
@@ -798,6 +798,9 @@
                                                     </div>
                                                 {% endif %}
                                             {% endif %}
+                                            <div class="ob-share">
+                                                {{ Post.RepostButton }}
+                                            </div>
 
                                             {% if isSingle == false and Post.ShowComments is not empty %}
                                                 {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}

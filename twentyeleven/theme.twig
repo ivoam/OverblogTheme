@@ -688,8 +688,15 @@
 			}
 			.google-share,
 			.facebook-share,
-			.twitter-share {
+			.twitter-share,
+			.ob-share {
 				float: left;
+			}
+			.facebook-share {
+				width: 105px;
+			}
+			.ob-share {
+				margin-top: -3px;
 			}
 			.share h6,
 			.item-comments h6 {
@@ -697,13 +704,6 @@
 				font-size: 18px;
 				font-weight: 300;
 				margin: 0 0 5px;
-			}
-			.share h4:first-letter,
-			.item-comments h4:first-letter {
-				text-transform: capitalize;
-			}
-			.fb-like iframe {
-				margin-bottom: -3px;
 			}
 
 			.special h3 {
@@ -966,7 +966,7 @@
 				</div>
 				<div id="search">
 					<form class="search" action="/search" method="post">
-						<input type="text" placeholder="{{ Lang.Get('Search') }}" value="{{ Search.Keyword }}" name="q" />
+						<input type="text" placeholder="{{ Lang.Get('Search') }}" value="" name="q" />
 						<input type="submit" value="{{ Lang.Get('Search') }}" />
 					</form>
 				</div>
@@ -1090,38 +1090,39 @@
 									</p>
 								</div>
 
-								{% if Custom('share_service') != 'None' %}
-									<div class="share">
-                                    	<h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
-                                    	{% if Custom('share_service') == 'Google +' %}
-                                            <div class="google-share">
-                                            	<div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                            </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'Twitter' %}
-                                        	<div class="twitter-share">
-                                            	<a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                            </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'Facebook' %}
-                                            <div class="facebook-share">
-                                            	<div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                            </div>
-                                        {% endif %}
-                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
-                                        	<div class="google-share">
-                                            	<div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                            </div>
-                                            <div class="twitter-share">
-                                            	<a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                            </div>
-                                            <div class="facebook-share">
-                                            	<div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                            </div>
-                                        {% endif %}
-                                        <div class="cb"></div>
-						         	</div>
-					         	{% endif %}
+								<div class="share">
+                                	<h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
+                                	{% if Custom('share_service') == 'Google +' %}
+                                        <div class="google-share">
+                                        	<div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
+                                        </div>
+                                    {% endif %}
+                                    {% if Custom('share_service') == 'Twitter' %}
+                                    	<div class="twitter-share">
+                                        	<a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                        </div>
+                                    {% endif %}
+                                    {% if Custom('share_service') == 'Facebook' %}
+                                        <div class="facebook-share">
+                                        	<div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+                                        </div>
+                                    {% endif %}
+                                    {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                    	<div class="google-share">
+                                        	<div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
+                                        </div>
+                                        <div class="twitter-share">
+                                        	<a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
+                                        </div>
+                                        <div class="facebook-share">
+                                        	<div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+                                        </div>
+                                    {% endif %}
+                                    <div class="ob-share">
+                                    	{{ Post.RepostButton }}
+                                    </div>
+                                    <div class="cb"></div>
+					         	</div>
 
 					         	{% if isSingle and Navigation.PreviousPost is not empty or Navigation.NextPost is not empty and not isPage%}
 									<div id="navigation" class="single">
@@ -1338,47 +1339,23 @@
 					'type'			: 'image'
 				});
 
-				(function() {
-                    // HTML5 placeholder fallback
-                    function isPlaceholderSupported() {
-                        'use strict';
-                        var o = document.createElement('input');
-                        return 'placeholder' in o;
-                    }
-                    function initPlaceHolder(el){
-                        if(jQuery.trim(el.val()) === '' || jQuery.trim(el.val()) === el.attr('placeholder')){
-                            el.val(el.attr('placeholder'));
-                            el.css({'color': '#999'});
-                        }
-                    }
-                    function togglePlaceholder(el, submitMode) {
-                        'use strict';
-                        var v = jQuery.trim(el.val()), p = el.attr('placeholder');
-                        if (v === '' && !submitMode) {
-                            el.val(p);
-                            el.css({'color': '#999'});
-                        } else if (v === p) {
-                            el.val('');
-                        }
-                    }
-                    function emulatePlaceholder(form) {
-                        'use strict';
-                        if (!isPlaceholderSupported()) {
-                            jQuery('input[placeholder]', form).each(function () {
-                                initPlaceHolder(jQuery(this));
-                            }).focus(function () {
-                                togglePlaceholder(jQuery(this), false);
-                            }).blur(function () {
-                                initPlaceHolder(jQuery(this));
-                            });
-                            form.submit(function () {
-                                jQuery(this).find('input[placeholder]').each(function () {
-                                    togglePlaceholder(jQuery(this), true);
-                                });
-                            });
-                        }
-                    }
-                })();
+				// Placeholder Script
+				if($.browser.msie && $.browser.version <= 9.0 ){
+				    $('input[placeholder]').each(function(){
+				        var input = $(this);
+				        $(input).val(input.attr('placeholder'));
+				        $(input).focus(function(){
+				             if (input.val() == input.attr('placeholder')) {
+				                 input.val('');
+				             }
+				        });
+				        $(input).blur(function(){
+				            if (input.val() == '' || input.val() == input.attr('placeholder')) {
+				                input.val(input.attr('placeholder'));
+				            }
+				        });
+				    });
+				}
 			});
 
 			{% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
