@@ -1328,12 +1328,8 @@
 						'loader' 		 : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts...') }}</p>",
 						onLoadItems      : function(items) {
 							FancyboxControls(items);
-							
-							console.log('toto');
 						},
 						onRenderComplete : function(items) {
-							console.log('toto2');
-							
 							if (typeof OB != "undefined") { 
 								OB.restart && OB.restart(); 
 							}
@@ -1346,7 +1342,7 @@
 								// Disqus callback
 								if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS && DISQUSWIDGETS.getCount(); 
 								}
-							{% elseif Custom('comment') == 'Facebook' %}-
+							{% elseif Custom('comment') == 'Facebook' %}
 	                            // FB callback
 	                            if (typeof FB != "undefined") { 
 	                            	FB.XFBML.parse(document.body); 
