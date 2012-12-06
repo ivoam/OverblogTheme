@@ -1701,7 +1701,8 @@
 
                         var ItemPermalink,
                             shareBar,
-                            url;
+                            url,
+                            location;
 
                         $(selector).fancybox({
                             autoHeight  : true,
@@ -1728,6 +1729,7 @@
                             afterShow: function() {
                                 if(!$.browser.msie || $.browser.msie && $.browser.version > 9.0 ){
                                     url = $(this.element).attr('href');
+                                    location = window.location.pathname;
                                     history.pushState("", "", url);
                                 }
 
@@ -1749,8 +1751,8 @@
                                 {% endif %}
 
                                 //Twitter render
-                                if (typeof twttr != "undefined") { 
-                                    twttr.widgets.load(); 
+                                if (typeof twttr != "undefined") {
+                                    twttr.widgets.load();
                                 }
                                 else {
                                     !function(d,s,id){
@@ -1778,7 +1780,7 @@
                             },
                             beforeClose : function() {
                                 if(!$.browser.msie || $.browser.msie && $.browser.version > 9.0 ){
-                                    history.back(1);
+                                    history.pushState("", "", location);
                                 }
 
                                 // kill Disqus
