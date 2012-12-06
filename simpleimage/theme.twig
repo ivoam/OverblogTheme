@@ -2,8 +2,8 @@
 <!--[if lte IE 7]> <html class="ie67 ie678" lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
 <!--[if IE 8]> <html class="ie8 ie678" lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
 <!--[if IE 9]> <html class="ie9" lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"> <![endif]-->
-<!--[if !IE]><!--> 
-<html lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog"> 
+<!--[if !IE]><!-->
+<html lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog">
 <!--<![endif]-->
 	<head>
 		<!-- shortcut:[Meta] -->
@@ -684,7 +684,7 @@
 				height: 61px;
 			}
 			.social .ob-share {
-				height: 59px;
+				height: 60px;
 				margin-right: 0;
 			}
 
@@ -1330,22 +1330,22 @@
 							FancyboxControls(items);
 						},
 						onRenderComplete : function(items) {
-							if (typeof OB != "undefined") { 
-								OB.restart && OB.restart(); 
+							if (typeof OB != "undefined") {
+								OB.restart && OB.restart();
 							}
 
-							if (typeof twttr != "undefined") { 
-								twttr.widgets.load(); 
+							if (typeof twttr != "undefined") {
+								twttr.widgets.load();
 							}
 
 							{% if Custom('comment') == 'Disqus' %}
 								// Disqus callback
-								if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS && DISQUSWIDGETS.getCount(); 
+								if (typeof DISQUSWIDGETS != "undefined" ){ DISQUSWIDGETS && DISQUSWIDGETS.getCount();
 								}
 							{% elseif Custom('comment') == 'Facebook' %}
 	                            // FB callback
-	                            if (typeof FB != "undefined") { 
-	                            	FB.XFBML.parse(document.body); 
+	                            if (typeof FB != "undefined") {
+	                            	FB.XFBML.parse(document.body);
 	                            }
 							{% endif %}
 
