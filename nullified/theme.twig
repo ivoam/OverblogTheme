@@ -904,9 +904,10 @@
                                     {% endif %}
                                         <div class="ob-section m-social-networks">
                                             {% if Custom('share_service') != 'None' %}
-                                                {% if isSingle and Custom('share_service') != 'None' %}
+                                                {% if isSingle %}
                                                     <h4>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h4>
-                                                {% elseif Custom('share_service') == 'Google +' %}
+                                                {% endif %}
+                                                {% if Custom('share_service') == 'Google +' %}
                                                     <div class="google-share">
                                                         <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
                                                     </div>
