@@ -959,22 +959,18 @@
                                     </h3>
                                 </div>
                                 <div class="box-content">
-                                    <ul>
+                                    <ul class="clearfix">
                                         {% list Blog.Posts(6) %}
                                             {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
-                                                <li {% if loop.index is odd %}class="left"{% endif %}>
+                                                <li {% if loop.index is odd %}class="left {% if not loop.first %}clear{% endif %}"{% endif %}>
                                                     <h3>
                                                         <a href="{{ Post.Permalink }}" title="{{ Post.Permalink }}">
                                                             <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(126,90)|crop }}{% else %}{{ Custom('post_cover')|resize(126,90)|crop }}{% endif %}" alt="" width="126" height="90" />
                                                         </a>
                                                     </h3>
                                                 </li>
-                                                {% if loop.index % 2 == 0 %}
-                                                    <div class="clear"></div>
-                                                {% endif %}
                                             {% endif %}
                                         {% endlist %}
-                                        <div class="clear"></div>
                                     </ul>
                                 </div>
                             </div>
