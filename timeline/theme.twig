@@ -251,7 +251,7 @@
 			/* Social Share */
 			.item .footer {background: #fafafa; border: 1px solid #e8ecf1; border-radius: 5px; line-height: 40px; margin-top: 25px; padding: 0 8px; position: relative;}
 
-			.item .share .button {background: #FFF url("http://vivienkaufinger.com/ob/share-buttons.png") no-repeat; border: 1px solid #CCC; border-radius: 4px; color: #333; display: inline-block; line-height: 18px; margin: 0 8px; font-size: 11px; padding: 2px 6px 2px 25px;}
+			.item .share .button {background: #FFF url("http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_affac08056020ba0f8958205b031c5ca_share-buttons.png") no-repeat; border: 1px solid #CCC; border-radius: 4px; color: #333; display: inline-block; line-height: 18px; margin: 0 8px; font-size: 11px; padding: 2px 6px 2px 25px;}
 			.item .share a.googleplus-one {background-position: 5px 4px;}
 			.item .share a.twitter-share {background-position: 5px -23px;}
 			.item .share a.facebook-like {background-position: 5px -50px;}
@@ -268,7 +268,7 @@
 			.share .ob-repost-btn {display: none; vertical-align: 2px;}
 			.single .ob-repost-btn {display: inline-block; margin-left: 10px;}
 			.share .ob-repost-btn span {font-weight: normal; vertical-align: middle;}
-			
+
 
 			/* Enhance images */
 			.yui3-slideshow {height: 460px;}
@@ -439,7 +439,7 @@
 				.item {border:solid 1px #1d1d1d;}
 				.timeline{ background-color:#121212;}
 			{% endif %}
-		</style>		
+		</style>
 	</head>
 	<body>
 		<div id="fb-root"></div>
@@ -877,7 +877,7 @@
 	            	if(hover){
 	            		$(elements).find('.share').one('mouseenter', function(){
 	            			Socialite.load($(this)[0]);
-	            			
+
 	            		});
 	            	} else{
 	            		Socialite.load($(elements));
@@ -966,7 +966,7 @@
 
 				{% if not isSingle %}
 					Timeline.elsStart = $('.item');
-					
+
 					$('.items-wrapper').imagesLoaded(function() {
 						Timeline.ItemDispatcher(Timeline.elsStart);
 						Timeline.EnhancePictures(Timeline.elsStart);
@@ -974,9 +974,9 @@
 					});
 
 					Timeline.Socialite(Timeline.elsStart, true);
-						
+
 					Timeline.RepostButtonShow(Timeline.elsStart);
-					
+
 					// loadmore plugin
 					jQuery.ias({
 						'container' 	: ".items-wrapper",
@@ -998,17 +998,17 @@
 								Timeline.EnhancePictures(items);
 								Timeline.FancyboxControls(items);
 							});
-							
+
 							Timeline.Socialite(items, true);
-							
+
 							Timeline.RepostButtonShow(items);
 
-							if (typeof OB != "undefined") { 
-								OB.restart && OB.restart(); 
+							if (typeof OB != "undefined") {
+								OB.restart && OB.restart();
 							}
-							
-							if (typeof twttr != "undefined") { 
-								twttr.widgets.load(); 
+
+							if (typeof twttr != "undefined") {
+								twttr.widgets.load();
 							}
 
 							Timeline.counter++;
