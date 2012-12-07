@@ -291,7 +291,14 @@
                     .ob-section-quote .ob-link {color: #4D4D4F;}
 
                     /* section video */
-                    .ob-section-video iframe {max-height: 346px; position: relative; width: 100%; z-index: 1;}
+                    .ob-section-video iframe,
+                    .ob-section-video embed,
+                    .ob-section-video object {max-height: 346px; width: 100%;}
+
+                    /* Section HTML */
+                    .ob-section-html iframe,
+                    .ob-section-html object,
+                    .ob-section-html embed {max-width: 100%}
 
                     .tags {border-top: 1px dotted #d5d5d5; color: #878789; font-size: 11px; margin-top: 15px; padding: 3px 2px 10px 2px; text-align: left;}
                     .tags .tag {padding: 5px 0 6px 0;}

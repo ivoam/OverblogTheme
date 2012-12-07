@@ -1546,10 +1546,22 @@
             .ob-link .ob-img {
                 padding-right: 12px;
             }
-            .ob-video iframe {
-                max-height: 346px;
+            /* section video */
+            .ob-section-video iframe,
+            .ob-section-video embed,
+            .ob-section-video object {
+                max-height: 346px; 
                 width: 100%;
             }
+
+            /* Section HTML */
+            .ob-section-html iframe,
+            .ob-section-html object,
+            .ob-section-html embed {
+                max-width: 100%
+            }
+
+
             .ob-section-audio .obsoundplayer .obsoundplayername {
                 height: 31px;
                 overflow: hidden;

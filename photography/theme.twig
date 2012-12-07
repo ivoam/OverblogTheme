@@ -320,7 +320,11 @@
             .ob-section-link p.ob-url .ob-link:hover {color: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#FFF{% else %}#000{% endif %};}
             .ob-section-link .ob-desc {margin-top: 5px;}
 
-
+            /* Section HTML */
+            .ob-section-html iframe,
+            .ob-section-html object,
+            .ob-section-html embed {max-width: 100%}
+            
             .ob-row-1-col,
             .ob-slideshow,
             .ob-map {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %}; display: block; max-width: 584px !important; padding: 8px;}

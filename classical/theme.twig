@@ -315,8 +315,14 @@
 
         /* Section Video */
         .ob-section-video .ob-video {width: 622px; overflow: hidden;}
-        .ob-video iframe {max-height: 345px; width: 100%;}
+        .ob-video iframe,
+        .ob-video embed,
+        .ob-video object {max-height: 346px; width: 100%;}
 
+        /* Section HTML */
+        .ob-section-html iframe,
+        .ob-section-html object,
+        .ob-section-html embed {max-width: 100%}
         /* Section Map */
         .ob-section-map .ob-map,
         .ob-section-map .ob-desc {margin: 0 auto; width: 100%;}
