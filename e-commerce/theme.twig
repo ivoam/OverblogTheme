@@ -722,8 +722,6 @@
                 text-align: center;
             }
             .special .ob-terms:hover {
-                background: #92CE0C;
-                color: #FFF;
                 text-decoration: none; 
             }
             /* ----------------------------- */
@@ -788,7 +786,7 @@
                 color: #FFF;
                 font-size: 13px;
                 font-weight: normal;
-                line-height: normal;
+                line-height: 1.75em;
                 padding: 2px;
                 text-decoration: none;
             }
@@ -902,7 +900,7 @@
                     <form class="search-form" action="/search" method="post">
                         <label for="search">{{ Lang.Get('Search') }} :</label>
                         <input type="text" name="q" id="search" {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} />
-                        <input type="submit" value="{{ Lang.Get('Go') }}" />
+                        <input type="submit" value="{{ Lang.Get('OK') }}" />
                     </form>
                 {% endif %}
             </nav>
@@ -1326,7 +1324,12 @@
                         }
                     });
 
-                    $(".arch_month").hide(500);
+                    $(".arch_month").hide();
+                    
+                    var currentYear = {{ "now"|date("Y") }};
+                    
+                    $(".arch_year > a[data-year="+currentYear+"]").siblings(".arch_month").show();
+
                     $('.arch_year > a').click(function() {
                         $(this).siblings(".arch_month").slideToggle(500);
                         return false;
