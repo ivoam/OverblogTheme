@@ -241,7 +241,7 @@
             /* ==GLOBAL */
             /* ----------------------------- */
             #global {
-                background: #FFF url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/bg-container.gif) left repeat-y;
+                background: #FFF url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/bg-container.gif) left repeat-y;
                 margin: 0 auto;
                 padding: 30px 17px 20px;
                 width: 940px;
@@ -294,7 +294,7 @@
                 padding: 0;
             }
             .menu li + li {
-                background: url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/sep.gif) repeat-y scroll left 5px;
+                background: url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/sep.gif) repeat-y scroll left 5px;
             }
             .menu .dropdown ul {
                 -webkit-opacity: 0;
@@ -404,11 +404,11 @@
                 margin-right: 20px;
             }
             .post .metas .date {
-                background: url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/clock.gif) no-repeat 1px top;
+                background: url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/clock.gif) no-repeat 1px top;
                 padding-left: 22px;
             }
             .post .metas .author {
-                background: url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/person.gif) no-repeat 1px top;
+                background: url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/person.gif) no-repeat 1px top;
                 padding-left: 22px;
             }
             /************************ Post title ************************/
@@ -494,6 +494,9 @@
                 line-height: 1.75em;
                 margin-bottom: 15px;
             }
+            .post .ob-section li p {
+                margin-bottom: 0;
+            }
             /************************ Links ************************/
             .post .ob-link,
             .post .ob-section-text a {
@@ -508,7 +511,7 @@
             }
             /************************ File ************************/
             .post .ob-section-file .ob-ctn {
-                background: #FECC52 url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/sep-hor.gif) repeat-x left top;
+                background: #FECC52 url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/sep-hor.gif) repeat-x left top;
                 border: none;
                 -webkit-border-radius: 0;
                    -moz-border-radius: 0;
@@ -528,7 +531,7 @@
             }
             /************************ Quote ************************/
             .post .ob-section-quote {
-                background: #FECC52 url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/sep-hor.gif) repeat-x left top;
+                background: #FECC52 url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/sep-hor.gif) repeat-x left top;
                 border: none;
                 -webkit-border-radius: 0;
                    -moz-border-radius: 0;
@@ -591,7 +594,7 @@
             }
             /************************ Section link ************************/
             .post .ob-section-link .ob-ctn {
-                background: #FECC52 url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/sep-hor.gif) repeat-x left top;
+                background: #FECC52 url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/sep-hor.gif) repeat-x left top;
                 border: none;
                 -webkit-border-radius: 0;
                    -moz-border-radius: 0;
@@ -687,9 +690,14 @@
             .ob-section-map img {
                 max-width: none;
             }
+            /************************ Tweets ************************/
+            div.twitter-tweet-rendered,
+            div.twt-border {
+                max-width: none !important;
+            }
             /************************ Tags ************************/
             .post .tags {
-                background: url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/sepB.gif) repeat-x bottom left;
+                background: url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/sepB.gif) repeat-x bottom left;
                 color: #999;
                 font-size: 12px;
                 padding-bottom: 10px;
@@ -705,7 +713,8 @@
                 text-decoration: none;
             }
             /************************ Description ************************/
-            .post p.ob-desc {
+            .post p.ob-desc,
+            .post .ob-desc {
                 font-size: 12px;
                 font-style: italic;
                 font-weight: bold;
@@ -756,12 +765,12 @@
                 width: 300px;
             }
             .sidebar .widget {
-                background: #FECC52 url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/bg-sidebar-yellow.gif) no-repeat bottom right;
+                background: #FECC52 url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/bg-sidebar-yellow.gif) no-repeat bottom right;
                 margin-bottom: 20px;
                 padding-bottom: 15px;
             }
             .sidebar .widget h3 {
-                background: #FFF url(http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/sep-hor.gif) repeat-x 0 bottom;
+                background: #FFF url(//assets.over-blog-kiwi.com/themes/custom/e-commerce/images/sep-hor.gif) repeat-x 0 bottom;
                 color: #252525;
                 font-weight: bold;
                 margin-bottom: 12px;
@@ -890,7 +899,7 @@
 
                     <li class="feed">
                         <a href="{{ Blog.RssUrl }}">
-                            <img src="http://magazine.blomming.com/wp-content/themes/likepicasso_1_1/img/feed-green.gif" alt="Feed icon" title="{{ Lang.Get('Subscribe to RSS feed') }}">
+                            <img src="////assets.over-blog-kiwi.com/themes/custom/e-commerce/images/feed-green.gif" alt="Feed icon" title="{{ Lang.Get('Subscribe to RSS feed') }}">
                         </a>
                     </li>
                 </ul>
