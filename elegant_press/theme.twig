@@ -1586,7 +1586,7 @@
                         <a {% if isIndex %} {% endif %} href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                     </li>
 
-                    {% if Post.tags is not empty %}
+                    {% if Blog.PostsTags is not empty %}
                         <!-- Tags -->
                         <li>
                             <a href="#">{{ Lang.Get('Tags') }}</a>
