@@ -24,7 +24,7 @@
         {% endif %}
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 		{% if Blog.FaviconUrl is not empty %}
 			<link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" rel="apple-touch-icon" />
@@ -35,6 +35,7 @@
 		{% endif %}
 
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css" />
+
 		<style type="text/css">
 			/*
 			KNACSS.com V1.3 @author : Raphael Goetter, Alsacreations
@@ -66,8 +67,8 @@
 			p, li, td, th, textarea, caption, pre {font-size: 1.2em;}
 			li li, li p, td p, th p, li h1, li h2, li h3, li h4, li h5, li h6, button, input, select {font-size: 100%;}
 			h1, .h1-like {font-size: 2.4em;} /* equiv 24 pixels */
-			h2, .h2-like {font-size: 1.8em;} /* equiv 20 pixels */
-			h3, .h3-like {font-size: 1.4em;} /* equiv 18 pixels */
+			h2, .h2-like {font-size: 2em;} /* equiv 20 pixels */
+			h3, .h3-like {font-size: 1.8em;} /* equiv 18 pixels */
 			h4, .h4-like {font-size: 1.6em;} /* equiv 16 pixels */
 			h5, .h5-like {font-size: 1.4em;} /* equiv 14 pixels */
 
@@ -86,11 +87,12 @@
                 clear: both;
             }
 
+            a {color: #222;}
 			/* ----------------------------- */
             /* ==BASICAL */
             /* ----------------------------- */
 			body {
-				background: #FFF url(//fdata.over-blog.net/99/00/00/01/images/blog/mobile/background.jpg);
+				background: #FFF url(http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/background.jpg);
 			    color: #222;
 				font-family: "Lato",  sans-serif;
 				font-size: 1.4em;
@@ -112,7 +114,7 @@
 				border-top: 1px solid #222325;
 				height: 43px;
 				position: fixed;
-				top: 0px;
+				top: 0;
 				width: 100%;
 				z-index: 1000;
 			}
@@ -131,7 +133,7 @@
 				padding: 0;
 			}
 			.header .button-box {
-				background: url(//fdata.over-blog.net/99/00/00/01/images/blog/mobile/header-separator.gif) no-repeat left top;
+				background: url(http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/header-separator.gif) no-repeat left top;
 				display: inline-block;
 			}
 			.header .button-icon {
@@ -144,9 +146,6 @@
 				background: linear-gradient(top, #ececec 0%,#f8f8f8 2%,#fefefe 3%,#fcfcfc 10%,#d2d2d2 83%,#cccccc 98%,#434a54 100%); /* W3C */
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececec', endColorstr='#434a54',GradientType=0 ); /* IE6-9 */
 				-webkit-border-radius: 5px;
-				   -moz-border-radius: 5px;
-					-ms-border-radius: 5px;
-					 -o-border-radius: 5px;
 						border-radius: 5px;
 				display: block;
 				float: none;
@@ -154,13 +153,10 @@
 			}
 			.button-icon:active{
 				-webkit-box-shadow: inset 0 0 4px #000;
-				   -moz-box-shadow: inset 0 0 4px #000;
-					-ms-box-shadow: inset 0 0 4px #000;
-					 -o-box-shadow: inset 0 0 4px #000;
 						box-shadow: inset 0 0 4px #000;
 			}
 			.header .icon {
-				background: url(//vivienkaufinger.com/ob/mobile/icons.png) no-repeat;
+				background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons.png) no-repeat;
 				display: block;
 				height: 29px;
 				width: 30px;
@@ -179,30 +175,14 @@
 			.search-form {
 				background: #FFF;
 				background: rgba(170, 170, 170, 0.8);
-				margin-top: 86px;
+				display: none;
+				margin-top: 87px;
 				max-width: 100%;
-				-webkkit-opacity: 1;
-				    -moz-opacity: 1;
-				     -ms-opacity: 1;
-					  -o-opacity: 1;
-					     opacity: 1;
 				padding: 20px;
-				visibility: visible;
-			}
-			.search-form.hide {
-				-webkkit-opacity: 0;
-				    -moz-opacity: 0;
-				     -ms-opacity: 0;
-					  -o-opacity: 0;
-					     opacity: 0;
-				visibility: hidden;
 			}
 			.search-input-text {
 				border: 2px solid #DDD;
 				-webkit-border-radius: 3px;
-				   -moz-border-radius: 3px;
-					-ms-border-radius: 3px;
-					 -o-border-radius: 3px;
 					  	border-radius: 3px;
 				padding: 20px 0;
 				text-indent: 15px;
@@ -217,16 +197,18 @@
 				background-image: -ms-linear-gradient(top,#F8B33D 0,#F59A28 100%);
 				background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#F8B33D),color-stop(1,#F59A28));
 				border: 0;
-				border-left: 2px solid #F59A28;
+				border: 2px solid #F59A28;
+				-webkit-border-radius: 0 3px 3px 0;
+				border-radius: 0 3px 3px 0;
 				color: #FFF;
 				cursor: pointer;
 				display: inline-block;
 				font-size: 1.4em;
 				font-weight: bold;
-				padding: 18px 15px 19px;
+				padding: 17px 14px;
 				position: absolute;
-				right: 17px;
-				top: 105px;
+				right: 14px;
+				top: 107px;
 				text-decoration: none;
 				text-shadow: 2px 2px 3px #777;
 			}
@@ -236,6 +218,10 @@
 				margin: 0 0 30px;
 				text-align: center;
 			}
+			h1 a {
+				color: #222;
+				text-decoration: none;
+			}
 			/* ----------------------------- */
             /* ==POSTS */
             /* ----------------------------- */
@@ -243,20 +229,17 @@
             	margin-bottom: 20px;
             	padding: 0 20px;
             }
+            .main.index {
+            	margin-bottom: 120px;
+            }
 			article {
 				background: #FDFDFD;
 				border: 1px solid #DDD;
 				border-bottom-color: #BBB;
 				-webkit-border-radius: 5px;
-				   -moz-border-radius: 5px;
-					-ms-border-radius: 5px;
-					 -o-border-radius: 5px;
 						border-radius: 5px;
 				border-top-color: #EEE;
 				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-				   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-					-ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-					 -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 					 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 			    -webkit-hyphens: auto;
 			       -moz-hyphens: auto;
@@ -294,18 +277,16 @@
 				background: -o-linear-gradient(top,#F8B33D 0,#F59A28 100%);
 				background: linear-gradient(top,#F8B33D 0,#F59A28 100%);
 				-webkit-border-radius: 3px;
-				   -moz-border-radius: 3px;
-					 -o-border-radius: 3px;
 						border-radius: 3px;
 				border: 1px solid #F59A28;
 				color: #FFF;
 				display: inline-block;
-				font-size: 0.8em;
+				font-size: 1em;
 				font-weight: bold;
-				margin-bottom: 5px;
+				margin-bottom: 3px;
 				padding: 5px 10px;
 				text-decoration: none;
-				text-shadow: 1px 1px 0px #555;
+				text-shadow: 1px 1px 0 #555;
 			}
 			.post .tags a:active {
 				background: #F8B33D;
@@ -315,7 +296,16 @@
 			.ob-section {
 				width: 100%;
 			}
-
+			.ob-section a {
+				max-width: 100%;
+			}
+			.ob-section .ob-desc {
+           		font-size: 1.1em;
+           		font-style: italic;
+           		font-weight: bold;
+           		margin-top: 5px;
+           		width: auto;
+           	}
 			/**** IMAGES ****/
 			.ob-img {
 				max-width: 100%;
@@ -333,23 +323,32 @@
 				width: 100%;
 				word-wrap: break-word;
 			}
-
+			.ob-section li p {
+				margin-bottom: 0;
+			}
 			/**** SECTION IMAGE ****/
+			.ob-section-images {
+				text-align: center;
+			}
 			.ob-section-images img {
-				margin-bottom: 20px;
+				max-width: none;
 			}
 			.ob-section-images .ob-slideshow {
-				display: block;
-				height: auto;
-				width: 100%;
-			}
-			.ob-section-images .ob-slideshow .ob-link-img {
-				display: block;
+				text-align: center;
 				width: 100%;
 			}
 			.ob-section-images .ob-slideshow .ob-img {
-				width: 100%;
+				height: 100%;
+				left: 0;
 			}
+			.ob-slider-directionNav {
+				width: 100% !important;
+			}
+			.ob-section-images .ob-desc {
+				text-align: center;
+			}
+
+			/**** SECTION AUDIO ****/
 			.ob-section-audio .obsoundplayer .obsoundplayername {
 				height: 31px;
 				overflow: hidden;
@@ -360,44 +359,59 @@
 			.ob-section-video iframe,
 			.ob-section-video object,
 			.ob-section-video embed{
+				max-height: 320px;
 				width: 100%;
 			}
 
+			/**** SECTION HTML ****/
+			.ob-section-html iframe,
+			.ob-section-html object,
+			.ob-section-html embed{
+				max-width: 100%;
+			}
             /**** SECTION QUOTE ****/
             .ob-section-quote {
             	background: #EEE;
             	border-color: #DDD;
+            	-webkit-border-radius: 3px;
             	border-radius: 3px;
             	margin: 0 0 20px;
             	max-width: none;
             }
             .ob-section-quote .ob-quote {
-            	padding: 50px 60px;
+            	padding: 30px 20px;
             }
             .ob-section-quote .ob-quote p {
             	color: #222;
-            	font-size: 1.4em;
+            	font-size: 1.2em;
             	margin: 0;
             	max-width: none;
+            	text-indent: 30px;
             }
             .ob-section-quote .ob-quote p:before {
-            	margin: -64px 0 0 -74px;
+            	font-size: 110px;
+            	left: -40px;
+            	margin: 0;
+            	top: 0;
             }
             .ob-section-quote .ob-quote p:after {
-            	margin: 0 0 0 -74px;
+            	display: none;
             }
             .ob-section-quote .ob-author,
             .ob-section-quote .ob-source {
+            	-webkit-border-radius: 3px;
+            	border-radius: 3px;
             	max-width: 84%;
             	overflow: hidden;
             	text-overflow: ellipsis;
             	white-space: nowrap;
             }
-
+            
             /**** SECTION FILE ****/
             .ob-section-file .ob-ctn {
             	background: #EEE;
             	border-color: #DDD;
+            	-webkit-border-radius: 3px;
             	border-radius: 3px;
             	max-width: none;
             	width: 100%;
@@ -406,13 +420,23 @@
             	color: #222;
             	max-width: 87.6%;
             }
-           	.ob-section .ob-desc {
-           		font-size: 1.1em;
-           		font-style: italic;
-           		font-weight: bold;
-           		margin-top: 5px;
-           	}
-
+            /**** SECTION LINK ****/
+            .ob-section-link .ob-ctn {
+            	-webkit-border-radius: 3px;
+            	border-radius: 3px;
+            }
+            .ob-section-link .ob-title .ob-link {
+            	color: inherit;
+            }
+            .ob-section-link .ob-media-left {
+            	margin: 0 20px 0 0;
+            }
+            .ob-section-link .ob-img {
+            	-webkit-border-radius: 3px 0 0 3px;
+            	border-radius: 3px 0 0 3px;
+				display: block;
+				margin-right: 0;
+            }
            	/**** SECTION MAP ****/
            	.ob-section-map .ob-map {
            		max-width: 100%;
@@ -420,6 +444,12 @@
            	}
 
             /***** SHARE BUTTONS ****/
+            .share {
+            	background: #EEE;
+            	-webkit-border-radius: 5px;
+            	border-radius: 5px;
+            	padding: 15px;
+            }
             .share h3 {
             	font-size: 1.2em;
             	font-weight: bold;
@@ -428,14 +458,16 @@
             .share div {
             	display: inline-block;
             	margin-top: 10px;
+            	vertical-align: bottom;
             }
-            .share iframe {
-            	border: none;
-            	height: 21px;
-            	width: 110px;
+            .share div + div {
+            	margin-left: 29px;
             }
-            .share .google-share iframe {
-            	width: 90px;
+            .twitter-share {
+            	height: 62px;
+            }
+            .facebook-share {
+            	height: 61px;
             }
 
             .fb_iframe_widget span {
@@ -446,7 +478,7 @@
             /* ==PAGINATION */
             /* ----------------------------- */
 	        .pagination {
-	        	margin: 0 0 30px;
+	        	margin: 30px 0;
 	        	overflow: hidden;
 	        }
 			.pagination a {
@@ -460,21 +492,15 @@
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#404852',GradientType=0 );
 				border: 1px solid #555;
 				-webkit-border-radius: 3px;
-				   -moz-border-radius: 3px;
-					-ms-border-radius: 3px;
-					 -o-border-radius: 3px;
 						border-radius: 3px;
 				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-				   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-					-ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-					 -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 					 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 				color: #FFF;
 				display: block;
 				font-size: 1em;
 				padding: 10px 15px;
 				text-decoration: none;
-				text-shadow: 1px 1px 0px #555;
+				text-shadow: 1px 1px 0 #555;
 			}
 			.pagination a:active {
 				background: #6b6b6b;
@@ -495,8 +521,14 @@
 				margin: 0;
 				margin-bottom: 5px;
 			}
-			.special input {
+			.special .ob-input,
+			.special .ob-input-email {
+				border: 1px solid #DDD;
+				-webkit-border-radius: 3px;
+				border-radius: 3px;
+				background: #F5F5F5;
 				font-size: 1.4em;
+				padding: 5px 10px;
 			}
 			.special .ob-input-submit {
 				background: #6b6b6b; /* Old browsers */
@@ -509,14 +541,8 @@
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b6b6b', endColorstr='#404852',GradientType=0 ); /* IE6-9 */
 				border: 1px solid #555;
 				-webkit-border-radius: 3px;
-				   -moz-border-radius: 3px;
-					-ms-border-radius: 3px;
-					 -o-border-radius: 3px;
 						border-radius: 3px;
 				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-				   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-					-ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-					 -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 					 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 				color: #FFF;
 				font-size: 1.4em;
@@ -530,7 +556,20 @@
 				color: #222;
 				display: block;
 				font-weight: bold;
+				margin-top: 50px;
 				text-align: center;
+			}
+
+			.ias_loader {
+				bottom: 20px; 
+				left: 50%; 
+				margin-left: -100px; 
+				position: fixed; 
+				text-align: center;
+				width: 200px;
+			}
+			.ias_loader p {
+				margin-top: 10px;
 			}
 			/* ----------------------------- */
             /* ==MEDIA QUERIES */
@@ -538,9 +577,6 @@
 
 			/**** iPhone 1 - 2 - 3 - 3GS  ****/
 			@media only screen and (max-device-width: 320px) and (-webkit-min-device-pixel-ratio: 1) {
-				body {
-					background: blue;
-				}
 				/**** HEADER ****/
 				.header .logo {
 					margin-left: 10px;
@@ -575,6 +611,7 @@
 				}
 				.search-input-submit {
 					border: 2px solid #F59A28;
+					-webkit-border-radius: 0 3px 3px 0;
 					border-radius: 0 3px 3px 0;
 					font-size: 1em;
 					padding: 10px;
@@ -591,6 +628,16 @@
 					padding: 12px;
 					margin-bottom: 12px
 				}
+				/**** SECTION HTML ****/
+				.ob-section-html iframe,
+				.ob-section-html embed,
+				.ob-section-html object {
+					height: 300px;
+				}
+				/**** SECTION LINK ****/
+				.ob-section-link .ob-title .ob-link {
+					font-size: 0.8em;
+				}
 				.tags a {
 					font-size: 0.7em;
 				}
@@ -598,78 +645,111 @@
 				.pagination {
 					margin-bottom: 20px;
 				}
+				.pagination a {
+					padding: 8px 10px;
+				}
 			}
 
 			/**** iPhone 1 - 2 - 3 - 3GS  (portrait) ****/
 			@media only screen and (max-device-width: 320px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 1) {
-				body {
-					background: white;
-				}
-				/**** HEADER ****/
-				.header .logo {
-					margin-left: 20px;
-				}
+				/* section image with slidshow */
+				.ob-section-images .ob-slideshow,
+				.ob-section-images .ob-slideshow .ob-img {
+					height: 240px;
+				} 
 				/**** SECTION VIDEO ****/
 				.ob-section-video iframe,
 				.ob-section-video object,
 				.ob-section-video embed {
-					max-height: 151px;
+					max-height: 200px;
 				}
 				/**** SECTION MAP ****/
 				.ob-section-map .ob-map {
 					height: 270px;
 				}
+				/**** SECTION LINk ****/
+				.ob-section-link .ob-img {
+					max-width: 100px;
+				}
+				.ob-section-link .ob-snippet,
+				.ob-section-link .ob-url {
+					display: none;
+				}
 			}
 			/**** iPhone 1 - 2 - 3 - 3GS  (paysage) ****/
 			@media only screen and (max-device-width: 320px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
-				body {
-					background: red;
-				}
 				/**** SECTION VIDEO ****/
 				.ob-section-video iframe,
 				.ob-section-video object,
 				.ob-section-video embed {
 					max-height: 240px;
-				}
+				} 
 				/**** SECTION MAP ****/
 				.ob-section-map .ob-map {
-					height: 430px;
+					height: 190px;
+				}
+				.ob-section-link .ob-snippet {
+					font-size: 0.9em;
+					margin: 0;
+					padding: 0 20px 0 0;
+				}
+				.ob-section-link .ob-url {
+					display: none;
 				}
 			}
 
-			/**** iPhone 1 - 2 - 3 - 3GS (landscape) ****/
-			/*@media only screen and (max-device-width: 480px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
+			/**** iPhone 4 - 4S + other retina devices (portrait) ****/
+			@media only screen and (max-device-width: 320px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 1.5), only screen and (max-device-width: 320px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 2) {
 				body {
-					background: red;
-					min-width: 480px;
+					background: purple;
 				}
-				.ob-row-1-col img,
-				.ob-row-2-col img,
-				.ob-row-3-col img {
-					float: none;
-					margin: 0 auto;
-					max-width: 100%;
+				/* logo */
+				.header .logo {
+					background: url(http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/images/logo-overblog@2x.png) no-repeat scroll 0 0;
+					height: 35px; 
+					margin: 6px 0 0 10px;
+					-webkit-background-size: 100px 35px; 
+					-moz-background-size: 100px 35px; 
+					-o-background-size: 100px 35px; 
+					background-size: 100px 35px; 
+					width: 100px;
 				}
-				.ob-section-audio .obsoundplayer .obsoundplayername {
-					max-width: 30px;
+				/* icons */
+				.header .icon {
+					background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons@2x.png) no-repeat; 
+					height: 30px; 
+					width: 30px;
 				}
-				.footer .button {
-					font-size: 1em;
+				/* section html */
+				.ob-section-html iframe,
+				.ob-section-html embed,
+				.ob-section-html object {
+					height: 300px;
+				} 
+				/* section image with slidshow */
+				.ob-section-images .ob-slideshow,
+				.ob-section-images .ob-slideshow .ob-img {
+					height: 240px;
 				}
+				/* next/prev page */
+				.pagination a {
+					padding: 8px 10px;
+				}
+				/* Load more */
+				.ias_loader {
+					bottom: 10px;
+				}
+			}
 
-				.ob-section-file .ob-link {
-					max-width: 70%;
+			/**** iPhone 4 - 4S  (paysage) ****/
+			@media only screen and (max-device-width: 320px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 2) {
+				body {
+					background: pink;
 				}
-				.ob-section-quote .ob-author {max-width: 75%;}
-	            .ob-section-quote .ob-quote p::before {font-size: 100px; margin: -22px 0px 0px -60px;}
-	            .ob-section-quote .ob-quote p {margin: 18px 0px 10px 6px;}
-			}*/
+			}
 
 			/* media queries pour tablette */
 			@media screen and (min-width: 641px){
-				body {
-					background: red;
-				}
 				.header {
 					height: 85px;
 				}
@@ -696,50 +776,41 @@
 					background-position: center -170px;
 				}
 				.header .noMob .icon {
-					background-position: 11px -260px;
+					background-position: 9px -259px;
 				}
-
 				.main {
 					margin-top: 130px;
 				}
-
 				.ob-section-audio .obsoundplayer .obsoundplayername {
 					width: 200px;
 				}
-                .ob-slideshow {
-                	position: relative;
-                	width: 450px;
-                	height: 320px;
-                	 margin: auto;
-                }
-
-				.ob-section-file .ob-link {max-width: 85%;}
+				.ob-section-file .ob-link {
+					max-width: 85%;
+				}
 			}
 
 			/* @group retina friendly */
-			@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-webkit-min-device-pixel-ratio: 2){
-				.header .icon {background: url(http://vivienkaufinger.com/ob/mobile/icons@2x.png) no-repeat; -webkit-background-size: 155px 19px; -moz-background-size: 155px 19px; -o-background-size: 155px 19px; background-size: 155px 19px; height: 58px; width: 59px;}
+			/*@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-webkit-min-device-pixel-ratio: 2){
+				.header .icon {background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons@2x.png) no-repeat; -webkit-background-size: 155px 19px; -moz-background-size: 155px 19px; -o-background-size: 155px 19px; background-size: 155px 19px; height: 58px; width: 59px;}
 				.header .home .icon {background-position: 6px 5px;}
 				.header .contact .icon {background-position: -134px 5px;}
 				.header .search .icon {background-position: -134px 5px;}
 				.header .noMob .icon {background-position: 6px 5px;}
 				.footer {background: url(http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/logo-overblog@2x.png) no-repeat scroll 0 0; -webkit-background-size: 100px 36px; -moz-background-size: 100px 36px; -o-background-size: 100px 36px; background-size: 100px 36px;}
-			}
+			}*/
 
 			/* tablet + retina */
 			@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 641px), only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 641px) {
-				.header .icon {background: url(http://vivienkaufinger.com/ob/mobile/icons@2x.png) no-repeat; -webkit-background-size: 310px 38px; -moz-background-size: 310px 38px; -o-background-size: 310px 38px; background-size: 310px 38px;}
-				.header .icon:active {-webkit-background-size: 310px 38px; -moz-background-size: 310px 38px; -o-background-size: 310px 38px; background-size: 310px 38px;}
-				.header .button-icon {margin: 14px 12px 0 0;}
-				.header .home .icon {background-position: 12px 10px;}
-				.header .search .icon {background-position: -268px 10px;}
-
-				.footer {background: url("http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/logo-overblog-big@2x.png") no-repeat scroll 0 0; -webkit-background-size: 200px 72px; -moz-background-size: 200px 72px; -o-background-size: 200px 72px; background-size: 200px 72px;}
+				.header .icon {
+					background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons@2x.png) no-repeat; 
+					-webkit-background-size: 38px 310px; 
+					   -moz-background-size: 38px 310px; 
+							background-size: 38px 310px;
+				}
 			}
-			/* @end retina friendly */
 		</style>
 	</head>
-	<body class="yui-skin-ob __blog __mobile fr FR" >
+	<body>
 		<div id="fb-root"></div>
 		<header class="header">
 			<a class="logo" href="{{ Blog.Url }}" title="{{ Blog.Description }}"></a>
@@ -772,8 +843,16 @@
 				<input class="search-input-submit" type="submit" value="{{ Lang.Get('Search') }}" />
 			</form>
 		</header>
-		<section class="main">
-			<h1>{{ Blog.Title }}</h1>
+		<section class="main{% if isIndex %} index{% endif %}">
+			<h1>
+				{% if isSearch %}
+					{{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
+				{% elseif isTag %}
+					#{{ Tag.Title }}
+				{% else %}
+					<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
+				{% endif %}
+			</h1>
 
 			{% if isSpecial %}
 				<article class="special">
@@ -784,7 +863,7 @@
 					<article class="post">
 						{% if not isSingle and Post.Cover is not empty %}
 							<a class="post-cover" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-								<img src="{{ Post.Cover }}" title="" alt="" />
+								<img src="{{ Post.Cover|resize(686,384)|crop }}" title="" alt="" />
 							</a>
 						{% endif %}
 
@@ -826,34 +905,34 @@
                                 </p>
                             {% endif %}
 
-                        	{% if Custom('share_service') != 'None' or isSingle %}
                         		<div class="share">
-                                	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
+	                        		{% if Custom('share_service') != 'None' %}
+	                                	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
 	                                	{% if Custom('share_service') == 'Google +' %}
-	                                        <div class="google-share">
-	                                        	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
-	                                        </div>
-	                                    {% elseif Custom('share_service') == 'Twitter' %}
-	                                    	<div class="twitter-share">
-	                                        	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
-	                                        </div>
-	                                    {% elseif Custom('share_service') == 'Facebook' %}
-	                                        <div class="facebook-share">
-	                                        	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
-	                                        </div>
-	                                    {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
-	                                    	<div class="google-share">
-	                                        	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
-	                                        </div>
-	                                        <div class="twitter-share">
-	                                        	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
-	                                        </div>
-	                                        <div class="facebook-share">
-	                                        	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
-	                                        </div>
-	                                    {% endif %}
-	                                </div>
-                            {% endif %}
+											<div class="google-share">
+		                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=tall&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 50px; height: 60px;" align="left"></iframe>
+		                                    </div>
+                                        {% elseif Custom('share_service') == 'Twitter' %}
+                                            <div class="twitter-share">
+                                                <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; height: 62px;"></iframe>
+                                            </div>
+                                        {% elseif Custom('share_service') == 'Facebook' %}
+                                            <div class="facebook-share">
+                                                <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?&href={{ Post.Permalink }}&amp;send=false&amp;layout=box_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90"  style="border:none; overflow:hidden; width: 61px; height:61px;"></iframe>
+                                            </div>
+                                        {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                            <div class="google-share">
+		                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=tall&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 50px; height: 60px;" align="left"></iframe>
+		                                    </div>
+		                                    <div class="twitter-share">
+                                                <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; height: 62px; width: 65px;"></iframe>
+                                            </div>
+                                            <div class="facebook-share">
+                                                <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?&href={{ Post.Permalink }}&amp;send=false&amp;layout=box_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90"  style="border:none; overflow:hidden; width: 61px; height:61px;"></iframe>
+                                            </div>
+                                        {% endif %}
+	                            	{% endif %}
+	                            </div>
 
                             {% if (Navigation.PreviousPost is not empty or Navigation.NextPost is not empty) %}
                                 <nav class="pagination">
@@ -890,67 +969,18 @@
 				{% endlist %}
 			{% endif %}
 
-			{% if (Navigation.PreviousPage is not empty or Navigation.NextPage is not empty) %}
-                <nav class="pagination">
-                    {% if Navigation.PreviousPage is not empty %}
-                        <a href="{{ Navigation.PreviousPage }}" class="prev" rel="prev">&laquo; {{ Lang.Get('Previous page') }}</a>
-                    {% endif %}
-                    {% if Navigation.NextPage is not empty %}
-                        <a href="{{ Navigation.NextPage }}" class="next" rel="next">{{ Lang.Get('Next page') }} &raquo;</a>
-                    {% endif %}
-                </nav>
-            {% endif %}
+            <nav class="load-more">
+                <a href="{{ Navigation.NextPage }}" class="next" rel="next"></a>
+            </nav>
 		</section>
 
 		<!-- jQuery -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+		<script src="http://assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
 
 		<!-- Scripts -->
 		<script>
-			$('.noMob').click(function() {
-                document.cookie = "_noMob=1;path=/";
-                window.location.reload();
-                return false;
-			});
-
-			$('.search').click(function() {
-				$('.search-form').toggleClass('hide');
-			    $('.search-input-text').focus();
-			    return false;
-			});
-
-        	// Twitter renderer
-        	!function(d,s,id){
-        		var js, fjs = d.getElementsByTagName(s)[0];
-        		if(!d.getElementById(id)){
-	        		js = d.createElement(s);
-	        		js.id = id;
-	        		js.src = "//platform.twitter.com/widgets.js";
-	        		fjs.parentNode.insertBefore(js,fjs);
-	        	}
-	        }(document,"script","twitter-wjs");
-
-	        {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-            	var disqus_shortname = '{{ Custom('comment_disqus') }}';
-            	(function() {
-            	    var dsq = document.createElement('script');
-            	        dsq.type = 'text/javascript';
-            	        dsq.async = true;
-            	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-            	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            	})();
-            {% elseif Custom('comment') == 'Facebook' %}
-            	// Facebook comments
-			    (function(d, s, id) {
-			        var js, fjs = d.getElementsByTagName(s)[0];
-			        if (d.getElementById(id)) return;
-				        js = d.createElement(s); js.id = id;
-				        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-				        fjs.parentNode.insertBefore(js, fjs);
-			    }(document, 'script', 'facebook-jssdk'));
-            {% endif %}
-
-            {% if Custom('google_analytics') is not empty %}
+			{% if Custom('google_analytics') is not empty %}
     		    // Google Analytics
     		    window.google_analytics_uacct = '{{Custom('google_analytics')}}';
     		    var _gaq = _gaq || [];
@@ -968,14 +998,78 @@
     		    })();
     		{% endif %}
 
-    		$(document).ready(function() {
+			{% if isSingle %}
+	        	// Twitter renderer
+	        	!function(d,s,id){
+	        		var js, fjs = d.getElementsByTagName(s)[0];
+	        		if(!d.getElementById(id)){
+		        		js = d.createElement(s);
+		        		js.id = id;
+		        		js.src = "//platform.twitter.com/widgets.js";
+		        		fjs.parentNode.insertBefore(js,fjs);
+		        	}
+		        }(document,"script","twitter-wjs");
 
-				$('.ob-section-text img, .ob-section-images img').each(function(){
-					$(this).attr(
-						'src',
-						$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "")
-					);
+		        {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+	            	var disqus_shortname = '{{ Custom('comment_disqus') }}';
+	            	(function() {
+	            	    var dsq = document.createElement('script');
+	            	        dsq.type = 'text/javascript';
+	            	        dsq.async = true;
+	            	        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	            	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	            	})();
+	            {% elseif Custom('comment') == 'Facebook' %}
+	            	// Facebook comments
+				    (function(d, s, id) {
+				        var js, fjs = d.getElementsByTagName(s)[0];
+				        if (d.getElementById(id)) return;
+					        js = d.createElement(s); js.id = id;
+					        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+					        fjs.parentNode.insertBefore(js, fjs);
+				    }(document, 'script', 'facebook-jssdk'));
+	            {% endif %}
+
+	            // Disabled pictures resizing
+	    		var EnhancePictures = function(elements) {
+	            	$(elements).find('.ob-section-text img, .ob-section-images img').each(function(){
+						$(this).attr(
+							'src',
+							$(this).attr('src').replace(/\/[0-9]+x[0-9]+(\-ct)?/, "")
+						);
+					});
+	            }
+	        {% endif %}
+
+    		$(document).ready(function() {
+    			// Switch to web version
+				$('.noMob').click(function() {
+	                document.cookie = "_noMob=1;path=/";
+	                window.location.reload();
+	                return false;
 				});
+
+				// Hide/sho search form
+				$('.search-form').hide();
+				$('.search').click(function() {
+					$('.search-form').slideToggle(0).find('.search-input-text').focus();
+					return false;
+				});
+
+				{% if isSingle %}
+					// Disabled pictures resizing
+					EnhancePictures(".post");
+				{% elseif not isSpecial %}
+					// Load more
+					jQuery.ias({
+						'container' 	 : ".main",
+						'item' 			 : ".post",
+						'pagination' 	 : ".load-more",
+						'next'			 : ".next",
+						'history'		 : false,
+						'loader' 		 : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' width='30' /><p>{{ Lang.Get('Loading new posts...') }}</p>"
+					});
+				{% endif %}
 			});
 		</script>
 	</body>
