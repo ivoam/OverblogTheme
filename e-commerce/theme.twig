@@ -980,7 +980,7 @@
                                             </div>
                                         {% elseif Custom('share_service') == 'Twitter' %}
                                             <div class="twitter-share">
-                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal" frameborder="0" scrolling="no"></iframe>
+                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}{% if Custom('twitter_username') is not empty %}&amp;via={{ Custom('twitter_username') }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal" frameborder="0" scrolling="no"></iframe>
                                             </div>
                                         {% elseif Custom('share_service') == 'Facebook' %}
                                             <div class="facebook-share">
@@ -991,7 +991,7 @@
                                                 <iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" frameborder="0" scrolling="no"></iframe>
                                             </div>
                                             <div class="twitter-share">
-                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal" frameborder="0" scrolling="no"></iframe>
+                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}{% if Custom('twitter_username') is not empty %}&amp;via={{ Custom('twitter_username') }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal" frameborder="0" scrolling="no"></iframe>
                                             </div>
                                             <div class="facebook-share">
                                                 <iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font" frameborder="0" scrolling="no"></iframe>

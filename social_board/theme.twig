@@ -1580,7 +1580,7 @@
                                     </div>
                                 {% elseif Custom('share_service') == 'Twitter' %}
                                     <div class="twt">
-                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; height: 62px;"></iframe>
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username')}}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; height: 62px;"></iframe>
                                     </div>
                                 {% elseif Custom('share_service') == 'Facebook' %}
                                     <div class="facebook">
@@ -1595,7 +1595,7 @@
                                         <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=tall&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 50px; height: 60px;" align="left"></iframe>
                                     </div>
                                     <div class="twt">
-                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; height: 62px;"></iframe>
+                                        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username')}}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}&count=vertical" style="border:none; overflow:hidden; height: 62px;"></iframe>
                                     </div>
                                     <div class="facebook">
                                         <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?&href={{ Post.Permalink }}&amp;send=false&amp;layout=box_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90"  style="border:none; overflow:hidden; width:100%; height:61px;"></iframe>

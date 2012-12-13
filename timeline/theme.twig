@@ -265,7 +265,7 @@
 			.share div.twitter-share,
 			.share div.facebook-like,
 			.share .ob-repost-btn {display: inline-block; line-height: normal; vertical-align: middle;}
-			.share div.googleplus-one {margin: 0 8px; width: 70px;}
+			.share div.googleplus-one {margin: 0 8px 0 0; width: 70px;}
 			.share div.twitter-share {height: 22px; margin-right: 18px; width: 85px;}
 			.share div.facebook-like {height: 22px; margin-right: 8px;  vertical-align: -2px; width: 85px;}
 			.single div.facebook-like {vertical-align: middle;}
@@ -537,7 +537,7 @@
 									    </div>
 									{% elseif Custom('share_service') == 'Twitter' %}
 									    <div class="twitter-share">
-									        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}" style="border:none; overflow:hidden; height: 22px; width: 100px;"></iframe>
+									        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username')}}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}" style="border:none; overflow:hidden; height: 22px; width: 100px;"></iframe>
 									    </div>
 									{% elseif Custom('share_service') == 'Facebook' %}
 									    <div class="facebook-like">
@@ -548,7 +548,7 @@
 									        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}" style="border:none; overflow:hidden; width: 70px; height: 22px;" align="left"></iframe>
 									    </div>
 									    <div class="twitter-share">
-									        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username')}}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}" style="border:none; overflow:hidden; height: 22px; width: 100px;"></iframe>
+									        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username')}}{% endif %}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&lang={{ Blog.Lang }}" style="border:none; overflow:hidden; height: 22px; width: 100px;"></iframe>
 									    </div>
 									    <div class="facebook-like">
 									        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="//www.facebook.com/plugins/like.php?&href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90"  style="border:none; overflow: hidden; height: 20px; width: 100px;"></iframe>
