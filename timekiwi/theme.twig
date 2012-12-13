@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="{{ Blog.Lang|default('en') }}">
+	<head>
+	<!-- shortcut:[Meta] -->
+  	<!-- title, description, keyword, robots -->
+  	{% if isSingle%}
+			{% list Posts %}
+	  		<title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{Blog.Title}}</title>
+	  		<meta name="description" content="{{ Post.Snippet }}" />
+  			<meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
+				<meta name="robots" content="index,follow" />
+			{% endlist %}
+		{% elseif isTag and Tag is not empty %}
+			<title>{{ Tag.Title|title }} - {{Blog.Title}}</title>
+			<meta name="description" content="{{ Blog.Description }}" />
+			<meta name="keywords" content="{{ Tag.Title|title }}" />
+			<meta name="robots" content="index,follow" />
+		{% elseif isSearch and Search is not empty %}
+			<title>{{ Search|title }} - {{Blog.Title}}</title>
+			<meta name="description" content="{{ Blog.Description }}" />
+			<meta name="keywords" content="{{ Search|title }}" />
+			<meta name="robots" content="noindex" />
+		{% else %}
+			<title>{{Blog.Title}}</title>
+			<meta name="description" content="{{ Blog.Description }}" />
+			<meta name="robots" content="index,follow" />
+		{% endif %}
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=yes" />
+
+
+		<!-- Social setting : Facebook, G+ .. --> 
+		<meta property="og:site_name" content="{{ Blog.Title }}" />
+		<meta property="og:type" content="blog" />
+		<meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
+		<meta itemprop="name" content="{{ Blog.Title }}" />
+
+		{% if isSingle %}
+			{% list Posts %}
+				<meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
+				<meta property="og:description" content="{{ Post.Snippet }}" />
+				<meta itemprop="description" content="{{ Post.Snippet }}" />
+				<meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
+				{% if Post.Cover %}
+					<meta property="og:image" content="{{ Post.Cover }}"/>
+					<meta itemprop="image" content="{{ Post.Cover }}" />
+				{% endif %}
+			{% endlist %}
+			<meta property="og:type" content="overblogkiwi:see" />
+		{% else %}
+			<meta property="og:title" content="{{ Blog.Title }}"/>
+			<meta property="og:description" content="{{ Blog.Description }}" />
+			<meta itemprop="description" content="{{ Blog.Description }}" />
+			{% if Blog.Avatar %}
+		<meta property="og:image" content="{{ Blog.Avatar }}"/>
+		<meta itemprop="image" content="{{ Blog.Avatar }}" />
+			{% else %}
+				{% list Posts %}
+				{% if loop.index == 1 and Post.Cover %}
+			<meta property="og:image" content="{{ Post.Cover }}"/>
+			<meta itemprop="image" content="{{ Post.Cover }}" />
+				{% endif %}
+				{% endlist %}
+	  	{% endif %}
+
+	  	{% if isSearch %}
+				<meta property="og:type" content="overblogkiwi:search" />
+			{% else %}
+				<meta property="og:type" content="overblogkiwi:visit" />
+			{% endif %}
+		{% endif %}
+
+
+		<!-- shortcut:[Options] -->
+		<meta name="constant:displayArticlesLimit" content="10" />
+		<!-- options -->
+		<meta name="string:twitter_username:Enter your Twitter Username" default="overblog" group="Social" />
+		<meta name="string:facebook_username:Enter your Facebook Username" default="Overblog" group="Social" />
+		<meta name="string:google_username:Enter your Google + Username" group="Social" />
+
+		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+		<meta name="string:comment_disqus:Disqus account (Mandatory)" default="obcomment" group="Comment" />
+
+		<meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
+		<meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
+		<meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
+		<meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+		
+
+		<!-- shortcut:[Includes] -->
+		<!-- favicon -->		
+		{% if Blog.FaviconUrl is not empty %}
+			<link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
+		{% else %}
+			<link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
+			<link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
+			<link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
+		{% endif %}	
+		
+		<!-- SEO -->
+		{% if Custom('google_webmaster_id') is not empty %}
+			<meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
+		{% endif %}
+		{% if Custom('msn_webmaster_id') is not empty %}
+			<meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
+		{% endif %}
+
+		<!-- includes -->
+		<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
+
+
+		<!-- shortcut:[Styles] -->
+		<link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+		<style type="text/css">
+			/*** RESET ***/
+			body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, textarea, blockquote, th, td {
+				margin: 0; padding: 0;
+			}
+			
+			table {
+				border-collapse: collapse; 
+				border-spacing:0;
+			}
+			
+			fieldset, img {
+				border:0;
+			}
+			address, caption, cite, code, dfn, var {
+				font-style: normal; 
+				font-weight: normal;
+			}
+			ol, ul {
+				list-style: none;
+			}
+			caption, th {
+				text-align: left;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				font-size: 100%; 
+				font-weight: normal;
+			}
+			q:before, q:after { 
+				content:'';
+			}
+			abbr, acronym { 
+				border:0;
+			}
+			
+			body {
+				background: url('http://timekiwi-assets.s3.amazonaws.com/assets/backgrounds/surface-6129364b9999e2890b3fa6e77f2dae7b.jpg') no-repeat;
+				background-attachment: fixed;
+				background-size: auto;
+				color: #000;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				height: 100%;
+				width: 100%;
+			}
+			
+			/*** HEADER ***/
+			#header {
+				background: #000;
+			}
+				#header .inner {
+					display: block;
+					height: 150px;
+					margin: 0 auto;
+					overflow: hidden;
+					position: relative;
+					width: 980px;
+				}
+					
+					/** avatar **/
+					#header .inner .avatar {
+						height: 100px;
+						overflow: hidden;
+						padding: 25px 0;
+						width: 100px;
+					}
+						#header .inner .avatar img {
+							float: right;
+							height: 100px;
+						}
+					
+					/** blog title **/
+					#header .inner .blog-about {
+						bottom: 0;
+						left: 120px;
+						padding: 25px 0;
+						position: absolute;
+						width: 600px;
+					}
+						#header .inner .blog-about p a,
+						#header .inner .blog-about h1 p a:visited,
+						#header .inner .blog-about h1 a,
+						#header .inner .blog-about h1 a:visited {
+							color: #EEE;
+							display: block;
+							font-size: 48px;
+							font-weight: bold;
+							line-height: 48px;
+							margin: 0;
+							text-decoration: none;
+							text-shadow: 1px 1px 0 #000;
+							width: 600px;
+							
+						}
+						#header .inner #blog-description {
+							color: #999;
+							font-family: "Helvetica Neue Light", "HelveticaNeue-Light", Arial, Helvetica, sans-serif;
+							font-size: 16px;
+							font-weight: normal;
+							line-height: 20px;
+							margin-top: 5px;
+						}
+					
+					/** header links **/
+					#header .links {
+						bottom: 0;
+						height: 37px;
+						padding: 25px 0;
+						position: absolute;
+						right: 0;
+					}
+						#header .links a {
+							background: url("http://vivienkaufinger.com/ob/timekiwi/social_sprite.png") no-repeat;
+							display: block;
+							float: left;
+							height: 38px;
+							text-indent: -99999px;
+							width: 41px;
+						}
+							#header .links .facebook {
+								background-position: 0 0;
+							}
+								#header .links .facebook:hover {
+									background-position: -1px bottom;
+								}
+							#header .links .twitter {
+								background-position: -39px 0;
+							}
+								#header .links .twitter:hover {
+									background-position: -40px bottom;
+								}
+
+							#header .links .google {
+								background-position: -79px 0;
+							}
+								#header .links .google:hover {
+									background-position: -80px bottom;
+								}
+							#header .links .rss {
+								background-position: -120px 0;
+							}
+								#header .links .rss:hover {
+									background-position: -121px bottom;
+								}
+							#header .links .contact {
+								background-position: -161px 0;
+							}
+								#header .links .contact:hover {
+									background-position: -162px bottom;
+								}
+
+			
+			/*** MAIN CONTENT ***/
+			#timeline .container {
+				background: url("http://timekiwi-assets.s3.amazonaws.com/assets/45black-d0cd8ceac6409682d2bf3423a3dd61b5.png") repeat;
+				margin: 0 auto;
+				width: 980px;
+			}
+				#timeline .vertical {
+				{% if not isSingle and not isSpecial %}
+					background: url("http://timekiwi-assets.s3.amazonaws.com/assets/stem-cf3b4071b9daa52d740a9f9d7eb96c7e.png") center top repeat-y;
+				{% endif %}
+					color: #333;
+					display: block;
+					padding: 50px 0;
+					width: 100%;
+				}
+				#timeline .vertical:after {
+					clear: both;
+					content: " ";
+					display: block;
+					font-size: 0;
+					height: 0;
+					line-height: 0;
+					visibility: hidden;
+					width: 0;
+				}
+					/** months **/
+					#timeline .month-before {
+						clear: both;
+						float: none;
+						height: 100px;
+						margin: 0 auto;
+					}
+					#timeline .month {
+						background-color: #212121;
+						clear: both;
+						color: #D9DF20;
+						float: none;
+						margin: 0 auto;
+						padding: 20px;
+						width: 150px;
+					}
+						#timeline .month span {
+							display: block;
+						}
+						#timeline .month .m {
+							font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+							font-size: 24px;
+							font-weight: normal;
+						}
+						#timeline .month .y {
+							font-size: 36px;
+							font-weight: bold;
+						}
+					#timeline .month-after {
+						clear: both;
+						float: none;
+						height: 50px;
+						margin: 0 auto;
+					}
+					
+					/** single post **/
+					#timeline .single {
+						padding: 0 190px;
+					}
+						#timeline .single header {
+							margin-bottom: 20px;
+						}
+						#timeline .single header h1 {
+							color: #D9DF20;
+							font-size: 30px;
+							font-weight: bold;
+							text-shadow: 0px 1px 0px black !important;
+						}
+						#timeline .single #body {
+							color: #fff;
+							font-weight: 300;
+							text-shadow: 0px 1px 0px black !important;
+						}
+							
+							/* section text */
+							#timeline .single .ob-section h2,
+							#timeline .single .ob-section h3,
+							#timeline .single .ob-section h4 {
+								color: #D9DF20;
+								font-weight: bold;
+								margin-bottom: 15px;
+							}
+							#timeline .single .ob-section h2 {
+								font-size: 20px;	
+							}
+							#timeline .single .ob-section h3 {
+								font-size: 18px
+							}
+							#timeline .single .ob-section h4 {
+								font-size: 16px
+							}
+							#timeline .single .ob-section p {
+								margin: 5px 0 15px;
+							}
+							#timeline .single .ob-section pre {
+								background: #212121; 
+								border: 1px dashed #DDD; 
+								margin: 10px 0 15px;
+								overflow: auto; 
+								padding: 15px; 
+								white-space: -webkit-pre-wrap;
+								   white-space: -moz-pre-wrap;  
+								     white-space: -o-pre-wrap;
+								        white-space: pre-wrap;  
+								word-wrap: break-word;
+							}
+							#timeline .single .ob-link,
+							#timeline .single a,
+							#timeline .single a:visited {
+								color: #888;
+								font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+								text-shadow: 0px 1px 0px black !important;
+								text-decoration: none;
+							}
+							#timeline .single a:hover,
+							#timeline .single .ob-link:hover {
+								color: #E53200;
+							}
+							#timeline .single .ob-section ol,
+							#timeline .single .ob-section ul {
+								margin: 0 0 30px 20px;
+							}
+							#timeline .single .ob-section ol {
+								list-style: decimal;
+							}
+							#timeline .single .ob-section ul {
+								list-style: disc;
+							}
+							
+							/* section image */
+							#timeline .single .ob-section .ob-media {
+								max-width: 100%;
+							}
+							#timeline .single .ob-section .ob-slideshow {
+								margin-bottom: 20px;
+							}
+							
+							/* section video */
+							#timeline .single .ob-section .ob-video iframe {
+								width: 94%;
+							}
+							
+							/* description */
+							#timeline .single .ob-desc {
+								font-size: 13px;
+								font-style: italic;	
+							}
+							
+							/* section audio */
+							#timeline .single .ob-section-audio .obsoundplayer .obsoundplayername {
+								height: 31px; 
+								overflow: hidden; 
+								width: 117px; 
+							}
+							
+							/* section map */
+							#timeline .single .ob-section-map .ob-map p,
+							#timeline .single .ob-section-map .ob-map h3 {
+								color: #212121;
+								text-shadow: none;
+								
+							}
+							
+						#timeline .single #comments {
+							margin-top: 40px;
+							padding: 20px 0; 
+						}
+						
+					/* contact form */
+					#timeline .single .ob-input {
+						font-size: 14px;
+						font-weight: bold;
+					}
+					#timeline .single .ob-input-text,
+					#timeline .single .ob-input-email {
+						padding: 3px 0;
+						width: 250px;
+					}
+					#timeline .single .ob-input-submit {
+						background: #d1d53a;
+						border: 0;
+						cursor: pointer;
+						font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+						font-size: 18px;
+						font-weight: normal;
+						padding: 3px 10px;
+						-webkit-transition: all 0.15s ease-out;
+						   -moz-transition: all 0.15s ease-out;
+						    -ms-transition: all 0.15s ease-out;
+						     -o-transition: all 0.15s ease-out;
+						     	transition: all 0.15s ease-out;
+						text-shadow: 0px 1px 0px black !important;
+					}
+						#timeline .single .ob-input-submit:hover {
+							background: #000;
+							color: #fff;
+						}
+
+					
+					#timeline .timespot {
+						border-top: 1px dotted #000;
+						color: #CCC;
+						float: left;
+						margin: 0 5px;
+						padding: 60px 40px 20px 40px;
+						position: relative;
+						overflow: hidden;
+						text-shadow: 0px 1px 0px black !important;
+						width: 400px;
+					}
+						
+						#timeline .timespot .date a,
+						#timeline .timespot .date a:visited {
+							color: #D9DF20 !important;
+							display: block;
+							font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+							font-size: 24px;
+							font-weight: normal;
+							left: 40px;
+							letter-spacing: -1px;
+							position: absolute;
+							text-decoration: none;
+							text-shadow: 0px 1px 0px black !important;
+							top: 10px;
+						}
+						#timeline .timespot .date-long a,
+						#timeline .timespot .date-long a:visited {
+							color: #999 !important;
+							display: none;
+							font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+							font-size: 14px;
+							font-weight: normal;
+							left: 40px;
+							letter-spacing: 0px;
+							padding: 10px 0;
+							position: absolute;
+							text-decoration: none;
+							text-shadow: 0px 1px 0px black !important;
+							top: 10px;
+						}
+						#timeline .timespot:hover .date a {
+							display: none;
+						}
+						#timeline .timespot:hover .date-long a {
+							display: block;
+						}
+						#timeline .timespot .snippet {
+							font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+							font-weight: normal;
+							line-height: 1.4em;
+							text-shadow: 0px 1px 0px black !important;
+						}
+						#timeline .timespot .snippet .ob-section,
+						#timeline .timespot .snippet .ob-img,
+						#timeline .timespot .snippet .ob-video iframe,
+						#timeline .timespot .snippet .ob-section-images img {
+							max-width: 100%;
+						}
+						#timeline .timespot .snippet .ob-row-1-col img,
+						#timeline .timespot .snippet .ob-row-2-col img,
+						#timeline .timespot .snippet .ob-row-3-col img {
+							width: 100%;
+						}
+
+						#timeline .timespot .snippet img {
+							-webkit-transition: all 0.15s ease-out;
+							   -moz-transition: all 0.15s ease-out;
+							    -ms-transition: all 0.15s ease-out;
+							     -o-transition: all 0.15s ease-out;
+							     	transition: all 0.15s ease-out;
+						}
+						#timeline .timespot .snippet img:hover {
+							-webkit-box-shadow: 0px 0px 10px 0 #000;
+							   -moz-box-shadow: 0px 0px 10px 0 #000;
+							     -o-box-shadow: 0px 0px 10px 0 #000;
+							     	box-shadow: 0px 0px 10px 0 #000;
+						}
+						#timeline .timespot .snippet .ob-text a,
+						#timeline .timespot .snippet .ob-text a:visited,
+						#timeline .timespot .snippet .ob-author a,
+						#timeline .timespot .snippet .ob-author a:visited {
+							color: #888;
+							font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+							text-shadow: 0px 1px 0px black !important;
+							text-decoration: none;
+						}
+						#timeline .timespot .snippet .ob-text a:hover,
+						#timeline .timespot .snippet .ob-author a:hover {
+							color: #E53200;
+							border-bottom: 1px dotted #B63700;
+							
+						}
+						#timeline .timespot .snippet .ob-row-1-col a:hover,
+						#timeline .timespot .snippet .ob-row-2-col a:hover,
+						#timeline .timespot .snippet .ob-row-3-col a:hover,
+						#timeline .timespot .snippet .ob-link-img {
+							border: 0;
+							text-decoration: none;
+						}
+						
+						#timeline .timespot .ob-quote{
+							color: #fff;
+							font-weight: 300;
+						}
+						
+						#timeline .timespot .read-more {
+							margin: 20px 0 0 0;
+						}
+						#timeline .timespot .read-more a,
+						#timeline .timespot .read-more a:visited {
+							background: url("http://timekiwi-assets.s3.amazonaws.com/assets/45black-d0cd8ceac6409682d2bf3423a3dd61b5.png") repeat;
+							color: #999;
+							display: table;
+							padding: 5px 10px;
+							text-decoration: none;
+							-webkit-transition: all 0.15s ease-out;
+							   -moz-transition: all 0.15s ease-out;
+							    -ms-transition: all 0.15s ease-out;
+							     -o-transition: all 0.15s ease-out;
+							     	transition: all 0.15s ease-out;
+						}
+						#timeline .timespot .read-more a:hover {
+							background: #bb3404;
+							color: #fff;
+						}
+						
+						/* Infinite Scroll loader */
+						#infscr-loading { 
+						  color: #D9DF20;
+						  background-color: #212121;
+						  bottom: 60px;
+						  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+						  font-size: 16px;
+						  font-weight: bold; 
+						  left: 45%;
+						  opacity: 0.9;
+						  padding: 10px;
+						  position: fixed;
+						  text-align: center;
+						  width: 150px;
+						  z-index: 100;
+						  
+						}
+							#infscr-loading img {
+								height: 60px;
+								margin: 0 auto;
+								width: 60px;
+							}
+
+			/*** FOOTER ***/
+			#footer {
+				background: url("http://timekiwi-assets.s3.amazonaws.com/assets/80green-5b978f3faccf47df1da74908951334af.png") repeat;
+				bottom: 0;
+				height: 50px;
+				left: 0;
+				position: fixed;
+				width: 100%;
+				z-index: 99;
+			}
+				#footer .sharing {
+					float: left;
+					position: relative;
+				}
+					#footer .sharing h3 {
+						color: #FFF;
+						display: table;
+						float: left;
+						font-size: 24px;
+						font-weight: bold;
+						height: 50px;
+						line-height: 50px;
+						padding: 0 20px;
+						text-decoration: none;
+					}
+					#footer .sharing h3:hover,
+					#footer .sharing h3.active {
+						background: #212121;
+					}
+					#footer .sharing .inner {
+						background: #212121;
+						bottom: 50px;
+						display: none;
+						left: 0;
+						padding: 20px;
+						position: absolute;
+						width: 350px;
+					}
+					#footer .sharing:hover .inner {
+						display: block;
+					}
+
+						#footer .sharing .inner .sharing-service {
+							float: left;
+							margin-right: 30px;
+						}
+						
+						#footer .sharing .inner .sharing-service.twitter {
+							margin-right: 10px;
+						}
+						
+						#footer .sharing .inner .sharing-service.google {
+							margin-right: 0;
+						}
+						
+						#footer .sharing .inner .sharing-service h4 {
+							color: #fff;
+							font-size: 18px;
+							font-weight: bold;
+							margin-bottom: 5px;
+						}
+						#footer .sharing .inner .sharing-service h4 span {
+							display: block;
+							font-family: "Helvetica Neue Light","HelveticaNeue-Light",Arial,Helvetica,sans-serif;
+							font-size: 14px;
+							font-weight: normal;
+						}
+		</style>
+	</head>
+	<body>
+		<header id="header" role="banner">
+			<div class="inner">
+				<div class="avatar">
+					<a href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
+						<img src="{{ Blog.Owner.Avatar|resize(100)|crop }}" alt="" width="100" height="100" />
+					</a>
+				</div>
+				
+				<div class="blog-about">
+					{% if isSingle %}
+						<p>
+							<span class="title">
+								<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title|truncate(20) }}</a>
+							</span>
+						</p>
+					{% else %}
+						<h1>
+							<span class="title">
+								<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title|truncate(20) }}</a>
+							</span>
+						</h1>
+					{% endif %}
+					<p id="blog-description">{{ Blog.Description }}</p>
+				</div>
+				
+				<div class="links">
+					{% if Custom('facebook_username') is not empty %}
+						<a href="http://facebook.com/{{ Custom ('facebook_username') }}" class="facebook">{{ Lang.Get('Follow me on') }} Facebook</a>
+					{% endif %}
+					{% if Custom('twitter_username') is not empty %}
+						<a href="http://twitter.com/{{ Custom ('twitter_username') }}" class="twitter">{{ Lang.Get('Follow me on') }} Twitter</a>
+					{% endif %}
+					{% if Custom('google_username') is not empty %}
+						<a href="http://google.com/{{ Custom ('google_username') }}" class="google">{{ Lang.Get('Follow me on') }} Google +</a>
+					{% endif %}
+					<a href="{{ Blog.RssUrl }}" class="rss">{{ Lang.Get('Follow me with') }} RSS feeds</a>
+					<a href="{{ Blog.Url }}/contact" class="contact">{{ Lang.Get('Contact us') }}</a>
+				</div>
+				
+			</div>
+		</header>
+		<section id="timeline" role="main">
+			<div class="container">
+				
+				<ul class="vertical">
+					{% if isSingle %}
+						<article class="single">
+							<header>
+								<h1>{{ Post.Title }}</h1>
+							</header>
+							<div id="body">
+								{{ Post.Body }}
+							</div>
+							<div id="comments">
+								{% if Custom("comment") == "Facebook" %}
+									<div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="650"></div>
+								{% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+									<div id="disqus_thread"></div>
+									<script type="text/javascript">
+										var disqus_shortname = '{{ Custom('comment_disqus') }}';
+				
+										(function() {
+											var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+											dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+											(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+										})();
+									</script>
+									<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+								{% else %}
+									{{ Post.Comments }}
+								{% endif %}
+							</div>
+						</article>
+					{% elseif isSpecial %}
+						<article class="single">
+							<header>
+								<h1>{{ Lang.Get('Contact us') }}</h1>
+							</header>
+							<div id="body">
+								{{ SpecialContent }}
+							</div>
+						</article>
+					{% else %}
+
+						{% list Posts %}
+							
+<!--
+							<li class="month-before"></li>
+								<li class="month">
+									<span class="m"></span>
+									<span class="y"></span>
+								</li>
+							<li class="month-after"></li>
+-->
+								
+							<li class="timespot">
+								<div class="snippet">
+									{{ Post.Body(1) }}
+								</div>
+								<div class="read-more">
+									<a href="{{ Post.Permalink }}" title="">{{ Lang.Get('Read more') }} &rarr;</a>
+								</div>
+								<div class="date">
+									<a href="{{ Post.Permalink }}" title="">
+										<span>{{ Post.Date|date('F d') }}</span> <span>{% if Post.Title is not empty %}- {{ Post.Title | truncate(28) }}{% endif %}</span>
+									</a>
+								</div>
+								<div class="date-long">
+									<a href="{{ Post.Permalink }}" title="">
+										{{ Lang.Get('Posted to') }} {% list Post.Sources %}{{ Lang.Get(Source) }} {% if not loop.last %} {{ Lang.Get('and ') }} {% endif %}{% endlist %} {% if Post.author is not empty %}{{ Lang.Get('by') }} {{ Post.Author }}{% endif %} {{ Lang.Get('on') }} {{ Lang.Get('on') }} {{ Post.Date|date('F d, Y') }} {{ Lang.Get('at') }} {{ Post.Date|date('H:i') }}
+									</a>
+								</div>
+							</li>
+						{% endlist %}
+						<p class="load-more">	
+							<a href="{{ Navigation.NextPage }}" title="Load more">{{ Lang.Get('Load more') }}</a>
+						</p>
+					{% endif %}
+				</ul>
+			</div>
+		</section>
+		<footer id="footer" role="contentinfo">
+			<div class="sharing">
+				<h3>
+					{% if isSingle %}
+						{{ Lang.Get('Share this post') }} 
+					{% else %}
+						{{ Lang.Get('Share this blog') }}
+					{% endif %}
+				</h3>
+				<div class="inner">
+					<div class="sharing-service">
+						<h4><span>{{ Lang.Get('Share on') }}</span> Facebook</h4>
+						<div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true" data-font="lucida grande"></div>					
+					</div>
+					<div class="sharing-service twitter">
+						<h4><span>{{ Lang.Get('Share on') }}</span> Twitter</h4>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ Blog.Url }}{% if isSingle %}{{ Post.Permalink }}{% endif %}" data-lang="{{ Blog.Lang }}"></a>
+					</div>
+					<div class="sharing-service google">
+						<h4><span>{{ Lang.Get('Share on') }}</span> Google +</h4>
+						<div class="g-plusone" data-size="medium" data-href="{{ Blog.Url }}{% if isSingle %}{{ Post.Permalink }}{% endif %}"></div>
+
+					</div>
+					
+				</div>
+			</div>
+		</footer>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+		{% if not isSingle %}
+			<script src="http://assets.over-blog-kiwi.com/themes/13/js/jquery.infinitescroll.min.js" type="text/javascript"></script>
+		{% endif %}
+		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+		
+		{% if not isSingle and not isSpecial %}
+			<script type="text/javascript">
+				var Timeline = new Array();
+				Timeline.PaginationPath = function ()
+				{
+					var path = window.location.pathname.replace(/\/([0-9]+)$/i, '');
+					if(path == '/')
+					{
+						path = '/page';
+					}
+	
+					path += '/';
+	
+					return path;
+				},
+				
+				Timeline.CurrentPage = function ()
+				{
+					var result = window.location.pathname.match(/\/([0-9]+)$/i);
+	
+					if(result)
+					{
+						return parseInt(result[1]);
+					}
+					else
+					{
+						return 1;
+					}
+				}
+							
+				// On document load
+				$(document).ready(function(){					
+					$('.load-more').hide();
+	
+					$('.vertical').infinitescroll({
+						navSelector  : '.load-more',	// selector for the paged navigation 
+						nextSelector : '.load-more a',  // selector for the NEXT link (to page 2)
+						itemSelector : '.timespot',	 // selector for all items you'll retrieve
+						loadingImg   : "http://timekiwi-assets.s3.amazonaws.com/assets/kiwi_spinner-ed85ae1de33ff4e93f26a7c67ab863b1.gif",
+						loadingText  : "{{ Lang.Get('Loading new posts...') }}",
+						loading: {
+							finishedMsg: "{{ Lang.Get('No more post') }}",
+							img: "http://timekiwi-assets.s3.amazonaws.com/assets/kiwi_spinner-ed85ae1de33ff4e93f26a7c67ab863b1.gif"
+						},
+						state        : {
+						currPage     : Timeline.CurrentPage()
+						},
+						pathParse: [Timeline.PaginationPath(),'']
+					},
+					
+					function( newElements ) {
+						$(".ob-section-images a, .ob-link-img").attr("rel", "group1");
+						$(".ob-section-images a, .ob-link-img").fancybox({
+							'overlayShow'	: true,
+							'overlayColor'  : '#000',
+							'transitionIn'	: 'elastic',
+							'transitionOut'	: 'elastic',
+							'type'			: 'image'
+						});					
+							
+						if (typeof twttr !== "undefined") 
+						{ 
+							twttr.widgets.load(); 
+						}
+						
+						Timeline.Update($( newElements ));
+					});
+				});
+	
+				// On window load
+				$(window).load(function() {
+					Timeline.Update($('.timespot'));
+				});
+			</script>
+		{% endif %}	
+			
+		<!-- Fancybox -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('.inner').hover(
+					function()
+					{ 
+						$('.sharing h3').addClass('active') 
+					},
+				    function()
+				    { 
+				    	$('.sharing h3').removeClass('active') 
+				    }
+				)
+				
+				$(".ob-section-images a,.ob-link-img, .avatar a").attr("rel", "fancybox");
+				$("a[rel=fancybox]").fancybox({
+					'overlayShow'	: true,
+					'transitionIn'	: 'fadin',
+					'transitionOut'	: 'fadin',
+					'type'			: 'image'
+				});
+			});		 			
+		</script>
+		
+		<!-- Facebook Script -->
+		<div id="fb-root"></div>
+        <script type="text/javascript">
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>	
+		
+		<!-- Social networks : Twitter -->
+		<script type="text/javascript">
+			!function(d,s,id){
+				var js, fjs=d.getElementsByTagName(s)[0];
+				if(!d.getElementById(id))
+				{
+					js=d.createElement(s);
+					js.id=id;
+					js.src="//platform.twitter.com/widgets.js";
+					fjs.parentNode.insertBefore(js,fjs); 
+				}
+			}(document,"script","twitter-wjs");
+		</script>
+		
+		<!-- Google + button -->
+		<script type="text/javascript">
+		  	window.___gcfg = {lang: '{{ Blog.Lang|default('en') }}'};
+		
+		  	(function() {
+		    	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    	po.src = 'https://apis.google.com/js/plusone.js';
+		    	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		    })();
+		</script>
+		
+		{% if Custom('google_analytics') is not empty %}
+			<!-- Google Analytics -->
+			 <script type="text/javascript">
+			    window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+			    var _gaq = _gaq || [];
+			    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+			    _gaq.push(['_trackPageview']);
+			    _gaq.push(['_trackPageLoadTime']);
+			
+			    (function() {
+			        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			    })();
+			</script>
+		{% endif %}	
+	</body>
+</html>
