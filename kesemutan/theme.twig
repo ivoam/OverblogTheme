@@ -2,75 +2,10 @@
 <html lang="{{ Blog.Lang|default('en') }}">
     <head>
         <!-- shortcut:[Meta] -->
-        <!-- title, description, keyword, robots -->
-        {% if isSingle%}
-            {% list Posts %}
-                <title>{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }} - {% endif %}{{ Blog.Title }}</title>
-                <meta name="description" content="{{ Post.Snippet }}" />
-                <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
-                <meta name="robots" content="index,follow" />
-            {% endlist %}
-        {% elseif isTag and Tag is not empty %}
-            <title>{{ Tag.Title|title }} - {{Blog.Title}}</title>
-            <meta name="description" content="{{ Blog.Description }}" />
-            <meta name="keywords" content="{{ Tag.Title|title }}" />
-            <meta name="robots" content="index,follow" />
-        {% elseif isSearch and Search is not empty %}
-            <title>{{ Search|title }} - {{Blog.Title}}</title>
-            <meta name="description" content="{{ Blog.Description }}" />
-            <meta name="keywords" content="{{ Search|title }}" />
-            <meta name="robots" content="noindex" />
-        {% else %}
-            <title>{{ Blog.Title }}</title>
-            <meta name="description" content="{{ Blog.Description }}" />
-            <meta name="robots" content="index,follow" />
-        {% endif %}
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-
-        <!-- Social setting : Facebook, G+ .. -->
-        <meta property="og:site_name" content="{{ Blog.Title }}" />
-        <meta property="og:type" content="blog" />
-        <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
-        {% if Custom('facebook_username') is not empty %}
-	        <meta property="fb:admins" content="{{ Custom('facebook_username') }}"/>
-	    {% endif %}
-        <meta itemprop="name" content="{{ Blog.Title }}" />
-
-        {% if isSingle %}
-            {% list Posts %}
-                <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
-                <meta property="og:description" content="{{ Post.Snippet }}" />
-                <meta itemprop="description" content="{{ Post.Snippet }}" />
-                <meta property="og:url" content="{{ Post.Permalink }}" />
-                {% if Post.Cover %}
-                    <meta property="og:image" content="{{ Post.Cover }}"/>
-                    <meta itemprop="image" content="{{ Post.Cover }}" />
-                {% endif %}
-            {% endlist %}
-            <meta property="og:type" content="overblogkiwi:see" />
-        {% else %}
-            <meta property="og:title" content="{{ Blog.Title }}"/>
-            <meta property="og:description" content="{{ Blog.Description }}" />
-            <meta itemprop="description" content="{{ Blog.Description }}" />
-            {% if Blog.Avatar %}
-            <meta property="og:image" content="{{ Blog.Avatar }}"/>
-            <meta itemprop="image" content="{{ Blog.Avatar }}" />
-            {% else %}
-                {% list Posts %}
-                {% if loop.index == 1 and Post.Cover %}
-            <meta property="og:image" content="{{ Post.Cover }}"/>
-            <meta itemprop="image" content="{{ Post.Cover }}" />
-                {% endif %}
-                {% endlist %}
-            {% endif %}
-
-            {% if isSearch %}
-                <meta property="og:type" content="overblogkiwi:search" />
-            {% else %}
-                <meta property="og:type" content="overblogkiwi:visit" />
-            {% endif %}
-        {% endif %}
+        <!-- title -->
+        {% title %}
+        <!-- metas description, keyword, robots -->
+        {% meta %}
 
         <!-- shortcut:[Options] -->
 	    <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
@@ -99,13 +34,7 @@
 
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
-        {% if Blog.FaviconUrl is not empty %}
-            <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
-        {% else %}
-            <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
-            <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
-            <link rel="apple-touch-icon" href="http://fdata.over-blog.net/99/00/00/01/img/mobile-favicon.png" />
-        {% endif %}
+        {% favicon %}
 
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
