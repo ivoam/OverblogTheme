@@ -120,10 +120,11 @@
 			}
 			.header .logo{
 				background: url("http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/logo-overblog.png") no-repeat scroll 0 0;
+				background-size: 100px;
 				display: block;
 				float: left;
 				height: 35px;
-				margin: 3px 0 0 20px;
+				margin: 6px 0 0 10px;
 				width: 100px;
 			}
 			.header nav {
@@ -135,6 +136,7 @@
 			.header .button-box {
 				background: url(http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/header-separator.gif) no-repeat left top;
 				display: inline-block;
+				padding: 6px 4px 5px 10px;
 			}
 			.header .button-icon {
 				background: #ececec; /* Old browsers */
@@ -156,19 +158,23 @@
 						box-shadow: inset 0 0 4px #000;
 			}
 			.header .icon {
-				background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons.png) no-repeat;
+				background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons.png) no-repeat center center;
+				background-size: 20px;
 				display: block;
-				height: 29px;
+				height: 30px;
 				width: 30px;
 			}
-			.home .icon {
-				background-position: 6px 4px;
+			.header .home .icon {
+				background-position: 5px 5px;
 			}
-			.contact .icon {
-				background-position: ;
+			.header .contact .icon {
+				background-position: 5px -39px;
 			}
-			.search .icon {
-				background-position: -134px 5px;
+			.header .search .icon{
+				background-position: 5px -84px;
+			}
+			.header .noMob .icon {
+				background-position: 5px -129px;
 			}
 
 			/***** SEARCH FORM *****/
@@ -176,17 +182,20 @@
 				background: #FFF;
 				background: rgba(170, 170, 170, 0.8);
 				display: none;
-				margin-top: 87px;
-				max-width: 100%;
-				padding: 20px;
+				top: 45px;
+				height: 50px;
+				position: absolute;
+				width: 100%;
 			}
 			.search-input-text {
 				border: 2px solid #DDD;
 				-webkit-border-radius: 3px;
 					  	border-radius: 3px;
-				padding: 20px 0;
-				text-indent: 15px;
-				width: 100%;
+				left: 12px;
+				padding: 5px 10px;
+				position: absolute;
+				right: 12px;
+				top: 6px;
 			}
 			.search-input-submit {
 				background-color: #F8B33D;
@@ -202,13 +211,12 @@
 				border-radius: 0 3px 3px 0;
 				color: #FFF;
 				cursor: pointer;
-				display: inline-block;
-				font-size: 1.4em;
+				font-size: 0.9em;
 				font-weight: bold;
-				padding: 17px 14px;
+				padding: 6px 10px;
 				position: absolute;
-				right: 14px;
-				top: 107px;
+				right: 12px;
+				top: 6px;
 				text-decoration: none;
 				text-shadow: 2px 2px 3px #777;
 			}
@@ -226,8 +234,8 @@
             /* ==POSTS */
             /* ----------------------------- */
             .main {
-            	margin-bottom: 20px;
-            	padding: 0 20px;
+            	margin: 80px 0 20px;
+            	padding: 0 12px;
             }
             .main.index {
             	margin-bottom: 120px;
@@ -340,6 +348,10 @@
 			.ob-section-images img {
 				max-width: none;
 			}
+			.ob-section-images .ob-slideshow,
+			.ob-section-images .ob-slideshow .ob-img {
+				height: 240px;
+			} 
 			.ob-section-images .ob-slideshow {
 				text-align: center;
 				width: 100%;
@@ -355,18 +367,11 @@
 				text-align: center;
 			}
 
-			/**** SECTION AUDIO ****/
-			.ob-section-audio .obsoundplayer .obsoundplayername {
-				height: 31px;
-				overflow: hidden;
-				width: 240px;
-			}
-
 			/**** SECTION VIDEO ****/
 			.ob-section-video iframe,
 			.ob-section-video object,
 			.ob-section-video embed{
-				max-height: 320px;
+				max-height: 200px;
 				width: 100%;
 			}
 
@@ -434,6 +439,8 @@
             }
             .ob-section-link .ob-title .ob-link {
             	color: inherit;
+            	font-size: 0.8em;
+            	padding-left: 20px;
             }
             .ob-section-link .ob-media-left {
             	margin: 0 20px 0 0;
@@ -443,9 +450,15 @@
             	border-radius: 3px 0 0 3px;
 				display: block;
 				margin-right: 0;
+				width: 100px;
+            }
+            .ob-section-link .ob-snippet,
+            .ob-section-link .ob-url {
+            	display: none;
             }
            	/**** SECTION MAP ****/
            	.ob-section-map .ob-map {
+           		height: 270px;
            		max-width: 100%;
            		width: 100%;
            	}
@@ -468,7 +481,7 @@
             	vertical-align: bottom;
             }
             .share div + div {
-            	margin-left: 29px;
+            	margin-left: 20px;
             }
             .twitter-share {
             	height: 62px;
@@ -485,7 +498,7 @@
             /* ==PAGINATION */
             /* ----------------------------- */
 	        .pagination {
-	        	margin: 30px 0;
+	        	margin: 30px 0 20px;
 	        	overflow: hidden;
 	        }
 			.pagination a {
@@ -505,7 +518,7 @@
 				color: #FFF;
 				display: block;
 				font-size: 1em;
-				padding: 10px 15px;
+				padding: 8px 10px;
 				text-decoration: none;
 				text-shadow: 1px 1px 0 #555;
 			}
@@ -518,8 +531,6 @@
 			.pagination .next {
 				float: right;
 			}
-
-
 
 			/* ----------------------------- */
             /* ==SPECIAL */
@@ -577,310 +588,20 @@
 			}
 			.ias_loader p {
 				margin-top: 10px;
-			}
+			}			
+				
 			/* ----------------------------- */
             /* ==MEDIA QUERIES */
             /* ----------------------------- */
 
-			/**** iPhone 1 - 2 - 3 - 3GS  ****/
-			@media only screen and (max-device-width: 320px) and (-webkit-min-device-pixel-ratio: 1) {
-				/**** HEADER ****/
-				.header .logo {
-					margin-left: 10px;
-				}
-				.header .button-box {
-					padding: 6px 4px 5px 10px;
-				}
-				.header .icon {
-					background-size: 20px;
-					height: 30px;
-					width: 30px;
-				}
-				.header .home .icon {
-					background-position: 5px 5px;
-				}
-				.header .contact .icon {
-					background-position: 5px -39px;
-				}
-				.header .search .icon{
-					background-position: 5px -84px;
-				}
-				.header .noMob .icon {
-					background-position: 5px -129px;
-				}
-				/**** SEARCH FORM ****/
-				.search-form {
-					margin-top: 45px;
-					padding: 10px;
-				}
-				.search-input-text {
-					padding: 10px 0;
-				}
-				.search-input-submit {
-					border: 2px solid #F59A28;
-					-webkit-border-radius: 0 3px 3px 0;
-					border-radius: 0 3px 3px 0;
-					font-size: 1em;
-					padding: 10px;
-					right: 4px;
-					top: 55px;
-				}
-				/**** MAIN ****/
-				.main {
-					margin-top: 80px;
-					padding: 0 12px;
-				}
-				/**** POSTS ****/
-				article {
-					padding: 12px;
-					margin-bottom: 12px
-				}
-				/**** SECTION HTML ****/
-				.ob-section-html iframe,
-				.ob-section-html embed,
-				.ob-section-html object {
-					height: 300px;
-				}
-				/**** SECTION LINK ****/
-				.ob-section-link .ob-title .ob-link {
-					font-size: 0.8em;
-				}
-				.tags a {
-					font-size: 0.7em;
-				}
-				/**** PAGINATION ****/
-				.pagination {
-					margin-bottom: 20px;
-				}
-				.pagination a {
-					padding: 8px 10px;
-				}
-			}
-
-			/**** iPhone 1 - 2 - 3 - 3GS  (portrait) ****/
-			@media only screen and (max-device-width: 320px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio: 1) {
-				/* section image with slidshow */
-				.ob-section-images .ob-slideshow,
-				.ob-section-images .ob-slideshow .ob-img {
-					height: 240px;
-				} 
-				/**** SECTION VIDEO ****/
-				.ob-section-video iframe,
-				.ob-section-video object,
-				.ob-section-video embed {
-					max-height: 200px;
-				}
-				/**** SECTION MAP ****/
-				.ob-section-map .ob-map {
-					height: 270px;
-				}
-				/**** SECTION LINk ****/
-				.ob-section-link .ob-img {
-					max-width: 100px;
-				}
-				.ob-section-link .ob-snippet,
-				.ob-section-link .ob-url {
-					display: none;
-				}
-			}
-			/**** iPhone 1 - 2 - 3 - 3GS  (paysage) ****/
-			@media only screen and (max-device-width: 320px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio: 1) {
-				/**** SECTION VIDEO ****/
-				.ob-section-video iframe,
-				.ob-section-video object,
-				.ob-section-video embed {
-					max-height: 240px;
-				} 
-				/**** SECTION MAP ****/
-				.ob-section-map .ob-map {
-					height: 190px;
-				}
-				.ob-section-link .ob-snippet {
-					font-size: 0.9em;
-					margin: 0;
-					padding: 0 20px 0 0;
-				}
-				.ob-section-link .ob-url {
-					display: none;
-				}
-			}
-
 			/**** Retina devices ****/
 			@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min--moz-device-pixel-ratio: 1.5),only screen and (min-device-pixel-ratio: 1.5) {
-
-				/* logo */
+				
 				.header .logo {
 					background: url(http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/logo-overblog@2x.png) no-repeat scroll 0 0;
-					height: 35px; 
-					margin: 6px 0 0 10px;
-					background-size: 100px 35px; 
-					width: 100px;
-				}
-				/* icons */
-				.header .button-box {
-					padding: 6px 4px 5px 10px;
 				}
 				.header .icon {
 					background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons@2x.png) no-repeat; 
-					background-size: 20px;
-					height: 30px; 
-					width: 30px;
-				}
-				.header .home .icon {
-					background-position: 5px 5px;
-				}
-				.header .contact .icon {
-					background-position: 5px -39px;
-				}
-				.header .search .icon{
-					background-position: 5px -84px;
-				}
-				.header .noMob .icon {
-					background-position: 5px -129px;
-				}
-				/**** SEARCH FORM ****/
-				.search-form {
-					margin-top: 45px;
-					padding: 10px;
-				}
-				.search-input-text {
-					padding: 10px 0;
-				}
-				.search-input-submit {
-					border: 2px solid #F59A28;
-					-webkit-border-radius: 0 3px 3px 0;
-					border-radius: 0 3px 3px 0;
-					font-size: 1em;
-					padding: 10px;
-					right: 4px;
-					top: 55px;
-				}
-				/**** MAIN ****/
-				.main {
-					margin-top: 80px;
-					padding: 0 12px;
-				}
-				/**** POSTS ****/
-				article {
-					padding: 12px;
-					margin-bottom: 12px
-				}
-				/**** SECTION HTML ****/
-				.ob-section-html iframe,
-				.ob-section-html embed,
-				.ob-section-html object {
-					height: 300px;
-				}
-				/**** SECTION LINK ****/
-				.ob-section-link .ob-title .ob-link {
-					font-size: 0.8em;
-				}
-				.tags a {
-					font-size: 0.7em;
-				}
-				/**** PAGINATION ****/
-				.pagination {
-					margin-bottom: 20px;
-				}
-				.pagination a {
-					padding: 8px 10px;
-				}
-			}
-			@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (orientation : portrait), only screen and (-o-min-device-pixel-ratio: 3/2) and (orientation : portrait), only screen and (min--moz-device-pixel-ratio: 1.5) and (orientation : portrait),only screen and (min-device-pixel-ratio: 1.5) and (orientation : portrait) {
-				
-				/* section image with slidshow */
-				.ob-section-images .ob-slideshow,
-				.ob-section-images .ob-slideshow .ob-img {
-					height: 240px;
-				} 
-				/**** SECTION VIDEO ****/
-				.ob-section-video iframe,
-				.ob-section-video object,
-				.ob-section-video embed {
-					max-height: 300px;
-				}
-				/**** SECTION MAP ****/
-				.ob-section-map .ob-map {
-					height: 270px;
-				}
-				/**** SECTION LINk ****/
-				.ob-section-link .ob-img {
-					max-width: 100px;
-				}
-				.ob-section-link .ob-snippet,
-				.ob-section-link .ob-url {
-					display: none;
-				}
-			}
-			@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (orientation : landscape), only screen and (-o-min-device-pixel-ratio: 3/2) and (orientation : landscape), only screen and (min--moz-device-pixel-ratio: 1.5) and (orientation : landscape),only screen and (min-device-pixel-ratio: 1.5) and (orientation : landscape) {
-				/**** SECTION VIDEO ****/
-				.ob-section-video iframe,
-				.ob-section-video object,
-				.ob-section-video embed {
-					max-height: 240px;
-				} 
-				/**** SECTION MAP ****/
-				.ob-section-map .ob-map {
-					height: 190px;
-				}
-				.ob-section-link .ob-snippet {
-					font-size: 0.9em;
-					margin: 0;
-					padding: 0 20px 0 0;
-				}
-				.ob-section-link .ob-url {
-					display: none;
-				}
-			}
-
-			/* media queries pour tablette */
-			@media screen and (min-width: 641px){
-				.header {
-					height: 85px;
-				}
-				.header .logo {
-					background: url("http://fdata.over-blog.net/99/00/00/01/images/blog/mobile/logo-overblog@2x.png") no-repeat scroll 0 0;
-					height: 70px;
-					margin: 6px 0 0 20px;
-					width: 200px;
-				}
-				.header .button-box {
-					padding: 13px 16px 12px 22px;
-				}
-				.header .icon {
-					height: 58px;
-					width: 58px;
-				}
-				.header .home .icon {
-					background-position: center 11px;
-				}
-				.header .contact .icon {
-					background-position: 10px -80px;
-				}
-				.header .search .icon{
-					background-position: center -170px;
-				}
-				.header .noMob .icon {
-					background-position: 9px -259px;
-				}
-				.main {
-					margin-top: 130px;
-				}
-				.ob-section-audio .obsoundplayer .obsoundplayername {
-					width: 200px;
-				}
-				.ob-section-file .ob-link {
-					max-width: 85%;
-				}
-			}
-
-			/* tablet + retina */
-			@media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 641px), only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 641px) {
-				.header .icon {
-					background: url(http://assets.over-blog-kiwi.com/themes/mobile/images/icons@2x.png) no-repeat; 
-					-webkit-background-size: 38px 310px; 
-					   -moz-background-size: 38px 310px; 
-							background-size: 38px 310px;
 				}
 			}
 		</style>
