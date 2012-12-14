@@ -38,7 +38,7 @@
                 <meta property="og:title" content="{% if Post.Title is not empty %}{{ Post.Title }} - {% elseif Post.Snippet is not empty %}{{ Post.Snippet|truncate(80) }}{% endif %}"/>
                 <meta property="og:description" content="{{ Post.Snippet }}" />
                 <meta itemprop="description" content="{{ Post.Snippet }}" />
-                <meta property="og:url" content="{{ Post.Permalink }}" />
+                <meta property="og:url" content="{{ Blog.Url }}{{ Post.Permalink }}" />
                 {% if Post.Cover %}
                     <meta property="og:image" content="{{ Post.Cover }}"/>
                     <meta itemprop="image" content="{{ Post.Cover }}" />
@@ -112,13 +112,13 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         
         <!-- NivoSlider -->
-        <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/themes/default/default.css" type="text/css" />
-        <script src="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="http://assets.over-blog-staging.com/themes/jquery/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="http://assets.over-blog-staging.com/themes/jquery/nivo-slider/themes/default/default.css" type="text/css" />
+        <script src="http://assets.over-blog-staging.com/themes/jquery/nivo-slider/jquery.nivo.slider.pack.js" type="text/javascript"></script>
 
         <!-- Fancybox -->
-        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+        <script src="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="http://assets.over-blog-staging.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
         
         <!-- Template resources -->
 				<style type="text/css">
@@ -137,9 +137,12 @@
 					font-size: 12px;
 					color: #757575;
 				}
+				.clear {
+					clear: both;
+				}
 
 				h1, h2, h3 {
-					margin: 0;
+					margin: 0 0 10px;
 					padding: 0;
 					font-weight: normal;
 					color: #221D1D;
@@ -178,7 +181,7 @@
 					margin: 0 auto;
 					padding: 0;
 				}
-
+				
 				/* Header */
 
 				#header {
@@ -254,7 +257,7 @@
 
 				#search-text {
 					width: 170px;
-					padding: 6px 5px 2px 5px;
+					padding: 6px 5px;
 					border: none;
 					background: #FFFFFF;
 					text-transform: lowercase;
@@ -263,8 +266,7 @@
 				}
 
 				#search-submit {
-					width: 50px;
-					height: 23px;
+					padding: 6px;
 					border: 1px solid #525252;
 					background: #525252;
 					font-weight: bold;
@@ -295,9 +297,9 @@
 
 				#menu a {
 					display: block;
-					height: 26px;
+					height: 24px;
 					margin-bottom: 10px;
-					padding: 10px 20px 0px 20px;
+					padding: 12px 20px 0px 20px;
 					text-decoration: none;
 					text-align: center;
 					text-transform: uppercase;
@@ -337,20 +339,18 @@
 
 				#content {
 					float: right;
-					width: 620px;
-					padding: 0px 0px 0px 0px;
+					width: 600px;
+					padding: 0;
 				}
 
 				.post {
 					margin-bottom: 15px;
 				}
-				.ob-repost {
-					background: #111;
-					font-weight: bold;
-					text-align: center;
+
+				.post-bgtop {
 				}
-				.ob-repost .ob-link {
-					text-decoration: underline;
+
+				.post-bgbtm {
 				}
 
 				.post .title {
@@ -366,9 +366,8 @@
 				}
 
 				.post .meta {
-					height: 30px;
 					border-bottom: 1px solid #292929;
-					margin: 0px;
+					margin-bottom: 20px;
 					padding: 0px 0px 0px 0px;
 					text-align: left;
 					font-family: Arial, Helvetica, sans-serif;
@@ -378,22 +377,34 @@
 
 				.post .meta .date {
 					float: left;
+					width: 50%;
 					height: 24px;
-					padding: 3px 15px;
 					color: #BBBBBB;
 				}
 
 				.post .meta .posted {
 					float: right;
+					width: 50%;
 					height: 24px;
-					padding: 3px 15px;
 					color: #BBBBBB;
+					text-align: right;
 				}
 
-				.post .meta a {
+				.post .meta a,
+				.post .meta a:visited {
 					color: #BBBBBB;
 				}
-
+				.post .meta a:hover {
+					color: #FFF;
+				}
+				
+				.post .meta .tags {
+					display: block;
+					height: 24px;
+					color: #BBBBBB;
+					clear: both;
+				}
+				
 				.post .entry {
 					padding: 0px 0px 20px 0px;
 					padding-bottom: 20px;
@@ -404,6 +415,51 @@
 					padding-top: 20px;
 					font-size: 12px;
 					font-weight: bold;
+				}
+				
+				.ob-section p {
+					margin-bottom: 15px;
+				}
+				
+				.ob-text pre {
+	            	background: #EEE;
+	            	border: 1px dashed {{ Custom('custom_page_theme_color_2') }};
+	            	line-height: 20px;
+	            	margin-bottom: 15px;
+	                overflow: auto;
+	                padding: 10px;
+	                white-space: pre-wrap; 
+	                white-space: -moz-pre-wrap; 
+	                white-space: -pre-wrap; 
+	                white-space: -o-pre-wrap;
+	                word-wrap: break-word; 
+	            }
+	            
+				.ob-text ul {
+					list-style: disc;
+				}
+				
+				.ob-text ol {
+					list-style: decimal;
+				}
+				.ob-text ul,
+				.ob-text ol {
+					margin-left: 20px;
+				}
+				
+				.ob-section-video iframe {
+					width: 600px;
+				}
+				
+				.ob-section-file,
+				.ob-ctn {
+					margin-left: 0;
+				}
+				
+				.ob-section-audio .obsoundplayer .obsoundplayername {
+					height: 31px; 
+					width: 117px; 
+					overflow: hidden;
 				}
 
 				/* Sidebar */
@@ -440,7 +496,11 @@
 
 				#sidebar li a {
 					padding-left: 10px;
-					background: url(http://assets.over-blog-kiwi.com/themes/24/images/img03.gif) no-repeat left 5px;
+					background: url(http://assets.over-blog-staging.com/themes/24/images/img03.gif) no-repeat left 5px;
+				}
+				
+				#sidebar li .about {
+					background: none;
 				}
 
 				#sidebar li li span {
@@ -476,6 +536,23 @@
 					text-decoration: underline;
 					color: #6E6E6E;
 				}
+				
+				#sidebar .m-networks {
+					padding: 0 30px 20px 20px;
+				}
+				#sidebar .m-networks a {
+					background: none;
+				}
+				#sidebar .m-networks a,
+	            #sidebar .m-networks a:hover,
+	            #sidebar .m-networks img,
+	            #sidebar .m-networks img:hover {
+	                margin-right: 4px;
+	                text-decoration: none;
+	            }
+	            #sidebar .m-networks a:last-child{
+	                margin-right: 0;
+	            }
 
 				/* Calendar */
 
@@ -591,7 +668,7 @@
 				}
 				</style>
 
-        <script type="text/javascript" src="http://assets.over-blog-kiwi.com/themes/24/jquery/jquery.gallerax-0.2.js"></script>
+        <script type="text/javascript" src="http://assets.over-blog-staging.com/themes/24/jquery/jquery.gallerax-0.2.js"></script>
         <style type="text/css">
             {% if Custom("custom_page_background_color") is not empty %}
                 body{
@@ -618,6 +695,7 @@
             }
             #logo p{
                 max-width: 300px;
+                margin-bottom: 25px;
             }
             #menu{
                 clear: both;
@@ -689,7 +767,7 @@
         <meta name="color:custom_page_font_color_1:Page font color 1" default="#BBBBBB" group="Design" />
         <meta name="color:custom_page_font_color_2:Page font color 2" default="#FFFFFF" group="Design" />
 
-        <meta name="string:custom_tag_pictures_pinned:Tag for pictures in slider" default="pinned" group="Slider" />
+        <meta name="tag:custom_tag_pictures_pinned:Tag for pictures in slider" default="pinned" group="Slider" />
         <meta name="image:custom_slider_default_image:Slider default image" group="Slider" />
 
         <meta name="boolean:custom_hide_widget_search_form:Hide Widget &quot;Search form&quot;" group="Widgets" />
@@ -697,6 +775,9 @@
         <meta name="boolean:custom_hide_widget_categories:Hide Widget &quot;Categories&quot;" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
         <meta name="boolean:custom_hide_widget_archives:Hide Widget &quot;Archives&quot;" group="Widgets" />
+        
+        <meta name="string:facebook_account:Enter your Facebook Username" default="overblog" group="Social" />
+        <meta name="string:twitter_account:Enter your Twitter Account" default="overblog" group="Social" />
 
         <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
@@ -737,21 +818,37 @@
                                 <div class="post">
                                     {% list Posts %}
                                         <h2 class="title"><a href="{{ Post.PermaLink }}">{{ Post.Title }}</a></h2>
-                                        <p class="meta">
-                                            <span class="date">{{ Post.Date|date("M d Y, H:ia") }}</span>
+                                        <div class="meta">
+                                            <span class="date">
+                                            	{{ Post.Date|date("M d Y, H:ia") }}
+                                            </span>
                                             {% if Post.Author and Post.Author is not empty %}
-                                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                                                <span class="posted">
+                                                	{{ Lang.Get('Posted by') }} {{Post.Author}}
+                                                </span>
                                             {% endif %}
-                                        </p>
-                                        <div style="clear: both;">&nbsp;</div>
+                                            {% if Post.Tags is not empty %}
+	                                            <span class="tags">
+													{{ Lang.Get('Tags') }} : 
+													{% list Post.Tags %}
+														<a href="{{ Tag.Url }}">
+															#{{ Tag.title }}
+														</a>
+														{% if loop.last is empty%}
+														, 
+														{% endif %}
+													{% endlist %}
+	                                            </span>
+											{% endif %}
+										   <div class="clear"></div>
+                                        </div>
                                         <div class="entry">
-                                        	{{ Post.Body }}
-                                           
+                                            {{ Post.Body }}
                                             <div class="ob-section m-social-networks">
                                                 <!-- Social networks : share -->
                                                 <h3>{{ Lang.Get('Share this post') }}</h3>
-                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
-                                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}" {% endif %}></a>
+                                                <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}" {% endif %}></a>
                                             </div>
                                             {% if not isPage %}
                                                 <div class="bloc-comment">
@@ -760,7 +857,7 @@
                                                     <div class="item-comments">
                                                         <div class="item-comments">
                                                             {% if Custom("comment") == "Facebook" %}
-                                                                <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="620" data-colorscheme="dark"></div>
+                                                                <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="dark"></div>
                                                             {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                                 <div id="disqus_thread"></div>
                                                                 <script type="text/javascript">
@@ -782,28 +879,48 @@
                                         </div>
                                     {% endlist %}
                                 </div>
-                                <div class="return">
-                                    <a href="{{ Blog.Url }}">{{ Lang.Get('Return to home') }}</a>
-                                </div>
                             {% elseif isTag or isArchive or isSearch %}
                                 <!-- Search Page -->
                                 <div class="post">
                                     {% list Posts %}
                                         <h2 class="title"><a href="{{ Post.PermaLink }}">{{ Post.Title }}</a></h2>
-                                        <p class="meta">
-                                            <span class="date">{{ Post.Date|date("M d Y, H:ia") }}</span>
+                                        <div class="meta">
+                                            <span class="date">
+                                            	{{ Post.Date|date("M d Y, H:ia") }}
+                                            </span>
                                             {% if Post.Author and Post.Author is not empty %}
-                                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                                                <span class="posted">
+                                                	{{ Lang.Get('Posted by') }} {{Post.Author}}
+                                                </span>
                                             {% endif %}
-                                        </p>
-                                        <div style="clear: both;">&nbsp;</div>
+                                            {% if Post.Tags is not empty %}
+	                                            <span class="tags">
+													{{ Lang.Get('Tags') }} : 
+													{% list Post.Tags %}
+														<a href="{{ Tag.Url }}">
+															#{{ Tag.title }}
+														</a>
+														{% if loop.last is empty%}
+														, 
+														{% endif %}
+													{% endlist %}
+	                                            </span>
+											{% endif %}
+										   <div class="clear"></div>
+                                        </div>
                                         <div class="entry">
                                             {% if Post.Cover is not empty %}
                                                 <img class="ob-media-right ob-pull-right" src="{{ Post.Cover|resize(200, 150) }}" alt="" title="Post.Title" />
                                             {% endif %}
-                                            {{ Post.Snippet }}
+                                            {% list Post.Sources %}
+                                            	{% if Source == 'TW' %}
+                                            		{{ Post.Body(1) }}
+                                            	{% else %}
+                                            		{{ Post.Snippet }}
+                                            	{% endif %}
+                                            {% endlist %}
                                             <p class="links"><a href="{{ Post.PermaLink }}">{{ Lang.Get('Read more') }}</a>
-                                            <div style="clear: both;">&nbsp;</div>
+                                            <div class="clear"></div>
                                         </div>
                                     {% endlist %}
                                     {% if isSearch and Posts is empty %}
@@ -824,7 +941,7 @@
                                                         {% elseif Custom('custom_slider_default_image') is not empty %}
                                                             <img class="output" src="{{ Custom('custom_slider_default_image')|resize(604, 375)|crop }}" title="{{TaggedPost.Title}}" alt="" />
                                                         {% else %}
-                                                            <img class="output" src="http://assets.over-blog-kiwi.com/themes/24/images/img04.jpg" title="{{TaggedPost.Title}}" alt="" />
+                                                            <img class="output" src="http://assets.over-blog-staging.com/themes/24/images/img04.jpg" title="{{TaggedPost.Title}}" alt="" />
                                                         {% endif %}
                                                     {% endlist %}
                                                     <div id="thumbnail-bg">
@@ -836,7 +953,7 @@
                                                                     {% elseif Custom('custom_slider_default_image') is not empty %}
                                                                         <img title="{{TaggedPost.Title}}" class="active" src="{{ Custom('custom_slider_default_image')|resize(604, 375)|crop }}" alt="" width="604" height="375" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=70" />
                                                                     {% else %}
-                                                                        <img title="{{TaggedPost.Title}}" class="active" src="http://assets.over-blog-kiwi.com/themes/24/images/img04.jpg" alt="" width="604" height="375" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=70" />
+                                                                        <img title="{{TaggedPost.Title}}" class="active" src="http://assets.over-blog-staging.com/themes/24/images/img04.jpg" alt="" width="604" height="375" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=70" />
                                                                     {% endif %}
                                                                 </li>
                                                             {% endlist %}
@@ -859,40 +976,67 @@
                                 <div class="post">
                                     {% list Posts %}
                                         <h2 class="title"><a href="{{ Post.PermaLink }}">{{ Post.Title }}</a></h2>
-                                        <p class="meta">
-                                            <span class="date">{{ Post.Date|date("M d Y, H:ia") }}</span>
+                                        <div class="meta">
+                                            <span class="date">
+                                            	{{ Post.Date|date("M d Y, H:ia") }}
+                                            </span>
                                             {% if Post.Author and Post.Author is not empty %}
-                                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                                                <span class="posted">
+                                                	{{ Lang.Get('Posted by') }} {{Post.Author}}
+                                                </span>
                                             {% endif %}
-                                        </p>
-                                        <div style="clear: both;">&nbsp;</div>
+                                            {% if Post.Tags is not empty %}
+	                                            <span class="tags">
+													{{ Lang.Get('Tags') }} : 
+													{% list Post.Tags %}
+														<a href="{{ Tag.Url }}">
+															#{{ Tag.title }}
+														</a>
+														{% if loop.last is empty%}
+														, 
+														{% endif %}
+													{% endlist %}
+	                                            </span>
+											{% endif %}
+										   <div class="clear"></div>
+                                        </div>
+                                        
                                         <div class="entry">
                                             {% if Post.Cover is not empty %}
-                                                <img class="ob-media-right ob-pull-right" src="{{ Post.Cover|resize(200, 150) }}" alt="" title="Post.Title" />
+                                                <img class="ob-media-right ob-pull-right" src="{{ Post.Cover|resize(200, 150) | crop }}" alt="" title="Post.Title" />
                                             {% endif %}
-                                            {{ Post.Snippet }}
+                                            {% list Post.Sources %}
+                                            	{% if Source == 'TW' %}
+                                            		{{ Post.Body(1) }}
+                                            	{% else %}
+                                            		{{ Post.Snippet }}
+                                            	{% endif %}
+                                            {% endlist %}
                                             <p class="links"><a href="{{ Post.PermaLink }}">{{ Lang.Get('Read more') }}</a>
-                                            <div style="clear: both;">&nbsp;</div>
+                                            <div class="clear"></div>
                                         </div>
                                     {% endlist %}
                                 </div>
                             {% endif %}
-                            
                             <!-- Pagination -->
-                            {% if (Navigation.PreviousPage is not empty or Navigation.NextPage is not empty) %}
-                                <div class="pagination">
+                            {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}                                    
+                            	<div class="pagination">
                                     {% if Navigation.PreviousPage is not empty %}
                                         <a href="{{ Navigation.PreviousPage }}" class="prev">{{ Lang.Get('Previous page') }}</a>
+                                    {% elseif Navigation.PreviousPost is not empty %}
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" class="prev" title="{{ Lang.Get('Go to') }} {% if Navigation.PreviousPost.Title is not empty %}&quot;{{ Navigation.PreviousPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('previous post') }}{% endif %}">{{ Lang.Get('Previous post') }}</a>
                                     {% endif %}
-                                    {% if Navigation.PreviousPage is not empty and Navigation.NextPage is not empty %}
-                                        &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    {% endif %}
+                                    {% if Navigation.PreviousPage is not empty and Navigation.NextPage is not empty or Navigation.PreviousPost is not empty and Navigation.NextPost is not empty %}
+                                        &nbsp;|&nbsp;
+                                    {% endif %}   
                                     {% if Navigation.NextPage is not empty %}
                                         <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }}</a>
+                                     {% elseif Navigation.NextPost is not empty %}
+                                        <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }}</a>
                                     {% endif %}
                                 </div>
-                            {% endif %}                    
-                            <div style="clear: both;">&nbsp;</div>
+                            {% endif %}                   
+                            <div class="clear"></div>
                         </div>
                         
                         <!-- shortcut:[Sidebar content] -->
@@ -903,14 +1047,14 @@
                                 {% if Custom('custom_hide_widget_search_form') == false %}
                                     <li>
                                         <div id="search" >
-                                            <form class="search" method="post" action="/search">
+                                            <form class="search" method="get" action="/search/">
                                                 <div>
-                                                    <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text" value="" />
+                                                    <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..."  id="search-text"  />
                                                     <input type="submit" value="{{ Lang.Get('Search') }}" id="search-submit" value="{{ Lang.Get('Go') }}" />
                                                 </div>
                                             </form>
                                         </div>
-                                        <div style="clear: both;">&nbsp;</div>
+                                        <div class="clear"></div>
                                     </li>
                                 {% endif %}
                                 
@@ -919,16 +1063,35 @@
                                     {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
                                         <li>
                                             <h2>
-                                                <a href="/about">{{ Blog.Owner.Nickname }}</a>
+                                                <a class="about" href="/about">{{ Blog.Owner.Nickname }}</a>
                                             </h2>
                                             {% if Blog.Owner.Bio is not empty %}
                                                 <p>
                                                     {% if Blog.Owner.Avatar is not empty %}
-                                                        <a href="/about"><img class="m-avatar-img" src="{{ Blog.Owner.Avatar|resize(45,45) }}" alt="" /></a>
+                                                        <a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
+                                                        	<img class="m-avatar-img" src="{{ Blog.Owner.Avatar|resize(45,45) }}" alt=""  />
+                                                        </a>
                                                     {% endif %}
                                                     {{Blog.Owner.Bio}}
                                                 </p>
                                             {% endif %}
+                                            <p class="m-networks">
+	                                            {% if Custom('facebook_account') is not empty or Custom('twitter_account') is not empty %}
+	                                                {% if Custom('facebook_account') is not empty %}
+	                                                    <a title="Facebook" target="_blank" href="http://www.facebook.com/{{ Custom('facebook_account') }}">
+	                                                    	<img alt="Facebook" src="http://www.efusia.net/overblog/captivegreen/images/facebook.png" />
+	                                                    </a>
+	                                                {% endif %}
+	                                                {% if Custom('twitter_account') is not empty %}
+	                                                    <a title="Twitter" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_account') }}">
+	                                                    	<img alt="Twitter" src="http://www.efusia.net/overblog/captivegreen/images/twitter.png" />
+	                                                    </a>
+	                                                {% endif %}
+	                                            {% endif %}
+	                                            <a title="RSS" target="_blank" href="{{ Blog.RssUrl }}">
+	                                            	<img alt="Twitter" src="http://www.efusia.net/overblog/captivegreen/images/rss.png" />
+	                                            </a>
+	                                        </p>
                                         </li>
                                     {% endif %}
                                 {% endif %}
@@ -975,7 +1138,7 @@
                                                         <ul id="arch_{{Archive.Year}}" class="arch_month">
                                                         {% list Archive.Months %}
                                                             {% if Month.PostCount > 0 %}
-                                                                <li><a href="{{Month.Url}}">{{Lang.Get(Month.Name)}}</a> ({{Month.PostCount}})</li>
+                                                                <li><a href="{{Month.Url}}">{{Month.Name}}</a> ({{Month.PostCount}})</li>
                                                             {% endif %}
                                                         {% endlist %}
                                                         </ul>
@@ -987,7 +1150,7 @@
                                 {% endif %}
                             </ul>
                         </div>
-                        <div style="clear: both;">&nbsp;</div>
+                        <div class="clear"></div>
                     </div>
                 </div>
             </div>
@@ -1056,6 +1219,7 @@
             </script>
         {% endif %}
         
+        {% if Custom('custom_hide_widget_archives') == false %}
         <!-- Archives -->
         <script type="text/javascript">
             function switch_arch(year) {
@@ -1078,6 +1242,7 @@
                 return false;
             }
         </script>
+       {% endif %}
         
         <!-- Social networks : Facebook -->
         <div id="fb-root"></div>
@@ -1086,7 +1251,7 @@
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
                 js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
         </script>
@@ -1098,7 +1263,8 @@
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 // Fancy box
-                jQuery(".ob-section-images a").fancybox({
+                $(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox");
+				$("a[rel=fancybox]").fancybox({
                     'overlayShow'	: true,
                     'transitionIn'	: 'elastic',
                     'transitionOut'	: 'elastic',
@@ -1149,7 +1315,45 @@
                         switch_arch('{{Archive.year}}');
                     {% endlist %}
                 })();
+                
+                $(function() {
+					if(!$.support.placeholder) { 
+						var active = document.activeElement;
+						$(':text').focus(function () {
+							if ($(this).attr('placeholder') != '' && $(this).val() == $(this).attr('placeholder')) {
+								$(this).val('').removeClass('hasPlaceholder');
+							}
+						}).blur(function () {
+							if ($(this).attr('placeholder') != '' && ($(this).val() == '' || $(this).val() == $(this).attr('placeholder'))) {
+								$(this).val($(this).attr('placeholder')).addClass('hasPlaceholder');
+							}
+						});
+						$(':text').blur();
+						$(active).focus();
+						$('form').submit(function () {
+							$(this).find('.hasPlaceholder').each(function() { $(this).val(''); });
+						});
+					}
+				});
             });
         </script>
+        
+        <!-- Placeholder script -->
+		<script type="text/javascript">
+			$('input[placeholder]').each(function(){  
+		        var input = $(this);        		        
+		        $(input).val(input.attr('placeholder'));
+		        $(input).focus(function(){
+		             if (input.val() == input.attr('placeholder')) {
+		                 input.val('');
+		             }
+		        });
+		        $(input).blur(function(){
+		            if (input.val() == '' || input.val() == input.attr('placeholder')) {
+		                input.val(input.attr('placeholder'));
+		            }
+		        });
+		    });		
+		</script>
     </body>
 </html>

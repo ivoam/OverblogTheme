@@ -1,1414 +1,1481 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="{{ Blog.Lang | default('en') }}">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{% if isSingle%}{{ Post.Title }} - {% elseif isTag and Tag is not empty %}{{ Tag.Title|title }} - {% elseif isSearch and Search is not empty %}{{ Search|title }} - {% endif %}{{Blog.Title}}</title>
-    <meta name="description" content="{{ Blog.Description }}" />
-
-    <meta name="list:style:Theme style" items="cowboy, dusk, grasslands" default="cowboy">
-
-    <meta name="string:text_publishedby:“Published by”" default="Published by" group="Wordings">
-
-    <meta name="boolean:display_widget_profile:Show Widget &quot;Blog Profile&quot;" group="Widgets" default="true">
-    <meta name="boolean:display_widget_search:Show Widget &quot;Search&quot;" group="Widgets" default="true">
-    <meta name="boolean:display_widget_pages:Show Widget &quot;Pages&quot;" group="Widgets" default="true">
-    <meta name="boolean:display_widget_tags:Show Widget &quot;Tags&quot;" group="Widgets" default="true">
-    <meta name="boolean:display_widget_navigation:Show Widget &quot;Navigation&quot;" group="Widgets" default="true">
-
-    <style type="text/css" media="screen">
-        @charset "utf-8";
-        /* CSS Document */
-        /*
-            Theme Name: jeans
-            Theme URI: http://www.wpart.org/wordpress-themes-jeans/
-            Description: "Jeans" theme WORDPRESS template, visually rich and interesting, perfect details. Specially developed to hide  / display the sidebar, the                  user could select whether display the Sidebar or not, it's facilitate to read the article better, browse photos and watch videos.
-                         Home Articles display as abstracts and thumbnail, maintaining the homepage rich and clean. Template also supports the head images switch,                  background images and background color change.
-            Version: 1.2.1
-            Author:WPart.org
-            Author URI: http://www.wpart.org
-            tags:blue,white,brown,orange,light,red,yellow,flexible-width,sticky-post,two-columns,right-sidebar,threaded-comments,custom-background,custom-header,photoblogging
-            License: GNU General Public License v2.0
-            License URI: http://www.gnu.org/licenses/gpl-2.0.html
-        */
-
-
-        body {
-            background: url(http://assets.over-blog-kiwi.com/themes/8/images/body_bg.jpg) repeat #e8e7e5;
-            margin:0 auto;
-            padding:0;
-            font-family: Arial, Tahoma, Helvetica, sans-serif;
-            color:#343434;
-            font-size:12px;
-        }
-
-        body a {
-            color:#902400;
-        }
-        body a:hover {
-            text-decoration:underline;
-        }
-
-        .alignright{
-           float:right;
-           margin:15px;
-           margin-right:0;
-           }
-
-        .alignleft{
-            float:left;
-            margin:15px;
-            margin-left:0;
-           }
-
-        .aligncenter {
-           display:block;
-           clear: both;
-           margin:15px auto;
-           }
-
-        #container .main .entry img.alighleft{
-            display: inline;
-            float: left;
-            margin:4px 0 0 24px;
-        }
-
-        #container .main .entry img.alignright {
-            display: inline;
-            float: right;
-            margin:4px 0 0 24px;
-        }
-
-        #container .main .entry img.aligncenter {
-            clear: both;
-            float:none;
-            display:block;
-            margin:auto;
-        }
-
-        #container .main .entry img.alignnone {
-            float:none;
-        }
-
-        #container .main .entry img.alignleft,
-        #container .main .entry img.alignright,
-        #container .main .entry img.aligncenter,
-        #container .main .entry img.alignnone{
-            margin-bottom: 12px;
-        }
-
-        table,tr, th, td {
-            background: transparent;
-            border: 0;
-            margin: 0;
-            padding: 0;
-            vertical-align: baseline;
-        }
-
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-
-        .main table {
-            border: 1px solid #e7e7e7;
-            margin: 0 -1px 24px 0;
-            text-align: left;
-            width: 100%;
-        }
-        .main  tr th,
-        .main  thead th {
-            color: #888;
-            font-size: 12px;
-            font-weight: bold;
-            line-height: 18px;
-            padding: 9px 24px;
-        }
-        .main tr td {
-            border-top: 1px solid #e7e7e7;
-            padding: 6px 24px;
-        }
-        .main  tr.odd td {
-            background: #f2f7fc;
-        }
-
-        .wp-caption {
-            line-height: 18px;
-            margin-bottom: 20px;
-            padding: 4px;
-            text-align: center;
-        }
-
-        .wp-caption-text {
-            color:#8f2425;
-            font-size: 12px;
-            margin: 5px;
-        }
-
-        .home .sticky {
-            border-top: 4px solid #8f2425;
-            margin:10px -20px;
-            padding: 18px 20px;
-            }
-
-        .gallery-caption {
-            color: #8f2425;
-            font-size: 12px;
-            margin: 0 0 12px;
-        }
-        .bypostauthor {
-        }
-
-        .white{
-            color:#fff;
-            }
-
-        #header {
-            width:100%;
-            height:200px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/header_bg.jpg) repeat-x top left;
-            margin:0 auto;
-            clear:both;
-            position:relative;
-        }
-
-        #headerContent {
-            width:960px;
-            margin:0 auto;
-            position:relative;
-        }
-
-        .site-title {
-            margin: 0;
-            padding:0;
-        }
-        .site-title a {
-            color: #fff;
-            text-decoration: none;
-            font-size:28px;
-            font-weight:bold;
-            position:absolute;
-            left:0;
-            top:10px;
-            width: auto;
-        }
-        .site-title a:hover,
-        .site-title a:focus,
-        .site-title a:active {
-            color: #1982d1;
-        }
-        .site-description {
-            color: #fff;
-            font-size:14px;
-            font-weight:normal;
-            margin: 0;
-            position:absolute;
-            left:0;
-            top:70px;
-            width: auto;
-        }
-
-
-        /* =search form
-        -------------------------------------------------------------- */
-        #searchTop {
-            position:absolute;
-            text-align:right;
-            width:330px;
-            right:0px;
-            top:40px;
-            z-index:100;
-        }
-        #searchTop form {
-            padding:0;
-            margin:0;
-            height:39px;
-        }
-        #searchTop .txtField {
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/search_form.jpg) no-repeat left center;
-            width:247px;
-            height:29px;
-            margin:15px 5px 0 0;
-            padding:5px 10px;
-            border:none;
-            font-family: Arial, Tahoma, Helvetica, sans-serif;
-            font-size:14px;
-            color:#fff;
-            line-height:30px;
-            float:left;
-        }
-        #searchTop .btnSearch {
-            margin:0;
-            padding:2px;
-            float:left;
-            height:66px;
-            width:58px;
-            border:none;
-            color:#999999;
-            font-size:10px;
-            background: url(http://assets.over-blog-kiwi.com/themes/8/images/search_btn.jpg) no-repeat top transparent;
-            text-indent:-999px;
-            cursor:hand;
-        }
-        #search {
-            text-align:right;
-            width:180px;
-            padding:20px 0 0 5px;
-        }
-        #search form {
-            padding:0;
-            margin:0;
-            height:26px;
-        }
-        #search .txtField {
-            border:1px solid #cfcecc;
-            background-color:#F0F0F0;
-            width:135px;
-            margin-right:5px;
-            padding:5px;
-            font-family: Arial, Tahoma, Helvetica, sans-serif;
-            font-size:12px;
-            float:left;
-        }
-        #search .btnSearch {
-            margin:0;
-            padding:2px;
-            float:left;
-            height:23px;
-            width:18px;
-            color:#999999;
-            font-size:10px;
-            background: url(http://assets.over-blog-kiwi.com/themes/8/images/searchBtn02.jpg) no-repeat top transparent;
-            border:none;
-            text-indent:-999px;
-            cursor:hand;
-        }
-
-
-        /* =Menu
-        -------------------------------------------------------------- */
-        #menu {
-            height:46px;
-            width:100%;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/nav_bg.jpg) repeat-x;
-            padding:0;
-            margin:0 auto;
-            top:132px;
-            left:0;
-            position:absolute;
-            text-transform: uppercase;
-        }
-
-        #menuLeft {
-            height:46px;
-            width:76px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/nav_l.jpg) no-repeat left;
-            float:left;
-        }
-
-        #menuRight {
-            height:46px;
-            width:76px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/nav_r.jpg) no-repeat right;
-            float:right;
-        }
-
-        #nav {
-            height:31px;
-            width:960px;
-            padding:15px 0 0 0;
-            margin:0 auto;
-            text-transform:uppercase;
-        }
-
-        #nav .menu-header,
-        div.menu {
-            font-size: 13px;
-            margin-left: 12px;
-            width: 960px;
-        }
-        #nav .menu-header ul,
-        div.menu ul {
-            list-style: none;
-            margin: 0;
-            padding:0;
-        }
-        #nav .menu-header li,
-        div.menu li {
-            float: left;
-            position: relative;
-        }
-
-        #nav ul li {
-            margin:0px 15px 0 0;
-
-        }
-
-        #nav a {
-            font-size:14px;
-            color:#2a0b01;
-            font-weight:bold;
-            text-shadow:1px 1px #d5642d;
-            display: block;
-            height:35px;
-            vertical-align:bottom;
-            text-decoration:none;
-        }
-
-        #nav ul ul {
-            display: none;
-            position: absolute;
-            top:20px;
-            left:0;
-            float: left;
-            width:180px;
-            z-index: 99999;
-        }
-        #nav ul ul li {
-
-        }
-        #nav ul ul ul {
-            left: 100%;
-            top: 0;
-        }
-        #nav ul ul a {
-            background-color: #751600;
-            line-height: 1em;
-            padding:10px;
-            height: auto;
-        }
-        #nav li:hover > a,
-        #nav ul ul :hover > a {
-            color: #fff;
-        }
-        #nav ul li:hover > ul {
-            display: block;
-        }
-        #nav ul li.current_page_item > a,
-        #nav ul li.current-menu-ancestor > a,
-        #nav ul li.current-menu-item > a,
-        #nav ul li.current-menu-parent > a {
-            color: #fff;
-        }
-        * html #nav ul li.current_page_item a,
-        * html #nav ul li.current-menu-ancestor a,
-        * html #nav ul li.current-menu-item a,
-        * html #nav ul li.current-menu-parent a,
-        * html #nav ul li a:hover {
-            color:#fff;
-        }
-
-        #headerImg{
-            width:960px;
-            height:auto;
-            margin:0 auto;
-            margin-top:20px;
-            clear:both;
-            }
-
-        #headerImg img{
-            border:1px solid #ac9889;
-            }
-
-        /* =content
-        -------------------------------------------------------------- */
-        .wrapper {
-            width:966px;
-            height:auto;
-            margin:0 auto;
-        }
-        .post-wrapper {
-            clear: both;
-        }
-        #container,#contentTop,#contentBot {
-            width:966px;
-            float:left;
-        }
-
-        #container {
-            height:auto;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/content_bg.png) repeat-y right;
-            position:relative;
-        }
-
-        #contentTop {
-            height:23px;
-            margin-top:20px;
-            background: url(http://assets.over-blog-kiwi.com/themes/8/images/content_top.png) no-repeat right top;
-        }
-
-        #contentBot {
-            height:34px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/content_bot.png) no-repeat right top;
-        }
-
-
-        /* =main
-        -------------------------------------------------------------- */
-        #container .main {
-            width:676px;
-            margin:0 38px 20px 25px;
-            float:left;
-            display:inline;
-            line-height:20px;
-        }
-
-
-        .main .posts .postmetadata {
-            font-size:12px;
-            float:left;
-            width:670px;
-            padding-bottom:5px;
-            margin-bottom:15px;
-            border-bottom:3px solid #8f2425;
-        }
-
-        .page-title {
-            color: #6c3714;
-            font-size: 14px;
-            font-weight: bold;
-            margin: 0 0 20px 0;
-        }
-        .page-title span {
-            color: #6c3714;
-            font-size: 16px;
-            font-style: italic;
-            font-weight: normal;
-        }
-        .page-title a:link,
-        .page-title a:visited {
-            color: #8F2425;
-            text-decoration: none;
-        }
-        .page-title a:active,
-        .page-title a:hover {
-            color: #ff4b33;
-        }
-
-        .month {
-            position: absolute;
-            top: 13px;
-            left: 25px;
-            -moz-transform: rotate(-9deg);
-            -webkit-transform: rotate(-9deg);
-            -o-transform: rotate(-9deg);
-            -ms-transform: rotate(-9deg);
-            transform: rotate(-9deg);
-        }
-
-        .title {
-            color:#6c3714;
-            font-size:18px;
-            font-weight:bold;
-            height:25px;
-            margin:0;
-            padding-bottom:15px;
-            border-bottom:1px solid #d8d8d8;
-        }
-        #container .main .entry img {
-            padding:5px;
-            border:1px solid #CCCCCC;
-            margin:12px 12px 12px 0;
-            float:left;
-            height: auto;
-            max-width: 100%;
-        }
-
-        #container .main .entry .post-title{
-            clear:both;
-        }
-
-        #container .main .entry p{
-            word-wrap:break-word;
-        }
-
-        .entry-thumbnails {
-            width:145px;
-            height:145px;
-            padding:0 8px 8px 8px;
-            margin:0 12px 12px 0;
-            float:left;
-            position:relative;
-        }
-
-        .entry-thumbnailsBg {
-            width:130px;
-            height:32px;
-            margin:0 12px 12px 0;
-            position:absolute;
-            top:-18px;
-            left:15px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/thambnail_bg.png) no-repeat top left;
-            z-index:9999;
-        }
-
-        .entry-thumbnails img {
-            width:145px;
-            height:130px;
-            border:1px solid #ccc;
-        }
-        .time {
-            position:absolute;
-            left:-85px;
-            height:60px;
-            width:73px;
-            text-align: center;
-            text-decoration:none;
-            font-weight:bold;
-            display:block;
-            padding:15px 0 0 0;
-            font-size:14px;
-            line-height:25px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/postTime_bg.png) no-repeat;
-        }
-
-        .singleTitle{
-            font-size:16px;
-            font-weight:bold;
-            line-height:20px;
-            clear:both;
-            padding-bottom:10px;
-            margin-top:20px;
-            border-bottom:2px solid #8f2425;
-        }
-
-        .post-title{
-            color:#8f2425;
-            font-size:16px;
-            font-weight:bold;
-            line-height:20px;
-            clear:both;
-            margin:0;
-            padding:0;
-        }
-        .post-title a{
-            color:#8f2425;
-            text-decoration:none;
-        }
-        .post-title a:hover{
-            color:#8f2425;
-            text-decoration:underline;
-        }
-        .posts-quick .entry-summary {
-            font-size: 12px;
-            overflow:hidden;
-            white-space:normal;
-        }
-        .posts-quick .postmetadata,
-        .post .postmetadata {
-            font-size:12px;
-            width:100%;
-            clear:both;
-            padding-bottom:5px;
-            margin-bottom:10px;
-            border-bottom:2px solid #8f2425;
-        }
-        .posts-quick .postmetadata a,
-        .post .postmetadata as {
-            text-decoration:underline;
-        }
-        .posts-quick .quick-read-more a:link, .posts-quick .quick-read-more a:visited {
-            padding:0 3px;
-            font-size: 12px;
-            text-decoration: none;
-            float:right;
-        }
-        .posts-quick .quick-read-more a:hover {
-            color:#fff;
-            background:#8f2425;
-        }
-        .ob-repost {
-            border: 1px solid #DDD;
-            font-weight: bold;
-            margin-top: 2em;
-            text-align: center;
-        }
-
-        .edit-link {
-            clear: both;
-            display: block;
-        }
-
-        pre {
-            overflow: auto;
-        }
-
-        .page-link {
-            font-weight: bold;
-            margin: 0 0 22px 0;
-            word-spacing: 0.5em;
-            clear:both;
-        }
-        .page-link a:link,
-        .page-link a:visited {
-            background: #f1f1f1;
-            color: #333;
-            font-weight: normal;
-            padding: 0.5em 0.75em;
-            text-decoration: none;
-        }
-        .home .sticky .page-link a {
-            background: #d9e8f7;
-        }
-        .page-link a:active,
-        .page-link a:hover {
-            color: #ff4b33;
-        }
-
-
-        /* next previous */
-        .previous a {
-            float:left;
-            width:93px;
-            height:33px;
-        }
-        .previous a:hover {
-            font-weight:bold;
-        }
-        .next a {
-            float:right;
-            width:93px;
-            height:33px;
-        }
-        .next a:hover {
-            font-weight:bold;
-        }
-        /*main end*/
-
-
-
-        /* =sidebar
-        -------------------------------------------------------------- */
-        #sidebar {
-            width:189px;
-            padding:0;
-            margin:0;
-            float:left;
-        }
-
-        #sidebarBtn {
-            width:45px;
-            height:148px;
-            right:-8px;
-            top:100px;
-            position: absolute;
-            z-index:9999;
-        }
-
-
-        .close-sidebar, .show-sidebar {
-            width:45px;
-            height:148px;
-            cursor: hand;
-        }
-
-        .close-sidebar img, .show-sidebar img{
-            border:0;
-        }
-
-
-        #sidebar h2 {
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/sidebarTitle.jpg) no-repeat bottom;
-            height:32px;
-            width:169px;
-            line-height:30px;
-            padding-left:20px;
-            margin-top:30px;
-            font-size:14px;
-            font-weight:bold;
-            text-transform:uppercase;
-            color:#fff;
-            float:left;
-        }
-        #sidebar ul {
-            font-size:12px;
-            line-height: 25px;
-            margin:0;
-            padding:0;
-        }
-        #sidebar ul li {
-            float:left;
-            list-style-type: none;
-        }
-        #sidebar ul li ul {
-            width:170px;
-            float: left;
-            margin-left:17px;
-            _margin-left:5px;
-        }
-        #sidebar ul li ul ul {
-            width:95%;
-            float: left;
-            background-image: none;
-            margin: 0px;
-            padding: 0px;
-        }
-        #sidebar ul li ul li {
-            list-style-type: none;
-            padding-left:15px;
-            width: 85%;
-            display: block;
-            float: left;
-            margin:0 5px;
-        }
-        #sidebar a {
-            color: #5c5c5c;
-            text-decoration:none;
-        }
-        #sidebar .tagcloud {
-            width:160px;
-            padding-left:20px;
-        }
-        #sidebar .tagcloud a {
-            color: #5c5c5c;
-            text-decoration:none;
-            display:inline;
-        }
-        #sidebar a:hover {
-            text-decoration: underline;
-            font-weight:bold;
-            color:#386878;
-        }
-        #sidebar h2 a,
-        #sidebar h2 a:hover {
-            color: white;
-            text-decoration: none;
-        }
-
-        .navigation {
-            height:20px;
-            margin:10px 0;
-            list-style:none;
-            text-align:center;
-            clear:both;
-        }
-
-        .navigation a {
-            float:none;
-            text-decoration: none;
-            padding:3px 5px;
-            margin-top:10px;
-            border-radius: 3px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            display: inline-block;
-        }
-
-        .navigation a:hover {
-            background-color:#8f2425;
-            color: #FFF;
-            text-decoration: none;
-        }
-
-        #nav-below {
-            margin: 18px 0 0 0;
-        }
-
-        .nav-previous {
-            float: left;
-            width: 50%;
-            text-align:left;
-        }
-        .nav-next {
-            float: right;
-            text-align: right;
-            width: 50%;
-        }
-
-
-        /* =comments
-        -------------------------------------------------------------- */
-        #comments{
-            /*float:left;*/
-            margin:10px 0;
-            }
-
-        .commentlist {
-          list-style:none;
-          margin:0;
-          padding:0;
-        }
-
-        .commentlist li.comment {
-            border-bottom: 1px dashed #8f2425;
-            line-height: 24px;
-            margin: 0 0 24px 0;
-            padding:10px 0 30px 0;
-            float:left;
-            width:100%;
-
-        }
-
-        #respond{
-            padding-top:20px;
-            float:left;
-            position:relative;
-            }
-
-        #reply-title {
-            width:207px;
-            height:32px;
-            padding-left:8px;
-            margin:0;
-            line-height:30px;
-            color:#fff;
-            background: url(http://assets.over-blog-kiwi.com/themes/8/images/commentTitle.jpg) top left no-repeat;
-            position:absolute;
-            left:-25px;
-            top:0;
-        }
-
-        #comments-title    {
-            color:#999;
-        }
-
-        .commentlist ol {
-            list-style: decimal;
-        }
-
-        .commentlist .avatar {
-            border: 1px solid #8f2425;
-            padding: 2px;
-            float: left;
-            margin: 0 15px 10px 0;
-        }
-        .commentlist cite {
-            font-weight: 700;
-            font-style: normal;
-            line-height: 20px;
-            font-size: 14px;
-            color:#8f2425;
-        }
-
-        .commentlist .children {
-            list-style: none;
-            margin: 0;
-        }
-        .commentlist .children li {
-            border: none;
-            margin: 0;
-        }
-
-        .commentlist p {
-            font-size: 12px;
-        }
-        .commentlist .comment-meta, #commentlist .comment-meta abbr {
-            border: none;
-            text-decoration: none;
-            font-size: 11px;
-        }
-
-        .commentlist .reply a{
-            color:#8f2425;
-            float:right;
-            text-decoration: none;
-            padding:3px 8px;
-            margin: 0;
-        }
-
-        .comments-navigation a, .read-more {
-            color:#666;
-            float:right;
-            text-decoration: none;
-            padding:3px 8px;
-            margin: 0;
-            border: 1px solid #8f2425;
-        }
-        .commentlist .reply a:hover, .comments-navigation a:hover,  .read-more:hover {
-            background: #8f2425;
-            color: #FFF;
-        }
-        .comments-navigation {
-            padding: 0 10px 10px;
-        }
-        .comments-navigation a {
-            display: inline-block;
-        }
-        .nocomments {
-            border: solid #E7E7E7;
-            border-width: 0 1px 1px;
-            padding: 15px 10px;
-            margin: 0 10px 10px 0;
-            font-size: 12px;
-            display:none;
-        }
-
-
-
-        #commentform {
-            margin:10px 10px 0 0;
-            padding: 10px;
-        }
-        #commentform label {
-            color: #8f2425;
-        }
-        #commentform label.error {
-            margin: 5px 0;
-            color: #A80009;
-            font-weight: bold;
-            padding: 5px;
-        }
-        #commentform span.required {
-            color: #A80009;
-        }
-        #commentform input[type=text] {
-            display: block;
-            width: 300px;
-            border:1px solid #ccc;
-            font: 12px 'Lucida Grande', Arial, Helvetica, sans-serif;
-            margin: 5px 0;
-            padding: 5px;
-        }
-        #commentform textarea {
-            display: block;
-            font: 14px 'Lucida Grande', Arial, Helvetica, sans-serif;
-            border:1px solid #ccc;
-            width: 90%;
-            margin-bottom: 5px;
-        }
-
-        #commentform #submit {
-            color:#fff;
-            padding:5px;
-            margin:7px 0;
-            border:0;
-            text-align: center;
-            background:#8f2425;
-        }
-
-        #commentform #submit:hover{
-            border: 1px solid #ccc;
-        }
-
-        #cancel-comment-reply-link a{
-            font-size: 11px;
-            float:right;
-            color:#fff;
-        }
-
-        /* =footer
-        -------------------------------------------------------------- */
-
-        #footer {
-            margin:0 auto;
-            margin-top:50px;
-            clear: both;
-            width:100%;
-            height:175px;
-            color:#fff;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/footer_bg.png) repeat-x top;
-        }
-
-        #footerContent {
-            margin:0 auto;
-            width:947px;
-            height:175px;
-            background:url(http://assets.over-blog-kiwi.com/themes/8/images/footerImg.png) no-repeat 0 3px;
-        }
-
-        #footer a{
-            font-weight:bold;
-            color:#fff;
-        }
-
-        #footer a:hover{
-            text-decoration:underline;
-        }
-
-        #footer p{
-            padding:100px 10px 0 10px;
-            clear:both;
-        }
-        /*footer end*/
-
-
-        /* =Gallery listing
-        -------------------------------------------------------------- */
-
-        .format-gallery .size-thumbnail img,
-        .category-gallery .size-thumbnail img {
-            border: 10px solid #f1f1f1;
-            margin-bottom: 0;
-        }
-        .format-gallery .gallery-thumb,
-        .category-gallery .gallery-thumb {
-            float: left;
-            margin-right: 20px;
-            margin-top: -4px;
-        }
-
-        #container .main .center .entry-utility {
-            padding-top: 4px;
-            margin:10px 0;
-        }
-
-        #container .main .entry .gallery {
-            margin: 0 auto 18px;
-        }
-        #container .main .entry .gallery .gallery-item {
-            float: left;
-            margin-top:10px;
-            text-align: center;
-            width: 33%;
-        }
-        #container .main .entry .gallery-columns-2 .gallery-item {
-            width: 50%;
-        }
-        #container .main .entry .gallery-columns-4 .gallery-item {
-            width: 25%;
-        }
-
-        #container .main .entry .gallery-columns-2 .attachment-medium {
-            max-width: 92%;
-            height: auto;
-        }
-        #container .main .entry .gallery-columns-4 .attachment-thumbnail {
-            max-width: 84%;
-            height: auto;
-        }
-        #container .main .entry .gallery .gallery-caption {
-            color: #888;
-            font-size: 12px;
-            margin: 0 0 12px;
-        }
-        #container .main .entry .gallery dl {
-            margin: 0;
-        }
-        #container .main .entry .gallery img {
-            border: 10px solid #f1f1f1;
-        }
-        #container .main .entry .gallery br+br {
-            display: none;
-        }
-
-        #container .attachment img { /* single attachment images should be centered */
-            display: block;
-            margin: 0 auto;
-        }
-
-        /* =Attachment pages
-        -------------------------------------------------------------- */
-
-        .attachment .entry-content .entry-caption {
-            font-size: 140%;
-            margin-top: 24px;
-        }
-        .attachment .entry-content .nav-previous a:before {
-            content: '\2190\00a0';
-            float:left;
-        }
-        .attachment .entry-content .nav-next a:after {
-            content: '\00a0\2192';
-            float:right;
-        }
-
-        /* =Widgets
-        ----------------------------------------------- */
-
-        .widget-area {
-            font-size: 12px;
-        }
-        .widget {
-            clear: both;
-            margin: 0 0 2.2em;
-        }
-        .widget-title {
-            color: #666;
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            line-height: 2.6em;
-            text-transform: uppercase;
-        }
-        .widget ul {
-            font-size: 15px;
-            margin: 0;
-        }
-        .widget ul ul {
-            margin-left: 1.5em;
-        }
-        .widget ul li {
-            color: #777;
-            font-size: 13px;
-        }
-        .widget a {
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .widget a:hover,
-        .widget a:focus,
-        .widget a:active {
-            text-decoration: underline;
-        }
-
-        /* =error404
-        ----------------------------------------------- */
-        .error404 #main {
-            clear: none;
-            float: left;
-            margin: 0 25px;
-            width:900px;
-        }
-
-        .error404 #main .widget {
-            clear: none;
-            float: left;
-            margin-right: 3.7%;
-            width: 30.85%;
-        }
-        .error404 #main .widget_archive {
-            margin-right: 0;
-        }
-        .error404 #main .widget_tag_cloud {
-            float: none;
-            margin-right: 0;
-            width: 100%;
-            clear:both;
-        }
-        .error404 .widgettitle {
-            font-size: 10px;
-            letter-spacing: 1px;
-            line-height: 20px;
-            text-transform: uppercase;
-        }
-
-        .profile .avatar {
-            text-align: center;
-        }
-        .profile p {
-            text-align: right;
-            margin: 1em;
-        }
-        .pagination {
-            clear: both;
-        }
-        .pagination .previous {
-            float: left;
-        }
-        .pagination .next {
-            float: right;
-        }
-    </style>
-</head>
-
-<body class="home blog">
-    <div id="header">
-        <div id="headerContent">
-            <{% if isIndex %}h1{% else %}p{% endif %} class="site-title">
-            <span><a href="{{ Blog.Url }}" title="{{ Blog.Title }}" rel="home">{{ Blog.Title }}</a></span>
-            </{% if isIndex %}h1{% else %}p{% endif %}>
-            <p class="site-description">{{ Blog.Description }}</p>
-            <div id="searchTop">
-                <form method="post" id="searchform" action="/search">
-                    <input type="text" value="" name="q" id="q" class="txtField" />
-                    <input type="submit" id="searchsubmit" class="btnSearch" value="{{ Search }}" />
-                </form>
-            </div>
-        </div>
-        <!-- #headerContent -->
-        <div id="menu">
-            <div id="menuLeft"></div>
-            <div id="menuRight"></div>
-            <div id="nav">
-                <div class="menu">
-                    <ul>{#
-                        #}<li class="current_page_item"><a href="{{ Blog.Url }}" title="Home">Home</a></li>{#
-                        #}{% list Blog.ListPages %}{#
-                        #}<li class="current_page_item"><a href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a></li>{#
-                        #}{% endlist %}
-                    </ul>
-                </div>
-            </div>
-            <!-- #nav  -->
-        </div>
-        <!-- #menu  -->
-    </div>
-    <!-- #header -->
-    <div id="headerImg">
-        <img src="http://assets.over-blog-kiwi.com/themes/8/images/{{ Custom('style') }}.jpg" width="960" height="302" alt="" />
-    </div>
-
-    <div class="wrapper">
-        <div id="contentTop"></div>
-        <div id="container">
-            <div class="main">
-
-                {# List title #}
-                {% if isSearch %}
-                <h1 class="list-title">Search for “{{ Search }}”</h1>
+    <head>
+        <!-- shortcut:[Meta] -->
+        <!-- title, description, keyword, robots -->
+        {% if isSingle%}
+            {% list Posts %}
+                <title>{{ Post.Title }} - {{Blog.Title}}</title>
+                <meta name="description" content="{{ Post.Snippet }}" />
+                <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
+                <meta name="robots" content="index,follow" />
+            {% endlist %}
+        {% elseif isTag and Tag is not empty %}
+            <title>{{ Tag.Title|title }} - {{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="keywords" content="{{ Tag.Title|title }}" />
+            <meta name="robots" content="index,follow" />
+        {% elseif isSearch and Search is not empty %}
+            <title>{{ Search|title }} - {{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="keywords" content="{{ Search|title }}" />
+            <meta name="robots" content="noindex" />
+        {% else %}
+            <title>{{Blog.Title}}</title>
+            <meta name="description" content="{{ Blog.Description }}" />
+            <meta name="robots" content="index,follow" />
+        {% endif %}
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+
+        <!-- Social setting : Facebook, G+ .. --> 
+        <meta property="og:site_name" content="{{ Blog.Title }}" />
+        <meta property="og:type" content="blog" />
+        <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
+
+        <meta itemprop="name" content="{{ Blog.Title }}" />
+
+        {% if isSingle %}
+            {% list Posts %}
+                <meta property="og:title" content="{{ Post.Title }}"/>
+                <meta itemprop="description" content="{{ Post.Snippet }}" />
+                {% if Post.Cover %}
+                    <meta property="og:image" content="{{ Post.Cover }}"/>
+                    <meta itemprop="image" content="{{ Post.Cover }}" />
                 {% endif %}
-                {% if isTag %}
-                <h1 class="list-title">Posts with #<strong>{{ Tag.Title }}</strong> tag</h1>
-                {% endif %}
+            {% endlist %}
+            <meta property="og:type" content="overblogkiwi:see" />
+        {% else %}
+           <meta property="og:title" content="{{ Blog.Title }}"/>
+            <meta itemprop="description" content="{{ Blog.Description }}" />
+            {% if Blog.Avatar %}
+                <meta property="og:image" content="{{ Blog.Avatar }}"/>
+                <meta itemprop="image" content="{{ Blog.Avatar }}" />
+            {% endif %}
+            {% if isSearch %}
+                <meta property="og:type" content="overblogkiwi:search" />
+            {% else %}
+                <meta property="og:type" content="overblogkiwi:visit" />
+            {% endif %}
+        {% endif %}
 
-                {# Posts #}
-                {% if Posts is empty %}
+        <!-- shortcut:[Options] -->
+        <!-- options -->
+        <meta name="constant:displayArticlesLimit" content="6" />
+        
+        <meta name="list:blog_title_font:Chose the blog title font" items="Spicy Rice, Londrina Sketch, Sofia, Ewert, Chelsea Market" default="Spicy Rice" group="Design">
+        <meta name="image:blog_cover:Blog Cover (recommanded 960 x 302)" default="http://assets.over-blog-staging.com/themes/8/images/cowboy.jpg" group="Design" />
+        <meta name="image:post_cover:Default post Cover" default="http://assets.over-blog-staging.com/themes/8/images/thumbnail.png" group="Design" />
+        
+        <meta name="boolean:display_widget_profile:Hide Widget &quot;Blog Profile&quot;" group="Widgets" />
+        <meta name="boolean:display_widget_tags:Hide Widget &quot;Tags&quot;" group="Widgets" />
+        <meta name="boolean:display_widget_about:Hide Widget &quot;About&quot;" group="Widgets" />
+        <meta name="boolean:display_widget_follow:Hide Widget &quot;Follow us&quot;" group="Widgets" />
+        
+        <meta name="string:facebook_account:Enter your Facebook Username" default="overblog" group="Social" />
+        <meta name="string:twitter_account:Enter your Twitter Account" default="overblog" group="Social" />
+        <meta name="list:share_button:Chose your(s) share button(s)" items="Facebook, Twitter, Google +, All" default="All" group="Social Share">
+        
+        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
+        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
+        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
+        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        
+        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
+        
+        
+        <!-- shortcut:[Includes] -->
+        <!-- favicon -->        
+        {% if Blog.FaviconUrl is not empty %}
+            <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
+        {% else %}
+            <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
+            <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
+        {% endif %}    
 
-                {% if isSearch %}
-                <div class="contenuArticle">
-                    <p>
-                        No result… Try again !
-                    </p>
-                    <form action="/search" method="post">
-                        <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
-                        <button type="submit">{{ Lang.Get('Search') }}!</button>
+        <!-- SEO -->
+        {% if Custom('google_webmaster_id') is not empty %}
+            <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
+        {% endif %}
+        {% if Custom('msn_webmaster_id') is not empty %}
+            <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
+        {% endif %}
+       
+        <!-- includes -->
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        <!-- shortcut:[Styles] -->      
+        <link href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href='http://fonts.googleapis.com/css?family=Spicy+Rice|Londrina+Sketch|Sofia|Ewert|Chelsea+Market' rel='stylesheet' type='text/css'>
+
+        <style type="text/css">
+            @charset "utf-8";
+            /* CSS Document */
+            /*
+                Theme Name: jeans
+                Theme URI: http://www.wpart.org/wordpress-themes-jeans/
+                Description: "Jeans" theme WORDPRESS template, visually rich and interesting, perfect details. Specially developed to hide  / display the sidebar, the                  user could select whether display the Sidebar or not, it's facilitate to read the article better, browse photos and watch videos.
+                             Home Articles display as abstracts and thumbnail, maintaining the homepage rich and clean. Template also supports the head images switch,                  background images and background color change.
+                Version: 1.2.1
+                Author:WPart.org
+                Author URI: http://www.wpart.org
+                tags:blue,white,brown,orange,light,red,yellow,flexible-width,sticky-post,two-columns,right-sidebar,threaded-comments,custom-background,custom-header,photoblogging
+                License: GNU General Public License v2.0
+                License URI: http://www.gnu.org/licenses/gpl-2.0.html
+            */
+            
+            fieldset,
+            img,
+            abbr,
+            acronym{ border:0;}
+    
+            body {
+                background: url(http://assets.over-blog-staging.com/themes/8/images/body_bg.jpg) repeat #e8e7e5;
+                margin:0 auto;
+                padding:0;
+                font-family: Arial, Tahoma, Helvetica, sans-serif;
+                color:#343434;
+                font-size:12px;
+            }
+    
+            body a {
+                color: #902400;
+                text-decoration: none;
+            }
+            body a:hover {
+                text-decoration: underline;
+            }
+            
+            .cb {
+                clear: both;
+            }
+            .alignright{
+               float:right;
+               margin:15px;
+               margin-right:0;
+               }
+    
+            .alignleft{
+                float:left;
+                margin:15px;
+                margin-left:0;
+               }
+    
+            .aligncenter {
+               display:block;
+               clear: both;
+               margin:15px auto;
+               }
+    
+            #container .main .entry img.alighleft{
+                display: inline;
+                float: left;
+                margin:4px 0 0 24px;
+            }
+    
+            #container .main .entry img.alignright {
+                display: inline;
+                float: right;
+                margin:4px 0 0 24px;
+            }
+    
+            #container .main .entry img.aligncenter {
+                clear: both;
+                float:none;
+                display:block;
+                margin:auto;
+            }
+    
+            #container .main .entry img.alignnone {
+                float:none;
+            }
+    
+            #container .main .entry img.alignleft,
+            #container .main .entry img.alignright,
+            #container .main .entry img.aligncenter,
+            #container .main .entry img.alignnone{
+                margin-bottom: 12px;
+            }
+    
+            table,tr, th, td {
+                background: transparent;
+                border: 0;
+                margin: 0;
+                padding: 0;
+                vertical-align: baseline;
+            }
+    
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+    
+            .main table {
+                border: 1px solid #e7e7e7;
+                margin: 0 -1px 24px 0;
+                text-align: left;
+                width: 100%;
+            }
+            .main  tr th,
+            .main  thead th {
+                color: #888;
+                font-size: 12px;
+                font-weight: bold;
+                line-height: 18px;
+                padding: 9px 24px;
+            }
+            .main tr td {
+                border-top: 1px solid #e7e7e7;
+                padding: 6px 24px;
+            }
+            .main  tr.odd td {
+                background: #f2f7fc;
+            }
+    
+            .wp-caption {
+                line-height: 18px;
+                margin-bottom: 20px;
+                padding: 4px;
+                text-align: center;
+            }
+    
+            .wp-caption-text {
+                color:#8f2425;
+                font-size: 12px;
+                margin: 5px;
+            }
+    
+            .home .sticky {
+                border-top: 4px solid #8f2425;
+                margin:10px -20px;
+                padding: 18px 20px;
+                }
+    
+            .gallery-caption {
+                color: #8f2425;
+                font-size: 12px;
+                margin: 0 0 12px;
+            }
+            .bypostauthor {
+            }
+    
+            .white{
+                color:#fff;
+                }
+    
+            #header {
+                width:100%;
+                height:200px;
+                background: url(http://assets.over-blog-staging.com/themes/8/images/header_bg.jpg) repeat-x top left;
+                margin:0 auto;
+                clear:both;
+                position:relative;
+            }
+    
+            #headerContent {
+                width:960px;
+                margin:0 auto;
+                position:relative;
+            }
+    
+            .site-title {
+                margin: 0;
+                padding:0;
+            }
+            .site-title a,
+            .site-title a:visited,
+            .site-title a:hover  {
+                display: block;
+                width: 600px;
+                color: #fff;
+                font-family: '{{ Custom('blog_title_font') }}', cursive;
+                font-size: 30px;
+                font-weight: bold;
+                text-decoration: none;
+                padding-top: 26px;
+            }
+            
+            .site-description {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 600;
+                margin-top: 5px;
+            }
+    
+    
+            /* =search form
+            -------------------------------------------------------------- */
+            #searchTop {
+                position:absolute;
+                text-align:right;
+                width:330px;
+                right:0px;
+                top:40px;
+                z-index:100;
+            }
+            #searchTop form {
+                padding:0;
+                margin:0;
+                height:39px;
+            }
+            #searchTop .txtField {
+                background:url(http://assets.over-blog-staging.com/themes/8/images/search_form.jpg) no-repeat left center;
+                width:247px;
+                height:29px;
+                margin:15px 5px 0 0;
+                padding:5px 10px;
+                border:none;
+                font-family: Arial, Tahoma, Helvetica, sans-serif;
+                font-size:14px;
+                color:#fff;
+                line-height:30px;
+                float:left;
+            }
+            #searchTop .btnSearch {
+                margin:0;
+                padding:2px;
+                float:left;
+                height:66px;
+                width:58px;
+                border:none;
+                color:#999999;
+                font-size:10px;
+                background: url(http://assets.over-blog-staging.com/themes/8/images/search_btn.jpg) no-repeat top transparent;
+                text-indent:-999px;
+                cursor:hand;
+            }
+            #search {
+                text-align:right;
+                width:180px;
+                padding:20px 0 0 5px;
+            }
+            #search form {
+                padding:0;
+                margin:0;
+                height:26px;
+            }
+            #search .txtField {
+                border:1px solid #cfcecc;
+                background-color:#F0F0F0;
+                width:135px;
+                margin-right:5px;
+                padding:5px;
+                font-family: Arial, Tahoma, Helvetica, sans-serif;
+                font-size:12px;
+                float:left;
+            }
+            #search .btnSearch {
+                margin:0;
+                padding:2px;
+                float:left;
+                height:23px;
+                width:18px;
+                color:#999999;
+                font-size:10px;
+                background: url(http://assets.over-blog-staging.com/themes/8/images/searchBtn02.jpg) no-repeat top transparent;
+                border:none;
+                text-indent:-999px;
+                cursor:hand;
+            }
+    
+    
+            /* =Menu
+            -------------------------------------------------------------- */
+            #menu {
+                height:46px;
+                width:100%;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/nav_bg.jpg) repeat-x;
+                padding:0;
+                margin:0 auto;
+                top:132px;
+                left:0;
+                position:absolute;
+                text-transform: uppercase;
+            }
+    
+            #menuLeft {
+                height:46px;
+                width:76px;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/nav_l.jpg) no-repeat left;
+                float:left;
+            }
+    
+            #menuRight {
+                height:46px;
+                width:76px;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/nav_r.jpg) no-repeat right;
+                float:right;
+            }
+    
+            #nav {
+                height:31px;
+                width:960px;
+                padding:15px 0 0 0;
+                margin:0 auto;
+                text-transform:uppercase;
+            }
+    
+            #nav .menu-header,
+            div.menu {
+                font-size: 13px;
+                margin-left: 12px;
+                width: 960px;
+            }
+            #nav .menu-header ul,
+            div.menu ul {
+                list-style: none;
+                margin: 0;
+                padding:0;
+            }
+            #nav .menu-header li,
+            div.menu li {
+                float: left;
+                position: relative;
+            }
+    
+            #nav ul li {
+                margin:0px 15px 0 0;
+    
+            }
+    
+            #nav a,
+            #nav a:visited {
+                font-size:14px;
+                color: #2a0b01;
+                font-weight:bold;
+                text-shadow:1px 1px #d5642d;
+                display: block;
+                height:35px;
+                vertical-align:bottom;
+                text-decoration: none;
+                -webkit-transition: color 200ms ease-in-out;
+                   -moz-transition: color 200ms ease-in-out;
+                     -o-transition: color 200ms ease-in-out;
+                        transition: color 200ms ease-in-out;
+            }
+            
+            #nav a:hover {
+                color: #FFF;
+            }
+    
+            #headerImg{
+                width:960px;
+                height:auto;
+                margin:0 auto;
+                margin-top:20px;
+                clear:both;
+                }
+    
+            #headerImg img{
+                margin-left: -4px;
+                border: 1px solid #ac9889;
+            }
+    
+            /* =content
+            -------------------------------------------------------------- */
+            .wrapper {
+                width:966px;
+                height:auto;
+                margin:0 auto;
+            }
+            .post-wrapper {
+                margin-bottom: 60px;
+            }
+            #container,#contentTop,#contentBot {
+                width:966px;
+                float:left;
+            }
+    
+            #container {
+                height:auto;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/content_bg.png) repeat-y right;
+                position:relative;
+            }
+    
+            #contentTop {
+                height:23px;
+                margin-top:20px;
+                background: url(http://assets.over-blog-staging.com/themes/8/images/content_top.png) no-repeat right top;
+            }
+    
+            #contentBot {
+                height:34px;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/content_bot.png) no-repeat right top;
+            }
+    
+    
+            /* =main
+            -------------------------------------------------------------- */
+            #container .main {
+                width:676px;
+                margin:0 38px 20px 25px;
+                float:left;
+                display:inline;
+                line-height:20px;
+            }
+    
+    
+            .main .posts .postmetadata {
+                font-size:12px;
+                float:left;
+                width:670px;
+                padding-bottom:5px;
+                margin-bottom:15px;
+                border-bottom:3px solid #8f2425;
+            }
+    
+            .page-title {
+                color: #6c3714;
+                font-size: 14px;
+                font-weight: bold;
+                margin: 0 0 20px 0;
+            }
+            .page-title span {
+                color: #6c3714;
+                font-size: 16px;
+                font-style: italic;
+                font-weight: normal;
+            }
+            .page-title a:link,
+            .page-title a:visited {
+                color: #8F2425;
+                text-decoration: none;
+            }
+            .page-title a:active,
+            .page-title a:hover {
+                color: #ff4b33;
+            }
+    
+            .month {
+                position: absolute;
+                top: 13px;
+                left: 25px;
+                -moz-transform: rotate(-9deg);
+                -webkit-transform: rotate(-9deg);
+                -o-transform: rotate(-9deg);
+                -ms-transform: rotate(-9deg);
+                transform: rotate(-9deg);
+            }
+    
+            .title {
+                color:#6c3714;
+                font-size:18px;
+                font-weight:bold;
+                height:25px;
+                margin:0;
+                padding-bottom:15px;
+                border-bottom:1px solid #d8d8d8;
+            }
+            #container .main .entry .post-title{
+                clear:both;
+            }
+    
+            #container .main .entry p{
+                word-wrap: break-word;
+            }
+    
+            .entry-thumbnails {
+                width:145px;
+                height:145px;
+                padding:0 8px 8px 8px;
+                margin:0 12px 12px 0;
+                float:left;
+                position:relative;
+            }
+    
+            .entry-thumbnailsBg {
+                width:130px;
+                height:32px;
+                margin:0 12px 12px 0;
+                position:absolute;
+                top:-18px;
+                left:15px;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/thambnail_bg.png) no-repeat top left;
+                z-index:9999;
+            }
+    
+            .entry-thumbnails img {
+                width: 145px;
+                height: 130px;
+                border: 1px solid #ccc;
+                -webkit-opacity: 0.8;
+                   -moz-opacity: 0.8;
+                     -o-opacity: 0.8;
+                        opacity: 0.8;
+                -webkit-transition: opacity 300ms;
+                   -moz-transition: opacity 300ms;
+                     -o-transition: opacity 300ms;
+                        transition: opacity 300ms;
+                     
+            }
+            .entry-thumbnails:hover img {
+                -webkit-opacity: 1;
+                   -moz-opacity: 1;
+                     -o-opacity: 1;
+                        opacity: 1;
+            }
+            .time {
+                position:absolute;
+                left:-85px;
+                height:60px;
+                width:73px;
+                text-align: center;
+                text-decoration:none;
+                font-weight:bold;
+                display:block;
+                padding:15px 0 0 0;
+                font-size:14px;
+                line-height:25px;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/postTime_bg.png) no-repeat;
+            }
+    
+            .singleTitle{
+                font-size:16px;
+                font-weight:bold;
+                line-height:20px;
+                clear:both;
+                padding-bottom:10px;
+                margin-top:20px;
+                border-bottom:2px solid #8f2425;
+            }
+    
+            .post-title{
+                color:#8f2425;
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 20px;
+                clear:both;
+                margin:0;
+                padding-top: 5px;
+            }
+            .post-title a{
+                color: #8f2425;
+                text-decoration:none;
+            }
+            .post-title a:hover{
+                color:#8f2425;
+                text-decoration:underline;
+            }
+            .posts-quick .entry-summary {
+                font-size: 12px;
+                overflow:hidden;
+                white-space:normal;
+            }
+            .posts-quick .postmetadata,
+            .post .postmetadata {
+                font-size:12px;
+                float:left;
+                width:100%;
+                clear:both;
+                padding-bottom:5px;
+                margin-bottom: 20px;
+                border-bottom:2px solid #8f2425;
+            }
+            .post .postmetadata as {
+                text-decoration: underline;
+            }
+            .post .quick-read-more {
+                margin-top: 30px;
+            }
+            .post .quick-read-more a, 
+            .post .quick-read-more a:visited,
+            .ob-input-submit {
+                width: 90px;
+                padding: 6px 10px;
+                background: #902400;
+                -webkit-border-radius: 5px;
+                   -moz-border-radius: 5px;
+                     -o-border-radius: 5px;
+                        border-radius: 5px;
+                border-radius: 5px;
+                color: #FFF;
+                font-size: 12px;
+                font-weight: bold;
+                text-decoration: none;
+                text-align: center;
+            }
+            .post .quick-read-more a:hover,
+            .ob-input-submit:hover {
+                color: #FFF;
+                background:#8f2425;
+            }
+            
+            .post-comments {
+                text-decoration: none;
+            }
+             .post-comments:hover {
+                text-decoration: underline;
+            }
+            
+            .post-tag {
+                font-weight: bold;
+                text-decoration: none;
+            }
+            .post-tag:hover {
+                text-decoration: bold;
+            }
+            .edit-link {
+                clear: both;
+                display: block;
+            }
+    
+            .page-link {
+                font-weight: bold;
+                margin: 0 0 22px 0;
+                word-spacing: 0.5em;
+                clear:both;
+            }
+            .page-link a:link,
+            .page-link a:visited {
+                background: #f1f1f1;
+                color: #333;
+                font-weight: normal;
+                padding: 0.5em 0.75em;
+                text-decoration: none;
+            }
+            .home .sticky .page-link a {
+                background: #d9e8f7;
+            }
+            .page-link a:active,
+            .page-link a:hover {
+                color: #ff4b33;
+            }
+            
+            .ob-input-submit {
+                border: none;
+                cursor: pointer;
+            }
+            
+            /* =single post
+            -------------------------------------------------------------- */
+            
+            /* sections */
+            .ob-section-text, 
+            .ob-section-images, 
+            .ob-section-video, 
+            .ob-section-audio, 
+            .ob-section-quote {width: 100%;}
+            
+            /* medias */
+            .ob-text, 
+            .obsoundplayer, 
+            .ob-quote {width: 100%;}
+            
+            /* section image */
+            .ob-row-1-col img,
+            .ob-row-2-col img,
+            .ob-row-3-col img,
+            .ob-slideshow img {
+                padding: 5px; 
+                border:1px solid #CCCCCC;
+            }
+            .ob-row-1-col img {
+                width: 98.2%;
+            }
+            .ob-row-2-col img {
+                width: 48.2%;
+            }
+            .ob-row-3-col img {
+                width: 31.5%;
+            }
+            .ob-section-images .ob-slideshow {
+                height: 515px;
+            }
+            .ob-section-images .ob-slideshow img {
+                width: 664px;
+            }
+            
+            /* section video */
+            .ob-video iframe {
+                width: 100%;
+            }
+            
+            /* section quote p */
+            .ob-quote p {
+                width: 98%;
+                margin-left: -40px;
+                font-style: italic;
+            }
+            
+            /* section file */
+            .ob-section-file,
+            .ob-ctn {margin-left: 0;}
+            
+            
+            .ob-desc {max-width: 100%; text-align: left; font-size: 13px; font-style: italic;}
+            
+            
+            /* section text */
+            .ob-text h2, 
+            .ob-text h3, 
+            .ob-text h4, 
+            .ob-text h5 {font-weight: bold; text-align: left;}
+            .ob-text h2 {margin: 10px 0 5px; font-size: 24px; line-height: 22px;}
+            .ob-text h3 {margin: 10px 0 5px; font-size: 18px; line-height: 18px;}
+            .ob-text h4 {margin: 10px 0 5px; font-size: 16px; line-height: 16px;}   
+            .ob-text h5 {margin: 10px 0 5px; font-size: 14px; line-height: 14px;}
+            .ob-text p a:hover, 
+            .ob-link:hover {text-decoration: underline;}
+            
+            .ob-text pre {background-color: #F1F1F1; border: 1px dashed #902400; padding: 10px; white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word; overflow: auto;}
+
+            
+            
+            /* section audio */
+            .ob-section-audio .obsoundplayer .obsoundplayername {height: 31px; width: 117px; overflow: hidden;}
+            
+            /* section map */
+            .ob-section-map .ob-map,
+            .ob-section-map .ob-desc {
+                width: 100%;
+            }
+            
+            /* share button */
+            .share {width: 100%; margin-top: 30px;}
+            .share h4 {margin: 0 0 5px;}
+            .fb-like iframe {margin-top: -3px;}
+    
+    
+            /* =sidebar
+            -------------------------------------------------------------- */
+            #sidebar {
+                width:189px;
+                padding:0;
+                margin:0;
+                float:left;
+            }
+    
+            #sidebarBtn {
+                width:45px;
+                height:148px;
+                right:-8px;
+                top:100px;
+                position: absolute;
+                z-index:9999;
+            }
+    
+    
+            .close-sidebar, .show-sidebar {
+                width:45px;
+                height:148px;
+                cursor: hand;
+            }
+    
+            .close-sidebar img, .show-sidebar img{
+                border:0;
+            }
+    
+    
+            #sidebar h2 {
+                background:url(http://assets.over-blog-staging.com/themes/8/images/sidebarTitle.jpg) no-repeat bottom;
+                height: 32px;
+                width: 169px;
+                line-height:30px;
+                padding-left:20px;
+                margin-top: 30px;
+                font-size: 14px;
+                font-weight: bold;
+                text-transform:uppercase;
+                color:#fff;
+                float:left;
+            }
+            #sidebar ul {
+                font-size: 12px;
+                line-height: 18px;
+                margin:0;
+                padding:0;
+            }
+            #sidebar ul li {
+                float: left;
+                list-style-type: none;
+            }
+            #sidebar ul li ul {
+                width:170px;
+                float: left;
+                margin-left:17px;
+                _margin-left:5px;
+            }
+            #sidebar ul li ul ul {
+                width:95%;
+                float: left;
+                background-image: none;
+                margin: 0px;
+                padding: 0px;
+            }
+            #sidebar ul li ul li {
+                list-style-type: none;
+                padding-left:15px;
+                width: 85%;
+                display: block;
+                float: left;
+                margin:0 5px;
+            }
+            #sidebar a {
+                color: #5c5c5c;
+                text-decoration: none;
+            }
+            
+            #sidebar h2 {
+                text-align: center;
+            }
+            #sidebar h2 a,
+            #sidebar h2 a:hover {
+                color: white;
+                text-decoration: none;
+            }
+            
+            #sidebar .tagcloud {
+                width: 181px;
+                padding-right: 10px;
+                text-align: right;
+            }
+            #sidebar .tagcloud a,
+            #sidebar .tagcloud a:visited {
+                padding: 0 2px;
+                color: #5c5c5c;
+                font-weight: bold;
+                text-decoration: none;
+                display: inline;
+            }
+            #sidebar .tagcloud a:hover {
+                color: #386878;
+            }
+            
+            .avatar img {
+                width: 160px;
+                height: 110px;
+                padding-left: 19px; 
+            }
+            .profile-text {
+                padding: 0 10px 0 20px;
+                text-align: right
+            }
+            
+            .follow {
+                float: left;
+                display: block;
+                width: 50px;
+                height: 50px;
+                margin: 0 auto;
+                background: url('http://vivienkaufinger.com/ob/jeans/jeans-social-sprite.png') no-repeat;
+                text-indent: -99999px;
+            }
+            
+            .follow:hover {
+            -webkit-opacity: 0.9;
+               -moz-opacity: 0.9;
+                 -o-opacity: 0.9;
+                    opacity: 0.9;
+            }
+            
+            .facebook {
+                margin: 0 5px 0 19px;
+                background-position: 0 top;
+            }
+            .twitter {
+                margin-right: 5px;
+                background-position: 0 center;
+            }
+            .rss {
+                background-position: 0 bottom;
+            }
+             /* =pagination
+            -------------------------------------------------------------- */
+            .pagination {
+                display: block;
+                width: 100%;
+            }
+            .pagination a {
+                font-weight: bold;
+            }
+            .pagination .previous {
+                float: left;
+            }
+            .pagination .next {
+                float: right;
+            }
+
+
+            /* =footer
+            -------------------------------------------------------------- */
+            #footer {
+                margin:0 auto;
+                margin-top:50px;
+                clear: both;
+                width:100%;
+                height:175px;
+                color:#fff;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/footer_bg.png) repeat-x top;
+            }
+    
+            #footerContent {
+                margin:0 auto;
+                width:947px;
+                height:175px;
+                background:url(http://assets.over-blog-staging.com/themes/8/images/footerImg.png) no-repeat 0 3px;
+            }
+    
+            #footer a{
+                font-weight:bold;
+                color:#fff;
+            }
+    
+            #footer a:hover{
+                text-decoration:underline;
+            }
+    
+            #footer p{
+                padding:100px 10px 0 10px;
+                clear:both;
+            }   
+        </style>
+    </head>
+    
+    <body class="home blog">
+        <div id="header">
+            <div id="headerContent">
+                <{% if isIndex %}h1{% else %}p{% endif %} class="site-title">
+                <span>
+                    <a href="{{ Blog.Url }}" title="{{ Blog.Title }}" rel="home">{{ Blog.Title }}</a>
+                </span>
+                </{% if isIndex %}h1{% else %}p{% endif %}>
+                <p class="site-description">{{ Blog.Description }}</p>
+                <div id="searchTop">
+                    <form id="searchform" action="/search" method="post">
+                        <input type="text" name="q" placeholder="{{ Lang.Get('Search keywords') }}..." value="{{ Lang.Get('Search...') }}" class="txtField" />
+                        <input type="submit" id="searchsubmit" class="btnSearch" value="{{ Lang.Get('Search') }}" />
                     </form>
                 </div>
-                {% else %}
-                <div class="contenuArticle">
-                    <p>
-                        {{ Lang.Get('No post') }}…
-                    </p>
-                </div>
-                {% endif %}
-
-                {% else %}
-
-                {% list Posts %}
-
-                <div class="post-wrapper">
-                    <div class="time">
-                        <time datetime="{{ Post.Date }}"><span class="month">{{ Post.Date | date('M') }}</span><br /><span class="white">{{ Post.Date | date('j') }}</span></time>
-                    </div>
-                    <div class="post-{{ loop.index }} post">
-                        <h{% if isSingle %}1{% else %}2{% endif %} class='post-title'>
-                            <a href="{{ Post.Permalink }}" rel="bookmark" title="{{ Post.Title | default(Post.Snippet | truncate(100)) }}">{{ Post.Title | default(Post.Snippet | truncate(100)) }}</a>
-                        </h{% if isSingle %}1{% else %}2{% endif %}>
-                        <div class="entry-summary">
-                            <div class="postmetadata">
-                                {% if Post.Author is not empty %}{{ Custom('text_publishedby') }} {{ Post.Author}}&nbsp;|&nbsp;{% endif %}{{ Post.Date | date('h:m A') }}&nbsp;|&nbsp;{% if Post.Comments is empty %}&nbsp;|&nbsp;<span>{{ Lang.Get('Comments Off') }}</span>{% else %}<a href="{{ Post.Permalink }}#comments">{{ Post.CommentCount('%c comment', '%c comments') }}</a>{% endif %}&nbsp;|&nbsp;{% list Post.Tags %}<a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if  not loop.last %}, {% endif %}{% endlist %}
-                            </div>
-
-                            {% if isSingle %}
-
-                                <div class="entry">
-                                    <article>
-                                        {{ Post.Body }}
-                                    </article>
-
-                                    <div id="comments">
-                                        {{ Post.Comments }}
-                                    </div>
-                                </div>
-
-                            {% else %}
-
-                            <div class="entry-thumbnails">
-                                <div class="entry-thumbnailsBg"></div>
-                                <a href="{{ Post.Permalink }}" title="{{ Lang.Get('ReadMore') }}"><img src="{{ Post.Cover | default('http://assets.over-blog-kiwi.com/themes/8/images/thumbnail.png') | resize(145, 130) | crop }}" alt="thumbnail" /></a>
-                            </div>
-                            <div class="entry">
-                                {{ Post.Snippet }}
-                                <p class="quick-read-more"><a href="{{ Post.Permalink }}" title="{{ Post.Title }}">{{ Lang.Get('Read more') }}&nbsp;&gt;&gt;</a></p>
-                            </div>
-
-                            {% endif %}
-                        </div>
-                    </div>
-                    <!--post end-->
-                </div>
-
-                {% endlist %}
-
-                {% endif %}
-
-                {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty %}
-                <div class="before_articles">
-                    <div class="pagination clearfix">
-                        {% if Navigation.PreviousPage is not empty %}
-                        <a href="{{ Navigation.PreviousPage }}" class="previous">{{ Lang.Get('Previous page') }}</a>
-                        {% endif %}
-
-                        {% if Navigation.NextPage is not empty %}
-                        <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }}</a>
-                        {% endif %}
-                    </div>
-                </div>
-                {% endif %}
             </div>
-            <!--main end-->
-
-            <div id="sidebar">
-                <ul>
-
-                    {# Blog profile #}
-                    {% if Custom('display_widget_profile') %}
-                    <li>
-                        <h2><a href="{{ Blog.Url }}">{{ Blog.Title }}</a></h2>
-                        <div class="profile clearfix">
-                            {% if Blog.Avatar is not empty %}
-                            <p class="avatar">
-                                <img src="{{ Blog.Avatar | resize(100) }}" alt="{{Blog.Title}}" />
-                            </p>
-                            {% endif %}
-                            {% if Blog.Description is not empty %}
-                            <p>
-                                “{{ Blog.Description }}”
-                            </p>
-                            {% endif %}
-                            {% if Blog.Owner.Nickname is not empty %}
-                            <p>
-                                {{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}
-                            </p>
-                            {% endif %}
-                        </div>
-                    </li>
-                    {% endif %}
-
-                    {# Tags #}
-                    {% if Custom('display_widget_tags') %}
-                    <li>
-                        <h2>tag cloud</h2>
-                        {% list Blog.PostsTags(20) %}
-                        <a href="{{ PostsTag.Url }}"{# class='tag-link-12'#} title="{{ PostsTag.Title }}"{# style='font-size: 8pt;'#}>{{ PostsTag.Title }}</a>
-                        {% endlist %}
-                    </li>
-                    {% endif %}
-
-                    {# Search #}
-                    {% if Custom('display_widget_search') %}
-                    <li>
-                        <h2>Search</h2>
-                        <div id="search">
-                            <form method="post" id="searchform" action="/search">
-                                <input type="text" value="" name="q" id="q" class="txtField" />
-                                <input type="submit" id="searchsubmit" class="btnSearch" value=" " />
-                            </form>
-                        </div>
-                    </li>
-                    {% endif %}
-
-                    {# Navigation #}
-                    {% if Custom('display_widget_navigation') %}
-                    <li>
-                        <h2>Navigation</h2>
-                        <ul class="blogroll">
-                            <li>
-                                <a href="{{ Blog.Url }}/contact">
+            <!-- #headerContent -->
+            <div id="menu">
+                <div id="menuLeft"></div>
+                <div id="menuRight"></div>
+                <div id="nav">
+                    <div class="menu">
+                        <ul>
+                            <li class="current_page_item">
+                                <a href="{{ Blog.Url }}" title="{{ Lang.Get('Home') }}">
+                                    {{ Lang.Get('Home') }}
+                                </a>
+                            </li>
+                        {% if Blog.ListPages is not empty %}
+                            {% list Blog.ListPages %}
+                                <li class="current_page_item">
+                                    <a href="{{ Blog.Url }}/{{ ListPage.Url }}" title="{{ ListPage.Title }}">
+                                        {{ ListPage.Title }}</a>
+                                </li>
+                            {% endlist %}
+                        {% endif %}
+                            <li class="current_page_item">
+                                <a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact us') }}">
                                     {{ Lang.Get('Contact') }}
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ Blog.Url }}/terms">
-                                    {{ Lang.Get('Terms') }}
-                                </a>
-                            </li>
                         </ul>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div><!-- sidebar -->
+                    </div>
+                </div>
+                <!-- #nav  -->
+            </div>
+            <!-- #menu  -->
         </div>
-        <div id="contentBot"></div>
-    </div>
-    <!--content end-->
-
-    <div id="footer">
-        <div id="footerContent">
-            <p>
-                <span class="alignleft"><a href="http://www.over-blog.com/">Overblog</a></span>
-                <span class="alignright"><strong>Designed by <a href="http://www.wpart.org">wpart.org</a></strong></span>
-           </p>
+        <!-- #header -->
+        <div id="headerImg">
+            {% if Custom('blog_cover') is not empty %}
+                <img src="{{ Custom('blog_cover') | resize(960,302) | crop }}" width="960" height="302" alt="" />
+            {% endif %}
+        </div>
+    
+        <div class="wrapper">
+            <div id="contentTop"></div>
+            <div id="container">
+                <div class="main">
+    
+                    {# List title #}
+                    {% if isSearch %}
+                        <h1 class="list-title"> {{ Lang.Get ('Search for') }} "{{ Search.Keyword }}”</h1>
+                    {% elseif isTag %}
+                        <h1 class="list-title"> {{ Lang.Get('Posts with') }}#<strong>{{ Tag.Title }}</strong> tag</h1>
+                    {% elseif isSpecial %}
+                        <h1 class="list-title">{{ Lang.Get('Contact us') }}</h1>
+                    {% endif %}
+    
+                    {# Posts #}
+                    {% if Posts is empty %}
+    
+                    {% if isSearch %}
+                    <div class="contenuArticle">
+                        <p>
+                            {{ Lang.Get('No result… Try again') }} !
+                        </p>
+                        <form action="/search" method="post">
+                            <input type="text" name="q" value="{{ Lang.Get('Search') }}" placeholder="{{ Lang.Get('Search') }}" />
+                            <button type="submit">{{ Lang.Get('Ok') }} !</button>
+                        </form>
+                    </div>
+                    {% elseif isSpecial %}
+                        {{ SpecialContent }}
+                    {% else %}
+                    <div class="contenuArticle">
+                        <p>
+                            {{ Lang.Get('No post') }}…
+                        </p>
+                    </div>
+                    {% endif %}
+    
+                    {% else %}
+    
+                    {% list Posts %}
+    
+                    <div class="post-wrapper">
+                        <div class="time">
+                            <time datetime="{{ Post.Date }}">
+                                <span class="month">{{ Post.Date | date('M') }}</span><br />
+                                <span class="white">{{ Post.Date | date('j') }}</span>
+                            </time>
+                        </div>
+                        <div class="post-{{ loop.index }} post">
+                            <h{% if isSingle %}1{% else %}2{% endif %} class='post-title'>
+                                <a href="{{ Post.Permalink }}" rel="bookmark" title="{{ Post.Title | default(Post.Snippet | truncate(100)) }}">{{ Post.Title | default(Post.Snippet | truncate(100)) }}</a>
+                            </h{% if isSingle %}1{% else %}2{% endif %}>
+                            <div class="entry-summary">
+                                <div class="postmetadata">
+                                    {% if Post.Author is not empty %}
+                                        {{ Lang.Get('Published by') }} {{ Post.Author | default(Blog.Owner.Nickname) }} |
+                                    {% endif %}
+                                    {{ Post.Date | date('l, F d, Y') }}
+                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                        | <a href="{{ Blog.Url }}{{ Post.PermaLink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="post-comments"></a>
+                                    {% else %}
+                                        | <a href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}" class="post-comments">
+                                            {% if Custom("comment") == "Facebook" %}
+                                                <fb:comments-count href="{{ Blog.Url }}{{ Post.Permalink }}"></fb:comments-count>
+                                                {{ Lang.Get('comments') }}
+                                            {% else %}
+                                                {{ Post.CommentCount(Lang.Get('comment'), Lang.Get('comments')) }}
+                                            {% endif %}
+                                       </a>
+                                    {% endif %}
+                                    {% list Post.Tags %}
+                                        {% if loop.first is not empty %}
+                                         |
+                                        {% endif %}
+                                        <a class="post-tag" href="{{ Tag.Url }}">
+                                            #{{ Tag.Title }}
+                                        </a>
+                                        {% if not loop.last %}
+                                            , 
+                                        {% endif %}
+                                    {% endlist %}
+                                </div>
+    
+                                {% if isSingle %}
+                                    <div class="entry">
+                                        <article>
+                                            {{ Post.Body }}
+                                        </article>
+                                        {% if Custom ('share_button') is not empty %}
+                                            <div class="share">
+                                                <h4 class="h4commentMessage">{% if isPage == false %}{{ Lang.Get('Share this post') }}{% else %}{{ Lang.Get('Share this page') }}{% endif %}</h4>   
+                                                {%if Custom ('share_button') == 'Facebook' %}
+                                                <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="true" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                                {% elseif Custom ('share_button') == 'Twitter' %}
+                                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
+                                                {% elseif Custom ('share_button') == 'Google +' %}
+                                                <g:plusone href="{{ Blog.Url }}{{ Post.Permalink }}" size="medium"></g:plusone>
+                                                {% elseif Custom ('share_button') == 'All' %}
+                                                <div class="fb-like" data-href="{{ Blog.Url }}{{ Post.PermaLink }}" data-send="false" data-layout="button_count" data-width="120" data-show-faces="true" data-font="lucida grande"></div>
+                                                <a href="https://twitter.com/share" class="twitter-share-button" data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Blog.Url }}{{ Post.PermaLink }}" data-lang="{{ Blog.Lang }}" {% if Custom('twitter_account') is not empty %} data-via="{{Custom('twitter_account')}}"{% endif %}></a>
+                                                <g:plusone href="{{ Blog.Url }}{{ Post.Permalink }}" size="medium"></g:plusone>
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                        {% if isPage == false %}
+                                            <div id="comments">
+                                                {% if Custom("comment") == "Facebook" %}
+                                                    <div class="fb-comments" data-href="{{ Blog.Url }}{{ Post.Permalink }}" data-num-posts="2" data-width="676"></div>
+                                                {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                                    <div id="disqus_thread"></div>
+                                                    <script type="text/javascript">
+                                                        var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                                        (function() {
+                                                            var dsq = document.createElement('script'); 
+                                                            dsq.type = 'text/javascript'; 
+                                                            dsq.async = true;
+                                                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                                        })();
+                                                    </script>
+                                                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                                {% else %}
+                                                    {{Post.Comments}}
+                                                {% endif %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% else %}
+                                    {% list Post.Sources %}
+                                        {% if Source != "TW" %}
+                                            <div class="entry-thumbnails">
+                                                <div class="entry-thumbnailsBg"></div>
+                                                <a href="{{ Post.Permalink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">
+                                                {% if Post.Cover is not empty %}
+                                                    <img src="{{ Post.Cover | resize(145, 130) | crop }}" alt="thumbnail" width="145" height="130" />
+                                                {% else %}
+                                                    <img src="{{ Custom('post_cover') | resize(145, 130) | crop }}" alt="thumbnail" width="145" height="130" />
+                                                {% endif %}
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    {% endlist %}
+                                    
+                                    <div class="entry">
+                                        {% list Post.Sources %}
+                                            {% if Source != "TW" %}
+                                                {{ Post.Snippet }}
+                                            {% else %}
+                                                {{ Post.Body(1) }}        
+                                            {% endif %}
+                                        {% endlist %}
+                                        <p class="quick-read-more">
+                                            <a href="{{ Post.Permalink }}" title="{{ Post.Title }}">{{ Lang.Get('Read more') }}</a>
+                                        </p>
+                                    </div>
+                                    <div class="cb"></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!--post end-->
+                    </div>
+    
+                    {% endlist %}
+    
+                    {% endif %}
+    
+                    {% if isPage == false %}
+                        {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
+                            <div class="before_articles">
+                                <div class="pagination clearfix">
+                                    {% if Navigation.PreviousPage is not empty %}
+                                        <a href="{{ Navigation.PreviousPage }}" class="previous">{{ Lang.Get('Previous page') }}</a>
+                                    {% elseif Navigation.PreviousPost is not empty %}
+                                         <a class="previous" href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}">{{ Lang.Get('Previous post') }}</a>
+                                    {% endif %}
+            
+                                    {% if Navigation.NextPage is not empty %}
+                                        <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }}</a>
+                                    {% elseif Navigation.NextPost is not empty %}
+                                         <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Navigation.NextPost.Title }}">{{ Lang.Get('Next post') }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <!--main end-->
+    
+                <div id="sidebar">
+                    <ul>
+                        {# Blog profile #}
+                        {% if Custom('display_widget_profile') == false %}
+                        <li>
+                            <h2><a href="{{ Blog.Url }}">{{ Blog.Title | truncate(15) }}</a></h2>
+                            <div class="profile clearfix">
+                                {% if Blog.Avatar is not empty %}
+                                    <p class="avatar">
+                                        <a href="{{ Blog.Avatar }}">
+                                            <img src="{{ Blog.Avatar | resize(160,110) | crop }}" alt="{{ Blog.Title }}" title="{{ Blog.Title }}" width="100" height="100" />
+                                        </a>
+                                    </p>
+                                {% endif %}
+                                {% if Blog.Description is not empty %}
+                                    <p class="profile-text">
+                                        “{{ Blog.Description }}”
+                                    </p>
+                                {% endif %}
+                                {% if Blog.Owner.Nickname is not empty %}
+                                    <p class="profile-text">
+                                        {{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endif %}
+                       
+                        {# Tags #}
+                        {% if Custom('display_widget_tags') == false %}
+                        <li class="tagcloud">
+                            <h2>tag cloud</h2>
+                            {% list Blog.PostsTags(20) %}
+                                <a href="{{ PostsTag.Url }}" class='tag-link-12' title="{{ PostsTag.Title }}" style='font-size: 8pt'>{{ PostsTag.Title }}</a>
+                            {% endlist %}
+                        </li>
+                        {% endif %}
+                        
+                        {# Author profile #}
+                        {% if Custom('display_widget_about') == false %}
+                        <li>
+                            <h2>{{ Lang.Get('About the author') }}</h2>
+                            <div class="profile clearfix">
+                                {% if Blog.Owner.Avatar is not empty %}
+                                    <p class="avatar">
+                                        <a href="{{ Blog.Owner.Avatar }}">
+                                            <img src="{{ Blog.Owner.Avatar | resize(160,110) | crop }}" alt="{{ Blog.Owner.Nickname }}" title="{{ Blog.Owner.Nickname }}" width="100" height="100" />
+                                        </a>
+                                    </p>
+                                {% endif %}
+                                {% if Blog.Owner.Bio is not empty %}
+                                    <p class="profile-text">
+                                        “{{ Blog.Owner.Bio }}”
+                                    </p>
+                                {% endif %}
+                                {% if Blog.Owner.Nickname is not empty %}
+                                    <p class="profile-text">
+                                        {{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endif %}
+                        
+                        {# Follow us #}
+                        {% if Custom('display_widget_follow') == false %}
+                        <li>
+                            <h2>{{ Lang.Get('Follow us') }}</h2>
+                            <div class="profile clearfix">
+                                
+                                {% if Custom('facebook_account') is not empty %}
+                                    <a class="follow facebook" href="http://facebook.com/{{ Custom('facebook_account') }}" title="{{ Lang.Get('Follow us on') }} Facebook">{{ Lang.Get('Follow us on') }} Facebook</a>                              
+                                {% endif %}
+                                {% if Custom('twitter_account') is not empty %}
+                                    <a class="follow twitter" href="http://facebook.com/{{ Custom('twitter_account') }}" title="{{ Lang.Get('Follow us on') }} Twitter">{{ Lang.Get('Follow us on') }} Twitter</a>              {% endif %}
+                                    <a class="follow rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Follow us with') }} Rss">{{ Lang.Get('Follow us with') }} RSS</a>
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div><!-- sidebar -->
+            </div>
+            <div id="contentBot"></div>
+        </div>
+        <!--content end-->
+    
+        <div id="footer">
+            <div id="footerContent">
+                <p>
+                    <span class="alignleft">
+                        {{ Lang.Get('Hosted by') }} <a href="http://over-blog.com/" target="_blank">Overblog</a>
+                    </span>
+                    <span class="alignright">
+                        <strong>{{ Lang.Get('Designed by') }} <a href="http://www.wpart.org" target="_blank">Wpart.org</a></strong>
+                    </span>
+               </p>
+           </div>    
        </div>
-   </div>
-</body>
+       
+       <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+       
+       <!-- Fancybox -->
+       <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+       <script type="text/javascript">
+            $(document).ready(function() {
+                $(".ob-section img a, .ob-link-img, .avatar a").attr("rel", "fancybox");
+                $("a[rel=fancybox]").fancybox({
+                    'overlayShow'   : true,
+                    'transitionIn'  : 'fadin',
+                    'transitionOut' : 'fadin',
+                    'type'          : 'image'
+                });
+            });                 
+       </script>
+        
+       <!-- Facebook Script -->
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        
+        <!-- Twitter Script -->
+        <script>
+            !function(d,s,id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if(!d.getElementById(id)){
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js,fjs); 
+            }}(document,"script","twitter-wjs");
+        </script>
+        
+        <!-- Google + button -->
+        <script type="text/javascript">
+          window.___gcfg = {lang: '{{ Blog.Lang }}'};
+        
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script>
+        
+        {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+            <!-- Disqus comments count -->
+            <script type="text/javascript">
+                var disqus_shortname = "{{ Custom('comment_disqus') }}";
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
+        {% endif %}
+        
+        {% if Custom('google_analytics') is not empty %}
+        <!-- Google Analytics -->
+         <script type="text/javascript">
+            window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+            _gaq.push(['_trackPageview']);
+            _gaq.push(['_trackPageLoadTime']);
+        
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        <!-- End Google Analytics -->
+        {% endif %} 
+        
+        <!-- Placeholder script -->
+        <script>
+            $('input[placeholder]').each(function(){  
+                var input = $(this);                        
+                $(input).val(input.attr('placeholder'));
+                $(input).focus(function(){
+                     if (input.val() == input.attr('placeholder')) {
+                         input.val('');
+                     }
+                });
+                $(input).blur(function(){
+                    if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                        input.val(input.attr('placeholder'));
+                    }
+                });
+            });     
+        </script>
+    </body>
 </html>
