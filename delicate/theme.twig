@@ -29,7 +29,7 @@
 
         <meta name="tag:pinned_tag:label.pinnedTag" group="Slider" />
         <meta name="image:custom_default_slider_cover:label.defaultSliderCover" default="http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg" group="Slider" />
-
+        <meta name="boolean:replace_slider:label.deactivateSlider" group="Slider" />
 
         <meta name="string:footer:label.footer" default="Theme: Delicate &copy; 2012" group="Wording"  />
 
@@ -381,44 +381,48 @@
 
                 <div class="slideshow-bg module">
                     <div class="slideshow">
-                        {% if Custom('pinned_tag') is not empty %}
-                            {% list Blog.TaggedPosts(Custom('pinned_tag'), 10) %}
-                                <article>
-                                    <div class="tagline">
-                                        <h2>
-                                            <a title="{{ TaggedPost.Snippet }}" href="{{ TaggedPost.PermaLink }}">
-                                                {% if TaggedPost.Title is not empty %}
-                                                    {{ TaggedPost.Title }}
+                        {% if Custom('replace_slider') == false %}
+                            {% if Custom('pinned_tag') is not empty %}
+                                {% list Blog.TaggedPosts(Custom('pinned_tag'), 10) %}
+                                    <article>
+                                        <div class="tagline">
+                                            <h2>
+                                                <a title="{{ TaggedPost.Snippet }}" href="{{ TaggedPost.PermaLink }}">
+                                                    {% if TaggedPost.Title is not empty %}
+                                                        {{ TaggedPost.Title }}
+                                                    {% else %}
+                                                        {{ Lang.Get('Posted from') }}
+                                                        {% list TaggedPost.Sources %}
+                                                            {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
+                                                        {% endlist %}
+                                                    {% endif %}
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <img src="{% if TaggedPost.Cover is not empty %}{{ TaggedPost.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ TaggedPost.Title }}" alt="" width="970" height="301" />
+                                    </article>
+                                {% endlist %}
+                            {% else %}
+                                {% list Blog.Posts(10) %}
+                                    <article>
+                                        <div class="tagline">
+                                            <a title="{{ Post.Snippet }}" href="{{ Post.PermaLink }}">
+                                                {% if Post.Title is not empty %}
+                                                    {{ Post.Title }}
                                                 {% else %}
                                                     {{ Lang.Get('Posted from') }}
-                                                    {% list TaggedPost.Sources %}
+                                                    {% list Post.Sources %}
                                                         {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
                                                     {% endlist %}
                                                 {% endif %}
                                             </a>
-                                        </h2>
-                                    </div>
-                                    <img src="{% if TaggedPost.Cover is not empty %}{{ TaggedPost.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ TaggedPost.Title }}" alt="" width="970" height="301" />
-                                </article>
-                            {% endlist %}
+                                        </div>
+                                        <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ Post.Title }}" alt="" width="970" height="301" />
+                                    </article>
+                                {% endlist %}
+                            {% endif %}
                         {% else %}
-                            {% list Blog.Posts(10) %}
-                                <article>
-                                    <div class="tagline">
-                                        <a title="{{ Post.Snippet }}" href="{{ Post.PermaLink }}">
-                                            {% if Post.Title is not empty %}
-                                                {{ Post.Title }}
-                                            {% else %}
-                                                {{ Lang.Get('Posted from') }}
-                                                {% list Post.Sources %}
-                                                    {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
-                                                {% endlist %}
-                                            {% endif %}
-                                        </a>
-                                    </div>
-                                    <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(970,301)|crop }}{% else %}{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}{% endif %}" title="{{ Post.Title }}" alt="" width="970" height="301" />
-                                </article>
-                            {% endlist %}
+                            <img src="{{ Custom('custom_default_slider_cover')|default('http://assets.over-blog-kiwi.com/themes/28/images/header/header.jpg')|resize(970,301)|crop }}" title="{{ Post.Title }}" alt="" width="970" height="301" />
                         {% endif %}
                     </div>
                     <div class="slideshow-nav"></div>
@@ -520,7 +524,7 @@
                                     {% endif %}
                                     <div class="left">
                                         {{ Post.RepostButton }}
-                                    </div>   
+                                    </div>
                                     <div class="clear"></div>
                                 </div>
 
@@ -685,22 +689,26 @@
 
         <script src="http://assets.over-blog-kiwi.com/themes/jquery/nivo-slider/jquery.nivo.slider.pack.js"></script>
         <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-        <script src="http://assets.over-blog-kiwi.com/themes/28/js/jquery.cycle.all.min.js?ver=3.3.1"></script>
+        {% if Custom('replace_slider') == false %}
+            <script src="http://assets.over-blog-kiwi.com/themes/28/js/jquery.cycle.all.min.js?ver=3.3.1"></script>
+        {% endif %}
 
         <script>
             jQuery(document).ready(function($) {
                 var formSubmit = $(".ob-input-submit")
                 formSubmit.addClass("button");
 
-                $('.slideshow').cycle({
-                    fx                  : 'fade',
-                    timeout             : 5000,
-                    pager               : '.slideshow-nav',
-                    speed               : 1000,
-                    pagerEvent          : 'click',
-                    pauseOnPagerHover   : true,
-                    cleartypeNoBg       : true
-                });
+                {% if Custom('replace_slider') == false %}
+                    $('.slideshow').cycle({
+                        fx                  : 'fade',
+                        timeout             : 5000,
+                        pager               : '.slideshow-nav',
+                        speed               : 1000,
+                        pagerEvent          : 'click',
+                        pauseOnPagerHover   : true,
+                        cleartypeNoBg       : true
+                    });
+                {% endif %}
 
                 // Fancybox
                 $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
