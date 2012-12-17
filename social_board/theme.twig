@@ -608,7 +608,7 @@
             .fancybox-wrap .post .navigation {
                 display: none;
             }
-            .fancybox-wrap .share-bar {
+            .share-bar {
                 background: #F9F9F9;
                 border: 1px solid #DDD;
                 -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
@@ -616,38 +616,43 @@
                     -ms-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                      -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                         box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                right: 50%;
                 margin: 0 -408px 0 0;
                 padding: 13px;
                 position: fixed;
+            }
+            .fancybox-wrap .share-bar {
+                right: 50%;
                 top: 170px;
             }
-            .fancybox-wrap .share-bar div {
+            .share-bar div {
                 display: block;
                 margin: 0 auto;
                 overflow: hidden;
                 text-align: center;
             }
-            .fancybox-wrap .share-bar div + div {
+            .share-bar div + div {
                 margin-top: 20px;
             }
-            .fancybox-wrap .share-bar .gplus {
+            .share-bar .gplus {
                 width: 50px;
             }
-            .fancybox-wrap .share-bar .twt {
+            .share-bar .twt {
                 width: 66px;
             }
-            .ie8 .fancybox-wrap .share-bar .twt {
+            .share-bar .twt iframe {
+                max-width: 100%;
+            }
+            .ie8 .share-bar .twt {
                 width: 70px;
             }
-            .fancybox-wrap .share-bar .facebook {
+            .share-bar .facebook {
                 width: 59px;
             }
-            .ie8 .fancybox-wrap .share-bar .facebook,
-            .ie9 .fancybox-wrap .share-bar .facebook {
+            .ie8 .share-bar .facebook,
+            .ie9 .share-bar .facebook {
                 width: 56px;
             }
-            .fancybox-wrap .share-bar .pinterest {
+            .share-bar .pinterest {
                 width: 43px;
             }
             /* ----------------------------- */
@@ -714,45 +719,8 @@
                 color: red;
             }
             .single .share-bar {
-                background: #F9F9F9;
-                border: 1px solid #DDD;
-                -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                   -moz-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                    -ms-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                     -o-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
-                        box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
                 left: 50%;
                 margin: 8px 0 0 387px;
-                padding: 13px;
-                position: fixed;
-            }
-            .single .share-bar div {
-                display: block;
-                margin: 0 auto;
-                overflow: hidden;
-                text-align: center;
-            }
-            .single .share-bar div + div {
-                margin-top: 20px;
-            }
-            .single .share-bar .gplus {
-                width: 50px;
-            }
-            .single .share-bar .twt {
-                width: 66px;
-            }
-            .ie8 .single .share-bar .twt {
-                width: 70px;
-            }
-            .single .share-bar .facebook {
-                width: 59px;
-            }
-            .ie8 .single .share-bar .facebook,
-            .ie9 .single .share-bar .facebook {
-                width: 56px;
-            }
-            .single .share-bar .pinterest {
-                width: 43px;
             }
             a.ob-repost-btn.top .ob-repost-count {
                 height: auto;
@@ -1066,7 +1034,7 @@
             .ob-section-map img{
 				max-width: none;
 			}
- 
+
             /* ----------------------------- */
             /* ==NAVIGATION */
             /* ----------------------------- */
