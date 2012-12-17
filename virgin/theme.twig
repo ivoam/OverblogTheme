@@ -6,7 +6,10 @@
         {% title %}
         <!-- metas description, keyword, robots -->
         {% meta %}
-        
+        {% if Custom('googleplus_userid') is not empty %}
+            <link rel="author" href="https://plus.google.com/{{ Custom('googleplus_userid') }}">
+            <link rel="publisher" href="https://plus.google.com/{{ Custom('googleplus_userid') }}">
+        {% endif %}
 
         <!-- Define the display mode -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
@@ -33,6 +36,8 @@
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <!-- Define the Facebook username -->
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <!-- Define the Google + userid -->        
+        <meta name="string:googleplus_userid:label.gplusUserid" group="Social" />
         <!-- Choose the service to share posts -->
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
         
@@ -230,7 +235,7 @@
 
 								<!-- Share buttons &amp; comments &amp; comments counter -->
                                 <footer>
-                                	{% if Custom('share_service') != 'None' or isSingle %}
+                                	{% if Custom('share_service') != 'None' %}
                                     	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
                                     	{% if Custom('share_service') == 'Google +' %}
                                             <div class="google-share">
@@ -256,6 +261,7 @@
                                             </div>
                                         {% endif %}
                                     {% endif %}
+                                    {{ Post.RepostButton }}
 
                                     {% if not isSingle %}
 		                                {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
@@ -382,7 +388,7 @@
                             <ul>
                                 {% list Blog.Posts(6) %}
 	                                {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
-		                                <li{% if loop.index % 2 == 0 %} class="clearfix"{% endif %}>
+		                                <li>
 		                                    <h4>
 		                                    	<a href="{{ Post.Permalink }}" title="{{ Post.Permalink }}">
 			                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(90)|crop }}{% else %}{{ Custom('post_cover')|resize(90)|crop }}{% endif %}" alt="{{ Post.Title }}" width="90" height="90" />
@@ -530,32 +536,6 @@
     		    })();
     		{% endif %}
 
-            {% if Custom('display_widget_archives') == false %}
-                // Blog archives
-                function switch_arch(year) {
-                    'use strict';
-                    var archiveYear,
-                        archiveMonths,
-                        displayStyle;
-
-                        displayStyle = '';
-                    archiveYear = document.getElementById('arch_' + year);
-                    if (typeof (archiveYear) !== 'undefined') {
-                        if (archiveYear.style.display !== 'none') {
-                            // Hide years without months
-                            archiveMonths = archiveYear.getElementsByTagName('li');
-                            if (!archiveMonths.length) {
-                                archiveYear.parentNode.style.display = 'none';
-                            }
-                            // Onclick management
-                            displayStyle = 'none';
-                        }
-                        archiveYear.style.display = displayStyle;
-                    }
-                    return false;
-                }
-            {% endif %}
-
             $(document).ready(function() {
 
                 // Fancybox
@@ -593,15 +573,23 @@
 
                 {% if Custom('display_widget_archives') == false %}
                     // Blog archives
+                    // Hide years without months
+                    $(".arch_year").each(function() {
+                        if ($(this).find(".arch_month li").length == 0) {
+                            $(this).hide();
+                        }
+                    });
+
+                    $(".arch_month").hide();
+                    
+                    var currentYear = {{ "now"|date("Y") }};
+                    
+                    $(".arch_year > a[data-year="+currentYear+"]").siblings(".arch_month").show();
+
                     $('.arch_year > a').click(function() {
-                        switch_arch($(this).attr('data-year'));
+                        $(this).siblings(".arch_month").slideToggle(500);
                         return false;
                     });
-                    {% list Blog.Archives %}
-                        {% if Archive.Year != "now"|date("Y") %}
-                            switch_arch('{{ Archive.Year }}');
-                        {% endif %}
-                    {% endlist %}
                 {% endif %}
 
                 {% if Custom('background') is not empty %}
