@@ -191,23 +191,23 @@
                                             {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
                                         </span>
                                         <span class="date">
-                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date|date("Y-m-d") }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
                                         </span>
 	                                </p>
 
                                     <!-- Post tags -->
                                     {% if Post.Tags is not empty %}
-    	                                <p class="tags" itemprop="keywords">
+    	                                <p class="tags">
     	                                    <span>{{ Lang.Get('Tagged on') }} : </span>
                                             {% list Post.Tags %}
-    	                                    	<a href="{{ Tag.Url }}" rel="tag">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+    	                                    	<a href="{{ Tag.Url }}" rel="tag" itemprop="keywords">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
     	                                    {% endlist %}
     	                                </p>
                                     {% endif %}
 
                                     <!-- Post title -->
                                     <h2 class="title">
-    	                    	        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+    	                    	        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}" itemprop="url" rel="bookmark">
     	                    	        	{% if Post.Title is not empty %}
     	                    	        		{{ Post.Title }}
     	                    	        	{% else %}
@@ -218,7 +218,7 @@
                                 </header>
 
                                 <!-- Post body or post sections or post snippet -->
-                                <div class="body" itemprop="articleBody">
+                                <div class="body" itemprop="ArticleBody">
                                     {% if isSingle or Custom('display_mode') == 'All' %}
                                     	{{ Post.Body }}
                                     {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
@@ -343,11 +343,11 @@
 	            <div id="sidebar">
                     {% if Custom('display_widget_profile') == false %}
                         <!-- Blog about -->
-	                    <div class="widget profile" >
+	                    <div class="widget profile" itemscope="" itemtype="http://schema.org/Person">
 	                        <h3>{{ Lang.Get('About') }}</h3>
                         	{% if Blog.Owner.Avatar is not empty %}
 								<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-									<img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100" height="100" />
+									<img itemprop="image" src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100" height="100" />
 								</a>
 							{% endif %}
 							
@@ -408,7 +408,7 @@
                             <ul>
                             	{% list Blog.PostsTags(Custom('display_tags')) %}
 	                                <li>
-	                                    <a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">#{{ PostsTag.Title }}</a> <span class="number">{{ PostsTag.PostCount }}</span>
+	                                    <a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}" itemprop="about">#{{ PostsTag.Title }}</a> <span class="number">{{ PostsTag.PostCount }}</span>
 	                                </li>
                                 {% endlist %}
                             </ul>
