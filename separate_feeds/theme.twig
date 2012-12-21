@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="{{ Blog.Lang|default('en') }}" itemscope="" itemtype="http://schema.org/Blog">
+    <head>
+        <!-- shortcut:[Meta] -->
+        {% title %}
+        {% meta %}
+
+        <!-- Define the display mode -->
+        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+
+        <!-- Define the background image -->
+        <meta name="image:background:label.backgroundImage" group="design" />
+        <!-- Define the default post cover -->
+        <meta name="image:post_cover:label.defaultPostCover" group="design" />
+
+        <!-- Hide "About" widget -->
+        <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
+        <!-- Hide search form -->
+        <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
+        <!-- Hide "Last posts" wiget -->
+        <meta name="boolean:display_widget_last_posts:label.hideLastPosts" group="Widgets" />
+        <!-- Define the number of tags which display or hide "Blog tags" wiget -->
+        <meta name="list:display_widget_tags:label.numberOfTags" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets" />
+        <!-- Hide "Social" wiget -->
+        <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
+        <!-- Hide "Blog archives" wiget -->
+        <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
+
+        <!-- Define the Twitter username -->
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <!-- Define the Facebook username -->
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <!-- Choose the service to share posts -->
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+
+        <!-- Choose the comments service -->
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <!-- Define facebook comments theme color -->
+        <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+        <!-- Define the Disqus username -->
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
+
+        <!-- Define the Facebook App ID (go to https://developers.facebook.com/apps) -->
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <!-- Define the Google Analytics ID-->
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <!-- Define the Google Webmaster Tools ID -->
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <!-- Define the MSN Webmaster Tools ID -->
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
+
+	    <!-- shortcut:[Includes] -->
+	    <!-- favicon -->
+        {% favicon %}
+
+	    <!-- SEO -->
+	    {% if Custom('google_webmaster_id') is not empty %}
+	        <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
+	    {% endif %}
+	    {% if Custom('msn_webmaster_id') is not empty %}
+	        <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
+	    {% endif %}
+
+	    <!-- includes -->
+	    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
+
+	    <!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+        <!-- Add here yours external steel sheets (fonts, plugins) -->
+	    <!-- Fancybox -->
+		<link href="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+
+        <!-- Theme CSS -->
+	    <style type="text/css">
+            /* ----------------------------- */
+            /* ==CLEARFIX */
+            /* ----------------------------- */
+            /* blocks that needs to be placed under floats */
+            .clear {
+                clear: both;
+            }
+
+            /* blocks that can contain floats */
+            .clearfix:before,
+            .clearfix:after {
+                content: "";
+                display: table;
+            }
+            .clearfix:after {
+                clear: both;
+            }
+
+	    	/* ----------------------------- */
+            /* ==BASICAL */
+            /* ----------------------------- */
+            body {
+                {% if Custom('background') is not empty %}
+                    background: url({{ Custom('background') }}) no-repeat fixed center center;
+                    -webkit-background-size: cover;
+                       -moz-background-size: cover;
+                        -ms-background-size: cover;
+                         -o-background-size: cover;
+                            background-size: cover;
+                {% endif %}
+
+            }
+            /* ----------------------------- */
+            /* ==GLOBAL */
+            /* ----------------------------- */
+	    	#global {
+	    		margin-left: auto;
+	    		margin-right: auto;
+	    		width: 960px;
+	    	}
+
+            /* ----------------------------- */
+            /* ==MAIN CONTENT */
+            /* ----------------------------- */
+            .main {
+	    		float: left;
+	    		width: 600px;
+	    	}
+
+            .google-share iframe,
+            .facebook-share iframe,
+            .twitter-share iframe {
+                border: none;
+                height: 21px;
+                width: 110px;
+
+            }
+
+            /* ----------------------------- */
+            /* ==SOCIAL */
+            /* ----------------------------- */
+	    	.sidebar {
+	    		float: right;
+	    		width: 300px;
+	    	}
+	    </style>
+	</head>
+	<body>
+        <!-- Init Facebook script -->
+		<div id="fb-root"></div>
+	    <div id="global">
+            <header>
+                <!-- Blog title -->
+            	<h1 class="title">
+                 	<a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
+                </h1>
+                <!-- Blog description -->
+             	<strong class="description">{{ Blog.Description }}</strong>
+            </header>
+	        <section class="content clearfix">
+	        	<!-- left content -->
+
+                {% if isHome %}
+                    <div class="main">
+                        {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB']) %}
+                            <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                                <header itemprop="headline">
+                                    <!-- Post author &amp; post date -->
+                                    <p class="metas">
+                                        <span class="author" itemprop="author">
+                                            {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
+                                        </span>
+                                        <span class="date">
+                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                        </span>
+                                    </p>
+
+                                    <!-- Post tags -->
+                                    {% if Post.Tags is not empty %}
+                                        <p class="tags" itemprop="keywords">
+                                            <span>{{ Lang.Get('Tagged on') }} : </span>
+                                            {% list Post.Tags %}
+                                                <a href="{{ Tag.Url }}" rel="tag">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+                                            {% endlist %}
+                                        </p>
+                                    {% endif %}
+
+                                    <!-- Post title -->
+                                    <h2 class="title">
+                                        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+                                            {% if Post.Title is not empty %}
+                                                {{ Post.Title }}
+                                            {% else %}
+                                                {{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}
+                                            {% endif %}
+                                        </a>
+                                    </h2>
+                                </header>
+
+                                <!-- Post body or post sections or post snippet -->
+                                <div class="body" itemprop="articleBody">
+                                    {{ Post.Snippet }}
+                                </div>
+                            </article>
+                        {% endlist %}
+                        <div class="navigation">
+                            <a class="next" href="/social/ob/2">Plus d'OB</a>
+                        </div>
+                    </div>
+                {% elseif isSingle or isSocial or isSearch or isTag %}
+                    <div class="main{% if isSocial %} social{% endif %}">
+                        {% list Posts %}
+                            <article class="post{% if isSocial %} social-post{% endif %}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                                {% if isSearch %}
+                                    {{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
+                                {% elseif isTag %}
+                                    {{ Lang.Get('Posts with') }} #{{ Tag.Title }}
+                                {% endif %}
+	                        	<header itemprop="headline">
+                                    <!-- Post author &amp; post date -->
+	                                <p class="metas">
+                                    	<span class="author" itemprop="author">
+                                            {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
+                                        </span>
+                                        <span class="date">
+                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                        </span>
+	                                </p>
+
+                                    <!-- Post tags -->
+                                    {% if Post.Tags is not empty %}
+    	                                <p class="tags" itemprop="keywords">
+    	                                    <span>{{ Lang.Get('Tagged on') }} : </span>
+                                            {% list Post.Tags %}
+    	                                    	<a href="{{ Tag.Url }}" rel="tag">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+    	                                    {% endlist %}
+    	                                </p>
+                                    {% endif %}
+
+                                    <!-- Post title -->
+                                    <h2 class="title">
+    	                    	        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+    	                    	        	{% if Post.Title is not empty %}
+    	                    	        		{{ Post.Title }}
+    	                    	        	{% else %}
+    	                    	        		{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}
+    	                    	        	{% endif %}
+    	                    	        </a>
+                            		</h2>
+                                </header>
+                                {% list Post.Sources %}
+                                    {{ Source }}
+                                {% endlist %}
+                                <!-- Post body or post sections or post snippet -->
+                                <div class="body" itemprop="articleBody">
+                                    {{ Post.snippet }}
+                                </div>
+
+								<!-- Share buttons &amp; comments &amp; comments counter -->
+                                <footer>
+                                	{% if Custom('share_service') != 'None' %}
+                                    	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
+                                    	{% if Custom('share_service') == 'Google +' %}
+                                            <div class="google-share">
+                                                <iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
+                                            </div>
+                                        {% elseif Custom('share_service') == 'Twitter' %}
+                                        	<div class="twitter-share">
+                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
+                                            </div>
+                                        {% elseif Custom('share_service') == 'Facebook' %}
+                                            <div class="facebook-share">
+                                                <iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
+                                            </div>
+                                        {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
+                                        	<div class="google-share">
+                                            	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
+                                            </div>
+                                            <div class="twitter-share">
+                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
+                                            </div>
+                                            <div class="facebook-share">
+                                            	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <!-- Post comments -->
+                                    {% if isPost %}
+							         	<div id="comments" class="item-comments">
+							         		<h3>{{ Lang.Get('Comment this post') }}</h3>
+										    {% if Custom('comment') == 'Facebook' %}
+										    	<div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
+										    {% elseif Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}
+										        <div id="disqus_thread"></div>
+										        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+										    {% else %}
+										        {{ Post.Comments }}
+										    {% endif %}
+										</div>
+		                            {% endif %}
+                                </footer>
+	                        </article>
+                        <!-- If no post found -->
+                        {% else %}
+                            <article class="no-result">
+                                <p>{{ Lang.Get('No post found') }}.</p>
+                            </article>
+                        {% endlist %}
+
+                        {% if Navigation.NextPage is not empty %}
+                            <div class="navigation{% if isSocial %} social-navigation{% endif%}">
+                                <a class="next{% if isSocial %} social-next{% endif%}" href="{{ Navigation.NextPage }}">{{ Lang.Get('Next page') }} &raquo;</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% elseif isSpecial %}
+                    <div class="main">
+                        <!-- Contact page -->
+                        <article class="special">
+		                    {{ SpecialContent }}
+                        </article>
+                    </div>
+                {% endif %}
+
+                {% if not isSocial %}
+                    <!-- Social -->
+                    <div class="sidebar social">
+                        {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB'], false) %}
+                            <div class="social-post">
+                                <h1><a href="{{Post.Permalink}}">{{ Post.Title }}</a></h1>
+                                {% list Post.Sources %}
+                                    {{ Source }}
+                                {% endlist %}
+                                <p>{{ Post.Snippet }}</p>
+                            </div>
+                        {% endlist %}
+                        <div class="social-navigation">
+                            <a class="social-next" href="/social/not/ob/2">{{ Lang.Get('Next page') }} &raquo;</a>
+                        </div>
+                    </div>
+                {% endif %}
+	        </section>
+	    </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+        {% if not isSpecial %}
+            <script src="http://assets.over-blog-kiwi.com//themes/jquery/masonry/jquery.masonry.min.js"></script>
+            <script src="http://assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
+        {% endif %}
+
+		<script>
+            $(document).ready(function(){
+                // Load more with Masonry
+                {% if not isSingle or not isSpecial %}
+                    jQuery.ias({
+                        container      : ".main",
+                        item           : ".post",
+                        pagination     : ".navigation",
+                        next           : ".next",
+                        loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
+                        history        : false,
+                        onRenderComplete: function(){
+                            console.debug('main');
+                            $('.navigation').removeClass('social-navigation');
+                            $('.next').removeClass('social-next');
+                        }
+                    });
+                {% endif %}
+
+                jQuery.ias({
+                    container      : ".social",
+                    item           : ".social-post",
+                    pagination     : ".social-navigation",
+                    next           : ".social-next",
+                    loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
+                    history        : false,
+                    onRenderComplete: function(){
+                        console.debug('social');
+                        $('.social-navigation').removeClass('navigation');
+                        $('.social-next').removeClass('next');
+                    }
+                });
+            });
+        </script>
+	</body>
+</html>
