@@ -65,316 +65,1469 @@
 	    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
 
 	    <!--[if lt IE 9]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 
         <!-- Add here yours external steel sheets (fonts, plugins) -->
 	    <!-- Fancybox -->
 		<link href="//assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.css" rel="stylesheet" type="text/css" />
 
+        <!-- Fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet" type="text/css" />
+        <link href="http://fonts.googleapis.com/css?family=Rambla:400,700" rel="stylesheet" type="text/css" />
+
         <!-- Theme CSS -->
 	    <style type="text/css">
+            /*
+            KNACSS.com V1.3 @author : Raphael Goetter, Alsacreations
+            Licence CC-BY http://creativecommons.org/licenses/by/3.0/fr/
+            */
+
             /* ----------------------------- */
-            /* ==CLEARFIX */
+            /* ==reset */
             /* ----------------------------- */
-            /* blocks that needs to be placed under floats */
-            .clear {
-                clear: both;
+
+            /* base font-size corresponds to equiv 10px */
+            html {
+                font-size: 62.5%;
+            }
+            body {
+                background: #E1E1E1;
+                {% if Custom('background') is not empty %}
+                background: url({{ Custom('background') }}) no-repeat fixed;
+                -webkit-background-size: cover;
+                   -moz-background-size: cover;
+                    -ms-background-size: cover;
+                     -o-background-size: cover;
+                        background-size: cover;
+                {% endif %}
+                color: #222;
+                font-family: 'Lato', sans-serif;
+                position: relative;
             }
 
-            /* blocks that can contain floats */
-            .clearfix:before,
-            .clearfix:after {
+            /* HTML5 tags */
+            article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+                display: block;
+            }
+
+            /* soft reset */
+            html, body, blockquote, ul, ol, form {margin: 0; padding: 0}
+            p {margin: 0 0 1em;}
+            ul, ol {
+                margin-bottom: 2em; 
+                padding-left: 2em;
+            }
+            .mreset {margin: 0 !important;}
+            .preset {padding: 0 !important;}
+
+            /* font-sizing for content */
+            p, li, td, th, textarea, caption, pre {font-size: 1.5em;}
+            li li, li p, td p, th p, li h1, li h2, li h3, li h4, li h5, li h6, button, input, select {font-size: 100%;}
+            h1, .h1-like {font-size: 2.4em;} /* equiv 24 pixels */
+            h2, .h2-like {font-size: 2.1em;} /* equiv 20 pixels */
+            h3, .h3-like {font-size: 1.8em;} /* equiv 18 pixels */
+            h4, .h4-like {font-size: 1.6em;} /* equiv 16 pixels */
+            h5, .h5-like {font-size: 1.4em;} /* equiv 14 pixels */
+
+            /* alternate font-sizing */
+            .smallest {font-size: .7em;}
+            .smaller {font-size: .8em;}
+            .small {font-size: .9em;}
+            .big {font-size: 1.07em;} /* 15 pixels */
+            .bigger {font-size: 1.14em;} /* 16 pixels */
+            .biggest {font-size: 1.28em;} /* 18 pixels */
+
+            /* avoid collapsing margins */
+            h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
+                margin-top: 0;
+            }
+            /* avoid last paragraph bottom margin */
+            p:last-child {margin-bottom: 0;}
+
+
+            /* max values */
+            img, table, td, blockquote, code, pre, textarea, input, video {
+                max-width: 100%; height: auto;
+            }
+
+            /* you shall not pass */
+            textarea, table, td, th, code, pre, samp, div, p {
+                word-wrap: break-word;
+                -webkit-hyphens: auto;
+                   -moz-hyphens: auto;
+                    -ms-hyphens: auto;
+                     -o-hyphens: auto;
+                        hyphens: auto;
+            }
+            code, pre, samp {
+                white-space: pre-wrap;
+            }
+
+            /* pictures */
+            img {width: auto; vertical-align: middle}
+            a img {border: 0;}
+
+            * {
+                -webkit-box-sizing: border-box;
+                   -moz-box-sizing: border-box;
+                        box-sizing: border-box;
+            }
+
+            /* clearfix */
+            .clearfix:before, .clearfix:after{
                 content: "";
                 display: table;
             }
-            .clearfix:after {
+            .clearfix:after{
                 clear: both;
             }
 
-	    	/* ----------------------------- */
+            /* link */
+            a {
+                -webkit-transition: color 220ms ease;
+                   -moz-transition: color 220ms ease;
+                        transition: color 220ms ease;
+            }
+            /* ----------------------------- */
             /* ==BASICAL */
             /* ----------------------------- */
             body {
                 {% if Custom('background') is not empty %}
-                    background: url({{ Custom('background') }}) no-repeat fixed center center;
-                    -webkit-background-size: cover;
-                       -moz-background-size: cover;
-                        -ms-background-size: cover;
-                         -o-background-size: cover;
-                            background-size: cover;
+                    background: url({{ Custom('background') }}) no-repeat cover;
+                {% else %}
+                    background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_2b23c346da068a055f2c235f3a6580e0_bg.jpg) repeat;
                 {% endif %}
+                border-top: 6px solid #111;
+                color: #292323;
+                font-family: "Rambla", sans-serif;
+                margin: 0;
 
             }
+            .content {
+                background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_1b7244595c00548752209dbdae83fc3b_bg-rules.png) repeat-y;
+                margin: 30px auto 200px;
+                padding: 0 80px;
+                width: 1140px;
+            }
             /* ----------------------------- */
-            /* ==GLOBAL */
+            /* ==HEADER */
             /* ----------------------------- */
-	    	#global {
-	    		margin-left: auto;
-	    		margin-right: auto;
-	    		width: 960px;
-	    	}
+            .blog-header {
+                margin-left: auto;
+                margin-right: auto;
+                width: 980px;
+            }
+            .blog-avatar {
+                border-radius: 50px;
+                display: block;
+                height: 100px;
+                margin: 20px auto;
+                width: 100px;
+            }
+            .blog-title {
+                font-family: "Sanchez", serif;
+                font-size: 4em;
+                font-weight: normal;
+                text-align: center;
+                text-shadow: 1px 1px 1px #FFF;
+            }
+            .blog-title a {
+                color: #292323;
+                text-decoration: none;
+            }
+            .blog-description {
+                display: block;
+                font-size: 1.8em;
+                font-weight: normal;
+                margin-top: 35px;
+                text-align: center;
+                text-shadow: 1px 1px 1px #FFF;
+            }
+            .menu {
+                {% if Custom('background') is not empty %}
+                    background: #FFF;
+                {% endif %}
+                border-bottom: 5px solid #111;
+                border-top: 1px solid #D2D2D2;
+                margin-top: 35px;
+            }
+            .menu ul {
+                float: left;
+                margin: -1px 0 0;
+                padding: 0;
+            }
+            .menu li {
+                float: left;
+                list-style: none;
+                position: relative;
+            }
+            .menu a {
+                color: #292323;
+                display: inline-block;
+                font-size: 1em;
+                padding: 10px 15px;
+                position: relative;
+                text-decoration: none;
+                text-shadow: 1px 1px 1px #FFF;
+                text-transform: uppercase;
+            }
+            .menu a:hover {
+                color: #A0977F;
+            }
+            .menu a.active {
+                color: #A0977F;
+                border-top: 1px solid #111;
+            }
+            .menu .sub-menu-link {
+                margin-right: 10px;
+            }
+            .menu .sub-menu-link:after {
+                border: 4px solid transparent;
+                border-top-color: #292323; 
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 17px;
+            }
+            .menu .sub-menu-link:hover:after {
+                border-top-color: #A0977F;
+            }
+            .menu .sub-menu {
+                background: #DDD;
+                background: rgba(221,221,221,0.9);
+                display: none;
+                float: none;
+                position: absolute;
+                visibility: hidden;
+                -webkit-transition: visibility 250ms;
+                   -moz-transition: visibility 250ms;
+                        transition: visibility 250ms;
+                width: 150px;
+                z-index: 99;
+            }
+            .menu li:hover .sub-menu {
+                display: block;
+                top: 40px;
+                -webkit-transition: visibility 450ms;
+                   -moz-transition: visibility 450ms;
+                        transition: visibility 450ms;
+                visibility: visible;
+            }
+            .sub-menu li {
+                float: none;
+            }
+            .search-form {
+                float: right;
+                margin-top: 4px;
+                position: relative;
+            }
+            .search-form input[type="text"] {
+                background: #FFF;
+                border: 1px solid #D1D1D1;
+                padding: 8px;
+                width: 180px;
+            }
+            .search-form input[type="submit"] {
+                background: #FFF url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_e7a2b9614c95c59043d160b7017b5f01_sprite.png) no-repeat 5px 1px;
+                border: none;
+                border-left: 1px solid #D1D1D1;
+                cursor: pointer;
+                height: 20px;
+                position: absolute;
+                right: 5px;
+                top: 5px;
+                width: 25px;
+            }
+            .menu .social-link {
+                float: right;
+                margin: 9px 0 0 10px;
+            }
+            .menu .social-link a {
+                background: #999 url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_e7a2b9614c95c59043d160b7017b5f01_sprite.png) no-repeat;
+                border-radius: 3px;
+                height: 19px;
+                padding: 0;
+                margin: 0 5px;
+                -webkit-transition: background-color 220ms ease;
+                   -moz-transition: background-color 220ms ease;
+                        transition: background-color 220ms ease;
+                vertical-align: middle;
+                width: 19px
+            }
+            .menu .social-link a:hover {
+                background-color: #666; 
+            }
+            .menu .social-link .twitter {
+                background-position: 3px -52px;
+            }
+            .menu .social-link .facebook {
+                background-position: 3px -104px;
+            }
+            .menu .social-link .rss {
+                background-position: 3px -157px;
+            }
+            
 
             /* ----------------------------- */
             /* ==MAIN CONTENT */
             /* ----------------------------- */
             .main {
+                position: relative;
 	    		float: left;
-	    		width: 600px;
+	    		width: 500px;
 	    	}
-
-            .google-share iframe,
-            .facebook-share iframe,
-            .twitter-share iframe {
-                border: none;
-                height: 21px;
-                width: 110px;
-
+            .post {
+                background: #FFF;
+                margin-bottom: 20px;
+                width: 500px;
             }
+            .main .post:last-child {
+                margin-bottom: 0;
+            }
+            .post-header {
+                padding: 10px;
+                position: relative;
+            }
+            .post-cover {
+                display: block;
+                margin-bottom: 20px;
+                position: relative;
+            }
+            .post-cover:after {
+                bottom: 0;
+                border: 15px solid transparent;
+                border-bottom-color: #FFF;
+                content: "";
+                left: 15px;
+                position: absolute;
+            }
+            .post-title {
+                margin: 0 0 5px;
+                padding: 0 10px;
+            }
+            .post-title h2 {
+                display: inline-block;
+                font-family: "Sanchez", sans-serif;
+                font-size: 1.8em;
+                font-weight: normal;
+                margin: 0;
+                width: 368px;
+            }
+            .post-title h2 a {
+                color: #292323;
+                text-decoration: none;
+            }
+            .comments-number {
+                border-left: 1px solid #D2D2D2;
+                color: #292323;
+                float: right;
+                font-size: 1.8em;
+                font-weight: bold;
+                text-align: right;
+                overflow: hidden;
+                padding-left: 10px;
+                text-decoration: none;
+                text-indent: 11px;
+                text-transform: uppercase;
+                white-space: nowrap;
+                width: 70px;
+            }
+            .comments-wording {
+                color: #6e6e6e;
+                text-transform: uppercase;
+            }
+            .post-source {
+                background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_e7a2b9614c95c59043d160b7017b5f01_sprite.png) no-repeat;
+                display: inline-block;
+                height: 23px;
+                margin-left: 10px;
+                vertical-align: middle;
+                width: 23px;
+            }
+            .post-source.FB {
+                background-position: left -231px;
+            }
+            .post-source.FL {
+                background-position: left -280px;
+            }
+            .post-source.FS {
+                background-position: left -329px;
+            }
+            .post-source.IG {
+                background-position: left -377px;
+            }
+            .post-source.OB {
+                background-position: left -475px;
+            }
+            .post-source.RS {
+                background-position: left -524px;
+            }
+            .post-source.TB {
+                background-position: left -573px;
+            }
+            .post-source.TW {
+                background-position: left -621px;
+            }
+            .post-source.YT {
+                background-position: left -670px;
+            }
+            .post-author {
+                display: inline-block;
+                font-size: 1.3em;
+                margin-left: 7px;
+                vertical-align: middle;
+            }
+            .post-author span {
+                color: #A0977F;
+            }
+            .post-snippet {
+                color: #6E6E6E;
+                margin-top: 15px;
+                line-height: 25px;
+                padding: 0 20px;
+            }
+            .read-more {
+                color: #A0977F;
+                display: inline-block;
+                font-size: 1.5em;
+                margin: 30px 0 30px 20px;
+                text-decoration: none;
+            }
+            .read-more:hover {
+                text-decoration: underline;
+            }
+            .post-tags {
+                margin-bottom: 30px;
+                padding: 0 20px;
+            }
+            .post-tags a {
+                background: #DDDAD4;
+                -webkit-box-shadow: 1px 1px 2px #888;
+                box-shadow: 1px 1px 2px #888;
+                color: #6E6E6E;
+                float: left;
+                font-size: 0.85em;
+                margin: 0 15px 10px 0;
+                padding: 4px 5px 4px 15px;
+                position: relative;
+                text-decoration: none;
+            }
+            .post-tags a:before {
+                content: "";
+                border: 12px solid transparent;
+                border-right: 6px solid #DDDAD4;
+                left: -18px;
+                position: absolute;
+                top: 0;
+            }
+            .post-tags a:active {
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                margin: 1px 15px 9px 0;
+            }
+            .post-tags a span {
+                display: block;
+                position: relative;
+            }
+            .post-tags a span:before {
+                background: #FFF;
+                -webkit-box-shadow: inset 1px 1px 2px #888;
+                box-shadow: inset 1px 1px 2px #888;
+                border-radius: 8px;
+                bottom: 4px;
+                content: "";
+                height: 8px;
+                left: -15px;
+                position: absolute;
+                width: 8px;
+            }
+            .post-tags a:active span:before {
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+            .post-footer {
+                border-top: 1px solid #D2D2D2;
+                color: #999;
+                font-size: 1.3em;
+            }
+            .post-footer a:hover,
+            .post-footer a.ob-repost-btn .ob-repost-label:hover {
+                text-decoration: underline;
+            }
+            .post-date {
+                display: inline-block;
+                padding: 10px 0 10px 20px;
+                vertical-align: middle;
+            }
+            .post-share {
+                float: right;
+                position: relative;
+            }
+            a.ob-repost-btn .ob-repost-label {
+                background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_e7a2b9614c95c59043d160b7017b5f01_sprite.png) no-repeat left -717px;
+                border: 0;
+                border-radius: 0;
+                color: #A0977F;
+                font-family: inherit;
+                font-size: inherit;
+                margin-right: 12px;
+                padding: 0 0 0 17px;
+                text-shadow: none;
+                vertical-align: middle;
+            }
+            a.ob-repost-btn .ob-repost-label .ob-repost-icon {
+                display: none;
+            }
+            .share {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .share-link {
+                background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_e7a2b9614c95c59043d160b7017b5f01_sprite.png) no-repeat left -743px;
+                color: #A0977F;
+                display: inline-block;
+                padding: 10px 20px 10px 17px;
+                text-decoration: none;
+                vertical-align: middle;
+            }
+            .share-buttons {
+                background: #FFF;
+                border-left: 1px solid #D9D9D9;
+                border-top: 1px solid #D9D9D9;
+                bottom: 37px;
+                display: none;
+                list-style: none;
+                margin: 0;
+                padding: 10px;
+                position: absolute;
+                right: 0;
+            }
+            .share:hover .share-buttons {
+                display: block;
+            }
+            .share-buttons:before {
+                content: "";
+                border: 10px solid transparent;
+                border-top-color: #D2D2D2;
+                bottom: -21px;
+                left: 50px;
+                position: absolute;
+            }
+            .share-buttons:after {
+                content: "";
+                border: 10px solid transparent;
+                border-top-color: #FFF;
+                bottom: -20px;
+                left: 50px;
+                position: absolute;
+            }
+            .share-buttons li {
+                margin-bottom: 10px;
+            }
+            .share-buttons li:last-child {
+                margin-bottom: 0;
+            }
+            .share-buttons a {
+                background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_cb65aa7bcd0648023b8737006e01a1b4_sprite.png) no-repeat;
+                color: #A0977F;
+                display: block;
+                font-size: 0.75em;
+                padding: 5px 0 5px 35px;
+                text-decoration: none;
+                width: 100px;
+            }
+            .share-buttons .gplus {
+                background-position: left -934px;
+            }
+            .share-buttons .fb {
+                background-position: left -854px;
+            }
+            .share-buttons .twt {
+                background-position: left -894px;
+            }
+            .share-buttons .pint {
+                background-position: left -973px;
+            }
+
 
             /* ----------------------------- */
             /* ==SOCIAL */
             /* ----------------------------- */
-	    	.sidebar {
+	    	.social {
 	    		float: right;
-	    		width: 300px;
+	    		width: 480px;
 	    	}
+            .social .social-post {
+                background: #FFF;
+                float: left;
+                margin: 0 0 20px 20px; 
+                width: 220px;
+            }
+            .social .post-title {
+                padding: 0;
+            }
+            .social .post-title h2 {
+                width: 200px;
+            }
+            .social .post-source {
+                margin-left: 0;
+            }
+            .social .post-snippet {
+                line-height: 20px;
+                padding: 0 10px;
+            }
+            .social .post-date {
+                padding: 10px 0 10px 10px;
+            }
+            .social a.ob-repost-btn .ob-repost-label {
+                background-position: left -719px; 
+                font-size: 0;
+                height: 11px;
+                margin-right: 5px;
+                padding: 0;
+                width: 14px;
+            }
+            .social .share {
+                height: 36px;
+            }
+            .social .share-link {
+                background-position: left -743px;
+                height: 36px;
+                padding: 10px;
+            }
+            .social .share-buttons:before {
+                bottom: -20px;
+                left: auto;
+                right: 5px;
+            }
+            .social .share-buttons:after {
+                bottom: -19px;
+                left: auto;
+                right: 5px;
+            }
+            .false-player {
+                background: url(http://data.over-blog-kiwi.com/0/19/10/50/201212/ob_a87cb9b4a301e71012623a4733cc5aaf_sprite.png) no-repeat left -939px;
+                display: block;
+                height: 40px;
+                margin: 55px 70px;
+                position: absolute;
+                top: 0;
+                width: 60px;
+            }
+            blockquote.ob-tweet {
+                background: none;
+                border: none;
+                border-radius: 0;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+            blockquote.ob-tweet .ob-media-left {
+                border-radius: 0;
+                float: left;
+                height: auto;
+                margin: 0 0 10px;
+                min-height: 0;
+                width: 48px;
+            }
+            blockquote.ob-tweet .ob-tweet-author {
+                left: auto;
+                top: 10px;
+                right: 10px;
+                width: 120px;
+            }
+            blockquote.ob-tweet .ob-tweet-author a {
+                font-size: 12px;
+                text-decoration: none;
+            }
+            blockquote.ob-tweet .ob-text {
+                clear: both;
+                margin: 0;
+                padding: 0;
+            }
+            blockquote.ob-tweet .ob-text a {
+                color: #A0977F;
+                text-decoration: none;
+            }
+            blockquote.ob-tweet .ob-text a:hover {
+                text-decoration: underline;
+            }
+            .ob-tweet-bird,
+            blockquote.ob-tweet .ob-tweet-date {
+                display: none;
+            }
+
+            /* ----------------------------- */
+            /* ==SECTIONS */
+            /* ----------------------------- */
+            .ob-section {
+                padding: 0 10px;
+                width: auto;
+            }
+            .ob-section.text {
+                padding: 0 20px;
+            }
+            .ob-section-images .ob-img {
+                max-width: 100%;
+                width: auto;
+            }
+            .ob-section-images .ob-row-2-col .ob-img {
+                max-width: 240px;
+            }
+            .ob-section-images .ob-row-3-col .ob-img {
+                max-width: 160px;
+            }
+            .ob-section-images .ob-slideshow {
+                height: 380px;
+                width: auto;
+            }
+            .ob-section-video iframe,
+            .ob-section-video embed,
+            .ob-section-video object {
+                height: 300px;
+                width: 100%;
+            }
+            .ob-section-map .ob-map, 
+            .ob-section-map .ob-desc {
+                width: auto;
+            }
+            .ob-section-audio .obsoundplayer {
+                height: 70px;
+                overflow: hidden;
+            }
+            .ob-section-audio .obsoundplayer .obsoundplayername {
+                width: 120px;
+            }
+            .comments {
+                border-top: 1px solid #D2D2D2;
+                padding: 20px;
+            }
+            .comments h3 {
+                color: #494949;
+                font-weight: normal; 
+            }
+
+            /* ----------------------------- */
+            /* ==SPECIAL PAGE */
+            /* ----------------------------- */
+            .special {
+                background: #FFF;
+                padding: 20px;
+            }
+            .special h2 {
+                font-family: "Sanchez", serif;
+                font-size: 1.8em;
+                font-weight: normal;
+            }
+            .special .ob-label {
+                font-size: 1.4em;
+            }
+            .special .ob-terms {
+                display: none;
+            }
+            .ob-input,
+            .ob-input-email {
+                background: #FFF;
+                border: 1px solid #D1D1D1;
+                padding: 8px;
+            }
+            .ob-input-submit {
+                background: #999;
+                border: 0;
+                color: #FFF;
+                cursor: pointer;
+            }
+            /* ----------------------------- */
+            /* ==FOOTER */
+            /* ----------------------------- */
+            .blog-footer {
+                background: #111;
+                padding: 13px 0;
+                position: absolute;
+                width: 100%;
+            }
+            .withsharebar .blog-footer {
+                bottom: -160px;
+            }
+            .blog-footer {
+                bottom: -200px;
+            }
+            .footer-content {
+                margin-left: auto;
+                margin-right: auto;
+                width: 980px;
+            }
+            .blog-footer {
+                color: #8D8D8D;
+            }
+            .blog-footer p {
+                margin-bottom: 0;
+            }
+            .blog-footer a {
+                color: #FFF;
+                text-decoration: none;
+            }
+            .blog-footer .credits {
+                float: left;
+            }
+            .blog-footer .powered {
+                float: right;
+            }
+
+            .ias_loader {
+                bottom: -70px;
+                width: 250px;
+                left: 50%;
+                margin-left: -125px;
+                position: absolute;
+                text-align: center;
+            }
+            .ias_loader img {
+                width: 30px;
+            }
+            .ias_loader p {
+                color: #292323;
+                font-family: "Sanchez", serif;
+                font-size: 1.7em;
+                margin-top: 5px;
+                text-shadow: 1px 1px 1px #FFF;
+            }
 	    </style>
 	</head>
-	<body>
+	
+    <body>
         <!-- Init Facebook script -->
 		<div id="fb-root"></div>
-	    <div id="global">
-            <header>
-                <!-- Blog title -->
-            	<h1 class="title">
-                 	<a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
-                </h1>
-                <!-- Blog description -->
-             	<strong class="description">{{ Blog.Description }}</strong>
-            </header>
-	        <section class="content clearfix">
-	        	<!-- left content -->
+        
+        <header class="blog-header">
+            <!-- Blog.Avatar -->
+            {% if Blog.Avatar %}
+                <a href="{{ Blog.Url }}" title="{{ Blog.Title }}">
+                    <img class="blog-avatar" src="{{ Blog.Avatar|resize(100,100)|crop }}" title="{{ Blog.Description }}" alt="{{ Blog.Description }}" width="100" height="100" />
+                </a>
+            {% endif %}
 
-                {% if isHome %}
-                    <div class="main">
-                        {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB']) %}
-                            <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-                                <header itemprop="headline">
-                                    <!-- Post author &amp; post date -->
-                                    <p class="metas">
-                                        <span class="author" itemprop="author">
-                                            {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
-                                        </span>
-                                        <span class="date">
-                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                        </span>
-                                    </p>
+            <!-- Blog title -->
+            <h1 class="blog-title">
+                <a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
+            </h1>
+            <!-- Blog description -->
+            <strong class="blog-description">
+                {{ Blog.Description }}
+            </strong>
 
-                                    <!-- Post tags -->
-                                    {% if Post.Tags is not empty %}
-                                        <p class="tags" itemprop="keywords">
-                                            <span>{{ Lang.Get('Tagged on') }} : </span>
-                                            {% list Post.Tags %}
-                                                <a href="{{ Tag.Url }}" rel="tag">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+            <nav class="menu clearfix">
+                <ul>
+                    <li>
+                        <a{% if isIndex %} class="active"{% endif %} href="{{ Blog.Url }}" title="{{ Lang.Get('Home') }}">{{ Lang.Get('Home') }}</a>
+                    </li>
+                    <li>
+                        <a class="sub-menu-link{% if isPage %} active{% endif %}" href="#">{{ Lang.Get('Pages') }}</a>
+                        <ul class="sub-menu">
+                            {% list Blog.ListPages %}
+                                <li>
+                                    <a href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                </li>
+                           {% endlist %}
+                        </ul>
+                    </li>
+                    {% if Blog.PostsTags is not empty and Custom('display_widget_tags') > 0 %}
+                        <li>
+                            <a class="sub-menu-link{% if isTag %} active{% endif %}" href="#">{{ Lang.Get('Category') }}</a>
+                            <ul class="sub-menu">
+                                {% list Blog.PostsTags(Custom('display_tags')) %}
+                                    <li>
+                                        <a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title }}">{{ PostsTag.Title }}</a>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                    {% if Custom('display_widget_archives') == false %}
+                        <li>
+                            <a class="sub-menu-link{% if isArchive %} active{% endif %}" href="#">{{ Lang.Get('Archives') }}</a>
+                            <ul class="sub-menu">
+                                {% list Blog.Archives %}
+                                     <li>
+                                        <ul>
+                                            {% list Archive.Months %}
+                                                {% if Month.PostCount > 0 %}
+                                                    <li>
+                                                        <a href="{{ Month.Url }}">{{ Month.Name }} {{ Archive.Year }}</a>
+                                                    </li>
+                                                {% endif %}
                                             {% endlist %}
-                                        </p>
+                                        </ul>
+                                    </li>
+                                {% endlist %}
+                            </ul>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a{% if isSpecial %} class="active"{% endif %} href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                    </li>
+                </ul>
+                
+                <!-- Social link -->
+                <ul class="social-link">
+                    {% if Custom('twitter_username') is not empty %}
+                        <li>
+                            <a class="twitter" href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter" target="_blank"></a>
+                        </li>
+                    {% endif %}
+                    {% if Custom('facebook_username') is not empty %}
+                        <li>
+                            <a class="facebook" href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook" target="_blank"></a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a class="rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subscribe to the RSS feed') }}" target="_blank"></a>
+                    </li>
+                </ul>
+
+                <!-- Search form -->
+                <form class="search-form" action="/search" method="post">
+                    <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}" value="{% if isSearch %}{{ Search.Keyword }}{% endif %}" />
+                    <input type="submit" title="{{ Lang.Get('Search') }}" value="" />
+                </form>
+            </nav>
+        </header>
+
+        <section class="content clearfix">
+        	<!-- left content -->
+            {% if isHome %}
+                <div class="main">
+                    {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB']) %}
+                        <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                            <header class="post-header" itemprop="headline">
+                                {% if Post.Cover is not empty %}
+                                    <!-- Post cover -->
+                                    <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                        <img src="{{ Post.Cover|resize(480,280)|crop }}" alt="" width="480" height="280" /> 
+                                    </a>
+                                {% endif %}
+
+                                <div class="post-title">
+                                    {% if Post.Title is not empty %}
+                                        <!-- Post title -->
+                                        <h2>
+                                            <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+                                        </h2>
                                     {% endif %}
 
-                                    <!-- Post title -->
-                                    <h2 class="title">
-                                        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-                                            {% if Post.Title is not empty %}
-                                                {{ Post.Title }}
-                                            {% else %}
-                                                {{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}
+                                    {% if Post.ShowComments is not empty %}
+                                        <!-- Comments number -->
+                                        <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
+                                            {% if Custom('comment') == 'Facebook' %}
+                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count> 
+                                            {% elseif Custom('comment') == 'OverBlog' %}
+                                                {{ Post.CommentCount }}
+                                            {% endif %}
+                                            <span class="comments-wording">{{ Lang.Get('com') }}</span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                
+                                <!-- Post source -->
+                                <span class="post-source {{ Post.GetfirstSource }}"></span>
+
+                                {% if Post.Author is not empty %}
+                                    <!-- Post author -->
+                                    <span class="post-author" itemprop="author">
+                                        {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+                                    </span>
+                                {% endif %}
+                            </header>
+
+                            {% if Post.Snippet is not empty %}
+                                <!-- Post snippet -->
+                                <p class="post-snippet" itemprop="articleBody">
+                                    {{ Post.Snippet }}
+                                </p>
+                            {% endif %}
+
+                            <a class="read-more" href="{{ Post.Permalink }}" title="{{ Lang.Get('Read more') }}">{{ Lang.Get('Read more') }}</a>
+
+                            {% if Post.Tags is not empty %}
+                                <!-- Post tags -->
+                                <p class="post-tags clearfix" itemprop="keywords">
+                                    {% list Post.Tags %}
+                                        <a href="{{ Tag.Url }}" rel="tag">
+                                            <span>{{ Tag.Title }}</span>
+                                        </a>
+                                    {% endlist %}
+                                </p>
+                            {% endif %}
+
+                            <footer class="post-footer">
+                                <time class="post-date" itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                
+                                <div class="post-share">
+                                    {{ Post.RepostButton('nocount') }}
+
+                                    <div class="share">
+                                        <a class="share-link" href="#">{{ Lang.Get('Share this post') }}</a>
+                                        <ul class="share-buttons">
+                                            <li>
+                                                <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}">Google +</a>
+                                            </li>
+                                            <li>
+                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}">Twitter</a>
+                                            </li>
+                                            <li>
+                                                <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}">Facebook</a>
+                                            </li>
+                                            {% if Post.Cover is not empty %}
+                                                <li>
+                                                    <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}">Pinterest</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </footer>
+                        </article>
+                    {% endlist %}
+                    <div class="navigation">
+                        <a class="next" href="/social/ob/2">Plus d'OB</a>
+                    </div>
+                </div>
+            {% elseif isSingle or isSocial or isSearch or isTag or isArchive %}
+                <div class="main{% if isSocial %} social{% endif %}">
+                    {% list Posts %}
+                        <article class="post{% if isSocial %} social-post{% endif %}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                            <header class="post-header" itemprop="headline">
+                                {% if Post.getFirstSource != 'TW' and Post.Cover is not empty %}
+                                    <!-- Post cover -->
+                                    <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                        {% if not isSingle and Post.GetfirstSource != 'OB' %}
+                                            <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" />
+                                            {% if not isSingle and Post.GetfirstSource == 'YT' %}
+                                                <span class="false-player"></span> 
+                                            {% endif %}
+                                        {% else %}
+                                            <img src="{{ Post.Cover|resize(480,280)|crop }}" alt="" width="480" height="280" /> 
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+
+                                <div class="post-title">
+                                    {% if Post.Title is not empty %}
+                                        <!-- Post title -->
+                                        <h2>
+                                            <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+                                        </h2>
+                                    {% endif %}
+
+                                    {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
+                                        <!-- Comments number -->
+                                        <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
+                                            {% if Custom('comment') == 'Facebook' %}
+                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count> 
+                                            {% elseif Custom('comment') == 'OverBlog' %}
+                                                {{ Post.CommentCount }}
+                                            {% endif %}
+                                            <span class="comments-wording">{{ Lang.Get('com') }}</span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+
+                                {% if Post.getFirstSource != 'TW' %}
+                                    <!-- Post source -->
+                                    <span class="post-source {{ Post.GetfirstSource }}"></span>
+                                    {% if Post.Author is not empty %}
+                                        <!-- Post author -->
+                                        <span class="post-author" itemprop="author">
+                                            {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+                                        </span>
+                                    {% endif %}
+                                {% endif %}
+                            </header>
+
+                            {% if isSingle %}
+                                <!-- Post body -->
+                                <div class="post-body">
+                                    {{ Post.Body }}
+                                </div>
+                            {% elseif Post.getFirstSource == 'TW' %}
+                                {{ Post.Body(1) }}
+                            {% elseif Post.Snippet is not empty %}
+                                <!-- Post snippet -->
+                                <p class="post-snippet" itemprop="articleBody">
+                                    {{ Post.Snippet }}
+                                </p>
+                                
+                                {% if Post.GetfirstSource == 'OB' %}
+                                    <!-- Read more link -->
+                                    <a class="read-more" href="{{ Post.Permalink }}" title="{{ Lang.Get('Read more') }}">{{ Lang.Get('Read more') }}</a>
+                                {% endif %}
+                            {% endif %}
+
+                            {% if Post.Tags is not empty %}
+                                <!-- Post tags -->
+                                <p class="post-tags clearfix" itemprop="keywords">
+                                    {% list Post.Tags %}
+                                        <a href="{{ Tag.Url }}" rel="tag">
+                                            <span>{{ Tag.Title }}</span>
+                                        </a>
+                                    {% endlist %}
+                                </p>
+                            {% endif %}
+
+                            <footer class="post-footer">
+                                <!-- Post date -->
+                                <time class="post-date" itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                
+                                <!-- Post share -->
+                                <div class="post-share">
+                                    {{ Post.RepostButton('nocount') }}
+
+                                    <div class="share">
+                                        <a class="share-link" href="#" title="{{ Lang.Get('Share this post') }}">
+                                            {% if Post.GetfirstSource == 'OB' or isSingle %}
+                                                {{ Lang.Get('Share this post') }}
                                             {% endif %}
                                         </a>
-                                    </h2>
-                                </header>
-
-                                <!-- Post body or post sections or post snippet -->
-                                <div class="body" itemprop="articleBody">
-                                    {{ Post.Snippet }}
-                                </div>
-                            </article>
-                        {% endlist %}
-                        <div class="navigation">
-                            <a class="next" href="/social/ob/2">Plus d'OB</a>
-                        </div>
-                    </div>
-                {% elseif isSingle or isSocial or isSearch or isTag %}
-                    <div class="main{% if isSocial %} social{% endif %}">
-                        {% list Posts %}
-                            <article class="post{% if isSocial %} social-post{% endif %}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-                                {% if isSearch %}
-                                    {{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
-                                {% elseif isTag %}
-                                    {{ Lang.Get('Posts with') }} #{{ Tag.Title }}
-                                {% endif %}
-	                        	<header itemprop="headline">
-                                    <!-- Post author &amp; post date -->
-	                                <p class="metas">
-                                    	<span class="author" itemprop="author">
-                                            {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
-                                        </span>
-                                        <span class="date">
-                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                        </span>
-	                                </p>
-
-                                    <!-- Post tags -->
-                                    {% if Post.Tags is not empty %}
-    	                                <p class="tags" itemprop="keywords">
-    	                                    <span>{{ Lang.Get('Tagged on') }} : </span>
-                                            {% list Post.Tags %}
-    	                                    	<a href="{{ Tag.Url }}" rel="tag">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
-    	                                    {% endlist %}
-    	                                </p>
-                                    {% endif %}
-
-                                    <!-- Post title -->
-                                    <h2 class="title">
-    	                    	        <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-    	                    	        	{% if Post.Title is not empty %}
-    	                    	        		{{ Post.Title }}
-    	                    	        	{% else %}
-    	                    	        		{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}
-    	                    	        	{% endif %}
-    	                    	        </a>
-                            		</h2>
-                                </header>
-                                {% list Post.Sources %}
-                                    {{ Source }}
-                                {% endlist %}
-                                <!-- Post body or post sections or post snippet -->
-                                <div class="body" itemprop="articleBody">
-                                    {{ Post.snippet }}
+                                        <ul class="share-buttons">
+                                            <li>
+                                                <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}">Google +</a>
+                                            </li>
+                                            <li>
+                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}">Twitter</a>
+                                            </li>
+                                            <li>
+                                                <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}">Facebook</a>
+                                            </li>
+                                            {% if Post.Cover is not empty %}
+                                                <li>
+                                                    <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}">Pinterest</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
                                 </div>
 
-								<!-- Share buttons &amp; comments &amp; comments counter -->
-                                <footer>
-                                	{% if Custom('share_service') != 'None' %}
-                                    	<h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
-                                    	{% if Custom('share_service') == 'Google +' %}
-                                            <div class="google-share">
-                                                <iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
-                                            </div>
-                                        {% elseif Custom('share_service') == 'Twitter' %}
-                                        	<div class="twitter-share">
-                                                <iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
-                                            </div>
-                                        {% elseif Custom('share_service') == 'Facebook' %}
-                                            <div class="facebook-share">
-                                                <iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
-                                            </div>
-                                        {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
-                                        	<div class="google-share">
-                                            	<iframe src="https://plusone.google.com/u/0/_/+1/fastbutton?url={{ Post.Permalink }}&amp;size=medium&amp;annotation=bubble&amp;lang={{ Blog.Lang }}"></iframe>
-                                            </div>
-                                            <div class="twitter-share">
-                                            	<iframe src="http://platform.twitter.com/widgets/tweet_button.html?url={{ Post.PermaLink }}&amp;via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }}{% else %}{{ Blog.Owner.Nickname }}{% endif %}&amp;text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Blog.Title }}{% endif %}&amp;lang={{ Blog.Lang }}&amp;count=horizontal"></iframe>
-                                            </div>
-                                            <div class="facebook-share">
-                                            	<iframe src="//www.facebook.com/plugins/like.php?href={{ Post.Permalink }}&amp;send=false&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font"></iframe>
-                                            </div>
+                                {% if isSingle and not isPage and Post.ShowComments is not empty %}
+                                    <div class="comments" id="comments">
+                                        <h3>{{ Lang.Get('Comment this post') }}</h3>
+                                        {% if Custom("comment") == "Facebook" %}
+                                            <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="4" data-width="460"></div>
+                                        {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                            <div id="disqus_thread"></div>
+                                            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                        {% else %}
+                                            {{ Post.Comments }}
                                         {% endif %}
-                                    {% endif %}
-
-                                    <!-- Post comments -->
-                                    {% if isPost %}
-							         	<div id="comments" class="item-comments">
-							         		<h3>{{ Lang.Get('Comment this post') }}</h3>
-										    {% if Custom('comment') == 'Facebook' %}
-										    	<div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
-										    {% elseif Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}
-										        <div id="disqus_thread"></div>
-										        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-										    {% else %}
-										        {{ Post.Comments }}
-										    {% endif %}
-										</div>
-		                            {% endif %}
-                                </footer>
-	                        </article>
-                        <!-- If no post found -->
-                        {% else %}
-                            <article class="no-result">
-                                <p>{{ Lang.Get('No post found') }}.</p>
-                            </article>
-                        {% endlist %}
-
-                        {% if Navigation.NextPage is not empty %}
-                            <div class="navigation{% if isSocial %} social-navigation{% endif%}">
-                                <a class="next{% if isSocial %} social-next{% endif%}" href="{{ Navigation.NextPage }}">{{ Lang.Get('Next page') }} &raquo;</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                {% elseif isSpecial %}
-                    <div class="main">
-                        <!-- Contact page -->
-                        <article class="special">
-		                    {{ SpecialContent }}
+                                    </div>
+                                {% endif %}
+                            </footer>
                         </article>
-                    </div>
-                {% endif %}
+                    {% else %}
+                        <!-- No post found -->
+                        <article class="no-result">
+                            <p>{{ Lang.Get('No post found') }}.</p>
+                        </article>
+                    {% endlist %}
 
-                {% if not isSocial %}
-                    <!-- Social -->
-                    <div class="sidebar social">
-                        {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB'], false) %}
-                            <div class="social-post">
-                                <h1><a href="{{Post.Permalink}}">{{ Post.Title }}</a></h1>
-                                {% list Post.Sources %}
-                                    {{ Source }}
-                                {% endlist %}
-                                <p>{{ Post.Snippet }}</p>
-                            </div>
-                        {% endlist %}
-                        <div class="social-navigation">
-                            <a class="social-next" href="/social/not/ob/2">{{ Lang.Get('Next page') }} &raquo;</a>
+                    {% if Navigation.NextPage is not empty %}
+                        <div class="navigation{% if isSocial %} social-navigation{% endif%}">
+                            <a class="next{% if isSocial %} social-next{% endif%}" href="{{ Navigation.NextPage }}">{{ Lang.Get('Next page') }} &raquo;</a>
                         </div>
+                    {% endif %}
+                </div>
+            {% elseif isSpecial %}
+                <div class="main">
+                    <!-- Contact page -->
+                    <article class="special">
+	                    {{ SpecialContent }}
+                    </article>
+                </div>
+            {% endif %}
+
+            {% if not isSocial %}
+                <!-- Social -->
+                <div class="social">
+                    {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB'], false) %}
+                        <article class="social-post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                            <header class="post-header" itemprop="headline">
+                                {% if Post.getFirstSource != 'TW' and Post.Cover is not empty %}
+                                    <!-- Post cover -->
+                                    <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                        <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" /> 
+                                        {% if not isSingle and Post.GetfirstSource == 'YT' %}
+                                            <span class="false-player"></span> 
+                                        {% endif %}
+                                    </a>
+                                {% endif %}
+
+                                {% if Post.Title is not empty %}
+                                    <div class="post-title">
+                                        <!-- Post title -->
+                                        <h2>
+                                            <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+                                        </h2>
+                                    </div>
+                                {% endif %}
+                                
+                                {% if Post.getFirstSource != 'TW' %}
+                                    <!-- Post source -->
+                                    <span class="post-source {{ Post.GetfirstSource }}"></span>
+
+                                    {% if Post.Author is not empty %}
+                                        <!-- Post author -->
+                                        <span class="post-author" itemprop="author">
+                                            {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+                                        </span>
+                                    {% endif %}
+                                {% endif %}
+                            </header>
+
+                            {% if Post.getFirstSource == 'TW' %}
+                                {{ Post.Body(1) }}
+                            {% elseif Post.Snippet is not empty %}
+                                <!-- Post snippet -->
+                                <p class="post-snippet" itemprop="articleBody">
+                                    {{ Post.Snippet }}
+                                </p>
+                            {% endif %}
+
+                            {% if Post.Tags is not empty %}
+                                <!-- Post tags -->
+                                <p class="post-tags clearfix" itemprop="keywords">
+                                    {% list Post.Tags %}
+                                        <a href="{{ Tag.Url }}" rel="tag">
+                                            <span>{{ Tag.Title }}</span>
+                                        </a>
+                                    {% endlist %}
+                                </p>
+                            {% endif %}
+
+                            <footer class="post-footer">
+                                <time class="post-date" itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                
+                                <div class="post-share">
+                                    {{ Post.RepostButton('nocount') }}
+
+                                    <div class="share">
+                                        <a class="share-link" href="#" title="{{ Lang.Get('Share this post') }}"></a>
+                                        <ul class="share-buttons">
+                                            <li>
+                                                <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}">Google +</a>
+                                            </li>
+                                            <li>
+                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}">Twitter</a>
+                                            </li>
+                                            <li>
+                                                <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}">Facebook</a>
+                                            </li>
+                                            {% if Post.Cover is not empty %}
+                                                <li>
+                                                    <a class="pint" href="//pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}">Pinterest</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </footer>
+                        </article>
+                    {% endlist %}
+
+                    <!-- Next page -->
+                    <div class="social-navigation">
+                        <a class="social-next" href="/social/not/ob/2">{{ Lang.Get('Next page') }} &raquo;</a>
                     </div>
-                {% endif %}
-	        </section>
-	    </div>
+                </div>
+            {% endif %}
+        </section>
+        
+        <!-- Blog footer -->
+        <footer class="blog-footer">
+            <div class="footer-content">
+                <p class="credits">
+                    © Copyright 2013 - <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>. {{ Lang.Get('All right reserved') }}.
+                </p>
+                <p class="powered">
+                    {{ Lang.Get('Proudly powered by') }} <a href="http://www.over-blog.com" target="_blank">OverBlog</a> - <a href="http://fr.over-blog-kiwi.com/terms-of-use" target="_blank">{{ Lang.Get('Terms of use') }}</a>
+                </p>
+            </div>
+        </footer>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-        {% if not isSpecial %}
-            <script src="http://assets.over-blog-kiwi.com//themes/jquery/masonry/jquery.masonry.min.js"></script>
+            <script src="http://assets.over-blog-kiwi.com/themes/jquery/masonry/jquery.masonry.min.js"></script>
             <script src="http://assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
+        {% if not isSpecial %}
+            <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         {% endif %}
 
 		<script>
+            {% if Custom('google_analytics') is not empty %}
+                // Google Analytics
+                window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+                var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+                    _gaq.push(['_trackPageview']);
+                    _gaq.push(['_trackPageLoadTime']);
+
+                (function() {
+                    var ga = document.createElement('script');
+                        ga.type = 'text/javascript';
+                        ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(ga, s);
+                })();
+            {% endif %}
+
+            {% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}
+                // Disqus comments
+                var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                (function() {
+                    var dsq = document.createElement('script');
+                        dsq.type = 'text/javascript';
+                        dsq.async = true;
+                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+
+                // Disqus comments counter
+                var disqus_shortname = "{{ Custom('comment_disqus') }}";
+                (function () {
+                    var s = document.createElement('script');
+                        s.async = true;
+                        s.type = 'text/javascript';
+                        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            {% elseif Custom('comment') == 'Facebook' %}
+                // Facebook comments
+                (function(d, s, id) {
+                    var js,
+                        fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/{{ Blog.Lang}}_{{ Blog.Lang|upper }}/all.js#xfbml=1&amp;appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            {% endif %}
+
+            {% if isSingle %}
+                // Disable tweets render
+                TwitterDisabled = function(elements) {
+                    $(elements).find(".twitter-tweet").removeClass("twitter-tweet");
+                },
+
+                //Twitter render
+                !function(d,s,id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if(!d.getElementById(id)){
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js,fjs);
+                    }
+                }(document,"script","twitter-wjs");
+            {% endif %}
+
+            // Social popup
+            SocialPopup = function(elements) {
+                $(elements).find(".share-buttons a").click(function() {
+                    var popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
+                    if (window.focus) {
+                        popup.focus();
+                    }
+                    return false;
+                });
+            }
+
+
             $(document).ready(function(){
+                {% if isSingle %}
+                    // Fancybox
+                    $(".ob-link-img").attr("rel", "fancybox").fancybox({
+                        type: "image"
+                    });
+
+                    TwitterDisabled($(".social .social-post"));
+                {% endif %}
+
+                SocialPopup($(".post, .social-post"));
+
+                // Masonry
+                var container = $(".social");
+
+                container.imagesLoaded(function(){
+                    container.masonry({
+                        itemSelector : ".social .social-post",
+                        columnWidth  : 240,
+                        isAnimated   : false
+                    });
+                });
+
                 // Load more with Masonry
                 {% if not isSingle or not isSpecial %}
                     jQuery.ias({
-                        container      : ".main",
-                        item           : ".post",
-                        pagination     : ".navigation",
-                        next           : ".next",
-                        loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
-                        history        : false,
-                        onRenderComplete: function(){
-                            console.debug('main');
+                        container        : ".main",
+                        item             : ".post",
+                        pagination       : ".navigation",
+                        next             : ".next",
+                        loader           : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' width='40' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
+                        history          : false,
+                        onRenderComplete : function() {
                             $('.navigation').removeClass('social-navigation');
                             $('.next').removeClass('social-next');
+
+                            // OB callback
+                            if (typeof OB != "undefined") { 
+                                OB.restart && OB.restart(); 
+                            }
+                            {% if Custom('comment') == 'Facebook' %}
+                                // FB callback
+                                if (typeof FB != "undefined") { 
+                                    FB.XFBML.parse(document.body); 
+                                }
+                            {% endif %}
+                        },
+                        onLoadItems      : function(items) {
+                            SocialPopup(items);
                         }
                     });
                 {% endif %}
 
                 jQuery.ias({
-                    container      : ".social",
-                    item           : ".social-post",
-                    pagination     : ".social-navigation",
-                    next           : ".social-next",
-                    loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
-                    history        : false,
-                    onRenderComplete: function(){
-                        console.debug('social');
+                    container        : ".social",
+                    item             : ".social-post",
+                    pagination       : ".social-navigation",
+                    next             : ".social-next",
+                    loader           : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' width='10' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
+                    history          : false,
+                    onRenderComplete : function(){
                         $('.social-navigation').removeClass('navigation');
                         $('.social-next').removeClass('next');
+
+                        // OB callback
+                        if (typeof OB != "undefined") { 
+                            OB.restart && OB.restart(); 
+                        }
+                    },
+                    onLoadItems       : function(items) {
+                        var newElems = $(items);
+                        newElems.css({ 
+                            opacity: 0 
+                        });
+
+                        newElems.imagesLoaded(function() {
+                            newElems.animate({ 
+                                opacity: 1 
+                            });
+                            container.masonry("appended", newElems, false);
+                        });
+                        
+                        {% if isSingle %}
+                            TwitterDisabled(items);
+                        {% endif %}
+
+                        SocialPopup(items);
                     }
                 });
             });
