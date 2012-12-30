@@ -134,6 +134,9 @@
 			.date li a:hover{border-bottom: 2px solid #e2eaef;}
 			.date .active a {color: #4c7999;}
 
+			.year li{display:none;}
+			.year li:nth-last-child(-n+12){display:inline-block;}
+
 			/*----- CONTENT -----*/
 			.container {margin: 0 auto; padding-bottom: 20px; width: 980px;}
 
@@ -404,33 +407,17 @@
 
 			<nav class="date">
 				<div class="wrap">
-					<a class="control-left" href="#" data-year="{{ 'now'|date('Y') }}">
-						<img alt="{{ Lang.Get('Previous year') }}" src="http://assets.over-blog-kiwi.com/themes/13/images/control-left-black.png" />
-					</a>
-					<a class="control-right" href="#" data-year="{{ 'now'|date('Y') }}">
-						<img alt="{{ Lang.Get('Next year') }}" src="http://assets.over-blog-kiwi.com/themes/13/images/control-right-black.png" />
-					</a>
+					<ul class="year">
 					{% list Blog.Archives %}
-						<ul class="year year-{{ Archive.Year }}"
-							{% if Archive.Year == Year %}
-								style="display:block;"
-							{% elseif not Year and Archive.Year == 'now'|date('Y') %}
-								style="display:block;"
-							{% else %}
-								style="display:none;"
+						{% list Archive.Months %}
+							{% if Month.PostCount > 0 %}
+								<li {% if Archive.Year == 'now'|date('Y') and Month.isCurrent %}class="active"{% endif %} data-year="{{Archive.Year}}" data-month="{{Month.Index}}">
+									<a href="{{ Month.Url }}" title="{{ Lang.Get('Archives')}} {{ Lang.Get(Month.Name) }} {{Archive.Year}}">{{ Lang.Get(Month.Name) }}</a>
+								</li>
 							{% endif %}
-						>
-							{% list Archive.Months %}
-								{% if Month.PostCount > 0 %}
-									<li {% if Month.isCurrent %}class="active"{% endif %}>
-										<a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a>
-									</li>
-								{% else %}
-									<li>{{ Lang.Get(Month.Name) }}</li>
-								{% endif %}
-							{% endlist %}
-						</ul>
+						{% endlist %}
 					{% endlist %}
+					</ul>
 				</div>
 			</nav>
 		</header>
@@ -711,6 +698,50 @@
 				'{{ Lang.Get('November') }}',
 				'{{ Lang.Get('December') }}'
 			),
+			Calendar.Init = function(){
+				{% if not isArchive %}
+					$('.date li a').last().parent().addClass(Calendar.CSS_ACTIVE);
+				{% endif %}
+
+				var d = new Date(),
+				year = d.getFullYear();
+
+				Calendar.Reload(year);
+
+				prevEl = null;
+
+				$('.year li').each(function(){
+					if( prevEl != null)
+					{
+						// We are in a previous year
+						if($(this).data('month')-1 < prevEl.data('month'))
+						{
+							// Année précédente à finir
+							for(var i = prevEl.data('month'); i < 12; i++)
+							{
+								Calendar.AddMonth($(this), i);
+							}
+
+							// Année en cours à combler
+							for(var i = 0; i < $(this).data('month') -1; i++)
+							{
+								Calendar.AddMonth($(this), i);
+							}
+						}
+						// we are in the same year
+						else if($(this).data('month')-1 > prevEl.data('month'))
+						{
+							// Interval à combler
+							for(var i = prevEl.data('month'); i < $(this).data('month') -1; i++)
+							{
+								Calendar.AddMonth($(this), i);
+							}
+						}
+					}
+
+					prevEl = $(this);
+				});
+			},
 			Calendar.Reload = function(year){
 				var d = new Date();
 				var currentYear = d.getFullYear();
@@ -718,12 +749,10 @@
 				if (year > currentYear) {
 					return;
 				}
-
-				if ($('.year-'+year).length) {
-					$('.year').hide();
-					$('.year-'+year).show();
-					$('.control-left, .control-right').data('year', year);
-				}
+			},
+			Calendar.AddMonth = function(el, idMonth){
+console.debug('Ajout du mois : '+Calendar.MONTHS[ idMonth ]);
+				el.before('<li>'+Calendar.MONTHS[ idMonth ]+'</li>');
 			}
 
 			{% if Custom('comment') == 'Facebook' and isSingle %}
@@ -838,70 +867,10 @@
 			{% endif %}
 
 			$(document).ready(function() {
-				// Calendar
-
 				// Init calendar
-				var d = new Date(),
-					year = d.getFullYear(),
-					currentYear = d.getFullYear(),
-					nbMonths, year, first, last, ctn;
+				Calendar.Init();
 
-				{% if Year %}
-					year = {{ Year }};
-				{% endif %}
-
-				Calendar.Reload(year);
-
-				{% if not isArchive %}
-					$('.date li a').last().parent().addClass(Calendar.CSS_ACTIVE);
-				{% endif %}
-
-				year = $('.year').first();
-				first = year.find('li:first-child a').text();
-				ctn = $('<div></div>');
-
-				// add month at start of first year if needed
-				if(first !== Calendar.MONTHS[0]){
-					$.each(Calendar.MONTHS, function(){
-						if(this == first){
-							year.prepend(ctn.html());
-							return false;
-						}
-						ctn.append($('<li>'+this+'</li>'));
-					});
-				}
-
-				// add month at end of last year if needed
-				year = $('.year').last(),
-				nbMonths = year.find('li').length;
-
-				if (nbMonths < 12){
-					for (i = nbMonths; i<12; i++){
-						var e = $('<li>'+Calendar.MONTHS[i]+'</li>');
-						year.append(e);
-					}
-				}
-
-				// Prev year
-				$('.control-left').live(
-					'click',
-					function() {
-						var year = $(this).data('year');
-						year = year - 1;
-						Calendar.Reload(year);
-					}
-				);
-
-				// Next year
-				$('.control-right').live(
-					'click',
-					function() {
-						var year = $(this).data('year');
-						year = year + 1;
-						Calendar.Reload(year);
-					}
-				);
-
+				// Fancy box
 				$(".ob-link-img").attr("rel", "fancybox").fancybox({
 				    type: "image"
 				});
