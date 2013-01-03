@@ -115,7 +115,7 @@
             html, body, blockquote, ul, ol, form {margin: 0; padding: 0}
             p {margin: 0 0 1em;}
             ul, ol {
-                margin-bottom: 2em; 
+                margin-bottom: 2em;
                 padding-left: 2em;
             }
             .mreset {margin: 0 !important;}
@@ -284,7 +284,7 @@
             }
             .menu .sub-menu-link:after {
                 border: 4px solid transparent;
-                border-top-color: #292323; 
+                border-top-color: #292323;
                 content: "";
                 position: absolute;
                 right: 0;
@@ -356,7 +356,7 @@
                 width: 19px
             }
             .menu .social-link a:hover {
-                background-color: #666; 
+                background-color: #666;
             }
             .menu .social-link .twitter {
                 background-position: 3px -52px;
@@ -367,7 +367,7 @@
             .menu .social-link .rss {
                 background-position: 3px -157px;
             }
-            
+
 
             /* ----------------------------- */
             /* ==MAIN CONTENT */
@@ -498,7 +498,7 @@
                 text-decoration: underline;
             }
             .post-tags {
-                margin-bottom: 30px;
+                margin-bottom: 10px;
                 padding: 0 20px;
             }
             .post-tags a {
@@ -661,7 +661,7 @@
             .social .social-post {
                 background: #FFF;
                 float: left;
-                margin: 0 0 20px 20px; 
+                margin: 0 0 20px 20px;
                 width: 220px;
             }
             .social .post-title {
@@ -681,7 +681,7 @@
                 padding: 10px 0 10px 10px;
             }
             .social a.ob-repost-btn .ob-repost-label {
-                background-position: left -719px; 
+                background-position: left -719px;
                 font-size: 0;
                 height: 11px;
                 margin-right: 5px;
@@ -787,7 +787,7 @@
                 height: 300px;
                 width: 100%;
             }
-            .ob-section-map .ob-map, 
+            .ob-section-map .ob-map,
             .ob-section-map .ob-desc {
                 width: auto;
             }
@@ -804,7 +804,7 @@
             }
             .comments h3 {
                 color: #494949;
-                font-weight: normal; 
+                font-weight: normal;
             }
 
             /* ----------------------------- */
@@ -894,11 +894,11 @@
             }
 	    </style>
 	</head>
-	
+
     <body>
         <!-- Init Facebook script -->
 		<div id="fb-root"></div>
-        
+
         <header class="blog-header">
             <!-- Blog.Avatar -->
             {% if Blog.Avatar %}
@@ -967,7 +967,7 @@
                         <a{% if isSpecial %} class="active"{% endif %} href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
                     </li>
                 </ul>
-                
+
                 <!-- Social link -->
                 <ul class="social-link">
                     {% if Custom('twitter_username') is not empty %}
@@ -1003,7 +1003,7 @@
                                 {% if Post.Cover is not empty %}
                                     <!-- Post cover -->
                                     <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
-                                        <img src="{{ Post.Cover|resize(480,280)|crop }}" alt="" width="480" height="280" /> 
+                                        <img src="{{ Post.Cover|resize(480,280)|crop }}" alt="" width="480" height="280" />
                                     </a>
                                 {% endif %}
 
@@ -1019,7 +1019,7 @@
                                         <!-- Comments number -->
                                         <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
                                             {% if Custom('comment') == 'Facebook' %}
-                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count> 
+                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
                                             {% elseif Custom('comment') == 'OverBlog' %}
                                                 {{ Post.CommentCount }}
                                             {% endif %}
@@ -1027,7 +1027,7 @@
                                         </a>
                                     {% endif %}
                                 </div>
-                                
+
                                 <!-- Post source -->
                                 <span class="post-source {{ Post.GetfirstSource }}"></span>
 
@@ -1061,7 +1061,7 @@
 
                             <footer class="post-footer">
                                 <time class="post-date" itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                
+
                                 <div class="post-share">
                                     {{ Post.RepostButton('nocount') }}
 
@@ -1096,43 +1096,43 @@
                 <div class="main{% if isSocial %} social{% endif %}">
                     {% list Posts %}
                         <article class="post{% if isSocial %} social-post{% endif %}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-                            <header class="post-header" itemprop="headline">
-                                {% if Post.getFirstSource != 'TW' and Post.Cover is not empty %}
-                                    <!-- Post cover -->
-                                    <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
-                                        {% if not isSingle and Post.GetfirstSource != 'OB' %}
-                                            <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" />
-                                            {% if not isSingle and Post.GetfirstSource == 'YT' %}
-                                                <span class="false-player"></span> 
+                            {% if Post.getFirstSource != 'TW' %}
+                                <header class="post-header" itemprop="headline">
+                                    {% if not isSingle and Post.getFirstSource != 'TW' and Post.Cover is not empty %}
+                                        <!-- Post cover -->
+                                        <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                            {% if isSocial and Post.GetfirstSource != 'OB' %}
+                                                <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" />
+                                                {% if not isSingle and Post.GetfirstSource == 'YT' %}
+                                                    <span class="false-player"></span>
+                                                {% endif %}
+                                            {% else %}
+                                                <img src="{{ Post.Cover|resize(480,280)|crop }}" alt="" width="480" height="280" />
                                             {% endif %}
-                                        {% else %}
-                                            <img src="{{ Post.Cover|resize(480,280)|crop }}" alt="" width="480" height="280" /> 
-                                        {% endif %}
-                                    </a>
-                                {% endif %}
-
-                                <div class="post-title">
-                                    {% if Post.Title is not empty %}
-                                        <!-- Post title -->
-                                        <h2>
-                                            <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
-                                        </h2>
-                                    {% endif %}
-
-                                    {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
-                                        <!-- Comments number -->
-                                        <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
-                                            {% if Custom('comment') == 'Facebook' %}
-                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count> 
-                                            {% elseif Custom('comment') == 'OverBlog' %}
-                                                {{ Post.CommentCount }}
-                                            {% endif %}
-                                            <span class="comments-wording">{{ Lang.Get('com') }}</span>
                                         </a>
                                     {% endif %}
-                                </div>
 
-                                {% if Post.getFirstSource != 'TW' %}
+                                    <div class="post-title">
+                                        {% if Post.Title is not empty %}
+                                            <!-- Post title -->
+                                            <h2>
+                                                <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+                                            </h2>
+                                        {% endif %}
+
+                                        {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
+                                            <!-- Comments number -->
+                                            <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
+                                                {% if Custom('comment') == 'Facebook' %}
+                                                    <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+                                                {% elseif Custom('comment') == 'OverBlog' %}
+                                                    {{ Post.CommentCount }}
+                                                {% endif %}
+                                                <span class="comments-wording">{{ Lang.Get('com') }}</span>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+
                                     <!-- Post source -->
                                     <span class="post-source {{ Post.GetfirstSource }}"></span>
                                     {% if Post.Author is not empty %}
@@ -1141,8 +1141,8 @@
                                             {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
                                         </span>
                                     {% endif %}
-                                {% endif %}
-                            </header>
+                                </header>
+                            {% endif %}
 
                             {% if isSingle %}
                                 <!-- Post body -->
@@ -1156,7 +1156,7 @@
                                 <p class="post-snippet" itemprop="articleBody">
                                     {{ Post.Snippet }}
                                 </p>
-                                
+
                                 {% if Post.GetfirstSource == 'OB' %}
                                     <!-- Read more link -->
                                     <a class="read-more" href="{{ Post.Permalink }}" title="{{ Lang.Get('Read more') }}">{{ Lang.Get('Read more') }}</a>
@@ -1177,7 +1177,7 @@
                             <footer class="post-footer">
                                 <!-- Post date -->
                                 <time class="post-date" itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                
+
                                 <!-- Post share -->
                                 <div class="post-share">
                                     {{ Post.RepostButton('nocount') }}
@@ -1249,27 +1249,27 @@
                 <div class="social">
                     {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB'], false) %}
                         <article class="social-post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-                            <header class="post-header" itemprop="headline">
-                                {% if Post.getFirstSource != 'TW' and Post.Cover is not empty %}
-                                    <!-- Post cover -->
-                                    <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
-                                        <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" /> 
-                                        {% if not isSingle and Post.GetfirstSource == 'YT' %}
-                                            <span class="false-player"></span> 
-                                        {% endif %}
-                                    </a>
-                                {% endif %}
+                            {% if Post.getFirstSource != 'TW' %}
+                                <header class="post-header" itemprop="headline">
+                                    {% if Post.Cover is not empty %}
+                                        <!-- Post cover -->
+                                        <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                            <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" />
+                                            {% if not isSingle and Post.GetfirstSource == 'YT' %}
+                                                <span class="false-player"></span>
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
 
-                                {% if Post.Title is not empty %}
-                                    <div class="post-title">
-                                        <!-- Post title -->
-                                        <h2>
-                                            <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
-                                        </h2>
-                                    </div>
-                                {% endif %}
-                                
-                                {% if Post.getFirstSource != 'TW' %}
+                                    {% if Post.Title is not empty %}
+                                        <div class="post-title">
+                                            <!-- Post title -->
+                                            <h2>
+                                                <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+                                            </h2>
+                                        </div>
+                                    {% endif %}
+
                                     <!-- Post source -->
                                     <span class="post-source {{ Post.GetfirstSource }}"></span>
 
@@ -1279,8 +1279,8 @@
                                             {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
                                         </span>
                                     {% endif %}
-                                {% endif %}
-                            </header>
+                                </header>
+                            {% endif %}
 
                             {% if Post.getFirstSource == 'TW' %}
                                 {{ Post.Body(1) }}
@@ -1304,7 +1304,7 @@
 
                             <footer class="post-footer">
                                 <time class="post-date" itemprop="datePublished" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                
+
                                 <div class="post-share">
                                     {{ Post.RepostButton('nocount') }}
 
@@ -1339,7 +1339,7 @@
                 </div>
             {% endif %}
         </section>
-        
+
         <!-- Blog footer -->
         <footer class="blog-footer">
             <div class="footer-content">
@@ -1478,13 +1478,13 @@
                             $('.next').removeClass('social-next');
 
                             // OB callback
-                            if (typeof OB != "undefined") { 
-                                OB.restart && OB.restart(); 
+                            if (typeof OB != "undefined") {
+                                OB.restart && OB.restart();
                             }
                             {% if Custom('comment') == 'Facebook' %}
                                 // FB callback
-                                if (typeof FB != "undefined") { 
-                                    FB.XFBML.parse(document.body); 
+                                if (typeof FB != "undefined") {
+                                    FB.XFBML.parse(document.body);
                                 }
                             {% endif %}
                         },
@@ -1506,23 +1506,23 @@
                         $('.social-next').removeClass('next');
 
                         // OB callback
-                        if (typeof OB != "undefined") { 
-                            OB.restart && OB.restart(); 
+                        if (typeof OB != "undefined") {
+                            OB.restart && OB.restart();
                         }
                     },
                     onLoadItems       : function(items) {
                         var newElems = $(items);
-                        newElems.css({ 
-                            opacity: 0 
+                        newElems.css({
+                            opacity: 0
                         });
 
                         newElems.imagesLoaded(function() {
-                            newElems.animate({ 
-                                opacity: 1 
+                            newElems.animate({
+                                opacity: 1
                             });
                             container.masonry("appended", newElems, false);
                         });
-                        
+
                         {% if isSingle %}
                             TwitterDisabled(items);
                         {% endif %}
