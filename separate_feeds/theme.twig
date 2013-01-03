@@ -1184,7 +1184,7 @@
 
                                     <div class="share">
                                         <a class="share-link" href="#" title="{{ Lang.Get('Share this post') }}">
-                                            {% if Post.GetfirstSource == 'OB' or isSingle %}
+                                            {% if Post.GetfirstSource == 'OB' or not isSocial %}
                                                 {{ Lang.Get('Share this post') }}
                                             {% endif %}
                                         </a>
