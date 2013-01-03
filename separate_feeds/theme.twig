@@ -751,11 +751,14 @@
             /* ==SECTIONS */
             /* ----------------------------- */
             .ob-section {
-                padding: 0 10px;
+                margin: 0 10px 20px;
                 width: auto;
             }
             .ob-section.text {
                 padding: 0 20px;
+            }
+            .ob-section a{
+                color: #A0977F;
             }
             .ob-section-images .ob-img {
                 max-width: 100%;
@@ -788,6 +791,36 @@
             .ob-section-audio .obsoundplayer .obsoundplayername {
                 width: 120px;
             }
+            .ob-section-quote .ob-quote p::before {
+                margin: -55px 0 0 -90px;
+            }
+            .ob-section-quote .ob-quote p::after {
+                margin: -40px 0 0 0;
+            }
+            .ob-section-link .ob-ctn {
+                padding: 10px;
+            }
+            .ob-section-link .ob-img {
+                margin: 0;
+            }
+            .ob-section-link .ob-ctn,
+            .ob-section-file .ob-ctn,
+            .ob-section-quote{
+                background: #F0F1F3;
+            }
+            .ob-section-link .ob-url,
+            .ob-section-quote .ob-author,
+            .ob-section-quote .ob-source{
+                background: #E0E1E3;
+            }
+            .ob-section-file .ob-link {
+                font-size: 1.5em;
+                font-style: normal;
+            }
+            .ob-section-link .ob-title .ob-link,
+            .ob-section-file .ob-link{
+                color: #292323;
+            }
             .comments {
                 border-top: 1px solid #D2D2D2;
                 padding: 20px;
@@ -796,7 +829,14 @@
                 color: #494949;
                 font-weight: normal;
             }
-
+            .ob-commentsList .ob-info{
+                font-size: 12px;
+            }
+            .ob-commentsList .ob-avatar{
+                -webkit-box-sizing: content-box;
+                -moz-box-sizing: content-box;
+                box-sizing: content-box;
+            }
             /* ----------------------------- */
             /* ==SPECIAL PAGE */
             /* ----------------------------- */
