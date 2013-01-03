@@ -5,24 +5,15 @@
         {% title %}
         {% meta %}
 
-        <!-- Define the display mode -->
-        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-
         <!-- Define the background image -->
         <meta name="image:background:label.backgroundImage" group="design" />
         <!-- Define the default post cover -->
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
 
-        <!-- Hide "About" widget -->
-        <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <!-- Hide search form -->
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
-        <!-- Hide "Last posts" wiget -->
-        <meta name="boolean:display_widget_last_posts:label.hideLastPosts" group="Widgets" />
         <!-- Define the number of tags which display or hide "Blog tags" wiget -->
         <meta name="list:display_widget_tags:label.numberOfTags" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets" />
-        <!-- Hide "Social" wiget -->
-        <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
 
@@ -920,6 +911,7 @@
                     <li>
                         <a{% if isIndex %} class="active"{% endif %} href="{{ Blog.Url }}" title="{{ Lang.Get('Home') }}">{{ Lang.Get('Home') }}</a>
                     </li>
+                    {% if Blog.ListPages is not empty %}
                     <li>
                         <a class="sub-menu-link{% if isPage %} active{% endif %}" href="#">{{ Lang.Get('Pages') }}</a>
                         <ul class="sub-menu">
@@ -930,9 +922,10 @@
                            {% endlist %}
                         </ul>
                     </li>
+                    {% endif %}
                     {% if Blog.PostsTags is not empty and Custom('display_widget_tags') > 0 %}
                         <li>
-                            <a class="sub-menu-link{% if isTag %} active{% endif %}" href="#">{{ Lang.Get('Category') }}</a>
+                            <a class="sub-menu-link{% if isTag %} active{% endif %}" href="#">{{ Lang.Get('Tags') }}</a>
                             <ul class="sub-menu">
                                 {% list Blog.PostsTags(Custom('display_tags')) %}
                                     <li>
@@ -985,10 +978,12 @@
                 </ul>
 
                 <!-- Search form -->
-                <form class="search-form" action="/search" method="post">
-                    <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}" value="{% if isSearch %}{{ Search.Keyword }}{% endif %}" />
-                    <input type="submit" title="{{ Lang.Get('Search') }}" value="" />
-                </form>
+                {% if Custom('display_widget_search') == false %}
+                    <form class="search-form" action="/search" method="post">
+                        <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}" value="{% if isSearch %}{{ Search.Keyword }}{% endif %}" />
+                        <input type="submit" title="{{ Lang.Get('Search') }}" value="" />
+                    </form>
+                {% endif %}
             </nav>
         </header>
 
