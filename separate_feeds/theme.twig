@@ -536,8 +536,38 @@
                 -webkit-box-shadow: none;
                 box-shadow: none;
             }
+            blockquote.ob-tweet{
+                padding-bottom: 0;
+            }
+            .social .tweet-actions {
+                bottom: 45px;
+                display: inline-block;
+                position: absolute;
+                right: 4px;
+            }
+            .main .tweet-actions {
+                display: inline-block;
+                float: right;
+                position: relative;
+                right: 10px;
+                top: -20px;
+            }
+            .tweet-actions a {
+                background-image: url(http://assets.over-blog-kiwi.com/t/separate_feeds/images/twitter-sprite.png);
+                display: inline-block;
+                height: 16px;
+                margin: 0 2px;
+                width: 16px;
+            }
+            .tweet-retweet {
+                background-position: -80px top;
+            }
+            .tweet-favorite {
+                background-position: -32px top;
+            }
             .post-footer {
                 border-top: 1px solid #D2D2D2;
+                clear: right;
                 color: #999;
                 font-size: 1.3em;
             }
@@ -1185,6 +1215,11 @@
                                 </div>
                             {% elseif Post.getFirstSource == 'TW' %}
                                 {{ Post.Body(1) }}
+                                <div class="tweet-actions">
+                                    <a class="tweet-reply" href=""></a>
+                                    <a class="tweet-retweet" href=""></a>
+                                    <a class="tweet-favorite" href=""></a>
+                                </div>
                             {% elseif Post.Snippet is not empty %}
                                 <!-- Post snippet -->
                                 <p class="post-snippet" itemprop="articleBody">
@@ -1318,6 +1353,11 @@
 
                             {% if Post.getFirstSource == 'TW' %}
                                 {{ Post.Body(1) }}
+                                <div class="tweet-actions">
+                                    <a class="tweet-reply" href=""></a>
+                                    <a class="tweet-retweet" href=""></a>
+                                    <a class="tweet-favorite" href=""></a>
+                                </div>
                             {% elseif Post.Snippet is not empty %}
                                 <!-- Post snippet -->
                                 <p class="post-snippet" itemprop="articleBody">
@@ -1463,9 +1503,20 @@
                 }(document,"script","twitter-wjs");
             {% endif %}
 
+            // Twitter controls
+            var TwitterControls = function(elements) {
+                $(elements).find(".ob-tweet").each(function() {
+                    var datatwitter = $(this).find("a[data-twitter]").attr("data-twitter");
+
+                    $(this).parent().parent().find(".tweet-reply").attr("href", "https://twitter.com/intent/tweet?in_reply_to=" + datatwitter);
+                    $(this).parent().parent().find(".tweet-retweet").attr("href", "https://twitter.com/intent/retweet?tweet_id=" + datatwitter);
+                    $(this).parent().parent().find(".tweet-favorite").attr("href", "https://twitter.com/intent/favorite?tweet_id=" + datatwitter);
+                });
+            },
+
             // Social popup
             SocialPopup = function(elements) {
-                $(elements).find(".share-buttons a").click(function() {
+                $(elements).find(".tweet-reply, .tweet-retweet, .tweet-favorite, .share-buttons a").click(function() {
                     var popup = window.open($(this).prop("href"), '',"width=650, height=400, scrollbars=0, left=" +((screen.width - 650)/2) + ", top=" + ((screen.height - 400)/2) );
                     if (window.focus) {
                         popup.focus();
@@ -1473,7 +1524,6 @@
                     return false;
                 });
             }
-
 
             $(document).ready(function(){
                 {% if isSingle %}
@@ -1489,6 +1539,9 @@
 
                 // Masonry
                 var container = $(".social");
+
+                TwitterControls($(".main"));
+                TwitterControls($(".social"));
 
                 container.imagesLoaded(function(){
                     container.masonry({
@@ -1524,6 +1577,7 @@
                         },
                         onLoadItems      : function(items) {
                             SocialPopup(items);
+                            TwitterControls(items);
                         }
                     });
                 {% endif %}
@@ -1562,6 +1616,7 @@
                         {% endif %}
 
                         SocialPopup(items);
+                        TwitterControls(items);
                     }
                 });
             });
