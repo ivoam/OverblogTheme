@@ -1088,7 +1088,7 @@
 
                                     {% if Post.ShowComments is not empty %}
                                         <!-- Comments number -->
-                                        <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
+                                        <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
                                             {% if Custom('comment') == 'Facebook' %}
                                                 <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
                                             {% elseif Custom('comment') == 'OverBlog' %}
@@ -1193,7 +1193,7 @@
 
                                         {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
                                             <!-- Comments number -->
-                                            <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}" title="{{ Lang.Get('comments') }}">
+                                            <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
                                                 {% if Custom('comment') == 'Facebook' %}
                                                     <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
                                                 {% elseif Custom('comment') == 'OverBlog' %}
