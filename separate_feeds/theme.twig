@@ -1088,14 +1088,16 @@
 
                                     {% if Post.ShowComments is not empty %}
                                         <!-- Comments number -->
-                                        <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
-                                            {% if Custom('comment') == 'Facebook' %}
-                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
-                                            {% elseif Custom('comment') == 'OverBlog' %}
-                                                {{ Post.CommentCount }}
-                                            {% endif %}
-                                            <span class="comments-wording">{{ Lang.Get('com') }}</span>
-                                        </a>
+                                        {% if Custom('comment') != 'Disqus' %}
+                                            <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
+                                                {% if Custom('comment') == 'Facebook' %}
+                                                    <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+                                                {% elseif Custom('comment') == 'OverBlog' %}
+                                                    {{ Post.CommentCount }}
+                                                {% endif %}
+                                                <span class="comments-wording">{{ Lang.Get('com') }}</span>
+                                            </a>
+                                        {% endif %}
                                     {% endif %}
                                 </div>
 
@@ -1193,14 +1195,16 @@
 
                                         {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
                                             <!-- Comments number -->
-                                            <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
-                                                {% if Custom('comment') == 'Facebook' %}
-                                                    <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
-                                                {% elseif Custom('comment') == 'OverBlog' %}
-                                                    {{ Post.CommentCount }}
-                                                {% endif %}
-                                                <span class="comments-wording">{{ Lang.Get('com') }}</span>
-                                            </a>
+                                            {% if Custom('comment') != 'Disqus' %}
+                                                <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
+                                                    {% if Custom('comment') == 'Facebook' %}
+                                                        <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+                                                    {% elseif Custom('comment') == 'OverBlog' %}
+                                                        {{ Post.CommentCount }}
+                                                    {% endif %}
+                                                    <span class="comments-wording">{{ Lang.Get('com') }}</span>
+                                                </a>
+                                            {% endif %}
                                         {% endif %}
                                     </div>
 
