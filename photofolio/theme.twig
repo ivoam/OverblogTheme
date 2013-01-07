@@ -725,7 +725,7 @@
                                     <figure class="cover">
                                         <a class="" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}" href="{{ Post.PermaLink }}">
                                             {% if Post.Cover is not empty %}
-                                                <img alt="" src="{{ Post.Cover|resize(222,122)|crop }}" width="222" height="122" alt="" />
+                                                <img alt="" src="{{ Post.Cover|resize(222,122)|crop }}" width="222" height="122" />
                                             {% else %}
                                                 <img src="{{ Custom('custom_default_post_cover')|default('http://assets.over-blog-kiwi.com/themes/34/images/default_cover.jpg')|resize(222,122)|crop }}" width="222" height="122" alt="" />
                                             {% endif %}
