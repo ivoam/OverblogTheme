@@ -405,7 +405,7 @@
                 font-size: 1.8em;
                 font-weight: normal;
                 margin: 0;
-                width: 368px;
+                max-width: 368px;
             }
             .post-title h2 a {
                 color: #292323;
@@ -422,7 +422,7 @@
                 text-decoration: none;
                 text-transform: uppercase;
                 white-space: nowrap;
-                width: 70px;
+                min-width: 70px;
             }
             .comments-wording {
                 color: #6e6e6e;
@@ -1088,16 +1088,14 @@
 
                                     {% if Post.ShowComments is not empty %}
                                         <!-- Comments number -->
-                                        {% if Custom('comment') != 'Disqus' %}
-                                            <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
-                                                {% if Custom('comment') == 'Facebook' %}
-                                                    <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
-                                                {% elseif Custom('comment') == 'OverBlog' %}
-                                                    {{ Post.CommentCount }}
-                                                {% endif %}
-                                                <span class="comments-wording">{{ Lang.Get('com') }}</span>
-                                            </a>
-                                        {% endif %}
+										<a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
+											{% if Custom('comment') == 'Facebook' %}
+												<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+											{% elseif Custom('comment') == 'OverBlog' %}
+												{{ Post.CommentCount }}
+											{% endif %}
+											<span class="comments-wording">{{ Lang.Get('com') }}</span>
+										</a>
                                     {% endif %}
                                 </div>
 
@@ -1195,16 +1193,14 @@
 
                                         {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
                                             <!-- Comments number -->
-                                            {% if Custom('comment') != 'Disqus' %}
-                                                <a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
-                                                    {% if Custom('comment') == 'Facebook' %}
-                                                        <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
-                                                    {% elseif Custom('comment') == 'OverBlog' %}
-                                                        {{ Post.CommentCount }}
-                                                    {% endif %}
-                                                    <span class="comments-wording">{{ Lang.Get('com') }}</span>
-                                                </a>
-                                            {% endif %}
+											<a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
+												{% if Custom('comment') == 'Facebook' %}
+													<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+												{% elseif Custom('comment') == 'OverBlog' %}
+													{{ Post.CommentCount }}
+												{% endif %}
+												<span class="comments-wording">{{ Lang.Get('com') }}</span>
+											</a>
                                         {% endif %}
                                     </div>
 
@@ -1465,7 +1461,7 @@
 
             {% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}
                 // Disqus comments
-                var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                var disqus_shortname = "{{ Custom('comment_disqus') }}";
                 (function() {
                     var dsq = document.createElement('script');
                         dsq.type = 'text/javascript';
@@ -1478,10 +1474,10 @@
                 var disqus_shortname = "{{ Custom('comment_disqus') }}";
                 (function () {
                     var s = document.createElement('script');
-                        s.async = true;
                         s.type = 'text/javascript';
+						s.async = true;
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
                 }());
             {% elseif Custom('comment') == 'Facebook' %}
                 // Facebook comments
@@ -1584,7 +1580,12 @@
                                 if (typeof FB != "undefined") {
                                     FB.XFBML.parse(document.body);
                                 }
-                            {% endif %}
+                            {% elseif Custom('comment') == 'Disqus' %}
+								// Disqus callback
+								if (typeof DISQUSWIDGETS != "undefined" ){
+									DISQUSWIDGETS && DISQUSWIDGETS.getCount();
+								}
+							{% endif %}
                         },
                         onLoadItems      : function(items) {
                             SocialPopup(items);
