@@ -379,10 +379,6 @@
             .sidebar .follow li > a,
             .tabs ul.nav li a:hover, .tabs ul.nav .selected a {color: {{ Custom('custom_highlight_font_color')|default('#13C5FF') }};}
 
-            {% if Custom('custom_titles_font') == 'Nosifer' or Custom('custom_titles_font') == 'Ultra' %}
-                .date {font-size: 20px; line-height: 2em; }
-                .date span {font-size: 33px;}
-            {% endif %}
         </style>
     </head>
     <body id="{% if isIndex %}index{% else %}page2{% endif %}">
