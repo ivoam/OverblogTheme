@@ -676,6 +676,19 @@
             .share-buttons .pint {
                 background-position: left -902px;
             }
+			.navigation-post {
+				margin: 10px  20px;
+			}
+			.prev-post,
+			.next-post{
+				color: #A0977F;
+			}
+			.prev-post{
+				float: left;
+			}
+			.next-post{
+				float: right;
+			}
 
 
             /* ----------------------------- */
@@ -1282,7 +1295,20 @@
                                         </ul>
                                     </div>
                                 </div>
+								<!-- Pagination -->
+								{% if isSingle and not isPage and (Navigation.PreviousPost is not empty or Navigation.NextPost is not empty) %}
+									<nav class="navigation-post clearfix">
+										{% if Navigation.PreviousPost is not empty %}
+											<a href="{{ Navigation.PreviousPost.Permalink }}" class="prev-post">&larr; {{ Lang.Get('Previous post') }}</a>
+										{% endif %}
 
+										{% if Navigation.NextPost is not empty %}
+											<a href="{{ Navigation.NextPost.Permalink }}" class="next-post">{{ Lang.Get('Next post') }} &rarr;</a>
+										{% endif %}
+										<div class="clearboth"></div>
+									</nav>
+								{% endif %}
+								<!-- End Pagination -->
                                 {% if isSingle and not isPage and Post.ShowComments is not empty %}
                                     <div class="comments" id="comments">
                                         <h3>{{ Lang.Get('Comment this post') }}</h3>
