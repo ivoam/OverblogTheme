@@ -25,6 +25,11 @@
         <!-- shortcut:[Options] -->
         <meta name="image:background:label.backgroundImage" group="design" />
         <meta name="image:post_cover:label.defaultPostCover" group="design" default="" />
+
+        <meta name="color:primary_color:label.primaryColor" default="#111" group="Colors" />
+        <meta name="color:secondary_color:label.secondaryColor" default="#fff" group="Colors" />
+        <meta name="color:tertiary_color:label.tertiaryColor" default="#ccc" group="Colors" />
+
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
@@ -165,21 +170,25 @@
                 {% if Custom('background') is not empty %}
                     background: url({{Custom('background')}}) no-repeat center top;
                 {% endif %}
-                color: #111;
-				min-height: 230px;
+                color: {{ Custom('primary_color') }};
+				min-height: 180px;
 				margin: 0 auto;
+                padding: 20px 20px 30px;
 				position: relative;
 				width: 980px;
 			}
 			.banner h1 {
+                font-size: 3em;
 				margin: 0;
 			}
             .banner a {
-                color: #111;
+                color: {{ Custom('primary_color') }};
+                text-decoration: none;
             }
 			.menu {
                 bottom: 0;
 				float: left;
+                left: 0;
 				margin-top: 30px;
 				max-width: 70%;
                 position: absolute;
@@ -205,7 +214,7 @@
 				padding-bottom: 2px;
 			}
 			.search-form {
-				border-left: 1px solid #111;
+				border-left: 3px solid #111;
                 bottom: 5px;
 				float: right;
 				margin-top: 30px;
@@ -216,7 +225,8 @@
 			}
 			.search-input {
 				background: #fff;
-				border: none;
+                border-bottom: 1px solid #eee;
+				border-top: 1px solid #eee;
 				color: #fff;
 				border-left: 3px solid #fff;
 				font-family: "Lato", sans-serif, arial, helvetica, sans-serif;
@@ -224,8 +234,8 @@
 				font-weight: bold;
 				float: left;
 				margin: 0;
-				padding: 4px 7px;
-				width: 221px;
+				padding: 3px 7px;
+				width: 219px;
 			}
 			.search-submit {
 				background: #111 url(http://assets.over-blog-kiwi.com/t/floating_posts/images/sprite.png) no-repeat 7px -447px;
@@ -253,7 +263,7 @@
 			article,
             .widget,
 			.item-comments {
-				background: #FFF;
+				background: #fff;
 				border: 1px solid #CCC;
 				float: left;
 				margin-bottom: 20px;
@@ -266,7 +276,7 @@
 			.item-comments,
 			.special article,
 			article.no-result{
-				background: #FFF;
+				background: #fff;
 				float: none;
 				width: 640px;
 			}
@@ -278,35 +288,35 @@
 			}
 			.special h3,
 			.item-comments>h3{
-				background-color: #111;
-				color: #FFF;
+				background-color: {{ Custom('primary_color') }};
+				color: {{ Custom('secondary_color') }};
 				padding: 10px 15px;
 			}
 			article header,
             .widget header{
-                background-color: #111;
+                background-color: {{ Custom('primary_color') }};
 				padding: 10px 15px;
 			}
 			article h2,
             .widget h3{
-                color: #FFF;
+                color: {{ Custom('secondary_color') }};
 				font-size: 1.8em;
 				margin-bottom: 0;
 			}
 			article h2 a{
-                color: #FFF;
+                color: {{ Custom('secondary_color') }};
 				text-decoration: none;
 			}
 			article h2 a:hover {
 				color: #DDD;
 			}
 			article time {
-				color: #CCC;
+				color: {{ Custom('tertiary_color') }};
 				font-size: 1.2em;
 			}
 			article .entry,
             .widget .entry{
-				border-bottom: 3px solid #111;
+				border-bottom: 3px solid {{ Custom('primary_color') }};
 				padding: 10px 12px;
 			}
 			.entry .permalink {
@@ -899,7 +909,7 @@
 					<h1>
 						<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
 					</h1>
-                    <p>{{ Blog.Description }}</p>
+                    <p class="description h3-like">{{ Blog.Description }}</p>
 					<nav class="menu">
 						<ul>
 							<li{% if isIndex %} class="active"{% endif %}>
