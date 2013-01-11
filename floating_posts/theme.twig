@@ -159,13 +159,13 @@
 			/* ==header */
 			/* ----------------------------- */
 			#global > header{
-				background-color: #000;
+				background-color: #fff;
 			}
 			.banner {
                 {% if Custom('background') is not empty %}
                     background: url({{Custom('background')}}) no-repeat center top;
                 {% endif %}
-                color: #eee;
+                color: #111;
 				min-height: 230px;
 				margin: 0 auto;
 				position: relative;
@@ -175,7 +175,7 @@
 				margin: 0;
 			}
             .banner a {
-                color: #eee;
+                color: #111;
             }
 			.menu {
                 bottom: 0;
@@ -189,23 +189,23 @@
 				padding-left: 0;
 			}
 			.menu li {
-				background-color: #000;
-				background-color: rgba(0, 0, 0, 0.5);
+				background-color: #fff;
+				background-color: rgba(255, 255, 255, 0.5);
 				float: left;
 			}
 			.menu a{
-				color: #eee;
+				color: #111;
 				display: block;
 				padding: 5px 15px 4px;
 				text-decoration: none;
 			}
 			.menu a:hover,
 			.menu li.active a{
-				border-bottom: 2px solid #eee;
+				border-bottom: 2px solid #111;
 				padding-bottom: 2px;
 			}
 			.search-form {
-				border-left: 1px solid #eee;
+				border-left: 1px solid #111;
                 bottom: 5px;
 				float: right;
 				margin-top: 30px;
@@ -215,10 +215,10 @@
 				width: 252px;
 			}
 			.search-input {
-				background: #000;
+				background: #fff;
 				border: none;
 				color: #fff;
-				border-left: 3px solid #111;
+				border-left: 3px solid #fff;
 				font-family: "Lato", sans-serif, arial, helvetica, sans-serif;
 				font-size: 1.4em;
 				font-weight: bold;
@@ -228,7 +228,7 @@
 				width: 221px;
 			}
 			.search-submit {
-				background: #eee url(http://assets.over-blog-kiwi.com/t/floating_posts/images/sprite.png) no-repeat 7px -556px;
+				background: #111 url(http://assets.over-blog-kiwi.com/t/floating_posts/images/sprite.png) no-repeat 7px -447px;
 				border: none;
 				cursor: pointer;
 				float: right;
