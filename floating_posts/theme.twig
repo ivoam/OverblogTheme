@@ -251,6 +251,7 @@
 			}
 
 			article,
+            .widget,
 			.item-comments {
 				background: #FFF;
 				border: 1px solid #CCC;
@@ -281,15 +282,18 @@
 				color: #FFF;
 				padding: 10px 15px;
 			}
-			article header{
+			article header,
+            .widget header{
                 background-color: #111;
 				padding: 10px 15px;
 			}
-			article h2 {
+			article h2,
+            .widget h3{
+                color: #FFF;
 				font-size: 1.8em;
 				margin-bottom: 0;
 			}
-			article h2 a {
+			article h2 a{
                 color: #FFF;
 				text-decoration: none;
 			}
@@ -300,7 +304,8 @@
 				color: #CCC;
 				font-size: 1.2em;
 			}
-			article .entry {
+			article .entry,
+            .widget .entry{
 				border-bottom: 3px solid #111;
 				padding: 10px 12px;
 			}
@@ -682,26 +687,24 @@
 				width: 250px;
 			}
 			.widget {
-				background: #FFF;
+				/*background: #FFF;
 				border: 1px solid #DDD;
 				border-bottom: 3px solid #111;
-				margin-bottom: 20px;
-				padding: 10px 15px;
+				margin-bottom: 20px;*/
 				width: 250px;
 			}
+            /*.widget header {
+                background-color: #111;
+                padding: 10px 15px;
+            }
 			.widget h3 {
 				margin-bottom: 0;
 				padding-bottom: 20px;
-			}
+			}*/
 			.widget h3:first-letter {
 				display: inline-block;
 				text-transform: capitalize;
 			}
-			.about h3 {background-position: 15px 12px;}
-			.follow h3 {background-position: 15px -28px;}
-			.archives h3 {background-position: 15px -70px;}
-			.tags h3 {background-position: 15px -111px;}
-			.last-posts h3 {background-position: 15px -153px;}
 
 			.widget ul {
 				list-style: none;
@@ -1165,7 +1168,9 @@
 					<aside class="sidebar">
 						{% if Custom('display_widget_profile') == false %}
 							<div class="widget about">
-								<h3>{{ Lang.Get('About me') }}</h3>
+                                <header>
+                                    <h3>{{ Lang.Get('About me') }}</h3>
+                                </header>
 								<div class="entry">
 									{% if Blog.Owner.Avatar  is not empty %}
 										<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
@@ -1181,7 +1186,9 @@
 
 						{% if Custom('display_widget_follow') != true %}
 							<div class="widget follow">
-								<h3>{{ Lang.Get('follow me') }}</h3>
+                                <header>
+                                    <h3>{{ Lang.Get('follow me') }}</h3>
+                                </header>
 								<div class="entry">
 									<ul>
 										{% if Custom('twitter_username') is not empty %}
@@ -1204,7 +1211,9 @@
 
 						{% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
 							<div class="widget archives">
-								<h3>{{ Lang.Get('archives') }}</h3>
+                                <header>
+                                    <h3>{{ Lang.Get('archives') }}</h3>
+                                </header>
 								<div class="entry">
 									<ul id="archivelist" class="archivelist">
 										{% list Blog.Archives %}
@@ -1228,7 +1237,9 @@
 
 						{% if Custom('category_number') > 0 %}
 							<div class="widget tags">
-								<h3>{{ Lang.Get('Tags') }}</h3>
+                                <header>
+                                    <h3>{{ Lang.Get('Tags') }}</h3>
+                                </header>
 								<div class="entry">
 									<ul>
 										{% list Blog.PostsTags(Custom('category_number')|default('6'), count) %}
@@ -1243,8 +1254,10 @@
 
 						{% if Custom('display_widget_last') != true and Blog.Posts is not empty %}
 							<div class="widget last-posts">
-								<h3>{{ Lang.Get('last posts') }}</h3>
-								<div class="entry">
+                                <header>
+                                    <h3>{{ Lang.Get('last posts') }}</h3>
+                                </header>
+								<div class="entry clearfix">
 									<ul>
 										{% list Blog.Posts(6) %}
 											{% if Post.Cover is not empty or Custom('post_cover') is not empty %}
