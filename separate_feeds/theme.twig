@@ -159,6 +159,9 @@
             code, pre, samp {
                 white-space: pre-wrap;
             }
+			.no-margin {
+				margin: 0 !important;
+			}
 
             /* pictures */
             img {width: auto; vertical-align: middle}
@@ -1183,11 +1186,11 @@
                 <div class="main{% if isSocial %} social{% endif %}">
                     {% list Posts %}
                         <article class="post{% if isSocial %} social-post{% endif %}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-                            {% if Post.getFirstSource != 'TW' %}
+                            {% if Post.getFirstSource != 'TW' or Post.Cover is not empty %}
                                 <header class="post-header" itemprop="headline">
-                                    {% if not isSingle and Post.getFirstSource != 'TW' and Post.Cover is not empty %}
+                                    {% if not isSingle %}
                                         <!-- Post cover -->
-                                        <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                        <a class="post-cover{% if Post.getFirstSource == 'TW' %} no-margin{% endif %}" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
                                             {% if isSocial and Post.GetfirstSource != 'OB' %}
                                                 <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" />
                                                 {% if not isSingle and Post.GetfirstSource == 'YT' %}
@@ -1199,35 +1202,37 @@
                                         </a>
                                     {% endif %}
 
-                                    <div class="post-title">
-                                        {% if Post.Title is not empty %}
-                                            <!-- Post title -->
-                                            <h2>
-                                                <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
-                                            </h2>
-                                        {% endif %}
+									{% if Post.getFirstSource != 'TW' %}
+										<div class="post-title">
+											{% if Post.Title is not empty %}
+												<!-- Post title -->
+												<h2>
+													<a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+												</h2>
+											{% endif %}
 
-                                        {% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
-                                            <!-- Comments number -->
-											<a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
-												{% if Custom('comment') == 'Facebook' %}
-													<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
-												{% elseif Custom('comment') == 'OverBlog' %}
-													{{ Post.CommentCount }}
-												{% endif %}
-												<span class="comments-wording">{{ Lang.Get('com') }}</span>
-											</a>
-                                        {% endif %}
-                                    </div>
+											{% if Post.ShowComments is not empty and Post.GetfirstSource == 'OB' %}
+												<!-- Comments number -->
+												<a class="comments-number" href="{{ Post.Permalink }}{% if Custom('comment') == 'Disqus' and Custom('comment_disqus') is not empty %}#disqus_thread{% else %}#comments{% endif %}">
+													{% if Custom('comment') == 'Facebook' %}
+														<fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+													{% elseif Custom('comment') == 'OverBlog' %}
+														{{ Post.CommentCount }}
+													{% endif %}
+													<span class="comments-wording">{{ Lang.Get('com') }}</span>
+												</a>
+											{% endif %}
+										</div>
 
-                                    <!-- Post source -->
-                                    <span class="post-source {{ Post.GetfirstSource }}"></span>
-                                    {% if Post.Author is not empty %}
-                                        <!-- Post author -->
-                                        <span class="post-author" itemprop="author">
-                                            {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
-                                        </span>
-                                    {% endif %}
+										<!-- Post source -->
+										<span class="post-source {{ Post.GetfirstSource }}"></span>
+										{% if Post.Author is not empty %}
+											<!-- Post author -->
+											<span class="post-author" itemprop="author">
+												{{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+											</span>
+										{% endif %}
+									{% endif %}
                                 </header>
                             {% endif %}
 
@@ -1354,11 +1359,11 @@
                 <div class="social">
                     {% list Blog.Posts(Custom('displayArticlesLimit'), ['OB'], false) %}
                         <article class="social-post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-                            {% if Post.getFirstSource != 'TW' %}
+                            {% if Post.getFirstSource != 'TW' or Post.Cover is not empty %}
                                 <header class="post-header" itemprop="headline">
                                     {% if Post.Cover is not empty %}
                                         <!-- Post cover -->
-                                        <a class="post-cover" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
+                                        <a class="post-cover{% if Post.getFirstSource == 'TW' %} no-margin{% endif %}" href="{{ Post.Permalink }}"{% if Post.Title is not empty %} title="{{ Post.Title }}"{% endif %}>
                                             <img src="{{ Post.Cover|resize(200,150)|crop }}" alt="" width="200" height="150" />
                                             {% if not isSingle and Post.GetfirstSource == 'YT' %}
                                                 <span class="false-player"></span>
@@ -1366,24 +1371,26 @@
                                         </a>
                                     {% endif %}
 
-                                    {% if Post.Title is not empty %}
-                                        <div class="post-title">
-                                            <!-- Post title -->
-                                            <h2>
-                                                <a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
-                                            </h2>
-                                        </div>
-                                    {% endif %}
+									{% if Post.getFirstSource != 'TW' %}
+										{% if Post.Title is not empty %}
+											<div class="post-title">
+												<!-- Post title -->
+												<h2>
+													<a itemprop="name" href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">{{ Post.Title }}</a>
+												</h2>
+											</div>
+										{% endif %}
 
-                                    <!-- Post source -->
-                                    <span class="post-source {{ Post.GetfirstSource }}"></span>
+										<!-- Post source -->
+										<span class="post-source {{ Post.GetfirstSource }}"></span>
 
-                                    {% if Post.Author is not empty %}
-                                        <!-- Post author -->
-                                        <span class="post-author" itemprop="author">
-                                            {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
-                                        </span>
-                                    {% endif %}
+										{% if Post.Author is not empty %}
+											<!-- Post author -->
+											<span class="post-author" itemprop="author">
+												{{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+											</span>
+										{% endif %}
+									{% endif %}
                                 </header>
                             {% endif %}
 
