@@ -708,7 +708,7 @@
             <!-- shortcut:[Header content] -->
             {% if Custom('custom_header_picture') is not empty %}
                 <div id="splash">
-                    <a class="cover" href="{{ Custom('custom_header_picture') }}" title="{{ Blog.Title }} - {{ Blog.Description }}">
+                    <a class="cover" href="{{ Blog.Url }}" title="{{ Blog.Title }} - {{ Blog.Description }}">
                         <img src="{{ Custom('custom_header_picture')|resize(980, 285)|crop|default('http://assets.over-blog-kiwi.com/themes/29/images/105.jpg') }}" alt="" width="980" height="285" />
                     </a>
                 </div>
@@ -1132,7 +1132,7 @@
         <script type="text/javascript">
             jQuery(document).ready(function() {
 
-                $(".cover, .ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox");
+                $(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox");
                 $("a[rel=fancybox]").fancybox({
                     'overlayShow'   : true,
                     'transitionIn'  : 'fadin',
