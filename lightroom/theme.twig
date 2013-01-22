@@ -606,7 +606,7 @@
                                                 </time>
                                                 <span class='post-comment-link'>
                                                     <a class='comment-link' href='{{ Post.Permalink }}#comments' onclick=''>
-                                                        {{ Post.CommentCount('comment', 'comments') }}
+                                                        {{ Post.CommentCount(Lang.Get('ncomment'), Lang.Get('ncomments')) }}
                                                     </a>
                                                 </span>
                                                 <span class='post-labels'>
@@ -652,7 +652,7 @@
                                     {% if isSingle %}
                                     <div class="comments">
                                         <a name="comments"></a>
-                                        <h4>~ {{ Post.CommentCount('comment', 'comments') }}: ~</h4>
+                                        <h4>~ {{ Post.CommentCount(Lang.Get('ncomment'), Lang.Get('ncomments')) }}: ~</h4>
                                         {{ Post.Comments }}
                                     </div>
                                     {% endif %}

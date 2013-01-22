@@ -601,7 +601,7 @@
                                 <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span> at {{ Post.Date|date("H:ia") }}
                             {% endif %}
                             {% if not isSingle and Post.ShowComments is not empty %} -
-                                <a href="{{ Post.Permalink }}#comments">{{ Lang.Get('See comments') }} ({{ Post.CommentCount('', '') }})</a>
+                                <a href="{{ Post.Permalink }}#comments">{{ Lang.Get('See comments') }} ({{ Post.CommentCount }})</a>
                             {% endif %}
                             {% if Post.Tags is not empty %}<br />{{ Lang.Get('With tags') }} :
                                 {% list Post.Tags %}

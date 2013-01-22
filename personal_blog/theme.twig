@@ -486,7 +486,7 @@
                                                                                         {{ Lang.Get('Author') }}: <span class='fn'>{{ Post.Author }}</span>
                                                                                         /
                                                                                         <a class='comment-link' href='{{ Post.Permalink }}#comments'>
-                                                                                            {{ Post.CommentCount('comment', 'comments') }}
+                                                                                            {{ Post.CommentCount(Lang.Get('ncomment'), Lang.Get('ncomments')) }}
                                                                                         </a>
                                                                                         /
                                                                                         {% list Post.Tags %}
@@ -506,7 +506,7 @@
                                                                                 {% if isSingle %}
                                                                                 <div id="comments" class="comments">
                                                                                     <h2>
-                                                                                        {{ Post.CommentCount('comment', 'comments') }}
+                                                                                        {{ Post.CommentCount(Lang.Get('ncomment'), Lang.Get('ncomments')) }}
                                                                                     </h2>
                                                                                     {{ Post.Comments }}
                                                                                 </div>

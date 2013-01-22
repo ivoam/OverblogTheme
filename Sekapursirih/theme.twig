@@ -482,7 +482,7 @@
                                                     <div class='post-footer-line post-footer-line-2'>
                                                         {% if isSingle is empty %}
                                                         <a href="{{ Post.Permalink }}#comments">
-                                                            {{ Post.CommentCount('%c comment', '%c comments') }}
+                                                            {{ Post.CommentCount(Lang.Get('ncomment'), Lang.Get('ncomments')) }}
                                                         </a>
                                                         {% endif %}
                                                     </div>

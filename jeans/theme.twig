@@ -1275,7 +1275,7 @@
                         </h{% if isSingle %}1{% else %}2{% endif %}>
                         <div class="entry-summary">
                             <div class="postmetadata">
-                                {% if Post.Author is not empty %}{{ Custom('text_publishedby') }} {{ Post.Author}}&nbsp;|&nbsp;{% endif %}{{ Post.Date | date('h:m A') }}&nbsp;|&nbsp;{% if Post.Comments is empty %}&nbsp;|&nbsp;<span>{{ Lang.Get('Comments Off') }}</span>{% else %}<a href="{{ Post.Permalink }}#comments">{{ Post.CommentCount('%c comment', '%c comments') }}</a>{% endif %}&nbsp;|&nbsp;{% list Post.Tags %}<a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if  not loop.last %}, {% endif %}{% endlist %}
+                                {% if Post.Author is not empty %}{{ Custom('text_publishedby') }} {{ Post.Author}}&nbsp;|&nbsp;{% endif %}{{ Post.Date | date('h:m A') }}&nbsp;|&nbsp;{% if Post.Comments is empty %}&nbsp;|&nbsp;<span>{{ Lang.Get('Comments Off') }}</span>{% else %}<a href="{{ Post.Permalink }}#comments">{{ Post.CommentCount(Lang.Get('ncomment'), Lang.Get('ncomments')) }}</a>{% endif %}&nbsp;|&nbsp;{% list Post.Tags %}<a href="{{ Tag.Url }}">#{{ Tag.Title }}</a>{% if  not loop.last %}, {% endif %}{% endlist %}
                             </div>
 
                             {% if isSingle %}
