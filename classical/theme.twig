@@ -37,6 +37,7 @@
         <meta name="boolean:custom_hide_widget_slider:label.hideSlider" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
         <meta name="boolean:custom_hide_widget_categories:label.hideCategories" group="Widgets" />
@@ -120,7 +121,7 @@
         /*---- Search ----*/
         .search {float: right; position: relative;}
         .search input[type="text"] {background: url("http://assets.over-blog-kiwi.com/themes/1/images/search.png"); border:none; height: 19px; padding: 10px; width: 272px; color: #a6a5a5; text-shadow: 0px 1px 0px #000;}
-            .search input[type="text"]:focus {box-shadow: 0px 0px 4px #00a2ff; transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; color: white;}
+        .search input[type="text"]:focus {box-shadow: 0px 0px 4px #00a2ff; transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; color: white;}
         .search input[type="submit"] {background: url("http://assets.over-blog-kiwi.com/themes/1/images/search-submit.png") no-repeat; width: 17px; height: 17px; border: none; cursor: pointer; position: absolute;right: 10px;top: 12px;text-indent: -1337px;font-size: 0; display:block; line-height: 0;}
 
         /*---- Navigation ----*/
@@ -330,6 +331,12 @@
         .sidebar .social .rss {background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-rss.png") no-repeat scroll 0 3px transparent; padding-left: 40px;}
         .sidebar .social li a {font-size: 14px; font-weight: bold;}
         .sidebar .social li a.link {color: #aeb8c1; display: block; font-size: 12px; font-weight: normal; margin-top: -2px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+
+        .sidebar .subscription h3 {background-position: 150px 6px;}
+        .subscription input[type="text"] {border: 1px solid #a6a5a5; height: 19px; padding: 5px; width: 172px; color: #a6a5a5;}
+        .subscription input[type="text"]:focus {box-shadow: 0px 0px 4px #00a2ff; transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; color: black;}
+        .subscription input[type="submit"] {height: 39px; padding: 10px; width: 82px;}
+
 
         .sidebar .about h3 {background-position: 170px 6px;}
         .sidebar .about {padding: 10px; float: left;}
@@ -683,6 +690,9 @@
                                     </li>
                                 </ul>
                             </div>
+                        {% endif %}
+                        {% if Custom('custom_hide_widget_subscribe') == false %}
+                            {% email_notification %}
                         {% endif %}
                         {% if Custom('custom_hide_widget_biography') == false %}
                             {% if Blog.Owner.Bio is not empty and Blog.Owner.Avatar is not empty %}
