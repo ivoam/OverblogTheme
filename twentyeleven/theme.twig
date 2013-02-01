@@ -912,11 +912,13 @@
 					</form>
 				</div>
 				<div class="cb"></div>
+				{% if Custom('blog_cover') is not empty or Custom('blog_cover') != '' %}
 				<div id="blog-cover">
 					<a href="{{ Blog.Url }}">
-						<img src="{% if Custom('blog_cover') is not empty or Custom('blog_cover') != '' %}{{ Custom('blog_cover')|resize(1000,288)|crop }}{% else %}http://assets.over-blog-kiwi.com/themes/41/img/pine-cone.jpg{% endif %}" alt="" title="{{ Blog.Description }}" width="1000" height="288" />
+						<img src="{{ Custom('blog_cover')|resize(1000,288)|crop }}" alt="" title="{{ Blog.Description }}" width="1000" height="288" />
 					</a>
 				</div>
+				{% endif %}
 				<nav id="menu" role="navigation">
 					<ul>
 						<li {% if isIndex %}class="selected"{% endif %}>
