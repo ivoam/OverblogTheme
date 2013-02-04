@@ -332,11 +332,11 @@
         .sidebar .social li a {font-size: 14px; font-weight: bold;}
         .sidebar .social li a.link {color: #aeb8c1; display: block; font-size: 12px; font-weight: normal; margin-top: -2px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
-        .sidebar .subscription h3 {background-position: 150px 6px;}
-        .subscription input[type="text"] {border: 1px solid #a6a5a5; height: 19px; padding: 5px; width: 172px; color: #a6a5a5;}
-        .subscription input[type="text"]:focus {box-shadow: 0px 0px 4px #00a2ff; transition: all 0.5s; -moz-transition: all 0.5s; -webkit-transition: all 0.5s; -o-transition: all 0.5s; color: black;}
-        .subscription input[type="submit"] {height: 39px; padding: 10px; width: 82px;}
-
+        .sidebar .subscribe h3 {background-position: 140px 6px;}
+        .sidebar .subscribe .ob-form {margin-bottom: 10px;}
+        .sidebar .subscribe label {margin-left: 0px; width: 20%; line-height: 25px;}
+        .sidebar .subscribe input[type=email] {float: right; width:75%;}
+        .sidebar .subscribe input[type=submit] {float: right; margin-right: 0; margin-left: 0;}
 
         .sidebar .about h3 {background-position: 170px 6px;}
         .sidebar .about {padding: 10px; float: left;}
@@ -692,7 +692,11 @@
                             </div>
                         {% endif %}
                         {% if Custom('custom_hide_widget_subscribe') == false %}
-                            {% email_notification %}
+                            <div class="subscribe">
+                                <h3>{{ Lang.Get('Newsletter') }}</h3>
+                                <em>{{ Lang.Get('Add your email to receive future post') }}</em>
+                                {% email_notification %}
+                            </div>
                         {% endif %}
                         {% if Custom('custom_hide_widget_biography') == false %}
                             {% if Blog.Owner.Bio is not empty and Blog.Owner.Avatar is not empty %}
