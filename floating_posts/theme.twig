@@ -23,7 +23,7 @@
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
 
         <!-- shortcut:[Options] -->
-        <meta name="image:background:label.backgroundImage" group="design" />
+        <meta name="image:background_header:label.headerImage" group="design" />
         <meta name="image:post_cover:label.defaultPostCover" group="design" default="http://assets.over-blog-kiwi.com/t/floating_posts/images/cover.jpg" />
 
         <meta name="color:primary_color:label.primaryColor" default="#111" group="Colors" />
@@ -33,7 +33,7 @@
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
-		<meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="6" group="Widgets" />
+		<meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="5" group="Widgets" />
 		<meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
 
         <meta name="string:twitter_username:label.twitterUsername" default="" group="Social" />
@@ -159,17 +159,16 @@
 				clear: both;
 			}
 
-
 			/* ----------------------------- */
 			/* ==header */
 			/* ----------------------------- */
 			#global > header{
+				{% if Custom('background_header') is not empty %}
+                    background: url({{Custom('background_header')}}) no-repeat center top;
+                {% endif %}
 				background-color: #fff;
 			}
 			.banner {
-                {% if Custom('background') is not empty %}
-                    background: url({{Custom('background')}}) no-repeat center top;
-                {% endif %}
                 color: {{ Custom('primary_color') }};
 				min-height: 180px;
 				margin: 0 auto;
