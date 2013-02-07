@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ Blog.Lang|default('en') }}">
+<html lang="{{ Blog.Lang|default('en') }}" itemscope itemtype="http://schema.org/Blog">
     <head>
         <!-- shortcut:[Meta] -->
         <!-- title -->
@@ -944,10 +944,10 @@
 		                    </article>
 		                {% else %}
 		                    {% list Posts %}
-		                        <article class="item">
-		                            <header>
-		                                <h2>
-		                                	<a class="permalink" href="{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
+		                        <article class="item" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+		                            <header itemprop="headline">
+		                                <h2 itemprop="name">
+		                                	<a class="permalink" itemprop="url" href="{{ Post.Permalink }}" {% if Post.Snippet is not empty %}title="{{ Post.Snippet }}"{% endif %}>
 		                                        {% if Post.Title is not empty %}
 		                                            {{ Post.Title }}
 		                                        {% else %}
@@ -958,7 +958,7 @@
 		                                        {% endif %}
 		                                	</a>
 		                                </h2>
-		                                <time pubdate="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+		                                <time itemprop="datePublished" pubdate="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
 		                            </header>
 		                            <div class="entry">
 			                            {% if isSingle %}
@@ -994,7 +994,7 @@
 	                                        <section class="item-tags">
 			                                    Tag(s) :
 			                                    {% list Post.Tags %}
-			                                        <a href="{{ Tag.url }}">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
+			                                        <a href="{{ Tag.url }}" itemprop="keywords">#{{ Tag.Title }}</a>{% if loop.last is empty %}, {% endif %}
 			                                    {% endlist %}
 											</section>
 										{% endif %}
@@ -1163,18 +1163,18 @@
 
 					<aside class="sidebar">
 						{% if Custom('display_widget_profile') == false %}
-							<div class="widget about">
+							<div class="widget about" itemscope itemtype="http://schema.org/Person">
                                 <header>
                                     <h3>{{ Lang.Get('About me') }}</h3>
                                 </header>
 								<div class="entry">
 									{% if Blog.Owner.Avatar  is not empty %}
 										<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-											<img src="{{ Blog.Owner.Avatar|resize(250,167)|crop }}" alt="{{ Blog.Owner.Nickname }}" title="{{ Blog.Owner.Nickname }}" width="250" height="167" />
+											<img itemprop="image" src="{{ Blog.Owner.Avatar|resize(250,167)|crop }}" alt="{{ Blog.Owner.Nickname }}" title="{{ Blog.Owner.Nickname }}" width="250" height="167" />
 										</a>
 									{% endif %}
 									{% if Blog.Owner.Bio is not empty %}
-										<p>{{ Blog.Owner.Bio }}</p>
+										<p itemprop="description">{{ Blog.Owner.Bio }}</p>
 									{% endif %}
 								</div>
 							</div>
@@ -1240,7 +1240,7 @@
 									<ul>
 										{% list Blog.PostsTags(Custom('category_number')|default('6'), count) %}
 		                                    <li>
-		                                        <a href="{{ PostsTag.Url }}">#{{ PostsTag.Title }}</a> <span class="number">{{ PostsTag.PostCount }}</span>
+		                                        <a itemprop="keywords" href="{{ PostsTag.Url }}">#{{ PostsTag.Title }}</a> <span class="number">{{ PostsTag.PostCount }}</span>
 		                                    </li>
 		                                {% endlist %}
 									</ul>
@@ -1386,7 +1386,7 @@
             })();
 
 			// FancyBox
-			$(".ob-section-images a, .ob-link-img, .asset-img-link").attr("rel", "fancybox");
+			$(".ob-section-images a, .ob-link-img, .asset-img-link, .avatar").attr("rel", "fancybox");
 			$("a[rel='fancybox']").fancybox({
 				'overlayShow'	: true,
 				'overlayColor'  : '#000',
