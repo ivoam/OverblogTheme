@@ -652,7 +652,7 @@
                     <div id="menu">
                         <ul>
                             <li {% if isIndex %} class="current_page_item" {% endif %}><a {% if isIndex %} class="current_page_item" {% endif %} href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a></li>
-                            {% list Blog.PostsTags(3, 'SORT_POSTS_NUMBER_DESC') %}
+                            {% list Blog.PostsTags(3) %}
                                 <li {% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} class="current_page_item" {% endif %}><a {% if isTag and Tag.Title is not empty and Tag == PostsTag.Title %} class="current_page_item" {% endif %} href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a></li>
                             {% endlist %}
                             <li><a href="/contact">{{ Lang.Get('Contact') }}</a></li>

@@ -377,7 +377,7 @@
 						{% if Blog.PostsTags is not empty %}
 						<li>-</li>
 						{% endif %}
-					{% list Blog.PostsTags(9, count) %}
+					{% list Blog.PostsTags(9) %}
 						{% if PostsTag.Title|lower != "pinned" %}
 						<li><a {% if isTag and Tag.Title == PostsTag.Title %} class="selected" {% endif %} href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title }}</a></li>
 						{% if loop.last == false %}<li>-</li>{% endif %}

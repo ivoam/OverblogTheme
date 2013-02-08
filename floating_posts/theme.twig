@@ -1238,7 +1238,7 @@
                                 </header>
 								<div class="entry">
 									<ul>
-										{% list Blog.PostsTags(Custom('category_number')|default('6'), count) %}
+										{% list Blog.PostsTags(Custom('category_number')|default('6')) %}
 		                                    <li>
 		                                        <a itemprop="keywords" href="{{ PostsTag.Url }}">#{{ PostsTag.Title }}</a> <span class="number">{{ PostsTag.PostCount }}</span>
 		                                    </li>

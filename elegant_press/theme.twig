@@ -1483,7 +1483,7 @@
             .ob-section-video iframe,
             .ob-section-video embed,
             .ob-section-video object {
-                max-height: 346px; 
+                max-height: 346px;
                 width: 100%;
             }
 
@@ -1591,7 +1591,7 @@
                         <li>
                             <a href="#">{{ Lang.Get('Tags') }}</a>
                             <ul>
-                                {% list Blog.PostsTags(Custom('tag_number')|default('10'), 'SORT_POSTS_NUMBER_DESC') %}
+                                {% list Blog.PostsTags(Custom('tag_number')|default('10')) %}
                                     <li {% if isTag and Tag.Title == PostsTag.Title %} class="active" {% endif %}>
                                         <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
                                     </li>
@@ -1599,7 +1599,7 @@
                             </ul>
                         </li>
                     {% endif %}
-                    
+
                     <!-- Pages -->
                     {% list Blog.ListPages %}
                         {% if loop.first %}

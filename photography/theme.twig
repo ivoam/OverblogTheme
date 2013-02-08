@@ -675,7 +675,7 @@
                             <a href="{{ Blog.Url }}">{{ Lang.Get('All') }}</a>
                         </li>
                         {% if Custom('tag_number') > 0 %}
-                            {% list Blog.PostsTags(Custom('tag_number'), count) %}
+                            {% list Blog.PostsTags(Custom('tag_number')) %}
                                 <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}>
                                     <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
                                 </li>

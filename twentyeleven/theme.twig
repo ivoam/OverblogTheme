@@ -924,7 +924,7 @@
 						<li {% if isIndex %}class="selected"{% endif %}>
 							<a class="selected" href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
 						</li>
-						{% list Blog.PostsTags(Custom('tag_number'), count) %}
+						{% list Blog.PostsTags(Custom('tag_number')) %}
 							{% if PostsTag.Title|lower != "pinned" %}
 								<li {% if isTag and Tag.Title == PostsTag.Title %}class="selected"{% endif %}>
 									<a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title|truncate(20) }}</a>

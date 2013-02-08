@@ -718,7 +718,7 @@
                     <li {% if isIndex %} class="current_page_item" {% endif %}>
                         <a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                     </li>
-                    {% list Blog.PostsTags(6, 'SORT_POSTS_NUMBER_DESC') %}
+                    {% list Blog.PostsTags(6) %}
                         <li {% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} class="current_page_item" {% endif %}><a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a></li>
                     {% endlist %}
                     <li><a href="/contact">{{ Lang.Get('Contact') }}</a></li>
@@ -947,7 +947,7 @@
                             <div class="box">
                                 <h3>{{ Lang.Get('Tags') }}</h3>
                                 <ul class="list">
-                                    {% list Blog.PostsTags(Custom('tag_number'), count) %}
+                                    {% list Blog.PostsTags(Custom('tag_number')) %}
                                         <li>
                                             <a href="{{ PostsTag.Url }}">#{{ PostsTag.Title }} ({{ PostsTag.PostCount }})</a>
                                         </li>

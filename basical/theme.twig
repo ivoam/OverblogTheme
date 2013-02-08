@@ -1796,7 +1796,7 @@
                         <li class="page_item">
                             <a href="#">{{ Lang.Get('Tags') }}</a>
                             <ul class='children'>
-                                {% list Blog.PostsTags(15, 'SORT_POSTS_NUMBER_DESC') %}
+                                {% list Blog.PostsTags(15) %}
                                     {% if PostsTag.Title != Custom('custom_menu_1_tag') and PostsTag.Title != Custom('custom_menu_2_tag') %}
                                         <li class="page_item{% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} current_menu_item{% endif %}"><a href="{{ PostsTag.Url }}"><span>{{ PostsTag.Title }}</span></a></li>
                                     {% endif %}

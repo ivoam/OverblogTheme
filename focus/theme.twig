@@ -1232,7 +1232,7 @@
 					<div class="item tags">
 						<h3>{{ Lang.Get('Tags') }}</h3>
 						<ul>
-							{% list Blog.PostsTags(15, SORT_POSTS_NUMBER_DESC) %}
+							{% list Blog.PostsTags(15) %}
 							<li>
 								<a href="{{ PostsTag.Url }}"  alt="{{PostsTag.Title}}">
 									{{ PostsTag.Title }}

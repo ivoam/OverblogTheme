@@ -425,7 +425,7 @@
                                     <a {% if isIndex %} {% endif %} href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                                 </li>
 
-                                {% list Blog.PostsTags(10, 'SORT_POSTS_NUMBER_DESC') %}
+                                {% list Blog.PostsTags(10) %}
                                     {% if loop.first is not empty %}
                                         <li {% if isTag %} class="active"{% endif %}>
                                             <a href="#">{{ Lang.Get('Tags') }}</a>

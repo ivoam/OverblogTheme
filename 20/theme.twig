@@ -1581,7 +1581,7 @@
                         <li {% if isIndex %} class="current_page_item" {% endif %}>
                             <a href="/">{{ Lang.Get('home') }}</a>
                         </li>
-                        {% list Blog.PostsTags(15, 'SORT_POSTS_NUMBER_DESC') %}
+                        {% list Blog.PostsTags(15) %}
                             <li {% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} class="current_page_item" {% endif %}>
                                 <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
                             </li>

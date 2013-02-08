@@ -382,7 +382,7 @@
 							<div id="nav-right">
 								<h2>+ {{ Lang.Get('Categories') }}</h2>
 								<ul>
-									{% list Blog.PostsTags(4, count) %}
+									{% list Blog.PostsTags(4) %}
 									<li {% if isTag and Tag.Title == PostsTag.Title %}class="selected"{% endif %}><a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title }}</a></li>
 									{% endlist %}
 								</ul>

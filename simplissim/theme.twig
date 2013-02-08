@@ -558,7 +558,7 @@
                         {{ Lang.Get('Home') }}
                     </a>
                 </li>
-                {% list Blog.PostsTags(Custom('menus')-1, 'SORT_POSTS_NUMBER_DESC') %}
+                {% list Blog.PostsTags(Custom('menus')-1) %}
                 <li {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}
                     class="active"
                     {% endif %}

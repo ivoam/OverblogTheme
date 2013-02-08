@@ -331,7 +331,7 @@
 					<div id="category">
 						<h2>{{ Lang.Get('Tags') }}</h2>
 						<div id="tags">
-							{% list Blog.PostsTags(10, 'SORT_POSTS_NUMBER_DESC') %}
+							{% list Blog.PostsTags(10) %}
 							<span class="{% if loop.index is odd %}tag-size-1{% else %}tag-size-2{% endif %}"><a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a></span>
 							{% endlist %}
 						</div>
