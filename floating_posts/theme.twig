@@ -166,7 +166,7 @@
 				{% if Custom('background_header') is not empty %}
                     background: url({{Custom('background_header')}}) no-repeat center top;
                 {% endif %}
-				background-color: #fff;
+				background-color: {{Custom('secondary_color')}};
 			}
 			.banner {
                 color: {{ Custom('primary_color') }};
