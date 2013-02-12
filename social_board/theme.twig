@@ -167,12 +167,15 @@
             /* ----------------------------- */
             /* ==GLOBAL */
             /* ----------------------------- */
+             .withsharebar .global{
+                padding-bottom: 45px;
+             }
             .global {
                 margin: 0 auto;
                 max-width: 980px;
-                padding-bottom: 70px;
+                padding-bottom: 5px;
             }
-
+      
             a,
             a:visited {
                 color: {{ Custom('links_font_color')|default('#668FBA') }};
@@ -1175,15 +1178,16 @@
                 position: fixed;
                 right: 20px;
             }
-            .scroll-to-top a {
-                border-radius: 3px;
+            .scroll-to-top a,
+            .load-more a {
                 color: {{ Custom('titles_font_color')|default('#222') }};
-                display: block;
-                font-size: 1.6em;
+                display: inline-block;
+                font-size: 16px;
                 padding: 10px 10px 10px;
                 text-decoration: none;
             }
-            .scroll-to-top a:hover {
+            .scroll-to-top a:hover,
+            .load-more a:hover {
                 color: {{ Custom('links_font_color')|default('#668FBA') }};
             }
             .scroll-to-top a:active {
@@ -1520,10 +1524,10 @@
                     {% endlist %}
                 {% endif %}
             </section>
-            {% if Navigation.NextPage is not empty %}
-                <nav class="load-more">
-                    <a href="{{ Navigation.NextPage }}"></a>
-                </nav>
+            {% if Navigation.NextPage %}
+                <p class="load-more">
+                    <a href="{{ Navigation.NextPage }}">{{ Lang.Get('Load more') }}</a>
+                </p>
             {% endif %}
         </div>
 
@@ -1531,7 +1535,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
         {% if not isSingle and not isSpecial %}
             <script src="http://assets.over-blog-kiwi.com//themes/jquery/masonry/jquery.masonry.min.js"></script>
-            <script src="http://assets.over-blog-kiwi.com/themes/jquery/infinite-ajax-scroll/jquery.ias.min.js"></script>
+            <script src="http://assets.over-blog-kiwi.com/t/jquery/infinite-ajax-scroll/jquery-ias.min.js"></script>
         {% endif %}
         <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         {% if Custom('background') is not empty %}
@@ -1558,6 +1562,10 @@
             {% endif %}
 
             {% if not isSingle and not isSpecial %}
+                var ias = new Array();
+                ias.counter = 1,
+                ias.MAXPAGE = 10;
+
                 // Twitter controls
                 var TwitterControls = function(elements) {
                     $(elements).find(".ob-tweet").each(function() {
@@ -1777,6 +1785,16 @@
                         loader         : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts') }}...</p>",
                         history        : false,
                         tresholdMargin : -200,
+                        triggerPageTreshold: ias.MAXPAGE+1,
+                        beforePageChange: function(){
+                            if (ias.counter >= ias.MAXPAGE) {
+                                $('.load-more').show();
+                                return false;
+                            }
+                        },
+                        onRenderComplete: function(items){
+                            ias.counter++;
+                        },
                         onLoadItems    : function(items) {
                             var newElems;
 
