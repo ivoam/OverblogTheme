@@ -89,6 +89,15 @@
             q:before,q:after{ content:'';}
             abbr,acronym{ border:0;}
 
+            /* clearfix */
+            .clearfix:before, .clearfix:after{
+                content: "";
+                display: table;
+            }
+            .clearfix:after{
+                clear: both;
+            }
+
             .left {float: left;}
             .right {float: right;}
             .clear {clear: both; display: block; visibility: hidden;}
@@ -171,8 +180,7 @@
                 .post {margin: 0px 10px 20px 0px;}
                 .comments {background: url(http://assets.over-blog-kiwi.com/themes/28/images/comments.png) no-repeat 0 2px; margin: 10px 0 10px 30px; padding: 0 0 0 20px;}
                 .comments:hover {color: #01ADF1;}
-                .title {color: #4D4D4F; display: block; font-size: 24px; line-height: 35px;}
-                .title:hover {color: #0E73B8;}
+
                 .meta {color: #878789; font-size: 11px; padding-left: 3px;}
                 .meta p {display: inline-block;}
                 .entry {margin-top: 26px;}
@@ -186,18 +194,56 @@
                     .ob-media {max-width: 100%;}
                     .ob-desc {font-style: italic; font-weight: bold;}
                     .ob-section ul {list-style: disc; margin-bottom: 20px; padding-left: 20px;}
-                    .ob-section ol {list-style: decimal; margin-bottom: 20px; padding-left: 45px;}
-
+                    .ob-section ol {list-style: decimal; margin-bottom: 20px; padding-left: 20px;}
+                    .ob-section p {
+                        margin-bottom: 20px;
+                    }
                     .ob-media-left {margin: 0 30px 20px 0;}
 
-                    /* section texte */
-                    .ob-text h3,
-                    .ob-text h4,
-                    .ob-text h5 {margin: 15px 0 5px;}
-                    .ob-text h3 {font-size: 18px;}
-                    .ob-text h4 {font-size: 16px;}
-                    .ob-text h5 {font-size: 14px; font-weight: bold;}
+                    .ob-section-html h1{
+                        color: #4D4D4F; 
+                        font-size: 28px; 
+                        line-height: 35px;
+                    }
+                    .title,
+                    .ob-section-html h2{
+                        color: #4D4D4F; 
+                        display: block; 
+                        font-size: 24px; 
+                        line-height: 35px;
+                    }
+                        .title:hover {
+                            color: #0E73B8;
+                        }
 
+                    /* section texte */
+                    .ob-section-html h1,
+                    .ob-section-html h2,
+                    .ob-text h3,
+                    .ob-section-html h3,
+                    .ob-text h4,
+                    .ob-section-html h4,
+                    .ob-text h5,
+                    .ob-section-html h5,
+                    .ob-section-html h6 {
+                        margin: 15px 0 5px;
+                    }
+                    .ob-text h3,
+                    .ob-section-html h3 {
+                        font-size: 18px;
+                    }
+                    .ob-text h4,
+                    .ob-section-html h4 {
+                        font-size: 16px;
+                    }
+                    .ob-text h5,
+                    .ob-section-html h5 {
+                        font-size: 14px; 
+                        font-weight: bold;
+                    }
+                    .ob-section-html h6 {
+                        font-style: italic;
+                    }
                     /* section file */
                     .ob-section-file .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
                     .ob-section-file .ob-ctn a.ob-link,
@@ -267,8 +313,8 @@
                     .social-sharing {margin: 30px 0;}
                     .social-sharing .fb-like {width: 105px;}
                     .social-sharing .ob-repost-btn {margin-top: -2px;}
-                    .social-sharing h6,
-                    .item-comments h6 {font-size: 16px; margin-bottom: 5px;}
+                    .social-sharing h3,
+                    .item-comments h3 {font-size: 16px; margin-bottom: 5px;}
 
 
                 /*** SPECIAL PAGE ***/
@@ -295,7 +341,7 @@
             .widget a:before,
             .widget a:after {display: inline-block; margin-right: 8px; vertical-align: middle;}
             .avatar {display: inline !important;}
-            .avatar img {margin: 0 10px 10px 0;}
+            .avatar img {margin-right:10px;}
             a.facebook,
             a.twitter,
             a.rss {background-position: left 12px;}
@@ -496,7 +542,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="social-sharing">
-                                    <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
+                                    <h3>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h3>
                                     {% if Custom('share_service') != 'None' %}
                                         {% if Custom('share_service') == 'Google +' %}
                                             <div class="left">
@@ -560,7 +606,7 @@
                                             </script>
                                             <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                                         {% else %}
-                                            <h6>{{ Lang.Get('Comment this post') }}</h6>
+                                            <h3>{{ Lang.Get('Comment this post') }}</h3>
                                             {{ Post.Comments }}
                                         {% endif %}
                                     </div>
@@ -599,7 +645,7 @@
                 <div class="sidebar right">
                     {% if Custom('custom_hide_widget_biography') == false %}
                         <!-- Blog owner bio -->
-                        <div class="widget">
+                        <div class="widget clearfix">
                             {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
                                 <h3>{{ Blog.Owner.Nickname }}</h3>
                                 {% if Blog.Owner.Bio is not empty %}
