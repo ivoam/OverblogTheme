@@ -706,7 +706,7 @@
                     <li {% if isTag and Tag is not empty and Tag.Title != Custom('custom_menu_1_tag') and Tag.Title != Custom('custom_menu_2_tag') %} class="current_page_item" {% endif %}>
                         <a href="#"><span>{{ Lang.Get('Tags') }}</span></a>
                         <ul class='children'>
-                            {% list Blog.PostsTags(10, 'SORT_POSTS_NUMBER_DESC') %}
+                            {% list Blog.PostsTags(10) %}
                                 {% if PostsTag.Title != Custom('custom_menu_1_tag') and PostsTag.Title != Custom('custom_menu_2_tag') %}
                                     <li {% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} class="current_page_item" {% endif %}><a href="{{ PostsTag.Url }}"><span>{{ PostsTag.Title }}</span></a></li>
                                 {% endif %}
