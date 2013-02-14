@@ -1166,7 +1166,7 @@
                                                 <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}">Google +</a>
                                             </li>
                                             <li>
-                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}">Twitter</a>
+                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username') }}{% endif %}">Twitter</a>
                                             </li>
                                             <li>
                                                 <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}">Facebook</a>
@@ -1294,7 +1294,7 @@
                                                 <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}">Google +</a>
                                             </li>
                                             <li>
-                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}">Twitter</a>
+                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username') }}{% endif %}">Twitter</a>
                                             </li>
                                             <li>
                                                 <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}">Facebook</a>
@@ -1436,7 +1436,7 @@
                                                 <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}">Google +</a>
                                             </li>
                                             <li>
-                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}">Twitter</a>
+                                                <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username') }}{% endif %}">Twitter</a>
                                             </li>
                                             <li>
                                                 <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}">Facebook</a>
