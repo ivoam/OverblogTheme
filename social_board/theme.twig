@@ -179,7 +179,7 @@
                 max-width: 980px;
                 padding-bottom: 5px;
             }
-      
+
             a,
             a:visited {
                 color: {{ Custom('links_font_color')|default('#668FBA') }};
@@ -1459,7 +1459,7 @@
                                             <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}"></a>
                                         {% elseif Custom('share_service') == 'Twitter' %}
                                             <!-- twitter share -->
-                                            <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
+                                            <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username') }} {% endif %}" target="_blank"></a>
                                         {% elseif Custom('share_service') == 'Facebook' %}
                                             <!-- facebook share -->
                                             <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
@@ -1470,7 +1470,7 @@
                                             <a class="gplus" href="https://plus.google.com/share?url={{ Post.Permalink }}"></a>
 
                                             <!-- twitter share -->
-                                            <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}&via={% if Custom('twitter_username') is not empty %}{{ Custom('twitter_username') }} {% endif %}&" target="_blank"></a>
+                                            <a class="twt" href="https://twitter.com/share?url={{ Post.Permalink }}&text={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}{% if Custom('twitter_username') is not empty %}&via={{ Custom('twitter_username') }} {% endif %}" target="_blank"></a>
 
                                             <!-- facebook share -->
                                             <a class="fb" href="https://www.facebook.com/sharer/sharer.php?u={{ Post.Permalink }}&t={% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" target="_blank"></a>
