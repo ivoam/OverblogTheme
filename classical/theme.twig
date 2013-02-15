@@ -103,7 +103,13 @@
         .article ul, .article ol {margin-left: 20px;}
         .article ul li {list-style: disc;}
         .article ol li {list-style: decimal;}
-        .article pre {border-left: 2px solid #254C67; padding-left: 4px;}
+        .article pre,
+        .article .ob-section-text blockquote,
+        .article .ob-section-html blockquote{
+            border-left: 2px solid #254C67;
+            margin-bottom: 20px;
+            padding-left: 4px;
+        }
 
         /*----- TOP  -----*/
         .top {background: #202224; height: 38px; border-bottom: 1px solid #383b3d; line-height: 38px; color: white; font-weight: bold; text-shadow: 0px 1px 0px #000; font-size: 11px;}
@@ -257,10 +263,10 @@
         .ob-section-html iframe,
         .ob-section-html object,
         .ob-section-html embed {max-width: 100%}
+
         /* Section Map */
         .ob-section-map .ob-map,
         .ob-section-map .ob-desc {margin: 0 auto; width: 100%;}
-
 
         /* twitter box */
         .ob-section .twitter-tweet-rendered {max-width: 100% !important;}
@@ -280,7 +286,6 @@
         .excerpt .picture:hover .plus{opacity: 0.8; transition: opacity 0.5s; -moz-transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -o-transition: z-index:99; max-width: 200px;border-radius:6px; background: #000;}
         .comments-counter {display: block; position: absolute; bottom: 10px; right: 5px; white-space: nowrap; padding: 2px 5px 1px 20px; background: #111 url('http://assets.over-blog-kiwi.com/themes/1/images/mini-bulle-icon.png') no-repeat 5px 7px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; filter: alpha(opacity=90); -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; opacity: 0.9; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; transition: opacity 300ms; border-radius: 4px; color: #FFF; font-size: 12px; font-weight: bold; text-decoration: none; text-align: center;}
         .excerpt .picture:hover .comments-counter, .comments-counter:hover {-moz-opacity: 0.7; -webkit-opacity: 0.7; -o-opacity: 0.7; opacity: 0.7; color: #FFF; text-decoration: none;}
-
 
         .excerpt .facebook-share,
         .excerpt .twitter-share,
@@ -332,11 +337,36 @@
         .sidebar .social li a {font-size: 14px; font-weight: bold;}
         .sidebar .social li a.link {color: #aeb8c1; display: block; font-size: 12px; font-weight: normal; margin-top: -2px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 
-        .sidebar .subscribe h3 {background-position: 140px 6px;}
-        .sidebar .subscribe .ob-form {margin-bottom: 10px;}
-        .sidebar .subscribe label {margin-left: 0px; width: 20%; line-height: 25px;}
-        .sidebar .subscribe input[type=email] {float: right; width:75%;}
-        .sidebar .subscribe input[type=submit] {float: right; margin-right: 0; margin-left: 0;}
+        .subscribe {
+            padding: 0 10px;
+        }
+        .subscribe h3 {
+            background-position: 130px 6px;
+        }
+        .subscribe p {
+            margin-bottom: 0.5em;
+        }
+        .subscribe .ob-form {
+            margin-bottom: 10px;
+        }
+        .subscribe label {
+            margin-left: 0px;
+            line-height: 25px;
+            position: absolute;
+            top: -5000px;
+        }
+        .subscribe .ob-form-field {
+            float: left;
+            width: 60%;
+        }
+        .subscribe input[type=email] {
+            padding: 2px 3px;
+            width: 100%
+        }
+        .subscribe input[type=submit] {
+            float: right;
+            margin: 5px 0;
+        }
 
         .sidebar .about h3 {background-position: 170px 6px;}
         .sidebar .about {padding: 10px; float: left;}
@@ -381,8 +411,8 @@
         .ob-text h5,
         .ob-section-html h5,
         .ob-section-html h6{
-            color: #254C67; 
-            font-family: 'Montserrat', Arial, sans-serif; 
+            color: #254C67;
+            font-family: 'Montserrat', Arial, sans-serif;
             margin: 15px 0 5px;
             line-height: 1.5em;
         }
@@ -402,11 +432,15 @@
         }
         .ob-text h5,
         .ob-section-html h5  {
-            font-size: 14px; 
+            font-size: 14px;
             font-weight: bold;
         }
         .ob-section-html h6 {
             font-style: italic;
+        }
+        .ob-section-text a,
+        .ob-section-html a {
+            text-decoration: underline;
         }
         .ob-text pre {margin: 0 0 5px 0; white-space: pre-wrap;}
         .post-tags {margin-left: 12px;}
@@ -443,7 +477,7 @@
                     <div class="navigation">
                         <ul>
                             <li class="first"><a href="{{ Blog.Url }}" title="{{ Lang.Get('Home') }}">{{ Lang.Get('Home') }}</a></li>
-                            {% list Blog.PostsTags(Custom('tag_number')|default('7'), count) %}
+                            {% list Blog.PostsTags(Custom('tag_number')|default('7')) %}
                                 {% if PostsTag.Title|lower != "pinned" %}
                                     <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}><a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title }}</a></li>
                                 {% endif %}
@@ -723,8 +757,8 @@
                         {% endif %}
                         {% if Custom('custom_hide_widget_subscribe') == false %}
                             <div class="subscribe">
-                                <h3>{{ Lang.Get('Newsletter') }}</h3>
-                                <em>{{ Lang.Get('Add your email to receive future post') }}</em>
+                                <h3>{{ Lang.Get('Subscribe') }}</h3>
+                                <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
                                 {% email_notification %}
                             </div>
                         {% endif %}
@@ -775,7 +809,7 @@
                             <div class="list categories">
                                 <h3>{{ Lang.Get('Categories') }}</h3>
                                 <ul>
-                                {% list Blog.PostsTags(Custom('category_number'), count) %}
+                                {% list Blog.PostsTags(Custom('category_number')) %}
                                     <li>
                                         <span class="end-number"></span>
                                         <span class="number">{{ PostsTag.PostCount }}</span>
