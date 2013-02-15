@@ -171,9 +171,9 @@
                 margin-bottom: 0;
                 padding-bottom: 40px;
             }
-             .withsharebar .global{
+            .withsharebar .global{
                 padding-bottom: 80px;
-             }
+            }
             .global {
                 margin: 0 auto;
                 max-width: 980px;
@@ -1152,6 +1152,14 @@
             /* ----------------------------- */
             /* ==LOADER */
             /* ----------------------------- */
+            .ias_loader,
+            .scroll-to-top,
+            .load-more {
+                background-color: #F9F9F9;
+                border: 1px solid #DDD;
+                -webkit-box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+                        box-shadow: 0 0.3125em 0.875em -0.3125em rgba(0, 0, 0, .5);
+            }
             .ias_loader {
                 bottom: -40px;
                 left: 50%;
@@ -1162,11 +1170,12 @@
             }
             .ias_loader img {
                 float: left;
-                margin: 0 10px 10px 0;
+                margin: 10px;
                 width: 20px;
             }
             .ias_loader p {
                 font-size: 1.4em;
+                line-height: 3em;
             }
 
             /* ----------------------------- */
@@ -1181,6 +1190,9 @@
                 bottom: 5px;
                 position: fixed;
                 right: 20px;
+            }
+            .load-more{
+                margin-left: 8px;
             }
             .withsharebar  .load-more{
                 position: absolute;
