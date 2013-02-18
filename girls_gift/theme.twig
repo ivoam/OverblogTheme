@@ -881,7 +881,7 @@
                                 <form action="/search" method="post" accept-charset="utf-8">
                                     <fieldset>
                                         <legend>{{ Lang.Get('Search') }}</legend>
-                                        <input type="text" name="q" placeholder="{{ Lang.Get('Search something here...') }}" value="{{ Lang.Get('Search something...') }}" />
+                                        <input type="text" name="q" placeholder="{{ Lang.Get('Search something here') }}..." value="{{ Lang.Get('Search something...') }}" />
                                         <button>{{ Lang.Get('Search') }}</button>
                                     </fieldset>
                                 </form>
@@ -1100,7 +1100,7 @@
     
                                         {% if isSearch %}
                                         <div class="contenuArticle">
-                                            <p>{{ Lang.Get('No result… Try again') }} !</p>
+                                            <p>{{ Lang.Get('No results for this search') }} !</p>
                                         </div>
                                         {% elseif isSpecial %}
                                             <div class="contenuArticle">

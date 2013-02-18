@@ -1246,7 +1246,7 @@
                 {% if isSearch %}
                 <div class="contenuArticle">
                     <p>
-                        No result… Try again !
+                        {{ Lang.get ('No results for this search') }}
                     </p>
                     <form action="/search" method="post">
                         <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
@@ -1357,7 +1357,7 @@
                     {# Tags #}
                     {% if Custom('display_widget_tags') %}
                     <li>
-                        <h2>tag cloud</h2>
+                        <h2>{{ Lang.Get('Tags cloud') }}</h2>
                         {% list Blog.PostsTags(20) %}
                         <a href="{{ PostsTag.Url }}"{# class='tag-link-12'#} title="{{ PostsTag.Title }}"{# style='font-size: 8pt;'#}>{{ PostsTag.Title }}</a>
                         {% endlist %}

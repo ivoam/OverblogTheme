@@ -453,7 +453,7 @@
                                                                 {% if isSearch %}
                                                                 <div>
                                                                     <p>
-                                                                        No result… Try again !
+                                                                        {{ Lang.get ('No results for this search') }}
                                                                     </p>
                                                                     <form action="/search" method="post">
                                                                         <input type="text" name="q" value="{{ Search }}" placeholder="{{ Lang.Get('Search') }}" />
