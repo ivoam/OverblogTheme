@@ -1360,7 +1360,7 @@
 									{% list Post.Sources %}
 										{{ Lang.Get(Source) }}
 										{% if not loop.last %}
-											{{ Lang.Get(' and ') }}
+											&nbsp;{{ Lang.Get('and') }}&nbsp;
 										{% endif %}
 									{% endlist %}
 								{% endif %}
