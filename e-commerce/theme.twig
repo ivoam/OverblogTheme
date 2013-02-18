@@ -1012,7 +1012,7 @@
                                     {% else %}
                                         {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
                                             <a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-                                                <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(600,400)|crop }}{% else %}{{ Custom('post_cover')|resize(600,400)|crop }}{% endif %}" title="" alt="{{ Lang.Get('Post.Cover') }}" width="600" height="400"/>
+                                                <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(600,400)|crop }}{% else %}{{ Custom('post_cover')|resize(600,400)|crop }}{% endif %}" title="" alt="{{ Post.Title }}" width="600" height="400"/>
                                             </a>
                                         {% endif %}
                                         {{ Post.Snippet }}
