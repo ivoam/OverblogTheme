@@ -175,20 +175,26 @@
                         <article class="special">
 		                    {{ SpecialContent }}
                         </article>
-                    {% else %}
-                        <!-- List blog posts -->
+                    {% else %}               
+                        {% if isSearch %}
+                            <p>{{ Lang.Get('Search results for') }} "{{ Search.Keyword }}"</p>
+                        {% elseif isTag %}
+                            <p>{{ Lang.Get('Posts with') }} {{ Tag.Title }}</p>
+                        {% endif %}
+                         <!-- List blog posts -->
                         {% list Posts %}
                             <article class="post" itemprop="blogPosts" itemscope="" itemtype="http://schema.org/BlogPosting">
-                                {% if isSearch %}
-                                    {{ Lang.Get('Search results for') }} “{{ Search.Keyword }}”
-                                {% elseif isTag %}
-                                    {{ Lang.Get('Posts with') }} #{{ Tag.Title }}
-                                {% endif %}
 	                        	<header itemprop="headline">
                                     <!-- Post author &amp; post date -->
 	                                <p class="metas">
                                     	<span class="author" itemprop="author">
-                                            {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
+                                             {% if Post.Author is not empty %}
+                                                {{ Lang.Get('Published by') }}
+                                                {{ Post.Author }} 
+                                             {% else %}
+                                                {{ Lang.Get('Published by') }}
+                                                {{ Blog.Owner.Nickname }}
+                                             {% endif %}
                                         </span>
                                         <span class="date">
                                             {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date|date("Y-m-d") }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
