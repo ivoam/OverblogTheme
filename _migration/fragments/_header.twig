@@ -1,0 +1,217 @@
+<meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+{% title %}
+{% favicon %}
+{% meta %}
+
+<style type="text/css" media="screen">
+    .socialShare {
+        height: 30px;
+        padding: 10px 4px 0px 4px;
+    }
+    .socialShare>div {
+        padding: 0 4px;
+        margin: 0;
+    }
+    .socialShare h3 {
+        display: none;
+    }
+    .socialShare iframe {
+        width: 100px;
+        float: left;
+        border: none;
+    }
+    .box.social li {
+        height: 40px;
+    }
+    .box.social .ob2-facebook {
+        background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-fb.png") no-repeat scroll 0 3px transparent;
+        padding-left: 40px;
+    }
+    .box.social .ob2-twitter {
+        background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-twitter.png") no-repeat scroll 0 3px transparent;
+        padding-left: 40px;
+    }
+    .box.social .ob2-rss {
+        background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-rss.png") no-repeat scroll 0 3px transparent;
+        padding-left: 40px;
+    }
+    .box.social li a {
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .box.social li a.link {
+        color: #aeb8c2;
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+        margin-top: -2px;
+        max-width: 240px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+<link type="text/css" href="http://fdata.over-blog.net/99/00/00/02/csscombos/common.css?kiwi" rel="stylesheet" />
+{% if Custom('ob_style_common') %}
+<link type="text/css" href="{{ Custom('ob_style_common') }}" rel="stylesheet" />
+{% endif %}
+{% if Custom('ob_style_variation') %}
+<link type="text/css" href="{{ Custom('ob_style_variation') }}" rel="stylesheet" />
+{% endif %}
+
+{# Custom css #}
+{% if Custom('ob_style_custom_global') %}
+<link type="text/css" href="{{ Custom('ob_style_custom_global') }}" rel="stylesheet" />
+{% endif %}
+{% if isSingle %}
+    {% if isPage %}
+        {% if Custom('ob_style_custom_pages') %}
+<link type="text/css" href="{{ Custom('ob_style_custom_pages') }}" rel="stylesheet" />
+        {% else %}
+            {% if Custom('ob_style_custom_articles') %}
+<link type="text/css" href="{{ Custom('ob_style_custom_articles') }}" rel="stylesheet" />
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if Custom('ob_style_custom_articles') %}
+<link type="text/css" href="{{ Custom('ob_style_custom_articles') }}" rel="stylesheet" />
+        {% endif %}
+    {% endif %}
+{% else %}
+    {% if Custom('ob_style_custom_home') %}
+<link type="text/css" href="{{ Custom('ob_style_custom_home') }}" rel="stylesheet" />
+    {% else %}
+        {% if Custom('ob_style_custom_articles') %}
+<link type="text/css" href="{{ Custom('ob_style_custom_articles') }}" rel="stylesheet" />
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+<link rel="stylesheet" href="http://fdata.over-blog.net/99/00/00/02/csscombos/ob-print.css" type="text/css" media="print" />
+
+<meta name="constant:displayArticlesLimit" content="20" />
+
+<meta name="string:ob_style_common:Theme common stylesheet" group="DEV !!" />
+<meta name="string:ob_style_variation:Theme variation stylesheet" group="DEV !!" />
+<meta name="string:ob_style_custom_global:Theme custom stylesheet global" group="DEV !!" />
+<meta name="string:ob_style_custom_home:Theme custom stylesheet home" group="DEV !!" />
+<meta name="string:ob_style_custom_articles:Theme custom stylesheet articles" group="DEV !!" />
+<meta name="string:ob_style_custom_pages:Theme custom stylesheet pages" group="DEV !!" />
+
+<meta name="list:ob_header_display:In header, display:" group="Header" items="blog title,picture,free text" default="blog title" />
+<meta name="image:ob_header_picture:Header picture" group="Header" />
+<meta name="string:ob_header_freetext:Header free text" group="Header" />
+<meta name="string:ob_header_id:Footer free text HTML ID" group="Header" />
+
+<meta name="string:ob_menu_2_label:Menu 2 label" group="Menu" />
+<meta name="string:ob_menu_2_link:Menu 2 link" group="Menu" />
+<meta name="string:ob_menu_2_label:Menu 2 label" group="Menu" />
+<meta name="string:ob_menu_2_link:Menu 2 link" group="Menu" />
+<meta name="string:ob_menu_3_label:Menu 3 label" group="Menu" />
+<meta name="string:ob_menu_3_link:Menu 3 link" group="Menu" />
+<meta name="string:ob_menu_4_label:Menu 4 label" group="Menu" />
+<meta name="string:ob_menu_4_link:Menu 4 link" group="Menu" />
+<meta name="string:ob_menu_5_label:Menu 5 label" group="Menu" />
+<meta name="string:ob_menu_5_link:Menu 5 link" group="Menu" />
+<meta name="string:ob_menu_6_label:Menu 6 label" group="Menu" />
+<meta name="string:ob_menu_6_link:Menu 6 link" group="Menu" />
+
+<meta name="list:ob_display_post:Display post as" group="Content" items="all,snippets" default="snippets" />
+<meta name="string:ob_text_publishedby:“Published by”" default="Published by" group="Content" />
+<meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Content" />
+
+<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+<meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
+<meta name="list:custom_facebook_comments_color_theme:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+
+<meta name="boolean:ob_widget_presentation:Display widget “Blog presentation”" group="Widget Presentation" default="true" />
+<meta name="string:ob_widget_presentation_id:ID HTML" group="Widget Presentation" />
+
+<meta name="boolean:ob_widget_profile:Display widget “Author profile”" group="Widget Profile" default="true" />
+<meta name="string:ob_widget_profile_id:ID HTML" group="Widget Profile" />
+
+<meta name="boolean:ob_widget_freetext_2:Display widget #2 “Free text”" group="Widget #2 Free text" default="false" />
+<meta name="string:ob_widget_freetext_2_title:#2 “Free text” title" group="Widget #2 Free text" />
+<meta name="string:ob_widget_freetext_2_text:#2 “Free text” text" group="Widget #2 Free text" />
+<meta name="string:ob_widget_freetext_2_id:ID HTML" group="Widget #2 Free text" />
+
+<meta name="boolean:ob_widget_search:Display widget “Search”" group="Widget Search" default="true" />
+<meta name="string:ob_widget_search_id:ID HTML" group="Widget Search" />
+<meta name="string:ob_widget_search_id:ID HTML" group="Widget Search" />
+
+<meta name="boolean:ob_widget_freetext_2:Display widget #2 “Free text”" group="Widget #2 Free text" default="false" />
+<meta name="string:ob_widget_freetext_2_title:#2 “Free text” title" group="Widget #2 Free text" />
+<meta name="string:ob_widget_freetext_2_text:#2 “Free text” text" group="Widget #2 Free text" />
+<meta name="string:ob_widget_freetext_2_id:ID HTML" group="Widget #2 Free text" />
+
+<meta name="boolean:ob_widget_archives:Display widget “Archives”" group="Widget Archives" default="true" />
+<meta name="boolean:ob_widget_archives_count:Display posts count" group="Widget Archives" default="true" />
+<meta name="string:ob_widget_archives_id:ID HTML" group="Widget Archives" />
+
+<meta name="boolean:ob_widget_freetext_3:Display widget #3 “Free text”" group="Widget #3 Free text" default="false" />
+<meta name="string:ob_widget_freetext_3_title:#3 “Free text” title" group="Widget #3 Free text" />
+<meta name="string:ob_widget_freetext_3_text:#3 “Free text” text" group="Widget #3 Free text" />
+<meta name="string:ob_widget_freetext_3_id:ID HTML" group="Widget #3 Free text" />
+
+<meta name="boolean:ob_widget_pages:Display widget “Pages list”" group="Widget Pages List" default="true" />
+<meta name="string:ob_widget_pages_id:ID HTML" group="Widget Pages List" />
+
+<meta name="boolean:ob_widget_freetext_4:Display widget #4 “Free text”" group="Widget #4 Free text" default="false" />
+<meta name="string:ob_widget_freetext_4_title:#4 “Free text” title" group="Widget #4 Free text" />
+<meta name="string:ob_widget_freetext_4_text:#4 “Free text” text" group="Widget #4 Free text" />
+<meta name="string:ob_widget_freetext_4_id:ID HTML" group="Widget #4 Free text" />
+
+<meta name="boolean:ob_widget_tags:Display widget “Tags”" group="Widget Tags" default="true" />
+<meta name="boolean:ob_widget_tags_count:Display posts count" group="Widget Tags" default="true" />
+<meta name="string:ob_widget_tags_id:ID HTML" group="Widget Tags" />
+
+<meta name="boolean:ob_widget_freetext_5:Display widget #5 “Free text”" group="Widget #5 Free text" default="false" />
+<meta name="string:ob_widget_freetext_5_title:#5 “Free text” title" group="Widget #5 Free text" />
+<meta name="string:ob_widget_freetext_5_text:#5 “Free text” text" group="Widget #5 Free text" />
+<meta name="string:ob_widget_freetext_5_id:ID HTML" group="Widget #5 Free text" />
+
+<meta name="boolean:ob_widget_emailnotification:Display widget “Newsletter”" group="Widget Newsletter" default="true" />
+<meta name="string:ob_widget_emailnotification_id:ID HTML" group="Widget Newsletter" />
+
+<meta name="boolean:ob_widget_freetext_6:Display widget #6 “Free text”" group="Widget #6 Free text" default="false" />
+<meta name="string:ob_widget_freetext_6_title:#6 “Free text” title" group="Widget #6 Free text" />
+<meta name="string:ob_widget_freetext_6_text:#6 “Free text” text" group="Widget #6 Free text" />
+<meta name="string:ob_widget_freetext_6_id:ID HTML" group="Widget #6 Free text" />
+
+<meta name="boolean:ob_widget_blogroll:Display widget “Blog roll”" group="Widget Blog Roll" default="false" />
+<meta name="string:ob_widget_blogroll_2_label:#2 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_2_link:#2 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_2_label:#2 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_2_link:#2 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_3_label:#3 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_3_link:#3 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_4_label:#4 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_4_link:#4 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_5_label:#5 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_5_link:#5 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_6_label:#6 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_6_link:#6 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_7_label:#7 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_7_link:#7 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_8_label:#8 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_8_link:#8 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_9_label:#9 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_9_link:#9 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_20_label:#20 Blog name" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_20_link:#20 Blog URL" group="Widget Blog Roll" />
+<meta name="string:ob_widget_blogroll_id:ID HTML" group="Widget Blog Roll" />
+
+<meta name="boolean:ob_widget_freetext_7:Display widget #7 “Free text”" group="Widget #7 Free text" default="false" />
+<meta name="string:ob_widget_freetext_7_title:#7 “Free text” title" group="Widget #7 Free text" />
+<meta name="string:ob_widget_freetext_7_text:#7 “Free text” text" group="Widget #7 Free text" />
+<meta name="string:ob_widget_freetext_7_id:ID HTML" group="Widget #7 Free text" />
+
+<meta name="boolean:ob_widget_promo:Display widget “Promo”" group="Widget Promo" default="true" />
+
+<meta name="boolean:ob_widget_social:Display widget “Social”" group="Widget Social" default="true" />
+<meta name="string:twitter_username:label.twitterUsername" group="Widget Social" />
+<meta name="string:facebook_username:label.facebookUsername" group="Widget Social" />
+
+<meta name="boolean:ob_footer_display:Display footer free text" group="Footer" />
+<meta name="string:ob_footer_freetext:Footer free text" group="Footer" />
+<meta name="string:ob_footer_id:Footer free text Header HTML ID" group="Footer" />

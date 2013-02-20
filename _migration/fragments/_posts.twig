@@ -1,0 +1,228 @@
+{% if Custom('ob_menu_2_label') %}
+<div id="menuob">
+    {% if Custom('ob_menu_2_label') %}<a href="{{ Custom('ob_menu_2_link') }}">{{ Custom('ob_menu_2_label') }}</a>{% endif %}
+    {% if Custom('ob_menu_2_label') %}<a href="{{ Custom('ob_menu_2_link') }}">{{ Custom('ob_menu_2_label') }}</a>{% endif %}
+    {% if Custom('ob_menu_3_label') %}<a href="{{ Custom('ob_menu_3_link') }}">{{ Custom('ob_menu_3_label') }}</a>{% endif %}
+    {% if Custom('ob_menu_4_label') %}<a href="{{ Custom('ob_menu_4_link') }}">{{ Custom('ob_menu_4_label') }}</a>{% endif %}
+    {% if Custom('ob_menu_5_label') %}<a href="{{ Custom('ob_menu_5_link') }}">{{ Custom('ob_menu_5_label') }}</a>{% endif %}
+    {% if Custom('ob_menu_6_label') %}<a href="{{ Custom('ob_menu_6_link') }}">{{ Custom('ob_menu_6_label') }}</a>{% endif %}
+</div>
+{% endif %}
+
+{% if isSearch %}
+<div class="divTitleSearch">
+    <h2>Résultats pour "{{ Search.Keyword }}"</h2>
+</div>
+<div class="divSearchResults">
+    {% if Posts is not empty %}
+    {% list Posts %}
+    <div class="searchResult" style="margin-bottom:10px;">
+        <h3><a href="{{ Post.Url }}">{{ Post.Title }}</a></h3>
+        <div>{{ Post.Snippet }}</div>
+        {{ Post.Date|datel(Lang.Get('simple date format')) }}
+    <div class="clear"></div>
+    {% endlist %}
+    {% else %}
+    <p>{{ Lang.Get('no results for this search') }}</p>
+    {% endif %}
+</div>
+{% elseif isArchive %}
+{% if Posts %}
+<ul>
+    {% list Posts %}
+    <li class="listArticles  article_item_{% if loop.index % 2 %}even{% else %}odd{% endif %}">
+        <a href="{{ Post.Url }}">{{ Post.Title|default(Post.Snippet|truncate(100)) }}</a>
+        (<span class="DateListe">{{ Post.Date|datel(Lang.Get('simple date format')) }}</span>)<br />
+        <div class="resumeArticle">
+            {{ Post.Snippet }}
+            <div class="clear"></div>
+        </div>
+    </li>
+    {% endlist %}                               
+</ul>
+{% endif %}
+{% else %}
+
+<div class="articles{% if Custom('ob_display_post') == 'snippets' %} extraits{% endif %}">
+    <div>
+        <div class="before_articles">
+            <div class="pagination center">
+                {% if Navigation.NextPage %}
+                <!-- next page -->
+                <a href="{{ Navigation.NextPage }}" rel="next" class="textNext">{{ Lang.Get('next page') }}</a>
+                {% endif %}
+                {% if Navigation.PreviousPage %}
+                <!--last page -->
+                <a href="{{ Navigation.PreviousPage }}" rel="prev" class="textPrevious">{{ Lang.Get('previous page') }}</a>
+                {% endif %}
+
+                {% if Navigation.NextPost %}
+                <!-- next post -->
+                <a href="{{ Navigation.NextPost.Url }}" rel="next" class="textNext">{{ Navigation.NextPost.Title|truncate(50) }}</a>
+                {% endif %}
+                {% if Navigation.PreviousPost %}
+                <!-- previous post -->
+                <a href="{{ Navigation.PreviousPost.Url }}" rel="next" class="textNext">{{ Navigation.PreviousPost.Title|truncate(50) }}</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% list Posts %}
+
+        {% if Custom('ob_display_post') == 'all' or isSingle or isTag %}
+            {# Full post #}
+
+        <div class="article article_{% if loop.index % 2 %}even{% else %}odd{% endif %}" id="article{{ loop.index }}" itemscope itemtype="http://schema.org/BlogPosting">
+
+            <div class="option beforeArticle">
+                <div class="date">
+                    <span class="text">{{ Post.Date|datel(Lang.Get("Default date format")) }}</span>
+                    <span class="dow">{{ Post.Date|datel('c')}}</span>
+                    <span class="day">{{ Post.Date|datel('dd')}}</span>
+                    <span class="month"><span class="separator">/</span>{{ Post.Date|datel('MM')}}</span>
+                    <span class="litteralMonth"><span class="separator">/</span>{{ Post.Date|datel('MMMM')}}</span>
+                    <span class="year"><span class="separator">/</span>{{ Post.Date|datel('y')}}</span>
+                    <span class="hour">{{ Post.Date|datel('HH:mm')}}</span>
+                </div>
+            </div>
+            
+            {% if Post.Title %}
+            <div class="divTitreArticle">
+                <h2>
+                    <a href="{{ Post.Url }}" class="titreArticle" title="{{ Post.Title }}">{{ Post.Title }}</a>
+                </h2>
+            </div>
+            {% endif %}
+
+            <div class="contenuArticle">
+                {{ Post.Body }}
+
+                {% if Post.Title is empty %}
+                <p>
+                    <a href="{{ Post.Url }}">
+                        {{ Lang.Get('read more') }}
+                    </a>
+                </p>
+                {% endif %}
+                <div class="clear"></div>
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="socialShare">
+                {{ Post.Share }}
+            </div>
+
+            <div class="clear"></div>
+
+            <div class="option afterArticle">
+                {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
+                {% if Post.Tags is not empty %}
+                <span class="topic">
+                    <span class="separator">-</span>
+                    {{ Lang.Get('in') }}
+                    {% list Post.Tags %}
+                    <a href="{{ Tag.Url }}" title="{{ Tag.Title }}" class="linkTopic">{{ Tag.Title }}</a>
+                    {% endlist %}
+                </span>
+                {% endif %}
+                {% if Post.ShowComments %}
+                <br/>
+                <span class="spanAddComment">
+                    <a  href="{{ Post.Url }}#anchorComment"
+                        class="linkAddComment">{{ Lang.Get('comment this article') }}</a>
+                </span>
+                {{ Post.CommentCount(Lang.Get('seencomment'), Lang.Get('seencomments'), ' ') }}
+                {% endif %}
+            </div>
+
+        </div>
+
+        {% else %}
+            {# Extract post #}
+
+            <div class="extraitArticle  article_summary_{% if loop.index % 2 %}even{% else %}odd{% endif %}" id="extraitArticle{{ loop.index }}">
+                <div class="dateExtrait">
+                    <div class="date">
+                        <span class="text">{{ Post.Date|datel(Lang.Get("Default date format")) }}</span>
+                        <span class="dow">{{ Post.Date|datel('c')}}</span>
+                        <span class="day">{{ Post.Date|datel('dd')}}</span>
+                        <span class="month"><span class="separator">/</span>{{ Post.Date|datel('MM')}}</span>
+                        <span class="litteralMonth"><span class="separator">/</span>{{ Post.Date|datel('MMMM')}}</span>
+                        <span class="year"><span class="separator">/</span>{{ Post.Date|datel('y')}}</span>
+                        <span class="hour">{{ Post.Date|datel('HH:mm')}}</span>
+                    </div>
+                </div>
+                <div class="infoExtrait">
+                    <span class="titreExtrait"><a href="{{ Post.Url }}" class="titreExtrait">{{ Post.Title }}</a></span>
+                </div>
+                <hr class="hrExtrait" />
+                <div class="extrait">
+                    {% if Post.Cover %}
+                    <a href="{{ Post.Url }}">
+                        <img class="imgExtraitCon" src="{{ Post.Cover|resize(150) }}" alt="{{ Post.Title }}" />
+                    </a>
+                    <br />
+                    {% endif %}
+                    {{ Post.Snippet }}
+                    {% if Post.Title is empty %}
+                    <br />
+                    <a href="{{ Post.Url }}">
+                        {{ Lang.Get('read more') }}
+                    </a>
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+
+                <div class="socialShare">
+                    {{ Post.Share }}
+                </div>
+
+                <div class="plusExtrait">
+                    {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
+                    {% if Post.ShowComments %}
+                    <span class="spanAddComment">
+                        <a  href="{{ Post.Url }}#anchorComment"
+                            class="linkAddComment">{{ Lang.Get('comment this article') }}</a>
+                    </span>
+                    {{ Post.CommentCount(Lang.Get('seencomment'), Lang.Get('seencomments'), ' ') }}
+                    {% endif %}
+                </div>
+                
+            </div>
+
+            {% endif %}
+
+        {% endlist %}
+    
+        <div class="after_articles">
+            <div class="pagination center">
+                {% if Navigation.NextPage %}
+                <!-- next page -->
+                <a href="{{ Navigation.NextPage }}" rel="next" class="textNext">{{ Lang.Get('next page') }}</a>
+                {% endif %}
+                {% if Navigation.PreviousPage %}
+                <!-- previous page -->
+                <a href="{{ Navigation.PreviousPage }}" rel="prev" class="textPrevious">{{ Lang.Get('previous page') }}</a>
+                {% endif %}
+
+                {% if Navigation.NextPost %}
+                <!-- next post -->
+                <a href="{{ Navigation.NextPost.Url }}" rel="next" class="textNext">{{ Navigation.NextPost.Title|truncate(50) }}</a>
+                {% endif %}
+                {% if Navigation.PreviousPost %}
+                <!-- previous post -->
+                <a href="{{ Navigation.PreviousPost.Url }}" rel="next" class="textNext">{{ Navigation.PreviousPost.Title|truncate(50) }}</a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if isSingle and Post.ShowComments %}
+        <div id="anchorComment"></div>
+        <h2 class="h2commentMessage" id="c">{{ Lang.Get('Comments') }}</h2>
+        {#{ Post.Comments }#}
+        <div id="anchorEndComment" ></div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}

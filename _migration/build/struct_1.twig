@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+    {% title %}
+    {% favicon %}
+    {% meta %}
+    
+    <style type="text/css" media="screen">
+        .socialShare {
+            height: 30px;
+            padding: 10px 4px 0px 4px;
+        }
+        .socialShare>div {
+            padding: 0 4px;
+            margin: 0;
+        }
+        .socialShare h3 {
+            display: none;
+        }
+        .socialShare iframe {
+            width: 100px;
+            float: left;
+            border: none;
+        }
+        .box.social li {
+            height: 40px;
+        }
+        .box.social .ob2-facebook {
+            background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-fb.png") no-repeat scroll 0 3px transparent;
+            padding-left: 40px;
+        }
+        .box.social .ob2-twitter {
+            background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-twitter.png") no-repeat scroll 0 3px transparent;
+            padding-left: 40px;
+        }
+        .box.social .ob2-rss {
+            background: url("http://assets.over-blog-kiwi.com/themes/1/images/social-rss.png") no-repeat scroll 0 3px transparent;
+            padding-left: 40px;
+        }
+        .box.social li a {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .box.social li a.link {
+            color: #aeb8c2;
+            display: block;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: -2px;
+            max-width: 240px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+    <link type="text/css" href="http://fdata.over-blog.net/99/00/00/02/csscombos/common.css?kiwi" rel="stylesheet" />
+    {% if Custom('ob_style_common') %}
+    <link type="text/css" href="{{ Custom('ob_style_common') }}" rel="stylesheet" />
+    {% endif %}
+    {% if Custom('ob_style_variation') %}
+    <link type="text/css" href="{{ Custom('ob_style_variation') }}" rel="stylesheet" />
+    {% endif %}
+    
+    {# Custom css #}
+    {% if Custom('ob_style_custom_global') %}
+    <link type="text/css" href="{{ Custom('ob_style_custom_global') }}" rel="stylesheet" />
+    {% endif %}
+    {% if isSingle %}
+        {% if isPage %}
+            {% if Custom('ob_style_custom_pages') %}
+    <link type="text/css" href="{{ Custom('ob_style_custom_pages') }}" rel="stylesheet" />
+            {% else %}
+                {% if Custom('ob_style_custom_articles') %}
+    <link type="text/css" href="{{ Custom('ob_style_custom_articles') }}" rel="stylesheet" />
+                {% endif %}
+            {% endif %}
+        {% else %}
+            {% if Custom('ob_style_custom_articles') %}
+    <link type="text/css" href="{{ Custom('ob_style_custom_articles') }}" rel="stylesheet" />
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if Custom('ob_style_custom_home') %}
+    <link type="text/css" href="{{ Custom('ob_style_custom_home') }}" rel="stylesheet" />
+        {% else %}
+            {% if Custom('ob_style_custom_articles') %}
+    <link type="text/css" href="{{ Custom('ob_style_custom_articles') }}" rel="stylesheet" />
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    
+    <link rel="stylesheet" href="http://fdata.over-blog.net/99/00/00/02/csscombos/ob-print.css" type="text/css" media="print" />
+    
+    <meta name="constant:displayArticlesLimit" content="20" />
+    
+    <meta name="string:ob_style_common:Theme common stylesheet" group="DEV !!" />
+    <meta name="string:ob_style_variation:Theme variation stylesheet" group="DEV !!" />
+    <meta name="string:ob_style_custom_global:Theme custom stylesheet global" group="DEV !!" />
+    <meta name="string:ob_style_custom_home:Theme custom stylesheet home" group="DEV !!" />
+    <meta name="string:ob_style_custom_articles:Theme custom stylesheet articles" group="DEV !!" />
+    <meta name="string:ob_style_custom_pages:Theme custom stylesheet pages" group="DEV !!" />
+    
+    <meta name="list:ob_header_display:In header, display:" group="Header" items="blog title,picture,free text" default="blog title" />
+    <meta name="image:ob_header_picture:Header picture" group="Header" />
+    <meta name="string:ob_header_freetext:Header free text" group="Header" />
+    <meta name="string:ob_header_id:Footer free text HTML ID" group="Header" />
+    
+    <meta name="string:ob_menu_2_label:Menu 2 label" group="Menu" />
+    <meta name="string:ob_menu_2_link:Menu 2 link" group="Menu" />
+    <meta name="string:ob_menu_2_label:Menu 2 label" group="Menu" />
+    <meta name="string:ob_menu_2_link:Menu 2 link" group="Menu" />
+    <meta name="string:ob_menu_3_label:Menu 3 label" group="Menu" />
+    <meta name="string:ob_menu_3_link:Menu 3 link" group="Menu" />
+    <meta name="string:ob_menu_4_label:Menu 4 label" group="Menu" />
+    <meta name="string:ob_menu_4_link:Menu 4 link" group="Menu" />
+    <meta name="string:ob_menu_5_label:Menu 5 label" group="Menu" />
+    <meta name="string:ob_menu_5_link:Menu 5 link" group="Menu" />
+    <meta name="string:ob_menu_6_label:Menu 6 label" group="Menu" />
+    <meta name="string:ob_menu_6_link:Menu 6 link" group="Menu" />
+    
+    <meta name="list:ob_display_post:Display post as" group="Content" items="all,snippets" default="snippets" />
+    <meta name="string:ob_text_publishedby:“Published by”" default="Published by" group="Content" />
+    <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Content" />
+    
+    <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+    <meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
+    <meta name="list:custom_facebook_comments_color_theme:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+    
+    <meta name="boolean:ob_widget_presentation:Display widget “Blog presentation”" group="Widget Presentation" default="true" />
+    <meta name="string:ob_widget_presentation_id:ID HTML" group="Widget Presentation" />
+    
+    <meta name="boolean:ob_widget_profile:Display widget “Author profile”" group="Widget Profile" default="true" />
+    <meta name="string:ob_widget_profile_id:ID HTML" group="Widget Profile" />
+    
+    <meta name="boolean:ob_widget_freetext_2:Display widget #2 “Free text”" group="Widget #2 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_2_title:#2 “Free text” title" group="Widget #2 Free text" />
+    <meta name="string:ob_widget_freetext_2_text:#2 “Free text” text" group="Widget #2 Free text" />
+    <meta name="string:ob_widget_freetext_2_id:ID HTML" group="Widget #2 Free text" />
+    
+    <meta name="boolean:ob_widget_search:Display widget “Search”" group="Widget Search" default="true" />
+    <meta name="string:ob_widget_search_id:ID HTML" group="Widget Search" />
+    <meta name="string:ob_widget_search_id:ID HTML" group="Widget Search" />
+    
+    <meta name="boolean:ob_widget_freetext_2:Display widget #2 “Free text”" group="Widget #2 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_2_title:#2 “Free text” title" group="Widget #2 Free text" />
+    <meta name="string:ob_widget_freetext_2_text:#2 “Free text” text" group="Widget #2 Free text" />
+    <meta name="string:ob_widget_freetext_2_id:ID HTML" group="Widget #2 Free text" />
+    
+    <meta name="boolean:ob_widget_archives:Display widget “Archives”" group="Widget Archives" default="true" />
+    <meta name="boolean:ob_widget_archives_count:Display posts count" group="Widget Archives" default="true" />
+    <meta name="string:ob_widget_archives_id:ID HTML" group="Widget Archives" />
+    
+    <meta name="boolean:ob_widget_freetext_3:Display widget #3 “Free text”" group="Widget #3 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_3_title:#3 “Free text” title" group="Widget #3 Free text" />
+    <meta name="string:ob_widget_freetext_3_text:#3 “Free text” text" group="Widget #3 Free text" />
+    <meta name="string:ob_widget_freetext_3_id:ID HTML" group="Widget #3 Free text" />
+    
+    <meta name="boolean:ob_widget_pages:Display widget “Pages list”" group="Widget Pages List" default="true" />
+    <meta name="string:ob_widget_pages_id:ID HTML" group="Widget Pages List" />
+    
+    <meta name="boolean:ob_widget_freetext_4:Display widget #4 “Free text”" group="Widget #4 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_4_title:#4 “Free text” title" group="Widget #4 Free text" />
+    <meta name="string:ob_widget_freetext_4_text:#4 “Free text” text" group="Widget #4 Free text" />
+    <meta name="string:ob_widget_freetext_4_id:ID HTML" group="Widget #4 Free text" />
+    
+    <meta name="boolean:ob_widget_tags:Display widget “Tags”" group="Widget Tags" default="true" />
+    <meta name="boolean:ob_widget_tags_count:Display posts count" group="Widget Tags" default="true" />
+    <meta name="string:ob_widget_tags_id:ID HTML" group="Widget Tags" />
+    
+    <meta name="boolean:ob_widget_freetext_5:Display widget #5 “Free text”" group="Widget #5 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_5_title:#5 “Free text” title" group="Widget #5 Free text" />
+    <meta name="string:ob_widget_freetext_5_text:#5 “Free text” text" group="Widget #5 Free text" />
+    <meta name="string:ob_widget_freetext_5_id:ID HTML" group="Widget #5 Free text" />
+    
+    <meta name="boolean:ob_widget_emailnotification:Display widget “Newsletter”" group="Widget Newsletter" default="true" />
+    <meta name="string:ob_widget_emailnotification_id:ID HTML" group="Widget Newsletter" />
+    
+    <meta name="boolean:ob_widget_freetext_6:Display widget #6 “Free text”" group="Widget #6 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_6_title:#6 “Free text” title" group="Widget #6 Free text" />
+    <meta name="string:ob_widget_freetext_6_text:#6 “Free text” text" group="Widget #6 Free text" />
+    <meta name="string:ob_widget_freetext_6_id:ID HTML" group="Widget #6 Free text" />
+    
+    <meta name="boolean:ob_widget_blogroll:Display widget “Blog roll”" group="Widget Blog Roll" default="false" />
+    <meta name="string:ob_widget_blogroll_2_label:#2 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_2_link:#2 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_2_label:#2 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_2_link:#2 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_3_label:#3 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_3_link:#3 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_4_label:#4 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_4_link:#4 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_5_label:#5 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_5_link:#5 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_6_label:#6 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_6_link:#6 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_7_label:#7 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_7_link:#7 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_8_label:#8 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_8_link:#8 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_9_label:#9 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_9_link:#9 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_20_label:#20 Blog name" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_20_link:#20 Blog URL" group="Widget Blog Roll" />
+    <meta name="string:ob_widget_blogroll_id:ID HTML" group="Widget Blog Roll" />
+    
+    <meta name="boolean:ob_widget_freetext_7:Display widget #7 “Free text”" group="Widget #7 Free text" default="false" />
+    <meta name="string:ob_widget_freetext_7_title:#7 “Free text” title" group="Widget #7 Free text" />
+    <meta name="string:ob_widget_freetext_7_text:#7 “Free text” text" group="Widget #7 Free text" />
+    <meta name="string:ob_widget_freetext_7_id:ID HTML" group="Widget #7 Free text" />
+    
+    <meta name="boolean:ob_widget_promo:Display widget “Promo”" group="Widget Promo" default="true" />
+    
+    <meta name="boolean:ob_widget_social:Display widget “Social”" group="Widget Social" default="true" />
+    <meta name="string:twitter_username:label.twitterUsername" group="Widget Social" />
+    <meta name="string:facebook_username:label.facebookUsername" group="Widget Social" />
+    
+    <meta name="boolean:ob_footer_display:Display footer free text" group="Footer" />
+    <meta name="string:ob_footer_freetext:Footer free text" group="Footer" />
+    <meta name="string:ob_footer_id:Footer free text Header HTML ID" group="Footer" />
+</head>
+<body>
+
+<div id="global">
+
+    <div id="ln_0" class="ln">
+        <div id="cl_0_0" class="cl">
+            <div class="column_content">
+                <div{% if Custom('ob_header_id') %} id="{{ Custom('ob_header_id') }}"{% endif %}>
+                    <div id="header">
+                        <div id="top">
+                            {% if Custom('ob_header_display') == 'blog title' %}
+                            <h1>
+                                <a href="{{ Blog.Url }}">
+                                    {{ Blog.Title }}
+                                </a>
+                            </h1>
+                            {% elseif Custom('ob_header_display') == 'free text' %}
+                            {{ Custom('ob_header_freetext')}}
+                            {% elseif Custom('ob_header_picture') is not empty %}
+                            <a href="{{ Blog.Url }}" class="topLien toplinkImg nofont">
+                                <img src="{{ Custom('ob_header_picture') }}" alt="{{ Blog.Title }}" />
+                            </a>
+                            {% endif %}
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div id="ln_1" class="ln">
+        <div id="cl_1_0" class="cl">
+            <div class="column_content">
+                {# Widgets #}
+                
+                {# Presentation #}
+                {% if Custom('ob_widget_presentation') %}
+                <div class="box presentation" >
+                    <div class="box-titre"><h2><span>{{ Lang.Get('Presentation')|title }}</span></h2></div>
+                    <div class="box-content">
+                        <ul>
+                            {% if Blog.Title %}
+                            <li>
+                                <strong>
+                                    <label>{{ Lang.Get('Blog')|title }}</label>
+                                </strong> :
+                                {{ Blog.Title }}
+                            </li>
+                            {% endif %}
+                            {% if Blog.Avatar %}
+                            <li>
+                                <a href="{{ Blog.Url }}">
+                                    <img src="{{ Blog.Avatar|resize(200) }}" alt="{{ Blog.Title }}" />
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if Blog.Description %}
+                            <li>
+                                <strong>
+                                    <label>
+                                        {{ Lang.Get('Description') }}
+                                    </label>
+                                </strong> :
+                                {{ Blog.Description }}
+                            </li>
+                            {% endif %}
+                            <li>
+                                <a class="linkContact"
+                                    href="/contact">
+                                    {{ Lang.Get('Contact') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Profile #}
+                {% if Custom('ob_widget_profile') %}
+                <div class="box profil">
+                    <div class="box-titre">
+                        <h2>
+                            <span>{{ Lang.Get('Profile')|title }}</span>
+                        </h2>
+                    </div>
+                    <div class="box-content">
+                        <ul>
+                            {% if Blog.Owner.Nickname %}
+                            <li>
+                                <strong>
+                                    <label>
+                                        {{ Lang.Get('Name')|title}} :
+                                    </label>
+                                </strong>
+                                {{ Blog.Owner.Nickname }}
+                            </li>
+                            {% endif %}
+                            {% if Blog.Owner.Avatar %}
+                            <li>
+                                <img    src="{{ Blog.Owner.Avatar|resize(200) }}"
+                                        alt="{{ Blog.Owner.Bio }}" />
+                            </li>
+                            {% endif %}
+                            {% if Blog.Owner.Bio %}
+                            <li>
+                                <strong>
+                                    <label>
+                                        {{ Lang.Get('about me:')|title }}
+                                    </label>
+                                </strong>
+                                {{ Blog.Owner.Bio }}
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div>
+                </div>
+                {% endif %}
+                
+                {# Free text 2 #}
+                {% if Custom('ob_widget_freetext_2') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_2_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_2_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Search #}
+                {% if Custom('ob_widget_search') %}
+                <div class="box recherche" >
+                    <div class="box-titre"><h2><span>{{ Lang.Get('search for')|title }}</span></h2></div>
+                    <div class="box-content">
+                        {% search %}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Free text 2 #}
+                {% if Custom('ob_widget_freetext_2') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_2_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_2_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Archives #}
+                {% if Custom('ob_widget_archives') %}
+                <div class="box archive ">
+                    <div class="box-titre"><h2><span>{{ Lang.Get('Archives')|title }}</span></h2></div>
+                    <div class="box-content">
+                        <ul>
+                            {% list Blog.Archives %}
+                            {% list Archive.Months %}
+                            <li>
+                                <a href="{{ Month.Url }}">
+                                    {{ Month.Name }} {{ Archive.Year }}
+                                </a>
+                                {% if Custom('ob_widget_archives_count') %}
+                                ({{ Month.PostCount }})
+                                {% endif %}
+                            </li>
+                            {% endlist %}
+                            {% endlist %}
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Free text 3 #}
+                {% if Custom('ob_widget_freetext_3') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_3_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_3_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+        
+                {# Pages #}
+                {% if Custom('ob_widget_pages') %}
+                <div class="box pages" >
+                    <div class="box-titre"><h2><span>{{ Lang.Get('Pages List')|title }}</span></h2></div>
+                    <div class="box-content">
+                        <ul>
+                            {% list Blog.Pages %}
+                            <li>
+                                <a href="{{ Page.Url }}" title="{{ Page.Title }}">
+                                    {{ Page.Title }}
+                                </a>
+                            </li>
+                            {% endlist %}
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Free text 4 #}
+                {% if Custom('ob_widget_freetext_4') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_4_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_4_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Tags #}
+                {% if Custom('ob_widget_tags') %}
+                <div class="box categorie" >
+                    <div class="box-titre"><h2><span>{{ Lang.Get('Tags')|title }}</span></h2></div>
+                    <div class="box-content">
+                        <ul>
+                            {% list Blog.PostsTags %}
+                            <li>
+                                <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
+                                {% if Custom('ob_widget_tags_count') %}
+                                ({{ PostsTag.PostCount }})
+                                {% endif %}
+                            </li>
+                            {% endlist %}
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div>
+                </div>
+                {% endif %}
+                
+                {# Free text 5 #}
+                {% if Custom('ob_widget_freetext_5') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_5_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_5_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Newsletter #}
+                {% if Custom('ob_widget_emailnotification') %}
+                <div class="box newsletter">
+                    <div class="box-titre"><h2><span>{{ Lang.Get('Newsletter')|title }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Lang.Get('Subscribe to be notified about future posts.') }}
+                        {% email_notification %}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Free text 6 #}
+                {% if Custom('ob_widget_freetext_6') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_6_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_6_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Blog roll #}
+                {% if Custom('ob_widget_blogroll') %}
+                <div class="box lien">
+                    <div class="box-titre"><h2><span>{{ Lang.Get('links')|title }}</span></h2></div>
+                    <div class="box-content">
+                        <ul>
+                            {% if Custom('ob_widget_blogroll_2_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_2_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_2_label') }}">{{ Custom('ob_widget_blogroll_2_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_2_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_2_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_2_label') }}">{{ Custom('ob_widget_blogroll_2_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_3_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_3_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_3_label') }}">{{ Custom('ob_widget_blogroll_3_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_4_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_4_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_4_label') }}">{{ Custom('ob_widget_blogroll_4_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_5_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_5_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_5_label') }}">{{ Custom('ob_widget_blogroll_5_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_6_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_6_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_6_label') }}">{{ Custom('ob_widget_blogroll_6_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_7_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_7_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_7_label') }}">{{ Custom('ob_widget_blogroll_7_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_8_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_8_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_8_label') }}">{{ Custom('ob_widget_blogroll_8_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_9_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_9_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_9_label') }}">{{ Custom('ob_widget_blogroll_9_label') }}</a>
+                            </li>
+                            {% endif %}
+                            {% if Custom('ob_widget_blogroll_20_label') %}
+                            <li>
+                                <a  href="{{ Custom('ob_widget_blogroll_20_link') }}"
+                                    class="popup"
+                                    title="{{ Custom('ob_widget_blogroll_20_label') }}">{{ Custom('ob_widget_blogroll_20_label') }}</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Free text 7 #}
+                {% if Custom('ob_widget_freetext_7') %}
+                <div class="box text" >
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_7_title') }}</span></h2></div>
+                    <div class="box-content">
+                        {{ Custom('ob_widget_freetext_7_text') }}
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Promo #}
+                {% if Custom('ob_widget_promo') %}
+                <div class="box promo">
+                    <div class="box-content">
+                        GRRAAA
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+                
+                {# Social #}
+                {% if Custom('ob_widget_social') %}
+                <div class="box social">
+                    <div class="box-titre"><h2><span>{{ Lang.Get('Follow us') }}</span></h2></div>
+                    <div class="box-content">
+                        <ul>
+                            {% if Custom('facebook_username') is not empty %}
+                                <li class="ob2-facebook">
+                                    <a class="ob2-follow" href="http://facebook.com/{{ Custom('facebook_username') }}">{{ Lang.Get('Follow me on') }} Facebook</a>
+                                    <a class="ob2-link" href="http://facebook.com/{{ Custom('facebook_username') }}">http://facebook.com/{{ Custom('facebook_username') }}</a>
+                                </li>
+                            {% endif %}
+                            {% if Custom('twitter_username') is not empty %}
+                                <li class="ob2-twitter">
+                                    <a class="ob2-follow" href="http://twitter.com/{{ Custom('twitter_username') }}">{{ Lang.Get('Follow me on') }} Twitter</a>
+                                    <a class="ob2-link" href="http://twitter.com/{{ Custom('twitter_username') }}">http://twitter.com/{{ Custom('twitter_username') }}</a>
+                                </li>
+                            {% endif %}
+                            <li class="ob2-rss">
+                                <a class="ob2-follow" href="{{ Blog.RssUrl }}">{{ Lang.Get('Subscribe to the rss feed') }}</a>
+                                <a class="ob2-link" href="{{ Blog.RssUrl }}">{{ Blog.Url }}{{ Blog.RssUrl }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+                </div>
+                {% endif %}
+        
+                {# end sidebar #}
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <div id="cl_1_1" class="cl">
+            <div class="column_content">
+                {% if Custom('ob_menu_2_label') %}
+                <div id="menuob">
+                    {% if Custom('ob_menu_2_label') %}<a href="{{ Custom('ob_menu_2_link') }}">{{ Custom('ob_menu_2_label') }}</a>{% endif %}
+                    {% if Custom('ob_menu_2_label') %}<a href="{{ Custom('ob_menu_2_link') }}">{{ Custom('ob_menu_2_label') }}</a>{% endif %}
+                    {% if Custom('ob_menu_3_label') %}<a href="{{ Custom('ob_menu_3_link') }}">{{ Custom('ob_menu_3_label') }}</a>{% endif %}
+                    {% if Custom('ob_menu_4_label') %}<a href="{{ Custom('ob_menu_4_link') }}">{{ Custom('ob_menu_4_label') }}</a>{% endif %}
+                    {% if Custom('ob_menu_5_label') %}<a href="{{ Custom('ob_menu_5_link') }}">{{ Custom('ob_menu_5_label') }}</a>{% endif %}
+                    {% if Custom('ob_menu_6_label') %}<a href="{{ Custom('ob_menu_6_link') }}">{{ Custom('ob_menu_6_label') }}</a>{% endif %}
+                </div>
+                {% endif %}
+                
+                {% if isSearch %}
+                <div class="divTitleSearch">
+                    <h2>Résultats pour "{{ Search.Keyword }}"</h2>
+                </div>
+                <div class="divSearchResults">
+                    {% if Posts is not empty %}
+                    {% list Posts %}
+                    <div class="searchResult" style="margin-bottom:10px;">
+                        <h3><a href="{{ Post.Url }}">{{ Post.Title }}</a></h3>
+                        <div>{{ Post.Snippet }}</div>
+                        {{ Post.Date|datel(Lang.Get('simple date format')) }}
+                    <div class="clear"></div>
+                    {% endlist %}
+                    {% else %}
+                    <p>{{ Lang.Get('no results for this search') }}</p>
+                    {% endif %}
+                </div>
+                {% elseif isArchive %}
+                {% if Posts %}
+                <ul>
+                    {% list Posts %}
+                    <li class="listArticles  article_item_{% if loop.index % 2 %}even{% else %}odd{% endif %}">
+                        <a href="{{ Post.Url }}">{{ Post.Title|default(Post.Snippet|truncate(100)) }}</a>
+                        (<span class="DateListe">{{ Post.Date|datel(Lang.Get('simple date format')) }}</span>)<br />
+                        <div class="resumeArticle">
+                            {{ Post.Snippet }}
+                            <div class="clear"></div>
+                        </div>
+                    </li>
+                    {% endlist %}                               
+                </ul>
+                {% endif %}
+                {% else %}
+                
+                <div class="articles{% if Custom('ob_display_post') == 'snippets' %} extraits{% endif %}">
+                    <div>
+                        <div class="before_articles">
+                            <div class="pagination center">
+                                {% if Navigation.NextPage %}
+                                <!-- next page -->
+                                <a href="{{ Navigation.NextPage }}" rel="next" class="textNext">{{ Lang.Get('next page') }}</a>
+                                {% endif %}
+                                {% if Navigation.PreviousPage %}
+                                <!--last page -->
+                                <a href="{{ Navigation.PreviousPage }}" rel="prev" class="textPrevious">{{ Lang.Get('previous page') }}</a>
+                                {% endif %}
+                
+                                {% if Navigation.NextPost %}
+                                <!-- next post -->
+                                <a href="{{ Navigation.NextPost.Url }}" rel="next" class="textNext">{{ Navigation.NextPost.Title|truncate(50) }}</a>
+                                {% endif %}
+                                {% if Navigation.PreviousPost %}
+                                <!-- previous post -->
+                                <a href="{{ Navigation.PreviousPost.Url }}" rel="next" class="textNext">{{ Navigation.PreviousPost.Title|truncate(50) }}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                
+                        {% list Posts %}
+                
+                        {% if Custom('ob_display_post') == 'all' or isSingle or isTag %}
+                            {# Full post #}
+                
+                        <div class="article article_{% if loop.index % 2 %}even{% else %}odd{% endif %}" id="article{{ loop.index }}" itemscope itemtype="http://schema.org/BlogPosting">
+                
+                            <div class="option beforeArticle">
+                                <div class="date">
+                                    <span class="text">{{ Post.Date|datel(Lang.Get("Default date format")) }}</span>
+                                    <span class="dow">{{ Post.Date|datel('c')}}</span>
+                                    <span class="day">{{ Post.Date|datel('dd')}}</span>
+                                    <span class="month"><span class="separator">/</span>{{ Post.Date|datel('MM')}}</span>
+                                    <span class="litteralMonth"><span class="separator">/</span>{{ Post.Date|datel('MMMM')}}</span>
+                                    <span class="year"><span class="separator">/</span>{{ Post.Date|datel('y')}}</span>
+                                    <span class="hour">{{ Post.Date|datel('HH:mm')}}</span>
+                                </div>
+                            </div>
+                            
+                            {% if Post.Title %}
+                            <div class="divTitreArticle">
+                                <h2>
+                                    <a href="{{ Post.Url }}" class="titreArticle" title="{{ Post.Title }}">{{ Post.Title }}</a>
+                                </h2>
+                            </div>
+                            {% endif %}
+                
+                            <div class="contenuArticle">
+                                {{ Post.Body }}
+                
+                                {% if Post.Title is empty %}
+                                <p>
+                                    <a href="{{ Post.Url }}">
+                                        {{ Lang.Get('read more') }}
+                                    </a>
+                                </p>
+                                {% endif %}
+                                <div class="clear"></div>
+                            </div>
+                
+                            <div class="clear"></div>
+                
+                            <div class="socialShare">
+                                {{ Post.Share }}
+                            </div>
+                
+                            <div class="clear"></div>
+                
+                            <div class="option afterArticle">
+                                {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
+                                {% if Post.Tags is not empty %}
+                                <span class="topic">
+                                    <span class="separator">-</span>
+                                    {{ Lang.Get('in') }}
+                                    {% list Post.Tags %}
+                                    <a href="{{ Tag.Url }}" title="{{ Tag.Title }}" class="linkTopic">{{ Tag.Title }}</a>
+                                    {% endlist %}
+                                </span>
+                                {% endif %}
+                                {% if Post.ShowComments %}
+                                <br/>
+                                <span class="spanAddComment">
+                                    <a  href="{{ Post.Url }}#anchorComment"
+                                        class="linkAddComment">{{ Lang.Get('comment this article') }}</a>
+                                </span>
+                                {{ Post.CommentCount(Lang.Get('seencomment'), Lang.Get('seencomments'), ' ') }}
+                                {% endif %}
+                            </div>
+                
+                        </div>
+                
+                        {% else %}
+                            {# Extract post #}
+                
+                            <div class="extraitArticle  article_summary_{% if loop.index % 2 %}even{% else %}odd{% endif %}" id="extraitArticle{{ loop.index }}">
+                                <div class="dateExtrait">
+                                    <div class="date">
+                                        <span class="text">{{ Post.Date|datel(Lang.Get("Default date format")) }}</span>
+                                        <span class="dow">{{ Post.Date|datel('c')}}</span>
+                                        <span class="day">{{ Post.Date|datel('dd')}}</span>
+                                        <span class="month"><span class="separator">/</span>{{ Post.Date|datel('MM')}}</span>
+                                        <span class="litteralMonth"><span class="separator">/</span>{{ Post.Date|datel('MMMM')}}</span>
+                                        <span class="year"><span class="separator">/</span>{{ Post.Date|datel('y')}}</span>
+                                        <span class="hour">{{ Post.Date|datel('HH:mm')}}</span>
+                                    </div>
+                                </div>
+                                <div class="infoExtrait">
+                                    <span class="titreExtrait"><a href="{{ Post.Url }}" class="titreExtrait">{{ Post.Title }}</a></span>
+                                </div>
+                                <hr class="hrExtrait" />
+                                <div class="extrait">
+                                    {% if Post.Cover %}
+                                    <a href="{{ Post.Url }}">
+                                        <img class="imgExtraitCon" src="{{ Post.Cover|resize(150) }}" alt="{{ Post.Title }}" />
+                                    </a>
+                                    <br />
+                                    {% endif %}
+                                    {{ Post.Snippet }}
+                                    {% if Post.Title is empty %}
+                                    <br />
+                                    <a href="{{ Post.Url }}">
+                                        {{ Lang.Get('read more') }}
+                                    </a>
+                                    {% endif %}
+                                    <div class="clear"></div>
+                                </div>
+                
+                                <div class="socialShare">
+                                    {{ Post.Share }}
+                                </div>
+                
+                                <div class="plusExtrait">
+                                    {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
+                                    {% if Post.ShowComments %}
+                                    <span class="spanAddComment">
+                                        <a  href="{{ Post.Url }}#anchorComment"
+                                            class="linkAddComment">{{ Lang.Get('comment this article') }}</a>
+                                    </span>
+                                    {{ Post.CommentCount(Lang.Get('seencomment'), Lang.Get('seencomments'), ' ') }}
+                                    {% endif %}
+                                </div>
+                                
+                            </div>
+                
+                            {% endif %}
+                
+                        {% endlist %}
+                    
+                        <div class="after_articles">
+                            <div class="pagination center">
+                                {% if Navigation.NextPage %}
+                                <!-- next page -->
+                                <a href="{{ Navigation.NextPage }}" rel="next" class="textNext">{{ Lang.Get('next page') }}</a>
+                                {% endif %}
+                                {% if Navigation.PreviousPage %}
+                                <!-- previous page -->
+                                <a href="{{ Navigation.PreviousPage }}" rel="prev" class="textPrevious">{{ Lang.Get('previous page') }}</a>
+                                {% endif %}
+                
+                                {% if Navigation.NextPost %}
+                                <!-- next post -->
+                                <a href="{{ Navigation.NextPost.Url }}" rel="next" class="textNext">{{ Navigation.NextPost.Title|truncate(50) }}</a>
+                                {% endif %}
+                                {% if Navigation.PreviousPost %}
+                                <!-- previous post -->
+                                <a href="{{ Navigation.PreviousPost.Url }}" rel="next" class="textNext">{{ Navigation.PreviousPost.Title|truncate(50) }}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                
+                        {% if isSingle and Post.ShowComments %}
+                        <div id="anchorComment"></div>
+                        <h2 class="h2commentMessage" id="c">{{ Lang.Get('Comments') }}</h2>
+                        {#{ Post.Comments }#}
+                        <div id="anchorEndComment" ></div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="clear"></div>
+    </div>
+
+    <div id="ln_2" class="ln">
+        <div id="cl_2_0" class="cl">
+            <div class="column_content">
+                <div id="footer" >
+                    {% if Custom('ob_footer_display') %}
+                    <div{% if Custom('ob_footer_id') %} id="{{ Custom('ob_footer_id') }}"{% endif %}>
+                        {{ Custom('ob_footer_freetext')}}
+                        <div class="clear"></div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>  
+    </div>
+</div>
+
+<div id="legals" style="visibility:visible!important; display:block !important; height:auto!important; width:100%!important; text-align:center!important; clear:both;">
+    {{ Lang.Get('Create a free blog on overblog.com') }} - 
+    <a  href="/contact"
+        style="visibility:visible!important; display:inline!important; height:auto!important; width:auto!important;">
+        {{ Lang.Get('Contact') }}
+    </a> -
+    <a  href="/terms"
+        rel="nofollow"
+        style="visibility:visible!important; display:inline!important; height:auto!important; width:auto!important;">
+        {{ Lang.Get('Terms') }}
+    </a> -
+    <!--<a href="#" class="popup">
+        {{ Lang.Get('Revenue Share') }}
+    </a> - -->
+    <!--<a href="#" rel="nofollow"
+        style="visibility:visible!important; display:inline!important; height:auto!important; width:auto!important;">
+        {{ Lang.Get('Report abuse') }}
+    </a>-->
+</div>
+
+</body>
+</html>

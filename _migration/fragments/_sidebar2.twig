@@ -1,0 +1,214 @@
+{# Pages #}
+{% if Custom('ob_widget_pages') %}
+<div class="box pages" >
+    <div class="box-titre"><h2><span>{{ Lang.Get('Pages List')|title }}</span></h2></div>
+    <div class="box-content">
+        <ul>
+            {% list Blog.Pages %}
+            <li>
+                <a href="{{ Page.Url }}" title="{{ Page.Title }}">
+                    {{ Page.Title }}
+                </a>
+            </li>
+            {% endlist %}
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Free text 4 #}
+{% if Custom('ob_widget_freetext_4') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_4_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_4_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Tags #}
+{% if Custom('ob_widget_tags') %}
+<div class="box categorie" >
+    <div class="box-titre"><h2><span>{{ Lang.Get('Tags')|title }}</span></h2></div>
+    <div class="box-content">
+        <ul>
+            {% list Blog.PostsTags %}
+            <li>
+                <a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a>
+                {% if Custom('ob_widget_tags_count') %}
+                ({{ PostsTag.PostCount }})
+                {% endif %}
+            </li>
+            {% endlist %}
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div>
+</div>
+{% endif %}
+
+{# Free text 5 #}
+{% if Custom('ob_widget_freetext_5') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_5_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_5_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Newsletter #}
+{% if Custom('ob_widget_emailnotification') %}
+<div class="box newsletter">
+    <div class="box-titre"><h2><span>{{ Lang.Get('Newsletter')|title }}</span></h2></div>
+    <div class="box-content">
+        {{ Lang.Get('Subscribe to be notified about future posts.') }}
+        {% email_notification %}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Free text 6 #}
+{% if Custom('ob_widget_freetext_6') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_6_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_6_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Blog roll #}
+{% if Custom('ob_widget_blogroll') %}
+<div class="box lien">
+    <div class="box-titre"><h2><span>{{ Lang.Get('links')|title }}</span></h2></div>
+    <div class="box-content">
+        <ul>
+            {% if Custom('ob_widget_blogroll_2_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_2_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_2_label') }}">{{ Custom('ob_widget_blogroll_2_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_2_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_2_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_2_label') }}">{{ Custom('ob_widget_blogroll_2_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_3_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_3_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_3_label') }}">{{ Custom('ob_widget_blogroll_3_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_4_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_4_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_4_label') }}">{{ Custom('ob_widget_blogroll_4_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_5_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_5_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_5_label') }}">{{ Custom('ob_widget_blogroll_5_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_6_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_6_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_6_label') }}">{{ Custom('ob_widget_blogroll_6_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_7_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_7_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_7_label') }}">{{ Custom('ob_widget_blogroll_7_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_8_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_8_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_8_label') }}">{{ Custom('ob_widget_blogroll_8_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_9_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_9_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_9_label') }}">{{ Custom('ob_widget_blogroll_9_label') }}</a>
+            </li>
+            {% endif %}
+            {% if Custom('ob_widget_blogroll_20_label') %}
+            <li>
+                <a  href="{{ Custom('ob_widget_blogroll_20_link') }}"
+                    class="popup"
+                    title="{{ Custom('ob_widget_blogroll_20_label') }}">{{ Custom('ob_widget_blogroll_20_label') }}</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Free text 7 #}
+{% if Custom('ob_widget_freetext_7') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_7_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_7_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Promo #}
+{% if Custom('ob_widget_promo') %}
+<div class="box promo">
+    <div class="box-content">
+        GRRAAA
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Social #}
+{% if Custom('ob_widget_social') %}
+<div class="box social">
+    <div class="box-titre"><h2><span>{{ Lang.Get('Follow us') }}</span></h2></div>
+    <div class="box-content">
+        <ul>
+            {% if Custom('facebook_username') is not empty %}
+                <li class="ob2-facebook">
+                    <a class="ob2-follow" href="http://facebook.com/{{ Custom('facebook_username') }}">{{ Lang.Get('Follow me on') }} Facebook</a>
+                    <a class="ob2-link" href="http://facebook.com/{{ Custom('facebook_username') }}">http://facebook.com/{{ Custom('facebook_username') }}</a>
+                </li>
+            {% endif %}
+            {% if Custom('twitter_username') is not empty %}
+                <li class="ob2-twitter">
+                    <a class="ob2-follow" href="http://twitter.com/{{ Custom('twitter_username') }}">{{ Lang.Get('Follow me on') }} Twitter</a>
+                    <a class="ob2-link" href="http://twitter.com/{{ Custom('twitter_username') }}">http://twitter.com/{{ Custom('twitter_username') }}</a>
+                </li>
+            {% endif %}
+            <li class="ob2-rss">
+                <a class="ob2-follow" href="{{ Blog.RssUrl }}">{{ Lang.Get('Subscribe to the rss feed') }}</a>
+                <a class="ob2-link" href="{{ Blog.RssUrl }}">{{ Blog.Url }}{{ Blog.RssUrl }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}

@@ -1,0 +1,27 @@
+<div id="ln_0" class="ln">
+    <div id="cl_0_0" class="cl">
+        <div class="column_content">
+            <div{% if Custom('ob_header_id') %} id="{{ Custom('ob_header_id') }}"{% endif %}>
+                <div id="header">
+                    <div id="top">
+                        {% if Custom('ob_header_display') == 'blog title' %}
+                        <h1>
+                            <a href="{{ Blog.Url }}">
+                                {{ Blog.Title }}
+                            </a>
+                        </h1>
+                        {% elseif Custom('ob_header_display') == 'free text' %}
+                        {{ Custom('ob_header_freetext')}}
+                        {% elseif Custom('ob_header_picture') is not empty %}
+                        <a href="{{ Blog.Url }}" class="topLien toplinkImg nofont">
+                            <img src="{{ Custom('ob_header_picture') }}" alt="{{ Blog.Title }}" />
+                        </a>
+                        {% endif %}
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

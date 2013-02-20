@@ -1,0 +1,15 @@
+<div id="ln_2" class="ln">
+    <div id="cl_2_0" class="cl">
+        <div class="column_content">
+            <div id="footer" >
+                {% if Custom('ob_footer_display') %}
+                <div{% if Custom('ob_footer_id') %} id="{{ Custom('ob_footer_id') }}"{% endif %}>
+                    {{ Custom('ob_footer_freetext')}}
+                    <div class="clear"></div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>  
+</div>

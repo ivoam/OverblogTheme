@@ -1,0 +1,152 @@
+{# Presentation #}
+{% if Custom('ob_widget_presentation') %}
+<div class="box presentation" >
+    <div class="box-titre"><h2><span>{{ Lang.Get('Presentation')|title }}</span></h2></div>
+    <div class="box-content">
+        <ul>
+            {% if Blog.Title %}
+            <li>
+                <strong>
+                    <label>{{ Lang.Get('Blog')|title }}</label>
+                </strong> :
+                {{ Blog.Title }}
+            </li>
+            {% endif %}
+            {% if Blog.Avatar %}
+            <li>
+                <a href="{{ Blog.Url }}">
+                    <img src="{{ Blog.Avatar|resize(200) }}" alt="{{ Blog.Title }}" />
+                </a>
+            </li>
+            {% endif %}
+            {% if Blog.Description %}
+            <li>
+                <strong>
+                    <label>
+                        {{ Lang.Get('Description') }}
+                    </label>
+                </strong> :
+                {{ Blog.Description }}
+            </li>
+            {% endif %}
+            <li>
+                <a class="linkContact"
+                    href="/contact">
+                    {{ Lang.Get('Contact') }}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Profile #}
+{% if Custom('ob_widget_profile') %}
+<div class="box profil">
+    <div class="box-titre">
+        <h2>
+            <span>{{ Lang.Get('Profile')|title }}</span>
+        </h2>
+    </div>
+    <div class="box-content">
+        <ul>
+            {% if Blog.Owner.Nickname %}
+            <li>
+                <strong>
+                    <label>
+                        {{ Lang.Get('Name')|title}} :
+                    </label>
+                </strong>
+                {{ Blog.Owner.Nickname }}
+            </li>
+            {% endif %}
+            {% if Blog.Owner.Avatar %}
+            <li>
+                <img    src="{{ Blog.Owner.Avatar|resize(200) }}"
+                        alt="{{ Blog.Owner.Bio }}" />
+            </li>
+            {% endif %}
+            {% if Blog.Owner.Bio %}
+            <li>
+                <strong>
+                    <label>
+                        {{ Lang.Get('about me:')|title }}
+                    </label>
+                </strong>
+                {{ Blog.Owner.Bio }}
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div>
+</div>
+{% endif %}
+
+{# Free text 2 #}
+{% if Custom('ob_widget_freetext_2') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_2_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_2_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Search #}
+{% if Custom('ob_widget_search') %}
+<div class="box recherche" >
+    <div class="box-titre"><h2><span>{{ Lang.Get('search for')|title }}</span></h2></div>
+    <div class="box-content">
+        {% search %}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Free text 2 #}
+{% if Custom('ob_widget_freetext_2') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_2_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_2_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Archives #}
+{% if Custom('ob_widget_archives') %}
+<div class="box archive ">
+    <div class="box-titre"><h2><span>{{ Lang.Get('Archives')|title }}</span></h2></div>
+    <div class="box-content">
+        <ul>
+            {% list Blog.Archives %}
+            {% list Archive.Months %}
+            <li>
+                <a href="{{ Month.Url }}">
+                    {{ Month.Name }} {{ Archive.Year }}
+                </a>
+                {% if Custom('ob_widget_archives_count') %}
+                ({{ Month.PostCount }})
+                {% endif %}
+            </li>
+            {% endlist %}
+            {% endlist %}
+        </ul>
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
+
+{# Free text 3 #}
+{% if Custom('ob_widget_freetext_3') %}
+<div class="box text" >
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_freetext_3_title') }}</span></h2></div>
+    <div class="box-content">
+        {{ Custom('ob_widget_freetext_3_text') }}
+    </div>
+    <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
+</div>
+{% endif %}
