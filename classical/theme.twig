@@ -499,10 +499,12 @@
                                 <div id="slider" class="theme-default">
                                     {% if Custom('pinned_tag') is not empty %}
                                         {% list Blog.TaggedPosts(Custom('pinned_tag'), 10) %}
-                                            {% if TaggedPost.Cover is not empty and PostsTag.Title|lower != Custom('pinned_tag') %}
-                                                <a href="{{ TaggedPost.PermaLink }}" title="{{ TaggedPost.Title }}">
-                                                    <img src="{{ TaggedPost.Cover|resize(622,299)|crop }}" title="{{ Post.Snippet|truncate(60) }}" alt="{{ TaggedPost.Title }}" width="622" height="299" />
-                                                </a>
+                                            {% if TaggedPost.Cover is not empty and PostsTag.Title is not empty %}
+                                                {% if PostsTag.Title|lower != Custom('pinned_tag') %}
+                                                    <a href="{{ TaggedPost.PermaLink }}" title="{{ TaggedPost.Title }}">
+                                                        <img src="{{ TaggedPost.Cover|resize(622,299)|crop }}" title="{{ Post.Snippet|truncate(60) }}" alt="{{ TaggedPost.Title }}" width="622" height="299" />
+                                                    </a>
+                                                {% endif %}
                                             {% endif %}
                                         {% endlist %}
                                     {% else %}
