@@ -220,7 +220,7 @@
         {% if isSingle and Post.ShowComments %}
         <div id="anchorComment"></div>
         <h2 class="h2commentMessage" id="c">{{ Lang.Get('Comments') }}</h2>
-        {#{ Post.Comments }#}
+        {{ Post.Comments }}
         <div id="anchorEndComment" ></div>
         {% endif %}
     </div>
