@@ -1230,7 +1230,9 @@
 			{% endif %}
 
 			<footer id="blog-footer">
-				<p>{{ Lang.Get(Custom('footer_content'))|default('Theme: Twentyeleven &copy; 2012') }} - <span>{{ Lang.Get('Hosted by') }}</span> <a href="http://www.over-blog.com" target="_blank">Overblog</a></p>
+				<p>{{ Lang.Get(Custom('footer_content')) }} 
+					{% if Custom('footer_content') is not empty  %} - {% endif %}
+					<span>{{ Lang.Get('Hosted by') }}</span> <a href="http://www.over-blog.com" target="_blank">Overblog</a></p>
 			</footer>
 		</div>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
