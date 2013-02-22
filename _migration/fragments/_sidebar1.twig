@@ -1,7 +1,7 @@
 {# Presentation #}
 {% if Custom('ob_widget_presentation') %}
 <div class="box presentation" >
-    <div class="box-titre"><h2><span>{{ Lang.Get('Presentation')|title }}</span></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_presentation_title')|title }}</span></h2></div>
     <div class="box-content">
         <ul>
             {% if Blog.Title %}
@@ -44,11 +44,7 @@
 {# Profile #}
 {% if Custom('ob_widget_profile') %}
 <div class="box profil">
-    <div class="box-titre">
-        <h2>
-            <span>{{ Lang.Get('Profile')|title }}</span>
-        </h2>
-    </div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_profile_title')|title }}</span></h2></div>
     <div class="box-content">
         <ul>
             {% if Blog.Owner.Nickname %}
@@ -97,7 +93,7 @@
 {# Search #}
 {% if Custom('ob_widget_search') %}
 <div class="box recherche" >
-    <div class="box-titre"><h2><span>{{ Lang.Get('search for')|title }}</span></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_search_title')|title }}</span></h2></div>
     <div class="box-content">
         {% search %}
     </div>
@@ -119,7 +115,7 @@
 {# Archives #}
 {% if Custom('ob_widget_archives') %}
 <div class="box archive ">
-    <div class="box-titre"><h2><span>{{ Lang.Get('Archives')|title }}</span></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_archives_title')|title }}</span></h2></div>
     <div class="box-content">
         <ul>
             {% list Blog.Archives %}

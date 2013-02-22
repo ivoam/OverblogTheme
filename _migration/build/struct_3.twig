@@ -131,9 +131,11 @@
     <meta name="list:custom_facebook_comments_color_theme:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
     
     <meta name="boolean:ob_widget_presentation:Display widget “Blog presentation”" group="Widget Presentation" default="true" />
+    <meta name="string:ob_widget_presentation_title:Widget title" group="Widget Presentation" />
     <meta name="string:ob_widget_presentation_id:ID HTML" group="Widget Presentation" />
     
     <meta name="boolean:ob_widget_profile:Display widget “Author profile”" group="Widget Profile" default="true" />
+    <meta name="string:ob_widget_profile_title:Widget title" group="Widget Profile" />
     <meta name="string:ob_widget_profile_id:ID HTML" group="Widget Profile" />
     
     <meta name="boolean:ob_widget_freetext_1:Display widget #1 “Free text”" group="Widget #1 Free text" default="false" />
@@ -142,6 +144,7 @@
     <meta name="string:ob_widget_freetext_1_id:ID HTML" group="Widget #1 Free text" />
     
     <meta name="boolean:ob_widget_search:Display widget “Search”" group="Widget Search" default="true" />
+    <meta name="string:ob_widget_search_title:Widget title" group="Widget Search" />
     <meta name="string:ob_widget_search_id:ID HTML" group="Widget Search" />
     
     <meta name="boolean:ob_widget_freetext_2:Display widget #2 “Free text”" group="Widget #2 Free text" default="false" />
@@ -150,6 +153,7 @@
     <meta name="string:ob_widget_freetext_2_id:ID HTML" group="Widget #2 Free text" />
     
     <meta name="boolean:ob_widget_archives:Display widget “Archives”" group="Widget Archives" default="true" />
+    <meta name="string:ob_widget_archives_title:Widget title" group="Widget Archives" />
     <meta name="boolean:ob_widget_archives_count:Display posts count" group="Widget Archives" default="true" />
     <meta name="string:ob_widget_archives_id:ID HTML" group="Widget Archives" />
     
@@ -159,6 +163,7 @@
     <meta name="string:ob_widget_freetext_3_id:ID HTML" group="Widget #3 Free text" />
     
     <meta name="boolean:ob_widget_pages:Display widget “Pages list”" group="Widget Pages List" default="true" />
+    <meta name="string:ob_widget_pages_title:Widget title" group="Widget Pages List" />
     <meta name="string:ob_widget_pages_id:ID HTML" group="Widget Pages List" />
     
     <meta name="boolean:ob_widget_freetext_4:Display widget #4 “Free text”" group="Widget #4 Free text" default="false" />
@@ -167,6 +172,7 @@
     <meta name="string:ob_widget_freetext_4_id:ID HTML" group="Widget #4 Free text" />
     
     <meta name="boolean:ob_widget_tags:Display widget “Tags”" group="Widget Tags" default="true" />
+    <meta name="string:ob_widget_tags_title:Widget title" group="Widget Tags" />
     <meta name="boolean:ob_widget_tags_count:Display posts count" group="Widget Tags" default="true" />
     <meta name="string:ob_widget_tags_id:ID HTML" group="Widget Tags" />
     
@@ -176,6 +182,7 @@
     <meta name="string:ob_widget_freetext_5_id:ID HTML" group="Widget #5 Free text" />
     
     <meta name="boolean:ob_widget_emailnotification:Display widget “Newsletter”" group="Widget Newsletter" default="true" />
+    <meta name="string:ob_widget_emailnotification_title:Widget title" group="Widget Newsletter" />
     <meta name="string:ob_widget_emailnotification_id:ID HTML" group="Widget Newsletter" />
     
     <meta name="boolean:ob_widget_freetext_6:Display widget #6 “Free text”" group="Widget #6 Free text" default="false" />
@@ -184,6 +191,7 @@
     <meta name="string:ob_widget_freetext_6_id:ID HTML" group="Widget #6 Free text" />
     
     <meta name="boolean:ob_widget_blogroll:Display widget “Blog roll”" group="Widget Blog Roll" default="false" />
+    <meta name="string:ob_widget_blogroll_title:Widget title" group="Widget Blog Roll" />
     <meta name="string:ob_widget_blogroll_1_label:#1 Blog name" group="Widget Blog Roll" />
     <meta name="string:ob_widget_blogroll_1_link:#1 Blog URL" group="Widget Blog Roll" />
     <meta name="string:ob_widget_blogroll_2_label:#2 Blog name" group="Widget Blog Roll" />
@@ -326,7 +334,7 @@
                 {# Presentation #}
                 {% if Custom('ob_widget_presentation') %}
                 <div class="box presentation" >
-                    <div class="box-titre"><h2><span>{{ Lang.Get('Presentation')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_presentation_title')|title }}</span></h2></div>
                     <div class="box-content">
                         <ul>
                             {% if Blog.Title %}
@@ -369,11 +377,7 @@
                 {# Profile #}
                 {% if Custom('ob_widget_profile') %}
                 <div class="box profil">
-                    <div class="box-titre">
-                        <h2>
-                            <span>{{ Lang.Get('Profile')|title }}</span>
-                        </h2>
-                    </div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_profile_title')|title }}</span></h2></div>
                     <div class="box-content">
                         <ul>
                             {% if Blog.Owner.Nickname %}
@@ -422,7 +426,7 @@
                 {# Search #}
                 {% if Custom('ob_widget_search') %}
                 <div class="box recherche" >
-                    <div class="box-titre"><h2><span>{{ Lang.Get('search for')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_search_title')|title }}</span></h2></div>
                     <div class="box-content">
                         {% search %}
                     </div>
@@ -444,7 +448,7 @@
                 {# Archives #}
                 {% if Custom('ob_widget_archives') %}
                 <div class="box archive ">
-                    <div class="box-titre"><h2><span>{{ Lang.Get('Archives')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_archives_title')|title }}</span></h2></div>
                     <div class="box-content">
                         <ul>
                             {% list Blog.Archives %}
@@ -722,7 +726,7 @@
                 {# Pages #}
                 {% if Custom('ob_widget_pages') %}
                 <div class="box pages" >
-                    <div class="box-titre"><h2><span>{{ Lang.Get('Pages List')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_pages_title')|title }}</span></h2></div></h2></div>
                     <div class="box-content">
                         <ul>
                             {% list Blog.Pages %}
@@ -752,7 +756,7 @@
                 {# Tags #}
                 {% if Custom('ob_widget_tags') %}
                 <div class="box categorie" >
-                    <div class="box-titre"><h2><span>{{ Lang.Get('Tags')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_tags_title')|title }}</span></h2></div></h2></div>
                     <div class="box-content">
                         <ul>
                             {% list Blog.PostsTags %}
@@ -783,7 +787,7 @@
                 {# Newsletter #}
                 {% if Custom('ob_widget_emailnotification') %}
                 <div class="box newsletter">
-                    <div class="box-titre"><h2><span>{{ Lang.Get('Newsletter')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_emailnotification_title')|title }}</span></h2></div></h2></div>
                     <div class="box-content">
                         {{ Lang.Get('Subscribe to be notified about future posts.') }}
                         {% email_notification %}
@@ -806,7 +810,7 @@
                 {# Blog roll #}
                 {% if Custom('ob_widget_blogroll') %}
                 <div class="box lien">
-                    <div class="box-titre"><h2><span>{{ Lang.Get('links')|title }}</span></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_blogroll_title')|title }}</span></h2></div></h2></div>
                     <div class="box-content">
                         <ul>
                             {% if Custom('ob_widget_blogroll_1_label') %}
@@ -900,7 +904,7 @@
                 {% if Custom('ob_widget_promo') %}
                 <div class="box promo">
                     <div class="box-content">
-                        GRRAAA
+                        
                     </div>
                     <div class="box-footer"><h2><span>&nbsp;</span></h2></div> 
                 </div>
