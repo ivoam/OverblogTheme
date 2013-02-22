@@ -28,6 +28,8 @@
         <meta name="boolean:display_widget_tags:Hide Widget &quot;Tags&quot;" group="Widgets" />
         <meta name="boolean:display_widget_navigation:Hide Widget &quot;Navigation&quot;" group="Widgets" />
         <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
+        <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
+        
         <meta name="string:facebook:Enter your Facebook Username" default="overblog" group="Social" />
         <meta name="string:twitter:Enter your Twitter Username" default="overblog" group="Social" />
         <meta name="list:share_button:Chose your share button" items="Facebook, Twitter, Google +, All" default="All" group="Social">
@@ -750,6 +752,32 @@
                             </div>
                         </div>
                         {% endif %}
+
+                        {# ARCHIVE #}
+                        {% if Custom('display_widget_archives') == false %}
+                            <div class="box archives">
+                                <div class="box-titre">
+                                    <h3><span>{{ Lang.Get('Archives') }}</span></h3>
+                                </div>
+                                <div class="box-content">
+                                    <ul id="archivelist">
+                                    {% list Blog.Archives %}
+                                         <li class="arch_year">
+                                            <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
+                                            <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
+                                                {% list Archive.Months %}
+                                                    {% if Month.PostCount > 0 %}
+                                                        <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">{{ Month.PostCount }}</span></li>
+                                                    {% endif %}
+                                                {% endlist %}
+                                            </ul>
+                                        </li>
+                                    {% endlist %}
+                                    </ul>
+
+                            </div>
+                        {% endif %}
+
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -802,14 +830,13 @@
                 js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-        </script>
+       
 
-        <!-- Twitter Script -->
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");</script>
+        /*-- Twitter Script --*/
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs")
 
-
-        <!-- Google + button -->
-        <script type="text/javascript">
+        /*-- Google + button --*/
+       
           window.___gcfg = {lang: '{{ Blog.Lang }}'};
 
           (function() {
@@ -819,7 +846,31 @@
           })();
         </script>
     {% endif %}
-        {% if Custom('google_analytics') is not empty %}
+
+    {% if Custom('display_widget_archives') == false %}
+        <script type="text/javascript">
+            // Blog archives
+            // Hide years without months
+            $(".arch_year").each(function() {
+                if ($(this).find(".arch_month li").length == 0) {
+                    $(this).hide();
+                }
+            });
+
+            $(".arch_month").hide();
+            
+            var currentYear = {{ "now"|date("Y") }};
+            
+            $(".arch_year > a[data-year="+currentYear+"]").siblings(".arch_month").show();
+
+            $('.arch_year > a').click(function() {
+                $(this).siblings(".arch_month").slideToggle(500);
+                return false;
+            });
+        </script>
+    {% endif %}
+
+    {% if Custom('google_analytics') is not empty %}
         <!-- Google Analytics -->
          <script type="text/javascript">
             window.google_analytics_uacct = '{{Custom('google_analytics')}}';
@@ -834,6 +885,6 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-        {% endif %}
+    {% endif %}
     </body>
 </html>
