@@ -1114,8 +1114,8 @@
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
                     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
                 }());
-            {% endif %}
-
+            
+            {% elseif Custom('comment') == 'Facebook' %}
             // Facebook comments + share
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
@@ -1125,7 +1125,7 @@
                     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
                     fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
-
+            {% endif %}
             // Twitter share + tweets
             !function(d,s,id){
                 var js, fjs = d.getElementsByTagName(s)[0];
