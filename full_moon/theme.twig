@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ Blog.Lang|default('en') }}">
+<html lang="{{ Blog.Lang|default('en') }}" itemscope="" itemtype="http://schema.org/Blog">
     <head>
         <!-- shortcut:[Meta] -->
         <!-- title -->
@@ -749,9 +749,9 @@
 
                                             {% if isSingle == false and Post.ShowComments is not empty %}
                                                 {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-                                                    <a class="comment-number" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}" class="comments"></a>
+                                                    <a class="comment-number comments" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
                                                 {% else %}
-                                                    <a class="comment-number" href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}" class="comments">
+                                                    <a class="comment-number comments" href="{{ Post.PermaLink }}#comments" title="{{ Lang.Get('comments') }}">
                                                         {% if Custom("comment") == "Facebook" %}
                                                             <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
                                                             {{ Lang.Get('comment(s)') }}
@@ -831,7 +831,7 @@
                         {% if Custom('custom_hide_widget_biography') == false %}
                             <div class="box profile" >
                                 <div class="box-titre">
-                                    <h3>{{ Lang.Get('About me') }}</a></h3>
+                                    <h3>{{ Lang.Get('About me') }}</h3>
                                 </div>
                                 <div class="box-content clearfix">
                                     {% if Blog.Avatar or Blog.Owner.Avatar is not empty %}
@@ -907,10 +907,10 @@
                                     <ul class="clearfix">
                                         {% list Blog.Posts(6) %}
                                             {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
-                                                <li {% if loop.index is odd %}class="left {% if not loop.first %}clear{% endif %}"{% endif %}>
+                                                <li class="left">
                                                     <h3>
-                                                        <a href="{{ Post.Permalink }}" title="{{ Post.Permalink }}">
-                                                            <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(126,90)|crop }}{% else %}{{ Custom('post_cover')|resize(126,90)|crop }}{% endif %}" alt="" width="126" height="90" />
+                                                        <a href="{{ Post.Permalink }}">
+                                                            <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(126,90)|crop }}{% else %}{{ Custom('post_cover')|resize(126,90)|crop }}{% endif %}" alt="{{Post.Title}}" width="126" height="90" />
                                                         </a>
                                                     </h3>
                                                 </li>
@@ -965,9 +965,9 @@
                                         {% endif %}
                                         <li class="rss-follow">
                                             <a href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Follow us with') }} RSS" target="_blank">{{ Lang.Get('Flux RSS') }}</a>
-                                        </li>
-                                        <div class="clear"></div>
+                                        </li>                  
                                     </ul>
+                                     <div class="clear"></div>
                                 </div>
                             </div>
                         {% endif %}
