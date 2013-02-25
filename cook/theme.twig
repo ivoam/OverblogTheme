@@ -274,11 +274,20 @@
             .ob-video, 
             .ob-video iframe, 
             .ob-video object, 
+            .ob-video embed, 
+            .ob-section-html iframe, 
+            .ob-section-html object, 
+            .ob-section-html embed, 
             .ob-slideshow, 
             .yui3-slideshow-content {
                 max-width: 480px;
             }
-            .ob-video iframe{
+            .ob-video iframe,
+            .ob-video object,
+            .ob-video embed,
+            .ob-section-html iframe,
+            .ob-section-html object,
+            .ob-section-html embed{
                 max-height: 370px;
             }
             .ob-section-images .ob-slideshow {height: 370px;}
@@ -359,9 +368,18 @@
             .ob-section-quote p.ob-author,
             .ob-section-quote p.ob-source {background: #EEE; color: #555; font-size: 14px; font-style: italic; margin: 25px 0 0; max-height: 24px; max-width: 510px; overflow: hidden; padding-bottom: 0\9; position: relative; text-overflow: ellipsis; white-space: nowrap; z-index: 11;}
 
-            .ob-section-quote p.ob-author, .ob-section-quote p.ob-source {background: #63645f; background:rgba(255, 255, 255, 0.2);}
-            .ob-section-quote .ob-link {color: white;}
-            .ob-section-quote .ob-link:hover {color:#CCC;}
+            .ob-section-quote p.ob-author, 
+            .ob-section-quote p.ob-source {
+                background: #63645f; 
+                background:rgba(255, 255, 255, 0.2);
+                color:white;
+            }
+            .ob-section-quote .ob-link {
+                color: white;
+            }
+            .ob-section-quote .ob-link:hover {
+                color:#CCC;
+            }
 
             /* Section Link */
             .ob-section-link .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
