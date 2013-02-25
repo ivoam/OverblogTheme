@@ -39,8 +39,6 @@
 		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
 		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
 
-
-
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
   		{% favicon %}
@@ -219,8 +217,22 @@
 			.ob-quote {max-width: 440px;}
 
 			/* Medias */
-	        .ob-cell, .ob-img, .ob-video, .ob-slideshow, .yui3-slideshow-content, .ob-map {max-width: 440px;}
-
+	        .ob-cell, 
+	        .ob-img, 
+	        .ob-video, 
+	        .ob-section iframe,
+	        .ob-section object,
+	        .ob-section embed,
+	        .ob-slideshow, 
+	        .yui3-slideshow-content, 
+	        .ob-map {
+	        	max-width: 440px;
+	        }
+	        .ob-section iframe,
+            .ob-section object,
+            .ob-section embed{
+                max-height: 370px;
+            }
 	        /* Section image */
 			.ob-row-1-col img {max-width: 440px;}
 			.ob-row-2-col img {max-width: 49%; margin: 0 2px 1px;}
@@ -237,6 +249,10 @@
 			.share, .item-comments {width: 100%; margin-top: 30px;}
 			.share h4, .item-comments h4 {font-family: 'Yanone Kaffeesatz', sans-serif; margin: 0 0 5px; color: #005c7e; font-size: 18px;}
 			.fb-like iframe {margin-top: -3px;}
+
+			.ob-commentsList div > .ob-list{
+				margin-top: 20px;
+			}
 
 			/* Section File */
             .ob-section-file .ob-ctn {background: #fff; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);}
