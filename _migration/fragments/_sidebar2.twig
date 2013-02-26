@@ -1,7 +1,7 @@
 {# Pages #}
 {% if Custom('ob_widget_pages') %}
 <div class="box pages" >
-    <div class="box-titre"><h2><span>{{ Custom('ob_widget_pages_title')|title }}</span></h2></div></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_pages_title')|title }}</span></h2></div>
     <div class="box-content">
         <ul>
             {% list Blog.Pages %}
@@ -31,7 +31,7 @@
 {# Tags #}
 {% if Custom('ob_widget_tags') %}
 <div class="box categorie" >
-    <div class="box-titre"><h2><span>{{ Custom('ob_widget_tags_title')|title }}</span></h2></div></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_tags_title')|title }}</span></h2></div>
     <div class="box-content">
         <ul>
             {% list Blog.PostsTags %}
@@ -62,7 +62,7 @@
 {# Newsletter #}
 {% if Custom('ob_widget_emailnotification') %}
 <div class="box newsletter">
-    <div class="box-titre"><h2><span>{{ Custom('ob_widget_emailnotification_title')|title }}</span></h2></div></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_emailnotification_title')|title }}</span></h2></div>
     <div class="box-content">
         {{ Lang.Get('Subscribe to be notified about future posts.') }}
         {% email_notification %}
@@ -85,7 +85,7 @@
 {# Blog roll #}
 {% if Custom('ob_widget_blogroll') %}
 <div class="box lien">
-    <div class="box-titre"><h2><span>{{ Custom('ob_widget_blogroll_title')|title }}</span></h2></div></h2></div>
+    <div class="box-titre"><h2><span>{{ Custom('ob_widget_blogroll_title')|title }}</span></h2></div>
     <div class="box-content">
         <ul>
             {% if Custom('ob_widget_blogroll_1_label') %}

@@ -4,6 +4,9 @@ fs = require('fs'),
 
 PATH = __dirname+'/fragments/',
 BUILD_PATH = __dirname+'/build/',
+INSTALL_PATH = __dirname+
+	'/../../OverblogCore/src/OverblogCore/ModelBundle/Resources/themes/',
+INSTALL_THEME_ID = 45,
 STRUCTS = {
 	0:0,
 	1:1,
@@ -61,7 +64,9 @@ compile = function(struct, fragment)
 	);
 
 	return tpl;
-};
+},
+
+INSTALL = process.argv.indexOf('--install') > -1;
 
 Object.prototype.forEach = function(fn, scope)
 {
@@ -85,5 +90,14 @@ STRUCTS.forEach(
 			BUILD_PATH+filename,
 			tpl
 		);
+
+		if (INSTALL)
+		{
+			// Install on Core project
+			fs.writeFile(
+				INSTALL_PATH+(INSTALL_THEME_ID+parseInt(k))+'/theme.twig',
+				tpl
+			);
+		}
 	}
 );

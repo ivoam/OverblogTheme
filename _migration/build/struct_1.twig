@@ -234,11 +234,11 @@
     <meta name="color:ob_top_color:Blog title color" group="Customize my design" />
     <meta name="list:ob_top_font:Blog title font family" group="Customize my design" items="arial,arial black,book antiqua,comic sans ms,courier,courier new,geneva,georgia,helvetica,impact,lucida console,lucida grande,lucida sans unicode,monaco,ms sans serif,ms serif,new york,palatino,palatino linotype,tahoma,times,times new roman,trebuchet ms,verdana,symbol,webdings,wingdings,zapf dingbats" />
     <meta name="list:ob_top_font_size:Blog title font size" group="Customize my design" items="7,8,9,10,11,12,13,14,15,16,17,18,19,20,40" />
+    <meta name="image:ob_top_bg_picture:Header background picture" group="Customize my design" />
     <meta name="color:ob_articles_bg_color:Posts background color" group="Customize my design" />
     <meta name="color:ob_articles_color:Posts font color" group="Customize my design" />
     <meta name="list:ob_articles_font:Posts font family" group="Customize my design" items="arial,arial black,book antiqua,comic sans ms,courier,courier new,geneva,georgia,helvetica,impact,lucida console,lucida grande,lucida sans unicode,monaco,ms sans serif,ms serif,new york,palatino,palatino linotype,tahoma,times,times new roman,trebuchet ms,verdana,symbol,webdings,wingdings,zapf dingbats" />
     <meta name="list:ob_articles_font_size:Posts font size" group="Customize my design" items="7,8,9,10,11,12,13,14,15,16,17,18,19,20,40" />
-    <meta name="color:ob_articles_title_bg_color:Posts title background color" group="Customize my design" />
     <meta name="color:ob_articles_title_color:Posts title font color" group="Customize my design" />
     <meta name="list:ob_articles_title_font:Posts title font family" group="Customize my design" items="arial,arial black,book antiqua,comic sans ms,courier,courier new,geneva,georgia,helvetica,impact,lucida console,lucida grande,lucida sans unicode,monaco,ms sans serif,ms serif,new york,palatino,palatino linotype,tahoma,times,times new roman,trebuchet ms,verdana,symbol,webdings,wingdings,zapf dingbats" />
     <meta name="list:ob_articles_title_font_size:Posts title font size" group="Customize my design" items="7,8,9,10,11,12,13,14,15,16,17,18,19,20,40" />
@@ -251,42 +251,55 @@
     <meta name="color:ob_comments_replies_color:Replies title font color" group="Customize my design" />
     <meta name="list:ob_comments_replies_font:Replies title font family" group="Customize my design" items="arial,arial black,book antiqua,comic sans ms,courier,courier new,geneva,georgia,helvetica,impact,lucida console,lucida grande,lucida sans unicode,monaco,ms sans serif,ms serif,new york,palatino,palatino linotype,tahoma,times,times new roman,trebuchet ms,verdana,symbol,webdings,wingdings,zapf dingbats" />
     <meta name="list:ob_comments_replies_font_size:Replies title font size" group="Customize my design" items="7,8,9,10,11,12,13,14,15,16,17,18,19,20,40" />
+    <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="SEO" />
+    <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="SEO" />
+    
+    <!-- SEO -->
+    {% if Custom('google_webmaster_id') is not empty %}<meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />{% endif %}
+    {% if Custom('msn_webmaster_id') is not empty %}<meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />{% endif %}
     
     <style type="text/css">
         {% if Custom('ob_body_bg_color') or Custom('ob_body_bg_picture') %}body {
             {% if Custom('ob_body_bg_color') %}background-color: {{ Custom('ob_body_bg_color') }} ! important;{% endif %}
             {% if Custom('ob_body_bg_picture') %}background-image: url("{{ Custom('ob_body_bg_picture') }}") ! important;{% endif %}
         }{% endif %}
+    
+        {% if Custom('ob_top_bg_picture') %}#cl_0_0 {background-image: url({{ Custom('ob_top_bg_picture') }}) ! important; }{% endif %}
+    
         {% if Custom('ob_top_color') or Custom('ob_top_font') or Custom('ob_top_font_size') %}#top h1,
         #top h1 a {
             {% if Custom('ob_top_color') %}color: {{ Custom('ob_top_color') }};{% endif %}
             {% if Custom('ob_top_font') %}font-family: "{{ Custom('ob_top_font') }}";{% endif %}
             {% if Custom('ob_top_font_size') %}font-size: {{ Custom('ob_top_font_size') }}px;{% endif %}
         }{% endif %}
+    
         {% if Custom('ob_articles_bg_color') or Custom('ob_articles_color') or Custom('ob_articles_font') or Custom('ob_articles_font_size') %}.contenuArticle, .pageContent, .extraitArticle, .extrait {
             {% if Custom('ob_articles_bg_color') %}background-color: {{ Custom('ob_articles_bg_color') }} ! important;{% endif %}
             {% if Custom('ob_articles_color') %}color: {{ Custom('ob_articles_color') }} ! important;{% endif %}
             {% if Custom('ob_articles_font') %}font-family: "{{ Custom('ob_articles_font') }}";{% endif %}
             {% if Custom('ob_articles_font_size') %}font-size: {{ Custom('ob_articles_font_size') }}px;{% endif %}
         }{% endif %}
-        {% if Custom('ob_articles_title_bg_color') or Custom('ob_articles_title_color') or Custom('ob_articles_title_font') or Custom('ob_articles_title_font_size') %}.divTitreArticle h2, .divPageTitle h2,
+    
+        {% if Custom('ob_articles_title_color') or Custom('ob_articles_title_font') or Custom('ob_articles_title_font_size') %}.divTitreArticle h2, .divPageTitle h2,
         .divTitreArticle h2 a, .divPageTitle h2 a,
         .titreExtrait {
-            {% if Custom('ob_articles_title_bg_color') %}background-color: {{ Custom('ob_articles_title_bg_color') }} ! important;{% endif %}
             {% if Custom('ob_articles_title_color') %}color: {{ Custom('ob_articles_title_color') }} ! important;{% endif %}
             {% if Custom('ob_articles_title_font') %}font-family: "{{ Custom('ob_articles_title_font') }}";{% endif %}
             {% if Custom('ob_articles_title_font_size') %}font-size: {{ Custom('ob_articles_title_font_size') }}px;{% endif %}
         }{% endif %}
+    
         {% if Custom('ob_widgets_title_color') or Custom('ob_widgets_title_font') or Custom('ob_widgets_title_font_size') %}.box-titre h2 {
             {% if Custom('ob_widgets_title_color') %}color: {{ Custom('ob_widgets_title_color') }} ! important;{% endif %}
             {% if Custom('ob_widgets_title_font') %}font-family: "{{ Custom('ob_widgets_title_font') }}" ! important;{% endif %}
             {% if Custom('ob_widgets_title_font_size') %}font-size: {{ Custom('ob_widgets_title_font_size') }}px ! important;{% endif %}
         }{% endif %}
+    
         {% if Custom('ob_comments_color') or Custom('ob_comments_font') or Custom('ob_comments_font_size') %}.ob-commentsList .ob-message {
             {% if Custom('ob_comments_color') %}color: {{ Custom('ob_comments_color') }} ! important;{% endif %}
             {% if Custom('ob_comments_font') %}font-family: "{{ Custom('ob_comments_font') }}" ! important;{% endif %}
             {% if Custom('ob_comments_font_size') %}font-size: {{ Custom('ob_comments_font_size') }}px ! important;{% endif %}
         }{% endif %}
+    
         {% if Custom('ob_comments_replies_color') or Custom('ob_comments_replies_font') or Custom('ob_comments_replies_font_size') %}.ob-replies .ob-list .ob-message {
             {% if Custom('ob_comments_replies_color') %}color: {{ Custom('ob_comments_replies_color') }} ! important;{% endif %}
             {% if Custom('ob_comments_replies_font') %}font-family: "{{ Custom('ob_comments_replies_font') }}" ! important;{% endif %}
@@ -484,7 +497,7 @@
                 {# Pages #}
                 {% if Custom('ob_widget_pages') %}
                 <div class="box pages" >
-                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_pages_title')|title }}</span></h2></div></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_pages_title')|title }}</span></h2></div>
                     <div class="box-content">
                         <ul>
                             {% list Blog.Pages %}
@@ -514,7 +527,7 @@
                 {# Tags #}
                 {% if Custom('ob_widget_tags') %}
                 <div class="box categorie" >
-                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_tags_title')|title }}</span></h2></div></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_tags_title')|title }}</span></h2></div>
                     <div class="box-content">
                         <ul>
                             {% list Blog.PostsTags %}
@@ -545,7 +558,7 @@
                 {# Newsletter #}
                 {% if Custom('ob_widget_emailnotification') %}
                 <div class="box newsletter">
-                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_emailnotification_title')|title }}</span></h2></div></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_emailnotification_title')|title }}</span></h2></div>
                     <div class="box-content">
                         {{ Lang.Get('Subscribe to be notified about future posts.') }}
                         {% email_notification %}
@@ -568,7 +581,7 @@
                 {# Blog roll #}
                 {% if Custom('ob_widget_blogroll') %}
                 <div class="box lien">
-                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_blogroll_title')|title }}</span></h2></div></h2></div>
+                    <div class="box-titre"><h2><span>{{ Custom('ob_widget_blogroll_title')|title }}</span></h2></div>
                     <div class="box-content">
                         <ul>
                             {% if Custom('ob_widget_blogroll_1_label') %}
@@ -817,8 +830,6 @@
                             <div class="socialShare">
                                 {{ Post.Share }}
                             </div>
-                
-                            <div class="clear"></div>
                 
                             <div class="option afterArticle">
                                 {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
