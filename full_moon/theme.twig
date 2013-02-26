@@ -101,7 +101,17 @@
 
                 /** Article **/
                 .article,
-                .page {background: #141414; background: rgba(20,20,20,0.9); border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; padding: 10px;}
+                .page{
+                    background: #141414; 
+                    background: rgba(20,20,20,0.9); 
+                    border: 2px solid #333; 
+                    -moz-border-radius: 5px; 
+                    -webkit-border-radius: 5px; 
+                    -ms-border-radius: 5px; 
+                    -o-border-radius: 5px; 
+                    border-radius: 5px; 
+                    padding: 10px;
+                }
 
                 .beforeArticle {margin-bottom: 10px;}
                 .divTitreArticle .post-title,
@@ -200,9 +210,9 @@
                     .ob-section .twt-border {max-width: 100% !important;}
 
                     /* Share buttons */
-                    .share {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; margin: 10px 0; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 9px 13px 8px; position: relative; width: 600px; z-index: 1;/* iframe Facebook */}
-                    .share h6,
-                    .item-comments h6 {margin-bottom: 10px; font-size: 16px; line-height: 16px;}
+                    .afterArticle {background: #141414; border: 2px solid #333; -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; margin: 10px 0; -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; -ms-opacity: 0.9; opacity: 0.9; padding: 9px 13px 8px; position: relative; width: 600px; z-index: 1;/* iframe Facebook */}
+                    .share h3,
+                    .item-comments h3 {margin-bottom: 10px; font-size: 16px; line-height: 16px;}
                     .google-share,
                     .twitter-share,
                     .facebook-share,
@@ -275,6 +285,18 @@
                     .arch_month li {border-bottom: 1px solid #222; margin: 10px 0; padding: 10px 0;}
                     .archives .number {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; float: right; font-weight: bold; line-height: 17px; margin-top: -2px; padding: 2px 7px; text-align: center;}
 
+                    .share > div{
+                        float:left;
+                        height:20px;
+                        margin-right:28px;
+                    }
+                    .share .google-share{
+                        margin-right: 0;
+                    }
+                    .share iframe{
+                        border:none;
+                        width:100px;
+                    }
 
                 /** Pagination **/
                 .pagination {
@@ -612,6 +634,8 @@
         </style>
     </head>
     <body>
+        <!-- Init Facebook script -->
+        <div id="fb-root"></div>
         <div id="global">
             <div id="ln_0" class="ln">
                 <div id="cl_0_0" class="cl">
@@ -716,37 +740,12 @@
                                         <div class="clear"></div>
 
                                         <!-- Share buttons + comments -->
-                                        <div class="share">
-                                            <h6>{% if isPage %}{{ Lang.Get('Share this page') }}{% else %}{{ Lang.Get('Share this post') }}{% endif %}</h6>
+                                        <div class="afterArticle">
                                             {% if Custom('share_service') != 'None' %}
-                                                {% if Custom('share_service') == 'Google +' %}
-                                                    <div class="google-share">
-                                                        <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                                    </div>
-                                                {% elseif Custom('share_service') == 'Twitter' %}
-                                                    <div class="twitter-share">
-                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                                    </div>
-                                                {% elseif Custom('share_service') == 'Facebook' %}
-                                                    <div class="facebook-share">
-                                                        <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                                    </div>
-                                                {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
-                                                    <div class="google-share">
-                                                        <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                                    </div>
-                                                    <div class="twitter-share">
-                                                        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                                    </div>
-                                                    <div class="facebook-share">
-                                                        <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                                    </div>
-                                                {% endif %}
+                                                <div class="share">
+                                                   {{ Post.Share }}
+                                                </div>
                                             {% endif %}
-                                            <div class="ob-share">
-                                                {{ Post.RepostButton }}
-                                            </div>
-
                                             {% if isSingle == false and Post.ShowComments is not empty %}
                                                 {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                     <a class="comment-number comments" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
@@ -781,7 +780,7 @@
                                             {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                                 <div id="comments" class="item-comments">
                                                     {% if Custom("comment") == "Facebook" %}
-                                                        <h6>{{ Lang.Get('Comment this post') }}</h6>
+                                                        <h3>{{ Lang.Get('Comment this post') }}</h3>
                                                         <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="600" data-colorscheme="{{ Custom('facebook_comments_color') }}"></div>
                                                     {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                                         <div id="disqus_thread"></div>
@@ -797,7 +796,7 @@
                                                         </script>
                                                         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                                                     {% else %}
-                                                        <h6>{{ Lang.Get('Comment this post') }}</h6>
+                                                        <h3>{{ Lang.Get('Comment this post') }}</h3>
                                                         {{ Post.Comments }}
                                                     {% endif %}
                                                 </div>
@@ -1116,15 +1115,15 @@
                 }());
             
             {% elseif Custom('comment') == 'Facebook' %}
-            // Facebook comments + share
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
-                    fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
+                // Facebook comments + share
+                (function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('284865384904712')}}";
+                        fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
             {% endif %}
             // Twitter share + tweets
             !function(d,s,id){
