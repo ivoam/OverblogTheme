@@ -631,6 +631,11 @@
                 padding: 13px;
                 position: fixed;
             }
+            @media screen and (max-height: 665px) {
+              .share-bar {
+                position: absolute;
+              }
+            }
             .fancybox-wrap .share-bar {
                 right: 50%;
                 top: 170px;
@@ -731,12 +736,16 @@
             }
             .single .share-bar {
                 left: 50%;
-                margin: 8px 0 0 387px;
+                margin: 8px 0 0 387px;    
+            }
+            .single .share-bar *{
+                -webkit-box-sizing: content-box;
+                -moz-box-sizing: content-box;
+                box-sizing: content-box;
             }
             a.ob-repost-btn.top .ob-repost-count {
                 height: auto;
             }
-
             /* ----------------------------- */
             /* ==WIDGETS */
             /* ----------------------------- */
