@@ -267,7 +267,7 @@
             }
             .menu a {
                 color: {{ Custom('primary_color') }};
-                display: inline-block;
+                display: block;
                 font-size: 1em;
                 padding: 10px 15px;
                 position: relative;
@@ -318,6 +318,7 @@
             }
             .sub-menu li {
                 float: none;
+                word-wrap:break-word;
             }
             .search-form {
                 float: right;
@@ -508,6 +509,9 @@
                 margin-bottom: 10px;
                 padding: 0 20px;
             }
+            .social-post .post-tags {
+                margin-bottom: 20px;
+            }
             .post-tags a {
                 background: #DDDAD4;
                 -webkit-box-shadow: 1px 1px 2px #888;
@@ -518,7 +522,13 @@
                 margin: 0 15px 10px 0;
                 padding: 4px 5px 4px 15px;
                 position: relative;
-                text-decoration: none;
+                text-decoration: none;    
+            }
+            .post .post-tags a {
+                max-width: 400px;
+            }
+            .social-post .post-tags a {
+                max-width: 190px;
             }
             .post-tags a:before {
                 content: "";
@@ -542,7 +552,7 @@
                 -webkit-box-shadow: inset 1px 1px 2px #888;
                 box-shadow: inset 1px 1px 2px #888;
                 border-radius: 8px;
-                bottom: 4px;
+                top: 4px;
                 content: "";
                 height: 8px;
                 left: -15px;
