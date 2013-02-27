@@ -844,6 +844,8 @@
                                 {{ Post.Share }}
                             </div>
                 
+                            <div class="clear"></div>
+                
                             <div class="option afterArticle">
                                 {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
                                 {% if Post.Tags is not empty %}
@@ -907,8 +909,20 @@
                                     {{ Post.Share }}
                                 </div>
                 
+                                <div class="clear"></div>
+                
                                 <div class="plusExtrait">
                                     {% if Post.Author is not empty %}<span class="publishedBy">{{ Custom('ob_text_publishedby') }} {{ Post.Author }}</span>{% endif %}
+                                    {% if Post.Tags is not empty %}
+                                    <span class="topic">
+                                        <span class="separator">-</span>
+                                        {{ Lang.Get('in') }}
+                                        {% list Post.Tags %}
+                                        <a href="{{ Tag.Url }}" title="{{ Tag.Title }}" class="linkTopic">{{ Tag.Title }}</a>
+                                        {% endlist %}
+                                    </span>
+                                    {% endif %}
+                                    <br />
                                     {% if Post.ShowComments %}
                                     <span class="spanAddComment">
                                         <a  href="{{ Post.Url }}#anchorComment"
