@@ -251,11 +251,15 @@
 				width: 65%;
 			}
 
-				.other-title {
+				.other-title,
+				.special h2 {
 					color: #1982D1;
 					font-size: 22px;
 					font-weight: 300;
 					padding: 50px 0 0 40px;
+				}
+				.special h2 {
+					padding: 50px 0 40px;
 				}
 				p.error {
 					padding: 10px 40px;
@@ -656,13 +660,16 @@
 			.ob-form-field {
 				margin-bottom: 10px;
 			}
-
+			#left-content .ob-form input[type="text"],
+			#left-content .ob-form input[type="email"],
+			#left-content .ob-form textarea {
+				font-size: 16px;
+			}
 			.ob-form input[type="text"],
 			.ob-form input[type="email"],
 			.ob-form textarea {
 				background: #EEE;
-				border: 1px solid #CCC;
-				font-size: 16px;
+				border: 1px solid #CCC;	
 				padding: 6px 0;
 			}
 			.ob-form input[type="text"]:focus,
@@ -681,7 +688,6 @@
 					    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
 					     -o-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
 					        box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
-
 				border: none;
 				border-radius: 2px;
 				color: white;
@@ -691,14 +697,14 @@
 				padding: 10px 9px 9px 9px;
 				text-align: center;
 				text-decoration: none;
-				width: 66px;
+				min-width: 66px;
 			}
 			.ob-form input[type="submit"]:active {
 				background: #EEE;
 				color: #373737;
 			}
 
-			.ob-form {
+			#left-content .ob-form {
 				margin-bottom: 80px;
 			}
 			.ob-form + a {
@@ -1135,6 +1141,14 @@
 							{% endif %}
 						</div>
 					{% endif %}
+
+					 <div class="widget subscribe">                     
+                        <h3>{{ Lang.Get('Subscribe') }}</h3>
+                        <div class="box-content">
+                            <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                            {% email_notification %}
+                        </div>
+                    </div>
 
 					{% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
 						<div class="widget">

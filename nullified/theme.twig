@@ -184,7 +184,6 @@
                 font-family: 'Oswald', sans-serif;
                 padding: 0 35px 0 35px;
                 width: 910px;
-                height: 60px;
                 font-size: 1.2em;
                 background: #854646;
                 text-shadow: 0 1px 1px rgba(0,0,0,0.8);
@@ -210,6 +209,7 @@
 
             #menu ul {
                 list-style: none;
+                margin-bottom: 0;
             }
 
             #menu ul li {
@@ -380,7 +380,7 @@
 
             #sidebar {
                 width: 225px;
-                margin: 0 0 0 685px;
+                float:left;
                 padding: 0;
             }
 
@@ -412,7 +412,7 @@
                 width: 980px;
                 position: relative;
                 background: #151515 url(http://assets.over-blog-kiwi.com/themes/29/images/bg3.jpg) bottom center no-repeat;
-                margin: 80px auto 0 auto;
+                margin: 40px auto 0 auto;
             }
 
             .clear{
@@ -643,7 +643,8 @@
                 margin-top: 80px;
                 text-align: center;
             }
-            .ob-input{
+            .ob-input,
+            .ob-input-email{
                 background: #222;
                 border: 2px solid #191919;
                 color: #FFF;
@@ -667,7 +668,13 @@
             .ob-input-submit:active {
                 text-shadow: none;
             }
-
+            .subscribe {
+                margin-bottom: 1.5em;
+            }
+            .subscribe > p {
+                border-top: dotted 1px #333;
+                padding-top: 10px;
+            }
             .pagination {
                 margin: {% if isSingle %}40{% else %}20{% endif %}px 0;
                 overflow: hidden;
@@ -718,12 +725,11 @@
                     <li {% if isIndex %} class="current_page_item" {% endif %}>
                         <a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                     </li>
-                    {% list Blog.PostsTags(6) %}
+                    {% list Blog.PostsTags(Custom('tag_number')) %}
                         <li {% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} class="current_page_item" {% endif %}><a href="{{ PostsTag.Url }}">{{ PostsTag.Title }}</a></li>
                     {% endlist %}
                     <li><a href="/contact">{{ Lang.Get('Contact') }}</a></li>
                 </ul>
-                <br class="clearfix">
             </div>
             <div id="header">
                 <div id="logo">
@@ -972,6 +978,13 @@
                             </div>
                         {% endif %}
                     {% endif %}
+
+                    <!-- Subscribe -->
+                     <div class="box subscribe">                      
+                        <h3>{{ Lang.Get('Subscribe') }}</h3>                 
+                            <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                            {% email_notification %}
+                    </div>
 
                     <!-- Archives -->
                     {% if Custom('custom_hide_widget_archives') == false %}

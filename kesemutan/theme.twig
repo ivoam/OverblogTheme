@@ -333,7 +333,7 @@
 							<div id="menu">
 								<ul>
 									<li {% if isIndex %}class="active"{% endif %}><a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Lang.Get('Home') }}</a></li>
-									{% list Blog.PostsTags(4) %}
+									{% list Blog.PostsTags(Custom('tag_number')|default('5')) %}
 		                                {% if PostsTag.Title|lower != "pinned" %}
 		                                    <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}><a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title|title }}</a></li>
 		                                {% endif %}
@@ -536,6 +536,14 @@
 				                </div>
 				            {% endif %}
 
+				            <div class="sidebar-block subscribe">
+                                <h2>{{ Lang.Get('Subscribe') }}</h2>
+                                <div class="box-content">
+                                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                                    {% email_notification %}
+                                </div>
+                            </div>
+
 							{% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
 								<div class="sidebar-block">
 		                          	<h2>{{ Lang.Get('Archives') }}</h2>
@@ -572,7 +580,7 @@
 								<div class="sidebar-block">
 									<h2>{{ Lang.Get('Tags') }}</h2>
 									<ul>
-									{% list Blog.PostsTags(Custom('tag_number')|default('10')) %}
+									{% list Blog.PostsTags(Custom('tag_number')|default('5')) %}
 										<li><a href="{{ PostsTag.Url }}">{{ PostsTag.Title|title }}</a> ({{ PostsTag.PostCount }})</li>
 									{% endlist %}
 									</ul>

@@ -652,13 +652,17 @@
 			/* ----------------------------- */
 			/* ==special */
 			/* ----------------------------- */
-			.special form{
+			.special .ob-contact form{
 				margin-bottom: 4em;
 			}
 			.special label{
 				font-size: 1.4em;
 				padding-right: 10px;
 				text-align: right;
+			}
+			.entry label,
+			.entry input{
+				font-size: 1.2em;
 			}
 			.special input{
 				font-size: 1.4em;
@@ -1204,6 +1208,16 @@
 								</div>
 							</div>
 						{% endif %}
+
+						 <div class="widget subscribe">
+                                <header>
+                                    <h3>{{ Lang.Get('Subscribe') }}</h3>
+                                </header>
+                                <div class="entry">
+                                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                                    {% email_notification %}
+                                </div>
+                            </div>
 
 						{% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
 							<div class="widget archives">

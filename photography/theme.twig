@@ -10,7 +10,7 @@
         <!-- options -->
         <meta name="constant:displayArticlesLimit" content="12" />
 
-        <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="8" group="Menu" />
+        <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="5" group="Menu" />
 
         <meta name="image:post_cover:label.defaultPostCover" default="http://assets.over-blog-staging.com/themes/2/images/default-cover.jpg" group="Design" />
         <meta name="list:custom_titles_font:label.titlesFont" items="Anton, Arvo, Bevan, Montserrat, Oswald, Lato, Squada One" default="Arvo" group="Design" />
@@ -115,7 +115,7 @@
 
             /* Header */
             .header {min-height: 90px; padding-bottom: 20px; padding-top: 50px; border-top: 1px solid #000000; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-top.png") repeat-x;}
-            .logo {float: left; max-width: 640px; word-wrap: break-word;}
+            .logo {float: left; max-width: 590px; word-wrap: break-word;}
             .nav {float: right; max-width: 400px;}
             .nav li {cursor: pointer; float: left; margin-right: 30px; font-size: 16px; letter-spacing: -1px; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %} line-height: 26px; position: relative;}
             .nav a {display: inline-block;}
@@ -128,7 +128,12 @@
 
             /* Sub-Nav */
             .sub-nav {clear: both; text-transform : capitalize;}
-            .sub-nav .wrap {border-bottom: 1px solid #353638; height: 40px; margin-bottom: 20px;}
+            .sub-nav .wrap {border-bottom: 1px solid #353638; height: 38px; margin-bottom: 20px;}
+            .sub-nav ul{
+                border-bottom: 1px solid #353638; 
+                padding-bottom:1px;
+                margin-bottom:20px;
+            }
             .sub-nav .search {float: right;}
             .sub-nav .search input[type="submit"] {display: none;}
             .sub-nav .search input[type="text"] {
@@ -160,10 +165,14 @@
             }
             .sub-nav .categories {float: left; padding-top: 6px;}
             .sub-nav .categories ul {float: left;}
-            .sub-nav .categories li {float: left; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %}}
+            .sub-nav .categories li {
+                float: left; 
+                {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %}
+                line-height:31px;
+            }
             .sub-nav .categories li a { {% if Custom('custom_text_font') == 'Arvo'|default('Actor') %}font-size: 13px;{% endif %} padding-left: 15px; padding-right: 15px;}
-            .sub-nav li.active a {color: #FFF; border-bottom: 1px solid #888889; padding-bottom: 16px;}
-            .sub-nav li a:hover {color: #FFF; border-bottom: 1px solid #888889; padding-bottom: 16px;}
+            .sub-nav li.active a {color: #FFF; border-bottom: 1px solid #888889; padding-bottom: 8px;}
+            .sub-nav li a:hover {color: #FFF; border-bottom: 1px solid #888889; padding-bottom: 8px;}
 
             /* Content */
             .content {clear: both; padding-bottom: 20px; }
@@ -658,9 +667,11 @@
                                 {% endif %}
                             {% endlist %}
                         {% endif %}
+                        <li>
+                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                        </li>
                         <li class="last">
-                            <a {% if isSpecial %}class="active"{% endif %} href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
-                            {% if isSpecial %}<span class="bg-nav-end"></span>{% endif %}
+                            <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                         </li>
                     </ul>
                 </div>

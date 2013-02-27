@@ -434,6 +434,13 @@
 					</div>
 				</div>
 				{% endif %}
+
+				 <div class="widget subscribe">
+                    <h3>{{ Lang.Get('Subscribe') }}</h3>
+                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                    {% email_notification %}
+                </div>
+
 				{% if Custom('custom_display_widget_last_posts') != true %}
 				<div class="widget">
 					<div id="last-post">

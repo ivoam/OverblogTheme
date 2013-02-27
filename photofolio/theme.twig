@@ -156,7 +156,13 @@
                 #myRoundabout .roundabout-in-focus:hover .caption {bottom: 0;}
 
             .tag-title,
-            .search-title {display: block; font-size: 28px; line-height: 40px; margin-bottom: 40px;}
+            .search-title,
+            .special h2 {
+                display: block; 
+                font-size: 28px; 
+                line-height: 40px; 
+                margin-bottom: 40px;
+            }
 
             .post {background: url(http://assets.over-blog-kiwi.com/themes/34/images/line_ver1.gif) repeat-y -1px 0; border-left: 1px solid #DDD; margin: 0 0 40px; padding: 10px 35px 20px 33px; -webkit-transition: background 350ms ease; -moz-transition: background 350ms ease; -ms-transition: background 350ms ease; -o-transition: background 350ms ease; transition: background 350ms ease; width: 236px; word-wrap: break-word;}
                 .post:hover {background: #E3E3E3;}
@@ -349,7 +355,10 @@
             .search-title,
             .sidebar .follow li > a,
             .tag-title,
-            .widget .plustext {font-family: "{{ Custom('custom_titles_font')|default('Dosis') }}", Georgia, Times New Roman, serif; font-weight: normal;}
+            .widget .plustext {
+                font-family: "{{ Custom('custom_titles_font')|default('Dosis') }}", Georgia, Times New Roman, serif; 
+                font-weight: normal;
+            }
 
 
             #content2 {color: {{ Custom('custom_footer_font_color')|default('#FFF') }};}
@@ -454,8 +463,11 @@
                                         </li>
                                     {% endif %}
                                 {% endlist %}
-                                <li class="end{% if isSpecial %} active{% endif %}">
-                                    <a href="/contact">{{ Lang.Get('Contact') }}</a>
+                                <li>
+                                    <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                                </li>
+                                 <li class="end">
+                                    <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                                 </li>
                             </ul>
                         </nav>

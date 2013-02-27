@@ -225,11 +225,13 @@
                     }
 
                     /* Contact */
-                    .ob-form {margin-bottom: 80px;}
-                    .ob-form-field {margin: 5px 0 0 80px;}
+                    .ob-contact .ob-form {margin-bottom: 80px;}
+                    .ob-contact .ob-form-field {margin: 5px 0 0 80px;}
                     .ob-label {width: 20%; font-size: 14px;}
                     .ob-input-submit,
                     .ob-error {margin-left: 31%;}
+                    .box-content .ob-input-submit,
+                    .box-content .ob-error {margin-left: 20%;}
                     .ob-input-text,
                     .ob-input-email,
                     .ob-input-textarea {padding: 6px 0; border: 2px solid #333; -moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px;}
@@ -868,6 +870,16 @@
                                 </div>
                             </div>
                         {% endif %}
+
+                         <div class="box subscribe">
+                            <div class="box-titre">
+                                <h3><span>{{ Lang.Get('Subscribe') }}</span></h3>
+                            </div>
+                            <div class="box-content">
+                                <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                                {% email_notification %}
+                            </div>
+                        </div>
 
                         <!-- Navigation -->
                         <div class="box navigation" >

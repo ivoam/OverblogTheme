@@ -334,7 +334,12 @@
             .sidebar {color: #454547; margin-top: 10px; padding: 0 10px 0 10px; width: 280px;}
             .sidebar h3 {color: #4D4D4F; font-size: 19px; margin-bottom: 15px;}
             .widget {border-bottom: 2px dashed #c3c3c3; color: #454547; margin-bottom: 15px; padding: 10px 10px 30px 10px;}
-            .widget li {border-bottom: 1px solid #E8E8E8; margin-top: 5px; padding-bottom: 5px;}
+            .widget li {
+                border-bottom: 1px solid #E8E8E8; 
+                margin-top: 5px; 
+                padding-bottom: 5px;
+                word-wrap:break-word;
+            }
             .widget li:last-child {border-bottom: none;}
             .widget a {background: url(http://assets.over-blog-kiwi.com/themes/28/images/bullets/6.gif) no-repeat left 6px; color: #4D4D4F; display: block; font-size: 14px; line-height: 16px; padding: 4px 0 4px 22px;}
             .widget li.active a,
@@ -701,6 +706,15 @@
                             </ul>
                         </div>
                     {% endif %}
+
+                    <!-- Subscribe -->
+                    <div class="widget subscribe">
+                        <h3>{{ Lang.Get('Subscribe') }}</h3>
+                        <div class="box-content">
+                            <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                            {% email_notification %}
+                        </div>
+                    </div>
 
                     <!-- Archives -->
                     {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}

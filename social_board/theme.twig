@@ -30,7 +30,7 @@
 
         <meta name="list:post_opening:Post opening" items="Pop-in, Single page" default="Pop-in" />
 
-        <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="6" group="Navigation" />
+        <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="5" group="Navigation" />
 
         <meta name="color:titles_font_color:Titles font color" default="#222" group="Colors" />
         <meta name="color:text_font_color:Text font color" default="#888" group="Colors" />
@@ -203,7 +203,7 @@
             .header .menu {
                 overflow: hidden;
                 position: relative;
-                padding: 13px;
+                padding: 5px;
             }
 
             /* BANNER */
@@ -287,7 +287,9 @@
             .header .menu li {
                 border-right: 1px solid #ddd;
                 display: inline-block;
-                padding: 2px 12px;
+                padding: 0 2px;
+                line-height: 34px;
+                white-space: nowrap;
             }
             .header .menu li.last {
                 border-right: none;
@@ -1268,8 +1270,11 @@
                                 </li>
                             {% endlist %}
                         {% endif %}
-                        <li class="{% if isSpecial %} active {% endif %}last">
-                            <a href="/contact">{{ Lang.Get('Contact me') }}</a>
+                        <li>
+                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact me') }}</a>
+                        </li>
+                        <li class="last">
+                            <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                         </li>
                     </ul>
                 </nav>

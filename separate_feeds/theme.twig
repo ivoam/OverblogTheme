@@ -18,7 +18,7 @@
         <meta name="list:display_widget_tags:label.numberOfTags" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
-
+        
         <!-- Define the Twitter username -->
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <!-- Define the Facebook username -->
@@ -1066,7 +1066,10 @@
                         </li>
                     {% endif %}
                     <li>
-                        <a{% if isSpecial %} class="active"{% endif %} href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                        <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                    </li>
+                     <li>
+                        <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                     </li>
                 </ul>
 
