@@ -672,6 +672,7 @@
             }
             .share-bar .pinterest {
                 width: 43px;
+                overflow: visible;
             }
             /* ----------------------------- */
             /* ==NO POST */
@@ -1529,7 +1530,8 @@
                                     </div>
                                 {% elseif Custom('share_service') == 'Pinterest' and Post.Cover is not empty %}
                                     <div class="pinterest">
-                                        <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border:none; overflow:hidden; width: 43px; height: 58px;"></iframe>
+                                        <!--iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border:none; overflow:hidden; width: 43px; height: 58px;"></iframe-->
+                                        <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}" class="pin-it-button" count-layout="vertical"></a>
                                     </div>
                                 {% elseif Custom('share_service') == 'All' or Custom('share_service') is empty %}
                                     <div class="gplus">
@@ -1543,8 +1545,9 @@
                                     </div>
                                     {% if Post.Cover is not empty %}
                                         <div class="pinterest">
-                                            <iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border:none; overflow:hidden; width: 43px; height: 58px;"></iframe>
-                                        </div>
+                                            <!--iframe scrolling="no" frameborder="0" src="http://pinit-cdn.pinterest.com/pinit.html?url={{ Post.Permalink }}&media={{ Post.Cover }}&description={% if Post.Snippet is not empty %}{{ Post.Snippet }}{% else %}{{ Post.Title }}{% endif %}&layout=vertical" style="border:none; overflow:hidden; width: 43px; height: 58px;"></iframe-->
+                                            <a href="http://pinterest.com/pin/create/button/?url={{ Post.Permalink }}&media={{ Post.Cover }}" class="pin-it-button" count-layout="vertical"></a>
+                                    </div>
                                     {% endif %}
                                 {% endif %}
                                 <div class="ob-share">
@@ -1577,7 +1580,9 @@
         {% if Custom('background') is not empty %}
             <script src="http://assets.over-blog-kiwi.com/themes/13/js/jquery.backstretch.min.js" type="text/javascript"></script>
         {% endif %}
-
+       
+                <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+       
         <script>
             {% if Custom('google_analytics') is not empty %}
                 // Google Analytics
