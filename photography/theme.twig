@@ -134,7 +134,11 @@
                 padding-bottom:1px;
                 margin-bottom:20px;
             }
-            .sub-nav .search {float: right;}
+            .sub-nav .search {
+                position: absolute;
+                right: 0;
+                margin-top: -12px;
+            }
             .sub-nav .search input[type="submit"] {display: none;}
             .sub-nav .search input[type="text"] {
                 {% if Custom('theme_color') == 'Dark'|default('Dark') %} background: url("http://assets.over-blog-kiwi.com/themes/2/images/search.png") no-repeat scroll 0 0 transparent; border: medium none; color: #EEE; padding-bottom: 5px; padding-left: 25px; padding-top: 5px;
