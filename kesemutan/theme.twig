@@ -100,11 +100,6 @@
 
 			/** menu **/
 			#menu-wrapper {width: 448px; height: 40px; background: url('http://assets.over-blog-kiwi.com/themes/38/img/navigational.png') no-repeat left top;}
-			#menu ul {height: 30px; margin: 0; list-style: none;}
-			#menu li {display: inline;}
-			#menu li a {float: left; display: block; padding: 5px 20px 0; border-right: 1px solid #C76D4B; color: #fff; font-size: 13px; -webkit-transition: background-color 200ms; -moz-transition: background-color 200ms; -ms-transition: background-color 200ms; -o-transition: background-color 200ms; transition: background-color 200ms;}
-			#menu li.active a {color: #3D3D3D; font-weight: bold;}
-			#menu li a:hover {padding: 5px 20px 8px; background-color: #d28156;}
 
 
 			/** list post **/
@@ -274,7 +269,12 @@
 			.sidebar-block {margin: 0 25px 25px 10px;}
 			.sidebar-block h2 {height:  34px; margin: 10px 0 6px; padding: 8px 0 4px 10px; background: url('http://assets.over-blog-kiwi.com/themes/38/img/sidebar-trans21.png') no-repeat; color:  #222222; font-size: 12px; font-weight: bold; font-family: 'Trebuchet MS','Lucida Grande',Verdana,Arial,Halvetica,Sans-Serif; text-transform: uppercase;}
 			.sidebar-block ul {list-style: none; margin: 0; padding: 0;}
-			.sidebar-block li {margin: 0 0 5px 0; padding-bottom: 3px; border-bottom: 1px solid #F2F2F2;}
+			.sidebar-block li {
+				border-bottom: 1px solid #F2F2F2;
+				margin: 0 0 5px 0; 
+				padding-bottom: 3px; 
+				word-wrap:break-word;
+			}
 			.sidebar-block li a {color: #C76D4B;}
 			.sidebar-block li a:hover {text-decoration: underline;}
 			.sidebar-block li ul li {margin-top: 5px; border: none; text-indent: 20px;}
@@ -329,19 +329,7 @@
 				<div id="content-inner">
 					<div id="content-left">
 						<!-- menu -->
-						<div id="menu-wrapper">
-							<div id="menu">
-								<ul>
-									<li {% if isIndex %}class="active"{% endif %}><a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Lang.Get('Home') }}</a></li>
-									{% list Blog.PostsTags(Custom('tag_number')|default('5')) %}
-		                                {% if PostsTag.Title|lower != "pinned" %}
-		                                    <li {% if isTag and Tag.Title == PostsTag.Title %}class="active"{% endif %}><a href="{{ PostsTag.Url }}" title="{{ PostsTag.Title|title }}">{{ PostsTag.Title|title }}</a></li>
-		                                {% endif %}
-		                            {% endlist %}
-
-								</ul>
-							</div>
-						</div>
+						<div id="menu-wrapper"></div>
 
 						<div id="post-wrapper">
 							{% if isSpecial %}
@@ -568,6 +556,7 @@
 								<div class="sidebar-block">
 									<h2>{{ Lang.Get('Pages') }}</h2>
 									<ul>
+										<li><a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Lang.Get('Home') }}</a></li>
 										{% list Blog.ListPages %}
 				                        <li><a href='{{ ListPage.Url }}'>{{ ListPage.Title }}</a></li>
 				                        {% endlist %}
