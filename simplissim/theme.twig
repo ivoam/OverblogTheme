@@ -1,92 +1,41 @@
-<!DOCTYPE HTML>
-<html lang="{{ Blog.Lang | default('en') }}">
+<!DOCTYPE html>
+<html lang="{{ Blog.Lang|default('en') }}" itemscope="" itemtype="http://schema.org/Blog">
     <head>
         <!-- shortcut:[Meta] -->
-        <!-- title, description, keyword, robots -->
-        {% if isSingle%}
-            {% list Posts %}
-                <title>{{ Post.Title }} - {{Blog.Title}}</title>
-                <meta name="description" content="{{ Post.Snippet }}" />
-                <meta name="keywords" content="{% list Post.Tags %}{{ Tag.Title }}{% if loop.last == false %}, {% endif %}{% endlist %}" />
-                <meta name="robots" content="index,follow" />
-            {% endlist %}
-        {% elseif isTag and Tag is not empty %}
-            <title>{{ Tag.Title|title }} - {{Blog.Title}}</title>
-            <meta name="description" content="{{ Blog.Description }}" />
-            <meta name="keywords" content="{{ Tag.Title|title }}" />
-            <meta name="robots" content="index,follow" />
-        {% elseif isSearch and Search is not empty %}
-            <title>{{ Search|title }} - {{Blog.Title}}</title>
-            <meta name="description" content="{{ Blog.Description }}" />
-            <meta name="keywords" content="{{ Search|title }}" />
-            <meta name="robots" content="noindex" />
-        {% else %}
-            <title>{{Blog.Title}}</title>
-            <meta name="description" content="{{ Blog.Description }}" />
-            <meta name="robots" content="index,follow" />
-        {% endif %}
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-
-        <!-- Social setting : Facebook, G+ .. -->
-        <meta property="og:site_name" content="{{ Blog.Title }}" />
-        <meta property="og:type" content="blog" />
-        <meta property="fb:app_id" content="{% if Custom('facebook_appid') is not empty %}{{ Custom('facebook_appid') }}{% endif %}" />
-
-        <meta itemprop="name" content="{{ Blog.Title }}" />
-
-        {% if isSingle %}
-            {% list Posts %}
-                <meta property="og:title" content="{{ Post.Title }}"/>
-                <meta itemprop="description" content="{{ Post.Snippet }}" />
-                {% if Post.Cover %}
-                    <meta property="og:image" content="{{ Post.Cover }}"/>
-                    <meta itemprop="image" content="{{ Post.Cover }}" />
-                {% endif %}
-            {% endlist %}
-            <meta property="og:type" content="overblogkiwi:see" />
-        {% else %}
-           <meta property="og:title" content="{{ Blog.Title }}"/>
-            <meta itemprop="description" content="{{ Blog.Description }}" />
-            {% if Blog.Avatar %}
-                <meta property="og:image" content="{{ Blog.Avatar }}"/>
-                <meta itemprop="image" content="{{ Blog.Avatar }}" />
-            {% endif %}
-            {% if isSearch %}
-                <meta property="og:type" content="overblogkiwi:search" />
-            {% else %}
-                <meta property="og:type" content="overblogkiwi:visit" />
-            {% endif %}
+        <!-- title -->
+        {% title %}
+        <!-- metas description, keyword, robots -->
+        {% meta %}
+        {% if Custom('googleplus_userid') is not empty %}
+            <link rel="author" href="https://plus.google.com/{{ Custom('googleplus_userid') }}">
+            <link rel="publisher" href="https://plus.google.com/{{ Custom('googleplus_userid') }}">
         {% endif %}
 
         <!-- shortcut:[Options] -->
         <!-- options -->
         <meta name="constant:displayArticlesLimit" content="4" />
 
-        <meta name="list:colors:Choose color" items="pastel, black, green, pink" default="pastel" group="Theme" />
-        <meta name="list:menus:Number of menu item" items="0,1,4,5,6,7,8,9,10" default="10" group="Theme" />
-        <meta name="boolean:hide_search:Hide search form" default="false" group="Theme" />
-        <meta name="boolean:hide_social:Hide Social widget" default="false" group="Theme" />
-        <meta name="boolean:hide_bio:Hide Bio widget" default="false" group="Theme" />
-        <meta name="boolean:hide_page:Hide Page widget" default="false" group="Theme" />
+        <meta name="list:colors:Choose color" items="pastel, black, green, pink" default="pink" group="Theme" />
+        <meta name="list:menus:Number of menu item" items="0,1,2,3,4,5,6,7,8,9,10" default="10" group="Theme" />
+        <meta name="boolean:hide_search:label.hideSearchForm" default="false" group="Widgets" />
+        <meta name="boolean:hide_social:label.hideFollowUs" default="false" group="Widgets" />
+        <meta name="boolean:hide_bio:label.hideBiography" default="false" group="Widgets" />
+        <meta name="boolean:hide_page:label.hidePages" default="false" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
+        <meta name="list:share_button:Chose your(s) share button(s)" items="Facebook, Twitter, Google +, All" default="All" group="Social">
+        <meta name="string:twitter_account:Enter your Twitter Account" group="Social" />
+        <meta name="string:facebook_account:Enter your Facebook Account" group="Social" />
 
         <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
         <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
         <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
         <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
-        <meta name="string:twitter_account:Enter your Twitter Account" group="Settings" />
-        <meta name="string:facebook_account:Enter your Facebook Account" group="Settings" />
 
 
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
-        {% if Blog.FaviconUrl is not empty %}
-            <link rel="icon" type="image/png" href="{{ Blog.FaviconUrl }}" />
-        {% else %}
-            <link rel="shortcut icon" type="image/x-icon" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.ico" />
-            <link rel="icon" type="image/png" href="http://fdata.over-blog.net/99/00/00/01/img/favicon.png" />
-        {% endif %}
+        {% favicon %}
 
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
@@ -165,7 +114,7 @@
             .header {
                 border-radius: 10px;
                 padding: 1px 30px;
-                margin-bottom: 20px;
+                margin-bottom: 10px;
             }
             .header h1 {
                 font: normal bold 36px Tahoma, sans-serif;
@@ -179,8 +128,8 @@
                 padding: 0;
             }
             .menu li {
-                display: inline;
-                margin: 0 1px;
+                display: inline-block;
+                margin: 0 -2px;
                 padding: 10px 15px 10px 15px;
                 border-radius: 0 0 10px 10px;
                 background: #ddd;
@@ -208,7 +157,8 @@
             .date {
                 text-transform: uppercase;
                 padding-left: 10px;
-                font-size: 80%;
+                font-size: 90%;
+                font-weight:bold;
             }
             .post {
                 background-color: #ffffff;
@@ -253,6 +203,19 @@
             .ob-section {
                 margin-bottom: 10px;
             }
+            .ob-section-video {
+                margin:0;
+                width: 100%;
+            }
+            .ob-video iframe,
+            .ob-video object,
+            .ob-video embed,
+            .ob-section-html iframe,
+            .ob-section-html object,
+            .ob-section-html embed{
+                width: 640px;
+                max-height: 380px;
+            }
             .ob-repost {
                 border: 1px solid #DDD;
                 -webkit-border-radius: 5px;
@@ -270,7 +233,13 @@
             .ob-section-text {
                 width: 100%;
             }
-
+            .ob-section blockquote.ob-tweet{
+                max-width: 620px;
+                margin:0;
+            }
+            .ob-section-map .ob-map{
+                margin: 0;
+            }
 
             /* Footer ----------------------------------------------- */
             .footer {
@@ -286,17 +255,30 @@
             .widget {
                 border-right: 1px solid #eee;
                 position: relative;
-                float: left;
-                padding-left: 20px;
+                display:table-cell;
+                padding-left: 10px;
+                width: 30%;
             }
             .last {
                 border : 0;
             }
 
+            /* Share ----------------------------------------------- */
+            .share > div{
+                float:left;
+                height:20px;
+                margin-right:28px;
+            }
+            .share .google-share{
+                margin-right: 0;
+            }
+            .share iframe{
+                border:none;
+                width:90px;
+            }
+
             /* Widgets ----------------------------------------------- */
-            .social { width: 35%;}
-            .bio { width: 35%;}
-            .tags { width: 20%;}
+           
 
             .social ul  {
                 padding: 0;
@@ -315,13 +297,14 @@
                 padding-left: 40px;
             }
             .social li {
-                border-bottom: 1px dashed #aaa;
+                border-bottom: 1px dashed #eee;
                 padding-bottom: 5px;
                 margin-bottom: 5px;
                 min-height: 40px;
             }
-
-
+            .social a {
+                line-height: 40px;
+            }
             .bio .photo {
                 float: right;
                 margin-right: 10px;
@@ -477,7 +460,7 @@
                 color: #FA3881;
             }
             .search input[type="text"] {
-                background: #999;
+                background: #fff;
                 color: #000;
                 border: 1px solid #FF0099;
             }
@@ -574,12 +557,22 @@
 
             <!-- shortcut:[Principal content] -->
             <div class="entries">
+                {% if isSearch %}
+                    <p class="list-title">{{ Lang.Get('Search for') }} &quot;{{ Search }}&quot;</p>
+                {% endif %}
+
+                {% if isTag %}
+                    <p class="list-title">{{ Lang.Get('Posts with') }} #<strong>{{ Tag.Title }}</strong> {{ Lang.Get('tag') }}</p>
+                {% endif %}
+
                 {% if Posts is empty %}
                     <div class="post">
                         {% if isSearch %}
-                            {{ Lang.Get('No results for this search') }}
-                                                {% elseif isSpecial %}
-                                                    {{SpecialContent}}
+                            {{ Lang.Get('No result for this expression') }}
+                        {% elseif isSpecial %}
+                            {{SpecialContent}}
+                        {% else %}
+                            {{ Lang.Get('No post') }}
                         {% endif %}
                     </div>
                 {% endif %}
@@ -610,13 +603,17 @@
                             {% endif %}
                         </p>
                         {% if isSingle %}
-                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="{% if Custom('twitter_account') is not empty %}{{ Custom('twitter_account') }}{% else %}overblog{% endif %}">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                            <g:plusone size="small"></g:plusone>
+                            {% if Custom ('share_button') is not empty %}
+                                <div class="share clearfix">
+                                    {{ Post.Share }}
+                                </div>
+                            {% endif %}
 
                             {% if not isPage and Post.ShowComments is not empty %}
-                                <a name="comments" />
-                                {{ Post.Comments }}
+                                <div id="comments">
+                                    <h3>{{ Lang.Get('Comments') }}</h3>
+                                    {{ Post.Comments }}
+                                </div>
                             {% endif %}
                         {% endif %}
                     </div>
@@ -637,7 +634,6 @@
                     |&nbsp;<a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="prev">{{ Lang.Get('Next article') }}</a>
                 {% endif %}
             </div>
-
             <!-- shortcut:[Modules content] -->
 
 
@@ -680,21 +676,44 @@
                             {% if Blog.Owner.Bio is not empty %}
                                 <li>{{ Blog.Owner.Bio }}</li>
                             {% endif %}
-                            <li><a href="/contact">{{ Lang.Get('Contact') }}</a></li>
+                            <li>
+                                <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                            </li>
                         </ul>
                     </div>
                 {% endif %}
-                {% if Custom('hide_page') is empty and Custom('hide_page') == false %}
-                    <div class="widget pages last">
+
+                <div class="widget pages last">
+                {% if Custom('hide_page') is empty and Custom('hide_page') == false %}         
                         <h3>{{ Lang.Get('Pages') }}</h3>
                         <ul>
                             {% list Blog.ListPages %}
                                 <li><a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a></li>
                             {% endlist %}
                         </ul>
-                    </div>
                 {% endif %}
 
+                {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}  
+                    <h3>{{ Lang.Get('Archives') }}</h3>
+                    <ul id="archivelist">
+                        {% list Blog.Archives %}
+                             <li class="arch_year">
+                                <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
+                                <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
+                                    {% list Archive.Months %}
+                                        {% if Month.PostCount > 0 %}
+                                            <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">{{ Month.PostCount }}</span></li>
+                                        {% endif %}
+                                    {% endlist %}
+                                </ul>
+                            </li>
+                        {% endlist %}
+                    </ul>
+                {% endif %}
+                </div>
             </div>
         </div>
         {% endif %}
@@ -732,6 +751,45 @@
                     'type'      : 'image'
                 });
             });
+
+            {% if Custom('custom_hide_widget_blog_archive') == false %}
+                // Archives
+                function switch_arch(year) {
+                    'use strict';
+                    var archiveYear,
+                        archiveMonths,
+                        displayStyle;
+                        displayStyle = '';
+                        archiveYear = document.getElementById('arch_' + year);
+                    if (typeof (archiveYear) !== 'undefined') {
+                        if (archiveYear.style.display !== 'none') {
+
+                            // Hide years without months
+                                archiveMonths = archiveYear.getElementsByTagName('li');
+                            if (!archiveMonths.length) {
+                                archiveYear.parentNode.style.display = 'none';
+                            }
+                            // Onclick management
+                            displayStyle = 'none';
+                        }
+                        archiveYear.style.display = displayStyle;
+                    }
+                    return false;
+                }
+
+                $(document).ready(function(){
+                    $('.plustext').click(function(e) {
+                        return false;
+                    });
+                });
+
+                {% list Blog.Archives %}
+                    {% if Archive.Year != "now"|date("Y") %}
+                        switch_arch('{{ Archive.Year }}');
+                    {% endif %}
+                {% endlist %}
+            {% endif %}
+
         </script>
         <!-- Place this render call where appropriate -->
         <script type="text/javascript">
