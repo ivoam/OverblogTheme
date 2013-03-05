@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ Blog.Lang|default('en') }}">
+<html lang="{{ Blog.Lang|default('en') }}" itemscope="" itemtype="http://schema.org/Blog">
     <head>
         <!-- shortcut:[Meta] -->
         <!-- title -->
@@ -85,6 +85,9 @@
         a{color: #254c67;cursor:pointer;outline:none;position:relative;text-decoration:none;}
         a:hover{text-decoration:underline; color: #2577b0;}
         ::-moz-focus-inner{ border:0; }
+        input[type=text]::-ms-clear {
+            display: none;
+        }
         .wrap{ margin:0 auto; position:relative; width: 986px; }
         .cl,.cr,.cb{ display:block !important; float:none !important; height:0 !important; width: 0 !important;}
         .cl { clear:left;}
@@ -100,7 +103,10 @@
         ::selection {color: white;  background: #00a2ff;}
         ::-moz-selection {color: white;  background: #00a2ff;}
         ::-webkit-selection {color: white;  background: #00a2ff;}
-        .article ul, .article ol {margin-left: 20px;}
+        .article ul, 
+        .article ol {
+            margin:0 0 15px 20px;
+        }
         .article ul li {list-style: disc;}
         .article ol li {list-style: decimal;}
         .article pre,
@@ -287,14 +293,38 @@
         .comments-counter {display: block; position: absolute; bottom: 10px; right: 5px; white-space: nowrap; padding: 2px 5px 1px 20px; background: #111 url('http://assets.over-blog-kiwi.com/themes/1/images/mini-bulle-icon.png') no-repeat 5px 7px; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; filter: alpha(opacity=90); -moz-opacity: 0.9; -webkit-opacity: 0.9; -o-opacity: 0.9; opacity: 0.9; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; transition: opacity 300ms; border-radius: 4px; color: #FFF; font-size: 12px; font-weight: bold; text-decoration: none; text-align: center;}
         .excerpt .picture:hover .comments-counter, .comments-counter:hover {-moz-opacity: 0.7; -webkit-opacity: 0.7; -o-opacity: 0.7; opacity: 0.7; color: #FFF; text-decoration: none;}
 
-        .excerpt .facebook-share,
+        /*.excerpt .facebook-share,
         .excerpt .twitter-share,
         .excerpt .google-share,
         .excerpt .ob-share {float: left;}
         .excerpt .facebook-share {margin-right: 10px; width: 95px;}
         .excerpt .twitter-share {margin-right: 10px; width: 106px;}
-        .excerpt .google-share {margin-right: 10px; width: 80px;}
+        .excerpt .google-share {margin-right: 10px; width: 80px;}*/
         .excerpt .ob-share {margin-top: -2px;}
+
+        /* Share ----------------------------------------------- */
+        .share h3 {
+            border: 0; 
+            clip: rect(0 0 0 0); 
+            height: 1px; 
+            margin: -1px; 
+            overflow: hidden; 
+            padding: 0; 
+            position: absolute; 
+            width: 1px; 
+        }
+        .share > div{
+            float:left;
+            height:20px;
+            margin-right:28px;
+        }
+        .share .google-share{
+            margin-right: 0;
+        }
+        .share iframe{
+            border:none;
+            width:90px;
+        }
 
         /*---- Contact ----*/
         .ob-form {margin-bottom: 120px;}
@@ -385,7 +415,11 @@
         .sidebar .categories h3 {background-position: 95px 6px;}
         .sidebar .categories .number {float: right; background: url("http://assets.over-blog-kiwi.com/themes/1/images/categories.png") no-repeat; height: 22px; line-height: 22px; padding-left: 10px; padding-right: 6px; color: #FFF;font-family: 'Montserrat', Arial, sans-serif; font-size: 14px; text-shadow: 0 1px 0px #21496F;}
         .sidebar .categories .end-number {float: right; background: url("http://assets.over-blog-kiwi.com/themes/1/images/categories.png") no-repeat scroll -120px 0 transparent; width: 5px; height: 22px;}
-
+        .sidebar .categories li a{
+            float: left;
+            max-width: 80%;
+            word-wrap:break-word;
+        }
 
         .sidebar .archives {padding: 10px; float: left;}
         .sidebar .archives h3 {background-position:  80px 6px;}
@@ -576,7 +610,10 @@
 
                                                 <p class="meta">
                                                     <span>{{ Post.Date|datel(Lang.Get("Default date format"))|title }}</span>
-                                                    {% if Post.Author is not empty %}, {{ Lang.Get('Written by') }} {{ Post.Author }}{% endif %}
+                                                    {% if Post.Author is not empty %}
+                                                        {% if Post.Date is not empty %}, {% endif %}
+                                                        {{ Lang.Get('Written by') }} {{ Post.Author }}
+                                                    {% endif %}
                                                     {% if Post.tags is not empty %}
                                                         <span class="tags">
                                                             {% list Post.Tags %}
@@ -608,41 +645,13 @@
                                                             <h4>{{ Lang.Get('Share this page') }}</h4>
                                                         {% endif %}
                                                     {% else %}
-                                                        {% if Custom('display_mode') != 'Full text' %}
-                                                            <a class="readmore" href="{{ Post.PermaLink }}">{{ Lang.Get('Read more') }}</a>
-                                                        {% endif %}
+                                                       
+                                                        <a class="readmore" href="{{ Post.PermaLink }}">{{ Lang.Get('Read more') }}</a>
+                                                        
                                                     {% endif %}
 
                                                     <div class="share">
-                                                        {% if Custom('share_service') == 'Google +' %}
-                                                            <div class="google-share">
-                                                                <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                                            </div>
-                                                        {% endif %}
-                                                        {% if Custom('share_service') == 'Twitter' %}
-                                                            <div class="twitter-share">
-                                                                <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                                            </div>
-                                                        {% endif %}
-                                                        {% if Custom('share_service') == 'Facebook' %}
-                                                            <div class="facebook-share">
-                                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false"></div>
-                                                            </div>
-                                                        {% endif %}
-                                                        {% if Custom('share_service') == 'All' or Custom('share_service') is empty %}
-                                                            <div class="google-share">
-                                                                <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                                            </div>
-                                                            <div class="twitter-share">
-                                                                <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
-                                                            </div>
-                                                            <div class="facebook-share">
-                                                                <div class="fb-like" data-href="{{ Post.Permalink }}" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
-                                                            </div>
-                                                        {% endif %}
-                                                        <div class="ob-share">
-                                                            {{ Post.RepostButton }}
-                                                        </div>
+                                                        {{ Post.Share }}
                                                         <div class="cb"></div>
                                                     </div>
                                                 </div>
@@ -841,6 +850,7 @@
                                 </ul>
                             </div>
                         {% endif %}
+                        
                     </div>
                     <div class="cb"></div>
                 </div>
@@ -1014,7 +1024,7 @@
                 }
 
                 $(document).ready(function(){
-                    $('.plustext').click(function() {
+                    $('.plustext').click(function(e) {
                         return false;
                     });
                 });
