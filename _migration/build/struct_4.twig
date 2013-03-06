@@ -772,6 +772,25 @@
                     {% endlist %}                               
                 </ul>
                 {% endif %}
+                {% elseif isSpecial %}
+                
+                <div class="articles">
+                    <div>
+                        <div class="before_articles">
+                            <div class="pagination center"></div>
+                        </div>
+                        <div class="article" id="article1">
+                            <div class="option beforeArticle"></div>
+                            <div class="contenuArticle">
+                                {{ SpecialContent }}
+                                <div class="clear"></div>
+                            </div>
+                            <div class="option afterArticle"></div>
+                        </div>
+                        <div class="after_articles"></div>
+                    </div>
+                </div>
+                
                 {% else %}
                 
                 <div class="articles{% if Custom('ob_display_post') == 'snippets' %} extraits{% endif %}">
