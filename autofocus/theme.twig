@@ -26,36 +26,33 @@
         {% endif %}
 
         <!-- Custom vars -->
-        <meta name="constant:displayArticlesLimit" content="10" />
+        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
+        <meta name="image:custom_logo_picture:label.headerImage" group="Template (max 450*100px)"  group="Design" />
 
-        <meta name="image:custom_logo_picture:Choose your logo (max 450*100px)" group="Template" />
+        <meta name="list:custom_titles_font:label.titlesFont" items="Arial, Dosis, Crushed, Italiana, Italianno, Lobster, Marmelad, Metamorphous, Ovo, Oxygen, Salsa, Sancreek, Sunshiney, Wellfleet" default="Lobster" group="Design" />
+        <meta name="color:custom_theme_color:label.primaryColor" default="#00AAFF" group="Design" />
 
-        <meta name="list:custom_titles_font:Titles font" items="Arial, Dosis, Crushed, Italiana, Italianno, Lobster, Marmelad, Metamorphous, Ovo, Oxygen, Salsa, Sancreek, Sunshiney, Wellfleet" default="Lobster" group="Design" />
-        <meta name="color:custom_theme_color:Theme color" default="#00AAFF" group="Design" />
-
-        <meta name="string:facebook_profile_id:Enter your FaceBook Profile ID" group="Social" />
+        <meta name="string:facebook_profile_id:label.twitterUsername" group="Social" />
         <meta name="string:twitter_account:label.twitterUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
-        
+        <meta name="boolean:display_widget_lastPosts:label.hideLastPosts" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
+        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
+
         <meta name="string:footer:label.footer" default="Theme: Autofocus &copy; 2013" group="Wording"  />
 
-        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
-        <meta name="string:comment_disqus:Disqus website's shortname (Mandatory)" group="Comments" />
-        <meta name="list:custom_facebook_comments_color_theme:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
+        <meta name="list:custom_facebook_comments_color_theme:label.facebookCommentsColorTheme" items="light, dark" default="light" group="Comments" />
 
-        <meta name="string:facebook_profile_id:Enter your FaceBook Profile ID" group="Social" />
-        <meta name="string:twitter_account:Enter your Twitter login" group="Social" />
-        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />      
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
         <!-- Template resources -->
         {% if Custom('custom_titles_font') != "Arial" %}
@@ -203,7 +200,7 @@
                 transition: all 0.3s ease 0s;
             }
             .pagination{
-                padding-top: 35px;
+                padding: 5px 0 25px;
                 overflow: hidden;
             }
             .pagination a{
@@ -244,7 +241,7 @@
                               transform-origin: 60% 75%;
             }
             .search .s-input,
-            .ob-input-email{
+            .ob-form-subscription .ob-input-email{
                 padding: 2px 3px;
             }
             .ob-input-submit{
@@ -469,6 +466,7 @@
             }
             .col-post h3{
                 margin-bottom: 10px;
+                font-size: 18px;
             }
             .sidebar{
                 float: right;
@@ -513,8 +511,18 @@
                 color: #FFF;
                 padding: 3px 15px;
             }
-            .box .meta .links a{
+            .meta .links a{
+                margin-right: 2px;
                 text-decoration: none;
+            }
+                 .meta .links a:hover{
+                    text-decoration: underline;
+                }
+            .meta .links a:after{
+                content:",";
+            }
+            .meta .links a:last-child:after{
+                content:"";
             }
             .ob-text h3,
             .ob-text h4,
@@ -574,7 +582,14 @@
             .ob-section-file .ob-c a.ob-link:visited {color: {{ Custom("custom_theme_color") }}; text-decoration: underline; text-shadow: none;}
             .ob-section-file .ob-ctn a.ob-link:hover {color: {{ Custom("custom_theme_color") }}; text-decoration: none;}
             .ob-section-file .ob-ctn {display:block;width:100%;max-width:none;}
-            .ob-section-file .ob-link {max-width:555px;font-weight:normal;}
+            .ob-section-file .ob-link,
+            .ob-section-file{
+                max-width:640px;
+                font-weight:normal;
+            }
+            .ob-tweet {
+                max-width: 620px;
+            }
 
             /* Section Quote */
             .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); margin-bottom: 20px;}
@@ -692,6 +707,12 @@
                                 {% endlist %}
                             </ul>
                         </li>
+                        {% if Custom('custom_hide_widget_subscribe') == false %}
+                        <!-- Subscribe -->
+                        <li>
+                            <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                        </li>
+                        {% endif %}
                         <!-- Contact -->
                         <li class="end"><a href="/contact">{{ Lang.Get('Contact') }}</a></li>
                     </ul>
@@ -812,8 +833,39 @@
                                     </span>
                                 </p>
                                 <div class="entry">
-                                    {{ Post.Body }}
+                                     {% if isSingle or Custom('display_mode') == 'All' %}
+                                        {{ Post.Body }}
+                                    {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
+                                        {{ Post.Body(Custom('display_mode')) }}
+                                    {% else %}
+                                        <p>{{ Post.Snippet }}</p>
+                                    {% endif %}
                                 </div>
+
+                                <!-- Pagination -->
+                                {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
+                                    {% if not isIndex %}<div class="col-post clear">{% endif %}
+                                    <div class="pagination">
+                                        {% if Navigation.PreviousPage is not empty or Navigation.PreviousPost is not empty %}
+                                            {% if Navigation.PreviousPage is not empty %}
+                                                <a href="{{ Navigation.PreviousPage }}" class="prev">{{ Lang.Get('Previous page') }}</a>
+                                            {% elseif Navigation.PreviousPost is not empty %}
+                                                <a href="{{ Navigation.PreviousPost.Permalink }}" class="prev" title="{{ Lang.Get('Go to') }} {% if Navigation.PreviousPost.Title is not empty %}&quot;{{ Navigation.PreviousPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('previous post') }}{% endif %}">{{ Lang.Get('Previous post') }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if Navigation.NextPage is not empty or Navigation.NextPost is not empty %}
+                                            {% if Navigation.NextPage is not empty %}
+                                                <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }}</a>
+                                            {% elseif Navigation.NextPost is not empty %}
+                                                <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }}</a>
+                                            {% endif %}
+                                        {% endif %}
+                                        
+                                    </div>
+                                    {% if not isIndex %}</div>{% endif %}
+                                    <div class="clear"></div>   
+                                {% endif %}
+
                                 {% if Custom('share_service') != 'None' %}
                                     <div class="ob-section m-social-networks clear">
                                         {{ Post.Share }}
@@ -886,14 +938,10 @@
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                {% else %}
-                                   <div class="entry">
-                                        <p>{{ Lang.Get('No post found') }}.</p>
-                                    </div>
                                 {% endlist %}
                                 {% if isSearch and Posts is empty %}
                                     <!-- No result for search -->
-                                    <p>{{ Lang.Get('No result found') }}</p>
+                                    <p>{{ Lang.Get('No result found') }}.</p>
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -927,7 +975,7 @@
                                     {% endif %}
 
                                     {# lastPost #}
-                                    {% if Custom('display_widget_pages') != true and Blog.Pages is not empty %}
+                                    {% if Custom('display_widget_lastPosts') != true and Blog.Pages is not empty %}
                                     <li class="last-posts" >
                                         <h3>{{ Lang.Get('Last Posts') }}</h3>
                                         <ul class="list clearfix">
@@ -953,7 +1001,7 @@
                                         </li>
                                     {% endif %}
                                     <!-- Archives -->
-                                    {% if Custom('custom_hide_widget_archives') == false %}
+                                    {% if Custom('custom_hide_widget_blog_archive') == false %}
                                         {% if Blog.Archives is not empty %}
                                             <li>
                                                 <h3>{{ Lang.Get('Archives') }}</h3>
@@ -979,31 +1027,33 @@
                         {% endif %}
                     {% endif %}
                     <div class="clear"></div>
-
                     <!-- Pagination -->
-                    {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                        {% if not isIndex %}<div class="col-post clear">{% endif %}
-                        <div class="pagination">
-                            {% if Navigation.PreviousPage is not empty or Navigation.PreviousPost is not empty %}
-                                {% if Navigation.PreviousPage is not empty %}
-                                    <a href="{{ Navigation.PreviousPage }}" class="prev">{{ Lang.Get('Previous page') }}</a>
-                                {% elseif Navigation.PreviousPost is not empty %}
-                                    <a href="{{ Navigation.PreviousPost.Permalink }}" class="prev" title="{{ Lang.Get('Go to') }} {% if Navigation.PreviousPost.Title is not empty %}&quot;{{ Navigation.PreviousPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('previous post') }}{% endif %}">{{ Lang.Get('Previous post') }}</a>
+                    {% if isIndex %}
+                        {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
+                            
+                            <div class="pagination">
+                                {% if Navigation.PreviousPage is not empty or Navigation.PreviousPost is not empty %}
+                                    {% if Navigation.PreviousPage is not empty %}
+                                        <a href="{{ Navigation.PreviousPage }}" class="prev">{{ Lang.Get('Previous page') }}</a>
+                                    {% elseif Navigation.PreviousPost is not empty %}
+                                        <a href="{{ Navigation.PreviousPost.Permalink }}" class="prev" title="{{ Lang.Get('Go to') }} {% if Navigation.PreviousPost.Title is not empty %}&quot;{{ Navigation.PreviousPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('previous post') }}{% endif %}">{{ Lang.Get('Previous post') }}</a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                            {% if Navigation.NextPage is not empty or Navigation.NextPost is not empty %}
-                                {% if Navigation.NextPage is not empty %}
-                                    <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }}</a>
-                                {% elseif Navigation.NextPost is not empty %}
-                                    <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }}</a>
+                                {% if Navigation.NextPage is not empty or Navigation.NextPost is not empty %}
+                                    {% if Navigation.NextPage is not empty %}
+                                        <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }}</a>
+                                    {% elseif Navigation.NextPost is not empty %}
+                                        <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }}</a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                             <p class="gotop clear"><a href="#top" ><img alt="" src="http://assets.over-blog-kiwi.com/themes/31/images/arrow-l.png" />{{ Lang.Get('Go top') }}</a></p>
-                        </div>
-                        {% if not isIndex %}</div>{% endif %}
-                        <div class="clear"></div>
-                       
-                    {% endif %}
+                                
+                            </div>
+                            <div class="clear"></div>   
+                        {% endif %}
+                    {% endif %}       
+                    {% if isSpecial is empty %}        
+                     <p class="gotop clear"><a href="#top" ><img alt="" src="http://assets.over-blog-kiwi.com/themes/31/images/arrow-l.png" />{{ Lang.Get('Go top') }}</a></p>
+                     {% endif %}     
                 </div>
             </div>
         </div>
