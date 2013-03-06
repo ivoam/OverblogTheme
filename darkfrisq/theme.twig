@@ -12,16 +12,15 @@
         {% endif %}     
     
         <!-- shortcut:[Custom vars] -->
-        <meta name="constant:displayArticlesLimit" content="6" />
+        <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
     
-        <meta name="list:theme_style:Theme color scheme" items="green, red, pink, blue, orange, neutral" default="orange" group="Design">
-        <meta name="image:custom_background:Custom blog background" group="Design" />
-        <meta name="image:custom_blog_cover:Custom blog cover (Recommended size : 900x200 )" group="Design" />
+        <meta name="list:theme_style:label.appearance" items="green, red, pink, blue, orange, neutral" default="orange" group="Design">
+        <meta name="image:custom_background:label.backgroundImage" group="Design" />
+        <meta name="image:custom_blog_cover:label.headerImage" group="Image 900x200 px" />
     
         <meta name="string:text_publishedby:Published by" default="Published by" group="Wordings">
     
-        <meta name="list:snippet:On index, display post as" items="snippet, first section, full post" default="snippet" group="Posts">
-        <meta name="image:default_post_cover:Default post cover (Only with snippet display mode)" group="Posts" />
+        <meta name="image:default_post_cover:label.defaultPostCover" group="Posts" />
     
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
@@ -31,17 +30,17 @@
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
-        <meta name="string:facebook_account:Enter your Facebook Username" group="Social" />
-        <meta name="string:twitter_account:Enter your Twitter Username" group="Social" />
-        <meta name="list:share_button:Chose your(s) share button(s)" items="Facebook, Twitter, Google +, All" default="All" group="Social">
+        <meta name="list:share_button:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
+        <meta name="string:twitter_account:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_account:label.facebookUsername" group="Social" />
         
-        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
-        <meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
         
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
         
         <!-- shortcut:[Includes] -->
         <!-- favicon -->       
@@ -189,7 +188,8 @@
                 font-family: 'Fjalla One', arial, sans-serif;
             }
     
-            html > body #global {
+            html > body #global,
+            .header {
                 background: transparent url(http://assets.over-blog-kiwi.com/themes/4/images/main_dark_shadow.png) repeat-y 0 0;
                 /* ombre du container global - invisible sur IE6 */
             }
@@ -295,7 +295,7 @@
                 position: absolute;
                 z-index: 30;
                 bottom: 0;
-                width: 980px;
+                width: 940px;
                 background: rgba(43,43,43,.8);
             }
     
@@ -891,7 +891,7 @@
                 border: none;
                 padding:4px;
             }
-    
+
             .search button, 
             .ob-input-submit {
                 border: 1px solid #505050;
@@ -1145,7 +1145,7 @@
                         <div>
                             {# Pagination #}
                             {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                                {% if isPage == false %}
+                                {% if isIndex %}
                                     <div class="before_articles">
                                         <div class="pagination clearfix">
                                             {% if Navigation.PreviousPage is not empty %}
@@ -1207,31 +1207,29 @@
                                     <div class='post-title'>
                                         <h2>
                                             {% if isSingle %}
-                                            <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Post.Snippet }}">{% if Post.Title is not empty %}{{ Post.Title|truncate(100) }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
+                                            <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Post.Snippet }}">{% if Post.Title is not empty %}{{ Post.Title }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
                                             {% else %}
-                                            <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">{% if Post.Title is not empty %}{{ Post.Title|truncate(100) }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
+                                            <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">{% if Post.Title is not empty %}{{ Post.Title }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
                                             {% endif %}
                                         </h2>
                                     </div>
                                 </div>
                                 <div class="contenuArticle">
-                                    {% if isSingle %}
-                                    {{ Post.Body }}
-                                    {% elseif Custom('snippet') == 'snippet' %}
-                                        {% if Post.Cover is not empty %}
-                                        <a href="{{ Post.Permalink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">
-                                            <img src="{{ Post.Cover|resize(570,250)|crop }}" title="" alt="" width="570"/>
-                                        </a>
-                                        {% elseif Custom('default_post_cover') is not empty %}
-                                        <a href="{{ Post.Permalink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">
-                                            <img src="{{ Custom('default_post_cover')|resize(570,250)|crop }}" title="" alt="" width="570"/>
-                                        </a>
-                                        {% endif %}
-                                        {{ Post.Snippet }}
-                                    {% elseif Custom('snippet') == 'full post' %}
-                                    {{ Post.Body }}
+                                     {% if isSingle or Custom('display_mode') == 'All' %}
+                                        {{ Post.Body }}
+                                    {% elseif not isSingle and Custom('display_mode') != 'Summary' and Custom('display_mode') != 'All'  %}
+                                        {{ Post.Body(Custom('display_mode')) }}
                                     {% else %}
-                                    {{ Post.Body(1) }}
+                                        {% if Post.Cover is not empty %}
+                                            <a href="{{ Post.Permalink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">
+                                                <img src="{{ Post.Cover|resize(570,250)|crop }}" title="" alt="" width="570"/>
+                                            </a>
+                                        {% elseif Custom('default_post_cover') is not empty %}
+                                            <a href="{{ Post.Permalink }}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">
+                                                <img src="{{ Custom('default_post_cover')|resize(570,250)|crop }}" title="" alt="" width="570"/>
+                                            </a>
+                                        {% endif %}
+                                        <p>{{ Post.Snippet }}</p>
                                     {% endif %}
                                 </div>
                                 <div class="clear"></div>
@@ -1266,6 +1264,29 @@
                                     {% endlist %}
                                 </p>
                             </div>
+                            {% if loop.last  %}
+                                {# Pagination #}
+                                {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
+                                    {% if isPage == false %}
+                                        <div class="before_articles">
+                                            <div class="pagination clearfix">
+                                                {% if Navigation.PreviousPage is not empty %}
+                                                <a href="{{ Navigation.PreviousPage }}" class="previous">&laquo; {{ Lang.Get('Previous page') }}</a>
+                                                {% elseif Navigation.PreviousPost is not empty %}
+                                                <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">&laquo; {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
+                                                {% endif %}
+                                                <a href="#" title="{{ Lang.Get('Go top') }}" class="top">{{ Lang.Get('Top') }}</a>
+                                                {% if Navigation.NextPage is not empty %}
+                                                <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
+                                                {% elseif Navigation.NextPost is not empty %}
+                                                <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} &raquo;</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+
                             {# Share #}
                             {% if isSingle %}
                                 {% if Custom ('share_button') is not empty %}
@@ -1304,26 +1325,7 @@
                          
                          </div>
                         
-                        {# Pagination #}
-                        {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                            {% if isPage == false %}
-                                <div class="before_articles">
-                                    <div class="pagination clearfix">
-                                        {% if Navigation.PreviousPage is not empty %}
-                                        <a href="{{ Navigation.PreviousPage }}" class="previous">&laquo; {{ Lang.Get('Previous page') }}</a>
-                                        {% elseif Navigation.PreviousPost is not empty %}
-                                        <a href="{{ Navigation.PreviousPost.Permalink }}" title="{{ Navigation.PreviousPost.Title }}" class="previous">&laquo; {% if Navigation.PreviousPost.Title is not empty %}{{ Navigation.PreviousPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Previous post') }}{% endif %}</a>
-                                        {% endif %}
-                                        <a href="#" title="{{ Lang.Get('Go top') }}" class="top">{{ Lang.Get('Top') }}</a>
-                                        {% if Navigation.NextPage is not empty %}
-                                        <a href="{{ Navigation.NextPage }}" class="next">{{ Lang.Get('Next page') }} &raquo;</a>
-                                        {% elseif Navigation.NextPost is not empty %}
-                                        <a href="{{ Navigation.NextPost.Permalink }}" title="{{ Navigation.NextPost.Title }}" class="next">{% if Navigation.NextPost.Title is not empty %}{{ Navigation.NextPost.Title | truncate(25) }}{% else %}{{ Lang.Get('Next post') }}{% endif %} &raquo;</a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endif %}
+
                     </div>
                 </div>
                 <div id="cl_1_1" class="cl">
@@ -1475,7 +1477,7 @@
                                                 <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
                                                     {% list Archive.Months %}
                                                         {% if Month.PostCount > 0 %}
-                                                            <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">{{ Month.PostCount }}</span></li>
+                                                            <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">({{ Month.PostCount }})</span></li>
                                                         {% endif %}
                                                     {% endlist %}
                                                 </ul>
@@ -1540,7 +1542,7 @@
                 }(document, 'script', 'facebook-jssdk'));
             {% endif %}
 
-        <!-- Twitter Script -->
+        /*-- Twitter Script --*/
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");
 
         </script>
