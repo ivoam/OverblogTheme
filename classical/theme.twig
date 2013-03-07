@@ -575,21 +575,23 @@
                                 {% list Posts %}
                                     <div class="article">
                                         <div class="excerpt">
-                                            {% if isSingle == false and Custom('display_mode') == 'Summary' and Post.Cover is not empty and Post.ShowComments is not empty %}
+                                            {% if isSingle == false and Custom('display_mode') == 'Summary' and Post.Cover is not empty %}
                                                 <div class="picture">
                                                     <a href="{{ Post.PermaLink }}" title="{{ Post.Title }}">
                                                         <img alt="{{ Post.Title }}" src="{{ Post.Cover|resize(220)|crop }}" />
                                                     </a>
-                                                    {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-                                                        <a class="comments-counter" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
-                                                    {% else %}
-                                                        <a class="comments-counter" href="{{ Post.PermaLink }}#item-comments" title="{{ Lang.Get('comments') }}">
-                                                            {% if Custom("comment") == "Facebook" %}
-                                                                <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
-                                                            {% else %}
-                                                                {{ Post.CommentCount }}
-                                                            {% endif %}
-                                                       </a>
+                                                    {% if Post.ShowComments is not empty %}
+                                                        {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                                            <a class="comments-counter" href="{{ Post.Permalink }}#disqus_thread" title="{{ Lang.Get('comments') }}"></a>
+                                                        {% else %}
+                                                            <a class="comments-counter" href="{{ Post.PermaLink }}#item-comments" title="{{ Lang.Get('comments') }}">
+                                                                {% if Custom("comment") == "Facebook" %}
+                                                                    <fb:comments-count href="{{ Post.Permalink }}"></fb:comments-count>
+                                                                {% else %}
+                                                                    {{ Post.CommentCount }}
+                                                                {% endif %}
+                                                           </a>
+                                                        {% endif %}
                                                     {% endif %}
                                                 </div>
                                             {% endif %}
