@@ -697,16 +697,20 @@
                             {% endif %}
                         {% endlist %}
                         <!-- Tags -->
-                        <li>
-                            <a href="#">{{ Lang.Get('Tags') }}</a>
-                            <ul class='children'>
-                                {% list Blog.PostsTags(15) %}
-                                    <li class="{% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} current_menu_item{% endif %}">
-                                        <a href="{{ PostsTag.Url }}"><span>{{ PostsTag.Title }}</span>
-                                    </a></li>
-                                {% endlist %}
-                            </ul>
-                        </li>
+                        {% list Blog.PostsTags(15) %}
+                            {% if loop.first %}
+                                <li>
+                                    <a href="#">{{ Lang.Get('Tags') }}</a>
+                                    <ul class='children'>
+                            {% endif %}  
+                                            <li class="{% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} current_menu_item{% endif %}">
+                                                <a href="{{ PostsTag.Url }}"><span>{{ PostsTag.Title }}</span>
+                                            </a></li>
+                            {% if loop.last %}         
+                                    </ul>
+                                </li>
+                             {% endif %} 
+                        {% endlist %}
                         {% if Custom('custom_hide_widget_subscribe') == false %}
                         <!-- Subscribe -->
                         <li>
