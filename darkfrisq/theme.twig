@@ -30,7 +30,7 @@
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
-        <meta name="list:share_button:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
         <meta name="string:twitter_account:label.twitterUsername" group="Social" />
         <meta name="string:facebook_account:label.facebookUsername" group="Social" />
         
@@ -184,7 +184,8 @@
             h1,
             h2,
             h3,
-            h4{
+            h4,
+            h5{
                 font-family: 'Fjalla One', arial, sans-serif;
             }
     
@@ -338,7 +339,7 @@
             /* @group Articles */
             .article {
                 margin-bottom: 20px;
-                padding-bottom: 20px;
+                /*padding-bottom: 20px;*/
             }
     
             .article p {
@@ -449,27 +450,22 @@
             .contenuArticle h5 {
                 font-weight: normal;
                 margin: 15px 0 5px;
+                line-height: 1.5em;
             }
             .contenuArticle h1 {
                 font-size: 22px;
-                line-height: 22px;
             }
             .contenuArticle h2 {
                 font-size: 20px;
-                line-height: 20px;
             }
             .contenuArticle h3 {
                 font-size: 18px;
-                line-height: 18px;
             }
             .contenuArticle h4 {
                 font-size: 16px;
-                line-height: 16px;
             }
             .contenuArticle h5 {
                 font-size: 14px;
-                font-weight: bold;
-                line-height: 14px;
             }
     
             .contenuArticle ul, .contenuArticle ol {
@@ -1085,7 +1081,9 @@
             .ob-img, 
             .ob-media, 
             .ob-video, 
-            .ob-slideshow, 
+            .ob-slideshow,
+            .ob-section-map .ob-desc,
+            .ob-section-images img, 
             .yui3-slideshow-content {
                 max-width: 570px;
             }
@@ -1168,7 +1166,7 @@
                             <h3 class="list-title">{{ Lang.Get ('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;</h1>
                             {% endif %}
                             {% if isTag %}
-                            <h3 class="list-title">{{ Lang.Get('Posts with') }} #<strong>{{ Tag.Title }}</strong> {{ Lang.Get('tag') }}</h1>
+                            <h3 class="list-title">{{ Lang.Get('Posts with') }} #<strong>{{ Tag.Title }}</strong></h1>
                             {% endif %}
     
                             {# Posts #}
@@ -1199,9 +1197,11 @@
     
                             <div class="article index_{{ loop.index }} {% if (loop.index % 2) == 0 %}odd{% else %}even{% endif %}">
                                 <div class="option beforeArticle">
-                                    <div class="date">
-                                        <time datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('EEEE')) | title }}, {{ Post.Date|datel(Lang.Get('Default date format')) | title }} {{ Post.Date | date('h:m') }}</time>
-                                    </div>
+                                    {% if not isPage %}
+                                        <div class="date">
+                                            <time datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('EEEE')) | title }}, {{ Post.Date|datel(Lang.Get('Default date format')) | title }} {{ Post.Date | date('h:m') }}</time>
+                                        </div>
+                                    {% endif %}
                                 </div>
                                 <div class="divTitreArticle">
                                     <div class='post-title'>
@@ -1289,7 +1289,7 @@
 
                             {# Share #}
                             {% if isSingle %}
-                                {% if Custom ('share_button') is not empty %}
+                                {% if Custom ('share_service') is not empty %}
                                     <div class="share clearfix">
                                         {{ Post.Share }}
                                     </div>
@@ -1502,8 +1502,7 @@
             </div>
         </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    {% if isSingle %}
-        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
+    <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.pack.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $(".ob-row-1-col a,.ob-row-2-col a,.ob-row-3-col a,.ob-link-img").attr("rel", "fancybox");
@@ -1515,7 +1514,7 @@
                 });
             });                 
         </script>
-        
+    {% if isSingle %}
         <!-- Disqus comments count -->
         {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
         <script type="text/javascript">
