@@ -27,8 +27,7 @@
 
         <!-- Custom vars -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-        <meta name="image:custom_logo_picture:label.headerImage" group="Template (max 450*100px)"  group="Design" />
-
+  
         <meta name="list:custom_titles_font:label.titlesFont" items="Arial, Dosis, Crushed, Italiana, Italianno, Lobster, Marmelad, Metamorphous, Ovo, Oxygen, Salsa, Sancreek, Sunshiney, Wellfleet" default="Lobster" group="Design" />
         <meta name="color:custom_theme_color:label.primaryColor" default="#00AAFF" group="Design" />
 
@@ -37,11 +36,10 @@
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
+         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_lastPosts:label.hideLastPosts" group="Widgets" />
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
-        <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
 
         <meta name="string:footer:label.footer" default="Theme: Autofocus &copy; 2013" group="Wording"  />
 
@@ -81,12 +79,24 @@
             .clearfix:after{
                 clear: both;
             }
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
 
+            .ob-section-html iframe,
+            .ob-section-html object,
+            .ob-section-html embed{
+                max-width: 700px;
+                max-height: 394px;
+            }
             .entry-content,
             .ob-section-images,
             .ob-section-video,
-            .ob-section-map,
-            .ob-section-images .ob-slideshow{
+            .ob-section-map{
                 width: 100%;
             }
             .ob-text ol,
@@ -124,12 +134,19 @@
                 font-family: {% if Custom("custom_titles_font") is not empty %}'{{ Custom("custom_titles_font") }}', {%endif %}Helvetica, sans-serif;
             }
             .m-header{
-                padding: 30px 0 55px 0;
+                padding: 30px 0 35px 0;
                 position: relative;
             }
+            .m-avatar{
+                display: inline-block;
+                margin-right: 10px;
+                vertical-align: top;
+            }
             .m-logo{
-                float: left;
-                width: 480px;
+                display: inline-block;
+                width: 460px;
+                vertical-align: top;
+                padding-top: 10px;
             }
             .m-logo a{
                 font-size: 3em;
@@ -141,7 +158,8 @@
                 padding: 3px 0;
             }
             .m-navigation{
-                float: right;
+                display: inline-block;
+                vertical-align: top;
                 text-align: right;
                 padding: 15px 0 0 0;
                 width: 400px;
@@ -252,6 +270,27 @@
             }
             .search .ob-input-submit{
                 margin: 0;
+            }
+            .ob-form-subscription .ob-form-field{
+                display: inline-block;
+                 width: 62%;
+                 margin:5px 0;
+            }
+           .ob-form-subscription .ob-form-field .ob-input{
+                width: 92%;
+                display: inline-block;
+                vertical-align: top;
+                height: 14px;
+            }
+            .ob-form-subscription .ob-input-submit{
+                width: 35%;
+                display: inline-block;
+                margin:4px 0;
+                vertical-align: top;
+                line-height: 24px;
+                height: 24px;
+                padding: 0 3px 5px 2px;
+                cursor: pointer;
             }
             .m-networks a{
                 margin-right: 4px;
@@ -421,7 +460,8 @@
                 line-height: 1.2em;
                 margin-top: 25px;
             }
-            h2.title{
+            h2.title,
+            .sidebar h3:first-child{
                 margin-top: 12px;
             }
             .list .left{
@@ -663,15 +703,16 @@
             <div class="m-page-wrapper">
                 <!-- shortcut:[Header content] -->
                 <div class="m-header">
+                    {% if Blog.Avatar %}
+                        <div class="m-avatar">
+                            <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                        </div>
+                    {% endif %}
                     <div class="m-logo">
                         <!-- Main title -->
                         <h1>
-                            <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">
-                                {% if Custom('custom_logo_picture') is not empty %}
-                                    <img src="{{ Custom('custom_logo_picture')|resize(650,100) }}" alt="{{ Blog.Title|truncate(20, true) }}" title="{{ Blog.Title }}" />
-                                {% else %}
-                                    {{ Blog.Title }}
-                                {% endif %}
+                            <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">          
+                                {{ Blog.Title }}                   
                             </a>
                         </h1>
                         <p class="s-headline">{{ Blog.Description }}</p>
@@ -796,7 +837,9 @@
                                                 {% if Post.Author and Post.Author is not empty %}
                                                     <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>
                                                 {% endif %}
-                                                <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
+                                                {% if not isPage %}
+                                                    <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
+                                                {% endif %}
                                                 <span class="links">
                                                     {% list Post.Tags %}
                                                         {% if loop.index <= 5 %}
@@ -875,7 +918,7 @@
                                         {{ Post.Share }}
                                     </div>
                                 {% endif %}
-                                {% if not isPage %}
+                                 {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                     <div class="bloc-comment ob-section clear" id="comments">
                                         <!-- Comments -->
                                         <div class="item-comments">
@@ -952,34 +995,24 @@
                         {% if Custom('custom_hide_widget_categories') == false or Custom('custom_hide_widget_pages') == false or Custom('custom_hide_widget_biography') == false or Custom('custom_hide_widget_archives') == false %}
                             <div class="sidebar">
                                 <ul>
-                                    <!-- Blog owner -->
-                                    {% if Custom('custom_hide_widget_biography') == false %}
+                                    <!--Follow Us-->
+                                    {% if Custom('custom_hide_widget_follow_us') == false %}
                                         <li>
-                                            {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
-                                                <h3>{{ Blog.Owner.Nickname }}</h3>
-                                                {% if Blog.Owner.Bio is not empty %}
-                                                    <p>
-                                                        {% if Blog.Owner.Avatar is not empty %}
-                                                            <a title="{{ Blog.Owner.Nickname }}" class="fancybox ob-media ob-img ob-pull-left ob-media-left" href="{{ Blog.Owner.Avatar }}"><img src="{{ Blog.Owner.Avatar|resize(45,45) }}" alt="" /></a>
-                                                        {% endif %}
-                                                        {{Blog.Owner.Bio}}
-                                                    </p>
+                                            <h3>{{ Lang.Get('Follow us') }}</h3>
+                                            <p class="m-networks clear">
+                                                {% if Custom('facebook_profile_id') is not empty %}
+                                                    <a title="Facebook" target="_blank" href="http://www.facebook.com/profile.php?id={{ Custom('facebook_profile_id') }}"><img alt="Facebook" src="http://assets.over-blog-kiwi.com/themes/31/images/facebook.png"></a>
                                                 {% endif %}
-                                                <p class="m-networks clear">
-                                                    {% if Custom('facebook_profile_id') is not empty %}
-                                                        <a title="Facebook" target="_blank" href="http://www.facebook.com/profile.php?id={{ Custom('facebook_profile_id') }}"><img alt="Facebook" src="http://assets.over-blog-kiwi.com/themes/31/images/facebook.png"></a>
-                                                    {% endif %}
-                                                    {% if Custom('twitter_account') is not empty %}
-                                                        <a title="Twitter" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_account') }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/twitter.png"></a>
-                                                    {% endif %}
-                                                    <a title="RSS" target="_blank" href="{{ Blog.RssUrl }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/rss.png"></a>
-                                                </p>
-                                            {% endif %}
+                                                {% if Custom('twitter_account') is not empty %}
+                                                    <a title="Twitter" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_account') }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/twitter.png"></a>
+                                                {% endif %}
+                                                <a title="RSS" target="_blank" href="{{ Blog.RssUrl }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/rss.png"></a>
+                                            </p>
                                         </li>
                                     {% endif %}
 
                                     {# lastPost #}
-                                    {% if Custom('display_widget_lastPosts') != true and Blog.Pages is not empty %}
+                                    {% if Custom('display_widget_lastPosts') != true %}
                                     <li class="last-posts" >
                                         <h3>{{ Lang.Get('Last Posts') }}</h3>
                                         <ul class="list clearfix">
@@ -1005,7 +1038,7 @@
                                         </li>
                                     {% endif %}
                                     <!-- Archives -->
-                                    {% if Custom('custom_hide_widget_blog_archive') == false %}
+                                    {% if Custom('custom_hide_widget_archives') == false %}
                                         {% if Blog.Archives is not empty %}
                                             <li>
                                                 <h3>{{ Lang.Get('Archives') }}</h3>
