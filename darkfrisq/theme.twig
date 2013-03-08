@@ -107,7 +107,18 @@
             :focus {
                 outline: 0;
             }
-    
+            ::-webkit-input-placeholder { /* WebKit browsers */
+                color: #666;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                color: #666;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+                color: #666;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10+ */
+                color: #666;
+            }
             /* remember to highlight inserts somehow! */
             ins {
                 text-decoration: none;
@@ -122,7 +133,14 @@
                 border-spacing: 0;
             }
     
-    
+            .visuallyhidden,
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
     
             /* @end */
     
@@ -361,7 +379,7 @@
             }
     
             .afterArticle {
-                margin-bottom: 20px;
+                margin-bottom: 35px;
                 padding: 5px;
                 font-size: 10px;
                 border: 1px solid;
@@ -590,7 +608,7 @@
                 line-height: 16px;
                 border-left: none;
                 padding: 0 3px 5px 2px;
-                font-size: 1Apx;
+                font-size: 11px;
                 font-weight: bold;
             }
     
@@ -598,7 +616,27 @@
                 overflow: auto;
                 width: 100%;
             }
-    
+            .column_content .ob-form-field{
+                display: inline-block;
+                 width: 62%;
+            }
+            .column_content .ob-form-field .ob-input{
+                width: 96%;
+                display: inline-block;
+                vertical-align: top;
+                height: 14px;
+            }
+            .column_content .ob-input-submit{
+                width: 35%;
+                display: inline-block;
+                margin:4px 0;
+                vertical-align: top;
+                line-height: 24px;
+                height: 24px;
+                padding: 0 3px 5px 2px;
+                font-weight: bold;
+                cursor: pointer;
+            }
             .profile .avatar {
                 float: left;
                 margin-right: 10px;
@@ -1389,8 +1427,8 @@
                             <div class="box-content">
                                 <form action="/search" method="post">
                                     <div class="ob-form-field">
-                                        <label class="ob-label" for="fSearch">{{ Lang.Get('Search') }}</label>
-                                        <input type="text" id="fSearch" name="q" value="{{ Search }}" class="ob-input ob-input-text" />
+                                        <label class="ob-label visuallyhidden" for="fSearch">{{ Lang.Get('Search') }}</label>
+                                        <input type="text" id="fSearch" name="q" placeholder="{{ Lang.Get('Search') }}..." value="{{ Search }}" class="ob-input ob-input-text" />
                                     </div>
                                         <button class="ob-input ob-input-submit" type="submit">{{ Lang.Get('Search') }}!</button>
                                 </form>
