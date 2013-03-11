@@ -856,6 +856,8 @@
                                     <a class="box box-link box_{{ loop.index}}" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}{{ Post.Title }}{% else %}{{ Lang.Get('this post') }}{% endif %}" class="link" href="{{ Post.PermaLink }}"></a>
                                 </div>
                             {% endif %}
+                        {% else %}
+                            {{ Lang.Get('No post') }}
                         {% endlist %}
                     {% else %}
                         <div class="col-post clear">
