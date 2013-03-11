@@ -1286,7 +1286,7 @@
                             <div class="option afterArticle">
                                 <p>
                                 {% if Post.Author is not empty %}
-                                    <span class="publishedBy">{{ Custom('text_publishedby') }} {{ Post.Author|default('Blog.Owner.Nickname') }}</span>
+                                    <span class="publishedBy">{{ Custom('text_publishedby') }} {{ Post.Author }}</span>
                                 {% endif %}
                                 {% if isPage == false and Post.ShowComments is not empty %}
                                     {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
@@ -1463,16 +1463,16 @@
                         </div>
                         
                         {# Pages #}
-                        {% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
+                        {% if Custom('display_widget_pages') != true and Blog.Pages is not empty %}
                         <div class="box pages" >
                             <div class="box-titre">
                                 <h3><span>{{ Lang.Get('Pages') }}</span></h3>
                             </div>
                             <div class="box-content">
                                 <ul>
-                                    {% list Blog.ListPages %}
+                                    {% list Blog.Pages %}
                                     <li>
-                                        <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                        <a  href="{{ Page.Url }}" title="{{ Page.Title }}">{{ Page.Title }}</a>
                                     </li>
                                     {% endlist %}
                                 </ul>

@@ -848,14 +848,14 @@
                                 </div>
                                 {% endif %}
                                 
-                                 {% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
+                                 {% if Custom('display_widget_pages') != true and Blog.Pages is not empty %}
                                 <div class='widget Feed'>
                                     <h3>{{ Lang.Get('Pages') }}</h3>
                                     <div class='widget-content'>
                                         <ul>
-                                            {% list Blog.ListPages %}
+                                            {% list Blog.Pages %}
                                             <li>
-                                                <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                                <a  href="{{ Page.Url }}" title="{{ Page.Title }}">{{ Page.Title }}</a>
                                             </li>
                                             {% endlist %}
                                         </ul>

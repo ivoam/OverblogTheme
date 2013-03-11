@@ -1009,13 +1009,13 @@
 
                     <!-- Pages -->
                     {% if Custom('custom_hide_widget_pages') == false %}
-                        {% if Blog.ListPages and Blog.ListPages is not empty %}
+                        {% if Blog.Pages and Blog.Pages is not empty %}
                              <div class="box">
                                 <h3>{{ Lang.Get('Pages') }}</h3>
                                 <ul class="list">
-                                    {% list Blog.ListPages %}
+                                    {% list Blog.Pages %}
                                         <li>
-                                            <a href="{{ListPage.Url}}">{{ListPage.Title}}</a>
+                                            <a href="{{Page.Url}}">{{Page.Title}}</a>
                                         </li>
                                     {% endlist %}
                                 </ul>

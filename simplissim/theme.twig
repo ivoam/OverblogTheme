@@ -749,8 +749,8 @@
                         <h3>{{ Lang.Get('Pages') }}</h3>
                         <ul>
                             {% if Custom('hide_page') is empty and Custom('hide_page') == false %}
-                                {% list Blog.ListPages %}
-                                    <li><a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a></li>
+                                {% list Blog.Pages %}
+                                    <li><a href="{{ Page.Url }}">{{ Page.Title }}</a></li>
                                 {% endlist %}
                             {% endif %}
                             <li>
