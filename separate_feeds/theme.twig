@@ -18,7 +18,7 @@
         <meta name="list:display_widget_tags:label.numberOfTags" items="0,2,4,6,8,10,12,14,16,18,20" default="6" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
-        
+
         <!-- Define the Twitter username -->
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <!-- Define the Facebook username -->
@@ -439,41 +439,51 @@
                 color: #6e6e6e;
                 text-transform: uppercase;
             }
-            .post-source {
-                background: url(http://assets.over-blog-kiwi.com/t/separate_feeds/images/sprite.png) no-repeat;
-                display: inline-block;
-                height: 23px;
-                margin-left: 10px;
+			.post-source{
+				background: url('http://assets.over-blog-kiwi.com/t/images/social-24.png') no-repeat top left;
+				display: inline-block;
+				height: 24px;
+				margin-left: 10px;
                 vertical-align: middle;
-                width: 23px;
-            }
-            .post-source.FB {
-                background-position: left -231px;
-            }
-            .post-source.FL {
-                background-position: left -280px;
-            }
-            .post-source.FS {
-                background-position: left -329px;
-            }
-            .post-source.IG {
-                background-position: left -377px;
-            }
-            .post-source.OB {
-                background-position: left -475px;
-            }
-            .post-source.RS {
-                background-position: left -524px;
-            }
-            .post-source.TB {
-                background-position: left -573px;
-            }
-            .post-source.TW {
-                background-position: left -621px;
-            }
-            .post-source.YT {
-                background-position: left -670px;
-            }
+				width: 24px;
+			}
+			.post-source.OB{
+				background-position: 0 0;
+			}
+			.post-source.FB,
+			.post-source.FP{
+				background-position: 0 -48px;
+			}
+			.post-source.TW{
+				background-position: 0 -96px;
+			}
+			.post-source.FS{
+				background-position: 0 -144px;
+			}
+			.post-source.IG{
+				background-position: 0 -192px;
+			}
+			.post-source.YT{
+				background-position: 0 -240px;
+			}
+			.post-source.FL{
+				background-position: 0 -288px;
+			}
+			.post-source.TR{
+				background-position: 0 -336px;
+			}
+			.post-source.RS{
+				background-position: 0 -384px;
+			}
+			.post-source.PT{
+				background-position: 0 -432px;
+			}
+			.post-source.GP{
+				background-position: 0 -480px;
+			}
+			.post-source.LI{
+				background-position: 0 -528px;
+			}
             .post-author {
                 display: inline-block;
                 font-size: 1.3em;
@@ -522,7 +532,7 @@
                 margin: 0 15px 10px 0;
                 padding: 4px 5px 4px 15px;
                 position: relative;
-                text-decoration: none;    
+                text-decoration: none;
             }
             .post .post-tags a {
                 max-width: 400px;
