@@ -26,10 +26,9 @@
         <meta name="string:custom_footer:label.footerText" default="Theme: Nullified &copy; 2012" />
 
         <meta name="image:custom_header_picture:label.headerImage" default="http://assets.over-blog-kiwi.com/themes/29/images/105.jpg" group="Home" />
-        <meta name="string:custom_home_subtitle:label.mainSubtitle" default="Welcome to my blog" group="Home" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,20,30,40,50" default="5" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
         <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
@@ -173,10 +172,17 @@
                 text-decoration: none;
                 text-shadow: 0 1px 1px rgba(0,0,0,0.8);
             }
-
+            .avatar,
+            #logo h1 {
+                display: inline-block;
+                vertical-align: middle;
+            }
             #logo h1 {
                 font-size: 3em;
                 font-family: Oswald, sans-serif;
+                {% if Blog.Avatar is not empty %}
+                     max-width: 540px;
+                {% endif %}
             }
 
             #menu {
@@ -240,7 +246,7 @@
 
             #page {
                 color: #AAA;
-                padding: 45px 35px 25px;
+                padding: 25px 35px;
                 margin: 0;
                 width: 910px;
                 position: relative;
@@ -377,9 +383,28 @@
             #search input.submit:active {
                 text-shadow: none;
             }
-
+            /* Sidebar > Subscribe */
+            .ob-form-subscription .ob-form-field,
+            .ob-form-subscription .ob-input-submit{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .ob-form-subscription .ob-form-field input{
+                width: 150px;
+            }
+            .ob-form-subscription .ob-input-submit{
+                margin:0;
+                padding:2px 10px;
+            }
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
             #sidebar {
-                width: 225px;
+                width: 255px;
                 float:left;
                 padding: 0;
             }
@@ -392,7 +417,9 @@
                 color: #854646;
                 margin-bottom: 10px;
             }
-
+            #sidebar li{
+                word-wrap:break-word;
+            }
             #sidebar .plustext {
                 font-family: 'Oswald', sans-serif;
             }
@@ -733,6 +760,11 @@
             </div>
             <div id="header">
                 <div id="logo">
+                    {% if Blog.Avatar is not empty %}
+                         <div class="avatar">
+                            <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                        </div>
+                    {% endif %}
                     <h1>
                         <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                     </h1>
@@ -759,13 +791,9 @@
                     {% else %}
                             <div class="box">
                                 {% if isIndex %}
-                                    {% if Custom('custom_home_subtitle') is not empty %}
-                                        <p class="tagline">
-                                            {{ Custom('custom_home_subtitle') }}
-                                        </p>
+                                    {% if Blog.Description %}
+                                        <p>{{ Blog.Description }}</p>
                                     {% endif %}
-                                    <p>{{ Blog.Description }}</p>
-
                                 {% elseif isSearch %}
                                     <p class="tagline">
                                         {{ Lang.Get('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;
@@ -947,6 +975,22 @@
 
                 <!-- shortcut:[Sidebar content] -->
                 <div id="sidebar">
+                     <!-- Blog owner -->
+                    {% if Custom('custom_hide_widget_follow_us') == false %}
+                        <div class="box">
+                            <h3>{{ Lang.Get('Follow us') }}</h3>
+                            <p class="m-networks">
+                                {% if Custom('facebook_username') is not empty %}
+                                    <a class="fb-follow" target="_blank" href="http://www.facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook">{{ Lang.Get('Follow me on') }} Facebook</a>
+                                {% endif %}
+                                {% if Custom('twitter_username') is not empty %}
+                                    <a class="twt-follow" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter">{{ Lang.Get('Follow me on') }} Twitter</a>
+                                {% endif %}
+                                <a class="rss-follow" target="_blank" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subsribe to RSS feed') }}">{{ Lang.Get('Subsribe to RSS feed') }}</a>
+                            </p>
+                        </div>
+                    {% endif %}
+
                     <!-- Tags -->
                     {% if Custom('tag_number') != 0 %}
                         {% if Blog.PostsTags is not empty %}
@@ -1007,35 +1051,6 @@
                                 </ul>
                             </div>
                         {% endif %}
-                    {% endif %}
-
-                    <!-- Blog owner -->
-                    {% if Custom('custom_hide_widget_biography') == false %}
-                        <div class="box">
-                            {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
-                                <h3>{{ Blog.Owner.Nickname }}</h3>
-                                {% if Blog.Owner.Bio is not empty %}
-                                    <p>
-                                        {% if Blog.Owner.Avatar is not empty %}
-                                            <a class="fancybox ob-media ob-img ob-pull-left ob-media-left avatar" title="{{ Blog.Owner.Nickname }}" href="{{ Blog.Owner.Avatar }}">
-                                                <img src="{{ Blog.Owner.Avatar | resize(225,100) | crop }}" alt="" width="225" height="150" />
-                                        </a>
-                                        {% endif %}
-                                        {{ Blog.Owner.Bio }}
-                                    </p>
-                                {% endif %}
-
-                                <p class="m-networks">
-                                    {% if Custom('facebook_username') is not empty %}
-                                        <a class="fb-follow" target="_blank" href="http://www.facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook">{{ Lang.Get('Follow me on') }} Facebook</a>
-                                    {% endif %}
-                                    {% if Custom('twitter_username') is not empty %}
-                                        <a class="twt-follow" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter">{{ Lang.Get('Follow me on') }} Twitter</a>
-                                    {% endif %}
-                                    <a class="rss-follow" target="_blank" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subsribe to RSS feed') }}">{{ Lang.Get('Subsribe to RSS feed') }}</a>
-                                </p>
-                            {% endif %}
-                        </div>
                     {% endif %}
                 </div>
                 <br class="clearfix" />
