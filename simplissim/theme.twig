@@ -19,7 +19,6 @@
         <meta name="list:menus:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="5" group="Theme" />
         <meta name="boolean:hide_search:label.hideSearchForm" default="false" group="Widgets" />
         <meta name="boolean:hide_social:label.hideFollowUs" default="false" group="Widgets" />
-        <meta name="boolean:hidebio:label.hideBiography" default="false" group="Widgets" />
         <meta name="boolean:hide_page:label.hidePages" default="false" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
@@ -108,11 +107,20 @@
             /* Header ----------------------------------------------- */
             .header {
                 border-radius: 10px;
-                padding: 1px 30px;
+                padding: 30px 30px 1px;
                 margin-bottom: 10px;
+                position: relative;
+            }
+            .avatar{
+                display: inline-block;
+                vertical-align: middle;
             }
             .header h1 {
                 font: normal bold 36px Tahoma, sans-serif;
+                display: inline-block;
+                max-width: 520px;
+                margin:5px 2px;
+                vertical-align: middle;
             }
             .header .description {
                 font-size: 100%;
@@ -343,9 +351,9 @@
 
             /* Search ----------------------------------------------- */
             .search {
-                float: right;
-                position: relative;
-                top: 10px;
+                position: absolute;
+                top: 5px;
+                right: 5px;
             }
             .search input[type="text"] {
                 -moz-border-radius: 5px;
@@ -551,6 +559,11 @@
                         </form>
                     </div>
                 {% endif %}
+                {% if Blog.Avatar %}
+                    <div class="avatar">
+                        <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                    </div>
+                {% endif %}
                 <h1><a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a></h1>
                 {% if Blog.Description is not empty %}
                     <p class="description">{{ Blog.Description }}</p>
@@ -704,21 +717,14 @@
                         </ul>
                     </div>
                 {% endif %}
-                {% if Custom('hide_bio') is empty and Custom('hide_bio') == false %}
-                    <div class="widget bio">
-                        <h3>{{ Lang.Get('Who am I') }}</h3>
-                        {% if Blog.Owner.Avatar is not empty %}
-                            <div class="photo">
-                                <img alt="Avatar" src="{{ Blog.Owner.Avatar }}" />
-                            </div>
-                        {% endif %}
-
+   
+                    <div class="widget pages">
+                        <h3>{{ Lang.Get('Pages') }}</h3>
                         <ul>
-                            {% if Blog.Owner.Nickname is not empty %}
-                                <li>{{ Blog.Owner.Nickname }}</li>
-                            {% endif %}
-                            {% if Blog.Owner.Bio is not empty %}
-                                <li>{{ Blog.Owner.Bio }}</li>
+                            {% if Custom('hide_page') is empty and Custom('hide_page') == false %}   
+                                {% list Blog.ListPages %}
+                                    <li><a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a></li>
+                                {% endlist %}
                             {% endif %}
                             <li>
                                 <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
@@ -726,19 +732,13 @@
                             <li>
                                 <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                             </li>
-                        </ul>
+                        </ul>      
                     </div>
-                {% endif %}
+         
 
-                <div class="widget pages last">
-                {% if Custom('hide_page') is empty and Custom('hide_page') == false %}         
-                        <h3>{{ Lang.Get('Pages') }}</h3>
-                        <ul>
-                            {% list Blog.ListPages %}
-                                <li><a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a></li>
-                            {% endlist %}
-                        </ul>
-                {% endif %}
+                <div class="widget archives">
+                      
+         
 
                 {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}  
                     <h3>{{ Lang.Get('Archives') }}</h3>

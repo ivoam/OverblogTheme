@@ -233,7 +233,12 @@
                 height: 200px;
                 margin: 0 20px 0 20px;
             }
-            
+            #cl_0_0 a{
+                display: block;
+                height: 200px;
+                text-indent: -3000em;
+                overflow: hidden;
+            }
             .topLien {text-shadow: 2px 2px 1px rgba(00, 00, 00, 0.80); }
             
             .style_green #cl_0_0 {
@@ -641,7 +646,10 @@
                 float: left;
                 margin-right: 10px;
             }
-    
+            .profile p{
+                font-size: 13px;
+                font-weight: bold;
+            }
             /* @end */
     
             /* @group Footer */
@@ -1164,7 +1172,7 @@
         <div class="header">
             <div id="ln_0" class="ln">
                 <div id="cl_0_0" class="cl">
-                    <div class="column_content"></div>
+                    <a href="{{ Blog.Url }}">{{ Blog.Title }}</a>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -1369,25 +1377,17 @@
                 <div id="cl_1_1" class="cl">
                     <div class="column_content">
                         {# Blog profile #}
-                        {% if Custom('display_widget_profile') != true %}
+                        {% if Blog.Avatar or Blog.Description %}
                         <div class="box profile" >
-                            <div class="box-titre">
-                                <h3><a href="{{ Blog.Url }}">{{ Blog.Title }}</a></h3>
-                            </div>
                             <div class="box-content clearfix">
                                 {% if Blog.Avatar is not empty %}
-                                <p class="avatar">
-                                    <img src="{{ Blog.Avatar | resize(100) }}" alt="{{ Blog.Title }}" />
-                                </p>
+                                <h3 class="avatar">
+                                    <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar | resize(100)|crop }}" alt="{{ Blog.Title }}" /></a>
+                                </h3>
                                 {% endif %}
                                 {% if Blog.Description is not empty %}
                                 <p>
                                     {{ Blog.Description }}
-                                </p>
-                                {% endif %}
-                                {% if Blog.Owner.Nickname is not empty %}
-                                <p>
-                                    {{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}
                                 </p>
                                 {% endif %}
                             </div>
