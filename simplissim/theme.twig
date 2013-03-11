@@ -49,7 +49,7 @@
             <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
         {% endif %}
 
- 
+
         <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
         <!-- includes -->
@@ -166,29 +166,56 @@
             .post {
                 background-color: #ffffff;
                 border: solid 1px #dddddd;
-                -moz-border-radius: 10px;
-                -webkit-border-radius: 10px;
                 border-radius: 10px;
-                -goog-ms-border-radius: 10px;
-                padding: 1px 20px;
                 margin-bottom: 20px;
-                background-repeat: no-repeat;
-                background-position: top right;
+                padding: 1px 20px;
+                position: relative;
             }
-            .OB {
-                background-image: url(http://assets.over-blog-kiwi.com/themes/36/img/ob.png);
+            .post:after{
+                background: url('http://assets.over-blog-kiwi.com/t/images/social-34.png') no-repeat top left;
+                content: '';
+                display: block;
+                height: 34px;
+                position: absolute;
+                right: 2px;
+                top: 2px;
+                width: 34px;
             }
-            .TW {
-                background-image: url(http://assets.over-blog-kiwi.com/themes/36/img/tw.png);
+            .OB:after{
+                background-position: 0 0;
             }
-            .FB {
-                background-image: url(http://assets.over-blog-kiwi.com/themes/36/img/fb.png);
+            .FB, .FP:after{
+                background-position: 0 -68px;
             }
-            .IG {
-                background-image: url(http://assets.over-blog-kiwi.com/themes/36/img/ig.png);
+            .TW:after{
+                background-position: 0 -136px;
             }
-            .FS {
-                background-image: url(http://assets.over-blog-kiwi.com/themes/36/img/fs.png);
+            .FS:after{
+                background-position: 0 -204px;
+            }
+            .IG:after{
+                background-position: 0 -272px;
+            }
+            .YT:after{
+                background-position: 0 -340px;
+            }
+            .FL:after{
+                background-position: 0 -408px;
+            }
+            .TR:after{
+                background-position: 0 -476px;
+            }
+            .RS:after{
+                background-position: 0 -544px;
+            }
+            .PT:after{
+                background-position: 0 -612px;
+            }
+            .GP:after{
+                background-position: 0 -680px;
+            }
+            .LI:after{
+                background-position: 0 -748px;
             }
             .meta {
                 color: #999;
@@ -219,7 +246,7 @@
                 width: 640px;
                 max-height: 380px;
             }
-            .ob-section-map .ob-map, 
+            .ob-section-map .ob-map,
             .ob-section-map .ob-desc{
                 width:auto;
             }
@@ -309,7 +336,7 @@
             }
 
             /* Widgets ----------------------------------------------- */
-           
+
 
             .social ul  {
                 padding: 0;
@@ -717,11 +744,11 @@
                         </ul>
                     </div>
                 {% endif %}
-   
+
                     <div class="widget pages">
                         <h3>{{ Lang.Get('Pages') }}</h3>
                         <ul>
-                            {% if Custom('hide_page') is empty and Custom('hide_page') == false %}   
+                            {% if Custom('hide_page') is empty and Custom('hide_page') == false %}
                                 {% list Blog.ListPages %}
                                     <li><a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a></li>
                                 {% endlist %}
@@ -732,15 +759,15 @@
                             <li>
                                 <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                             </li>
-                        </ul>      
+                        </ul>
                     </div>
-         
+
 
                 <div class="widget archives">
-                      
-         
 
-                {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}  
+
+
+                {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
                     <h3>{{ Lang.Get('Archives') }}</h3>
                     <ul id="archivelist">
                         {% list Blog.Archives %}
@@ -801,7 +828,7 @@
                         s.type = 'text/javascript';
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
                     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-                }());            
+                }());
             {% elseif Custom('comment') == 'Facebook' %}
                 // Facebook comments + share
                 (function(d, s, id) {
