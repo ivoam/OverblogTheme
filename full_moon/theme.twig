@@ -15,7 +15,6 @@
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
         <meta name="list:font_title:label.titlesFont" items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />
 
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_display_widget_last_posts:label.hideLastPosts" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="6" group="Widgets" />
@@ -80,6 +79,15 @@
             #cl_1_0 ul,
             #cl_1_0 ol {margin-left: 0; padding-left: 25px;}
 
+            .visuallyhidden,
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
+
             /*** General ***/
             .ln {clear: both;}
             #ln_2 {padding-bottom: 20px;}
@@ -95,6 +103,16 @@
 
             #global {margin:0px auto; width:950px;}
             .header {margin: 110px 0 20px; text-align:left;}
+            .avatar,
+            #top{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            {% if Blog.Avatar is not empty %}
+            #top{
+                max-width: 840px;
+            }
+            {% endif %}
             #top .title {font-family: {{ Custom('font_title')|default('Carter One') }}, cusrive; font-size: 60px; left: 0; letter-spacing: 2px; line-height: 60px; text-shadow: 0 5px 5px #333; text-transform: uppercase;}
             #top .description {font-family: {{ Custom('font_title')|default('Carter One') }}, cusrive; font-size:60px; font-size: 20px; letter-spacing: 2px; text-shadow: 0 2px 1px #333;}
             article {margin-bottom: 35px;}
@@ -257,6 +275,19 @@
                     .search form input {border: 2px solid #333; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; border-radius: 3px; color: #676767; padding: 5px 0; width: 70%;}
                     .search form button {border: 0; -moz-border-radius: 3px; -webkit-border-radius: 3px; -o-border-radius: 3px; -ms-border-radius: 3px; border-radius: 3px; cursor: pointer; font-weight: bold; padding: 5px 0; width: 13%;}
 
+                    /* Sidebar > Subscribe */
+                    .ob-form-subscription .ob-form-field{
+                        display: inline-block;
+                    }
+                    .ob-form-subscription .ob-form-field input{
+                        width: 170px;
+                    }
+                    .ob-form-subscription .ob-input-submit{
+                        display: inline-block;
+                        margin:0;
+                    }
+
+
                     /* Sidebar > Last Posts */
                     .last li {float: left;}
                     .last ul:hover img {-moz-opacity: 0.7; -webkit-opacity: 0.7; -o-opacity: 0.7; -ms-opacity: 0.7; opacity: 0.7; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
@@ -265,7 +296,12 @@
                     .last ul img:hover {-moz-opacity: 1; -webkit-opacity: 1; -o-opacity: 1; -ms-opacity: 1; opacity: 1; -moz-transition: opacity 300ms; -webkit-transition: opacity 300ms; -o-transition: opacity 300ms; -ms-transition: opacity 300ms; transition: opacity 300ms;}
 
                     /* Sidebar > Tags */
-                    .tags li {border-bottom: 1px solid #222; margin: 10px 0; padding: 10px 0;}
+                    .tags li {
+                        border-bottom: 1px solid #222; 
+                        margin: 10px 0; 
+                        padding: 10px 0;
+                        word-wrap:break-word;
+                    }
                     .tags li a {font-size: 16px;}
                     .tags .number {-moz-border-radius: 4px; -webkit-border-radius: 4px; -o-border-radius: 4px; -ms-border-radius: 4px; border-radius: 4px; float: right; font-weight: bold; line-height: 17px; margin-top: -2px; padding: 2px 7px; text-align: center;}
 
@@ -643,7 +679,12 @@
                 <div id="cl_0_0" class="cl">
                     <div class="column_content">
                         <div class="header">
-                            <div id="top">
+                             {% if Blog.Avatar is not empty %}
+                                 <div class="avatar">
+                                    <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                                </div>
+                            {% endif %}
+                            <div id="top">    
                                 <h1 class="title">
                                     <a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                                 </h1>
@@ -695,10 +736,13 @@
                                         <div class="article">
                                             <div class="option beforeArticle">
                                                 <div class="date">
-                                                    <span class="publishedBy">
-                                                        {{ Lang.Get('Published by') }} {% if Post.Author is not empty %}{{ Post.Author }} {% else %}{{ Blog.Owner.Nickname }}{% endif %}
-                                                    </span>
-                                                    {{ Lang.Get('on') }} <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
+                                                    {% if Post.Author is not empty %}
+                                                        <span class="publishedBy">
+                                                            {{ Lang.Get('Published by') }} {{ Post.Author }} 
+                                                        </span>
+                                                        {{ Lang.Get('on') }} 
+                                                    {% endif %}
+                                                    <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
                                                 </div>
                                                 <span class="tags">
                                                     {% list Post.Tags %}
@@ -828,29 +872,6 @@
                 </div>
                 <div id="cl_1_1" class="cl">
                     <div class="column_content">
-                        <!-- Blog description -->
-                        {% if Custom('custom_hide_widget_biography') == false %}
-                            <div class="box profile" >
-                                <div class="box-titre">
-                                    <h3>{{ Lang.Get('About me') }}</h3>
-                                </div>
-                                <div class="box-content clearfix">
-                                    {% if Blog.Avatar or Blog.Owner.Avatar is not empty %}
-                                        <p class="avatar">
-                                            <a href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-                                                <img src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="{{ Blog.Title }}" width="100" />
-                                            </a>
-                                        </p>
-                                    {% endif %}
-                                    {% if Blog.Owner.Bio is not empty %}
-                                        <p>“{{ Blog.Owner.Bio }}”</p>
-                                    {% endif %}
-                                    {% if Blog.Owner.Nickname is not empty %}
-                                        <p class="blog-owner-nickname">{{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endif %}
 
                         <!-- Search -->
                         {% if Custom('custom_hide_widget_search_form') == false %}
@@ -920,7 +941,7 @@
                                             {% if Post.Cover is not empty or Custom('post_cover') is not empty %}
                                                 <li class="left">
                                                     <h3>
-                                                        <a href="{{ Post.Permalink }}">
+                                                        <a href="{{ Post.Permalink }}" title="{{Post.Title}}">
                                                             <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(126,90)|crop }}{% else %}{{ Custom('post_cover')|resize(126,90)|crop }}{% endif %}" alt="{{Post.Title}}" width="126" height="90" />
                                                         </a>
                                                     </h3>
