@@ -335,8 +335,8 @@
             .sidebar h3 {color: #4D4D4F; font-size: 19px; margin-bottom: 15px;}
             .widget {border-bottom: 2px dashed #c3c3c3; color: #454547; margin-bottom: 15px; padding: 10px 10px 30px 10px;}
             .widget li {
-                border-bottom: 1px solid #E8E8E8; 
-                margin-top: 5px; 
+                border-bottom: 1px solid #E8E8E8;
+                margin-top: 5px;
                 padding-bottom: 5px;
                 word-wrap:break-word;
             }
@@ -580,6 +580,16 @@
                                     <div class="clear"></div>
                                 </div>
 
+                                {% if Post.Tags is not empty %}
+                                    <footer class="tags">
+                                        <p class="tag">
+                                            {% list Post.Tags %}
+                                                <a href="{{ Tag.Url }}" title="{{ Tag.Title }}">{{ Tag.Title|title }}</a>{% if loop.last is empty %}, {% endif %}
+                                            {% endlist %}
+                                        </p>
+                                    </footer>
+                                {% endif %}
+
                                 {% if Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
                                     <!-- Pagination -->
                                     <nav class="pagination">
@@ -616,15 +626,6 @@
                                             {{ Post.Comments }}
                                         {% endif %}
                                     </div>
-                                {% endif %}
-                                {% if Post.Tags is not empty %}
-                                    <footer class="tags">
-                                        <p class="tag">
-                                            {% list Post.Tags %}
-                                                <a href="{{ Tag.Url }}" title="{{ Tag.Title }}">{{ Tag.Title|title }}</a>{% if loop.last is empty %}, {% endif %}
-                                            {% endlist %}
-                                        </p>
-                                    </footer>
                                 {% endif %}
                             </article>
                         {% else %}
