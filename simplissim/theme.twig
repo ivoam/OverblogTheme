@@ -22,11 +22,12 @@
         <meta name="boolean:hide_page:label.hidePages" default="false" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
-        <meta name="list:share_button:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
-        <meta name="string:twitter_account:label.twitterUsername" group="Social" />
-        <meta name="string:facebook_account:label.facebookUsername" group="Social" />
+        <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
 
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
 
         <meta name="string:footer:label.footer" default="Theme: Simplissim &copy; 2013" group="Wording"  />
@@ -705,7 +706,7 @@
                             {% endif %}
                         </p>
                         {% if isSingle %}
-                            {% if Custom ('share_button') is not empty %}
+                            {% if Custom ('share_service') is not empty %}
                                 <div class="share clearfix">
                                     {{ Post.Share }}
                                 </div>
@@ -715,7 +716,7 @@
                                 <div id="comments">
                                     <h3>{{ Lang.Get('Comments') }}</h3>
                                     {% if Custom("comment") == "Facebook" %}
-                                        <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="640" data-colorscheme="{{ Custom("custom_facebook_comments_color_theme")|default('light') }}"></div>
+                                        <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="640" data-colorscheme="{{ Custom("facebook_comments_color")|default('light') }}"></div>
                                     {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
                                         <div id="disqus_thread"></div>
                                         <script type="text/javascript">
@@ -760,14 +761,14 @@
                     <div class="social widget">
                         <h3>{{ Lang.Get('Follow me') }}</h3>
                         <ul>
-                            {% if Custom('facebook_account') is not empty %}
+                            {% if Custom('facebook_username') is not empty %}
                                 <li class="facebook">
-                                    <a href="http://facebook.com/{{ Custom('facebook_account') }}">{{ Lang.Get('Follow me on') }} Facebook</a>
+                                    <a href="http://facebook.com/{{ Custom('facebook_username') }}">{{ Lang.Get('Follow me on') }} Facebook</a>
                                 </li>
                             {% endif %}
-                            {% if Custom('twitter_account') is not empty %}
+                            {% if Custom('twitter_username') is not empty %}
                                 <li class="twitter">
-                                    <a href="http://twitter.com/{{ Custom('twitter_account') }}">{{ Lang.Get('Follow me on') }} Twitter</a>
+                                    <a href="http://twitter.com/{{ Custom('twitter_username') }}">{{ Lang.Get('Follow me on') }} Twitter</a>
                                 </li>
                             {% endif %}
                             <li class="rss">
