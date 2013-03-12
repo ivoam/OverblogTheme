@@ -19,30 +19,28 @@
 
         <meta name="string:text_publishedby:&quot;Published by&quot;" default="Published by" group="Wordings" />
 
-        <meta name="image:default_post_cover:Default post cover (Only with snippet display mode)" group="Posts" />
+        <meta name="image:default_post_cover:label.defaultPostCover" group="Posts" />
 
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_display_widget_last_posts:label.hideLastPosts" group="Widgets" />
-        <meta name="boolean:display_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
-        <meta name="boolean:display_widget_tags:Hide Widget &quot;Tags&quot;" group="Widgets" />
+        <meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
+        <meta name="boolean:display_widget_tags:label.hideCategories" group="Widgets" />
         <meta name="boolean:display_widget_navigation:Hide Widget &quot;Navigation&quot;" group="Widgets" />
         <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
+        <meta name="string:facebook_account:label.facebookUsername" default="overblog" group="Social" />
+        <meta name="string:twitter_account:label.twitterUsername" default="overblog" group="Social" />
+        <meta name="list:share_button:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
+
+        <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+        <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
         
-        <meta name="string:facebook:Enter your Facebook Username" default="overblog" group="Social" />
-        <meta name="string:twitter:Enter your Twitter Username" default="overblog" group="Social" />
-        <meta name="list:share_button:Chose your share button" items="Facebook, Twitter, Google +, All" default="All" group="Social">
-
-        <meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
-        <meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
-
-        <meta name="string:facebook_account:Enter your Facebook Account" default="overblog" group="Settings" />
-        <meta name="string:twitter_account:Enter your Twitter Account" default="overblog" group="Settings" />
-        <meta name="string:facebook_appid:Enter your FaceBook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
@@ -133,13 +131,18 @@
             .ob-text pre {color: #aaa;}
 
             /* Box */
-            .box {color:#f6f2ba; margin:30px 0 0 15px; width: 98%;}
+            .box {color:#f6f2ba; margin:30px 0 0 15px; width: 97%;}
             .box a {color:#fff;}
             .box-content {
                 font-size:12px; 
                 font-style:italic;
             }
-            .box-content li {background:url('http://assets.over-blog-kiwi.com/themes/3/images/box-li.png') no-repeat 0px 10px; margin-bottom:5px; padding-left:10px;}
+            .box-content li {
+                background:url('http://assets.over-blog-kiwi.com/themes/3/images/box-li.png') no-repeat 0px 10px; 
+                margin-bottom:5px; 
+                padding-left:10px;
+                word-wrap:break-word;
+            }
             .box-content form input[type="text"],
             .box-content form input[type="email"] {
                 background:#d8d8d5; 
@@ -189,6 +192,26 @@
             /* Form side */
             .box.newsletter form,
             .box.recherche form {}
+
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
+
+            /* Sidebar > Subscribe */
+            .ob-form-subscription .ob-form-field{
+                display: inline-block;
+            }
+            .ob-form-subscription .ob-form-field input{
+                width: 170px;
+            }
+            .ob-form-subscription .ob-input-submit{
+                display: inline-block;
+                margin:0;
+            }
 
             /* Sidebar > Last Posts */
             .last .box-content li {
@@ -356,6 +379,10 @@
             .ob-section-file .ob-ctn a.ob-link:hover {color: #C2E074; text-decoration: underline;}
             .ob-section-file .ob-ctn {display:block;width:100%;max-width:none;}
             .ob-section-file .ob-link {max-width:390px;}
+
+            .ob-section-images img{
+                max-width: 480px;
+            }
 
             /* Section Quote */
             .ob-section-quote {background: #FFF; -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); margin-bottom: 20px;}
@@ -608,9 +635,7 @@
                         {% if Custom('display_widget_profile') != true %}
                         <div class="box profile" >
                             <div class="box-titre">
-                                <h3>
-                                    <a href="{{ Blog.Url }}">{{ Blog.Title }}</a>
-                                </h3>
+                                <h2>{{ Blog.Title }}</h2>
                             </div>
                             <div class="box-content clearfix">
                                 {% if Blog.Avatar is not empty %}
@@ -619,14 +644,9 @@
                                 </p>
                                 {% endif %}
                                 {% if Blog.Description is not empty %}
-                                <p>
-                                    &quot;{{ Blog.Description }}&quot;
-                                </p>
-                                {% endif %}
-                                {% if Blog.Owner.Nickname is not empty %}
-                                <p>
-                                    {{ Lang.Get('Written by') }} {{ Blog.Owner.Nickname }}
-                                </p>
+                                    <p>
+                                        &quot;{{ Blog.Description }}&quot;
+                                    </p>
                                 {% endif %}
                             </div>
                         </div>
@@ -669,16 +689,16 @@
                         {% endif %}
 
                         {# Pages #}
-                        {% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
+                        {% if Custom('display_widget_pages') != true and Blog.Pages is not empty %}
                         <div class="box pages" >
                             <div class="box-titre">
                                 <h3><span>{{ Lang.Get('Pages') }}</span></h3>
                             </div>
                             <div class="box-content">
                                 <ul>
-                                    {% list Blog.ListPages %}
+                                    {% list Blog.Pages %}
                                     <li>
-                                        <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                        <a  href="{{ Page.Url }}" title="{{ Page.Title }}">{{ Page.Title }}</a>
                                     </li>
                                     {% endlist %}
                                 </ul>
@@ -795,7 +815,7 @@
 
                             </div>
                         {% endif %}
-
+                        </div>
                     </div>
                 </div>
                 <div class="clear"></div>
