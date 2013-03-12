@@ -31,8 +31,8 @@
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
-        <meta name="string:twitter_account:label.twitterUsername" group="Social" />
-        <meta name="string:facebook_account:label.facebookUsername" group="Social" />
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
 
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
@@ -1402,14 +1402,14 @@
                             <div class="box-titre"><h3><span>{{ Lang.Get('Follow us') }}</span></h3></div>
                             <div class="box-content">
                                 <ul>
-                                    {% if Custom('facebook_account') is not empty %}
+                                    {% if Custom('facebook_username') is not empty %}
                                     <li>
-                                        <a href="http://facebook.com/{{ Custom('facebook_account') }}" title="{{ Lang.Get('Follow us on') }} Facebook" >Facebook</a>
+                                        <a href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow us on') }} Facebook" >Facebook</a>
                                     </li>
                                     {% endif %}
-                                    {% if Custom('twitter_account') is not empty %}
+                                    {% if Custom('twitter_username') is not empty %}
                                     <li>
-                                        <a href="http://twitter.com/{{ Custom('twitter_account') }}" title="{{ Lang.Get('Follow us on') }} Twitter">Twitter</a>
+                                        <a href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow us on') }} Twitter">Twitter</a>
                                     </li>
                                     {% endif %}
                                     <li>
