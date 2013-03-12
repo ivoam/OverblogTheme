@@ -36,7 +36,6 @@
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
-
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
         {% favicon %}
@@ -49,13 +48,11 @@
             <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
         {% endif %}
 
-
         <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
         <!-- Style -->
-
 
         <style type="text/css">
             <!--
@@ -336,8 +333,6 @@
             }
 
             /* Widgets ----------------------------------------------- */
-
-
             .social ul  {
                 padding: 0;
                 list-style: none;
@@ -371,9 +366,11 @@
                 width: 60px;
                 height: 60px;
             }
-
             .pages ul, .bio ul {
                 padding-left: 15px;
+            }
+            .arch_month{
+                padding-left: 20px;
             }
 
             /* Search ----------------------------------------------- */
@@ -395,185 +392,183 @@
         </style>
 
         {% if Custom('colors') is not empty and Custom('colors') == 'black' %}
-        <style type="text/css">
-            <!--
-            body {
-                color: #444;
-                background: #000;
-            }
-            .content {
-                background: #333;
-            }
-            .header {
-                background: #ddd;
-                color: #000;
-            }
-            .menu li {
-                background-color: #aaa;
-            }
-            .menu li.active {
-                background: #ddd;
-            }
-            .footer {
-                background: #ddd;
-            }
-            .search input[type="text"] {
-                background: #eee;
-                color: #333;
-                border: 1px solid red;
-            }
-            .header h1 a, h3 {
-                color: darkred;
-                padding-right: 20px;
-            }
-            a:link, a:visited {
-                color: darkred;
-            }
-            .pagination, .pagination a, .pagination a:visited {
-                color: white;
-            }
-            .date {
-                color: #bbb;
-            }
+            <style type="text/css">
+                <!--
+                body {
+                    color: #444;
+                    background: #000;
+                }
+                .content {
+                    background: #333;
+                }
+                .header {
+                    background: #ddd;
+                    color: #000;
+                }
+                .menu li {
+                    background-color: #aaa;
+                }
+                .menu li.active {
+                    background: #ddd;
+                }
+                .footer {
+                    background: #ddd;
+                }
+                .search input[type="text"] {
+                    background: #eee;
+                    color: #333;
+                    border: 1px solid red;
+                }
+                .header h1 a, h3 {
+                    color: darkred;
+                    padding-right: 20px;
+                }
+                a:link, a:visited {
+                    color: darkred;
+                }
+                .pagination, .pagination a, .pagination a:visited {
+                    color: white;
+                }
+                .date {
+                    color: #bbb;
+                }
 
-            -->
-        </style>
+                -->
+            </style>
         {% elseif Custom('colors') is not empty and Custom('colors') == 'green' %}
-        <style type="text/css">
-            <!--
-            body {
-                color: #fff;
-                background: #66cc99;
-            }
-            .content {
-                background: #339966;
-            }
-            .header {
-                background: #006633;
-                color: #fff;
-            }
-            .menu li {
-                background-color: #66cc99;
-            }
-            .menu li.active {
-                background: #006633;
-            }
-            .menu a {
-                color: white;
-            }
-            .footer {
-                background: #006633;
-            }
-            .footer a {
-                color: white;
-            }
-            .search input[type="text"] {
-                background: #66cc99;
-                color: black;
-                border: 1px solid white;
-            }
-            .header h1 a, h3 {
-                color: #66cc99;
-                padding-right: 20px;
-            }
-            .pagination, .pagination a, .pagination a:visited {
-                color: white;
-            }
-            .date {
-                color: white;
-            }
+            <style type="text/css">
+                <!--
+                body {
+                    color: #fff;
+                    background: #66cc99;
+                }
+                .content {
+                    background: #339966;
+                }
+                .header {
+                    background: #006633;
+                    color: #fff;
+                }
+                .menu li {
+                    background-color: #66cc99;
+                }
+                .menu li.active {
+                    background: #006633;
+                }
+                .menu a {
+                    color: white;
+                }
+                .footer {
+                    background: #006633;
+                }
+                .footer a {
+                    color: white;
+                }
+                .search input[type="text"] {
+                    background: #66cc99;
+                    color: black;
+                    border: 1px solid white;
+                }
+                .header h1 a, h3 {
+                    color: #66cc99;
+                    padding-right: 20px;
+                }
+                .pagination, .pagination a, .pagination a:visited {
+                    color: white;
+                }
+                .date {
+                    color: white;
+                }
 
-            -->
-        </style>
+                -->
+            </style>
         {% elseif Custom('colors') is not empty and Custom('colors') == 'pink' %}
-        <style type="text/css">
-            <!--
-            body {
-                color: #444;
-                background: #222;
-            }
-            .content {
-                background: #FA3881;
-            }
-            .header {
-                background: #222;
-                color: #fff;
-            }
-            .menu li {
-                background-color: #ccc;
-            }
-            .menu li.active {
-                background: #222;
-            }
-            .menu li a {
-                color: black;
-            }
-            .menu .active a {
-                color: white;
-            }
-            .footer {
-                background: lightpink;
-            }
-            .footer a {
-                color: #FA3881;
-            }
-            .search input[type="text"] {
-                background: #fff;
-                color: #000;
-                border: 1px solid #FF0099;
-            }
-            .header h1 a, h3 {
-                color: #FA3881;
-                padding-right: 20px;
-            }
-            .pagination, .pagination a, .pagination a:visited {
-                color: #FFF;
-            }
-            .date {
-                color: #fff;
-            }
-
-            -->
-        </style>
+            <style type="text/css">
+                <!--
+                body {
+                    color: #444;
+                    background: #222;
+                }
+                .content {
+                    background: #FA3881;
+                }
+                .header {
+                    background: #222;
+                    color: #fff;
+                }
+                .menu li {
+                    background-color: #ccc;
+                }
+                .menu li.active {
+                    background: #222;
+                }
+                .menu li a {
+                    color: black;
+                }
+                .menu .active a {
+                    color: white;
+                }
+                .footer {
+                    background: lightpink;
+                }
+                .footer a {
+                    color: #FA3881;
+                }
+                .search input[type="text"] {
+                    background: #fff;
+                    color: #000;
+                    border: 1px solid #FF0099;
+                }
+                .header h1 a, h3 {
+                    color: #FA3881;
+                    padding-right: 20px;
+                }
+                .pagination, .pagination a, .pagination a:visited {
+                    color: #FFF;
+                }
+                .date {
+                    color: #fff;
+                }
+                -->
+            </style>
         {% else %}
-        <style type="text/css">
-            <!--
-            body {
-                color: #444;
-                background: #ddb;
-            }
-            .content {
-                background: #eec;
-            }
-            .header {
-                background: #cca;
-                color: #ffffff;
-            }
-            .menu li {
-                background-color: #ddb;
-            }
-            .menu li.active {
-                background: #cca;
-            }
-            .footer {
-                background: #cca;
-            }
-            .search input[type="text"] {
-                background: #eec;
-                color: #333;
-                border: 1px solid white;
-            }
-            .header h1 a, h3 {
-                color: #ffd;
-                padding-right: 20px;
-            }
-            .date {
-                color: #444;
-            }
-            -->
-        </style>
+            <style type="text/css">
+                <!--
+                body {
+                    color: #444;
+                    background: #ddb;
+                }
+                .content {
+                    background: #eec;
+                }
+                .header {
+                    background: #cca;
+                    color: #ffffff;
+                }
+                .menu li {
+                    background-color: #ddb;
+                }
+                .menu li.active {
+                    background: #cca;
+                }
+                .footer {
+                    background: #cca;
+                }
+                .search input[type="text"] {
+                    background: #eec;
+                    color: #333;
+                    border: 1px solid white;
+                }
+                .header h1 a, h3 {
+                    color: #ffd;
+                    padding-right: 20px;
+                }
+                .date {
+                    color: #444;
+                }
+                -->
+            </style>
         {% endif %}
-
     </head>
     <body>
         <div class="content">
@@ -597,25 +592,21 @@
                 {% endif %}
             </div>
             {% if Custom('menus') > 0 %}
-            <ul class="menu">
-                <li {% if isIndex %}class="active"{% endif %}>
-                    <a  href="{{ Blog.Url }}"
-                        title="{{ Blog.Title }}">
-                        {{ Lang.Get('Home') }}
-                    </a>
-                </li>
-                {% list Blog.PostsTags(Custom('menus')-1) %}
-                <li {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}
-                    class="active"
-                    {% endif %}
-                    >
-                    <a  href="{{ PostsTag.Url }}"
-                        title="{{ PostsTag.Title }}">
-                        {{ PostsTag.Title|title }}
-                    </a>
-                </li>
-                {% endlist %}
-            </ul>
+                <ul class="menu">
+                    <li {% if isIndex %}class="active"{% endif %}>
+                        <a  href="{{ Blog.Url }}" title="{{ Blog.Title }}">
+                            {{ Lang.Get('Home') }}
+                        </a>
+                    </li>
+                    {% list Blog.PostsTags(Custom('menus')-1) %}
+                    <li {% if Tag.Title is not empty and PostsTag.Title == Tag.Title %}class="active"{% endif %}>
+                        <a  href="{{ PostsTag.Url }}"
+                            title="{{ PostsTag.Title }}">
+                            {{ PostsTag.Title|title }}
+                        </a>
+                    </li>
+                    {% endlist %}
+                </ul>
             {% endif %}
 
             <!-- shortcut:[Principal content] -->
@@ -642,13 +633,15 @@
                 {% list Posts %}
                     <div class="date" itemprop="startDate" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</div>
                     <div class="post {{ Post.getFirstSource }}" itemscope itemtype="http://schema.org/BlogPosting">
-                        <h2 class="title"><a href="{{ Post.PermaLink }}" title="{{ Post.Snippet|title }}">
-                            {% if Post.Title is not empty %}
-                                {{ Post.Title }}
-                            {% elseif Post.Snippet is not empty %}
-                                {{ Post.Snippet|truncate(40) }}
-                            {% endif %}
-                        </a></h2>
+                        <h2 class="title">
+                            <a href="{{ Post.PermaLink }}" title="{{ Post.Snippet|title }}">
+                                {% if Post.Title is not empty %}
+                                    {{ Post.Title }}
+                                {% elseif Post.Snippet is not empty %}
+                                    {{ Post.Snippet|truncate(40) }}
+                                {% endif %}
+                            </a>
+                        </h2>
                         <div class="entry">
                             {% if isSingle or Custom('display_mode') == 'All' %}
                                 {{ Post.Body }}
@@ -662,12 +655,15 @@
                             {% if Post.Author and Post.Author is not empty %}
                                 <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span> {{ Lang.Get('at') }} {{ Post.Date|date("H:ia") }}
                             {% endif %}
-                            {% if not isSingle and Post.ShowComments is not empty %} -
-                                <a href="{{ Post.Permalink }}#comments">{{ Lang.Get('See comments') }} ({{ Post.CommentCount }})</a>
+                            {% if not isSingle and Post.ShowComments is not empty %}
+                                - <a href="{{ Post.Permalink }}#comments">{{ Lang.Get('See comments') }} ({{ Post.CommentCount }})</a>
                             {% endif %}
-                            {% if Post.Tags is not empty %}<br />{{ Lang.Get('With tags') }} :
+                            {% if Post.Tags is not empty %}
+                                <br />
+                                {{ Lang.Get('With tags') }} :
                                 {% list Post.Tags %}
-                                    #<a href="{{ Tag.Url }}">{{ Tag.Title }}</a>{% if loop.last == false %}, {% endif %}
+                                    #<a href="{{ Tag.Url }}">{{ Tag.Title }}</a>
+                                    {% if loop.last == false %}, {% endif %}
                                 {% endlist %}
                             {% endif %}
                         </p>
@@ -681,22 +677,22 @@
                             {% if not isPage and Post.ShowComments is not empty %}
                                 <div id="comments">
                                     <h3>{{ Lang.Get('Comments') }}</h3>
-                                        {% if Custom("comment") == "Facebook" %}
-                                            <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="640" data-colorscheme="{{ Custom("custom_facebook_comments_color_theme")|default('light') }}"></div>
-                                        {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-                                            <div id="disqus_thread"></div>
-                                            <script type="text/javascript">
-                                                var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                                                (function() {
-                                                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                                                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                                                })();
-                                            </script>
-                                            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-                                        {% else %}
-                                            {{ Post.Comments }}
-                                        {% endif %}
+                                    {% if Custom("comment") == "Facebook" %}
+                                        <div class="fb-comments" data-href="{{ Post.Permalink }}" data-num-posts="2" data-width="640" data-colorscheme="{{ Custom("custom_facebook_comments_color_theme")|default('light') }}"></div>
+                                    {% elseif Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+                                        <div id="disqus_thread"></div>
+                                        <script type="text/javascript">
+                                            var disqus_shortname = '{{ Custom('comment_disqus') }}';
+                                            (function() {
+                                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                                            })();
+                                        </script>
+                                        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                    {% else %}
+                                        {{ Post.Comments }}
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% endif %}
@@ -719,7 +715,6 @@
                 {% endif %}
             </div>
             <!-- shortcut:[Modules content] -->
-
 
             <!-- shortcut:[Bottom content] -->
             {% if Custom('hide_social') == false or Custom('hide_bio') == false or Custom('hide_page') == false %}
@@ -744,46 +739,40 @@
                         </ul>
                     </div>
                 {% endif %}
-
-                    <div class="widget pages">
-                        <h3>{{ Lang.Get('Pages') }}</h3>
-                        <ul>
-                            {% if Custom('hide_page') is empty and Custom('hide_page') == false %}
-                                {% list Blog.Pages %}
-                                    <li><a href="{{ Page.Url }}">{{ Page.Title }}</a></li>
-                                {% endlist %}
-                            {% endif %}
-                            <li>
-                                <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
-                            </li>
-                            <li>
-                                <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                <div class="widget archives">
-
-
-
-                {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
-                    <h3>{{ Lang.Get('Archives') }}</h3>
-                    <ul id="archivelist">
-                        {% list Blog.Archives %}
-                             <li class="arch_year">
-                                <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
-                                <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
-                                    {% list Archive.Months %}
-                                        {% if Month.PostCount > 0 %}
-                                            <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">{{ Month.PostCount }}</span></li>
-                                        {% endif %}
-                                    {% endlist %}
-                                </ul>
-                            </li>
-                        {% endlist %}
+                <div class="widget pages">
+                    <h3>{{ Lang.Get('Pages') }}</h3>
+                    <ul>
+                        {% if Custom('hide_page') is empty and Custom('hide_page') == false %}
+                            {% list Blog.Pages %}
+                                <li><a href="{{ Page.Url }}">{{ Page.Title }}</a></li>
+                            {% endlist %}
+                        {% endif %}
+                        <li>
+                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                        </li>
                     </ul>
-                {% endif %}
+                </div>
+                <div class="widget archives">
+                    {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
+                        <h3>{{ Lang.Get('Archives') }}</h3>
+                        <ul id="archivelist">
+                            {% list Blog.Archives %}
+                                 <li class="arch_year">
+                                    <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
+                                    <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
+                                        {% list Archive.Months %}
+                                            {% if Month.PostCount > 0 %}
+                                                <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">{{ Month.PostCount }}</span></li>
+                                            {% endif %}
+                                        {% endlist %}
+                                    </ul>
+                                </li>
+                            {% endlist %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
             {% if Custom('footer') %}
@@ -792,10 +781,6 @@
             </div>
             {% endif %}
         </div>
-        {% endif %}
-               <!-- Javascript -->
-        {% if Blog.JsUrl is not empty %}
-            <script src="{{Blog.JsUrl}}" type="text/javascript"></script>
         {% endif %}
 
         <!-- fancybox for pictures -->
