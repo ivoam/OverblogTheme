@@ -1513,11 +1513,15 @@
                                     <ul id="archivelist">
                                         {% list Blog.Archives %}
                                              <li class="arch_year">
-                                                <a href="#" class="plustext" onclick="javascript:switch_arch('{{ Archive.Year }}')">{{ Archive.Year }}</a>
-                                                <ul id="arch_{{ Archive.Year }}" class="arch_month" {% if loop.index == 1 %}style="display:block;"{% endif %}>
-                                                    {% list Archive.Months %}
+                                                <a href="#" class="year" data-year="{{ Archive.Year }}">{{ Archive.Year }}</a>
+                                                <ul id="arch_{{ Archive.Year }}" class="arch_month">
+                                                    {% list Archive.Months%}
                                                         {% if Month.PostCount > 0 %}
-                                                            <li><a href="{{ Month.Url }}">{{ Lang.Get(Month.Name) }}</a> <span class="end-number"></span><span class="number">({{ Month.PostCount }})</span></li>
+                                                            <li class="month">
+                                                                <a href="{{ Month.Url }}">
+                                                                    {{ Lang.Get(Month.Name) }} <span>{{ Month.PostCount }}</span>
+                                                                </a>
+                                                            </li>
                                                         {% endif %}
                                                     {% endlist %}
                                                 </ul>
@@ -1596,52 +1600,32 @@
         {% endif %}
         <script type="text/javascript">
             //Twitter render
-            !function(d,s,id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if(!d.getElementById(id)){
-                    js = d.createElement(s);
-                    js.id = id;
-                    js.src = "https://platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs);
-                }
-            }(document,"script","twitter-wjs");
-
-            {% if Custom('custom_hide_widget_blog_archive') == false %}
-                // Archives
-                function switch_arch(year) {
-                    'use strict';
-                    var archiveYear,
-                        archiveMonths,
-                        displayStyle;
-                        displayStyle = '';
-                        archiveYear = document.getElementById('arch_' + year);
-                    if (typeof (archiveYear) !== 'undefined') {
-                        if (archiveYear.style.display !== 'none') {
-
-                            // Hide years without months
-                                archiveMonths = archiveYear.getElementsByTagName('li');
-                            if (!archiveMonths.length) {
-                                archiveYear.parentNode.style.display = 'none';
-                            }
-                            // Onclick management
-                            displayStyle = 'none';
-                        }
-                        archiveYear.style.display = displayStyle;
+            $(document).ready(function(){
+                !function(d,s,id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if(!d.getElementById(id)){
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js,fjs);
                     }
-                    return false;
-                }
+                }(document,"script","twitter-wjs");
+            });
 
-                $(document).ready(function(){
-                    $('.plustext').click(function(e) {
-                        return false;
-                    });
+            {% if Custom('display_widget_archives') == false %}
+                // Archives
+                // Hide years without months
+                $(".arch_year").each(function() {
+                    if ($(this).find(".arch_month li").length == 0) {
+                        $(this).hide();
+                    }
                 });
 
-                {% list Blog.Archives %}
-                    {% if Archive.Year != "now"|date("Y") %}
-                        switch_arch('{{ Archive.Year }}');
-                    {% endif %}
-                {% endlist %}
+                $(".arch_month").hide();
+                $('.arch_year > a').click(function(e) {
+                    $(this).siblings(".arch_month").slideToggle(1);
+                    e.preventDefault();
+                });
             {% endif %}
         </script>
         {% if Custom('google_analytics') is not empty %}
