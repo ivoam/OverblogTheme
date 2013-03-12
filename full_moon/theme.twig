@@ -914,9 +914,9 @@
                                     <li>
                                         <a href="{{ Blog.Url }}">{{ Lang.Get('Home') }}</a>
                                     </li>
-                                        {% list Blog.ListPages %}
+                                        {% list Blog.Pages %}
                                             <li>
-                                                <a  href="{{ ListPage.Url }}" title="{{ ListPage.Title }}">{{ ListPage.Title }}</a>
+                                                <a  href="{{ Page.Url }}" title="{{ Page.Title }}">{{ Page.Title }}</a>
                                             </li>
                                        {% endlist %}
                                     <li>
