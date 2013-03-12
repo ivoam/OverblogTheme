@@ -35,7 +35,6 @@
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="list:categories_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="10" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
@@ -97,7 +96,14 @@
             .clearfix:after{
                 clear: both;
             }
-
+            .visuallyhidden,
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
             .left {float: left;}
             .right {float: right;}
             .clear {clear: both; display: block; visibility: hidden;}
@@ -136,12 +142,58 @@
 
             /**** HEADER *****/
                 /*** logo ***/
-                .logo {font-family: "Trebuchet MS",Arial,Helvetica,sans-serif; font-size: 30px; margin: 25px 0 0 0; padding-top: 13px; text-shadow: 2px 2px 3px #CCC; width: 550px;}
-                .logo a {color: #454545; display: block; line-height: 40px; max-width: 500px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+                .header{
+                    padding-top: 50px;
+                }
+                .logo {                         
+                    width: 550px;
+                }
+                .logo h1 {
+                    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif; 
+                    font-size: 30px;
+                    text-shadow: 2px 2px 3px #CCC; 
+                }    
+                .logo a {
+                    color: #454545; 
+                    display: block; 
+                    line-height: 40px; 
+                    max-width: 750px; 
+                    overflow: hidden; 
+                    text-overflow: ellipsis; 
+                    white-space: nowrap;
+                }
+                .avatar,
+                .logo{
+                    display: inline-block;
+                    vertical-align: middle;
+                }   
+                .avatar{
+                    margin-right: 40px;
+                }
 
-                .search {margin-top: 50px; width: 372px;}
+                .search {
+                    right: 20px;
+                    top:20px;                 
+                    position:absolute;
+                    width: 372px;
+                }
+
                 .search input[type="text"] {background: url(http://assets.over-blog-kiwi.com/themes/28/images/search.png) no-repeat scroll 0 0; border: none; color: #9499A1; float:left; font-family: Arial; font-size:13px; height:17px; margin: 0; padding: 5px 10px 0 38px; width:240px;}
                 .search input[type="submit"] {-webkit-border-radius: 12px; -moz-border-radius: 12px; -ms-border-radius: 12px; -o-border-radius: 12px; border-radius: 12px; cursor: pointer; padding: 5px 10px; -webkit-transition: all 0.3s ease 0s; -moz-transition: all 0.3s ease 0s; -o-transition: all 0.3s ease 0s; -ms-transition: all 0.3s ease 0s; transition: all all 0.3s ease 0s;}
+
+                /* Sidebar > Subscribe */
+                .ob-form-subscription .ob-form-field{
+                    display: inline-block;
+                }
+                .ob-form-subscription .ob-form-field input{
+                    width: 150px;
+                }
+                .ob-form-subscription .ob-input-submit[type=submit]{
+                    display: inline-block;
+                    margin:5px 0 0;
+                    padding:6px 9px;
+                    vertical-align: top;
+                }
 
                 /*** menu ***/
                 .menu {border-bottom:1px solid #EEE; border-top:1px solid #EEE; margin: 15px 0 30px; overflow: hidden;}
@@ -346,8 +398,7 @@
             .widget a:hover {color: #0e73b8;}
             .widget a:before,
             .widget a:after {display: inline-block; margin-right: 8px; vertical-align: middle;}
-            .avatar {display: inline !important;}
-            .avatar img {margin-right:10px;}
+
             a.facebook,
             a.twitter,
             a.rss {background-position: left 12px;}
@@ -369,24 +420,32 @@
         <div id="fb-root"></div>
         <div class="content">
             <header class="header">
-                <h1 class="logo left">
-                    <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">
-                        {% if Custom('custom_logo_picture') is not empty %}
-                            <img src="{{ Custom('custom_logo_picture')|resize(400,100) }}" alt="{{ Blog.Title }}" title="{{ Blog.Title }}" width="400" height="100" />
-                        {% else %}
-                            {{ Blog.Title }}
-                        {% endif %}
-                    </a>
-                </h1>
-
+                {% if Blog.Avatar is not empty %}
+                     <div class="avatar">
+                        <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                    </div>
+                {% endif %}
+                <div class="logo">
+                    <h1>
+                        <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">
+                            {% if Custom('custom_logo_picture') is not empty %}
+                                <img src="{{ Custom('custom_logo_picture')|resize(400,100) }}" alt="{{ Blog.Title }}" title="{{ Blog.Title }}" width="400" height="100" />
+                            {% else %}
+                                {{ Blog.Title }}
+                            {% endif %}
+                        </a>
+                    </h1>
+                     <p class="description">{{ Blog.Description }}</p>
+                </div>
                 {% if Custom('custom_hide_widget_search_form') == false %}
                     <!-- Search form -->
-                    <form class="search right" action="/search" method="post">
+                    <form class="search" action="/search" method="post">
                         <input type="text" class="left" title="search" value="{% if isSearch %}{{ Search.Keyword }}{% endif %}" placeholder="{{ Lang.Get('Search something here') }}..." name="q" />
                         <input type="submit" class="right button" value="{{ Lang.Get('Search') }}" />
                     </form>
                 {% endif %}
                 <div class="clear"></div>
+                
 
                 <nav class="menu">
                     <ul class="ul-top">
@@ -409,7 +468,7 @@
                                 {% endlist %}
                             </ul>
                         </li>
-                        {% list Blog.ListPages %}
+                        {% list Blog.Pages %}
                             {% if loop.first %}
                                 <li {% if isPage %}class="active"{% endif %}>
                                     <a href="#">
@@ -418,7 +477,7 @@
                                     <ul class="ul-bottom">
                             {% endif %}
                                         <li>
-                                            <a href="{{ ListPage.Url }}">{{ ListPage.Title|title }}</a>
+                                            <a href="{{ Page.Url }}">{{ Page.Title|title }}</a>
                                         </li>
                             {% if loop.last %}
                                     </ul>
@@ -650,25 +709,6 @@
                 </section>
 
                 <div class="sidebar right">
-                    {% if Custom('custom_hide_widget_biography') == false %}
-                        <!-- Blog owner bio -->
-                        <div class="widget clearfix">
-                            {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
-                                <h3>{{ Blog.Owner.Nickname }}</h3>
-                                {% if Blog.Owner.Bio is not empty %}
-                                    <p>
-                                        {% if Blog.Owner.Avatar is not empty %}
-                                            <a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-                                                <img class="left" src="{{ Blog.Owner.Avatar|resize(100)|crop }}" alt="" />
-                                            </a>
-                                        {% endif %}
-
-                                        {{ Blog.Owner.Bio }}
-                                    </p>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                    {% endif %}
 
                     {% if Custom('custom_hide_widget_follow_us') == false %}
                         <!-- Social widget -->
@@ -774,7 +814,7 @@
 
                 // Fancybox
                 $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
-                $("a[rel=fancybox], .avatar").fancybox({
+                $("a[rel=fancybox]").fancybox({
                     'overlayShow'   : true,
                     'titlePosition' : 'over',
                     'transitionIn'  : 'fadin',
