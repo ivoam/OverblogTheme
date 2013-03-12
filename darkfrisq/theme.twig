@@ -1142,6 +1142,10 @@
                 width: 570px;
                 max-height: 370px;
             }
+            .ob-section-html iframe.twitter-tweet{
+                max-height: none;
+            }
+
             .ob-map div {color: #272727;}
             /* Section image */
             .ob-row-1-col img {width: 570px;}
@@ -1539,8 +1543,8 @@
                 <div class="clear"></div>
             </div>
         </div>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $(".ob-row-1-col a,.ob-row-2-col a,.ob-row-3-col a,.ob-link-img").attr("rel", "fancybox");
@@ -1552,51 +1556,58 @@
                 });
             });
         </script>
-    {% if isSingle %}
-        <!-- Disqus comments count -->
-        {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
-        <script type="text/javascript">
-            var disqus_shortname = "{{ Custom('comment_disqus') }}";
-            (function () {
-                var s = document.createElement('script'); s.async = true;
-                s.type = 'text/javascript';
-                s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-                (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-            }());
-        </script>
-        {% endif %}
-
-        <!-- Facebook Script -->
-        <div id="fb-root"></div>
-        <script type="text/javascript">
-            {% if Custom('share_service') == 'Facebook' or Custom('share_service') == 'All' or Custom('comment') == 'facebook' %}
-                (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
+        {% if isSingle %}
+            <!-- Disqus comments count -->
+            {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
+            <script type="text/javascript">
+                var disqus_shortname = "{{ Custom('comment_disqus') }}";
+                (function () {
+                    var s = document.createElement('script'); s.async = true;
+                    s.type = 'text/javascript';
+                    s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+                    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+                }());
+            </script>
             {% endif %}
 
-        /*-- Twitter Script --*/
-            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");
+            <!-- Facebook Script -->
+            <div id="fb-root"></div>
+            <script type="text/javascript">
+                {% if Custom('share_service') == 'Facebook' or Custom('share_service') == 'All' or Custom('comment') == 'facebook' %}
+                    (function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (d.getElementById(id)) return;
+                        js = d.createElement(s); js.id = id;
+                        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId={{ Custom('facebook_appid')|default('127607930619601')}}";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, 'script', 'facebook-jssdk'));
+                {% endif %}
+            </script>
 
-        </script>
 
+            <!-- Google + button -->
+            <script type="text/javascript">
+              window.___gcfg = {lang: '{{ Blog.Lang }}'};
 
-        <!-- Google + button -->
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+        {% endif %}
         <script type="text/javascript">
-          window.___gcfg = {lang: '{{ Blog.Lang }}'};
+            //Twitter render
+            !function(d,s,id){
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if(!d.getElementById(id)){
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "https://platform.twitter.com/widgets.js";
+                    fjs.parentNode.insertBefore(js,fjs);
+                }
+            }(document,"script","twitter-wjs");
 
-          (function() {
-            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-            po.src = 'https://apis.google.com/js/plusone.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-          })();
-        </script>
-    {% endif %}
-        <script type="text/javascript">
             {% if Custom('custom_hide_widget_blog_archive') == false %}
                 // Archives
                 function switch_arch(year) {
@@ -1636,20 +1647,20 @@
             {% endif %}
         </script>
         {% if Custom('google_analytics') is not empty %}
-        <!-- Google Analytics -->
-         <script type="text/javascript">
-            window.google_analytics_uacct = '{{Custom('google_analytics')}}';
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
-            _gaq.push(['_trackPageview']);
-            _gaq.push(['_trackPageLoadTime']);
+            <!-- Google Analytics -->
+            <script type="text/javascript">
+                window.google_analytics_uacct = '{{Custom('google_analytics')}}';
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
+                _gaq.push(['_trackPageview']);
+                _gaq.push(['_trackPageLoadTime']);
 
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
         {% endif %}
     </body>
 </html>
