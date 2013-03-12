@@ -43,7 +43,6 @@
         <meta name="color:custom_footer_titles_font_color:label.footerTitlesFontColor" default="#FFFFFF" group="Design" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_about:label.hideBlogAbout" group="Widgets" />
@@ -449,14 +448,14 @@
                                     {% endif %}
                                 {% endlist %}
 
-                                {% list Blog.ListPages %}
+                                {% list Blog.Pages %}
                                     {% if loop.first is not empty %}
                                         <li {% if isPage %} class="active"{% endif %}>
                                             <a href="#">{{ Lang.Get('Pages') }}</a>
                                             <ul>
                                     {% endif %}
                                                 <li>
-                                                    <a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a>
+                                                    <a href="{{ Page.Url }}">{{ Page.Title }}</a>
                                                 </li>
                                     {% if loop.last is not empty %}
                                             </ul>
@@ -659,26 +658,6 @@
 
                             <div class="sidebar right">
                                 <div class="border"></div>
-                                {% if Custom('custom_hide_widget_biography') == false and Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
-                                    <article>
-                                        <!-- Blog owner -->
-                                        <h3>{{ Lang.Get('About me:') }}</h3>
-                                        <div class="pad">
-                                            <p class="bio">
-                                                {% if Blog.Owner.Avatar is not empty %}
-                                                    <a href="{{ Blog.Owner.Avatar }}" class="avatar" title="{{ Blog.Owner.Nickname }}">
-                                                        <img src="{{ Blog.Owner.Avatar|resize(236,136) }}" alt="" width="236" height="136" />
-                                                    </a>
-                                                {% endif %}
-                                                {{ Blog.Owner.Bio }}
-                                                {% if not isSpecial %}
-                                                    <a class="button right" href="/contact" title="{{ Lang.Get('Contact') }} {{ Blog.Owner.Nickname }}">{{ Lang.Get('Contact me') }}</a>
-                                                {% endif %}
-                                            </p>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </article>
-                                {% endif %}
 
                                 {% if Custom('custom_hide_widget_follow_us') == false %}
                                     <article>
