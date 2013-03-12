@@ -214,6 +214,9 @@
             .LI:after{
                 background-position: 0 -748px;
             }
+            .post.no-result:after{
+                background-image: none;
+            }
             .meta {
                 color: #999;
             }
@@ -620,7 +623,7 @@
                 {% endif %}
 
                 {% if Posts is empty %}
-                    <div class="post">
+                    <div class="post no-result">
                         {% if isSearch %}
                             {{ Lang.Get('No result for this expression') }}
                         {% elseif isSpecial %}
