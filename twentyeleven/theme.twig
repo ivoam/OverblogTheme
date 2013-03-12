@@ -103,7 +103,14 @@
 			.cb {
 				clear: both;
 			}
-
+			.visuallyhidden,
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
 			/***********
 			** HEADER **
 			***********/
@@ -113,9 +120,17 @@
 				width: 100%;
 			}
 				#blog-header .title {
-					float: left;
-					width: 70%;
+					width: 60%;
 				}
+				.avatar{
+					margin-left: 30px
+				}
+				.avatar,
+	            .title,
+	            #search{
+	                display: inline-block;
+	                vertical-align: middle;
+	            }
 					#blog-header .title a,
 					#blog-header .title a:visited {
 					 	color: #111;
@@ -123,7 +138,7 @@
 					 	font-size: 30px;
 					 	font-weight: bold;
 					 	line-height: 36px;
-					 	margin: 50px 50px 0 80px;
+					 	margin: 50px 50px 0 40px;
 					 	text-decoration: none;
 					 	-webkit-transition: color 300ms;
 						   -moz-transition: color 300ms;
@@ -136,17 +151,14 @@
 				#blog-header .description {
 					color: #7A7A7A;
 					font-size: 14px;
-					margin: 0 50px 50px 80px;
+					margin: 0 50px 50px 40px;
 				}
 
 				#search {
-					float: right;
-					margin-top: 50px;
-					width: 30%;
+					width: 20%;
 				}
 					#search form {
 						float: right;
-						margin-right: 80px;
 					}
 						#search input[type="text"] {
 							background: url('http://assets.over-blog-kiwi.com/themes/41/img/search.png') no-repeat 5px 6px;
@@ -846,6 +858,20 @@
 							     -o-opacity: 0.8;
 							        opacity: 0.8;
 						}
+				/* Sidebar > Subscribe */
+                .ob-form-subscription .ob-form-field{
+                    display: inline-block;
+                }
+                .ob-form-subscription .ob-form-field input{
+                    width: 170px;
+                }
+                .ob-form-subscription .ob-input-submit[type=submit]{
+                    display: inline-block;
+                    margin:5px 0 0;
+                    padding:6px 9px;
+                    vertical-align: top;
+                }
+
 
 				#navigation {
 					margin: 0 auto 20px;
@@ -905,6 +931,11 @@
 		<div id="fb-root"></div>
 		<div id="global">
 			<header id="blog-header" role="banner">
+				{% if Blog.Avatar is not empty %}
+                     <div class="avatar">
+                        <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                    </div>
+                {% endif %}
 				<div class="title">
 					<h1>
 						<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
@@ -1125,20 +1156,26 @@
 			</section>
 			<section id="right-content" role="complementary">
 				<aside id="sidebar">
-					{% if Custom('display_widget_profile') == false %}
-						<div class="widget">
-							<h3>{{ Lang.Get('About me') }}</h3>
-							{% if Blog.Owner.Avatar  is not empty %}
-								<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-									<img src="{{ Blog.Owner.Avatar|resize(250,167)|crop }}" alt="{{ Blog.Owner.Nickname }}" title="{{ Blog.Owner.Nickname }}" width="250" height="167" />
-								</a>
-							{% endif %}
-							{% if Blog.Owner.Bio is not empty %}
-								<p>
-									{{ Blog.Owner.Bio }}
-									<span class="author"> {{ Blog.Owner.Nickname }}</span>
-								</p>
-							{% endif %}
+					{% if Custom('display_widget_follow') != true %}
+						<div class="widget follow">
+							<h3>{{ Lang.Get('follow me') }}</h3>
+							<ul>
+								{% if Custom('facebook_username') is not empty %}
+									<li class="fb">
+										<a href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank" >Facebook</a>
+
+									</li>
+								{% endif %}
+								{% if Custom('twitter_username') is not empty %}
+									<li class="tw">
+										<a href="http://twitter.com/{{ Custom('twitter_username') }}" target="_blank">Twitter</a>
+									</li>
+								{% endif %}
+								<li class="rss">
+									<a href="{{ Blog.RssUrl }}">RSS</a>
+								</li>
+							</ul>
+							<div class="cb"></div>
 						</div>
 					{% endif %}
 
@@ -1170,12 +1207,12 @@
 						</div>
 					{% endif %}
 
-					{% if Custom('display_widget_pages') != true and Blog.ListPages is not empty %}
+					{% if Custom('display_widget_pages') != true and Blog.Pages is not empty %}
 						<div class="widget">
 							<h3>{{ Lang.Get('pages') }}</h3>
 							<ul>
-								{% list Blog.ListPages %}
-		                        	<li><a href='{{ ListPage.Url }}'>{{ ListPage.Title }}</a></li>
+								{% list Blog.Pages %}
+		                        	<li><a href='{{ Page.Url }}'>{{ Page.Title }}</a></li>
 		                        {% endlist %}
 							</ul>
 						</div>
@@ -1204,27 +1241,6 @@
 						</div>
 					{% endif %}
 
-					{% if Custom('display_widget_follow') != true %}
-						<div class="widget follow">
-							<h3>{{ Lang.Get('follow me') }}</h3>
-							<ul>
-								{% if Custom('facebook_username') is not empty %}
-									<li class="fb">
-										<a href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank" >Facebook</a>
-
-									</li>
-								{% endif %}
-								{% if Custom('twitter_username') is not empty %}
-									<li class="tw">
-										<a href="http://twitter.com/{{ Custom('twitter_username') }}" target="_blank">Twitter</a>
-									</li>
-								{% endif %}
-								<li class="rss">
-									<a href="{{ Blog.RssUrl }}">RSS</a>
-								</li>
-							</ul>
-						</div>
-					{% endif %}
 				</aside>
 			</section>
 			<div class="cb"></div>
