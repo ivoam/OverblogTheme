@@ -56,6 +56,10 @@
 
         <style type="text/css">
             <!--
+            img{
+                border: 0;
+            }
+
             .clearfix:after {
                 content: ".";
                 display: block;
@@ -143,11 +147,20 @@
             h2 {
                 margin: 0.5em 0;
             }
-            h2 a {
-                font: bold normal 18px Tahoma, sans-serif;
+            h2, h2 a, h3, h4, h5{
+                font: bold normal Tahoma, sans-serif;
             }
-            h3 {
-                font: bold normal 16px Tahoma, sans-serif;
+            h2, h2 a{
+                font-size: 22px;
+            }
+            h3{
+                font-size: 20px;
+            }
+            h4{
+                font-size: 18px;
+            }
+            h5{
+                font-size: 16px;
             }
             .post h1, .post h2, .post h3, .post h4 {
                 color: black;
@@ -232,6 +245,9 @@
             }
             .ob-section {
                 margin-bottom: 10px;
+            }
+            .post a:link, .post a:visited {
+                color: #0000cc;
             }
             .ob-section-video {
                 margin:0;
@@ -464,6 +480,15 @@
                 .menu a {
                     color: white;
                 }
+                .post{
+                    color: #444;
+                }
+                .post a:link, .post a:visited {
+                    color: #339966;
+                }
+                .post a:hover {
+                    color: #339966;
+                }
                 .footer {
                     background: #006633;
                 }
@@ -513,6 +538,12 @@
                 }
                 .menu .active a {
                     color: white;
+                }
+                .post a:link, .post a:visited {
+                    color: #FA3881;
+                }
+                .post a:hover {
+                    color: #FA3881;
                 }
                 .footer {
                     background: lightpink;
