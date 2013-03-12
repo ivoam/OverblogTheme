@@ -9,43 +9,43 @@
         {% if Custom('googleplus_userid') is not empty %}
             <link rel="author" href="https://plus.google.com/{{ Custom('googleplus_userid') }}">
             <link rel="publisher" href="https://plus.google.com/{{ Custom('googleplus_userid') }}">
-        {% endif %}     
-    
+        {% endif %}
+
         <!-- shortcut:[Custom vars] -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-    
+
         <meta name="list:theme_style:label.appearance" items="green, red, pink, blue, orange, neutral" default="orange" group="Design">
         <meta name="image:custom_background:label.backgroundImage" group="Design" />
         <meta name="image:custom_blog_cover:label.headerImage" group="Image 900x200 px" />
-    
+
         <meta name="string:text_publishedby:Published by" default="Published by" group="Wordings">
-    
+
         <meta name="image:default_post_cover:label.defaultPostCover" group="Posts" />
-    
+
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
+        <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
         <meta name="boolean:display_widget_tags:label.hideCategories" group="Widgets" />
-        <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
 
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social">
         <meta name="string:twitter_account:label.twitterUsername" group="Social" />
         <meta name="string:facebook_account:label.facebookUsername" group="Social" />
-        
+
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
-        
+
         <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
-        
+
         <!-- shortcut:[Includes] -->
-        <!-- favicon -->       
+        <!-- favicon -->
         {% favicon %}
-       
+
         <!-- SEO -->
         {% if Custom('google_webmaster_id') is not empty %}
             <meta name="google-site-verification" content="{{ Custom('google_webmaster_id') }}" />
@@ -53,14 +53,14 @@
         {% if Custom('msn_webmaster_id') is not empty %}
             <meta name="msvalidate.01" content="{{ Custom('msn_webmaster_id') }}" />
         {% endif %}
-    
+
         <!-- includes -->
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ Blog.RssUrl }}" />
-        
+
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-    
+
         {# Styles #}
         <!-- GoogleFont -->
         <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
@@ -68,9 +68,9 @@
         <link rel="stylesheet" type="text/css" href="http://assets.over-blog-kiwi.com/themes/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
         <style type="text/css">
             .clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .clearfix {display: inline-block;} /* Hides from IE-mac \*/ * html .clearfix { height: 1%; } .clearfix {display: block;}
-    
+
             /* @group Reset */
-    
+
             html, body, div, span, applet, object, iframe,
             h1, h2, h3, h4, h5, h6, p, blockquote, pre,
             a, abbr, acronym, address, big, cite, code,
@@ -102,7 +102,7 @@
                 content: '';
                 content: none;
             }
-    
+
             /* remember to define focus styles! */
             :focus {
                 outline: 0;
@@ -126,73 +126,73 @@
             del {
                 text-decoration: line-through;
             }
-    
+
             /* tables still need 'cellspacing="0"' in the markup */
             table {
                 border-collapse: collapse;
                 border-spacing: 0;
             }
-    
+
             .visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
-    
+
             /* @end */
-    
+
             #global, .header {
                 margin: 0px auto;
                 width: 980px;
                 position: relative;
             }
-    
+
             .ln {
                 clear: both;
             }
-    
+
             .cl {
                 float: left;
             }
-    
+
             .clear {
                 clear: both;
             }
-    
+
             /* modele */
-    
+
             #cl_0_0 {
                 width: 100%;
             }
-    
+
             #cl_1_0 {
                 width: 610px;
             }
-    
+
             #cl_1_1 {
                 width: 329px;
                 /* 330px - 1px (bordure gauche de la colonne de droite) */
             }
-    
+
             #cl_2_0 {
                 margin-bottom: 0;
                 width: 100%;
             }
-    
+
             .box {
                 width: auto;
             }
-    
+
             body {
                 font: 12px/18px arial, verdana, helvetica, sans-serif;
                 {% if Custom('custom_background') is not empty %}
-                background:  url('{{ Custom('custom_background') }}') no-repeat center center fixed; 
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                background:  url('{{ Custom('custom_background') }}') no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
                 {% else %}
                 background: #1f1f1f url('http://assets.over-blog-kiwi.com/themes/4/images/dark_stripes.png') repeat left top;
@@ -206,27 +206,27 @@
             h5{
                 font-family: 'Fjalla One', arial, sans-serif;
             }
-    
+
             html > body #global,
             .header {
                 background: transparent url(http://assets.over-blog-kiwi.com/themes/4/images/main_dark_shadow.png) repeat-y 0 0;
                 /* ombre du container global - invisible sur IE6 */
             }
-    
+
             #ln_1 {
                 width: 940px;
                 margin: 0 20px 0 40px;
                 margin-bottom: 0;
                 background-color: #272727;
             }
-    
-    
+
+
             html > body #global #ln_1 {
                 width: 940px;
                 margin: 0 20px;
                 border: none;
             }
-    
+
             /* @group Header */
             #cl_0_0 {
                 width: 940px;
@@ -240,79 +240,79 @@
                 overflow: hidden;
             }
             .topLien {text-shadow: 2px 2px 1px rgba(00, 00, 00, 0.80); }
-            
+
             .style_green #cl_0_0 {
             {% if Custom('custom_blog_cover') is not empty %}
                 background: #272727 url('{{ Custom('custom_blog_cover') }}') no-repeat center bottom;
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
             {% else %}
                 background: #272727 url('http://assets.over-blog-kiwi.com/themes/4/images/green.jpg') no-repeat left bottom;
             {% endif %}
             }
-            
+
             .style_red #cl_0_0 {
             {% if Custom('custom_blog_cover') is not empty %}
                 background: #272727 url('{{ Custom('custom_blog_cover') }}') no-repeat center bottom;
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
             {% else %}
                 background: #272727 url('http://assets.over-blog-kiwi.com/themes/4/images/red.jpg') no-repeat left bottom;
             {% endif %}
             }
-            
+
             .style_pink #cl_0_0 {
             {% if Custom('custom_blog_cover') is not empty %}
                 background: #272727 url('{{ Custom('custom_blog_cover') }}') no-repeat center bottom;
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
             {% else %}
                 background: #272727 url('http://assets.over-blog-kiwi.com/themes/4/images/pink.jpg') no-repeat left bottom;
             {% endif %}
             }
-            
+
             .style_blue #cl_0_0 {
             {% if Custom('custom_blog_cover') is not empty %}
                 background: #272727 url('{{ Custom('custom_blog_cover') }}') no-repeat center bottom;
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
             {% else %}
                 background: #272727 url('http://assets.over-blog-kiwi.com/themes/4/images/blue.jpg') no-repeat left bottom;
             {% endif %}
             }
-            
+
             .style_orange #cl_0_0 {
             {% if Custom('custom_blog_cover') is not empty %}
                 background: #272727 url('{{ Custom('custom_blog_cover') }}') no-repeat center bottom;
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
             {% else %}
                 background: #272727 url('http://assets.over-blog-kiwi.com/themes/4/images/oranges.jpg') no-repeat left bottom;
             {% endif %}
             }
-            
+
             .style_neutral #cl_0_0 {
             {% if Custom('custom_blog_cover') is not empty %}
                 background: #272727 url('{{ Custom('custom_blog_cover') }}') no-repeat center bottom;
-                -webkit-background-size: cover; 
-                -moz-background-size: cover; 
-                -o-background-size: cover; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
                 background-size: cover;
             {% else %}
                 background: #272727 url('http://assets.over-blog-kiwi.com/themes/4/images/birds.jpg') no-repeat left bottom;
             {% endif %}
             }
-    
+
             #top {
                 text-align: left;
                 margin: 0 20px;
@@ -322,67 +322,67 @@
                 width: 940px;
                 background: rgba(43,43,43,.8);
             }
-    
+
             #top h1 {
                 font-size: 32px;
                 line-height: 48px;
-                letter-spacing: -1px;          
+                letter-spacing: -1px;
                 padding-left:20px;
             }
 
             /* @end */
-    
+
             /* @group Main */
             #cl_1_0 .column_content {
                 padding: 20px;
             }
-    
+
             .GcheTexte {
                 margin: 10px;
                 margin-left: 0;
             }
-    
+
             img.DrteTexte {
                 display: block;
                 margin: 10px !important;
                 margin-right: 0 !important;
             }
-    
+
             .CtreTexte {
                 margin: 3px auto;
             }
-    
+
             .list-title {
                 margin: 0 0 1em 0;
                 font-size: 2em;
             }
-    
+
             /* @end */
-    
+
             /* @group Articles */
             .article {
                 margin-bottom: 20px;
                 /*padding-bottom: 20px;*/
             }
-    
+
             .article p {
                 margin-bottom: 10px;
             }
-    
+
             .beforeArticle {
                 font-size: 10px;
                 line-height: 10px;
                 padding-left: 4px;
             }
-    
+
             .beforeArticle br {
                 display: none;
             }
-    
+
             .date {
                 display: block;
             }
-    
+
             .afterArticle {
                 margin-bottom: 35px;
                 padding: 5px;
@@ -390,11 +390,11 @@
                 border: 1px solid;
                 line-height: 14px;
             }
-    
+
             .afterArticle a {
                 font-weight: bold;
             }
-    
+
             .post-title h2,
             .special h3,
             .special h2 {
@@ -422,44 +422,44 @@
             .style_neutral .post-title {
                 color: #d8d8d8;
             }
-    
+
             .before_articles, .after_articles {
                 text-align: center;
             }
-    
+
             .pagination {
                 margin: 10px 0 20px;
                 font-size: 11px;
                 padding: 2px 0;
             }
-    
+
             .pagination .previous {
                 float: left;
             }
-            
+
             .pagination .top {
                 position: absolute;
                 left: 31%;
             }
-            
+
             .pagination .next {
                 float: right;
             }
-    
+
             .pagination a, .pagination b {
                 margin: 0 5px;
             }
-    
+
             .article_navigation {
                 margin-top: 10px;
                 font-size: 11px;
                 font-weight: bold;
             }
-    
+
             .ob-section {
                 margin: 2em 0;
             }
-    
+
             /* @group Typographie */
             .contenuArticle .post-title {
                 font-size: 20px;
@@ -490,25 +490,25 @@
             .contenuArticle h5 {
                 font-size: 14px;
             }
-    
+
             .contenuArticle ul, .contenuArticle ol {
                 margin-left: 30px;
                 line-height: 18px;
                 margin-bottom: 10px;
             }
-    
+
             .contenuArticle ul {
                 list-style-type: square;
             }
-    
+
             .contenuArticle ol {
                 list-style-type: decimal;
             }
-    
+
             /* @end */
-    
+
             /* @end */
-    
+
             /* @Share buttons */
             .share{
                 margin-bottom: 20px;
@@ -525,9 +525,9 @@
                 border:none;
                 width:90px;
             }
-            
+
             /* @group Commentaires */
-    
+
             .h4commentMessage,
             .share h3 {
                 font-size: 18px;
@@ -536,28 +536,28 @@
                 padding: 5px 0 5px 20px;
                 border-left: 4px solid;
             }
-    
+
             .commentContainer {
                 border: 1px solid;
                 margin-bottom: 20px;
                 padding: 10px;
             }
-    
+
             .commentMessage {
                 margin-bottom: 10px;
             }
-    
+
             .commentOption {
                 font-size: 11px;
                 border-top: 1px solid;
             }
-    
+
             .afterReactions {
                 text-align: right;
                 font-size: 14px;
                 font-weight: bold;
             }
-    
+
             .reponseMessage {
                 margin-top: 10px;
                 margin-left: 20px;
@@ -565,37 +565,37 @@
             .reponseOption {
                 margin-left: 20px;
             }
-    
+
             /* @end */
-    
+
             /* @group sidebar */
             #cl_1_1 {
                 border-left: 1px solid;
             }
-    
+
             .box-titre {
                 font-size: 16px;
                 margin-bottom: 10px;
             }
-    
+
             .box {
                 padding: 10px;
                 border-bottom: 1px solid;
             }
-    
+
             .box-content {
                 font-size: 11px;
                 padding-left: 10px;
             }
-            
+
             .box-content a:hover {
                 text-decoration: underline;
             }
-    
+
             .box-footer, .search .box-titre {
                 display: none;
             }
-    
+
             .search input{
                 margin: 0;
                 border: 1px solid;
@@ -603,7 +603,7 @@
                 border-right: none;
                 height: 14px;
                 padding: 2px;
-    
+
             }
             .search button{
                 width: auto;
@@ -616,7 +616,7 @@
                 font-size: 11px;
                 font-weight: bold;
             }
-    
+
             .newsletter .box-content {
                 overflow: auto;
                 width: 100%;
@@ -651,7 +651,7 @@
                 font-weight: bold;
             }
             /* @end */
-    
+
             /* @group Footer */
             #ln_2 {
                 width: 940px;
@@ -660,13 +660,13 @@
                 background-color: #272727;
                 text-align: center;
             }
-    
+
             #footer {
                 padding: 20px;
             }
-    
+
             /* @end */
-    
+
             /* @group Colors */
             a, a:hover {
                 text-decoration: none;
@@ -701,8 +701,8 @@
             .style_neutral .special h3 {
                 color: #D8D8D8;
             }
-    
-    
+
+
             .style_green a.titreArticle:hover {
                 color: #477e00;
             }
@@ -721,7 +721,7 @@
             .style_neutral a.titreArticle:hover {
                 color: #FFF;
             }
-    
+
             .style_green .beforeArticle,
             .style_green .dateExtrait {
                 color: #54644d;
@@ -746,20 +746,20 @@
             .style_neutral .dateExtrait {
                 color: #989898;
             }
-    
+
             .commentContainer {
                 color: #989898;
             }
-    
+
             .reponseMessage, .reponseOption {
                 color: white;
                 font-weight: bold;
             }
-    
+
             .pagination {
                 background-color: #2e2e2e;
             }
-    
+
             .style_green .post-title{
                 border-left-color: #5fa900;
             }
@@ -778,7 +778,7 @@
             .style_neutral .post-title {
                 border-left-color: #d8d8d8;
             }
-    
+
             .style_green .h4commentMessage,
             .style_green .share h3,
             .style_green .special h2  {
@@ -815,8 +815,8 @@
                 border-left-color: #d8d8d8;
                 color: #d8d8d8,
             }
-    
-    
+
+
             .style_green #cl_1_1 .box-titre h3 {
                 color: #5fa900;
             }
@@ -835,7 +835,7 @@
             .style_neutral #cl_1_1 .box-titre h3 {
                 color: #FFF;
             }
-    
+
             .style_green #cl_1_1 a {
                 color: #5fa900;
             }
@@ -854,7 +854,7 @@
             .style_neutral #cl_1_1 a {
                 color: #FFF;
             }
-            
+
             .style_green #cl_1_1 #form .ob-label {
                 color: #5fa900;
             }
@@ -876,7 +876,7 @@
             .box-titre h3 {
                 color: #95610e;
             }
-    
+
             #cl_1_1 .column_content {
                 background: #2e2e2e;
                 color: #7a7a7a;
@@ -889,22 +889,22 @@
                 color: #cdcdcd;
                 background: #373737;
             }
-    
+
             #cl_1_1 .column_content .box:hover {
-                
+
             }
-    
+
             .calendarTable1 {
                 width: 100%;
                 border-color: #505050;
             }
-    
+
             td.calendarDays1 {
                 border-top-color: #505050;
             }
-    
+
             /* @end */
-    
+
             /* Form */
             form .ob-label{
                 width:24%;
@@ -914,19 +914,19 @@
                    -moz-box-sizing: border-box;
                         box-sizing: border-box;
             }
-            form .ob-input-submit, 
+            form .ob-input-submit,
             form .ob-error{
                 margin-left: 24%;
             }
-            form .ob-input-text, 
-            form .ob-input-email, 
-            form .ob-input-textarea, 
+            form .ob-input-text,
+            form .ob-input-email,
+            form .ob-input-textarea,
             form .ob-error{
                 width: 70%;
             }
 
-            form .ob-input-text, 
-            form .ob-input-email, 
+            form .ob-input-text,
+            form .ob-input-email,
             form .ob-input-textarea{
                 background: #d2d2d2;
                 color: #353535;
@@ -934,7 +934,7 @@
                 padding:4px;
             }
 
-            .search button, 
+            .search button,
             .ob-input-submit {
                 border: 1px solid #505050;
                 color: #3d3d3d;
@@ -951,7 +951,7 @@
 
 
             /* @group menu */
-    
+
             #articleAccueil {
                 position: absolute;
                 width: 920px;
@@ -961,17 +961,17 @@
                 padding: 10px;
                 height: 20px;
             }
-    
+
             #articleAccueil.article {
                 margin-bottom: 0;
             }
-    
-            #articleAccueil .divTitreArticle, 
-            #articleAccueil .afterArticle, 
+
+            #articleAccueil .divTitreArticle,
+            #articleAccueil .afterArticle,
             .articleAccueil .afterArticle {
                 display: none;
             }
-    
+
             #articleAccueil a {
                 font-size: 18px;
                 font-weight: bold;
@@ -980,29 +980,29 @@
                 margin-right: 10px;
                 padding-bottom: 10px;
             }
-    
+
             #articleAccueil a:visited {
                 color: #fff;
             }
-    
+
             #articleAccueil a:hover {
                 border-bottom: 3px solid #fff;
             }
-    
+
             /* @end */
-    
+
             #menuob a {padding: 5px; color: #f97d16; }
-            
+
             /* Repost banner */
             .ob-repost {background: #222; border: 1px solid #111; font-weight: bold; text-align: center;}
             .ob-repost .ob-link {text-decoration: underline;}
-            
+
             /* Sections */
-            .ob-section-text, 
-            .ob-section-images, 
-            .ob-section-video, 
-            .ob-section-audio, 
-            .ob-section-quote, 
+            .ob-section-text,
+            .ob-section-images,
+            .ob-section-video,
+            .ob-section-audio,
+            .ob-section-quote,
             .ob-secton-map {
                 width: 570px;
             }
@@ -1026,13 +1026,13 @@
 
             .ob-section-quote p.ob-author, .ob-section-quote p.ob-source {background: #63645f; background:rgba(255, 255, 255, 0.2);}
 
-            /* Section Link */ 
+            /* Section Link */
             .ob-section-link .ob-ctn {
-                background: #fff; 
-                -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-                -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-                -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
-                -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); 
+                background: #fff;
+                -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+                -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
             }
             .ob-section-link .ob-media-left {margin: 0;}
@@ -1121,15 +1121,15 @@
                 border: 1px solid #636360;
                 background: #3d3e39; background: rgba(255, 255, 255, 0);
             }
-            
+
             /* Medias */
-            .ob-cell, 
-            .ob-img, 
-            .ob-media, 
-            .ob-video, 
+            .ob-cell,
+            .ob-img,
+            .ob-media,
+            .ob-video,
             .ob-slideshow,
             .ob-section-map .ob-desc,
-            .ob-section-images img, 
+            .ob-section-images img,
             .yui3-slideshow-content {
                 max-width: 570px;
             }
@@ -1150,23 +1150,23 @@
             .ob-text li:last-child {margin-bottom: 15px;}
             .ob-text li p {margin-bottom: 5px;}
             .ob-text pre {
-                width: 570px;  
-                white-space: pre-wrap; /* CSS 3 */ 
-                white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */ 
-                white-space: -pre-wrap; /* Opera 4 & 6 */ 
-                white-space: -o-pre-wrap; /* Opera 7 */ 
-                word-wrap: break-word; /* IE 5.5+ */ 
+                width: 570px;
+                white-space: pre-wrap; /* CSS 3 */
+                white-space: -moz-pre-wrap; /* Mozilla depuis 1999 */
+                white-space: -pre-wrap; /* Opera 4 & 6 */
+                white-space: -o-pre-wrap; /* Opera 7 */
+                word-wrap: break-word; /* IE 5.5+ */
                 overflow: auto;/* IE 6 */
             }
             .ob-section-audio .obsoundplayer .obsoundplayername {
-                height: 31px; 
+                height: 31px;
                 overflow: hidden;
-                width: 200px; 
+                width: 200px;
             }
 
             .ob-form + a {display: block; margin-top: 80px; text-align: center;}
         </style>
-    
+
     </head>
     <body>
         <div class="header">
@@ -1206,7 +1206,7 @@
                                     </div>
                                 {% endif %}
                             {% endif %}
-                            
+
                             {# List title #}
                             {% if isSearch %}
                             <h3 class="list-title">{{ Lang.Get ('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;</h1>
@@ -1214,10 +1214,10 @@
                             {% if isTag %}
                             <h3 class="list-title">{{ Lang.Get('Posts with') }} #<strong>{{ Tag.Title }}</strong></h1>
                             {% endif %}
-    
+
                             {# Posts #}
                             {% if Posts is empty %}
-    
+
                             {% if isSearch %}
                             <div class="contenuArticle">
                                 <p>
@@ -1235,12 +1235,12 @@
                                 </p>
                             </div>
                             {% endif %}
-    
+
                             {% else %}
-    
+
                             {# shortcut:[Posts list] #}
                             {% list Posts %}
-    
+
                             <div class="article index_{{ loop.index }} {% if (loop.index % 2) == 0 %}odd{% else %}even{% endif %}">
                                 <div class="option beforeArticle">
                                     {% if not isPage %}
@@ -1281,7 +1281,7 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="clear"></div>
-    
+
                             {# Author #}
                             <div class="option afterArticle">
                                 <p>
@@ -1352,7 +1352,7 @@
                                         <div id="disqus_thread"></div>
                                         <script type="text/javascript">
                                         var disqus_shortname = '{{ Custom('comment_disqus') }}';
-                                
+
                                         (function() {
                                         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
                                         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
@@ -1366,18 +1366,18 @@
                                 </div>
                                 {% endif %}
                             {% endlist %} {# Posts #}
-    
+
                             {% endif %}
-                         
+
                          </div>
-                        
+
 
                     </div>
                 </div>
                 <div id="cl_1_1" class="cl">
                     <div class="column_content">
                         {# Blog profile #}
-                        {% if Blog.Avatar or Blog.Description %}
+                        {% if (Blog.Avatar or Blog.Description) and Custom("display_widget_profile") != true %}
                         <div class="box profile" >
                             <div class="box-content clearfix">
                                 {% if Blog.Avatar is not empty %}
@@ -1417,7 +1417,7 @@
                             </div>
                         </div>
                         {% endif %}
-    
+
                         {# Search #}
                         {% if Custom('display_widget_search') != true %}
                         <div class="box search" >
@@ -1435,7 +1435,7 @@
                             </div>
                         </div>
                         {% endif %}
-                        
+
                         {# Subscribe Form #}
                         {% if Custom('custom_hide_widget_subscribe') == false %}
                             <div class="box subscribe">
@@ -1461,7 +1461,7 @@
                                 </ul>
                             </div>
                         </div>
-                        
+
                         {# Pages #}
                         {% if Custom('display_widget_pages') != true and Blog.Pages is not empty %}
                         <div class="box pages" >
@@ -1479,7 +1479,7 @@
                             </div>
                         </div>
                         {% endif %}
-    
+
                         {# Tags #}
                         {% if Custom('display_widget_tags') != true %}
                         <div class="box tags" >
@@ -1501,7 +1501,7 @@
                             </div>
                         </div>
                         {% endif %}
-                            
+
                         {% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
                             <div class="box archives">
                                 <div class="box-titre">
@@ -1550,7 +1550,7 @@
                     'transitionOut' : 'fadin',
                     'type'          : 'image'
                 });
-            });                 
+            });
         </script>
     {% if isSingle %}
         <!-- Disqus comments count -->
@@ -1565,7 +1565,7 @@
             }());
         </script>
         {% endif %}
-     
+
         <!-- Facebook Script -->
         <div id="fb-root"></div>
         <script type="text/javascript">
@@ -1583,12 +1583,12 @@
             !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs); }}(document,"script","twitter-wjs");
 
         </script>
-        
-        
+
+
         <!-- Google + button -->
         <script type="text/javascript">
           window.___gcfg = {lang: '{{ Blog.Lang }}'};
-        
+
           (function() {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
             po.src = 'https://apis.google.com/js/plusone.js';
@@ -1643,13 +1643,13 @@
             _gaq.push(['_setAccount', '{{Custom('google_analytics')}}']);
             _gaq.push(['_trackPageview']);
             _gaq.push(['_trackPageLoadTime']);
-        
+
             (function() {
                 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
                 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
         </script>
-        {% endif %} 
+        {% endif %}
     </body>
 </html>
