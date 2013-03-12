@@ -27,18 +27,18 @@
 
         <!-- Custom vars -->
         <meta name="list:display_mode:label.numberOfSections" items="Summary,1,2,3,4,5,6,7,8,9,10,All" default="All" />
-  
+
         <meta name="list:custom_titles_font:label.titlesFont" items="Arial, Dosis, Crushed, Italiana, Italianno, Lobster, Marmelad, Metamorphous, Ovo, Oxygen, Salsa, Sancreek, Sunshiney, Wellfleet" default="Lobster" group="Design" />
         <meta name="color:custom_theme_color:label.primaryColor" default="#00AAFF" group="Design" />
 
-        <meta name="string:facebook_profile_id:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_profile_id:label.facebookUsername" group="Social" />
         <meta name="string:twitter_account:label.twitterUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_lastPosts:label.hideLastPosts" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
 
         <meta name="string:footer:label.footer" default="Theme: Autofocus &copy; 2013" group="Wording"  />
@@ -48,7 +48,7 @@
         <meta name="list:custom_facebook_comments_color_theme:label.facebookCommentsColorTheme" items="light, dark" default="light" group="Comments" />
 
         <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
-        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />      
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
@@ -79,12 +79,12 @@
             .clearfix:after{
                 clear: both;
             }
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 
             .ob-section-html iframe,
@@ -246,12 +246,12 @@
                 text-align: center;
             }
             .gotop img{
-                margin-right:5px;            
-              -webkit-transform: rotate(90deg) scale(.6); 
-                 -moz-transform: rotate(90deg) scale(.6); 
-                  -ms-transform: rotate(90deg) scale(.6); 
-                   -o-transform: rotate(90deg) scale(.6); 
-                      transform: rotate(90deg) scale(.6); 
+                margin-right:5px;
+              -webkit-transform: rotate(90deg) scale(.6);
+                 -moz-transform: rotate(90deg) scale(.6);
+                  -ms-transform: rotate(90deg) scale(.6);
+                   -o-transform: rotate(90deg) scale(.6);
+                      transform: rotate(90deg) scale(.6);
                          -moz-transform-origin: 60% 75%;
                       -webkit-transform-origin: 60% 75%;
                            -o-transform-origin: 60% 75%;
@@ -385,7 +385,7 @@
             .m-main .post .box-text h2,
             .m-main .post .box-text a{
                 color: #FFF;
-                
+
             }
             .m-main .post .box-text h2{
                 background-position: 0 24px;
@@ -400,10 +400,10 @@
             }
             .post:hover h2 a{
                 padding-right: 10px;
-             }   
+             }
             .m-main .post:hover .box-text h2{
                 background: transparent url(http://assets.over-blog-kiwi.com/themes/31/images/arrow.png) no-repeat 12px 24px;
-                padding-left: 48px;               
+                padding-left: 48px;
                 -moz-transition: all 0.5s ease 0s;
                 -o-transition: all 0.5s ease 0s;
                 -ms-transition: all 0.5s ease 0s;
@@ -474,7 +474,7 @@
             }
             .list a span{
                 display: none;
-            }    
+            }
             .list a:hover span{
                 border-width: 5px;
                 border-style: solid;
@@ -711,8 +711,8 @@
                     <div class="m-logo">
                         <!-- Main title -->
                         <h1>
-                            <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">          
-                                {{ Blog.Title }}                   
+                            <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">
+                                {{ Blog.Title }}
                             </a>
                         </h1>
                         <p class="s-headline">{{ Blog.Description }}</p>
@@ -743,14 +743,14 @@
                                 <li>
                                     <a href="#">{{ Lang.Get('Tags') }}</a>
                                     <ul class='children'>
-                            {% endif %}  
+                            {% endif %}
                                             <li class="{% if isTag and Tag is not empty and Tag.Title == PostsTag.Title %} current_menu_item{% endif %}">
                                                 <a href="{{ PostsTag.Url }}"><span>{{ PostsTag.Title }}</span>
                                             </a></li>
-                            {% if loop.last %}         
+                            {% if loop.last %}
                                     </ul>
                                 </li>
-                             {% endif %} 
+                             {% endif %}
                         {% endlist %}
                         {% if Custom('custom_hide_widget_subscribe') == false %}
                         <!-- Subscribe -->
@@ -909,10 +909,10 @@
                                                 <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }}</a>
                                             {% endif %}
                                         {% endif %}
-                                        
+
                                     </div>
                                     {% if not isIndex %}</div>{% endif %}
-                                    <div class="clear"></div>   
+                                    <div class="clear"></div>
                                 {% endif %}
 
                                 {% if Custom('share_service') != 'None' %}
@@ -1023,7 +1023,7 @@
                                                     <li class="left">
                                                             <a href="{{ Post.Permalink }}" title="{{Post.Title}}">
                                                                 <img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(100,80)|crop }}{% else %}{{ Custom('post_cover')|resize(100,80)|crop }}{% endif %}" alt="{{Post.Title}}" width="100" height="80" /><span></span>
-                                                            </a>          
+                                                            </a>
                                                     </li>
                                                 {% endif %}
                                             {% endlist %}
@@ -1069,7 +1069,7 @@
                     <!-- Pagination -->
                     {% if isIndex %}
                         {% if Navigation.PreviousPage is not empty or Navigation.NextPage is not empty or Navigation.PreviousPost is not empty or Navigation.NextPost is not empty %}
-                            
+
                             <div class="pagination">
                                 {% if Navigation.PreviousPage is not empty or Navigation.PreviousPost is not empty %}
                                     {% if Navigation.PreviousPage is not empty %}
@@ -1085,14 +1085,14 @@
                                         <a href="{{ Navigation.NextPost.Permalink }}" class="next" title="{{ Lang.Get('Go to') }} {% if Navigation.NextPost.Title is not empty %}&quot;{{ Navigation.NextPost.Title|truncate(30) }}&quot;{% else %}{{ Lang.Get('next post') }}{% endif %}">{{ Lang.Get('Next post') }}</a>
                                     {% endif %}
                                 {% endif %}
-                                
+
                             </div>
-                            <div class="clear"></div>   
+                            <div class="clear"></div>
                         {% endif %}
-                    {% endif %}       
-                    {% if isSpecial is empty %}        
+                    {% endif %}
+                    {% if isSpecial is empty %}
                      <p class="gotop clear"><a href="#top" ><img alt="" src="http://assets.over-blog-kiwi.com/themes/31/images/arrow-l.png" />{{ Lang.Get('Go top') }}</a></p>
-                     {% endif %}     
+                     {% endif %}
                 </div>
             </div>
         </div>
@@ -1158,7 +1158,7 @@
                         s.type = 'text/javascript';
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
                     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-                }());            
+                }());
             {% elseif Custom('comment') == 'Facebook' %}
                 // Facebook comments + share
                 (function(d, s, id) {
