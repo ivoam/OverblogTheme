@@ -866,7 +866,7 @@
                                 <h2 class="title">
                                     {% if Post.Title is not empty %}
                                         {{ Post.Title }}
-                                    {% else %}
+                                    {% elseif not isPage%}
                                         {{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}
                                     {% endif %}
                                 </h2>
@@ -874,7 +874,9 @@
                                     {% if Post.Author and Post.Author is not empty %}
                                         <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>
                                     {% endif %}
-                                    <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
+                                    {% if not isPage %}
+                                        <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
+                                    {% endif %}
                                     <span class="links">
                                         {% list Post.Tags %}
                                             <a href="{{Tag.Url}}" title="{{Tag.Title}}">{{Tag.Title}}</a>
