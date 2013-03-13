@@ -15,8 +15,8 @@
 		<meta name="constant:displayArticlesLimit" content="8" />
 
 		<!-- shortcut:[Custom vars] -->
-		<meta name="image:thumbnail_custom:Default thumbnail custom" default="http://assets.over-blog-kiwi.com/themes/27/img/deezer-cover.jpg" group="Options"/>
-		<meta name="string:footer_content:Footer content" group="Options" />
+		<meta name="image:thumbnail_custom:label.defaultPostCover" default="http://assets.over-blog-kiwi.com/themes/27/img/deezer-cover.jpg" group="Options"/>
+		<meta name="string:footer_content:label.footer" group="Options" />
 
 		<meta name="string:playlist_id:Enter your Playlist ID" default="30595446" group="Deezer audio" />
         <meta name="string:discography_id:Enter a Discography ID" default="27" group="Deezer audio" />
@@ -25,19 +25,21 @@
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_display_widget_last_posts:label.hideLastPosts" group="Widgets" />
-		<meta name="boolean:display_widget_pages:Hide Widget &quot;Pages&quot;" group="Widgets" />
+		<meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
 
-		<meta name="string:twitter_account:Enter your Twitter Account" group="Social Share" />
-		<meta name="string:facebook_account:Enter your Facebook Account" group="Social Share" />
-		<meta name="list:share_button:Chose your(s) share button(s)" items="Facebook, Twitter, Google +, All" default="All" group="Social Share">
+		<meta name="string:twitter_account:label.twitterUsername" group="Social Share" />
+		<meta name="string:facebook_account:label.facebookUsername" group="Social Share" />
+		<meta name="list:share_button:label.socialSharingServices" items="Facebook, Twitter, Google +, All" default="All" group="Social Share">
 
-        <meta name="string:facebook_appid:Enter your Facebook App ID" group="Settings" />
-        <meta name="string:google_analytics:Enter your Google Analytics ID" group="Settings" />
-        <meta name="string:google_webmaster_id:Enter your Google Webmaster Tools ID" group="Settings" />
-        <meta name="string:msn_webmaster_id:Enter your MSN Webmaster Tools ID" group="Settings" />
+		<meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
+		<meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
 
-		<meta name="list:comment:Comment service" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
-		<meta name="string:comment_disqus:Disqus account" default="obcomment" group="Comment" />
+        <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
+        <meta name="string:google_analytics:label.googleAnalyticsId" group="Settings" />
+        <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
+        <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
+
+		
 
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
@@ -93,7 +95,14 @@
 			.cr {clear: right;}
 			.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden; } .clearfix {display: inline-block;} /* Hides from IE-mac \*/ * html .clearfix {height: 1%; } .clearfix {display: block;}
 			#global {width: 980px; margin: 10px auto;}
-
+			.visuallyhidden,
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
 
 			/***********
 			** HEADER **
@@ -147,8 +156,8 @@
 
 			/** about **/
 			#about h3 {color: #9966cc;}
-			#avatar {width: 210px; height: 215px; margin: 0 auto;}
-			#avatar img {float: left; max-width: 100%; margin: 0 auto; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
+			#avatar {width: 100px; margin: 0 auto;}
+			#avatar img {max-width: 100%; margin: 0 auto; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
 			#avatar-bkg {display: block; width: 210px; height: 215px; position: absolute; background: url('http://assets.over-blog-kiwi.com/themes/27/img/bkg-img.png') repeat center center; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
 
 			/** last posts **/
@@ -357,7 +366,20 @@
 				color: #005c7e;
 				font-size: 18px;
             }
-
+            /* Sidebar > Subscribe */
+            .ob-form-subscription .ob-form-field{
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .ob-form-subscription .ob-form-field input{
+                width: 128px;
+            }
+            .ob-form-subscription .ob-input-submit{
+                display: inline-block;
+                vertical-align: middle;
+                margin:0;
+                padding: 1px 6px;
+            }
 			/*******************
 			** RIGHT - CONTENT **
 			*******************/
@@ -419,18 +441,12 @@
 				{% if Custom('display_widget_profile') != true %}
 				<div class="widget">
 					<div id="about">
-						{% if Blog.Owner.Avatar is not empty %}
+						{% if Blog.Avatar is not empty %}
 						<div id="avatar">
-							<a class="avatar-img" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-								<img src="{{ Blog.Owner.Avatar|resize (210, 215)|crop }}" alt="Avatar" title="{{ Blog.Owner.Nickname }}" width="210" height="215" />
-								<span id="avatar-bkg"></span>
-							</a>
+							 <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
 						</div>
 						{% endif %}
-						<h3>{{ Lang.Get('about the author') }}</h3>
-						{% if Blog.Owner.Bio is not empty %}
-						<p>{{ Blog.Owner.Bio }}<br />...</p>
-						{% endif %}
+						<p>{{ Blog.Description }}</p>
 					</div>
 				</div>
 				{% endif %}
