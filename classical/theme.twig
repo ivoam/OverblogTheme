@@ -24,7 +24,6 @@
 
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8" default="7" group="Navigation" />
 
-        <meta name="string:headline:label.headline" default="Welcome to my blog" group="Wording"  />
         <meta name="string:footer:label.footer" default="Theme: Classical © 2012" group="Wording"  />
 
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
@@ -38,7 +37,6 @@
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
         <meta name="boolean:custom_hide_widget_categories:label.hideCategories" group="Widgets" />
         <meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10" default="6" group="Widgets" />
@@ -122,12 +120,27 @@
         .header {background: url("http://assets.over-blog-kiwi.com/themes/1/images/bg-header.jpg") repeat;}
         .head {background: url("http://assets.over-blog-kiwi.com/themes/1/images/header.jpg") repeat-y; width: 986px; padding-top: 40px;}
 
+        .avatar{
+            float:left;
+            margin-right:20px;
+        }
+
         /*---- Logo ----*/
-        .logo {float: left; width: 640px; overflow: hidden;}
+        .logo {
+            float: left; 
+            overflow: hidden;
+            {% if Blog.Avatar is not empty %}
+                border-left: 1px solid #1a1a1a;
+                padding-left: 10px;
+                width: 560px; 
+            {% else %}
+                width: 640px;
+            {% endif %}
+        }
         .logo h1 {float: left;}
         .logo a,
         .logo a:visited,
-        .logo a:hover {line-height: 34px; margin-right: 10px; padding-right: 10px; text-shadow: 0px 2px 1px #000; border-right: 1px solid #1a1a1a; color: #FFF; font-size: 30px; text-decoration: none;}
+        .logo a:hover {line-height: 34px; margin-right: 10px;  text-shadow: 0px 2px 1px #000;  color: #FFF; font-size: 30px; text-decoration: none;}
         .slogan {float:left; color: #a6a5a5; font-style: italic; font-size: 14px; line-height: 34px; text-shadow: 0px 1px 0px #000;}
 
         /*---- Search ----*/
@@ -275,7 +288,7 @@
         .ob-section-map .ob-desc {margin: 0 auto; width: 100%;}
 
         /* twitter box */
-        .ob-section .twitter-tweet-rendered {max-width: 100% !important;}
+        .ob-section .twitter-tweet-rendered {width: 100%;}
         .ob-section .twt-border {max-width: 100% !important;}
 
         /* description */
@@ -484,16 +497,14 @@
         {% if Custom('share_service') == 'Facebook' or Custom('share_service') == 'All' or Custom('comment') == 'facebook' %}
             <div id="fb-root"></div>
         {% endif %}
-        <div class="top">
-            {% if Custom('headline') is not empty %}
-                <div class="wrap">
-                    <p>{{ Custom('headline') }}</p>
-                </div>
-            {% endif %}
-        </div>
         <div class="header">
             <div class="wrap">
                 <div class="head">
+                    {% if Blog.Avatar is not empty %}
+                         <div class="avatar">
+                            <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                        </div>
+                    {% endif %}
                     <div class="logo">
                         <h1>
                             <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
@@ -775,28 +786,6 @@
                                 {% email_notification %}
                             </div>
                         {% endif %}
-                        {% if Custom('custom_hide_widget_biography') == false %}
-                            {% if Blog.Owner.Bio is not empty and Blog.Owner.Avatar is not empty %}
-                                <div class="about">
-                                    <h3>{{ Lang.Get('About the author') }}</h3>
-                                    {% if Blog.Owner.Avatar is not empty %}
-                                        <div class="photo">
-                                            <a class="author-avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-                                                <img alt="Avatar" src="{{ Blog.Owner.Avatar }}" />
-                                            </a>
-                                        </div>
-                                    {% endif %}
-
-                                    {% if Blog.Owner.Nickname is not empty %}
-                                    <p class="name blue"><strong>{{ Blog.Owner.Nickname }}</strong></p>
-                                    {% endif %}
-
-                                    {% if Blog.Owner.Bio is not empty %}
-                                    <p class="description blue">{{ Blog.Owner.Bio }}</p>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                        {% endif %}
                         {% if Custom('video') is not empty %}
                             <div class="widget-video">
                                 <h3>{{ Lang.Get('Youtube widget') }}</h3>
@@ -807,8 +796,8 @@
                             <div class="list pages">
                                 <h3>{{ Lang.Get('Pages') }}</h3>
                                 <ul>
-                                    {% list Blog.ListPages %}
-                                    <li><a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a></li>
+                                    {% list Blog.Pages %}
+                                    <li><a href="{{ Page.Url }}">{{ Page.Title }}</a></li>
                                     {% endlist %}
                                 </ul>
                             </div>
