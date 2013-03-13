@@ -30,7 +30,6 @@
         <meta name="color:secondary_color:label.secondaryColor" default="#fff" group="Colors" />
         <meta name="color:tertiary_color:label.tertiaryColor" default="#ccc" group="Colors" />
 
-        <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
 		<meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="5" group="Widgets" />
@@ -158,7 +157,14 @@
 			.clearfix:after{
 				clear: both;
 			}
-
+			.visuallyhidden,
+            .ob-form-subscription label { 
+              position: absolute; 
+              overflow: hidden; 
+              clip: rect(0 0 0 0); 
+              height: 1px; width: 1px; 
+              margin: -1px; padding: 0; border: 0; 
+            }
 			/* ----------------------------- */
 			/* ==header */
 			/* ----------------------------- */
@@ -183,6 +189,14 @@
             .banner a {
                 color: {{ Custom('primary_color') }};
                 text-decoration: none;
+            }
+            .avatar{
+            	margin-right:20px;
+            }
+            .avatar,
+            .banner-title{
+                display: inline-block;
+                vertical-align: middle;
             }
 			.menu {
                 bottom: 0;
@@ -669,7 +683,7 @@
 				font-size: 1.4em;
 			}
 			input[type="submit"]{
-				background: #111;
+				background-color: #111;
 				border: none;
 				color: #FFF;
 				cursor: pointer;
@@ -795,6 +809,18 @@
 			.item-tags a:hover {
 				text-decoration: underline;
 			}
+			/* Sidebar > Subscribe */
+            .ob-form-subscription .ob-form-field{
+                display: inline-block;
+            }
+            .ob-form-subscription .ob-form-field input{
+                width: 148px;
+            }
+            .ob-form-subscription .ob-input-submit{
+                display: inline-block;
+                margin:0;
+            }
+
 			/* last posts */
 			.last-posts ul {border: 1px solid #CCC;}
 			.last-posts li {
@@ -910,19 +936,26 @@
             <!-- header -->
             <header>
 				<div class="banner clearfix">
-					<h1>
-						<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
-					</h1>
-                    <p class="description h3-like">{{ Blog.Description }}</p>
+					 {% if Blog.Avatar is not empty %}
+                         <div class="avatar">
+                            <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                        </div>
+                    {% endif %}
+                    <div class="banner-title">
+						<h1>
+							<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
+						</h1>
+	                    <p class="description h3-like">{{ Blog.Description }}</p>
+                    </div>
 					<nav class="menu">
 						<ul>
 							<li{% if isIndex %} class="active"{% endif %}>
 								<a href="{{ Blog.Url }}" title="{{ Lang.Get('Back to home') }}">{{ Lang.Get('Home') }}</a>
 							</li>
-							{% list Blog.ListPages %}
+							{% list Blog.Pages %}
 								{% if loop.index <= 5 %}
 								<li>
-									<a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a>
+									<a href="{{ Page.Url }}">{{ Page.Title }}</a>
 								</li>
 								{% endif %}
 							{% endlist %}
@@ -1167,24 +1200,6 @@
 		            </section>
 
 					<aside class="sidebar">
-						{% if Custom('display_widget_profile') == false %}
-							<div class="widget about" itemscope itemtype="http://schema.org/Person">
-                                <header>
-                                    <h3>{{ Lang.Get('About me') }}</h3>
-                                </header>
-								<div class="entry">
-									{% if Blog.Owner.Avatar  is not empty %}
-										<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-											<img itemprop="image" src="{{ Blog.Owner.Avatar|resize(250,167)|crop }}" alt="{{ Blog.Owner.Nickname }}" title="{{ Blog.Owner.Nickname }}" width="250" height="167" />
-										</a>
-									{% endif %}
-									{% if Blog.Owner.Bio is not empty %}
-										<p itemprop="description">{{ Blog.Owner.Bio }}</p>
-									{% endif %}
-								</div>
-							</div>
-						{% endif %}
-
 						{% if Custom('display_widget_follow') != true %}
 							<div class="widget follow">
                                 <header>
@@ -1401,7 +1416,7 @@
             })();
 
 			// FancyBox
-			$(".ob-section-images a, .ob-link-img, .asset-img-link, .avatar").attr("rel", "fancybox");
+			$(".ob-section-images a, .ob-link-img, .asset-img-link").attr("rel", "fancybox");
 			$("a[rel='fancybox']").fancybox({
 				'overlayShow'	: true,
 				'overlayColor'  : '#000',
