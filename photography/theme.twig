@@ -19,7 +19,6 @@
         <meta name="image:custom_background_image:label.backgroundImage" group="Design" />
 
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_last:label.hideLastPosts" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
@@ -115,8 +114,19 @@
 
             /* Header */
             .header {min-height: 90px; padding-bottom: 20px; padding-top: 50px; border-top: 1px solid #000000; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-top.png") repeat-x;}
-            .logo {float: left; max-width: 590px; word-wrap: break-word;}
-            .nav {float: right; max-width: 400px;}
+            .avatar,
+            .logo{
+                display: inline-block;
+                vertical-align: middle; 
+            }
+            .avatar{margin-right:20px;}
+            .logo { max-width: 590px; word-wrap: break-word;}
+            .nav { 
+                max-width: 400px;
+                position: absolute;
+                right:0;
+                top:-30px;
+            }
             .nav li {cursor: pointer; float: left; margin-right: 30px; font-size: 16px; letter-spacing: -1px; {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %} line-height: 26px; position: relative;}
             .nav a {display: inline-block;}
             .nav a.active {
@@ -294,7 +304,7 @@
             .wrap .search-title {font-weight: bold; font-size: 25px; line-height: 28px; margin-bottom: 5px;}
             .wrap .search-title {font-weight: normal;}
 
-            .social {margin: 20px 0 40px; overflow: hidden;}
+            .social {margin: 20px 0 40px;}
             .social div {float: left; margin-right: 10px;}
             .social .facebook {width: 105px;}
             .social .pinterest {margin-top: -1px; width: 70px;}
@@ -393,14 +403,12 @@
 
             /* Footer */
             .top-footer {background: url("http://assets.over-blog-kiwi.com/themes/2/images/top-footer.png") repeat-x; clear: both; height: 8px;}
-            .footer {background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-footer.jpg") repeat; clear: both; padding-top: 30px; padding-bottom: 50px;}
-            .footer .about {width: 430px; float: left; color: #FFF; margin-top: 20px; border-top: 1px solid #353638; margin-right: 70px;background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture2.png") no-repeat scroll -45px -32px transparent;}
-            .footer .about h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
-            .footer .about .avatar {background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-avatar.png") no-repeat; width: 69px; text-align: center; padding: 8px 10px 0 0; float: left;}
-            .footer .about .avatar img {width: 50px; height: 50px; padding-bottom: 4px;}
-            .footer .about p {}
+            .footer {
+                background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-footer.jpg") repeat; 
+                clear: both; 
+            }
 
-            .footer .social {width: 190px; float: left; color: #FFF; margin-top: 20px; border-top: 1px solid #353638; margin-right: 70px; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture2.png") no-repeat scroll -65px -32px transparent;}
+            .footer .social {width: 190px; float: left; color: #FFF; margin-top: 40px; border-top: 1px solid #353638; margin-right: 70px; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture2.png") no-repeat scroll -65px -32px transparent;}
             .footer .social h3 {color: #777777; font-size: 13px; font-weight: bold; text-transform: uppercase; margin-top: -25px; margin-bottom: 20px; float: left; padding-bottom: 4px;}
             .footer .social li {background: url("http://assets.over-blog-kiwi.com/themes/2/images/social-sep.png") 0 33px no-repeat; padding-bottom: 8px; padding-top: 7px;}
             .footer .social a.twitter {background: url("http://assets.over-blog-kiwi.com/themes/2/images/twitter.png") no-repeat left 2px; padding-left: 25px;}
@@ -642,6 +650,11 @@
         <div id="fb-root"></div>
         <div class="header">
             <div class="wrap">
+                {% if Blog.Avatar is not empty %}
+                     <div class="avatar">
+                        <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                    </div>
+                {% endif %}
                 <div class="logo">
                     <h1>
                         <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
@@ -656,14 +669,14 @@
                             </li>
                         <!-- Pages -->
                         {% if Custom('custom_hide_widget_pages') == false %}
-                            {% list Blog.ListPages %}
+                            {% list Blog.Pages %}
                                 {% if loop.first %}
                                     <li>
                                         <a href="#">{{ Lang.Get('Pages') }}</a>
                                         <ul class="children">
                                 {% endif %}
                                             <li>
-                                                <a href="{{ListPage.Url}}">{{ ListPage.Title }}</a>
+                                                <a href="{{Page.Url}}">{{ Page.Title }}</a>
                                             </li>
                                 {% if loop.last %}
                                         </ul>
@@ -953,24 +966,6 @@
         <div class="top-footer"></div>
         <div class="footer">
             <div class="wrap">
-                {% if Custom('custom_hide_widget_biography') == false %}
-                    {% if Blog.Owner.Bio is not empty %}
-                        <div class="about">
-                            <h3>{{ Lang.Get('About me') }}</h3>
-                            <div class="cb"></div>
-                             {% if Blog.Owner.Avatar is not empty %}
-                                <div class="avatar">
-                                    <a class="blog-avatar" href="{{ Blog.Owner.Avatar }}" title="{{ Blog.Owner.Nickname }}">
-                                        <img alt="{{ Blog.Owner.Nickname }}" src="{{ Blog.Owner.Avatar|resize(50,54)|crop }}" />
-                                    </a>
-                                </div>
-                            {% endif %}
-                            <p><strong>{{ Blog.Owner.Nickname }}</strong></p>
-                            <p>{{ Blog.Owner.Bio }}</p>
-                        </div>
-                    {% endif %}
-                {% endif %}
-
                 {% if Custom('twitter_username') is not empty or Custom('facebook_username') is not empty or Custom('flickr_username') is not empty %}
                     <div class="social">
                         <h3>{{ Lang.Get('Follow me') }}</h3>
