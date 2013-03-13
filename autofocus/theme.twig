@@ -31,8 +31,8 @@
         <meta name="list:custom_titles_font:label.titlesFont" items="Arial, Dosis, Crushed, Italiana, Italianno, Lobster, Marmelad, Metamorphous, Ovo, Oxygen, Salsa, Sancreek, Sunshiney, Wellfleet" default="Lobster" group="Design" />
         <meta name="color:custom_theme_color:label.primaryColor" default="#00AAFF" group="Design" />
 
-        <meta name="string:facebook_profile_id:label.facebookUsername" group="Social" />
-        <meta name="string:twitter_account:label.twitterUsername" group="Social" />
+        <meta name="string:facebook_username:label.facebookUsername" group="Social" />
+        <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
@@ -1010,11 +1010,11 @@
                                         <li>
                                             <h3>{{ Lang.Get('Follow us') }}</h3>
                                             <p class="m-networks clear">
-                                                {% if Custom('facebook_profile_id') is not empty %}
-                                                    <a title="Facebook" target="_blank" href="http://www.facebook.com/profile.php?id={{ Custom('facebook_profile_id') }}"><img alt="Facebook" src="http://assets.over-blog-kiwi.com/themes/31/images/facebook.png"></a>
+                                                {% if Custom('facebook_username') is not empty %}
+                                                    <a href="//facebook.com/{{ Custom('facebook_username') }}" target="_blank"><img alt="Facebook" src="http://assets.over-blog-kiwi.com/themes/31/images/facebook.png"></a>
                                                 {% endif %}
-                                                {% if Custom('twitter_account') is not empty %}
-                                                    <a title="Twitter" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_account') }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/twitter.png"></a>
+                                                {% if Custom('twitter_username') is not empty %}
+                                                    <a title="Twitter" target="_blank" href="https://www.twitter.com/{{ Custom('twitter_username') }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/twitter.png"></a>
                                                 {% endif %}
                                                 <a title="RSS" target="_blank" href="{{ Blog.RssUrl }}"><img alt="Twitter" src="http://assets.over-blog-kiwi.com/themes/31/images/rss.png"></a>
                                             </p>
