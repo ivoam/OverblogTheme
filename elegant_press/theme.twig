@@ -22,7 +22,6 @@
         <!-- Custom vars -->
         <meta name="constant:displayArticlesLimit" content="9" />
 
-        <meta name="string:custom_tagline_text:label.headline" default="Welcome to my blog" />
         <meta name="string:custom_footer_left:label.footer" default="Theme: Elegant press &copy; 2012" />
 
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,20,30,40,50" default="10" group="Navigation" />
@@ -249,7 +248,7 @@
             ***************** HEADER *****************
             *****************************************/
             .header {
-                padding: 30px 0;
+                padding: 20px 0 30px;
             }
 
             /**** blog title ***/
@@ -273,6 +272,42 @@
                 letter-spacing: 2px;
                 max-width: 960px;
                 text-align: center;
+            }
+            .header .img{
+                margin-bottom:5px; 
+                text-align:center;
+            }
+            .header .img a {
+                background-image:#fff url(http://assets.over-blog-kiwi.com/t/elegant_press/images/image-frames-picto.png) no-repeat left top;
+                display: inline-block;
+                padding:7px 7px 4px;
+                position: relative;
+            }
+            .header .img a:after, 
+            .header .img a:before {  
+                content: " ";  
+                height: 100px;  
+                position: absolute;  
+                width: 50%;  
+                z-index: -10;  
+            } 
+            .header .img a:before {  
+                box-shadow: 7px 6px 15px #333;  
+                left: 5px;  
+                top: 12px;  
+                -webkit-transform: rotate(-5deg);  
+                -moz-transform: rotate(-5deg);  
+                -ms-transform: rotate(-5deg);  
+                transform: rotate(-5deg);  
+            }  
+            .header .img a:after {  
+                box-shadow: -7px 6px 15px #333;  
+                right: 5px;  
+                top: 12px;  
+                -webkit-transform: rotate(5deg);  
+                -moz-transform: rotate(5deg);  
+                -ms-transform: rotate(5deg);  
+                transform: rotate(5deg);  
             }
             /**** headline + search form ****/
             .headline {
@@ -1197,6 +1232,9 @@
             .nav li li,.nav li li li {
                 background:#eee url(http://assets.over-blog-kiwi.com/themes/32/images/bg.png) repeat
             }
+            .nav li li{
+                word-wrap:break-word;
+            }
             .nav ul .sf-sub-indicator,
             .nav ul a:focus>.sf-sub-indicator,
             .nav ul a:hover>.sf-sub-indicator,
@@ -1552,10 +1590,16 @@
         <div class="container">
             <!-- shortcut:[Header content] -->
             <header class="header">
+                {% if Blog.Avatar is not empty %}
+                    <p class="img">
+                        <a href="{{ Blog.Avatar }}" class="avatar" title="{{ Blog.Title }}">
+                            <img src="{{ Blog.Avatar | resize(100,100) | crop }}" width="100" height="100" alt="{{ Blog.Title }}" />
+                        </a>
+                    </p>
+                {% endif %}
                 <h1 class="blog-title">
                     <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                 </h1>
-
                 <p class="description">
                     <strong>{{ Blog.Description }}</strong>
                 </p>
@@ -1571,9 +1615,6 @@
                                 <input type="submit" name="go" id="go" value="{{ Lang.Get('Search') }}" />
                             </fieldset>
                         </form>
-                    {% endif %}
-                    {% if Custom('custom_tagline_text') is not empty %}
-                        <p id="tagline2">{{ Custom('custom_tagline_text') }}</p>
                     {% endif %}
                     <br class="clear" />
                 </div>
@@ -1602,14 +1643,14 @@
                     {% endif %}
 
                     <!-- Pages -->
-                    {% list Blog.ListPages %}
+                    {% list Blog.Pages %}
                         {% if loop.first %}
                             <li>
                                 <a href="#">{{ Lang.Get('Pages') }}</a>
                                 <ul>
                         {% endif %}
                                     <li>
-                                        <a href="{{ ListPage.Url }}">{{ ListPage.Title }}</a>
+                                        <a href="{{ Page.Url }}">{{ Page.Title }}</a>
                                     </li>
                         {% if loop.last %}
                                 </ul>
@@ -1617,11 +1658,11 @@
                         {% endif %}
                     {% endlist %}
                     <li>
-                        <a href="{{ Blog.url }}/contact">{{ Lang.Get('Contact') }}</a>
-                    </li>
-                    <li class="last">
                         <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
                     </li>
+                    <li class="last">
+                        <a href="{{ Blog.url }}/contact">{{ Lang.Get('Contact') }}</a>
+                    </li>               
                 </ul>
             </nav>
 
@@ -1747,46 +1788,20 @@
                             {% endif %}
                         </div>
                         <div class="sidebar">
-                            {% if Custom('custom_hide_widget_about_blog') == false or Custom('custom_hide_widget_biography') == false %}
+                            {% if Custom('custom_hide_widget_about_blog') == false %}
                                 <div id="featured">
                                     <ul>
-                                        {% if Custom('custom_hide_widget_about_blog') == false %}
-                                            <li>
-                                                <h3>{{ Lang.Get('About this blog') }}</h3>
-                                                {% if Blog.Avatar is not empty %}
-                                                    <p class="imgholder">
-                                                        <a href="{{ Blog.Avatar }}" class="avatar" title="{{ Blog.Title }}">
-                                                            <img src="{{ Blog.Avatar | resize(210,90) | crop }}" width="210" height="90" alt="{{ Blog.Title }}" />
-                                                        </a>
-                                                    </p>
-                                                {% endif %}
-                                                <p>{{ Blog.Description }}</p>
-                                            </li>
-                                        {% endif %}
-                                        {% if Custom('custom_hide_widget_biography') == false %}
-                                            <li>
-                                                <h3>
-                                                    {% if Blog.Owner.Nickname is not empty %}
-                                                        {{ Blog.Owner.Nickname }}
-                                                    {% else %}
-                                                        {{ Lang.Get('About me') }}
-                                                    {% endif %}
-                                                </h3>
-                                                {% if Blog.Owner.Avatar is not empty %}
-                                                    <p class="imgholder">
-                                                        <a href="{{ Blog.Owner.Avatar }}" class="avatar" title="{{ Blog.OWner.Nickname }}">
-                                                            <img src="{{ Blog.Owner.Avatar | resize(210,90) | crop }}" width="210" height="90" alt="{{ Blog.Title }}" />
-                                                        </a>
-                                                    </p>
-                                                {% endif %}
-                                                <p>{{ Blog.Owner.Bio }}</p>
-                                                {% if not isSpecial %}
-                                                    <p class="readmore">
-                                                        <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact me') }} »</a>
-                                                    </p>
-                                                {% endif %}
-                                            </li>
-                                        {% endif %}
+                                        <li>
+                                            <h3>{{ Lang.Get('About this blog') }}</h3>
+                                            {% if Blog.Avatar is not empty %}
+                                                <p class="imgholder">
+                                                    <a href="{{ Blog.Avatar }}" class="avatar" title="{{ Blog.Title }}">
+                                                        <img src="{{ Blog.Avatar | resize(210,90) | crop }}" width="210" height="90" alt="{{ Blog.Title }}" />
+                                                    </a>
+                                                </p>
+                                            {% endif %}
+                                            <p>{{ Blog.Description }}</p>
+                                        </li>
                                     </ul>
                                 </div>
                             {% endif %}
@@ -1877,32 +1892,6 @@
                             {% endif %}
                         </div>
                     </div>
-
-                    {% if Custom('custom_hide_widget_biography') == false %}
-                        </div>
-                            <div class="callout about">
-                                <div class="calloutcontainer">
-                                    {% if Blog.Owner.Nickname is not empty and Blog.Owner.Bio is not empty %}
-                                        <div class="container bio">
-                                            <p class="title">{{ Lang.Get('About me') }}</p>
-                                            <a title="{{ Lang.Get('Contact') }} {{ Blog.Owner.Nickname }}" href="/contact" class="more">{{ Lang.Get('Contact') }}</a>
-                                            <p class="m-bio">
-                                                {% if Blog.Owner.Avatar is not empty %}
-                                                    <a href="{{ Blog.Owner.Avatar }}" class="avatar ob-pull-left ob-media-left" title="{{ Blog.Owner.Nickname }}">
-                                                        <img class="m-avatar-img" src="{{ Blog.Owner.Avatar|resize(100,80)|crop }}" alt="" width="100" height="80" />
-                                                    </a>
-                                                {% endif %}
-                                                {{ Blog.Owner.Bio }}
-                                            </p>
-                                        </div>
-                                    {% endif %}
-                                    <div class="clear"></div>
-                                    <div class="calloutoverlay"></div>
-                                    <div class="calloutoverlaybottom"></div>
-                                </div>
-                            </div>
-                        <div class="container">
-                    {% endif %}
                 {% endif %}
                 <div id="home_featured2">
                     {% if isSearch %}
