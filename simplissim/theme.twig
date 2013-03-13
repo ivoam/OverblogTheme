@@ -691,7 +691,8 @@
                         </div>
                         <p class="meta">
                             {% if Post.Author and Post.Author is not empty %}
-                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span> {{ Lang.Get('at') }} {{ Post.Date|date("H:ia") }}
+                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                                {% if not isPage %}{{ Lang.Get('at') }} {{ Post.Date|date("H:ia") }}{% endif %}
                             {% endif %}
                             {% if not isSingle and Post.ShowComments is not empty %}
                                 - <a href="{{ Post.Permalink }}#comments">{{ Lang.Get('See comments') }} ({{ Post.CommentCount }})</a>
