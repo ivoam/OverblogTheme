@@ -12,6 +12,8 @@
         <meta name="color:secondary_color:label.secondaryColor" default="#A0977F" group="Colors" />
         <meta name="color:tertiary_color:label.tertiaryColor" default="#111" group="Colors" />
 
+        <!-- Hide subscribe form -->
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <!-- Hide search form -->
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
         <!-- Define the number of tags which display or hide "Blog tags" wiget -->
@@ -1075,11 +1077,13 @@
                             </ul>
                         </li>
                     {% endif %}
+                    {% if Custom('custom_hide_widget_subscribe') == false %}
                     <li>
-                        <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
-                    </li>
-                     <li>
                         <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                    </li>
+                     {% endif %}
+                     <li>
+                        <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
                     </li>
                 </ul>
 
