@@ -35,8 +35,8 @@
         <meta name="color:titles_font_color:Titles font color" default="#222" group="Colors" />
         <meta name="color:text_font_color:Text font color" default="#888" group="Colors" />
         <meta name="color:links_font_color:Links font color" default="#668FBA" group="Colors" />
-
-        <meta name="boolean:display_widget_bio:label.hideBiography" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
@@ -1259,13 +1259,13 @@
                     {% if Blog.Description is not empty %}
                         <p>{{ Blog.Description }}</p>
                     {% endif %}
-
-                    <form class="search" action="/search" method="post">
-                        <input type="text" placeholder="{{ Lang.Get('Search') }}" {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} name="q" />
-                        <input type="submit" title="{{ Lang.Get('Search') }}" value="{{ Lang.Get('Search') }}" />
-                    </form>
-                </div>
-
+                    {% if Custom('custom_hide_widget_search_form') == false %}
+                        <form class="search" action="/search" method="post">
+                            <input type="text" placeholder="{{ Lang.Get('Search') }}" {% if isSearch %}value="{{ Search.Keyword }}"{% endif %} name="q" />
+                            <input type="submit" title="{{ Lang.Get('Search') }}" value="{{ Lang.Get('Search') }}" />
+                        </form>
+                    {% endif %}
+                </div>          
                 <!-- menu -->
                 <nav class="menu">
                     <ul>
@@ -1279,11 +1279,13 @@
                                 </li>
                             {% endlist %}
                         {% endif %}
+                        {% if Custom('custom_hide_widget_subscribe') == false %}
                         <li>
-                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact me') }}</a>
-                        </li>
-                        <li class="last">
                             <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                        </li>
+                        {% endif %}
+                        <li class="last">
+                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact me') }}</a>
                         </li>
                     </ul>
                 </nav>
@@ -1294,20 +1296,6 @@
                 {% if Custom('display_widget_bio') == false or Custom('display_widget_pages') == false or Custom('display_widget_archives') == false or Custom('display_widget_follow') == false %}
                     <!-- widgets -->
                     <article class="{% if not isSingle and not isSpecial %}masonry-item {% endif %}widgets">
-                        {% if Custom('display_widget_bio') == false %}
-                            <!-- blog owner about -->
-                            <div class="widget profile">
-                                {% if Blog.Owner.Avatar is not empty %}
-                                    <img class="avatar" src="{{ Blog.Owner.Avatar|resize(199,237)|crop }}" alt="" width="199" height="237" />
-                                {% endif %}
-                                {% if Blog.Owner.Nickname is not empty %}
-                                    <h3>{{ Blog.Owner.Nickname }}</h3>
-                                {% endif %}
-                                {% if Blog.Owner.Bio is not empty %}
-                                    <p>{{ Blog.Owner.Bio }}</p>
-                                {% endif %}
-                            </div>
-                        {% endif %}
 
                         {% if Custom('display_widget_pages') == false and Blog.ListPages is not empty %}
                             <div class="widget pages">
