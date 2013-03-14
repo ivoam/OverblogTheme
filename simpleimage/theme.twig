@@ -25,6 +25,7 @@
 
 		<meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
 		<meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
+		<meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
 
 		<meta name="string:wording_footer:label.footer" default="Theme: Simple Image &copy; 2012" group="Footer" />
 
@@ -146,7 +147,14 @@
 			.clearboth {
 				clear: both;
 			}
-
+			.avatar,
+			.header{
+				display: inline-block;
+				vertical-align: middle;
+			}
+			.avatar{
+				margin:10px 0 0 10px;
+			}
 			.header {
 				color: white;
 				font-family: 'Leckerli One', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -849,16 +857,16 @@
 
 			/* Follow buttons */
 			.follow {
-				height: 286px;
-				line-height: 286px;
-				margin-top: -143px;
+				height: 325px;
+				margin-top: -163px;
 				position: fixed;
 				right: 15px;
-				top: 50%;
+				top: 50%;		
 			}
-			.follow .wrapper {
-				display: inline-block;
+			.follow .wrapper{
+				display: table-cell;
 				vertical-align: middle;
+				height: inherit;
 			}
 			.follow a {
 				background: #F5F5F5 url("http://assets.over-blog-kiwi.com/themes/14/images/social.png") no-repeat;
@@ -871,12 +879,19 @@
 				   -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				     -o-box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 				        box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+				-webkit-transition: none;
+				   -moz-transition: none;
+				    -ms-transition: none;
+				     -o-transition: none;
+				     	transition: none;
+				color:#b9b9b9;
 				display: block;
-				height: 42px;
 				margin: 0 0 10px;
-				padding: 10px;
-				text-indent: -99999%;
-				width: 35px;
+				padding: 40px 5px 10px;
+				width: 45px;
+				text-align: center;
+				font-size:10px;
+				line-height: 12px;
 			}
 			.follow a:active {
 				background-color: #FFF;
@@ -886,19 +901,35 @@
 			}
 			.follow a.fb:hover {
 				background-position: 1px -74px;
+				color:#4d70aa;
 			}
 			.follow a.tw {
 				background-position: -81px 3px;
 			}
 			.follow a.tw:hover {
 				background-position: -81px -74px;
+				color:#00c1f3;
 			}
 			.follow a.rss {
 				background-position: -161px 3px;
-				margin-bottom: 0;
 			}
 			.follow a.rss:hover {
 				background-position: -161px -74px;
+				color:#ff7c00;
+			}
+			.follow a.contact {
+				background-position: -244px 3px;
+			}
+			.follow a.contact:hover {
+				background-position: -244px -74px;
+				color:#91c000;
+			}
+			.follow a.subscribe {
+				background-position: -324px 3px;
+			}
+			.follow a.subscribe:hover {
+				background-position: -324px -73px;
+				color:#9a1ee9;
 			}
 		</style>
 
@@ -908,6 +939,11 @@
 		<div id="fb-root"></div>
 		<!-- shortcut:[Header] -->
 		<div class="mask"></div>
+		 {% if Blog.Avatar %}
+            <div class="avatar">
+                <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+            </div>
+        {% endif %}
 		<header class="header">
 			<!--Logo-->
 			<div class="logo">
@@ -945,7 +981,12 @@
 							<span>#{{ Tag.Title }}</span>
 						</p>
 					{% endif %}
-
+					{% if Custom('custom_hide_widget_search_form') == false and not isSpecial %}
+			        	<form class="search {% if isSingle or isSpecial %}single{% else %}index{% endif %}" method="post" action="/search">
+			                <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..." value="" />
+			                <input type="submit" value="{{ Lang.Get('Search') }}" />
+			            </form>
+					{% endif %}
 					{% list Posts %}
 						<!-- Post item -->
 						<div class="post{% list Post.Sources %} {{ Source }}{% endlist %}">
@@ -1120,30 +1161,30 @@
 
 		<!-- shortcut:[Footer] -->
 		<footer class="footer clearboth">
-			{% if Custom('custom_hide_widget_search_form') == false and not isSpecial %}
-	        	<form class="search {% if isSingle or isSpecial %}single{% else %}index{% endif %}" method="post" action="/search">
-	                <input type="text" name="q" placeholder="{{ Lang.Get('Search') }}..." value="" />
-	                <input type="submit" value="{{ Lang.Get('Search') }}" />
-	            </form>
-			{% endif %}
+			
 			<p>
-	        	<span><a href="{{ Blog.Url }}/contact" title="{{ Lang.Get('Contact') }}">{{ Lang.Get('Contact me') }}</a></span>&nbsp;-&nbsp;<span>{{ Custom('wording_footer') }}</span>&nbsp;-&nbsp;<span>{{ Lang.Get('Hosted by') }}<span>&nbsp;<span><a class="credits" href="http://www.over-blog.com" target="_blank">Overblog</a><span>
+	        	<span>{{ Custom('wording_footer') }}</span>&nbsp;-&nbsp;<span>{{ Lang.Get('Hosted by') }}<span>&nbsp;<span><a class="credits" href="http://www.over-blog.com" target="_blank">Overblog</a><span>
 			</p>
 		</footer>
 
-		{% if Custom('custom_hide_widget_follow_us') == false %}
+		
 			<div class="follow">
 				<div class="wrapper">
-					{% if Custom('facebook_username') is not empty %}
-						<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook" target="_blank"></a>
+					{% if Custom('custom_hide_widget_follow_us') == false %}
+						{% if Custom('facebook_username') is not empty %}
+							<a class="fb" href="http://facebook.com/{{ Custom('facebook_username') }}" title="{{ Lang.Get('Follow me on') }} Facebook" target="_blank">Facebook</a>
+						{% endif %}
+						{% if Custom('twitter_username') is not empty %}
+						<a class="tw" href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter" target="_blank">Twitter</a>
+						{% endif %}
+						<a class="rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subscribe to') }} RSS {{ Lang.Get('feed') }}" target="_blank">RSS</a>
 					{% endif %}
-					{% if Custom('twitter_username') is not empty %}
-					<a class="tw" href="http://twitter.com/{{ Custom('twitter_username') }}" title="{{ Lang.Get('Follow me on') }} Twitter" target="_blank"></a>
+					{% if Custom('custom_hide_widget_subscribe') == false %}
+						<a class="subscribe" href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
 					{% endif %}
-					<a class="rss" href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Subscribe to') }} RSS {{ Lang.Get('feed') }}" target="_blank"></a>
+						<a class="contact" href="{{ Blog.Url }}/contact" >{{ Lang.Get('Contact me') }}</a>
 				</div>
 			</div>
-		{% endif %}
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 		<script src="http://assets.over-blog-kiwi.com/themes/jquery/fancybox2.1.2/jquery.fancybox.pack.js"></script>
