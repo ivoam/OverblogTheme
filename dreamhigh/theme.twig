@@ -17,7 +17,7 @@
 
 		<meta name="image:headerImage:label.headerImage" group="Design" />
 		<meta name="image:background:label.backgroundImage" group="Design" />
-		
+
 
 		<meta name="string:footer:label.footer" default="Theme: Dreamhigh &copy; 2012" group="Wording"  />
 
@@ -96,18 +96,18 @@
 
 			#global {width: 700px; margin: 0 auto 50px;}
 			#header {
-				margin: 20px auto 0; 
+				margin: 20px auto 0;
 				text-align: center;
-				width: 100%; 
+				width: 100%;
 			}
 			#main {
-				margin: 0 auto; 
-				padding-top: 10px; 
-				width: 100%; 
+				margin: 0 auto;
+				padding-top: 10px;
+				width: 100%;
 			}
 			#footer {
-				margin: 20px auto 0; 
-				overflow: hidden; 
+				margin: 20px auto 0;
+				overflow: hidden;
 				width: 600px;
 			}
 
@@ -116,27 +116,27 @@
 			** TOP **
 			********/
 			.blog-title a {
-				color: #FFF; 
-				display: block; 
-				font-size: 60px; 
-				font-weight: normal; 
-				padding: 10px 0; 
-				font-family: 'Mountains of Christmas'; 
+				color: #FFF;
+				display: block;
+				font-size: 60px;
+				font-weight: normal;
+				padding: 10px 0;
+				font-family: 'Mountains of Christmas';
 				text-shadow: 1px 1px 0px #ACC1C5;
 				word-wrap: break-word;
 			}
 			.blog-title a:hover {text-decoration: none;}
 			.blog-description {
 				background: url(http://assets.over-blog-kiwi.com/themes/39/img/border.png) no-repeat scroll center bottom transparent;
-				color: #957F7F; 
-				font-family: 'Josefin Sans', sans-serif; 
-				font-size: 25px; 
+				color: #957F7F;
+				font-family: 'Josefin Sans', sans-serif;
+				font-size: 25px;
 				padding-bottom: 20px;
 				margin-bottom: 20px;
 				text-shadow: 1px 1px 0px #ACC1C5;
 			}
 			.blog-img img{
-				max-width:700px; 
+				max-width:700px;
 			}
 
 			/*********
@@ -150,7 +150,7 @@
 			.post .title {background: url(http://assets.over-blog-kiwi.com/themes/39/img/hdr.gif) no-repeat center bottom; margin-bottom: 20px; padding-bottom: 25px; font-size: 35px; font-weight: normal; letter-spacing: -1px; text-align: center;}
 			.post .title a,
 			.post .title a:visited {
-				color: #7F7F7F; 
+				color: #7F7F7F;
 				font-size: 35px;
 				word-wrap: break-word;
 			}
@@ -176,7 +176,7 @@
 			.ob-media-right {margin-left: 35px;}
 			.ob-video iframe,
 			.ob-video object{
-				max-height: 346px; 
+				max-height: 346px;
 				width: 100%;
 			}
 			.ob-section-audio .obsoundplayer .obsoundplayername {width: 228px;}
@@ -184,11 +184,11 @@
 			.ob-text ol,
 			.ob-section-html ol{
 				list-style: decimal;
-				margin: 0 0 15px 35px; 
+				margin: 0 0 15px 35px;
 			}
 			.ob-text ul,
 			.ob-section-html ul {
-				margin: 0 0 15px 15px; 
+				margin: 0 0 15px 15px;
 				list-style: disc;
 			}
 			.ob-text li p,
@@ -200,24 +200,24 @@
 			.ob-text h3,
 			.ob-section-html h3,
             .ob-text h4,
-            .ob-section-html h4, 
+            .ob-section-html h4,
             .ob-text h5,
             .ob-section-html h5 {
             	margin: 20px 0 5px;
             }
             .ob-text h3,
 			.ob-section-html h3 {
-            	font-size: 18px; 
+            	font-size: 18px;
             	font-weight: normal;
             }
             .ob-text h4,
 			.ob-section-html h4 {
-            	font-size: 16px; 
+            	font-size: 16px;
             	font-weight: normal;
             }
             .ob-text h5,
 			.ob-section-html h5 {
-            	font-size: 14px; 
+            	font-size: 14px;
             	font-weight: bold;
             }
             .ob-text p,
@@ -273,9 +273,9 @@
 			.ob-input,
 			.ob-text-area,
 			.ob-input-email {
-				border: none; 
-				border: 1px dashed #ACC1C5; 
-				margin-bottom: 10px; 
+				border: none;
+				border: 1px dashed #ACC1C5;
+				margin-bottom: 10px;
 				padding: 5px 10px;
 			}
 			.ob-input-text, .ob-input-email {height: 20px;}
@@ -377,7 +377,7 @@
 											{% endif %}
 										</a>
 									</h2>
-									<p class="author">		
+									<p class="author">
 										{% if Post.Author is not empty %}
 											<span>{{ Lang.Get('by') }}</span>
 											{{ Post.Author }}
@@ -495,7 +495,7 @@
 										{{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
 									{% endlist %}
 								{% endif %}
-							</a> - {{ Post.Date|date('d/m/y') }}
+							</a> - {{ Post.Date|datel('d/m/y') }}
 						</li>
 					{% endlist %}
 					</ul>
@@ -534,7 +534,7 @@
 	                    </li>
 						<li><a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact us') }}</a></li>
 					</ul>
-				
+
 				</div>
 				<div class="clear"></div>
 				<div class="credits clear">
