@@ -16,6 +16,7 @@
         <meta name="list:font_title:label.titlesFont" items="Averia Sans Libre,Carter One,Chicle,Fredericka the Great, Fugaz One, Happy Monkey, Piedra" default="Carter One" group="design" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_display_widget_last_posts:label.hideLastPosts" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10" default="6" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
@@ -892,6 +893,7 @@
                             </div>
                         {% endif %}
 
+                        {% if Custom('custom_hide_widget_subscribe') == false %}
                          <div class="box subscribe">
                             <div class="box-titre">
                                 <h3><span>{{ Lang.Get('Subscribe') }}</span></h3>
@@ -901,7 +903,8 @@
                                 {% email_notification %}
                             </div>
                         </div>
-
+                        {% endif %}
+                        
                         <!-- Navigation -->
                         <div class="box navigation" >
                             <div class="box-titre">

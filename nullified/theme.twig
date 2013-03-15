@@ -31,8 +31,9 @@
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,20,30,40,50" default="5" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
 
+        <meta name="boolean:custom_hide_widget_archives:label.hideArchives" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
@@ -1023,13 +1024,15 @@
                         {% endif %}
                     {% endif %}
 
+                    {% if Custom('custom_hide_widget_subscribe') == false %}
                     <!-- Subscribe -->
                      <div class="box subscribe">                      
                         <h3>{{ Lang.Get('Subscribe') }}</h3>                 
                             <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
                             {% email_notification %}
                     </div>
-
+                    {% endif %}
+                    
                     <!-- Archives -->
                     {% if Custom('custom_hide_widget_archives') == false %}
                         {% if Blog.Archives is not empty %}

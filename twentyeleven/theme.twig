@@ -17,7 +17,7 @@
 
         <meta name="string:footer_content:label.footer" default="Theme: Twentyeleven &copy; 2012" group="footer" />
 
-		<meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
+		<meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
 		<meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
 		<meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
 		<meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
@@ -1163,7 +1163,6 @@
 								{% if Custom('facebook_username') is not empty %}
 									<li class="fb">
 										<a href="http://facebook.com/{{ Custom('facebook_username') }}" target="_blank" >Facebook</a>
-
 									</li>
 								{% endif %}
 								{% if Custom('twitter_username') is not empty %}
@@ -1179,6 +1178,7 @@
 						</div>
 					{% endif %}
 
+					{% if Custom('custom_hide_widget_subscribe') == false %}
 					 <div class="widget subscribe">                     
                         <h3>{{ Lang.Get('Subscribe') }}</h3>
                         <div class="box-content">
@@ -1186,6 +1186,7 @@
                             {% email_notification %}
                         </div>
                     </div>
+                    {% endif %}
 
 					{% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
 						<div class="widget">

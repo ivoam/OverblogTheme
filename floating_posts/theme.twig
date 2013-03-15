@@ -31,6 +31,7 @@
         <meta name="color:tertiary_color:label.tertiaryColor" default="#ccc" group="Colors" />
 
         <meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
+        <meta name="boolean:display_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
 		<meta name="list:category_number:label.numberOfCategories" items="0,1,2,3,4,5,6,7,8,9,10,15,20,25,30,35,40" default="5" group="Widgets" />
 		<meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
@@ -1224,8 +1225,8 @@
 								</div>
 							</div>
 						{% endif %}
-
-						 <div class="widget subscribe">
+						{% if Custom('display_widget_subscribe') == false %}
+						 	<div class="widget subscribe">
                                 <header>
                                     <h3>{{ Lang.Get('Subscribe') }}</h3>
                                 </header>
@@ -1234,7 +1235,7 @@
                                     {% email_notification %}
                                 </div>
                             </div>
-
+                        {% endif %}
 						{% if Custom('display_widget_archives') != true and Blog.Archives is not empty %}
 							<div class="widget archives">
                                 <header>

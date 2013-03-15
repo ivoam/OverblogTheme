@@ -19,6 +19,7 @@
         <meta name="image:custom_background_image:label.backgroundImage" group="Design" />
 
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_last:label.hideLastPosts" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
@@ -684,11 +685,13 @@
                                 {% endif %}
                             {% endlist %}
                         {% endif %}
+                        {% if Custom('custom_hide_widget_subscribe') == false %}
                         <li>
-                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
-                        </li>
-                        <li class="last">
                             <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                        </li>
+                        {% endif %}
+                        <li class="last">
+                            <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
                         </li>
                     </ul>
                 </div>

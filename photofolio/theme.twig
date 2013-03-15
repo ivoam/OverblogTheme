@@ -43,6 +43,7 @@
         <meta name="color:custom_footer_titles_font_color:label.footerTitlesFontColor" default="#FFFFFF" group="Design" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_about:label.hideBlogAbout" group="Widgets" />
@@ -462,11 +463,13 @@
                                         </li>
                                     {% endif %}
                                 {% endlist %}
-                                <li>
-                                    <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
-                                </li>
+                                {% if Custom('custom_hide_widget_subscribe') == false %}
+                                    <li>
+                                        <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                                    </li>
+                                {% endif %}
                                  <li class="end">
-                                    <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                                    <a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact') }}</a>
                                 </li>
                             </ul>
                         </nav>

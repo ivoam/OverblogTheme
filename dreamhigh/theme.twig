@@ -28,6 +28,7 @@
         <meta name="boolean:display_widget_lastPosts:label.hideLastPosts" group="Widgets" />
         <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
+        <meta name="boolean:display_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
 
 		<meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
@@ -529,9 +530,11 @@
 	                            </li>
 	                        {% endlist %}
 	                    {% endif %}
-						<li>
-	                        <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
-	                    </li>
+	                    {% if Custom('display_widget_subscribe') == false %}
+							<li>
+		                        <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+		                    </li>
+		                {% endif %}
 						<li><a href="{{ Blog.Url }}/contact">{{ Lang.Get('Contact us') }}</a></li>
 					</ul>
 

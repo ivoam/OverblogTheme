@@ -21,9 +21,9 @@
 		<meta name="string:playlist_id:Enter your Playlist ID" default="30595446" group="Deezer audio" />
         <meta name="string:discography_id:Enter a Discography ID" default="27" group="Deezer audio" />
         <meta name="string:top_id:Enter your Top tracks ID" default="5" group="Deezer audio" />
-        
         <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:display_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_display_widget_last_posts:label.hideLastPosts" group="Widgets" />
 		<meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
 
@@ -451,12 +451,13 @@
 				</div>
 				{% endif %}
 
-				 <div class="widget subscribe">
-                    <h3>{{ Lang.Get('Subscribe') }}</h3>
-                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
-                    {% email_notification %}
-                </div>
-
+				{% if Custom('display_widget_subscribe') == false %}
+					<div class="widget subscribe">
+	                    <h3>{{ Lang.Get('Subscribe') }}</h3>
+	                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+	                    {% email_notification %}
+	                </div>
+	            {% endif %}
 				{% if Custom('custom_display_widget_last_posts') != true %}
 				<div class="widget">
 					<div id="last-post">

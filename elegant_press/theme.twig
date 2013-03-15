@@ -39,7 +39,7 @@
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, Pinterest, All" default="All" group="Social" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_biography:label.hideBiography" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_about_blog:label.hideBlogAbout" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
@@ -278,7 +278,7 @@
                 text-align:center;
             }
             .header .img a {
-                background-image:#fff url(http://assets.over-blog-kiwi.com/t/elegant_press/images/image-frames-picto.png) no-repeat left top;
+                background:#fff url(http://assets.over-blog-kiwi.com/t/elegant_press/images/image-frames-picto.png) no-repeat left top;
                 display: inline-block;
                 padding:7px 7px 4px;
                 position: relative;
@@ -427,9 +427,6 @@
             #jFlowSlider {
                 border-top: 1px solid #666;
                 color: #FFF;
-                {% if Custom('custom_hide_widget_biography') == true %}
-                    margin-bottom: 80px;
-                {% endif %}
                 padding: 30px 0;
             }
             .jFlowSlideContainer a {
@@ -1657,9 +1654,11 @@
                             </li>
                         {% endif %}
                     {% endlist %}
-                    <li>
-                        <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
-                    </li>
+                    {% if Custom('custom_hide_widget_subscribe') == false %}
+                        <li>
+                            <a href="{{ Blog.Url }}/mail/form">{{ Lang.Get('Subscribe') }}</a>
+                        </li>
+                    {% endif %}
                     <li class="last">
                         <a href="{{ Blog.url }}/contact">{{ Lang.Get('Contact') }}</a>
                     </li>               

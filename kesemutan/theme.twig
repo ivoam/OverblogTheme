@@ -15,6 +15,7 @@
         <meta name="image:post_cover:label.defaultPostCover" group="Options" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
 	    <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,8,9,10,20,30,40" default="10" group="Widgets" />
@@ -561,15 +562,15 @@
 									</form>
 				                </div>
 				            {% endif %}
-
-				            <div class="sidebar-block subscribe">
-                                <h2>{{ Lang.Get('Subscribe') }}</h2>
-                                <div class="box-content">
-                                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
-                                    {% email_notification %}
-                                </div>
-                            </div>
-
+				            {% if Custom('custom_hide_widget_subscribe') == false %}
+					            <div class="sidebar-block subscribe">
+	                                <h2>{{ Lang.Get('Subscribe') }}</h2>
+	                                <div class="box-content">
+	                                    <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+	                                    {% email_notification %}
+	                                </div>
+	                            </div>
+	                        {% endif %}
 							{% if Custom('custom_hide_widget_blog_archive') == false and Blog.Archives is not empty %}
 								<div class="sidebar-block">
 		                          	<h2>{{ Lang.Get('Archives') }}</h2>
