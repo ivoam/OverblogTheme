@@ -1152,10 +1152,10 @@
                                 <!-- Post source -->
                                 <span class="post-source {{ Post.GetfirstSource }}"></span>
 
-                                {% if Post.Author is not empty %}
+                                {% if Post.Author.Nickname is not empty %}
                                     <!-- Post author -->
                                     <span class="post-author" itemprop="author">
-                                        {{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+                                        {{ Lang.Get('by') }} <span>{{ Post.Author.Nickname }}</span>
                                     </span>
                                 {% endif %}
                             </header>
@@ -1257,10 +1257,10 @@
 
 										<!-- Post source -->
 										<span class="post-source {{ Post.GetfirstSource }}"></span>
-										{% if Post.Author is not empty %}
+										{% if Post.Author.Nickname is not empty %}
 											<!-- Post author -->
 											<span class="post-author" itemprop="author">
-												{{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+												{{ Lang.Get('by') }} <span>{{ Post.Author.Nickname }}</span>
 											</span>
 										{% endif %}
 									{% endif %}
@@ -1415,10 +1415,10 @@
 										<!-- Post source -->
 										<span class="post-source {{ Post.GetfirstSource }}"></span>
 
-										{% if Post.Author is not empty %}
+										{% if Post.Author.Nickname is not empty %}
 											<!-- Post author -->
 											<span class="post-author" itemprop="author">
-												{{ Lang.Get('by') }} <span>{{ Post.Author }}</span>
+												{{ Lang.Get('by') }} <span>{{ Post.Author.Nickname }}</span>
 											</span>
 										{% endif %}
 									{% endif %}
