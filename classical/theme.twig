@@ -647,7 +647,7 @@
                                                 {% endif %}
                                             </div>
 
-                                            {% if isIndex or Custom('share_service') is not empty and Custom('share_service') != 'None'|default('All') %}
+                                            {% if Custom('share_service') is not empty %}
                                                 <div class="bloc-infos">
                                                     {% if isSingle and isPage == false %}
                                                         {% if Custom('share_service') != 'None' %}
