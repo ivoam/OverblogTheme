@@ -127,6 +127,10 @@
 				word-wrap: break-word;
 			}
 			.blog-title a:hover {text-decoration: none;}
+			.blog-avatar {
+				border-radius: 15px;
+				margin: 5px 0;
+			}
 			.blog-description {
 				background: url(http://assets.over-blog-kiwi.com/themes/39/img/border.png) no-repeat scroll center bottom transparent;
 				color: #957F7F;
@@ -347,6 +351,7 @@
 				<h1 class="blog-title">
 					<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
 				</h1>
+				<img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100" class="blog-avatar" /></a>
 				<p class="blog-description">{{ Blog.Description }}</p>
 				<p class="blog-img"><img src="{% if Custom('headerImage') is not empty %}{{ Custom('headerImage') }}{% else %}http://assets.over-blog-kiwi.com/themes/39/img/planet.png{% endif %}" alt=""></p>
 			</header>
@@ -379,12 +384,9 @@
 										</a>
 									</h2>
 									<p class="author">
-										{% if Post.Author is not empty %}
+										{% if Post.Author.Nickname is not empty %}
 											<span>{{ Lang.Get('by') }}</span>
-											{{ Post.Author }}
-										{% elseif Blog.Owner.Nickname %}
-											<span>{{ Lang.Get('by') }}</span>
-											{{ Blog.Owner.Nickname }}
+											{{ Post.Author.Nickname }}
 										{% endif %}
 									</p>
 
@@ -594,7 +596,7 @@
 			$(document).ready(function(){
 				// Fancybox
 				$(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
-	            $("a[rel=fancybox], .avatar").fancybox({
+	            $("a[rel=fancybox]").fancybox({
 	                'overlayShow'   : true,
 	                'titlePosition' : 'over',
 	                'transitionIn'  : 'fadin',
