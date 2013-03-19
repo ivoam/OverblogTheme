@@ -39,7 +39,7 @@
         <meta name="string:google_webmaster_id:label.googleWebmasterToolsId" group="Settings" />
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
-		
+
 
         <!-- shortcut:[Includes] -->
         <!-- favicon -->
@@ -96,12 +96,12 @@
 			.clearfix:after {content: "."; display: block; height: 0; clear: both; visibility: hidden; } .clearfix {display: inline-block;} /* Hides from IE-mac \*/ * html .clearfix {height: 1%; } .clearfix {display: block;}
 			#global {width: 980px; margin: 10px auto;}
 			.visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 
 			/***********
@@ -131,24 +131,24 @@
 			#search-results p,
 			.ob-contact h2,
 			#list-tags p {
-				font-family: 'Yanone Kaffeesatz', sans-serif; 
-				font-size: 30px; 
-				font-weight: bold; 
-				margin: 10px auto 15px; 
+				font-family: 'Yanone Kaffeesatz', sans-serif;
+				font-size: 30px;
+				font-weight: bold;
+				margin: 10px auto 15px;
 				text-transform: uppercase;
-				width: 200px; 
+				width: 200px;
 			}
 			.ob-contact h2{
 				width: 100%;
 			}
 			#blog-title {width: 210px; margin-bottom: 10px; padding: 10px; background-color: #FFF; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border: 1px solid #cecece; -moz-box-shadow: 0 0 2px #AAA; -webkit-box-shadow: 0 0 2px #AAA; box-shadow: 0 0 2px #AAA;}
 			#blog-title h1 {
-				font-size: 40px; 
-				font-family: 'Yanone Kaffeesatz', sans-serif; 
-				font-weight: bold; 
-				letter-spacing: -1px; 
-				text-transform: uppercase; 
-				text-align: left; 
+				font-size: 40px;
+				font-family: 'Yanone Kaffeesatz', sans-serif;
+				font-weight: bold;
+				letter-spacing: -1px;
+				text-transform: uppercase;
+				text-align: left;
 				line-height: 40px;
 				word-wrap: break-word;
 			}
@@ -226,14 +226,14 @@
 			.ob-quote {max-width: 440px;}
 
 			/* Medias */
-	        .ob-cell, 
-	        .ob-img, 
-	        .ob-video, 
+	        .ob-cell,
+	        .ob-img,
+	        .ob-video,
 	        .ob-section iframe,
 	        .ob-section object,
 	        .ob-section embed,
-	        .ob-slideshow, 
-	        .yui3-slideshow-content, 
+	        .ob-slideshow,
+	        .yui3-slideshow-content,
 	        .ob-map {
 	        	max-width: 440px;
 	        }
@@ -278,10 +278,10 @@
             	width:100%;
             }
             .ob-section-file .ob-link {
-            	font-family: 'Yanone Kaffeesatz', sans-serif; 
+            	font-family: 'Yanone Kaffeesatz', sans-serif;
             	font-size: 19px;
             	font-weight: normal;
-            	max-width: 350px; 
+            	max-width: 350px;
             }
 
 
@@ -322,9 +322,9 @@
 			.ob-label {font-size: 14px;}
 			.ob-input,
 			.ob-input-email {
-				border: 1px solid #cecece; 
-				-moz-border-radius: 4px; 
-				-webkit-border-radius: 4px; 
+				border: 1px solid #cecece;
+				-moz-border-radius: 4px;
+				-webkit-border-radius: 4px;
 				border-radius: 4px;
 			}
 			.ob-input-text, .ob-input-email {height: 25px;}
@@ -472,7 +472,7 @@
 									<span class="last-number">0{{ loop.index }}</span>
 									<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(30,30)|crop}}{% else %}{{ Custom('thumbnail_custom')|resize(30,30)|crop }}{% endif %}" alt="" title="" width="30" height="30" />
 									<span class="last-title">{{ Post.Title|truncate(13)|default('No title') }}</span>
-									<span class="last-author">{{ Post.Author.Nickname|default(Blog.Owner.Nickname) }}</span>
+									<span class="last-author">{{ Post.Author.Nickname }}</span>
 								</a>
 							</li>
 							{% endlist %}
@@ -502,7 +502,7 @@
 							</div>
 							<div class="post-infos">
 								<span class="post-date">{{ Lang.Get('Posted on') }} {{ Post.Date|datel(Lang.Get('Default date format')) | title }}</span>
-								<span class="post-author">{{ Lang.Get('by') }} {{ Post.Author | default(Blog.Owner) }}</span>
+								<span class="post-author">{{ Lang.Get('by') }} {{ Post.Author.Nickname }}</span>
 								<span class="post-tags">
 								{% list Post.Tags %}<a class="tag" href="{{ Tag.Url }}">#{{ Tag.title }}</a>
 								{% if loop.last %}{% else %}, {% endif %}
