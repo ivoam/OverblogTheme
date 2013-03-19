@@ -24,8 +24,7 @@
         <meta name="boolean:hide_search:label.hideSearchForm" default="false" group="Widgets" />
         <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />     
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" /> 
-         <meta name="boolean:display_widget_lastPosts:label.hideLastPosts" group="Widgets" />
-        
+        <meta name="boolean:display_widget_lastPosts:label.hideLastPosts" group="Widgets" />
         
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comment" />
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comment" />
@@ -379,8 +378,8 @@
             .widget .ob-form-field{
                 margin:0;
             }
-            .widget input[type=text],
-            .widget input[type=email]{
+            .sidebar2 input[type=text],
+            .sidebar2 input[type=email]{
                 margin: 10px 0 0 5px;
                 padding-left: 10px;
                 width: 150px;
@@ -389,8 +388,8 @@
                 -o-border-radius: 8px;
                 border-radius: 8px;
             }
-            .widget button,
-            .widget input[type=submit] {
+            .sidebar2 button,
+            .sidebar2 input[type=submit] {
                 margin: 10px 0 0 5px;
             }
             .list-title {
@@ -613,13 +612,21 @@
             .ob-section-file {width: 497px;}
             
             /* Medias */
-            .ob-cell, .ob-img, .ob-media, .ob-video, .ob-slideshow, .yui3-slideshow-content, .ob-map {max-width: 500px;}
-            .ob-video iframe {width: 500px;}
+            .ob-cell, 
+            .ob-img, 
+            .ob-media, 
+            .ob-video, 
+            .ob-slideshow, 
+            .yui3-slideshow-content, 
+            .ob-map {
+                max-width: 497px;
+            }
+            .ob-video iframe {width: 497px;}
             .ob-section-audio .obsoundplayer .obsoundplayername {height: 31px; width: 130px; overflow: hidden;}
 
             .ob-row-1-col img {max-width: 100%;}
             .ob-row-2-col img {max-width: 50%;}
-            .ob-row-3-col img {max-width: 166px;}
+            .ob-row-3-col img {max-width: 165px;}
     
             /* Section File */
             .ob-section-file .ob-ctn {
@@ -671,7 +678,7 @@
             }
             .ob-section-quote .ob-quote p:after {
                 color: #F75B95; 
-                margin: 72px 0 0;
+                margin: 55px 0 0;
             }
             .ob-section-quote p.ob-author,
             .ob-section-quote p.ob-source {
@@ -990,9 +997,9 @@
                                             <div class='post hentry'>
                                                 <h2 class='post-title'>
                                                     {% if isSingle %}
-                                                    <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Post.Snippet }}">{% if Post.Title is not empty %}{{ Post.Title|truncate(100) }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
+                                                    <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Post.Snippet }}">{% if Post.Title is not empty %}{{ Post.Title }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
                                                     {% else %}
-                                                    <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Lang.Get('More about') }} {% if Post.Title is not empty %}&quot;{{ Post.Title }}&quot;{% else %}{{ Lang.Get('this post') }}{% endif %}">{% if Post.Title is not empty %}{{ Post.Title|truncate(100) }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
+                                                    <a href="{{ Post.Permalink }}" class="titreArticle" title="{{ Post.Snippet }}">{% if Post.Title is not empty %}{{ Post.Title }}{% else %}{{ Lang.Get('From') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %}{{ Lang.Get('and') }} {% endif %}{% endlist %}{% endif %}</a>
                                                     {% endif %}
                                                 </h2>
                                                 <div class='post-header'>
@@ -1056,7 +1063,7 @@
                                             </div>
                                             {% endif %}
                                             {# Comments #}
-                                            {% if isSingle and isPage == false %}
+                                            {% if isSingle and isPage == false and Post.ShowComments is not empty %}
                                             <div class="item-comments">
                                                 <h3 id="comments">{{ Lang.Get('Comments') }}</h3>
                                                 {% if Custom("comment") == "Facebook" %}
@@ -1148,8 +1155,10 @@
             });
 
             {% list Blog.Archives %}
-                switch_arch('{{Archive.year}}');
-            {% endlist %}  
+                {% if Archive.Year != "now"|date("Y") %}
+                    switch_arch('{{Archive.Year}}');
+                {% endif %}
+            {% endlist %}
         </script>
     {% endif %}
     
