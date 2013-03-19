@@ -98,12 +98,12 @@
                 clear: both;
             }
             .visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
             .left {float: left;}
             .right {float: right;}
@@ -146,35 +146,31 @@
                 .header{
                     padding-top: 50px;
                 }
-                .logo {                         
-                    width: 550px;
+                .logo {
+                    width: 800px;
                 }
                 .logo h1 {
-                    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif; 
+                    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
                     font-size: 30px;
-                    text-shadow: 2px 2px 3px #CCC; 
-                }    
+                    text-shadow: 2px 2px 3px #CCC;
+                }
                 .logo a {
-                    color: #454545; 
-                    display: block; 
-                    line-height: 40px; 
-                    max-width: 750px; 
-                    overflow: hidden; 
-                    text-overflow: ellipsis; 
-                    white-space: nowrap;
+                    color: #454545;
+                    display: block;
+                    line-height: 40px;
                 }
                 .avatar,
                 .logo{
                     display: inline-block;
                     vertical-align: middle;
-                }   
+                }
                 .avatar{
                     margin-right: 40px;
                 }
 
                 .search {
                     right: 20px;
-                    top:20px;                 
+                    top:20px;
                     position:absolute;
                     width: 372px;
                 }
@@ -446,7 +442,7 @@
                     </form>
                 {% endif %}
                 <div class="clear"></div>
-                
+
 
                 <nav class="menu">
                     <ul class="ul-top">
@@ -588,8 +584,8 @@
 
                                     <div class="meta">
                                         <p>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}, {{ Post.Date|date("H:ia") }}</p>
-                                        {% if Post.Author and Post.Author is not empty %}
-                                            |&nbsp;<p>{{ Lang.Get('Posted by') }} {{ Post.Author }}</p>
+                                        {% if Post.Author.Nickname is not empty %}
+                                            |&nbsp;<p>{{ Lang.Get('Posted by') }} {{ Post.Author.Nickname }}</p>
                                         {% endif %}
                                     </div>
                                 </header>
