@@ -101,7 +101,7 @@
         ::selection {color: white;  background: #00a2ff;}
         ::-moz-selection {color: white;  background: #00a2ff;}
         ::-webkit-selection {color: white;  background: #00a2ff;}
-        .article ul, 
+        .article ul,
         .article ol {
             margin:0 0 15px 20px;
         }
@@ -127,12 +127,12 @@
 
         /*---- Logo ----*/
         .logo {
-            float: left; 
+            float: left;
             overflow: hidden;
             {% if Blog.Avatar is not empty %}
                 border-left: 1px solid #1a1a1a;
                 padding-left: 10px;
-                width: 560px; 
+                width: 560px;
             {% else %}
                 width: 640px;
             {% endif %}
@@ -317,14 +317,14 @@
 
         /* Share ----------------------------------------------- */
         .share h3 {
-            border: 0; 
-            clip: rect(0 0 0 0); 
-            height: 1px; 
-            margin: -1px; 
-            overflow: hidden; 
-            padding: 0; 
-            position: absolute; 
-            width: 1px; 
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
         }
         .share > div{
             float:left;
@@ -623,9 +623,9 @@
 
                                                 <p class="meta">
                                                     <span>{{ Post.Date|datel(Lang.Get("Default date format"))|title }}</span>
-                                                    {% if Post.Author is not empty %}
+                                                    {% if Post.Author.Nickname is not empty %}
                                                         {% if Post.Date is not empty %}, {% endif %}
-                                                        {{ Lang.Get('Written by') }} {{ Post.Author }}
+                                                        {{ Lang.Get('Written by') }} {{ Post.Author.Nickname }}
                                                     {% endif %}
                                                     {% if Post.tags is not empty %}
                                                         <span class="tags">
@@ -658,9 +658,9 @@
                                                             <h4>{{ Lang.Get('Share this page') }}</h4>
                                                         {% endif %}
                                                     {% else %}
-                                                       
+
                                                         <a class="readmore" href="{{ Post.PermaLink }}">{{ Lang.Get('Read more') }}</a>
-                                                        
+
                                                     {% endif %}
 
                                                     <div class="share">
@@ -841,7 +841,7 @@
                                 </ul>
                             </div>
                         {% endif %}
-                        
+
                     </div>
                     <div class="cb"></div>
                 </div>
