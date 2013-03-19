@@ -274,7 +274,7 @@
                 text-align: center;
             }
             .header .img{
-                margin-bottom:5px; 
+                margin-bottom:5px;
                 text-align:center;
             }
             .header .img a {
@@ -283,31 +283,31 @@
                 padding:7px 7px 4px;
                 position: relative;
             }
-            .header .img a:after, 
-            .header .img a:before {  
-                content: " ";  
-                height: 100px;  
-                position: absolute;  
-                width: 50%;  
-                z-index: -10;  
-            } 
-            .header .img a:before {  
-                box-shadow: 7px 6px 15px #333;  
-                left: 5px;  
-                top: 12px;  
-                -webkit-transform: rotate(-5deg);  
-                -moz-transform: rotate(-5deg);  
-                -ms-transform: rotate(-5deg);  
-                transform: rotate(-5deg);  
-            }  
-            .header .img a:after {  
-                box-shadow: -7px 6px 15px #333;  
-                right: 5px;  
-                top: 12px;  
-                -webkit-transform: rotate(5deg);  
-                -moz-transform: rotate(5deg);  
-                -ms-transform: rotate(5deg);  
-                transform: rotate(5deg);  
+            .header .img a:after,
+            .header .img a:before {
+                content: " ";
+                height: 100px;
+                position: absolute;
+                width: 50%;
+                z-index: -10;
+            }
+            .header .img a:before {
+                box-shadow: 7px 6px 15px #333;
+                left: 5px;
+                top: 12px;
+                -webkit-transform: rotate(-5deg);
+                -moz-transform: rotate(-5deg);
+                -ms-transform: rotate(-5deg);
+                transform: rotate(-5deg);
+            }
+            .header .img a:after {
+                box-shadow: -7px 6px 15px #333;
+                right: 5px;
+                top: 12px;
+                -webkit-transform: rotate(5deg);
+                -moz-transform: rotate(5deg);
+                -ms-transform: rotate(5deg);
+                transform: rotate(5deg);
             }
             /**** headline + search form ****/
             .headline {
@@ -1661,7 +1661,7 @@
                     {% endif %}
                     <li class="last">
                         <a href="{{ Blog.url }}/contact">{{ Lang.Get('Contact') }}</a>
-                    </li>               
+                    </li>
                 </ul>
             </nav>
 
@@ -1683,12 +1683,17 @@
                                     {% endif %}
                                 </h2>
                                 <p class="meta">
-                                    {% if Post.Author and Post.Author is not empty %}
-                                        {{ Lang.Get('Posted by') }} {{ Post.Author }} {{ Lang.Get('on') }}
-                                    {% else %}
-                                        {{ Lang.Get('Posted on') }}
+                                    {% if Post.Author.Nickname is not empty %}
+                                        {{ Lang.Get('Posted by') }} {{ Post.Author.Nickname }}
                                     {% endif %}
-                                    {{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:ia") }}
+                                    {% if not isPage %}
+                                        {% if Post.Author.Nickname is not empty %}
+                                            {{ Lang.Get('on') }}
+                                        {% else %}
+                                            {{ Lang.Get('Posted on') }}
+                                        {% endif %}
+                                        {{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:ia") }}
+                                    {% endif %}
                                 </p>
                                 {% list Post.Tags %}
                                     {% if loop.index == 1 %}
