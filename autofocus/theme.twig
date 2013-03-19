@@ -840,8 +840,8 @@
                                                 </a>
                                             </h2>
                                             <p class="meta">
-                                                {% if Post.Author and Post.Author is not empty %}
-                                                    <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>
+                                                {% if Post.Author.Nickname is not empty %}
+                                                    <span class="author">{{ Lang.Get('By') }} {{ Post.Author.Nickname }}</span>
                                                 {% endif %}
                                                 {% if not isPage %}
                                                     <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
@@ -877,8 +877,8 @@
                                     {% endif %}
                                 </h2>
                                 <p class="meta">
-                                    {% if Post.Author and Post.Author is not empty %}
-                                        <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>
+                                    {% if Post.Author.Nickname is not empty %}
+                                        <span class="author">{{ Lang.Get('By') }} {{ Post.Author.Nickname }}</span>
                                     {% endif %}
                                     {% if not isPage %}
                                         <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
@@ -971,8 +971,8 @@
                                             </a>
                                         </h2>
                                         <p class="meta">
-                                            {% if Post.Author and Post.Author is not empty %}
-                                                <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>
+                                            {% if Post.Author.Nickname is not empty %}
+                                                <span class="author">{{ Lang.Get('By') }} {{ Post.Author.Nickname}}</span>
                                             {% endif %}
                                             <span class="date">{{ Post.Date|datel(Lang.Get('Default date format')) | title }}, {{ Post.Date|date("H:i") }}</span>
                                             <span class="links">
