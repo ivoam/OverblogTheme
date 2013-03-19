@@ -370,7 +370,9 @@
 						{% list Posts %}
 							<article class="post">
 								<header>
-									<time datetime="{{ Post.Date }}">{{ Post.Date|datel('EEEE') }}, {{ Post.Date|datel(Lang.Get('Default date format')) }}</time>
+									{% if not isPage %}
+										<time datetime="{{ Post.Date }}">{{ Post.Date|datel('EEEE') }}, {{ Post.Date|datel(Lang.Get('Default date format')) }}</time>
+									{% endif %}
 									<h2 class="title">
 										<a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
 											{% if Post.Title is not empty %}
