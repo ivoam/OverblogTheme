@@ -1287,8 +1287,8 @@
                             {# Author #}
                             <div class="option afterArticle">
                                 <p>
-                                {% if Post.Author is not empty %}
-                                    <span class="publishedBy">{{ Custom('text_publishedby') }} {{ Post.Author }}</span>
+                                {% if Post.Author.Nickname is not empty %}
+                                    <span class="publishedBy">{{ Custom('text_publishedby') }} {{ Post.Author.Nickname }}</span>
                                 {% endif %}
                                 {% if isPage == false and Post.ShowComments is not empty %}
                                     {% if Custom("comment") == "Disqus" and Custom('comment_disqus') is not empty %}
