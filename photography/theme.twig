@@ -118,11 +118,11 @@
             .avatar,
             .logo{
                 display: inline-block;
-                vertical-align: middle; 
+                vertical-align: middle;
             }
             .avatar{margin-right:20px;}
             .logo { max-width: 590px; word-wrap: break-word;}
-            .nav { 
+            .nav {
                 max-width: 400px;
                 position: absolute;
                 right:0;
@@ -141,7 +141,7 @@
             .sub-nav {clear: both; text-transform : capitalize;}
             .sub-nav .wrap {border-bottom: 1px solid #353638; height: 38px; margin-bottom: 20px;}
             .sub-nav ul{
-                border-bottom: 1px solid #353638; 
+                border-bottom: 1px solid #353638;
                 padding-bottom:1px;
                 margin-bottom:20px;
             }
@@ -181,7 +181,7 @@
             .sub-nav .categories {float: left; padding-top: 6px;}
             .sub-nav .categories ul {float: left;}
             .sub-nav .categories li {
-                float: left; 
+                float: left;
                 {% if Custom('theme_color') == 'Dark'|default('Dark') %}text-shadow: 0px 1px 0px #000;{% endif %}
                 line-height:31px;
             }
@@ -281,7 +281,7 @@
             .ob-section-html iframe,
             .ob-section-html object,
             .ob-section-html embed {max-width: 100%}
-            
+
             .ob-row-1-col,
             .ob-slideshow,
             .ob-map {background: {% if Custom('theme_color') == 'Dark'|default('Dark') %}#121212{% else %}#D5D5D5{% endif %}; border-bottom: 1px solid {% if Custom('theme_color') == 'Dark'|default('Dark') %}#2D2D2D{% else %}#FFF{% endif %}; display: block; max-width: 584px !important; padding: 8px;}
@@ -405,8 +405,8 @@
             /* Footer */
             .top-footer {background: url("http://assets.over-blog-kiwi.com/themes/2/images/top-footer.png") repeat-x; clear: both; height: 8px;}
             .footer {
-                background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-footer.jpg") repeat; 
-                clear: both; 
+                background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-footer.jpg") repeat;
+                clear: both;
             }
 
             .footer .social {width: 190px; float: left; color: #FFF; margin-top: 40px; border-top: 1px solid #353638; margin-right: 70px; background: url("http://assets.over-blog-kiwi.com/themes/2/images/bg-texture2.png") no-repeat scroll -65px -32px transparent;}
@@ -742,10 +742,15 @@
                                     </a>
                                 </h2>
                                 <p class="meta">
-                                    {% if Post.Author and Post.Author is not empty %}
-                                        <span class="author">{{ Lang.Get('By') }} {{ Post.Author }}</span>&nbsp;-&nbsp;
+                                    {% if Post.Author.Nickname is not empty %}
+                                        <span class="author">{{ Lang.Get('By') }} {{ Post.Author.Nickname }}</span>
+                                        {% if not isPage %}
+                                            &nbsp;-&nbsp;
+                                        {% endif %}
                                     {% endif %}
-                                    <span class="date">{{ Post.Date|datel(Lang.Get("Default date format"))|title }}, {{ Post.Date|date("H:i") }}</span>
+                                    {% if not isPage %}
+                                        <span class="date">{{ Post.Date|datel(Lang.Get("Default date format"))|title }}, {{ Post.Date|date("H:i") }}</span>
+                                    {% endif %}
                                     {% list Post.Tags %}
                                         {% if loop.first %}
                                             &nbsp;-&nbsp;<span class="post-tags">{{ Lang.Get('Tags:') }}</span>
@@ -763,7 +768,7 @@
                                         {% if Custom('share_service') == 'Google +' %}
                                             <div class="google">
                                                 <div class="g-plusone" data-size="medium" data-href="{{ Post.Permalink }}"></div>
-                                            </div>                                        
+                                            </div>
                                         {% elseif Custom('share_service') == 'Twitter' %}
                                             <div class="twitter">
                                                 <a href="https://twitter.com/share" class="twitter-share-button"  data-text="{% if Post.Title is not empty %}{{ Post.Title }}{% elseif Post.Snippet is not empty %}{{ Post.Snippet}}{% else %}{{ Blog.Title }}{% endif %}" data-url="{{ Post.Permalink }}" data-lang="{{ Blog.Lang }}"{% if Custom('twitter_username') is not empty %} data-via="{{Custom('twitter_username')}}"{% endif %}></a>
