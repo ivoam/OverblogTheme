@@ -397,12 +397,12 @@
                 margin:0;
                 padding:2px 10px;
             }
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
             #sidebar {
                 width: 255px;
@@ -827,12 +827,18 @@
                                     {% endif %}
                                 </h2>
                                  <p class="meta">
-                                    {% if Post.Author and Post.Author is not empty %}
-                                        {{ Lang.Get('Posted by') }} {{ Post.Author }} {{ Lang.Get('on') }}
-                                    {% else %}
+                                    {% if not isPage %}
                                         {{ Lang.Get('Posted on') }}
+                                        <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
                                     {% endif %}
-                                    {{ Post.Date | datel(Lang.Get('Default date format')) | title }}
+                                    {% if Post.Author.Nickname is not empty %}
+                                        {% if not isPage %}
+                                            {{ Lang.Get('by') }}
+                                        {% else %}
+                                            {{ Lang.Get('Published by') }}
+                                        {% endif %}
+                                        {{ Post.Author.Nickname }}
+                                    {% endif %}
                                 </p>
                                 {% list Post.Tags %}
                                     {% if loop.index == 1 %}
@@ -1026,13 +1032,13 @@
 
                     {% if Custom('custom_hide_widget_subscribe') == false %}
                     <!-- Subscribe -->
-                     <div class="box subscribe">                      
-                        <h3>{{ Lang.Get('Subscribe') }}</h3>                 
+                     <div class="box subscribe">
+                        <h3>{{ Lang.Get('Subscribe') }}</h3>
                             <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
                             {% email_notification %}
                     </div>
                     {% endif %}
-                    
+
                     <!-- Archives -->
                     {% if Custom('custom_hide_widget_archives') == false %}
                         {% if Blog.Archives is not empty %}
