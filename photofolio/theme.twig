@@ -123,8 +123,19 @@
 
             /* header */
             header {height: auto; min-height: 165px;}
-                #logo {margin-top: 14px; margin-bottom: 5px; padding: 0; width: 530px;}
-                #logo a {color: {{ Custom('custom_header_font_color')|default('#FFF') }}; display: block; font-size: 50px; line-height: 67px; max-height: 100px; overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-space: nowrap;}
+                #logo {
+                    margin-top: 14px;
+                    margin-bottom: 5px;
+                    padding: 0;
+                    width: 660px;
+                }
+                #logo a {
+                    color: {{ Custom('custom_header_font_color')|default('#FFF') }};
+                    display: block;
+                    font-size: 50px;
+                    line-height: 67px;
+                    text-decoration: none;
+                }
                 #logo a:first-letter {color: #13C5FF;}
                 #headline {color: {{ Custom("custom_headline_font_color")|default('#A9A9A9') }}; float: left; font-size: 20px; line-height: 25px; {% if not isIndex %}padding: 0 0 30px;{% endif %} width: 520px;}
 
