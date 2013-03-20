@@ -159,12 +159,12 @@
 				clear: both;
 			}
 			.visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 			/* ----------------------------- */
 			/* ==header */
@@ -823,27 +823,19 @@
             }
 
 			/* last posts */
-			.last-posts ul {border: 1px solid #CCC;}
 			.last-posts li {
 				display: block;
 				float: left;
-				height: 108px;
+				height: 112px;
 				position: relative;
-				width: 108px;
-			}
-			.last-posts li a {
-				display: block;
-				height: 100%;
-				position: relative;
-				width: 100%;
-				z-index: 99;
+				width: 112px;
 			}
 			.last-posts .caption {
 				background: #111;
 				background: rgba(17,17,17,0.95);
 				display: block;
 				height: 100%;
-				margin-top: -108px;
+				margin-top: -112px;
 				filter:alpha(opacity=0);
 				opacity: 0;
 				overflow: hidden;
@@ -860,7 +852,7 @@
 				filter:alpha(opacity=100);
 				opacity: 1;
 			}
-			.last-posts .caption p {
+			.last-posts .caption a {
 				color: #FFF;
 				display: inline-block;
 				font-weight: bold;
@@ -870,13 +862,15 @@
 				padding: 12px 15px 15px 15px;
 				overflow: hidden;
 			}
-			.last-posts ul:hover .caption p {
+			.last-posts ul:hover .caption a {
 				-webkit-transition: margin-left 300ms ease-out;
 				   -moz-transition: margin-left 300ms ease-out;
 				     -o-transition: margin-left 300ms ease-out;
 				        transition: margin-left 300ms ease-out;
 			}
-			.last-posts li:hover .caption p {margin-left: 0;}
+			.last-posts li:hover .caption a{
+				margin-left: 0;
+			}
 
 			/* ----------------------------- */
 			/* ==navigation */
@@ -1285,28 +1279,22 @@
                                     <h3>{{ Lang.Get('last posts') }}</h3>
                                 </header>
 								<div class="entry clearfix">
-									<ul>
+									<ul class="clearfix">
 										{% list Blog.Posts(6) %}
 											{% if Post.Cover is not empty or Custom('post_cover') is not empty %}
 												<li>
 													<a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
-														<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(108)|crop }}{% else %}{{ Custom('post_cover')|resize(108)|crop }}{% endif %}" alt="" />
-														{% if Post.Title or Post.Snippet is not empty %}
-															<span class="caption">
-																<p>
-																	{% if Post.Title is not empty %}
-																		{{ Post.Title }}
-																	{% else %}
-																		{{ Lang.Get('Published from') }}
-							                                            {% list Post.Sources %}
-							                                                {{ Lang.Get(Source) }} {% if not loop.last %}{{ Lang.Get('and') }} {% endif %}
-							                                            {% endlist %}
-																	{% endif %}
-																	[...]
-																</p>
-															</span>
-														{% endif %}
+														<img src="{% if Post.Cover is not empty %}{{ Post.Cover|resize(112)|crop }}{% else %}{{ Custom('post_cover')|resize(112)|crop }}{% endif %}" alt="" />
 													</a>
+													<p class="caption">
+														<a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
+														{% if Post.Title is not empty %}
+															{{ Post.Title|truncate(35, false, '...') }}
+														{% else %}
+															{{ Lang.Get('Published from') }} {{ Lang.Get(Post.getFirstSource) }}
+														{% endif %}
+														</a>
+													</p>
 												</li>
 											{% endif %}
 										{% endlist %}
