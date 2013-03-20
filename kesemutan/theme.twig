@@ -81,12 +81,12 @@
 
 			.clear {clear: both;}
 			.visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 
 			/***********
@@ -99,9 +99,9 @@
 			}
 			#title-wrapper, #description-wrapper {
 				{% if Blog.Avatar is not empty %}
-					padding-left: 220px; 
+					padding-left: 220px;
 				{% else %}
-					padding-left: 100px; 
+					padding-left: 100px;
 				{% endif %}
 				text-align: left;
 			}
@@ -246,7 +246,7 @@
                 margin:0;
                 padding: 5px 8px;
             }
-			
+
 			/** CONTACT **/
 			.ob-terms {color: #C76D4B; display: block; margin-top: 80px; padding-bottom: 10px; text-align: center;}
 			.ob-form + a:hover,
@@ -305,8 +305,8 @@
 			.sidebar-block ul {list-style: none; margin: 0; padding: 0;}
 			.sidebar-block li {
 				border-bottom: 1px solid #F2F2F2;
-				margin: 0 0 5px 0; 
-				padding-bottom: 3px; 
+				margin: 0 0 5px 0;
+				padding-bottom: 3px;
 				word-wrap:break-word;
 			}
 			.sidebar-block li a {color: #C76D4B;}
@@ -425,8 +425,12 @@
 											</h2>
 										</header>
 										<div class="post-header">
-											<span class="post-author">{{ Lang.Get('Posted by') }} {{ Post.Author | default(Blog.Owner.Nickname) }}</span>
-											<span class="post-date">{{ Post.Date | datel('EEEE') | title }}, {{ Post.Date | datel(Lang.Get('Default date format')) | title }}  </span>
+											{% if Post.Author.Nickname %}
+												<span class="post-author">{{ Lang.Get('Posted by') }} {{ Post.Author.Nickname }}</span>
+											{% endif %}
+											{% if not isPage %}
+												<span class="post-date">{{ Post.Date | datel('EEEE') | title }}, {{ Post.Date | datel(Lang.Get('Default date format')) | title }}  </span>
+											{% endif %}
 										</div>
 										{% if isIndex and Custom('display_mode') == 'Summary' %}
 											<div class="post-cover">
@@ -621,7 +625,7 @@
 									<ul>
 										{% list Blog.Posts(4) %}
 											{% if Post.Cover is not empty or Custom('post_cover') is not empty %}
-				                                <li {% if loop.first is not empty or loop.index == 3 %}class="left"{% endif %}>
+				                                <li {% if loop.first or loop.index == 3 %}class="left"{% endif %}>
 				                                    <h3>
 				                                    	<a href="{{ Post.Permalink }}" title="{{ Post.Snippet }}">
 					                                    	<img src="{% if Post.Cover is not empty %}{{ Post.Cover | resize(76) | crop }}{% else %}{{ Custom('post_cover') | resize(76) | crop }}{% endif %}" alt="" width="76" height="76" />
