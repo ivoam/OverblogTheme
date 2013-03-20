@@ -14,6 +14,7 @@
 
         <meta name="image:post_cover:label.defaultPostCover" group="Options" />
 
+		<meta name="boolean:custom_hide_widget_blog_about:label.hideBlogAbout" group="Widgets" />
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
@@ -93,22 +94,12 @@
 			** HEADER **
 			***********/
 			#header-wrapper {width: 823px; height: 200px; margin: 0 auto; background: url('http://assets.over-blog-kiwi.com/themes/38/img/finalheader.png') no-repeat;}
-			.avatar-wrapper{
-				margin-left:105px;
-				position: absolute;
-			}
-			#title-wrapper, #description-wrapper {
-				{% if Blog.Avatar is not empty %}
-					padding-left: 220px;
-				{% else %}
-					padding-left: 100px;
-				{% endif %}
+			#title-wrapper {
+				padding-left: 100px;
 				text-align: left;
 			}
 			#title-wrapper a,
 			#title-wrapper a:visited {font-size: 30px; font-family: 'Trebuchet MS','Lucida Grande',Verdana,Arial,Halvetica,Sans-Serif; font-weight: bold; color: #3D3D3D;}
-			#description-title {font-size: 14px; text-transform: uppercase; color: #3D3D3D;}
-
 
 			/************
 			** CONTENT **
@@ -213,6 +204,11 @@
             .ob-section-link .ob-url .ob-link:hover {color: #333 !important;}
 
 			.ob-desc {color: #3D3D3D; font-size: 12px; font-style: italic;}
+
+			/** SIDEBAR **/
+			.avatar-wrapper{
+				text-align: center;
+			}
 
 			/** SEARCH **/
 			.search-block {width: 475px; margin-bottom: 40px;}
@@ -346,20 +342,10 @@
 		<div id="global">
 			<!-- HEADER -->
 			<div id="header-wrapper">
-				 {% if Blog.Avatar is not empty %}
-                     <div class="avatar-wrapper">
-                        <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
-                    </div>
-                {% endif %}
 				<div id="title-wrapper">
 					<h1>
 						<a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
 					</h1>
-				</div>
-				<div id="description-wrapper">
-					<p id="description-title">
-						<span>{{ Blog.Description }}</span>
-					</p>
 				</div>
 			</div>
 
@@ -557,6 +543,22 @@
 					<!-- [Widgets Sidebar] -->
 					<div id="sidebar-wrapper">
 						<aside id="sidebar">
+							{% if Custom('custom_hide_widget_blog_about') == false %}
+							<div class="sidebar-block">
+								<h2>{{ Lang.Get('About the blog') }}</h2>
+
+								{% if Blog.Avatar is not empty %}
+									<div class="avatar-wrapper">
+										<a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+									</div>
+								{% endif %}
+								<div id="description-wrapper">
+									<p id="description-title">
+										<span>{{ Blog.Description }}</span>
+									</p>
+								</div>
+							</div>
+							{% endif %}
 							{% if Custom('custom_hide_widget_search_form') == false %}
 								<div class="sidebar-block">
 		                          	<h2>{{ Lang.Get('Search') }}</h2>
