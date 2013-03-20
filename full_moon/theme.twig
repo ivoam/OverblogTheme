@@ -81,12 +81,12 @@
             #cl_1_0 ol {margin-left: 0; padding-left: 25px;}
 
             .visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 
             /*** General ***/
@@ -121,14 +121,14 @@
                 /** Article **/
                 .article,
                 .page{
-                    background: #141414; 
-                    background: rgba(20,20,20,0.9); 
-                    border: 2px solid #333; 
-                    -moz-border-radius: 5px; 
-                    -webkit-border-radius: 5px; 
-                    -ms-border-radius: 5px; 
-                    -o-border-radius: 5px; 
-                    border-radius: 5px; 
+                    background: #141414;
+                    background: rgba(20,20,20,0.9);
+                    border: 2px solid #333;
+                    -moz-border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    -o-border-radius: 5px;
+                    border-radius: 5px;
                     padding: 10px;
                 }
 
@@ -164,8 +164,8 @@
                         max-height: 345px;
                     }
                     .ob-section-audio .obsoundplayer .obsoundplayername {
-                        height: 31px; 
-                        width: 200px; 
+                        height: 31px;
+                        width: 200px;
                         overflow: hidden;
                     }
 
@@ -298,8 +298,8 @@
 
                     /* Sidebar > Tags */
                     .tags li {
-                        border-bottom: 1px solid #222; 
-                        margin: 10px 0; 
+                        border-bottom: 1px solid #222;
+                        margin: 10px 0;
                         padding: 10px 0;
                         word-wrap:break-word;
                     }
@@ -685,7 +685,7 @@
                                     <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
                                 </div>
                             {% endif %}
-                            <div id="top">    
+                            <div id="top">
                                 <h1 class="title">
                                     <a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                                 </h1>
@@ -737,11 +737,11 @@
                                         <div class="article">
                                             <div class="option beforeArticle">
                                                 <div class="date">
-                                                    {% if Post.Author is not empty %}
+                                                    {% if Post.Author.Nickname is not empty %}
                                                         <span class="publishedBy">
-                                                            {{ Lang.Get('Published by') }} {{ Post.Author }} 
+                                                            {{ Lang.Get('Published by') }} {{ Post.Author.Nickname }}
                                                         </span>
-                                                        {{ Lang.Get('on') }} 
+                                                        {{ Lang.Get('on') }}
                                                     {% endif %}
                                                     <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
                                                 </div>
@@ -904,7 +904,7 @@
                             </div>
                         </div>
                         {% endif %}
-                        
+
                         <!-- Navigation -->
                         <div class="box navigation" >
                             <div class="box-titre">
@@ -1000,7 +1000,7 @@
                                         {% endif %}
                                         <li class="rss-follow">
                                             <a href="{{ Blog.RssUrl }}" title="{{ Lang.Get('Follow us with') }} RSS" target="_blank">{{ Lang.Get('Flux RSS') }}</a>
-                                        </li>                  
+                                        </li>
                                     </ul>
                                      <div class="clear"></div>
                                 </div>
@@ -1050,7 +1050,7 @@
             $(document).ready(function() {
                 // Fancybox
                 $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
-                $("a[rel=fancybox], .avatar a").fancybox({
+                $("a[rel=fancybox]").fancybox({
                     'overlayShow'   : true,
                     'transitionIn'  : 'fadin',
                     'transitionOut' : 'fadin',
@@ -1149,7 +1149,7 @@
                         s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
                     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
                 }());
-            
+
             {% elseif Custom('comment') == 'Facebook' %}
                 // Facebook comments + share
                 (function(d, s, id) {
