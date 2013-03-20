@@ -22,7 +22,7 @@
         <!-- Custom vars -->
         <meta name="constant:displayArticlesLimit" content="9" />
 
-        <meta name="string:custom_footer_left:label.footer" default="Theme: Elegant press &copy; 2012" />
+        <meta name="string:custom_footer_left:label.footer" default="Theme: Elegant press &copy; 2013" />
 
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,20,30,40,50" default="10" group="Navigation" />
 
@@ -40,7 +40,6 @@
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
         <meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
-        <meta name="boolean:custom_hide_widget_about_blog:label.hideBlogAbout" group="Widgets" />
         <meta name="boolean:custom_hide_widget_blog_archive:label.hideArchives" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="boolean:custom_hide_widget_last_post:label.hideLastPosts" group="Widgets" />
@@ -242,6 +241,14 @@
             }
             h6 {
                 font-size: 12px;
+            }
+            .visuallyhidden,
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 
             /*****************************************
@@ -1071,7 +1078,20 @@
             .grid .footbox li.last {
                 margin-bottom:0
             }
-
+            /* Sidebar > Subscribe */
+            .sidebar .ob-form-subscription .ob-form-field{
+                display: inline-block;
+            }
+            .sidebar .ob-form-subscription .ob-form-field input{
+                margin: 0;
+                width: 204px;
+            }
+            .sidebar .ob-form-subscription .ob-input-submit[type=submit]{
+                display: inline-block;
+                margin: 5px 0 0;
+                padding: 11px 9px;
+                vertical-align: top;
+            }
 
             #home_featured21 .block {
                 display:inline;
@@ -1792,24 +1812,6 @@
                             {% endif %}
                         </div>
                         <div class="sidebar">
-                            {% if Custom('custom_hide_widget_about_blog') == false %}
-                                <div id="featured">
-                                    <ul>
-                                        <li>
-                                            <h3>{{ Lang.Get('About this blog') }}</h3>
-                                            {% if Blog.Avatar is not empty %}
-                                                <p class="imgholder">
-                                                    <a href="{{ Blog.Avatar }}" class="avatar" title="{{ Blog.Title }}">
-                                                        <img src="{{ Blog.Avatar | resize(210,90) | crop }}" width="210" height="90" alt="{{ Blog.Title }}" />
-                                                    </a>
-                                                </p>
-                                            {% endif %}
-                                            <p>{{ Blog.Description }}</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            {% endif %}
-
                             {% if Custom('custom_hide_widget_follow_us') == false %}
                                 <div class="subnav">
                                     <h3>{{ Lang.Get('Follow us') }}</h3>
@@ -1825,6 +1827,16 @@
                                         {% endif %}
                                         <li><a href="{{ Blog.RssUrl }}" target="_blank">RSS</a></li>
                                     </ul>
+                                </div>
+                            {% endif %}
+                            <!-- Subscribe -->
+                            {% if Custom('custom_hide_widget_subscribe') == false %}
+                                <div class="subnav subscribe">
+                                    <h3>{{ Lang.Get('Subscribe') }}</h3>
+                                    <div class="box-content">
+                                        <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
+                                        {% email_notification %}
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
