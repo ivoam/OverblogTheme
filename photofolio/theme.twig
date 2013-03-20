@@ -79,7 +79,7 @@
 
         <!-- Template resources -->
         <link href="http://fonts.googleapis.com/css?family={{ Custom("custom_titles_font") }}" rel="stylesheet" type="text/css" />
- 
+
         <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
             <style type="text/css">
@@ -154,9 +154,9 @@
             .tag-title,
             .search-title,
             .special h2 {
-                display: block; 
-                font-size: 28px; 
-                line-height: 40px; 
+                display: block;
+                font-size: 28px;
+                line-height: 40px;
                 margin-bottom: 40px;
             }
 
@@ -352,7 +352,7 @@
             .sidebar .follow li > a,
             .tag-title,
             .widget .plustext {
-                font-family: "{{ Custom('custom_titles_font')|default('Dosis') }}", Georgia, Times New Roman, serif; 
+                font-family: "{{ Custom('custom_titles_font')|default('Dosis') }}", Georgia, Times New Roman, serif;
                 font-weight: normal;
             }
 
@@ -545,10 +545,12 @@
                                 <div class="m-list">
                                     <article>
                                         <!-- Single Page -->
+                                        {% if not isPage %}
                                         <span class="date left">
                                             <span class="day">{{ Post.Date|date("d") }}</span>
                                             <span class="month">{{ Post.Date|date("M") }}</span>
                                         </span>
+                                        {% endif %}
                                         <h2>
                                             {% if Post.Title is not empty %}
                                                 {{ Post.Title }}
@@ -561,8 +563,8 @@
                                         </h2>
 
                                         <p class="meta">
-                                            {% if Post.Author and Post.Author is not empty %}
-                                                <span class="posted">{{ Lang.Get('Published by') }} {{ Post.Author }}</span>
+                                            {% if Post.Author.Nickname is not empty %}
+                                                <span class="posted">{{ Lang.Get('Published by') }} {{ Post.Author.Nickname }}</span>
                                             {% endif %}
                                             {% list Post.Tags %}
                                                 {% if loop.index == 1 %}
