@@ -737,13 +737,18 @@
                                         <div class="article">
                                             <div class="option beforeArticle">
                                                 <div class="date">
-                                                    {% if Post.Author.Nickname is not empty %}
-                                                        <span class="publishedBy">
-                                                            {{ Lang.Get('Published by') }} {{ Post.Author.Nickname }}
-                                                        </span>
-                                                        {{ Lang.Get('on') }}
+                                                    {% if not isPage %}
+                                                        {{ Lang.Get('Posted on') }}
+                                                        <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
                                                     {% endif %}
-                                                    <time datetime="{{ Post.Date }}">{{ Post.Date|datel (Lang.Get('Default date format'))|title }}</time>
+                                                    {% if Post.Author.Nickname is not empty %}
+                                                        {% if not isPage %}
+                                                            {{ Lang.Get('by') }}
+                                                        {% else %}
+                                                            {{ Lang.Get('Published by') }}
+                                                        {% endif %}
+                                                        {{ Post.Author.Nickname }}
+                                                    {% endif %}
                                                 </div>
                                                 <span class="tags">
                                                     {% list Post.Tags %}
@@ -929,7 +934,6 @@
                             </div>
                         </div>
 
-
                         {% if Custom('custom_display_widget_last_posts') == false %}
                             <!-- Last posts -->
                             <div class="box last" >
@@ -956,7 +960,6 @@
                             </div>
                         {% endif %}
 
-
                         {% if Custom('tag_number') > 0 %}
                             <!-- Tags -->
                             <div class="box tags" >
@@ -976,7 +979,6 @@
                                 </div>
                             </div>
                         {% endif %}
-
 
                         {% if Custom('custom_hide_widget_follow_us') == false %}
                              <!-- Follow us -->
@@ -1026,7 +1028,6 @@
                                                         {% endif %}
                                                     {% endlist %}
                                                 </ul>
-
                                             </li>
                                         {% endlist %}
                                     </ul>
