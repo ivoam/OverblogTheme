@@ -104,7 +104,7 @@
 				{% if Custom('background_custom') is not empty %}
 					background: url({{ Custom('background_custom') }}) no-repeat center center fixed;
 				{% elseif Custom('background')|default('Forest') is not empty %}
-					background: url(http://assets.over-blog-kiwi.com/themes/14/images/bg-{{ Custom('background')|default('Forest') }}.jpg) no-repeat center center fixed;
+					background: url(http://assets.over-blog-kiwi.com/t/simpleimage/images/bg-{{ Custom('background')|default('Forest') }}.jpg) no-repeat center center fixed;
 				{% endif %}
 				-webkit-background-size: cover;
 				   -moz-background-size: cover;
@@ -147,13 +147,9 @@
 			.clearboth {
 				clear: both;
 			}
-			.avatar,
-			.header{
-				display: inline-block;
-				vertical-align: middle;
-			}
-			.avatar{
-				margin:10px 0 0 10px;
+			.avatar {
+				margin: 10px 0 0;
+				text-align: center;
 			}
 			.header {
 				color: white;
@@ -861,7 +857,7 @@
 				margin-top: -163px;
 				position: fixed;
 				right: 15px;
-				top: 50%;		
+				top: 50%;
 			}
 			.follow .wrapper{
 				display: table-cell;
@@ -869,7 +865,7 @@
 				height: inherit;
 			}
 			.follow a {
-				background: #F5F5F5 url("http://assets.over-blog-kiwi.com/themes/14/images/social.png") no-repeat;
+				background: #F5F5F5 url("http://assets.over-blog-kiwi.com/t/simpleimage/images/social.png") no-repeat;
 				-webkit-border-radius: 6px;
 				   -moz-border-radius: 6px;
 				    -ms-border-radius: 6px;
@@ -1017,10 +1013,13 @@
 												{% endif %}
 											</h2>
 											<div class="meta">
-												{% if Post.Author is not empty %}
-													<span class="author">{{ Post.Author }}</span> —
+												{% if Post.Author.Nickname is not empty %}
+													<span class="author">{{ Post.Author.Nickname }}</span>
+													{% if not isPage %}—{% endif %}
 												{% endif %}
-												<time pubdate>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+												{% if not isPage %}
+													<time pubdate>{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+												{% endif %}
 												{% list Post.Tags %}
 													{% if loop.first %}
 														— <span class="tags">
@@ -1161,13 +1160,13 @@
 
 		<!-- shortcut:[Footer] -->
 		<footer class="footer clearboth">
-			
+
 			<p>
 	        	<span>{{ Custom('wording_footer') }}</span>&nbsp;-&nbsp;<span>{{ Lang.Get('Hosted by') }}<span>&nbsp;<span><a class="credits" href="http://www.over-blog.com" target="_blank">Overblog</a><span>
 			</p>
 		</footer>
 
-		
+
 			<div class="follow">
 				<div class="wrapper">
 					{% if Custom('custom_hide_widget_follow_us') == false %}
@@ -1300,7 +1299,7 @@
 						'next'			 : ".load-more a",
 						'tresholdMargin' : -200,
 						'history'		 : false,
-						'loader' 		 : "<img src='http://assets.over-blog-kiwi.com/themes/14/images/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts...') }}</p>",
+						'loader' 		 : "<img src='http://assets.over-blog-kiwi.com/t/simpleimage/images/social.png/ajax_loader.gif' alt='' title='' /><p>{{ Lang.Get('Loading new posts...') }}</p>",
 						onLoadItems      : function(items) {
 							FancyboxControls(items);
 						},
