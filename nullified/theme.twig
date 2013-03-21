@@ -28,6 +28,7 @@
         <meta name="image:custom_header_picture:label.headerImage" default="http://assets.over-blog-kiwi.com/themes/29/images/105.jpg" group="Home" />
 
         <meta name="boolean:custom_hide_widget_search_form:label.hideSearchForm" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_blog_about:label.hideBlogAbout" group="Widgets" />
         <meta name="boolean:custom_hide_widget_follow_us:label.hideFollowUs" group="Widgets" />
         <meta name="list:tag_number:label.numberOfTags" items="0,1,2,3,4,5,6,7,8,9,10,20,30,40,50" default="5" group="Widgets" />
         <meta name="boolean:custom_hide_widget_pages:label.hidePages" group="Widgets" />
@@ -114,7 +115,14 @@
                 font-family: Arial, sans-serif;
             }
 
-            br.clearfix {
+            .clear {
+                clear: both;
+            }
+            .clearfix:before, .clearfix:after{
+                content: "";
+                display: table;
+            }
+            .clearfix:after{
                 clear: both;
             }
 
@@ -173,17 +181,10 @@
                 text-decoration: none;
                 text-shadow: 0 1px 1px rgba(0,0,0,0.8);
             }
-            .avatar,
-            #logo h1 {
-                display: inline-block;
-                vertical-align: middle;
-            }
+
             #logo h1 {
                 font-size: 3em;
                 font-family: Oswald, sans-serif;
-                {% if Blog.Avatar is not empty %}
-                     max-width: 540px;
-                {% endif %}
             }
 
             #menu {
@@ -323,8 +324,6 @@
             #footer a:hover {
                 color: #ffae00;
             }
-
-
             #content .box {
                 margin-bottom: 50px;
                 max-width: 600px;
@@ -342,19 +341,16 @@
                 width: 310px;
                 overflow: hidden;
             }
-
             #col2 {
                 width: 310px;
                 overflow: hidden;
                 margin: 0 0 0 340px;
             }
-
             #search {
                 position: absolute;
                 top: 58px;
                 right: 35px;
             }
-
             #search input.form-text {
                 padding: 8px 42px 8px 12px;
                 width: 175px;
@@ -367,7 +363,6 @@
                 border-top: solid 1px #541C1B;
                 color: #DBBCBC;
             }
-
             #search input.submit {
                 background: transparent;
                 border: 0;
@@ -383,6 +378,32 @@
             }
             #search input.submit:active {
                 text-shadow: none;
+            }
+            #sidebar {
+                width: 255px;
+                float:left;
+                padding: 0;
+            }
+            #sidbar .box {
+                margin-bottom: 30px;
+            }
+            #sidebar h3 {
+                color: #854646;
+                margin-bottom: 10px;
+            }
+            #sidebar li{
+                word-wrap:break-word;
+            }
+            #sidebar .plustext {
+                font-family: 'Oswald', sans-serif;
+            }
+            #sidebar .arch_month li {
+                padding: 5px 0;
+            }
+            #sidebar .avatar {
+                /*text-align: center;*/
+                float: left;
+                margin: 10px 10px 5px 0;
             }
             /* Sidebar > Subscribe */
             .ob-form-subscription .ob-form-field,
@@ -404,30 +425,6 @@
               height: 1px; width: 1px;
               margin: -1px; padding: 0; border: 0;
             }
-            #sidebar {
-                width: 255px;
-                float:left;
-                padding: 0;
-            }
-
-            #sidbar .box {
-                margin-bottom: 30px;
-            }
-
-            #sidebar h3 {
-                color: #854646;
-                margin-bottom: 10px;
-            }
-            #sidebar li{
-                word-wrap:break-word;
-            }
-            #sidebar .plustext {
-                font-family: 'Oswald', sans-serif;
-            }
-            #sidebar .arch_month li {
-                padding: 5px 0;
-            }
-
             #splash {
                 height: 285px;
                 position: relative;
@@ -435,19 +432,12 @@
                 background: #FFF;
                 overflow: hidden;
             }
-
             #wrapper {
                 width: 980px;
                 position: relative;
                 background: #151515 url(http://assets.over-blog-kiwi.com/themes/29/images/bg3.jpg) bottom center no-repeat;
                 margin: 40px auto 0 auto;
             }
-
-            .clear{
-                clear: both;
-            }
-
-
             .m-networks a {
                 background: url(http://assets.over-blog-kiwi.com/themes/29/images/social.png) no-repeat;
                 display: inline-block;
@@ -761,11 +751,6 @@
             </div>
             <div id="header">
                 <div id="logo">
-                    {% if Blog.Avatar is not empty %}
-                         <div class="avatar">
-                            <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
-                        </div>
-                    {% endif %}
                     <h1>
                         <a href="{{ Blog.Url }}" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                     </h1>
@@ -790,24 +775,20 @@
                             {{ SpecialContent }}
                         </div>
                     {% else %}
-                            <div class="box">
-                                {% if isIndex %}
-                                    {% if Blog.Description %}
-                                        <p>{{ Blog.Description }}</p>
-                                    {% endif %}
-                                {% elseif isSearch %}
-                                    <p class="tagline">
-                                        {{ Lang.Get('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;
-                                    </p>
-                                    {% if Posts is empty %}
-                                        <p>{{ Lang.Get('No result for this expression') }}.<p>
-                                    {% endif %}
-                                {% elseif isTag %}
-                                    <p class="tagline">
-                                        {{ Lang.Get('Post(s) with') }} #{{ Tag.Title}} tag
-                                    </p>
+                        <div class="box">
+                            {% if isSearch %}
+                                <p class="tagline">
+                                    {{ Lang.Get('Search for') }} &ldquo;{{ Search.Keyword }}&rdquo;
+                                </p>
+                                {% if Posts is empty %}
+                                    <p>{{ Lang.Get('No result for this expression') }}.<p>
                                 {% endif %}
-                            </div>
+                            {% elseif isTag %}
+                                <p class="tagline">
+                                    {{ Lang.Get('Post(s) with') }} #{{ Tag.Title}} tag
+                                </p>
+                            {% endif %}
+                        </div>
                         {% list Posts %}
                             <article class="post">
                                 <h2 class="title">
@@ -982,7 +963,21 @@
 
                 <!-- shortcut:[Sidebar content] -->
                 <div id="sidebar">
-                     <!-- Blog owner -->
+                    <!-- About blog -->
+                    {% if Custom('custom_hide_widget_blog_about') == false %}
+                        <div class="box clearfix">
+                            <h3>{{ Lang.Get('About the blog') }}</h3>
+                            {% if Blog.Avatar is not empty %}
+                                <div class="avatar">
+                                    <a href="{{ Blog.Url }}"><img src="{{ Blog.Avatar|resize(100,100)|crop }}" alt="{{ Blog.Title}}" width="100" height="100"  /></a>
+                                </div>
+                            {% endif %}
+                            {% if Blog.Description %}
+                                <p>{{ Blog.Description }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <!-- Follow -->
                     {% if Custom('custom_hide_widget_follow_us') == false %}
                         <div class="box">
                             <h3>{{ Lang.Get('Follow us') }}</h3>
@@ -1062,7 +1057,7 @@
                         {% endif %}
                     {% endif %}
                 </div>
-                <br class="clearfix" />
+                <br class="clear" />
             </div>
         </div>
 
@@ -1169,7 +1164,7 @@
         <script type="text/javascript">
             jQuery(document).ready(function() {
 
-                $(".ob-section-images a, .ob-link-img, .avatar").attr("rel", "fancybox");
+                $(".ob-section-images a, .ob-link-img").attr("rel", "fancybox");
                 $("a[rel=fancybox]").fancybox({
                     'overlayShow'   : true,
                     'transitionIn'  : 'fadin',
