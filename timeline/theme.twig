@@ -533,9 +533,16 @@
 									<span class="icon"></span>
 									<h2>{{ Post.Title }}</h2>
 									<p class="infos">
-										{{ Lang.Get('Posted') }} {{ Post.Date|datel(Lang.Get('Default date format')) | title }}
-										{% if Post.Author and Post.Author is not empty %}
-											{{ Lang.Get('by') }} {{ Post.Author }}
+										{% if not isPage %}
+											{{ Lang.Get('Posted') }} {{ Post.Date|datel(Lang.Get('Default date format')) | title }}
+										{% endif %}
+										{% if Post.Author.Nickname is not empty %}
+											{% if not isPage %}
+												{{ Lang.Get('by') }}
+											{% else %}
+												{{ Lang.Get('Published by') }}
+											{% endif %}
+											{{ Post.Author.Nickname }}
 										{% endif %}
 										{% list Post.Tags %}
 											{% if loop.index == 1 %}
