@@ -643,7 +643,7 @@
               }
               .fancybox-inner[style]{
                 overflow: visible !important;
-              } 
+              }
               .fancybox-wrap .share-bar {
                 top:20px;
               }
@@ -745,7 +745,7 @@
             }
             .single .share-bar {
                 left: 50%;
-                margin: 8px 0 0 387px;    
+                margin: 8px 0 0 387px;
             }
             .single .share-bar *,
             .fancybox-overlay .share-bar *{
@@ -1265,7 +1265,7 @@
                             <input type="submit" title="{{ Lang.Get('Search') }}" value="{{ Lang.Get('Search') }}" />
                         </form>
                     {% endif %}
-                </div>          
+                </div>
                 <!-- menu -->
                 <nav class="menu">
                     <ul>
@@ -1375,12 +1375,13 @@
                                     </a>
                                 {% endif %}
                                 <!-- post date -->
-                                <time class="date" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-
-                                {% if isSingle and Post.Author is not empty %}
+                                {% if not isPage %}
+                                    <time class="date" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+                                {% endif %}
+                                {% if isSingle and Post.Author.Nickname is not empty %}
                                     <!-- post author -->
                                     <p class="author">
-                                        {{ Lang.Get('Published by') }} <span>{{ Post.Author }}</span>
+                                        {{ Lang.Get('Published by') }} <span>{{ Post.Author.Nickname }}</span>
                                     </p>
                                 {% endif %}
 
