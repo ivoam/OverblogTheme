@@ -18,9 +18,9 @@
         <meta name="image:background:label.backgroundImage" group="design" />
         <!-- Define the default post cover -->
         <meta name="image:post_cover:label.defaultPostCover" group="design" />
-       
+
         <!-- Hide "About" widget -->
-        <meta name="boolean:display_widget_profile:label.hideBiography" group="Widgets" />
+        <meta name="boolean:custom_hide_widget_blog_about:label.hideBlogAbout" group="Widgets" />
         <!-- Hide search form -->
         <meta name="boolean:display_widget_search:label.hideSearchForm" group="Widgets" />
         <!-- Hide "Last posts" wiget -->
@@ -31,23 +31,23 @@
         <meta name="boolean:display_widget_social:label.hideFollowUs" group="Widgets" />
         <!-- Hide "Blog archives" wiget -->
         <meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
-        
-        <!-- Define the Twitter username -->        
+
+        <!-- Define the Twitter username -->
         <meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <!-- Define the Facebook username -->
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
-        <!-- Define the Google + userid -->        
+        <!-- Define the Google + userid -->
         <meta name="string:googleplus_userid:label.gplusUserid" group="Social" />
         <!-- Choose the service to share posts -->
         <meta name="list:share_service:label.socialSharingServices" items="None, Facebook, Twitter, Google +, All" default="All" group="Social" />
-        
+
         <!-- Choose the comments service -->
         <meta name="list:comment:label.commentsServices" items="OverBlog, Facebook, Disqus" default="OverBlog" group="Comments" />
         <!-- Define facebook comments theme color -->
         <meta name="list:facebook_comments_color:Facebook comments color theme" items="light, dark" default="light" group="Comments" />
         <!-- Define the Disqus username -->
         <meta name="string:comment_disqus:label.disqusAccount" default="obcomment" group="Comments" />
-        
+
         <!-- Define the Facebook App ID (go to https://developers.facebook.com/apps) -->
         <meta name="string:facebook_appid:label.facebookAppid" group="Settings" />
         <!-- Define the Google Analytics ID-->
@@ -58,7 +58,7 @@
         <meta name="string:msn_webmaster_id:label.msnWebmasterId" group="Settings" />
 
 	    <!-- shortcut:[Includes] -->
-	    
+
         <!-- favicon -->
 	    {% favicon %}
 
@@ -162,8 +162,6 @@
             	<h1 class="title">
                  	<a href="{{ Blog.Url }}"  class="topLien" title="{{ Blog.Description }}">{{ Blog.Title }}</a>
                 </h1>
-                <!-- Blog description -->
-             	<strong class="description">{{ Blog.Description }}</strong>
             </header>
 
 	        <section class="content clearfix">
@@ -175,7 +173,7 @@
                         <article class="special">
 		                    {{ SpecialContent }}
                         </article>
-                    {% else %}               
+                    {% else %}
                         {% if isSearch %}
                             <p>{{ Lang.Get('Search results for') }} "{{ Search.Keyword }}"</p>
                         {% elseif isTag %}
@@ -187,18 +185,22 @@
 	                        	<header itemprop="headline">
                                     <!-- Post author &amp; post date -->
 	                                <p class="metas">
-                                    	<span class="author" itemprop="author">
-                                             {% if Post.Author is not empty %}
-                                                {{ Lang.Get('Published by') }}
-                                                {{ Post.Author }} 
-                                             {% else %}
-                                                {{ Lang.Get('Published by') }}
-                                                {{ Blog.Owner.Nickname }}
-                                             {% endif %}
-                                        </span>
-                                        <span class="date">
-                                            {{ Lang.Get('on') }} <time itemprop="datePublished" datetime="{{ Post.Date|date("Y-m-d") }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
-                                        </span>
+										{% if Post.Author.Nickname is not empty %}
+											<span class="author" itemprop="author">
+												{{ Lang.Get('Published by') }}
+												{{ Post.Author.Nickname }}
+											</span>
+										{% endif %}
+										{% if not isPage %}
+											<span class="date">
+												{% if Post.Author.Nickname is not empty %}
+													{{ Lang.Get('on') }}
+												{% else %}
+													{{ Lang.Get('Published on') }}
+												{% endif %}
+												<time itemprop="datePublished" datetime="{{ Post.Date|date("Y-m-d") }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</time>
+											</span>
+										{% endif %}
 	                                </p>
 
                                     <!-- Post tags -->
@@ -347,19 +349,19 @@
 
 	            <!-- Sidebar -->
 	            <div id="sidebar">
-                    {% if Custom('display_widget_profile') == false %}
+                    {% if Custom('custom_hide_widget_blog_about') == false %}
                         <!-- Blog about -->
 	                    <div class="widget profile" itemscope="" itemtype="http://schema.org/Person">
-	                        <h3>{{ Lang.Get('About') }}</h3>
-                        	{% if Blog.Owner.Avatar is not empty %}
-								<a class="avatar" href="{{ Blog.Owner.Avatar }}" title="{% if Blog.Owner.Nickname is not empty %}{{ Blog.Owner.Nickname }}{% else %}{{ Blog.Title }}{% endif %}">
-									<img itemprop="image" src="{% if Blog.Owner.Avatar is not empty %}{{ Blog.Owner.Avatar|resize(100) }}{% else %}{{ Blog.Avatar|resize(100) }}{% endif %}" alt="Avatar" width="100" height="100" />
+	                        <h3>{{ Lang.Get('About blog') }}</h3>
+                        	{% if Blog.Avatar is not empty %}
+								<a class="avatar" href="/" title="{{ Blog.Title }}">
+									<img itemprop="image" src="{{ Blog.Avatar|resize(100)|crop }}" alt="Avatar" width="100" height="100" />
 								</a>
 							{% endif %}
-							
-							<!-- Biography -->
-							{% if Blog.Owner.Bio is not empty %}
-								<p class="biography">{{ Blog.Owner.Bio }}</p>
+
+							<!-- Description -->
+							{% if Blog.Description is not empty %}
+								<p class="biography">{{ Blog.Description }}</p>
 							{% endif %}
 	                    </div>
                     {% endif %}
@@ -587,9 +589,9 @@
                     });
 
                     $(".arch_month").hide();
-                    
+
                     var currentYear = {{ "now"|date("Y") }};
-                    
+
                     $(".arch_year > a[data-year="+currentYear+"]").siblings(".arch_month").show();
 
                     $('.arch_year > a').click(function() {
