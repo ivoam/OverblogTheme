@@ -124,6 +124,9 @@
                 margin:5px 2px;
                 vertical-align: middle;
             }
+            .header h1 a{
+                text-decoration: none;
+            }
             .header .description {
                 font-size: 100%;
             }
@@ -669,7 +672,9 @@
                     </div>
                 {% endif %}
                 {% list Posts %}
-                    <div class="date" itemprop="startDate" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</div>
+                    {% if not isPage %}
+                        <div class="date" itemprop="startDate" datetime="{{ Post.Date }}">{{ Post.Date|datel(Lang.Get('Default date format'))|title }}</div>
+                    {% endif %}
                     <div class="post {{ Post.getFirstSource }}" itemscope itemtype="http://schema.org/BlogPosting">
                         <h2 class="title">
                             <a href="{{ Post.PermaLink }}" title="{{ Post.Snippet|title }}">
@@ -690,8 +695,8 @@
                             {% endif %}
                         </div>
                         <p class="meta">
-                            {% if Post.Author and Post.Author is not empty %}
-                                <span class="posted">{{ Lang.Get('Posted by') }} {{Post.Author}}</span>
+                            {% if Post.Author.Nickname is not empty %}
+                                <span class="posted">{{ Lang.Get('Posted by') }} {{ Post.Author.Nickname }}</span>
                                 {% if not isPage %}{{ Lang.Get('at') }} {{ Post.Date|date("H:ia") }}{% endif %}
                             {% endif %}
                             {% if not isSingle and Post.ShowComments is not empty %}
