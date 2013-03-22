@@ -127,6 +127,13 @@
 			.search input[type="text"] {background: url("http://assets.over-blog-kiwi.com/themes/13/images/search.png") no-repeat; height: 24px; border: none; width: 328px; color: #FFF; outline: none; padding: 5px 10px;}
 			.search input[type="text"]:focus {background: url("http://assets.over-blog-kiwi.com/themes/13/images/search.png") 0 -35px no-repeat; color: #000;}
 
+			{% if Custom('background_type') == 'Light' %}
+			.search input[type="text"] {
+				background-position: 0 -35px;
+				color: #000;
+			}
+			{% endif %}
+
 			/*----- NAV DATE -----*/
 			.date {background: url("http://assets.over-blog-kiwi.com/themes/13/images/date.png") repeat; height: 41px; line-height: 38px;}
 			.date a {display: block; font-weight: bold;}
@@ -164,7 +171,14 @@
 				margin-top:15px;
 			}
 			.informations p {font-size: 18px;}
-			.informations a {font-weight: bold; color: #fff;}
+			.informations a {
+				{% if Custom('background_type') == 'Dark' or Custom('background_type') is empty %}
+					color: #fff;
+				{% else %}
+					color: #000;
+				{% endif %}
+				font-weight: bold;
+			}
 			.informations a:hover {
 				opacity: .8;
 			}
