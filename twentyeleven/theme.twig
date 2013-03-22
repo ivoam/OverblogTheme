@@ -1009,28 +1009,30 @@
 										{% endif %}
 									</div>
 								{% endif %}
-								<div class="title">
-									<h2>
-										{% if isSingle %}
-											<span>
-										{% else %}
-											<a title="{{ Post.Snippet }}" href="{{ Post.PermaLink }}">
-										{% endif %}
-												{% if Post.Title is not empty %}
-													{{ Post.Title }}
-												{% else %}
-													{{ Lang.Get('A post from') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %} {{ Lang.Get('and') }} {% endif %}{% endlist %}
-												{% endif %}
-										{% if isSingle %}
-											</span>
-										{% else %}
-											</a>
-										{% endif %}
-									</h2>
-								</div>
-								<div class="date">
-									<p>{{ Lang.Get('Published on') }} {{ Post.Date|datel(Lang.Get('Default date format')) | title }}</p>
-								</div>
+									<div class="title">
+										<h2>
+											{% if isSingle %}
+												<span>
+											{% else %}
+												<a title="{{ Post.Snippet }}" href="{{ Post.PermaLink }}">
+											{% endif %}
+													{% if Post.Title is not empty %}
+														{{ Post.Title }}
+													{% else %}
+														{{ Lang.Get('A post from') }} {% list Post.Sources %}{{ Lang.Get(Source) }}{% if not loop.last %} {{ Lang.Get('and') }} {% endif %}{% endlist %}
+													{% endif %}
+											{% if isSingle %}
+												</span>
+											{% else %}
+												</a>
+											{% endif %}
+										</h2>
+									</div>
+								{% if not isPage %}
+									<div class="date">
+										<p>{{ Lang.Get('Published on') }} {{ Post.Date|datel(Lang.Get('Default date format')) | title }}</p>
+									</div>
+								{% endif %}
 							</header>
 
 							<div class="body">
@@ -1056,9 +1058,11 @@
 							{% endif %}
 							<footer class="footer">
 								<div class="tags">
-									<p>
-										{{ Lang.Get('Written by') }} <span>{{ Post.Author|default(Blog.Owner.Nickname) }}</span>
-									</p>
+									{% if Post.Author.Nickname %}
+										<p>
+											{{ Lang.Get('Written by') }} <span>{{ Post.Author.Nickname }}</span>
+										</p>
+									{% endif %}
 
 									<p class="tag">
 										{% list Post.Tags %}
