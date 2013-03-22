@@ -17,11 +17,11 @@
 
         <meta name="string:footer_content:label.footer" default="Theme: Twentyeleven &copy; 2012" group="footer" />
 
+		<meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
 		<meta name="boolean:custom_hide_widget_subscribe:label.hideSubscribeForm" group="Widgets" />
 		<meta name="boolean:display_widget_archives:label.hideArchives" group="Widgets" />
 		<meta name="boolean:display_widget_pages:label.hidePages" group="Widgets" />
 		<meta name="boolean:display_widget_last:label.hideLastPosts" group="Widgets" />
-		<meta name="boolean:display_widget_follow:label.hideFollowUs" group="Widgets" />
 
 		<meta name="string:twitter_username:label.twitterUsername" group="Social" />
         <meta name="string:facebook_username:label.facebookUsername" group="Social" />
@@ -104,12 +104,12 @@
 				clear: both;
 			}
 			.visuallyhidden,
-            .ob-form-subscription label { 
-              position: absolute; 
-              overflow: hidden; 
-              clip: rect(0 0 0 0); 
-              height: 1px; width: 1px; 
-              margin: -1px; padding: 0; border: 0; 
+            .ob-form-subscription label {
+              position: absolute;
+              overflow: hidden;
+              clip: rect(0 0 0 0);
+              height: 1px; width: 1px;
+              margin: -1px; padding: 0; border: 0;
             }
 			/***********
 			** HEADER **
@@ -681,7 +681,7 @@
 			.ob-form input[type="email"],
 			.ob-form textarea {
 				background: #EEE;
-				border: 1px solid #CCC;	
+				border: 1px solid #CCC;
 				padding: 6px 0;
 			}
 			.ob-form input[type="text"]:focus,
@@ -1179,7 +1179,7 @@
 					{% endif %}
 
 					{% if Custom('custom_hide_widget_subscribe') == false %}
-					 <div class="widget subscribe">                     
+					 <div class="widget subscribe">
                         <h3>{{ Lang.Get('Subscribe') }}</h3>
                         <div class="box-content">
                             <p>{{ Lang.Get('Subscribe to be notified about future posts.') }}</p>
@@ -1261,7 +1261,7 @@
 			{% endif %}
 
 			<footer id="blog-footer">
-				<p>{{ Lang.Get(Custom('footer_content')) }} 
+				<p>{{ Lang.Get(Custom('footer_content')) }}
 					{% if Custom('footer_content') is not empty  %} - {% endif %}
 					<span>{{ Lang.Get('Hosted by') }}</span> <a href="http://www.over-blog.com" target="_blank">Overblog</a></p>
 			</footer>
