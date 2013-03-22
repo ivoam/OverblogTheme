@@ -1,0 +1,42 @@
+.icon{
+    background: url('http://assets.over-blog-kiwi.com/t/images/social-48.png') no-repeat top left;
+    display: block;
+    height: 48px;
+    width: 48px;
+}
+.OB{
+    background-position: 0 0;
+}
+.FB, .FP{
+    background-position: 0 -96px;
+}
+.TW{
+    background-position: 0 -192px;
+}
+.FS{
+    background-position: 0 -288px;
+}
+.IG{
+    background-position: 0 -384px;
+}
+.YT{
+    background-position: 0 -480px;
+}
+.FL{
+    background-position: 0 -576px;
+}
+.TR{
+    background-position: 0 -672px;
+}
+.RS{
+    background-position: 0 -768px;
+}
+.PT{
+    background-position: 0 -864px;
+}
+.GP{
+    background-position: 0 -960px;
+}
+.LI{
+    background-position: 0 -1056px;
+}
